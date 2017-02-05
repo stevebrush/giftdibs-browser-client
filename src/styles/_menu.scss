@@ -1,0 +1,39 @@
+.menu {
+  margin: $padding-size/4 0;
+  padding: 0;
+  list-style: none;
+
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  > li {
+    margin: 0;
+    padding: 0;
+    display: block;
+    float: left;
+    width: 100%;
+
+    > a {
+      display: block;
+    }
+  }
+
+  &.menu-inline {
+    > li {
+      width: auto;
+      display: inline-block;
+      float: none;
+
+      > a {
+        text-decoration: underline;
+      }
+
+      & + li {
+        margin-left: $padding-size/2;
+      }
+    }
+  }
+}

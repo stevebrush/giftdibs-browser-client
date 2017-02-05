@@ -1,0 +1,12 @@
+.card {
+  padding: $padding-size;
+  border: 1px solid transparent;
+  border-color: darken($color-body, 3%);
+  border-bottom-color: darken($color-body, 10%);
+  background-color: #fff;
+  border-radius: $border-radius;
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+}

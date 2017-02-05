@@ -1,0 +1,22 @@
+.row {
+  margin-left: -$padding-size;
+  margin-right: -$padding-size;
+
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  > div[class^='col-'] {
+    float: left;
+    padding-left: $padding-size;
+    padding-right: $padding-size;
+    position: relative;
+    min-height: 1px;
+  }
+
+  > .col-6 {
+    width: 50%;
+  }
+}

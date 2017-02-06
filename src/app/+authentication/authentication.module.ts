@@ -5,6 +5,7 @@ import { AuthenticationComponent,
          LoginComponent,
          RegisterComponent,
          ForgottenComponent } from './authentication-components';
+
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 
 @NgModule({

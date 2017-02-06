@@ -23,7 +23,7 @@ import { Component } from '@angular/core';
           <ul class="menu menu-inline">
             <li><a routerLink="/about">About</a></li>
             <li><a routerLink="/feedback">Feedback</a></li>
-            <li><a routerLink="/terms">Privacy</a></li>
+            <li><a routerLink="/privacy">Privacy</a></li>
           </ul>
         </nav>
       </div>

@@ -8,7 +8,7 @@ import { AuthenticationComponent,
 
 const routes: Routes = [
   { path: '', component: AuthenticationComponent, children: [
-    { path: '', pathMatch: 'full', redirectTo: '/home' },
+    { path: '', pathMatch: 'full', redirectTo: '/auth/login' },
     { path: 'forgotten', component: ForgottenComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent }

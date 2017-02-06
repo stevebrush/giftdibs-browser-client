@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
 
+import { SupportModule } from './+support/support.module';
 import { AuthenticationModule } from './+authentication/authentication.module';
 
 import { AppComponent } from './app.component';
@@ -14,6 +15,10 @@ const appRoutes: Routes = [
   {
     path: 'home',
     component: HomeComponent
+  },
+  {
+    path: 'support',
+    loadChildren: './+support/support.module.ts#SupportModule'
   },
   {
     path: 'auth',
@@ -38,6 +43,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
+    SupportModule,
     AuthenticationModule,
     BrowserModule,
     FormsModule,

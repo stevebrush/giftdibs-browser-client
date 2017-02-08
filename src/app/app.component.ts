@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
       <div class="container">
         <a routerLink="/home" class="brand">GiftDibs</a>
         <nav class="menu">
-          <a routerLink="/login">Log in</a>
+          <a routerLink="/auth/login">Log in</a>
         </nav>
       </div>
     </header>
@@ -21,9 +21,9 @@ import { Component } from '@angular/core';
         GiftDibs &copy; 2017
         <nav>
           <ul class="menu menu-inline">
-            <li><a routerLink="/about">About</a></li>
-            <li><a routerLink="/feedback">Feedback</a></li>
-            <li><a routerLink="/privacy">Privacy</a></li>
+            <li><a [routerLink]="['support', 'about']">About</a></li>
+            <li><a [routerLink]="['support', 'feedback']">Feedback</a></li>
+            <li><a [routerLink]="['support', 'privacy']">Privacy</a></li>
           </ul>
         </nav>
       </div>

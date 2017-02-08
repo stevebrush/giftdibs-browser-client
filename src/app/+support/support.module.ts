@@ -4,8 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AboutComponent,
          FeedbackComponent,
          PrivacyComponent,
-         TermsComponent,
-         SupportComponent } from './support-components';
+         TermsComponent } from './support-components';
 
 import { SupportRoutingModule } from './support-routing.module';
 
@@ -18,8 +17,7 @@ import { SupportRoutingModule } from './support-routing.module';
     AboutComponent,
     FeedbackComponent,
     PrivacyComponent,
-    TermsComponent,
-    SupportComponent
+    TermsComponent
   ]
 })
 export class SupportModule { }

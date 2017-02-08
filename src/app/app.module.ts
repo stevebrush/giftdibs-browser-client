@@ -1,53 +1,30 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
-
-import { SupportModule } from './+support/support.module';
-import { AuthenticationModule } from './+authentication/authentication.module';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const appRoutes: Routes = [
-  {
-    path: 'home',
-    component: HomeComponent
-  },
-  {
-    path: 'support',
-    loadChildren: './+support/support.module.ts#SupportModule'
-  },
-  {
-    path: 'auth',
-    loadChildren: './+authentication/authentication.module.ts#AuthenticationModule'
-  },
-  { path: '',
-    redirectTo: '/home',
-    pathMatch: 'full'
-  },
-  {
-    path: '**',
-    component: PageNotFoundComponent
-  }
+  { path: 'home', component: HomeComponent },
+  { path: 'support', loadChildren: './+support/support.module.ts#SupportModule' },
+  { path: 'auth', loadChildren: './+authentication/authentication.module.ts#AuthenticationModule' },
+  { path: 'profile', loadChildren: './+profile/profile.module.ts#ProfileModule' },
+  { path: '404', component: PageNotFoundComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '**', redirectTo: '/404' }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    PageNotFoundComponent,
     PageNotFoundComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
-    SupportModule,
-    AuthenticationModule,
-    BrowserModule,
-    FormsModule,
-    HttpModule
+    BrowserModule
   ],
   providers: [],
   bootstrap: [AppComponent]

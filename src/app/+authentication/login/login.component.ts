@@ -33,8 +33,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
         <a class="btn btn-link" routerLink="/auth/register">Sign up</a>
       </div>
     </form>
-  `,
-  styleUrls: ['./login.component.scss']
+  `
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
@@ -47,7 +46,13 @@ export class LoginComponent implements OnInit {
   }
 
   isValid(field: any): boolean {
-    return field.valid || (field.pristine && !this.isSubmitted);
+    if (!field.touched) {
+      return true;
+    }
+    if (!field.valid) {
+      return false;
+    }
+    return true;
   }
 
   submit(): void {

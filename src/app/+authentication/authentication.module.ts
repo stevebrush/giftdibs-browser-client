@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
-import { AuthenticationComponent,
-         LoginComponent,
+import { LoginComponent,
          RegisterComponent,
          ForgottenComponent } from './authentication-components';
 
@@ -14,10 +14,10 @@ import { AuthenticationRoutingModule } from './authentication-routing.module';
     CommonModule,
     AuthenticationRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule
   ],
   declarations: [
-    AuthenticationComponent,
     LoginComponent,
     RegisterComponent,
     ForgottenComponent

@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   template: `
-    <header class="header" style="display:none;">
+    <header class="header">
       <div class="container">
         <a routerLink="/home" class="brand">GiftDibs</a>
         <nav class="menu">

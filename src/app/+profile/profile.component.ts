@@ -5,13 +5,26 @@ import { Router, ActivatedRoute } from '@angular/router';
   selector: 'app-profile',
   template: `
     <h1>{{user.firstName}} {{user.lastName}}</h1>
-    <router-outlet></router-outlet>
-    <nav>
-      <ul class="menu menu-inline">
-        <li><button (click)="goToRelative('profile')">Profile</button></li>
-        <li><button (click)="goToRelative('dibs')">Dibs</button></li>
+    <nav style="margin-bottom: 20px;">
+      <ul class="menu menu-buttons">
+        <li>
+          <button class="btn" (click)="goToRelative('profile')">Lists</button>
+        </li>
+        <li>
+          <button class="btn" (click)="goToRelative('dibs')">Dibs</button>
+        </li>
+        <li>
+          <button class="btn" (click)="goToRelative('friends')">Friends</button>
+        </li>
+        <li>
+          <button class="btn" (click)="goToRelative('settings')">
+            <i class="fa fa-cog icon-only"></i>
+            <span class="sr-only">Settings</span>
+          </button>
+        </li>
       </ul>
     </nav>
+    <router-outlet></router-outlet>
   `,
   styleUrls: ['./profile.component.scss']
 })
@@ -28,7 +41,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() { }
 
-  goToRelative(route: string = '/'): void {
+  goToRelative(route = '/'): void {
     this.router.navigate([route], { relativeTo: this.activatedRoute });
   }
 }

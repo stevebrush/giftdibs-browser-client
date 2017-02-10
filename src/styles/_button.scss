@@ -22,9 +22,14 @@
   background-color: #fff;
   border-color: darken($color-body, 3%);
   border-bottom-color: darken($color-body, 10%);
+  box-shadow: inset 0px -2px 0px rgba(0, 0, 0, 0.15);
 
   > .fa {
     margin-right: 8px;
+
+    &.icon-only {
+      margin-right: 0;
+    }
   }
 
   &.btn-block {
@@ -54,13 +59,5 @@
       text-decoration: none;
       background-color: darken($color-body, 5%);
     }
-  }
-}
-
-.btn-group {
-  margin-bottom: $padding-size;
-
-  > .btn + .btn {
-    margin-top: ($padding-size/2);
   }
 }

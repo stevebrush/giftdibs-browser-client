@@ -10,8 +10,10 @@ import { Component, OnInit } from '@angular/core';
         <label class="sr-only">Email address</label>
         <input class="form-control" type="email" autocomplete="off" placeholder="Your email address">
       </div>
-      <div class="btn-group">
+      <div class="form-group">
         <button class="btn btn-primary btn-block">Send request</button>
+      </div>
+      <div style="text-align: center">
         <a class="btn btn-link btn-block" routerLink="/auth/login">Go back to login</a>
       </div>
     </form>

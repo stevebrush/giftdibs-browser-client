@@ -53,8 +53,10 @@ import { Component, OnInit } from '@angular/core';
       <p>
         By submitting this form you are agreeing to our <a routerLink="/privacy">Privacy Policy</a> and <a routerLink="/terms">Terms</a>.
       </p>
-      <div class="btn-group">
+      <div class="form-group">
         <button class="btn btn-primary btn-block">Sign up</button>
+      </div>
+      <div style="text-align:center;">
         <a class="btn btn-link" routerLink="/auth/login">I already have an account.</a>
       </div>
     </form>

@@ -25,7 +25,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
           Password must be at least 7 characters.
         </small>
       </div>
-      <div class="btn-group">
+      <div class="form-group">
         <button class="btn btn-primary btn-block" type="submit" [disabled]="!form.valid || isSubmitted">Log in</button>
       </div>
       <div style="text-align:center;">

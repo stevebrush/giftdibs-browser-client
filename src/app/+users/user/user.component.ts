@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-profile',
+  selector: 'app-user',
   template: `
     <h1>{{user.firstName}} {{user.lastName}}</h1>
     <nav style="margin-bottom: 20px;">
       <ul class="menu menu-buttons">
         <li>
-          <button class="btn" (click)="goToRelative('profile')">Lists</button>
+          <button class="btn" (click)="goToRelative('lists')">Lists</button>
         </li>
         <li>
           <button class="btn" (click)="goToRelative('dibs')">Dibs</button>
@@ -25,10 +25,9 @@ import { Router, ActivatedRoute } from '@angular/router';
       </ul>
     </nav>
     <router-outlet></router-outlet>
-  `,
-  styleUrls: ['./profile.component.scss']
+  `
 })
-export class ProfileComponent implements OnInit {
+export class UserComponent implements OnInit {
   user: any = {
     id: 1,
     firstName: 'Steve',

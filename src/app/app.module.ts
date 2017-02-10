@@ -8,9 +8,11 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'support', loadChildren: './+support/support.module.ts#SupportModule' },
   { path: 'auth', loadChildren: './+authentication/authentication.module.ts#AuthenticationModule' },
-  { path: 'profile', loadChildren: './+profile/profile.module.ts#ProfileModule' },
+  { path: 'lists', loadChildren: './+lists/lists.module.ts#ListsModule' },
+  { path: 'settings', loadChildren: './+settings/settings.module.ts#SettingsModule' },
+  { path: 'support', loadChildren: './+support/support.module.ts#SupportModule' },
+  { path: 'users', loadChildren: './+users/users.module.ts#UsersModule' },
   { path: '404', component: PageNotFoundComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/404' }

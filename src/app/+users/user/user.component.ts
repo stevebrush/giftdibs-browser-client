@@ -8,16 +8,16 @@ import { Router, ActivatedRoute } from '@angular/router';
     <nav style="margin-bottom: 20px;">
       <ul class="menu menu-buttons">
         <li>
-          <button class="btn" (click)="goToRelative('lists')">Lists</button>
+          <button class="btn" [routerLink]="['lists']">Lists</button>
         </li>
         <li>
-          <button class="btn" (click)="goToRelative('dibs')">Dibs</button>
+          <button class="btn" [routerLink]="['dibs']">Dibs</button>
         </li>
         <li>
-          <button class="btn" (click)="goToRelative('friends')">Friends</button>
+          <button class="btn" [routerLink]="['friends']">Friends</button>
         </li>
         <li>
-          <button class="btn" (click)="goToRelative('settings')">
+          <button class="btn" [routerLink]="['/settings']">
             <i class="fa fa-cog icon-only"></i>
             <span class="sr-only">Settings</span>
           </button>

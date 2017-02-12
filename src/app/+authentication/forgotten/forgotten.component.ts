@@ -17,8 +17,7 @@ import { Component, OnInit } from '@angular/core';
         <a class="btn btn-link btn-block" routerLink="/auth/login">Go back to login</a>
       </div>
     </form>
-  `,
-  styleUrls: ['./forgotten.component.scss']
+  `
 })
 export class ForgottenComponent implements OnInit {
   constructor() { }

@@ -2,14 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-dibs',
-  templateUrl: './dibs.component.html',
-  styleUrls: ['./dibs.component.scss']
+  template: `
+    <h1>Dibs</h1>
+  `
 })
 export class DibsComponent implements OnInit {
-
   constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

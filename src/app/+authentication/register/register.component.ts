@@ -60,14 +60,9 @@ import { Component, OnInit } from '@angular/core';
         <a class="btn btn-link" routerLink="/auth/login">I already have an account.</a>
       </div>
     </form>
-  `,
-  styleUrls: ['./register.component.scss']
+  `
 })
 export class RegisterComponent implements OnInit {
-
   constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

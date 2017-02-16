@@ -1,0 +1,38 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Steve",
+      "lastName": "Brush",
+      "emailAddress": "stevebrush@aol.com",
+      "birthday": "8/30/1983",
+      "lists": [
+        {
+          "id": 1,
+          "name": "Christmas 2017",
+          "gifts": [
+            {
+              "id": 1,
+              "name": "Dark Souls 3",
+              "price": 3400,
+              "comments": [
+                {
+                  "id": 1,
+                  "author": 1,
+                  "text": "You sure you want PS4 version?"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "dibs": [
+        {
+          "id": 1,
+          "giftId": 2,
+          "dateToDeliver": ""
+        }
+      ]
+    }
+  ]
+}

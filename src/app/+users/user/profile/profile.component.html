@@ -1,0 +1,12 @@
+<div class="card" *ngFor="let list of lists" (click)="goToDetail(list)">
+  <div class="media">
+    <div class="media-left">
+      <div class="media-object"></div>
+    </div>
+    <div class="media-body">
+      <h1 class="media-heading">{{list.name}}</h1>
+      <h2 class="media-subheading" *ngIf="list.isPrivate">Private</h2>
+      <h2 class="media-subheading" *ngIf="!list.isPrivate">Public</h2>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+#footer {
+  color: lighten($color-text, 45%);
+  padding-top: $padding-size;
+  font-size: 80%;
+
+  a {
+    color: lighten($color-text, 45%);
+  }
+}

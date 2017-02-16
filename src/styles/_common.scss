@@ -48,12 +48,3 @@ p {
   clip: rect(0,0,0,0);
   border: 0;
 }
-
-#footer {
-  color: lighten($color-text, 45%);
-  padding-top: $padding-size;
-
-  a {
-    color: lighten($color-text, 45%);
-  }
-}

@@ -4,13 +4,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { UsersComponent,
          UserComponent,
          DibsComponent,
-         FriendsComponent } from './users-components';
+         FriendsComponent,
+         ProfileComponent } from './users-components';
 
 const routes: Routes = [
   { path: '', component: UsersComponent },
   { path: ':id', component: UserComponent,
     children: [
-      { path: 'lists', redirectTo: '' },
+      { path: '', component: ProfileComponent },
       { path: 'dibs', component: DibsComponent },
       { path: 'friends', component: FriendsComponent }
     ]

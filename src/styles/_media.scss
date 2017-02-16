@@ -24,6 +24,17 @@
 .media-heading {
   margin-top: 0;
   margin-bottom: 5px;
+  font-weight: 500;
+  font-size: 1em;
+}
+
+.media-subheading {
+  font-size: .85em;
+  color: $color-text-muted;
+
+  .fa {
+    color: lighten($color-text-muted, 25%);
+  }
 }
 
 .media-left {
@@ -34,4 +45,7 @@
 
 .media-object {
   display: block;
+  background-color: #ccc;
+  width: 50px;
+  height: 50px;
 }

@@ -1,0 +1,31 @@
+<div class="card user-header">
+  <div class="media">
+    <div class="media-left">
+      <div class="media-object"></div>
+    </div>
+    <div class="media-body">
+      <h1 class="media-heading">{{user.firstName}} {{user.lastName}}</h1>
+      <h4 class="media-subheading"><i class="fa fa-birthday-cake"></i> August 30</h4>
+    </div>
+  </div>
+</div>
+<nav style="margin-bottom: 20px;">
+  <ul class="menu menu-buttons">
+    <li>
+      <button class="btn" [routerLink]="['/users', user.id]">Lists</button>
+    </li>
+    <li>
+      <button class="btn" [routerLink]="['dibs']">Dibs</button>
+    </li>
+    <li>
+      <button class="btn" [routerLink]="['friends']">Friends</button>
+    </li>
+    <li>
+      <button class="btn" [routerLink]="['/settings']">
+        <i class="fa fa-cog icon-only"></i>
+        <span class="sr-only">Settings</span>
+      </button>
+    </li>
+  </ul>
+</nav>
+<router-outlet></router-outlet>

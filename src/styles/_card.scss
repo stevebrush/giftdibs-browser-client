@@ -1,11 +1,11 @@
 .card {
-  padding: $padding-size / 2;
+  padding: 8px;
   border: 1px solid transparent;
   border-color: darken($color-body, 3%);
   border-bottom-color: darken($color-body, 10%);
   background-color: #fff;
   border-radius: $border-radius;
-  margin-bottom: $padding-size / 2;
+  margin-bottom: 2px;
 
   > :last-child {
     margin-bottom: 0;

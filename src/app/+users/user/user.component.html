@@ -1,11 +1,13 @@
 <div class="user-header">
   <div class="media">
     <div class="media-left">
-      <div class="media-object"></div>
+      <div class="media-object">
+        <img src="{{user.thumbnail}}">
+      </div>
     </div>
     <div class="media-body">
       <h1 class="media-heading">{{user.firstName}} {{user.lastName}}</h1>
-      <h4 class="media-subheading"><i class="fa fa-birthday-cake"></i> August 30</h4>
+      <h4 class="media-subheading"><i class="fa fa-birthday-cake"></i> {{user.birthday}}</h4>
     </div>
   </div>
 </div>

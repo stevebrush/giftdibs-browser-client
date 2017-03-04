@@ -1,0 +1,14 @@
+.flex {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 100%;
+
+  > .flex-item {
+    flex: 0 0 85%;
+    margin-left: $padding-size;
+
+    &:last-item {
+      margin-right: $padding-size;
+    }
+  }
+}

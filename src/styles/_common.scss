@@ -5,6 +5,7 @@
 a {
   color: $color-anchor;
   text-decoration: none;
+  
   &:hover {
     text-decoration: underline;
   }
@@ -25,7 +26,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 2em;
   margin-bottom: $padding-size;
 }
 
@@ -47,4 +47,8 @@ p {
   overflow: hidden;
   clip: rect(0,0,0,0);
   border: 0;
+}
+
+.price {
+  color: #943;
 }

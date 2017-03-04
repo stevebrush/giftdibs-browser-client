@@ -6,17 +6,48 @@ const LISTS: List[] = [
   {
     id: 1,
     name: 'Christmas 2017',
-    isPrivate: false
+    isPrivate: false,
+    gifts: [
+      {
+        name: 'DeWalt DCD790D2 20V MAX XR Lithium Ion Brushless Compact Drill Driver Kit',
+        price: 125,
+        thumbnail: '/assets/images/sample/dewalt.jpg'
+      },
+      {
+        name: 'Lego AT-ST 75153',
+        price: 31,
+        thumbnail: '/assets/images/sample/lego-atst.jpg'
+      },
+      {
+        name: 'Dark Souls 3 - PS4',
+        price: 20,
+        thumbnail: '/assets/images/sample/ds3-ps4.jpg'
+      }
+    ]
   },
   {
     id: 2,
     name: 'Lego',
-    isPrivate: false
+    isPrivate: false,
+    gifts: [
+      {
+        name: 'Lego AT-ST 75153',
+        price: 31,
+        thumbnail: '/assets/images/sample/lego-atst.jpg'
+      }
+    ]
   },
   {
     id: 3,
     name: 'Video Games',
-    isPrivate: true
+    isPrivate: true,
+    gifts: [
+      {
+        name: 'Dark Souls 3 - PS4',
+        price: 20,
+        thumbnail: '/assets/images/sample/ds3-ps4.jpg'
+      }
+    ]
   }
 ];
 

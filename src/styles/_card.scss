@@ -1,13 +1,19 @@
 .card {
   padding: 8px;
-  border: 1px solid transparent;
-  border-color: darken($color-body, 3%);
-  border-bottom-color: darken($color-body, 10%);
+  border-bottom: 1px solid #ccc;
   background-color: #fff;
-  border-radius: $border-radius;
+  border-radius: 3px;
   margin-bottom: 2px;
 
   > :last-child {
     margin-bottom: 0;
   }
+
+  .price {
+    font-size: $font-size-secondary;
+  }
+}
+
+.card-heading {
+  margin-bottom: 0;
 }

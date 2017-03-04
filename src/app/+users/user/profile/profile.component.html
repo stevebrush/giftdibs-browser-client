@@ -1,12 +1,29 @@
-<div class="card" *ngFor="let list of lists" (click)="goToDetail(list)">
-  <div class="media">
-    <div class="media-left">
-      <div class="media-object"></div>
-    </div>
-    <div class="media-body">
-      <h1 class="media-heading">{{list.name}}</h1>
-      <h2 class="media-subheading" *ngIf="list.isPrivate">Private</h2>
-      <h2 class="media-subheading" *ngIf="!list.isPrivate">Public</h2>
+<div class="track">
+  <div class="flex">
+    <div class="well flex-item" *ngFor="let list of lists">
+      <div class="well-header">
+        <h1 class="well-heading">{{list.name}}</h1>
+        <h2 class="well-subheading" *ngIf="list.isPrivate">Private</h2>
+        <h2 class="well-subheading" *ngIf="!list.isPrivate">Public</h2>
+      </div>
+      <div class="well-body">
+        <div class="card" *ngFor="let gift of list.gifts">
+          <div class="media">
+            <div class="media-left">
+              <div class="media-object">
+                <img src="{{gift.thumbnail}}">
+              </div>
+            </div>
+            <div class="media-body">
+              <h1 class="media-heading">{{gift.name}}</h1>
+              <span class="price">${{gift.price}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="well-footer">
+        <button class="btn btn-link">New gift...</button>
+      </div>
     </div>
   </div>
 </div>

@@ -1,0 +1,36 @@
+.well {
+  background-color: #E2E4E6;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+}
+
+.well-header {
+  padding: 10px;
+  flex: 0 0 auto;
+}
+
+.well-heading {
+  font-weight: 700;
+  margin: 0;
+  margin-bottom: 2px;
+  font-size: $font-size-primary;
+}
+
+.well-subheading {
+  font-weight: 200;
+  font-size: $font-size-secondary;
+  color: lighten($color-text, 15%);
+}
+
+.well-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.well-footer {
+  flex: 0 0 auto;
+}

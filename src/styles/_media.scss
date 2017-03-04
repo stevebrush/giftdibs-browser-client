@@ -22,14 +22,13 @@
 }
 
 .media-heading {
-  margin-top: 7px;
-  margin-bottom: 5px;
-  font-weight: 500;
+  margin-top: 0;
+  margin-bottom: 0;
   font-size: 1em;
 }
 
 .media-subheading {
-  font-size: .85em;
+  font-size: $font-size-secondary;
   color: $color-text-muted;
 
   .fa {
@@ -44,9 +43,17 @@
 }
 
 .media-object {
-  display: block;
   background-color: #ccc;
-  width: 50px;
-  height: 50px;
+  width: 85px;
+  height: 85px;
+  overflow: hidden;
   border-radius: $border-radius;
+  text-align: center;
+
+  > img {
+    display: block;
+    width: auto;
+    height: 100%;
+    margin: 0 auto;
+  }
 }

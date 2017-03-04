@@ -9,7 +9,9 @@ export class UserComponent implements OnInit {
   user: any = {
     id: 1,
     firstName: 'Steve',
-    lastName: 'Brush'
+    lastName: 'Brush',
+    thumbnail: '/assets/images/sample/steve.jpg',
+    birthday: 'August 30'
   };
 
   constructor() { }

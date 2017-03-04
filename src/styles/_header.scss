@@ -1,5 +1,5 @@
 .header {
-  background-color: $color-primary;
+  background-color: darken($color-primary, 15%);
   text-align: left;
   color: #fff;
   height: 50px;
@@ -8,8 +8,6 @@
     color: #fff;
     line-height: 50px;
   }
-
-  .brand {}
 
   .menu {
     float: right;

@@ -1,17 +1,19 @@
 $font-family: sans-serif;
 $font-size: 16px;
-$font-size-primary: 18px;
-$font-size-secondary: 85%;
+$font-size-lg: 110%;
+$font-size-md: $font-size;
+$font-size-sm: 85%;
+$font-size-xs: 75%;
 $font-weight: 400;
 $line-height: 1.42;
 $line-height-title: 1.1;
 
-$color-primary: #71c300;
+$color-primary: #555;
 $color-text: #4d4d4d;
-$color-text-muted: #888;
+$color-text-muted: #8c8c8c;
 $color-anchor: $color-text;
-$color-body: #d4d4d4;
+$color-body: $color-primary;
 $color-facebook: #3b5998;
 
-$padding-size: 10px;
-$border-radius: 0;
+$padding-size: 15px;
+$border-radius: 3px;

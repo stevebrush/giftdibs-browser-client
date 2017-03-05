@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { ListService } from './shared/services';
+import { ListService, UserService } from './shared/services';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -30,7 +30,8 @@ const appRoutes: Routes = [
     BrowserModule
   ],
   providers: [
-    ListService
+    ListService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

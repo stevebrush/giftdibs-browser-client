@@ -1,0 +1,95 @@
+<div class="page-header">
+  <h1 class="page-header-heading">
+    {{user?.firstName}} {{user?.lastName}}
+  </h1>
+  <h4 class="page-header-subheading">
+    <i class="fa fa-birthday-cake"></i> {{user?.birthday}}
+  </h4>
+</div>
+<div class="runway">
+  <div class="runway-row">
+    <div class="runway-column" *ngFor="let list of user?.lists">
+      <div class="well">
+        <div class="well-header">
+          <h1 class="well-heading">{{list.name}} <small *ngIf="list.isPrivate" class="fa fa-eye"></small></h1>
+        </div>
+        <div class="well-body">
+          <div class="card" *ngFor="let gift of list.gifts">
+            <div class="media">
+              <div class="media-left">
+                <div class="media-object">
+                  <img src="{{gift.thumbnail}}">
+                </div>
+              </div>
+              <div class="media-body">
+                <h1 class="media-heading">{{gift.name}}</h1>
+                <div class="media-details">
+                  <span class="price">${{gift.price}}</span>&nbsp; 
+                  <i class="fa fa-comment-o"></i> 2
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="well-footer">
+          <button class="btn btn-link">New gift...</button>
+        </div>
+      </div>
+    </div><div class="runway-column">
+      <button class="btn btn-link">New wish list...</button>
+    </div>
+  </div>
+</div>
+<div class="runway">
+  <div class="runway-row">
+    <div class="runway-column">
+      <div class="well">
+        <div class="well-header">
+          <h1 class="well-heading">
+            Following <span class="badge">{{user?.following.length}}</span>
+          </h1>
+        </div>
+        <div class="well-body">
+          <a class="card" *ngFor="let friend of user?.following" [routerLink]="['/users', friend.id]">
+            <div class="media">
+              <div class="media-left">
+                <div class="media-object" style="width: 30px; height: 30px;">
+                  <img class="img-circle" src="{{friend.thumbnail}}">
+                </div>
+              </div>
+              <div class="media-body">
+                <h1 class="media-heading" style="margin-top: 3px;">
+                  {{friend.firstName}} {{friend.lastName}}
+                </h1>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div><div class="runway-column">
+      <div class="well">
+        <div class="well-header">
+          <h1 class="well-heading">
+            Followers <span class="badge">{{user?.followers.length}}</span>
+          </h1>
+        </div>
+        <div class="well-body">
+          <a class="card" *ngFor="let friend of user?.followers" [routerLink]="['/users', friend.id]">
+            <div class="media">
+              <div class="media-left">
+                <div class="media-object" style="width: 30px; height: 30px;">
+                  <img class="img-circle" src="{{friend.thumbnail}}">
+                </div>
+              </div>
+              <div class="media-body">
+                <h1 class="media-heading" style="margin-top: 3px;">
+                  {{friend.firstName}} {{friend.lastName}}
+                </h1>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

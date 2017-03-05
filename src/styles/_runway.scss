@@ -1,0 +1,42 @@
+.runway {
+  overflow-x: auto;
+  margin-left: -$padding-size;
+  margin-right: -$padding-size;
+  margin-bottom: $padding-size * 2;
+  height: 400px;
+  padding-left: $padding-size;
+  padding-right: $padding-size;
+  position: relative;
+}
+
+.runway-row {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow-y: hidden;
+  overflow-x: auto;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.runway-column {
+  width: 335px;
+  display: inline-block;
+  margin-left: $padding-size;
+  vertical-align: top;
+  height: 100%;
+
+  &:last-child {
+    margin-right: $padding-size;
+  }
+
+  > .btn {
+    background-color: rgba(0, 0, 0, 0.18);
+    color: rgba(255, 255, 255, 0.7);
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+}

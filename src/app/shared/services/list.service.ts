@@ -9,16 +9,19 @@ const LISTS: List[] = [
     isPrivate: false,
     gifts: [
       {
+        id: 1,
         name: 'DeWalt DCD790D2 20V MAX XR Lithium Ion Brushless Compact Drill Driver Kit',
         price: 125,
         thumbnail: '/assets/images/sample/dewalt.jpg'
       },
       {
+        id: 2,
         name: 'Lego AT-ST 75153',
         price: 31,
         thumbnail: '/assets/images/sample/lego-atst.jpg'
       },
       {
+        id: 3,
         name: 'Dark Souls 3 - PS4',
         price: 20,
         thumbnail: '/assets/images/sample/ds3-ps4.jpg'
@@ -31,6 +34,7 @@ const LISTS: List[] = [
     isPrivate: false,
     gifts: [
       {
+        id: 2,
         name: 'Lego AT-ST 75153',
         price: 31,
         thumbnail: '/assets/images/sample/lego-atst.jpg'
@@ -43,6 +47,7 @@ const LISTS: List[] = [
     isPrivate: true,
     gifts: [
       {
+        id: 3,
         name: 'Dark Souls 3 - PS4',
         price: 20,
         thumbnail: '/assets/images/sample/ds3-ps4.jpg'
@@ -54,16 +59,12 @@ const LISTS: List[] = [
 @Injectable()
 export class ListService implements Crudable<List> {
   getAll(): Promise<List[]> {
-    return new Promise((resolve) => {
-      resolve(LISTS);
-    });
+    return new Promise(resolve => resolve(LISTS));
   }
 
   getById(id: number): Promise<List> {
-    return new Promise((resolve) => {
-      const found = LISTS.filter((list) => {
-        return list.id === id;
-      });
+    return new Promise(resolve => {
+      const found = LISTS.filter(list => list.id === id);
       resolve(found[0]);
     });
   }

@@ -3,6 +3,8 @@
   border-radius: 3px;
   display: flex;
   flex-direction: column;
+  height: auto;
+  max-height: 100%;
 }
 
 .well-header {
@@ -12,14 +14,13 @@
 
 .well-heading {
   font-weight: 700;
-  margin: 0;
-  margin-bottom: 2px;
-  font-size: $font-size-primary;
+  margin: 2px 0;
+  font-size: $font-size-lg;
 }
 
 .well-subheading {
   font-weight: 200;
-  font-size: $font-size-secondary;
+  font-size: $font-size-sm;
   color: lighten($color-text, 15%);
 }
 
@@ -29,8 +30,20 @@
   overflow-x: hidden;
   padding-left: 10px;
   padding-right: 10px;
+
+  > :last-child {
+    margin-bottom: 8px;
+  }
 }
 
 .well-footer {
   flex: 0 0 auto;
+  padding: 0 0 3px;
+  color: lighten($color-text, 35%);
+
+  .btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
 }

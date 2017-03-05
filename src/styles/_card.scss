@@ -1,16 +1,14 @@
 .card {
-  padding: 8px;
+  padding: 10px 4px 10px 8px;
   border-bottom: 1px solid #ccc;
   background-color: #fff;
   border-radius: 3px;
-  margin-bottom: 2px;
+  margin-bottom: 8px;
+  white-space: normal;
+  display: block;
 
   > :last-child {
     margin-bottom: 0;
-  }
-
-  .price {
-    font-size: $font-size-secondary;
   }
 }
 

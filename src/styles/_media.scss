@@ -11,6 +11,10 @@
   &:first-child {
     margin-top: 0;
   }
+
+  .price {
+    font-size: $font-size-sm;
+  }
 }
 
 .media-body {
@@ -25,10 +29,11 @@
   margin-top: 0;
   margin-bottom: 0;
   font-size: 1em;
+  line-height: $line-height;
 }
 
 .media-subheading {
-  font-size: $font-size-secondary;
+  font-size: $font-size-sm;
   color: $color-text-muted;
 
   .fa {
@@ -43,9 +48,8 @@
 }
 
 .media-object {
-  background-color: #ccc;
-  width: 85px;
-  height: 85px;
+  width: 75px;
+  height: 75px;
   overflow: hidden;
   border-radius: $border-radius;
   text-align: center;
@@ -56,4 +60,10 @@
     height: 100%;
     margin: 0 auto;
   }
+}
+
+.media-details {
+  color: $color-text-muted; 
+  font-size: $font-size-xs; 
+  margin-top: 5px;
 }

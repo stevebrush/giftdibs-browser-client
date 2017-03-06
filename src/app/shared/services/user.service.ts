@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { Crudable } from '../crudable';
 import { User } from '../user';
 
@@ -94,20 +95,50 @@ const USERS: User[] = [
       }
     ],
     following: [],
-    lists: []
+    lists: [
+      {
+        id: 1,
+        name: 'Xmas',
+        isPrivate: false,
+        gifts: [
+          {
+            id: 1,
+            name: 'DeWalt DCD790D2 20V MAX XR Lithium Ion Brushless Compact Drill Driver Kit',
+            price: 125,
+            thumbnail: '/assets/images/sample/dewalt.jpg'
+          },
+          {
+            id: 2,
+            name: 'Lego AT-ST 75153',
+            price: 31,
+            thumbnail: '/assets/images/sample/lego-atst.jpg'
+          },
+          {
+            id: 3,
+            name: 'Dark Souls 3 - PS4',
+            price: 20,
+            thumbnail: '/assets/images/sample/ds3-ps4.jpg'
+          }
+        ]
+      }
+    ]
   }
 ];
 
 @Injectable()
 export class UserService implements Crudable<User> {
-  getAll(): Promise<User[]> {
-    return new Promise(resolve => resolve(USERS));
+  getAll(): Observable<User[]> {
+    return Observable.create(observer => {
+      observer.next(USERS);
+    });
   }
 
-  getById(id: number): Promise<User> {
-    return new Promise(resolve => {
-      const found = USERS.filter(u => u.id === id);
-      resolve(found[0]);
+  getById(id: number): Observable<User> {
+    return Observable.create(observer => {
+      setTimeout(() => {
+        observer.next(USERS.find(user => user.id === id));
+        observer.complete();
+      }, 200);
     });
   }
 }

@@ -16,7 +16,7 @@
       "polyfills": "polyfills.ts",
       "test": "test.ts",
       "tsconfig": "tsconfig.json",
-      "prefix": "app",
+      "prefix": "gd",
       "styles": [
         "styles/app.scss",
         "../node_modules/font-awesome/css/font-awesome.css"

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { Crudable } from '../crudable';
 import { List } from '../list';
 
@@ -58,14 +59,14 @@ const LISTS: List[] = [
 
 @Injectable()
 export class ListService implements Crudable<List> {
-  getAll(): Promise<List[]> {
-    return new Promise(resolve => resolve(LISTS));
+  getAll(): Observable<List[]> {
+    return new Observable(observer => observer.next(LISTS));
   }
 
-  getById(id: number): Promise<List> {
-    return new Promise(resolve => {
+  getById(id: number): Observable<List> {
+    return new Observable(observer => {
       const found = LISTS.filter(list => list.id === id);
-      resolve(found[0]);
+      observer.next(found[0]);
     });
   }
 }

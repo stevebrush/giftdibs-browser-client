@@ -53,8 +53,21 @@ small {
   border: 0;
 }
 
+.thumbnail {
+  overflow: hidden;
+  > img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+  }
+}
+
 .img-circle {
   border-radius: 50%;
+}
+
+.img-rounded {
+  border-radius: $border-radius;
 }
 
 .price {

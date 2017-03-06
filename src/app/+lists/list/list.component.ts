@@ -5,7 +5,7 @@ import { ListService } from '../../shared/services';
 import { List } from '../../shared/list';
 
 @Component({
-  selector: 'app-list',
+  selector: 'gd-list',
   template: `
     <h1>{{list?.name}}</h1>
   `
@@ -21,7 +21,7 @@ export class ListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.sub = this.route.params.subscribe(params => {
        const id = Number(params['id']);
-       this.listService.getById(id).then(data => this.list = data);
+       this.listService.getById(id).subscribe(data => this.list = data);
     });
   }
 

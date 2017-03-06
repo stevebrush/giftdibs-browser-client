@@ -1,6 +1,5 @@
 .well {
   background-color: #E2E4E6;
-  border-radius: 3px;
   display: flex;
   flex-direction: column;
   height: auto;
@@ -30,6 +29,7 @@
   overflow-x: hidden;
   padding-left: 10px;
   padding-right: 10px;
+  padding-bottom: 2px;
 
   > :last-child {
     margin-bottom: 8px;
@@ -39,11 +39,11 @@
 .well-footer {
   flex: 0 0 auto;
   padding: 0 0 3px;
-  color: lighten($color-text, 35%);
 
   .btn {
     display: block;
     width: 100%;
     text-align: left;
+    color: lighten($color-text, 10%);
   }
 }

@@ -1,4 +1,6 @@
+import { Observable } from 'rxjs/Observable';
+
 export interface Crudable<T> {
-  getAll(): Promise<T[]>;
-  getById(id: number): Promise<T>;
+  getAll(): Observable<T[]>;
+  getById(id: number): Observable<T>;
 }

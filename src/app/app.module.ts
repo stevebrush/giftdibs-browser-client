@@ -5,7 +5,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { ListService, UserService } from './shared/services';
+import { ListService, UserService, SessionService } from './shared/services';
+import { UserResolver } from './shared/user.resolver';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -31,7 +32,9 @@ const appRoutes: Routes = [
   ],
   providers: [
     ListService,
-    UserService
+    UserService,
+    SessionService,
+    UserResolver
   ],
   bootstrap: [AppComponent]
 })

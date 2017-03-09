@@ -1,4 +1,4 @@
 export { UsersComponent } from './users.component';
 export { UserComponent } from './user.component';
-export { ProfileComponent } from './profile.component';
-export { DashboardComponent } from './dashboard.component';
+export { ProfileVisitorComponent } from './profile-visitor.component';
+export { ProfileOwnerComponent } from './profile-owner.component';

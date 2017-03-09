@@ -6,11 +6,11 @@
 
 .page-header-heading {
   margin-bottom: 5px;
-  font-size: 1.4em;
+  font-size: $font-size-xl;
   font-weight: bold;
 }
 .page-header-subheading {
   font-size: $font-size-sm;
-  font-weight: 100;
+  font-weight: normal;
   color: #ccc;
 }

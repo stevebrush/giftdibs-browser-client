@@ -20,25 +20,30 @@ export class UserComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   isSessionUser(): boolean {
-    return (this.sessionService.getUser().id === this.user.id);
+    let sessionUser = this.sessionService.getUser();
+    return (sessionUser.id === this.user.id);
   }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { user: User }) => this.user = data.user);
-    this.route.fragment.subscribe(giftId => {
-      console.log(giftId);
-      if (giftId && this.user) {
-        const id = +giftId;
-        let found;
-        this.user.lists.forEach(list => {
-          if (!found) {
-            found = list.gifts.find(g => g.id === id);
-          }
-        });
-        this.activeGift = found;
-      } else {
+    this.route.data.subscribe((data: { user: User }) => {
+      this.user = data.user;
+
+      this.route.fragment.subscribe(giftId => {
+        if (giftId) {
+          const id = +giftId;
+          let found;
+          this.user.lists.forEach(list => {
+            if (!found) {
+              found = list.gifts.find(g => g.id === id);
+            }
+          });
+
+          this.activeGift = found;
+          return;
+        }
+
         this.activeGift = undefined;
-      }
+      });
     });
   }
 }

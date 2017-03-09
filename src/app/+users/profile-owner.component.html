@@ -1,0 +1,241 @@
+<div class="runway">
+  <div class="runway-row">
+    <div class="runway-column" *ngFor="let list of user.lists">
+      <div class="well">
+        <div class="well-header">
+          <button class="btn" title="Toggle list menu"><i class="fa fa-ellipsis-h"></i></button>
+          <h1 class="well-heading">
+            {{list.name}}
+          </h1>
+          <!--<h2 class="well-subheading" *ngIf="!list.isPrivate">
+            Public
+          </h2>
+          <h2 class="well-subheading" *ngIf="list.isPrivate">
+            Private
+          </h2>-->
+        </div>
+        <div class="well-body">
+          <div class="card" *ngFor="let gift of list.gifts" (click)="viewGift(gift)">
+            <div class="media">
+              <div class="media-left">
+                <div class="media-object">
+                  <img src="{{gift.thumbnail}}">
+                </div>
+              </div>
+              <div class="media-body">
+                <h1 class="media-heading">
+                  {{gift.name}}
+                </h1>
+                <div class="media-details">
+                  <span class="price">${{gift.price}}</span>&nbsp; 
+                  <span *ngIf="gift.comments.length > 0">
+                    <i class="fa fa-comment-o"></i>&nbsp;{{gift.comments.length}}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="well-footer">
+          <button class="btn btn-link">New gift...</button>
+        </div>
+      </div>
+    </div><div class="runway-column">
+      <button class="btn btn-link">New wish list...</button>
+    </div>
+  </div>
+</div>
+<div class="runway">
+  <div class="runway-row">
+    <div class="runway-column" *ngIf="user.dibs">
+      <div class="well">
+        <div class="well-header">
+          <h1 class="well-heading">
+            My Dibs <span class="badge">{{user.dibs.length}}</span>
+          </h1>
+        </div>
+        <div class="well-body">
+          <div class="card" *ngFor="let dib of user.dibs">
+            <div class="media">
+              <div class="media-left">
+                <div class="media-object">
+                  <img src="{{dib.gift.thumbnail}}">
+                </div>
+              </div>
+              <div class="media-body">
+                <h1 class="media-heading">
+                  {{dib.gift.name}}
+                </h1>
+                <h2 class="media-subheading">
+                  For {{dib.user.firstName}} {{dib.user.lastName}}
+                </h2>
+                <div class="media-details">
+                  <span class="price">${{dib.gift.price}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><div class="runway-column">
+      <div class="well">
+        <div class="well-header">
+          <h1 class="well-heading">
+            Following <span class="badge">{{user.following.length}}</span>
+          </h1>
+        </div>
+        <div class="well-body">
+          <a class="card" *ngFor="let friend of user.following" [routerLink]="['/users', friend.id]">
+            <div class="media">
+              <div class="media-left">
+                <div class="media-object" style="width: 30px; height: 30px;">
+                  <img class="img-circle" src="{{friend.thumbnail}}">
+                </div>
+              </div>
+              <div class="media-body">
+                <h1 class="media-heading" style="margin-top: 3px;">
+                  {{friend.firstName}} {{friend.lastName}}
+                </h1>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div><div class="runway-column">
+      <div class="well">
+        <div class="well-header">
+          <h1 class="well-heading">
+            Followers <span class="badge">{{user.followers.length}}</span>
+          </h1>
+        </div>
+        <div class="well-body">
+          <a class="card" *ngFor="let friend of user.followers" [routerLink]="['/users', friend.id]">
+            <div class="media">
+              <div class="media-left">
+                <div class="media-object" style="width: 30px; height: 30px;">
+                  <img class="img-circle" src="{{friend.thumbnail}}">
+                </div>
+              </div>
+              <div class="media-body">
+                <h1 class="media-heading" style="margin-top: 3px;">
+                  {{friend.firstName}} {{friend.lastName}}
+                </h1>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-canvas" *ngIf="activeGift" (click)="hideModal($event)">
+  <div class="modal">
+    <div class="modal-header">
+      <button class="btn"><i class="fa fa-close"></i></button>
+      <h1 class="modal-heading">
+        {{activeGift.name}}
+      </h1>
+      <h2 class="modal-subheading">
+        For {{user.firstName}} {{user.lastName}}
+      </h2>
+    </div>
+    <!--<div class="modal-body">
+      <div class="media">
+        <div class="media-left">
+          <div class="media-object" style="width: 120px; height: 120px;">
+            <img class="img-rounded" src="{{activeGift.thumbnail}}">
+          </div>
+        </div>
+        <div class="media-body">
+          
+        </div>
+      </div>
+      <div class="comments">
+        <h1 class="comments-heading">
+          Comments
+        </h1>
+        <div class="card">
+          <div class="media" *ngFor="let comment of activeGift.comments">
+            <div class="media-left">
+              <div class="media-object">
+                <img class="img-circle" src="{{comment.user.thumbnail}}">
+              </div>
+            </div>
+            <div class="media-body">
+              <h1 class="media-heading">
+                {{comment.user.firstName}}
+              </h1>
+              <div>
+                {{comment.body}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>-->
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-9">
+          <div class="media" style="margin-bottom: 15px;">
+            <div class="media-left">
+              <div class="media-object" style="width:150px;height:150px;padding:10px;background-color:#fff;border: 1px solid #ddd;">
+                <img class="img-rounded" src="{{activeGift.thumbnail}}">
+              </div>
+            </div>
+            <div class="media-body">
+              <h4>Don't spend more than:</h4>
+              <p class="price">
+                ${{activeGift.price}}
+              </p>
+              <h4>Where to buy:</h4>
+              <p class="link" style="max-width:250px;">
+                <a href="#">https://www.amazon.com/gp/product/B01GKGVIDK/ref=ox_sc_act_title_1?ie=UTF8&psc=1&smid=ATVPDKIKX0DER</a>
+              </p>
+            </div>
+          </div>
+          <div class="comments">
+            <h1 class="comments-heading">
+              Comments
+            </h1>
+            <div *ngIf="activeGift.comments.length">
+              <div class="media" *ngFor="let comment of activeGift.comments">
+                <div class="media-left">
+                  <div class="media-object">
+                    <img class="img-circle" src="{{comment.user.thumbnail}}">
+                  </div>
+                </div>
+                <div class="media-body">
+                  <h1 class="media-heading">
+                    {{comment.user.firstName}} {{comment.user.lastName}}
+                  </h1>
+                  <div class="card">
+                    {{comment.body}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="media">
+              <div class="media-left">
+                <div class="media-object">
+                  <img class="img-circle" src="{{sessionUser.thumbnail}}">
+                </div>
+              </div>
+              <div class="media-body">
+                <div class="card">
+                  <textarea class="form-control" placeholder="Write a comment..."></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <nav class="nav-buttons">
+            <button class="btn btn-default btn-block"><i class="fa fa-fw fa-check"></i> Mark Received</button>
+            <button class="btn btn-default btn-block"><i class="fa fa-fw fa-arrow-right"></i> Move</button>
+            <button class="btn btn-default btn-block"><i class="fa fa-fw fa-copy"></i> Copy</button>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

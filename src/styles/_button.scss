@@ -1,10 +1,10 @@
 .btn {
   display: inline-block;
-  padding: ($padding-size/2) $padding-size;
+  padding: 8px 12px;
   margin: 0;
   font-family: $font-family;
-  font-size: $font-size;
-  font-weight: $font-weight;
+  font-size: $font-size-sm;
+  font-weight: bold;
   line-height: $line-height;
   text-align: center;
   white-space: nowrap;
@@ -20,21 +20,30 @@
   border: 1px solid transparent;
   border-radius: $border-radius;
   background-color: #fff;
-  border-color: darken($color-body, 3%);
-  border-bottom-color: darken($color-body, 10%);
-  box-shadow: inset 0px -2px 0px rgba(0, 0, 0, 0.15);
 
-  > .fa {
-    margin-right: 8px;
+  &:focus,
+  &:active {
+    outline: none;
+  }
 
-    &.icon-only {
-      margin-right: 0;
-    }
+  & > .fa {
+    opacity: .4;
   }
 
   &.btn-block {
     width: 100%;
     display: block;
+    text-align: left;
+
+    + .btn-block {
+      margin-top: 6px;
+    }
+  }
+
+  &.btn-default {
+    border-color: #ddd;
+    border-bottom-color: #ccc;
+    background: linear-gradient(to bottom,#fff 0,#F8F9F9 100%);
   }
 
   &.btn-facebook {
@@ -45,8 +54,10 @@
 
   &.btn-primary {
     background-color: $color-primary;
-    border-color: transparent;
     color: #fff;
+    border-color: transparent;
+    border-bottom-color: darken($color-primary, 5%);
+    background: linear-gradient(to bottom, lighten($color-primary, 5%) 0, $color-primary 100%);
   }
 
   &.btn-link {

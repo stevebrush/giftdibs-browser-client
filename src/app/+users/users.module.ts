@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { UsersRoutingModule } from './users-routing.module';
 import { UsersComponent,
          UserComponent,
-         ProfileComponent,
-         DashboardComponent } from './users-components';
+         ProfileVisitorComponent,
+         ProfileOwnerComponent } from './users-components';
 
 @NgModule({
   imports: [
@@ -15,8 +15,8 @@ import { UsersComponent,
   declarations: [
     UserComponent,
     UsersComponent,
-    ProfileComponent,
-    DashboardComponent
+    ProfileVisitorComponent,
+    ProfileOwnerComponent
   ]
 })
 export class UsersModule { }

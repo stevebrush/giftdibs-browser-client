@@ -1,6 +1,9 @@
+$gutter: 8px;
+
 .row {
-  margin-left: -$padding-size;
-  margin-right: -$padding-size;
+  margin-left: -$gutter;
+  margin-right: -$gutter;
+  display: flex;
 
   &:after {
     content: "";
@@ -9,14 +12,21 @@
   }
 
   > div[class^='col-'] {
-    float: left;
-    padding-left: $padding-size;
-    padding-right: $padding-size;
+    padding-left: $gutter;
+    padding-right: $gutter;
     position: relative;
     min-height: 1px;
   }
 
+  > .col-3 {
+    width: 25%;
+  }
+
   > .col-6 {
     width: 50%;
+  }
+
+  > .col-9 {
+    width: 75%;
   }
 }

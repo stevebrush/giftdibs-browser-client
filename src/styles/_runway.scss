@@ -22,7 +22,7 @@
 }
 
 .runway-column {
-  width: 335px;
+  width: 300px;
   display: inline-block;
   margin-left: $padding-size;
   vertical-align: top;
@@ -38,5 +38,10 @@
     display: block;
     width: 100%;
     text-align: left;
+
+    &:hover {
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.38);
+    }
   }
 }

@@ -1,14 +1,43 @@
 .well {
-  background-color: #E2E4E6;
+  background-color: $color-grey;
   display: flex;
   flex-direction: column;
   height: auto;
   max-height: 100%;
+
+  .card {
+    cursor: pointer;
+
+    &:hover {
+      background-color: #f7f7f7;
+    }
+  }
+
+  .btn {
+    color: $color-text-muted;
+    font-weight: normal;
+    font-size: $font-size-lg;
+    background-color: $color-grey;
+
+    &:hover {
+      background-color: darken($color-grey, 8%);
+      color: $color-text;
+      text-decoration: underline;
+    }
+  }
 }
 
 .well-header {
   padding: 10px;
   flex: 0 0 auto;
+  position: relative;
+
+  .btn {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    padding: 4px 8px;
+  }
 }
 
 .well-heading {
@@ -18,9 +47,9 @@
 }
 
 .well-subheading {
-  font-weight: 200;
   font-size: $font-size-sm;
-  color: lighten($color-text, 15%);
+  color: $color-text-muted;
+  margin-top: 5px;
 }
 
 .well-body {
@@ -38,12 +67,12 @@
 
 .well-footer {
   flex: 0 0 auto;
-  padding: 0 0 3px;
+  z-index: 1;
 
   .btn {
     display: block;
     width: 100%;
     text-align: left;
-    color: lighten($color-text, 10%);
+    border-radius: 0;
   }
 }

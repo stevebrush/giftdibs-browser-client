@@ -1,10 +1,10 @@
 <div class="page-header">
   <h1 class="page-header-heading">
-    {{user?.firstName}} {{user?.lastName}}
+    {{user.firstName}} {{user.lastName}}
   </h1>
   <h4 class="page-header-subheading">
-    <i class="fa fa-birthday-cake"></i> {{user?.birthday}}
+    <i class="fa fa-birthday-cake"></i> {{user.birthday}}
   </h4>
 </div>
-<gd-dashboard [user]="user" [activeGift]="activeGift" *ngIf="isSessionUser()"></gd-dashboard>
-<gd-profile [user]="user" [activeGift]="activeGift" *ngIf="!isSessionUser()"></gd-profile>
+<gd-profile-owner [user]="user" [activeGift]="activeGift" *ngIf="isSessionUser()"></gd-profile-owner>
+<gd-profile-visitor [user]="user" [activeGift]="activeGift" *ngIf="!isSessionUser()"></gd-profile-visitor>

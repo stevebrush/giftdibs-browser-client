@@ -1,13 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { User } from '../shared/user';
 
 @Component({
-  selector: 'gd-dashboard',
-  templateUrl: './dashboard.component.html'
+  selector: 'gd-profile-visitor',
+  templateUrl: './profile-visitor.component.html'
 })
-export class DashboardComponent implements OnInit {
+export class ProfileVisitorComponent implements OnInit {
   @Input()
   user: User;
 

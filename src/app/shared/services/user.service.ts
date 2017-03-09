@@ -10,6 +10,23 @@ const USERS: User[] = [
     lastName: 'Brush',
     thumbnail: '/assets/images/sample/steve.jpg',
     birthday: 'August 30',
+    dibs: [
+      {
+        user: {
+          id: 2,
+          firstName: 'David',
+          lastName: 'Barnes',
+          thumbnail: '/assets/images/sample/david.jpg'
+        },
+        gift: {
+          id: 1,
+          name: 'DeWalt DCD790D2 20V MAX XR Lithium Ion Brushless Compact Drill Driver Kit',
+          price: 125,
+          thumbnail: '/assets/images/sample/dewalt.jpg',
+          comments: []
+        }
+      }
+    ],
     followers: [
       {
         id: 2,
@@ -36,19 +53,30 @@ const USERS: User[] = [
             id: 1,
             name: 'DeWalt DCD790D2 20V MAX XR Lithium Ion Brushless Compact Drill Driver Kit',
             price: 125,
-            thumbnail: '/assets/images/sample/dewalt.jpg'
+            thumbnail: '/assets/images/sample/dewalt.jpg',
+            comments: [{
+              user: {
+                id: 2,
+                firstName: 'David',
+                lastName: 'Barnes',
+                thumbnail: '/assets/images/sample/david.jpg'
+              },
+              body: 'You want this in purple?'
+            }]
           },
           {
             id: 2,
             name: 'Lego AT-ST 75153',
             price: 31,
-            thumbnail: '/assets/images/sample/lego-atst.jpg'
+            thumbnail: '/assets/images/sample/lego-atst.jpg',
+            comments: []
           },
           {
             id: 3,
             name: 'Dark Souls 3 - PS4',
             price: 20,
-            thumbnail: '/assets/images/sample/ds3-ps4.jpg'
+            thumbnail: '/assets/images/sample/ds3-ps4.jpg',
+            comments: []
           }
         ]
       },
@@ -61,7 +89,8 @@ const USERS: User[] = [
             id: 2,
             name: 'Lego AT-ST 75153',
             price: 31,
-            thumbnail: '/assets/images/sample/lego-atst.jpg'
+            thumbnail: '/assets/images/sample/lego-atst.jpg',
+            comments: []
           }
         ]
       },
@@ -74,7 +103,8 @@ const USERS: User[] = [
             id: 3,
             name: 'Dark Souls 3 - PS4',
             price: 20,
-            thumbnail: '/assets/images/sample/ds3-ps4.jpg'
+            thumbnail: '/assets/images/sample/ds3-ps4.jpg',
+            comments: []
           }
         ]
       }
@@ -105,23 +135,27 @@ const USERS: User[] = [
             id: 1,
             name: 'DeWalt DCD790D2 20V MAX XR Lithium Ion Brushless Compact Drill Driver Kit',
             price: 125,
-            thumbnail: '/assets/images/sample/dewalt.jpg'
+            thumbnail: '/assets/images/sample/dewalt.jpg',
+            comments: []
           },
           {
             id: 2,
             name: 'Lego AT-ST 75153',
             price: 31,
-            thumbnail: '/assets/images/sample/lego-atst.jpg'
+            thumbnail: '/assets/images/sample/lego-atst.jpg',
+            comments: []
           },
           {
             id: 3,
             name: 'Dark Souls 3 - PS4',
             price: 20,
-            thumbnail: '/assets/images/sample/ds3-ps4.jpg'
+            thumbnail: '/assets/images/sample/ds3-ps4.jpg',
+            comments: []
           }
         ]
       }
-    ]
+    ],
+    dibs: []
   }
 ];
 

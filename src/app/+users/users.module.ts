@@ -5,7 +5,9 @@ import { UsersRoutingModule } from './users-routing.module';
 import { UsersComponent,
          UserComponent,
          ProfileVisitorComponent,
-         ProfileOwnerComponent } from './users-components';
+         ProfileOwnerComponent,
+         GiftCommentsComponent,
+         GiftModalComponent } from './users-components';
 
 @NgModule({
   imports: [
@@ -16,7 +18,9 @@ import { UsersComponent,
     UserComponent,
     UsersComponent,
     ProfileVisitorComponent,
-    ProfileOwnerComponent
+    ProfileOwnerComponent,
+    GiftCommentsComponent,
+    GiftModalComponent
   ]
 })
 export class UsersModule { }

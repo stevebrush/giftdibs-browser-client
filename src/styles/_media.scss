@@ -11,10 +11,6 @@
   &:first-child {
     margin-top: 0;
   }
-
-  .price {
-    font-size: $font-size-sm;
-  }
 }
 
 .media-body {
@@ -27,7 +23,7 @@
 
 .media-heading {
   margin-top: 0;
-  margin-bottom: 3px;
+  margin-bottom: 0;
   font-size: 1em;
   line-height: $line-height;
   font-weight: normal;
@@ -37,6 +33,7 @@
   font-size: $font-size-sm;
   color: $color-text-muted;
   margin-bottom: 3px;
+  margin-top: 3px;
   font-weight: normal;
 
   .fa {
@@ -45,7 +42,7 @@
 }
 
 .media-left {
-  padding-right: 10px;
+  padding-right: 8px;
   display: table-cell;
   vertical-align: top;
 }
@@ -68,4 +65,5 @@
 .media-details {
   color: $color-text-muted; 
   font-size: $font-size-xs; 
+  margin-top: 5px;
 }

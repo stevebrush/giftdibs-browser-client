@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../shared/user';
+import { User } from '../shared/models';
 
 @Component({
   selector: 'gd-profile-visitor',
@@ -11,7 +11,7 @@ export class ProfileVisitorComponent implements OnInit {
   user: User;
 
   @Input()
-  activeGift: any;
+  selectedGift: any;
 
   constructor(private router: Router) { }
 

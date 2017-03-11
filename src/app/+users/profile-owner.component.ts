@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { User } from '../shared/user';
-import { SessionService } from '../shared/services';
+import { User } from '../shared/models';
 
 @Component({
   selector: 'gd-profile-owner',
@@ -13,23 +12,12 @@ export class ProfileOwnerComponent implements OnInit {
   user: User;
 
   @Input()
-  activeGift: any;
+  selectedGift: any;
 
-  sessionUser: any;
+  constructor(
+    private router: Router) { }
 
-  constructor(private router: Router, private sessionService: SessionService) { }
-
-  ngOnInit() {
-    this.sessionUser = this.sessionService.getUser();
-    console.log(this.sessionUser);
-  }
-
-  hideModal(event): void {
-    event.preventDefault();
-    if (event.target === event.currentTarget) {
-      this.router.navigate([]);
-    }
-  }
+  ngOnInit() { }
 
   viewGift(gift: any): void {
     this.router.navigate([], { fragment: gift.id });

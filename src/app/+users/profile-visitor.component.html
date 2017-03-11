@@ -84,16 +84,16 @@
     </div>
   </div>
 </div>
-<div class="modal-canvas" *ngIf="activeGift" (click)="hideModal()">
+<div class="modal-canvas" *ngIf="selectedGift" (click)="hideModal()">
   <div class="modal">
     <div class="modal-header">
       <h1 class="modal-heading">
-        {{activeGift.name}}
+        {{selectedGift.name}}
       </h1>
     </div>
     <div class="modal-body">
       <div class="thumbnail">
-        <img class="img-rounded" src="{{activeGift.thumbnail}}">
+        <img class="img-rounded" src="{{selectedGift.thumbnail}}">
       </div>
     </div>
   </div>

@@ -5,13 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { ListService, UserService, SessionService } from './shared/services';
+import { UserService, SessionService } from './shared/services';
 import { UserResolver } from './shared/user.resolver';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'auth', loadChildren: './+authentication/authentication.module.ts#AuthenticationModule' },
-  { path: 'lists', loadChildren: './+lists/lists.module.ts#ListsModule' },
   { path: 'settings', loadChildren: './+settings/settings.module.ts#SettingsModule' },
   { path: 'support', loadChildren: './+support/support.module.ts#SupportModule' },
   { path: 'users', loadChildren: './+users/users.module.ts#UsersModule' },
@@ -31,10 +30,9 @@ const appRoutes: Routes = [
     BrowserModule
   ],
   providers: [
-    ListService,
+    UserResolver,
     UserService,
-    SessionService,
-    UserResolver
+    SessionService
   ],
   bootstrap: [AppComponent]
 })

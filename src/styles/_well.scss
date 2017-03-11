@@ -1,23 +1,33 @@
+$well-padding: 8px;
+
 .well {
   background-color: $color-grey;
   display: flex;
   flex-direction: column;
   height: auto;
   max-height: 100%;
+  border-radius: 3px;
+  margin-bottom: $padding-size;
 
   .card {
     cursor: pointer;
 
+    .media-object {
+      width: 66px;
+      height: 66px;
+    }
+
     &:hover {
-      background-color: #f7f7f7;
+      box-shadow: 0 0px 2px rgba(0,0,0,0.1);
+      border-color: #ccc;
     }
   }
 
   .btn {
     color: $color-text-muted;
     font-weight: normal;
-    font-size: $font-size-lg;
     background-color: $color-grey;
+    font-size: $font-size;
 
     &:hover {
       background-color: darken($color-grey, 8%);
@@ -25,24 +35,38 @@
       text-decoration: underline;
     }
   }
+
+  &.disabled {
+    .well-header {
+      background: repeating-linear-gradient(
+        -45deg,
+        $color-grey,
+        $color-grey $padding-size/2,
+        darken($color-grey, 6%) $padding-size/2,
+        darken($color-grey, 6%) $padding-size
+      );
+      text-shadow: 0 0 7px #ddd;
+    }
+  }
 }
 
 .well-header {
-  padding: 10px;
+  padding: 12px $well-padding $well-padding;
   flex: 0 0 auto;
   position: relative;
+  border-radius: 3px 3px 0 0;
 
   .btn {
     position: absolute;
-    right: 5px;
-    top: 5px;
+    right: $well-padding;
+    top: 6px;
     padding: 4px 8px;
   }
 }
 
 .well-heading {
   font-weight: 700;
-  margin: 2px 0;
+  margin: 0;
   font-size: $font-size-lg;
 }
 
@@ -56,8 +80,8 @@
   flex: 1 1 auto;
   overflow-y: auto;
   overflow-x: hidden;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: $well-padding;
+  padding-right: $well-padding;
   padding-bottom: 2px;
 
   > :last-child {
@@ -68,11 +92,14 @@
 .well-footer {
   flex: 0 0 auto;
   z-index: 1;
+  border-radius: 0 0 3px 3px;
 
   .btn {
     display: block;
     width: 100%;
     text-align: left;
-    border-radius: 0;
+    border-radius: 0 0 3px 3px;
+    padding-top: 5px;
+    color: $color-text-muted;
   }
 }

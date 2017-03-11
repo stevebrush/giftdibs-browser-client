@@ -17,6 +17,8 @@ body {
   line-height: $line-height;
   color: $color-text;
   background-color: $color-body;
+  background-size: cover;
+  background-repeat: no-repeat;
   font-weight: $font-weight;
 }
 

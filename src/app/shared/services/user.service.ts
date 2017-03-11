@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Crudable } from '../crudable';
-import { User } from '../user';
+import { User } from '../models';
 
 const USERS: User[] = [
   {
@@ -23,7 +23,8 @@ const USERS: User[] = [
           name: 'DeWalt DCD790D2 20V MAX XR Lithium Ion Brushless Compact Drill Driver Kit',
           price: 125,
           thumbnail: '/assets/images/sample/dewalt.jpg',
-          comments: []
+          comments: [],
+          recipient: { name: 'David Barnes' }
         }
       }
     ],
@@ -62,21 +63,24 @@ const USERS: User[] = [
                 thumbnail: '/assets/images/sample/david.jpg'
               },
               body: 'You want this in purple?'
-            }]
+            }],
+            recipient: { name: 'Steve Brush' }
           },
           {
             id: 2,
             name: 'Lego AT-ST 75153',
             price: 31,
             thumbnail: '/assets/images/sample/lego-atst.jpg',
-            comments: []
+            comments: [],
+            recipient: { name: 'Steve Brush' }
           },
           {
             id: 3,
             name: 'Dark Souls 3 - PS4',
             price: 20,
             thumbnail: '/assets/images/sample/ds3-ps4.jpg',
-            comments: []
+            comments: [],
+            recipient: { name: 'Steve Brush' }
           }
         ]
       },
@@ -90,7 +94,8 @@ const USERS: User[] = [
             name: 'Lego AT-ST 75153',
             price: 31,
             thumbnail: '/assets/images/sample/lego-atst.jpg',
-            comments: []
+            comments: [],
+            recipient: { name: 'Steve Brush' }
           }
         ]
       },
@@ -104,7 +109,8 @@ const USERS: User[] = [
             name: 'Dark Souls 3 - PS4',
             price: 20,
             thumbnail: '/assets/images/sample/ds3-ps4.jpg',
-            comments: []
+            comments: [],
+            recipient: { name: 'Steve Brush' }
           }
         ]
       }
@@ -136,21 +142,24 @@ const USERS: User[] = [
             name: 'DeWalt DCD790D2 20V MAX XR Lithium Ion Brushless Compact Drill Driver Kit',
             price: 125,
             thumbnail: '/assets/images/sample/dewalt.jpg',
-            comments: []
+            comments: [],
+            recipient: { name: 'David Barnes' }
           },
           {
             id: 2,
             name: 'Lego AT-ST 75153',
             price: 31,
             thumbnail: '/assets/images/sample/lego-atst.jpg',
-            comments: []
+            comments: [],
+            recipient: { name: 'David Barnes' }
           },
           {
             id: 3,
             name: 'Dark Souls 3 - PS4',
             price: 20,
             thumbnail: '/assets/images/sample/ds3-ps4.jpg',
-            comments: []
+            comments: [],
+            recipient: { name: 'David Barnes' }
           }
         ]
       }

@@ -1,10 +1,14 @@
-<div class="page-header">
-  <h1 class="page-header-heading">
-    {{user.firstName}} {{user.lastName}}
-  </h1>
-  <h4 class="page-header-subheading">
-    <i class="fa fa-birthday-cake"></i> {{user.birthday}}
-  </h4>
+<div class="profile-page">
+  <div class="profile-header page-header">
+    <h1 class="page-header-heading">
+      {{user.firstName}} {{user.lastName}}
+    </h1>
+    <h4 class="page-header-subheading">
+      <i class="fa fa-birthday-cake"></i> {{user.birthday}}
+    </h4>
+  </div>
+  <div class="profile-body">
+    <gd-profile-owner [user]="user" [selectedGift]="selectedGift" *ngIf="isSessionUser()"></gd-profile-owner>
+    <gd-profile-visitor [user]="user" [selectedGift]="selectedGift" *ngIf="!isSessionUser()"></gd-profile-visitor>
+  </div>
 </div>
-<gd-profile-owner [user]="user" [activeGift]="activeGift" *ngIf="isSessionUser()"></gd-profile-owner>
-<gd-profile-visitor [user]="user" [activeGift]="activeGift" *ngIf="!isSessionUser()"></gd-profile-visitor>

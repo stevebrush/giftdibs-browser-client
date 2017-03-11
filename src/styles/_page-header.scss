@@ -1,6 +1,5 @@
 .page-header {
-  margin-bottom: 20px;
-  margin-top: 10px;
+  margin-bottom: $padding-size;
   color: #fff;
 }
 
@@ -9,6 +8,7 @@
   font-size: $font-size-xl;
   font-weight: bold;
 }
+
 .page-header-subheading {
   font-size: $font-size-sm;
   font-weight: normal;

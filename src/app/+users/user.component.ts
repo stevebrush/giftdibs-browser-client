@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import 'rxjs/add/operator/switchMap';
 
-import { User } from '../shared/user';
+import { User } from '../shared/models';
 import { SessionService, UserService } from '../shared/services';
 
 @Component({
@@ -12,7 +12,7 @@ import { SessionService, UserService } from '../shared/services';
 })
 export class UserComponent implements OnInit {
   user: User;
-  activeGift: any;
+  selectedGift: any;
 
   constructor(
     private sessionService: SessionService,
@@ -20,7 +20,7 @@ export class UserComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   isSessionUser(): boolean {
-    let sessionUser = this.sessionService.getUser();
+    const sessionUser = this.sessionService.getUser();
     return (sessionUser.id === this.user.id);
   }
 
@@ -38,11 +38,11 @@ export class UserComponent implements OnInit {
             }
           });
 
-          this.activeGift = found;
+          this.selectedGift = found;
           return;
         }
 
-        this.activeGift = undefined;
+        this.selectedGift = undefined;
       });
     });
   }

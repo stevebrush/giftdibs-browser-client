@@ -6,4 +6,7 @@ export interface Gift {
   price: number;
   thumbnail: string;
   comments: Comment[];
+  recipient: {
+    name: string;
+  };
 }

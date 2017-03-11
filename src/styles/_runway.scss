@@ -1,12 +1,13 @@
 .runway {
   overflow-x: auto;
-  margin-left: -$padding-size;
-  margin-right: -$padding-size;
-  margin-bottom: $padding-size * 2;
-  height: 400px;
-  padding-left: $padding-size;
-  padding-right: $padding-size;
   position: relative;
+  height: 400px;
+
+  & + .runway {
+    .runway-row {
+      padding-top: $padding-size * 2;
+    }
+  }
 }
 
 .runway-row {
@@ -19,29 +20,41 @@
   overflow-x: auto;
   white-space: nowrap;
   user-select: none;
+
+  &.scrollbar.scrollbar-horiz {
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+
+    &::-webkit-scrollbar {
+      height: $padding-size;
+      background-color: darken($color-body, 8%);
+      border-radius: $padding-size;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: $padding-size;
+      background-color: lighten($color-body, 10%);
+    }
+  }
 }
 
 .runway-column {
   width: 300px;
   display: inline-block;
-  margin-left: $padding-size;
   vertical-align: top;
   height: 100%;
-
-  &:last-child {
-    margin-right: $padding-size;
-  }
+  margin-right: $padding-size;
 
   > .btn {
-    background-color: rgba(0, 0, 0, 0.18);
-    color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(0, 0, 0, 0.75);
+    color: rgba(255, 255, 255, 0.9);
     display: block;
     width: 100%;
     text-align: left;
 
     &:hover {
       color: #fff;
-      background-color: rgba(0, 0, 0, 0.38);
+      background-color: rgba(0, 0, 0, 0.85);
     }
   }
 }

@@ -43,18 +43,20 @@
   display: inline-block;
   vertical-align: top;
   height: 100%;
-  margin-right: $padding-size;
+  margin-right: 10px;
 
   > .btn {
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgba(0, 0, 0, 0.25);
     color: rgba(255, 255, 255, 0.9);
     display: block;
     width: 100%;
     text-align: left;
+    font-size: $font-size;
+    font-weight: normal;
 
     &:hover {
       color: #fff;
-      background-color: rgba(0, 0, 0, 0.85);
+      background-color: rgba(0, 0, 0, 0.35);
     }
   }
 }

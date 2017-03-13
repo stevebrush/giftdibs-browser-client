@@ -51,7 +51,7 @@ $well-padding: 8px;
 }
 
 .well-header {
-  padding: 12px $well-padding $well-padding;
+  padding: 8px 11px;
   flex: 0 0 auto;
   position: relative;
   border-radius: 3px 3px 0 0;
@@ -59,7 +59,7 @@ $well-padding: 8px;
   .btn {
     position: absolute;
     right: $well-padding;
-    top: 6px;
+    top: 4px;
     padding: 4px 8px;
   }
 }
@@ -67,7 +67,7 @@ $well-padding: 8px;
 .well-heading {
   font-weight: 700;
   margin: 0;
-  font-size: $font-size-lg;
+  font-size: $font-size;
 }
 
 .well-subheading {
@@ -83,10 +83,6 @@ $well-padding: 8px;
   padding-left: $well-padding;
   padding-right: $well-padding;
   padding-bottom: 2px;
-
-  > :last-child {
-    margin-bottom: 8px;
-  }
 }
 
 .well-footer {

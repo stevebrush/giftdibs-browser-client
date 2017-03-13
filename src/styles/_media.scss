@@ -23,7 +23,7 @@
 
 .media-heading {
   margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: 2px;
   font-size: 1em;
   line-height: $line-height;
   font-weight: normal;
@@ -65,5 +65,5 @@
 .media-details {
   color: $color-text-muted; 
   font-size: $font-size-xs; 
-  margin-top: 5px;
+  margin-top: 8px;
 }

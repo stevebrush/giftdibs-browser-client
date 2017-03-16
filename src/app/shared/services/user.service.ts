@@ -49,6 +49,9 @@ const USERS: User[] = [
         id: 1,
         name: 'Christmas 2017',
         isPrivate: false,
+        recipient: {
+          name: 'Steve Brush'
+        },
         gifts: [
           {
             id: 1,
@@ -79,7 +82,15 @@ const USERS: User[] = [
             name: 'Dark Souls 3 - PS4',
             price: 20,
             thumbnail: '/assets/images/sample/ds3-ps4.jpg',
-            comments: [],
+            comments: [{
+              user: {
+                id: 2,
+                firstName: 'David',
+                lastName: 'Barnes',
+                thumbnail: '/assets/images/sample/david.jpg'
+              },
+              body: 'You okay with me getting this for Xbox One? There\'s a good sale.'
+            }],
             recipient: { name: 'Steve Brush' }
           }
         ]
@@ -88,6 +99,9 @@ const USERS: User[] = [
         id: 2,
         name: 'Lego',
         isPrivate: false,
+        recipient: {
+          name: 'Atlas'
+        },
         gifts: [
           {
             id: 2,
@@ -103,6 +117,9 @@ const USERS: User[] = [
         id: 3,
         name: 'Video Games',
         isPrivate: true,
+        recipient: {
+          name: 'Steve Brush'
+        },
         gifts: [
           {
             id: 3,
@@ -136,6 +153,9 @@ const USERS: User[] = [
         id: 1,
         name: 'Xmas',
         isPrivate: false,
+        recipient: {
+          name: 'David Barnes'
+        },
         gifts: [
           {
             id: 1,

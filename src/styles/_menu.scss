@@ -2,18 +2,13 @@
   margin: 0;
   padding: 0;
   list-style: none;
-
-  &:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
+  display: flex;
+  align-items: column;
 
   > li {
     margin: 0;
     padding: 0;
     display: block;
-    float: left;
     width: 100%;
 
     > a {
@@ -22,6 +17,10 @@
   }
 
   &.menu-inline {
+    align-items: column;
+    flex-basis: 0;
+    flex-grow: 1;
+
     > li {
       width: auto;
 

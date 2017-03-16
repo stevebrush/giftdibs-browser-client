@@ -1,16 +1,49 @@
 .page-header {
-  margin-bottom: 10px;
+  margin-bottom: $padding-size;
   color: #fff;
+  line-height: 1;
 }
 
 .page-header-heading {
   margin-bottom: 5px;
   font-size: $font-size-xl;
   font-weight: bold;
+  display: inline-block;
+  margin-right: 15px;
+  line-height: 1;
 }
 
 .page-header-subheading {
-  font-size: $font-size-sm;
+  display: inline-block;
   font-weight: normal;
-  color: #ccc;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1;
+  margin-right: 15px;
+}
+
+.page-header-nav {
+  display: inline-block;
+  line-height: 1;
+
+  .menu {
+    > li {
+      
+     & + li {
+        margin-left: 4px;
+      }
+
+      > a {
+        color: rgba(255, 255, 255, 0.90);
+        text-decoration: none;
+        padding: 8px 12px;
+        border-radius: 3px;
+        margin: 0;
+
+        &:hover {
+          background-color: rgba(0,0,0,0.3);
+          color: #fff;
+        }
+      }
+    }
+  }
 }

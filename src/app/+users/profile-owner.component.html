@@ -5,7 +5,7 @@
     <gd-bucket-body>
       <gd-card *ngFor="let gift of list.gifts" (click)="viewGift(gift)">
         <gd-media [mediaTitle]="gift.name" [imageSrc]="gift.thumbnail">
-          <div class="price">${{gift.price}}</div>
+          <gd-price-tag>{{gift.price}}</gd-price-tag>
           <gd-media-details *ngIf="gift.comments.length > 0">
             <i class="fa fa-comment-o"></i>&nbsp;{{gift.comments.length}}
           </gd-media-details>
@@ -27,7 +27,7 @@
           <h2>
             For {{dib.gift.recipient.name}}
           </h2>
-          <span class="price">${{dib.gift.price}}</span>
+          <gd-price-tag>{{dib.gift.price}}</gd-price-tag>
         </gd-media>
       </gd-card>
     </gd-bucket-body>

@@ -5,8 +5,8 @@
         <textarea class="form-control"></textarea>
       </div>
     </gd-card>
-    <button class="btn btn-primary">Add</button>
-    <button class="btn btn-default" (click)="hideComposer()">Cancel</button>
+    <gd-button buttonType="primary">Add</gd-button>
+    <gd-button (click)="hideComposer()">Cancel</gd-button>
   </div>
-  <button class="btn btn-link btn-block" *ngIf="!isVisible" (click)="showComposer()">Add gift...</button>
+  <gd-button buttonType="link" [fullWidth]="true" *ngIf="!isVisible" (click)="showComposer()">Add gift...</gd-button>
 </div>

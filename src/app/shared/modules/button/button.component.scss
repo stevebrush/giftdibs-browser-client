@@ -1,0 +1,74 @@
+@import '../../../../styles/_variables';
+
+.gd-button {
+  display: inline-block;
+  padding: 8px 12px;
+  margin: 0;
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: bold;
+  line-height: $line-height;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: $border-radius;
+  background-color: #fff;
+
+  &:focus,
+  &:active {
+    outline: none;
+  }
+
+  & > .fa {
+    opacity: .4;
+  }
+
+  &.gd-button-block {
+    width: 100%;
+    display: block;
+    text-align: left;
+
+    + .gd-button-block {
+      margin-top: 6px;
+    }
+  }
+
+  &.gd-button-default {
+    border-color: #ddd;
+    border-bottom-color: #ccc;
+    background: linear-gradient(to bottom,#fff 0,#F8F9F9 100%);
+  }
+
+  &.gd-button-facebook {
+    background-color: $color-facebook;
+    border-color: transparent;
+    color: #fff;
+  }
+
+  &.gd-button-primary {
+    background-color: $color-primary;
+    color: #fff;
+    border-color: transparent;
+    border-bottom-color: darken($color-primary, 5%);
+    background: linear-gradient(to bottom, lighten($color-primary, 5%) 0, $color-primary 100%);
+  }
+
+  &.gd-button-link {
+    background-color: transparent;
+    color: $color-anchor;
+    font-weight: normal;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}

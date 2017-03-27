@@ -24,14 +24,12 @@ $well-padding: 8px;
   }
 
   .btn {
-    color: $color-text-muted;
     font-weight: normal;
     background-color: $color-grey;
     font-size: $font-size;
 
     &:hover {
       background-color: darken($color-grey, 8%);
-      color: $color-text;
       text-decoration: underline;
     }
   }

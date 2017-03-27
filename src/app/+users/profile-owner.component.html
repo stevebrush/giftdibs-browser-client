@@ -1,126 +1,61 @@
-<div class="runway">
-  <div class="runway-row scrollbar scrollbar-horiz">
-    <div class="runway-column" *ngFor="let list of user.lists">
-      <div class="well" [ngClass]="{'disabled': list.isPrivate}">
-        <div class="well-header" [attr.title]="list.isPrivate ? 'This list is private.' : ''">
-          <button class="btn" title="Toggle list menu"><i class="fa fa-ellipsis-h"></i></button>
-          <h1 class="well-heading">
-            {{list.name}}
-          </h1>
-          <h2 class="well-subheading">
-            For <span style="text-decoration:underline;">{{list.recipient.name}}</span>
+<gd-runway>
+  <gd-bucket *ngFor="let list of user.lists" [isDisabled]="list.isPrivate">
+    <gd-bucket-header [bucketTitle]="list.name">
+    </gd-bucket-header>
+    <gd-bucket-body>
+      <gd-card *ngFor="let gift of list.gifts" (click)="viewGift(gift)">
+        <gd-media [mediaTitle]="gift.name" [imageSrc]="gift.thumbnail">
+          <div class="price">${{gift.price}}</div>
+          <gd-media-details *ngIf="gift.comments.length > 0">
+            <i class="fa fa-comment-o"></i>&nbsp;{{gift.comments.length}}
+          </gd-media-details>
+        </gd-media>
+      </gd-card>
+      <gd-card-composer></gd-card-composer>
+    </gd-bucket-body>
+  </gd-bucket>
+</gd-runway>
+
+<gd-runway>
+  <gd-bucket *ngIf="user.dibs">
+    <gd-bucket-header bucketTitle="My Dibs">
+      <span class="badge badge-danger">{{user.dibs.length}}</span>
+    </gd-bucket-header>
+    <gd-bucket-body>
+      <gd-card *ngFor="let dib of user.dibs">
+        <gd-media [mediaTitle]="dib.gift.name" [imageSrc]="dib.gift.thumbnail">
+          <h2>
+            For {{dib.gift.recipient.name}}
           </h2>
-        </div>
-        <div class="well-body scrollbar">
-          <div class="card" *ngFor="let gift of list.gifts" (click)="viewGift(gift)">
-            <div class="media">
-              <div class="media-left">
-                <div class="media-object">
-                  <img src="{{gift.thumbnail}}">
-                </div>
-              </div>
-              <div class="media-body">
-                <h1 class="media-heading">
-                  {{gift.name}}
-                </h1>
-                <div class="price">${{gift.price}}</div>
-                <div class="media-details" *ngIf="gift.comments.length > 0">
-                  <i class="fa fa-comment-o"></i>&nbsp;{{gift.comments.length}}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="well-footer">
-          <button class="btn btn-link">New gift...</button>
-        </div>
-      </div>
-    </div><div class="runway-column">
-      <button class="btn btn-link">New wish list...</button>
-    </div>
-  </div>
-</div>
-<div class="runway">
-  <div class="runway-row scrollbar scrollbar-horiz">
-    <div class="runway-column" *ngIf="user.dibs">
-      <div class="well">
-        <div class="well-header">
-          <h1 class="well-heading">
-            My Dibs <span class="badge badge-danger">{{user.dibs.length}}</span>
-          </h1>
-        </div>
-        <div class="well-body scrollbar">
-          <div class="card" *ngFor="let dib of user.dibs">
-            <div class="media">
-              <div class="media-left">
-                <div class="media-object">
-                  <img src="{{dib.gift.thumbnail}}">
-                </div>
-              </div>
-              <div class="media-body">
-                <h1 class="media-heading">
-                  {{dib.gift.name}}
-                </h1>
-                <h2 class="media-subheading">
-                  For {{dib.gift.recipient.name}}
-                </h2>
-                <div class="media-details">
-                  <span class="price">${{dib.gift.price}}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div><div class="runway-column">
-      <div class="well">
-        <div class="well-header">
-          <h1 class="well-heading">
-            Following <span class="badge">{{user.following.length}}</span>
-          </h1>
-        </div>
-        <div class="well-body scrollbar">
-          <a class="card" *ngFor="let friend of user.following" [routerLink]="['/users', friend.id]">
-            <div class="media">
-              <div class="media-left">
-                <div class="media-object" style="width: 30px; height: 30px;">
-                  <img class="img-circle" src="{{friend.thumbnail}}">
-                </div>
-              </div>
-              <div class="media-body">
-                <h1 class="media-heading" style="margin-top: 3px;">
-                  {{friend.firstName}} {{friend.lastName}}
-                </h1>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div><div class="runway-column">
-      <div class="well">
-        <div class="well-header">
-          <h1 class="well-heading">
-            Followers <span class="badge">{{user.followers.length}}</span>
-          </h1>
-        </div>
-        <div class="well-body scrollbar">
-          <a class="card" *ngFor="let friend of user.followers" [routerLink]="['/users', friend.id]">
-            <div class="media">
-              <div class="media-left">
-                <div class="media-object" style="width: 30px; height: 30px;">
-                  <img class="img-circle" src="{{friend.thumbnail}}">
-                </div>
-              </div>
-              <div class="media-body">
-                <h1 class="media-heading" style="margin-top: 3px;">
-                  {{friend.firstName}} {{friend.lastName}}
-                </h1>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+          <span class="price">${{dib.gift.price}}</span>
+        </gd-media>
+      </gd-card>
+    </gd-bucket-body>
+  </gd-bucket>
+
+  <gd-bucket>
+    <gd-bucket-header bucketTitle="Following">
+      <span class="badge">{{user.following.length}}</span>
+    </gd-bucket-header>
+    <gd-bucket-body>
+      <gd-card *ngFor="let friend of user.following">
+        <gd-media [mediaTitle]="friend.firstName + ' ' + friend.lastName" [imageSrc]="friend.thumbnail">
+        </gd-media>
+      </gd-card>
+    </gd-bucket-body>
+  </gd-bucket>
+
+  <gd-bucket>
+    <gd-bucket-header bucketTitle="Followers">
+      <span class="badge">{{user.followers.length}}</span>
+    </gd-bucket-header>
+    <gd-bucket-body>
+      <gd-card *ngFor="let friend of user.followers">
+        <gd-media [mediaTitle]="friend.firstName + ' ' + friend.lastName" [imageSrc]="friend.thumbnail">
+        </gd-media>
+      </gd-card>
+    </gd-bucket-body>
+  </gd-bucket>
+</gd-runway>
+
 <gd-gift-modal [gift]="selectedGift"></gd-gift-modal>

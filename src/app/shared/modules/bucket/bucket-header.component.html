@@ -1,0 +1,7 @@
+<div class="gd-bucket-header">
+  <ng-content></ng-content>
+  <h1 class="gd-bucket-heading" *ngIf="bucketTitle">
+    {{bucketTitle}}
+    <ng-content select=".badge"></ng-content>
+  </h1>
+</div>

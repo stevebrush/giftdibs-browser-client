@@ -5,7 +5,4 @@ export interface List {
   name: string;
   isPrivate: boolean;
   gifts: Gift[];
-  recipient: {
-    name: string
-  };
 }

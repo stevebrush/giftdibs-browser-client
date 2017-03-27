@@ -1,0 +1,29 @@
+@import '../../../../styles/_variables';
+
+.gd-media {
+  display: flex;
+}
+
+.gd-media-object {
+  width: 38%;
+  max-width: 120px;
+}
+
+.gd-media-thumbnail {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.gd-media-body {
+  padding-left: 10px;
+  width: 62%;
+}
+
+.gd-media-heading {
+  margin: 0;
+  margin-bottom: 4px;
+  font-size: 1em;
+  font-weight: normal;
+  white-space: normal;
+}

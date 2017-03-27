@@ -1,0 +1,12 @@
+<div class="gd-card-composer">
+  <div class="gd-card-composer-form" [ngClass]="{ 'hidden': !isVisible }">
+    <gd-card>
+      <div class="form-group">
+        <textarea class="form-control"></textarea>
+      </div>
+    </gd-card>
+    <button class="btn btn-primary">Add</button>
+    <button class="btn btn-default" (click)="hideComposer()">Cancel</button>
+  </div>
+  <button class="btn btn-link btn-block" *ngIf="!isVisible" (click)="showComposer()">Add gift...</button>
+</div>

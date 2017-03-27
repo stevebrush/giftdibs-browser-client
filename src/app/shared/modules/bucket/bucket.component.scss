@@ -1,0 +1,19 @@
+@import '../../../../styles/_variables';
+
+.gd-bucket {
+  background-color: $color-grey-light;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: $padding-size;
+  border-radius: $border-radius;
+
+  &.disabled {
+    background: repeating-linear-gradient(
+      -45deg,
+      $color-grey-light,
+      $color-grey-light $padding-size/2,
+      $color-grey-lightest $padding-size/2,
+      $color-grey-lightest $padding-size
+    );
+  }
+}

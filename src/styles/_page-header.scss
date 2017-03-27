@@ -5,11 +5,11 @@
 }
 
 .page-header-heading {
-  margin-bottom: 5px;
+  margin-bottom: 0;
   font-size: $font-size-xl;
   font-weight: bold;
   display: inline-block;
-  margin-right: 15px;
+  margin-right: 12px;
   line-height: 1;
 }
 
@@ -19,6 +19,11 @@
   color: rgba(255, 255, 255, 0.85);
   line-height: 1;
   margin-right: 15px;
+
+  > .fa {
+    font-size: .9em;
+    vertical-align: top;
+  }
 }
 
 .page-header-nav {
@@ -29,7 +34,7 @@
     > li {
       
      & + li {
-        margin-left: 4px;
+        margin-left: 3px;
       }
 
       > a {
@@ -39,7 +44,8 @@
         border-radius: 3px;
         margin: 0;
 
-        &:hover {
+        &:hover,
+        &.active {
           background-color: rgba(0,0,0,0.3);
           color: #fff;
         }

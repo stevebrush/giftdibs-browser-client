@@ -6,17 +6,20 @@ $font-size-md: $font-size;
 $font-size-sm: .90em;
 $font-size-xs: .85em;
 $font-weight: 400;
-$line-height: 18px;
-$line-height-title: 18px;
+$line-height: 1.45em;
+$line-height-title: 1.1em;
 
-$color-primary: #555;
-$color-text: #4d4d4d;
+$color-primary: forestgreen;
+$color-text: #000;
 $color-text-muted: #777;
 $color-anchor: $color-text;
 $color-body: $color-primary;
 $color-facebook: #3b5998;
-$color-grey: #e4e4e4;
 $color-danger: orangered;
 
-$padding-size: 16px;
-$border-radius: 3px;
+$color-grey: #e4e4e4;
+$color-grey-light: #eee;
+$color-grey-lightest: #f7f7f7;
+
+$padding-size: 1em;
+$border-radius: .25em;

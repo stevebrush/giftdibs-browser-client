@@ -6,10 +6,10 @@
     <h4 class="page-header-subheading">
       <i class="fa fa-birthday-cake"></i> {{user.birthday}}
     </h4>
-    <nav class="page-header-nav">
+    <!--<nav class="page-header-nav">
       <ul class="menu menu-inline">
         <li>
-          <a href="">Lists</a>
+          <a [routerLink]="['/users', user.id]" routerLinkActive="active">Lists</a>
         </li>
         <li>
           <a href="">Dibs</a>
@@ -18,7 +18,7 @@
           <a href="">Friends</a>
         </li>
       </ul>
-    </nav>
+    </nav>-->
   </div>
   <div class="profile-body">
     <gd-profile-owner [user]="user" [selectedGift]="selectedGift" *ngIf="isSessionUser()"></gd-profile-owner>

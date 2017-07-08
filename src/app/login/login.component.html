@@ -1,0 +1,5 @@
+<form (ngSubmit)="login()" novalidate>
+  <input type="email" name="emailAddress" [(ngModel)]="model.emailAddress">
+  <input type="password" name="password" [(ngModel)]="model.password">
+  <button type="submit" [disabled]="isLoading">Login</button>
+</form>

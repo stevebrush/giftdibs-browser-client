@@ -1,1 +1,32 @@
-Register
+<form (ngSubmit)="register()" novalidate>
+  <!-- PREVENTS AUTOCOMPLETE OF EMAIL/PASSWORD -->
+  <div style="display:none">
+    <input type="email" name="emailAddress">
+    <input type="password" name="password">
+  </div>
+
+  <div>
+    <label for="first-name">First name</label>
+    <input type="text" id="first-name" name="firstName" [(ngModel)]="model.firstName">
+  </div>
+
+  <div>
+    <label for="last-name">Last name</label>
+    <input type="text" id="last-name" name="lastName" [(ngModel)]="model.lastName">
+  </div>
+
+  <div>
+    <label for="email-address">Email</label>
+    <input type="email" id="email-address" name="emailAddress" [(ngModel)]="model.emailAddress">
+  </div>
+
+  <div>
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" [(ngModel)]="model.password">
+  </div>
+
+  <p>
+    By submitting this form you are agreeing to our <a routerLink="/privacy">Privacy Policy</a> and <a routerLink="/terms">Terms</a>.
+  </p>
+  <button type="submit" [disabled]="isLoading">Register</button>
+</form>

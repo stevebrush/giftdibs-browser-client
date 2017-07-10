@@ -13,7 +13,6 @@ export class AlertService {
     router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
         if (this.keepAfterNavigationChange) {
-          // only keep for a single location change
           this.keepAfterNavigationChange = false;
         } else {
           // clear alert

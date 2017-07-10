@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
   }
 
   public login() {
-    console.log('login?', this.model.emailAddress, this.model.password);
     this.isLoading = true;
     this.authenticationService
       .login(this.model.emailAddress, this.model.password)
@@ -34,7 +33,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate([this.redirectUrl]);
         },
         error => {
-          this.alertService.error(error);
+          this.alertService.error(error.json().message);
           this.isLoading = false;
         });
   }

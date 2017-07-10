@@ -22,26 +22,22 @@ export class AuthenticationService {
       });
   }
 
+  public register(formData: any): Observable<any> {
+    const url = 'http://localhost:8080/v1/auth/register';
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers });
+
+    console.log('formData:', formData);
+
+    return this.http.post(url, formData, options)
+      .map((response: Response) => {
+        const data = response.json();
+        console.log('data?', data);
+        return data;
+      });
+  }
+
   logout() {
     localStorage.removeItem('currentUser');
   }
-
-  // private extractData(res: Response) {
-  //   const body = res.json();
-  //   return body.data || { };
-  // }
-
-  // private handleError (error: Response | any) {
-  //   // In a real world app, we might use a remote logging infrastructure
-  //   let errMsg: string;
-  //   if (error instanceof Response) {
-  //     const body = error.json() || '';
-  //     const err = body.error || JSON.stringify(body);
-  //     errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-  //   } else {
-  //     errMsg = error.message ? error.message : error.toString();
-  //   }
-  //   console.error(errMsg);
-  //   return Promise.reject(errMsg);
-  // }
 }

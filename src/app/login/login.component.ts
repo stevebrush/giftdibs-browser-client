@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { AlertService, AuthenticationService } from '../_services';
+import { AuthenticationService } from '../_services';
+import { AlertService } from '../_modules/alert';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,6 @@ import { AlertService, AuthenticationService } from '../_services';
 export class LoginComponent implements OnInit {
   public isLoading = false;
   public model: any = {};
-
   private redirectUrl: string;
 
   constructor(
@@ -32,8 +32,8 @@ export class LoginComponent implements OnInit {
         () => {
           this.router.navigate([this.redirectUrl]);
         },
-        error => {
-          this.alertService.error(error.json().message);
+        (error: any) => {
+          this.alertService.error(error.message);
           this.isLoading = false;
         });
   }

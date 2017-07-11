@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AlertService, AuthenticationService, UserService } from '../_services';
+import { AuthenticationService, UserService } from '../_services';
+import { AlertService } from '../_modules/alert';
 
 @Component({
   selector: 'app-users',

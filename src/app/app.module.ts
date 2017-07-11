@@ -12,8 +12,9 @@ import { UsersComponent } from './users';
 import { routing } from './app.routing';
 
 import { AuthGuard } from './_guards';
-import { AlertService, AuthenticationService, UserService } from './_services';
-import { AlertComponent } from './_components';
+import { AuthenticationService, UserService } from './_services';
+
+import { AlertModule } from './_modules/alert';
 
 @NgModule({
   declarations: [
@@ -21,10 +22,10 @@ import { AlertComponent } from './_components';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    UsersComponent,
-    AlertComponent
+    UsersComponent
   ],
   imports: [
+    AlertModule,
     BrowserModule,
     FormsModule,
     HttpModule,
@@ -32,7 +33,6 @@ import { AlertComponent } from './_components';
   ],
   providers: [
     AuthGuard,
-    AlertService,
     AuthenticationService,
     UserService
   ],

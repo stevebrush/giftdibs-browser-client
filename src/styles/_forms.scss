@@ -3,13 +3,9 @@ button, input, select, textarea {
   font-size: 100%;
   font-family: $font-family;
   margin: 0;
-  border: 1px solid $font-color;
-}
-
-button, input {
-  border-radius: $border-radius;
 }
 
 label {
   display: block;
+  cursor: pointer;
 }

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AlertService, AuthenticationService } from '../_services';
+import { AuthenticationService } from '../_services';
+import { AlertService } from '../_modules/alert';
 
 @Component({
   selector: 'app-register',
@@ -26,7 +27,6 @@ export class RegisterComponent {
         },
         error => {
           const result = error.json();
-          console.log(result, error);
           let message;
 
           if (error.status === 401) {

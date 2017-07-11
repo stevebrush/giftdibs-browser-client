@@ -1,2 +1,9 @@
+<div>
+  <a [routerLink]="['/']">Home</a>
+  <a [routerLink]="['users']">Users</a>
+  <a [routerLink]="['login']">Login</a>
+  <a [routerLink]="['register']">Register</a>
+  <button (click)="logout()">Logout</button>
+</div>
 <app-alert></app-alert>
 <router-outlet></router-outlet>

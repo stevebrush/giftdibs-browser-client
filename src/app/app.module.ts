@@ -7,11 +7,12 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
+import { UsersComponent } from './users';
 
 import { routing } from './app.routing';
 
 import { AuthGuard } from './_guards';
-import { AlertService, AuthenticationService } from './_services';
+import { AlertService, AuthenticationService, UserService } from './_services';
 import { AlertComponent } from './_components';
 
 @NgModule({
@@ -20,6 +21,7 @@ import { AlertComponent } from './_components';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
+    UsersComponent,
     AlertComponent
   ],
   imports: [
@@ -31,7 +33,8 @@ import { AlertComponent } from './_components';
   providers: [
     AuthGuard,
     AlertService,
-    AuthenticationService
+    AuthenticationService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

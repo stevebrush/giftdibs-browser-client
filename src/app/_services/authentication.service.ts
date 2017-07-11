@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response, RequestOptions } from '@angular/http';
+import { Http, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 
@@ -10,10 +10,8 @@ export class AuthenticationService {
 
   public login(emailAddress: string, password: string): Observable<any> {
     const url = 'http://localhost:8080/v1/auth/login';
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    const options = new RequestOptions({ headers });
-
-    return this.http.post(url, { emailAddress, password }, options)
+    return this.http
+      .post(url, { emailAddress, password })
       .map((response: Response) => {
         const user = response.json();
         if (user && user.token) {
@@ -24,17 +22,9 @@ export class AuthenticationService {
 
   public register(formData: any): Observable<any> {
     const url = 'http://localhost:8080/v1/auth/register';
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    const options = new RequestOptions({ headers });
-
-    console.log('formData:', formData);
-
-    return this.http.post(url, formData, options)
-      .map((response: Response) => {
-        const data = response.json();
-        console.log('data?', data);
-        return data;
-      });
+    return this.http
+      .post(url, formData)
+      .map((response: Response) => response.json());
   }
 
   logout() {

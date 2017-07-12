@@ -25,6 +25,17 @@ export class UserService {
       .catch(this.handleError);
   }
 
+  public getById(id: string): Observable<any> {
+    const token = JSON.parse(localStorage.getItem('currentUser'));
+    const headers = new Headers({ 'Authorization': `JWT ${token.token}` });
+    const options = new RequestOptions({ headers });
+
+    return this.http
+      .get(`${this.resourceUrl}/${id}`, options)
+      .map((response: Response) => response.json())
+      .catch(this.handleError);
+  }
+
   public remove(id: string): Observable<any> {
     const token = JSON.parse(localStorage.getItem('currentUser'));
     const headers = new Headers({ 'Authorization': `JWT ${token.token}` });

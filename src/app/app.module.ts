@@ -8,6 +8,7 @@ import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
 import { UsersComponent } from './users';
+import { UserComponent } from './user';
 
 import { routing } from './app.routing';
 
@@ -22,7 +23,8 @@ import { AlertModule } from './_modules/alert';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    UsersComponent
+    UsersComponent,
+    UserComponent
   ],
   imports: [
     AlertModule,

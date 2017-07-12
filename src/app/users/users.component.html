@@ -2,7 +2,9 @@ Users
 <table>
   <tr *ngFor="let user of users">
     <td>{{user._id}}</td>
-    <td>{{user.firstName}} {{user.lastName}}</td>
+    <td>
+      <a [routerLink]="['/users', user._id]">{{user.firstName}} {{user.lastName}}</a>
+    </td>
     <td>
       <button (click)="delete(user._id)">Delete</button>
     </td>

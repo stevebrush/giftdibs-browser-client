@@ -1,0 +1,5 @@
+<div class="form-control-errors" *ngIf="!control.valid">
+  <div *ngFor="let key of getObjectKeys(control.errors)">
+    {{control.errors[key]}}
+  </div>
+</div>

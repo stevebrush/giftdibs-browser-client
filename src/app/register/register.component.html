@@ -1,3 +1,6 @@
+<h1>
+  Register
+</h1>
 <form (ngSubmit)="register()" novalidate>
   <!-- PREVENTS AUTOCOMPLETE OF EMAIL/PASSWORD -->
   <div style="display:none">
@@ -5,22 +8,22 @@
     <input type="password" name="password">
   </div>
 
-  <div>
+  <div class="form-group">
     <label for="first-name">First name</label>
     <input type="text" id="first-name" name="firstName" [(ngModel)]="model.firstName">
   </div>
 
-  <div>
+  <div class="form-group">
     <label for="last-name">Last name</label>
     <input type="text" id="last-name" name="lastName" [(ngModel)]="model.lastName">
   </div>
 
-  <div>
-    <label for="email-address">Email</label>
+  <div class="form-group">
+    <label for="email-address">Email address</label>
     <input type="email" id="email-address" name="emailAddress" [(ngModel)]="model.emailAddress">
   </div>
 
-  <div>
+  <div class="form-group">
     <label for="password">Password</label>
     <input type="password" id="password" name="password" [(ngModel)]="model.password">
   </div>

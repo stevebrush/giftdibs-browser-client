@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/finally';
 import 'rxjs/add/observable/throw';
 
 @Injectable()
@@ -15,8 +16,8 @@ export class UserService {
     private http: Http) { }
 
   public getAll(): Observable<any> {
-    const token = JSON.parse(localStorage.getItem('currentUser'));
-    const headers = new Headers({ 'Authorization': `JWT ${token.token}` });
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    const headers = new Headers({ 'Authorization': `JWT ${user.token}` });
     const options = new RequestOptions({ headers });
 
     return this.http
@@ -26,8 +27,8 @@ export class UserService {
   }
 
   public getById(id: string): Observable<any> {
-    const token = JSON.parse(localStorage.getItem('currentUser'));
-    const headers = new Headers({ 'Authorization': `JWT ${token.token}` });
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    const headers = new Headers({ 'Authorization': `JWT ${user.token}` });
     const options = new RequestOptions({ headers });
 
     return this.http
@@ -37,12 +38,23 @@ export class UserService {
   }
 
   public remove(id: string): Observable<any> {
-    const token = JSON.parse(localStorage.getItem('currentUser'));
-    const headers = new Headers({ 'Authorization': `JWT ${token.token}` });
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    const headers = new Headers({ 'Authorization': `JWT ${user.token}` });
     const options = new RequestOptions({ headers });
 
     return this.http
       .delete(`${this.resourceUrl}/${id}`, options)
+      .map((response: Response) => response.json())
+      .catch(this.handleError);
+  }
+
+  public update(data: any): Observable<any> {
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    const headers = new Headers({ 'Authorization': `JWT ${user.token}` });
+    const options = new RequestOptions({ headers });
+
+    return this.http
+      .patch(`${this.resourceUrl}/${data._id}`, data, options)
       .map((response: Response) => response.json())
       .catch(this.handleError);
   }

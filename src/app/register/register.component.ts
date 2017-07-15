@@ -20,25 +20,14 @@ export class RegisterComponent {
   public register(): void {
     this.isLoading = true;
     this.authenticationService.register(this.model)
+      .finally(() => this.isLoading = false)
       .subscribe(
         () => {
           this.alertService.success('Registration successful', true);
           this.router.navigate(['/login']);
         },
-        error => {
-          const result = error.json();
-          let message;
-
-          if (error.status === 401) {
-            message = 'The email address and password you entered were not found in our records.';
-          }
-
-          if (error.status === 400) {
-            message = result.message;
-          }
-
-          this.alertService.error(message);
-          this.isLoading = false;
+        (error: any) => {
+          this.alertService.error(error.message);
         });
   }
 }

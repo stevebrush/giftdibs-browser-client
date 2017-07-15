@@ -8,16 +8,19 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/finally';
 import 'rxjs/add/observable/throw';
 
+import { SessionService } from './session.service';
+
 @Injectable()
 export class UserService {
   private resourceUrl = 'http://localhost:8080/v1/users';
 
   constructor(
-    private http: Http) { }
+    private http: Http,
+    private sessionService: SessionService) { }
 
   public getAll(): Observable<any> {
-    const user = JSON.parse(localStorage.getItem('currentUser'));
-    const headers = new Headers({ 'Authorization': `JWT ${user.token}` });
+    const token = this.sessionService.token;
+    const headers = new Headers({ 'Authorization': `JWT ${token}` });
     const options = new RequestOptions({ headers });
 
     return this.http
@@ -27,8 +30,8 @@ export class UserService {
   }
 
   public getById(id: string): Observable<any> {
-    const user = JSON.parse(localStorage.getItem('currentUser'));
-    const headers = new Headers({ 'Authorization': `JWT ${user.token}` });
+    const token = this.sessionService.token;
+    const headers = new Headers({ 'Authorization': `JWT ${token}` });
     const options = new RequestOptions({ headers });
 
     return this.http
@@ -38,8 +41,8 @@ export class UserService {
   }
 
   public remove(id: string): Observable<any> {
-    const user = JSON.parse(localStorage.getItem('currentUser'));
-    const headers = new Headers({ 'Authorization': `JWT ${user.token}` });
+    const token = this.sessionService.token;
+    const headers = new Headers({ 'Authorization': `JWT ${token}` });
     const options = new RequestOptions({ headers });
 
     return this.http
@@ -49,8 +52,8 @@ export class UserService {
   }
 
   public update(data: any): Observable<any> {
-    const user = JSON.parse(localStorage.getItem('currentUser'));
-    const headers = new Headers({ 'Authorization': `JWT ${user.token}` });
+    const token = this.sessionService.token;
+    const headers = new Headers({ 'Authorization': `JWT ${token}` });
     const options = new RequestOptions({ headers });
 
     return this.http

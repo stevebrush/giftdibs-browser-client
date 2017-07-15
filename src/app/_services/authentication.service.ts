@@ -8,19 +8,23 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/finally';
 import 'rxjs/add/observable/throw';
 
+import { SessionService } from './session.service';
+
 @Injectable()
 export class AuthenticationService {
   constructor(
-    private http: Http) { }
+    private http: Http,
+    private sessionService: SessionService) { }
 
   public login(emailAddress: string, password: string): Observable<any> {
     const url = 'http://localhost:8080/v1/auth/login';
     return this.http
       .post(url, { emailAddress, password })
       .map((response: Response) => {
-        const user = response.json();
-        if (user && user.token) {
-          localStorage.setItem('currentUser', JSON.stringify(user));
+        const json = response.json();
+        if (json && json.token) {
+          this.sessionService.token = json.token;
+          this.sessionService.user = json.user;
         }
       })
       .catch(this.handleError);
@@ -35,7 +39,7 @@ export class AuthenticationService {
   }
 
   logout() {
-    localStorage.removeItem('currentUser');
+    this.sessionService.clearAll();
   }
 
   private handleError(err: Response): ErrorObservable {

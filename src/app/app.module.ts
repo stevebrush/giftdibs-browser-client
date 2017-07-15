@@ -15,7 +15,7 @@ import { SettingsComponent } from './settings';
 import { routing } from './app.routing';
 
 import { AuthGuard } from './_guards';
-import { AuthenticationService, UserService } from './_services';
+import { AuthenticationService, UserService, SessionService } from './_services';
 
 import { AlertModule } from './_modules/alert';
 import { FormControlValidationErrorsModule } from './_modules/form-control-validation-errors';
@@ -43,7 +43,8 @@ import { FormControlValidationErrorsModule } from './_modules/form-control-valid
   providers: [
     AuthGuard,
     AuthenticationService,
-    UserService
+    UserService,
+    SessionService
   ],
   bootstrap: [AppComponent]
 })

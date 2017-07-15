@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { UserService } from '../_services';
 import { AlertService } from '../_modules/alert';
+
+import { UserService, SessionService } from '../_services';
+import { User } from '../_models';
 
 @Component({
   selector: 'app-settings',
@@ -15,16 +17,16 @@ export class SettingsComponent implements OnInit {
   public constructor(
     private formBuilder: FormBuilder,
     private alertService: AlertService,
-    private userService: UserService) {
+    private userService: UserService,
+    private sessionService: SessionService) {
       this.createForm();
     }
 
   public ngOnInit(): void {
-    const session = JSON.parse(localStorage.getItem('currentUser'));
     this.userService
-      .getById(session.user._id)
-      .subscribe((user: any) => {
-        this.settingsForm.reset(user);
+      .getById(this.sessionService.user._id)
+      .subscribe((data: any) => {
+        this.settingsForm.reset(data);
       });
   }
 
@@ -35,15 +37,14 @@ export class SettingsComponent implements OnInit {
       .finally(() => this.isLoading = false)
       .subscribe(
         (result: any) => {
-          const session = JSON.parse(localStorage.getItem('currentUser'));
-          session.user = this.settingsForm.value;
-          localStorage.setItem('currentUser', JSON.stringify(session));
+          this.sessionService.user = this.settingsForm.value;
           this.alertService.success(result.message);
         },
         (error: any) => {
           error.errors.forEach((err: any, i: number) => {
-            if (this.settingsForm.controls[err.field]) {
-              this.settingsForm.controls[err.field].setErrors({
+            const control = this.settingsForm.controls[err.field];
+            if (control) {
+              control.setErrors({
                 [`schemaError.${i}`]: err.message
               });
             }
@@ -60,6 +61,6 @@ export class SettingsComponent implements OnInit {
       firstName: '',
       lastName: '',
       emailAddress: ''
-    });
+    } as User);
   }
 }

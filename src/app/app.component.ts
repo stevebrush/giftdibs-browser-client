@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthenticationService } from './_services';
+import { AuthenticationService, SessionService } from './_services';
 
 @Component({
   selector: 'app-root',
@@ -13,11 +13,11 @@ export class AppComponent implements OnInit {
 
   constructor(
     private authenticationService: AuthenticationService,
+    private sessionService: SessionService,
     private router: Router) { }
 
   public ngOnInit(): void {
-    const session = JSON.parse(localStorage.getItem('currentUser'));
-    this.currentUser = session.user;
+    this.currentUser = this.sessionService.user;
   }
 
   public logout(): void {

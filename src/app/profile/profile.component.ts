@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
 
-import { UserService } from '../_services';
+import { UserService, SessionService } from '../_services';
 
 @Component({
   selector: 'app-profile',
@@ -14,14 +14,15 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    private sessionService: SessionService,
     private route: ActivatedRoute) { }
 
   public ngOnInit(): void {
-    const session = JSON.parse(localStorage.getItem('currentUser'));
+    const user = this.sessionService.user;
     this.userService
-      .getById(session.user._id)
-      .subscribe((user: any) => {
-        this.user = user;
+      .getById(user._id)
+      .subscribe((data: any) => {
+        this.user = data;
       });
   }
 }

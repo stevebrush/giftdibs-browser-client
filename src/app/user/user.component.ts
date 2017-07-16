@@ -4,8 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
 import { User } from '../_models';
-import { UserService } from '../_services';
-import { AlertService } from '../_modules/alert';
+import { UserService, AlertService } from '../_services';
 
 @Component({
   selector: 'app-user',

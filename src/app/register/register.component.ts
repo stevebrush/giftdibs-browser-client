@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { AuthenticationService } from '../_services';
-import { AlertService } from '../_modules/alert';
+import { AlertService, AuthenticationService } from '../_services';
 
 @Component({
   selector: 'app-register',

@@ -15,14 +15,13 @@ import { SettingsComponent } from './settings';
 import { routing } from './app.routing';
 
 import { AuthGuard } from './_guards';
-import { AuthenticationService, UserService, SessionService } from './_services';
-import { AppFormGroupComponent } from './_components';
-
-import { AlertModule } from './_modules/alert';
+import { AlertService, AuthenticationService, UserService, SessionService } from './_services';
+import { AppFormGroupComponent, AlertComponent } from './_components';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AlertComponent,
     HomeComponent,
     LoginComponent,
     RegisterComponent,
@@ -33,7 +32,6 @@ import { AlertModule } from './_modules/alert';
     AppFormGroupComponent
   ],
   imports: [
-    AlertModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
@@ -41,6 +39,7 @@ import { AlertModule } from './_modules/alert';
     routing,
   ],
   providers: [
+    AlertService,
     AuthGuard,
     AuthenticationService,
     UserService,

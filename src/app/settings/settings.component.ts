@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { AlertService } from '../_modules/alert';
-
-import { UserService, SessionService } from '../_services';
+import { UserService, AlertService, SessionService } from '../_services';
 import { User } from '../_models';
 
 @Component({

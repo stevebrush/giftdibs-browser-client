@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthenticationService, UserService } from '../_services';
+import { AuthenticationService, UserService, AlertService } from '../_services';
 import { User } from '../_models';
-import { AlertService } from '../_modules/alert';
 
 @Component({
   selector: 'app-users',

@@ -1,6 +1,6 @@
 <nav class="navbar">
   <div class="navbar-main">
-    <a [routerLink]="['/']" routerLinkExactActive="active">Home</a>
+    <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">GiftDibs</a> /
     <a [routerLink]="['/users']" routerLinkActive="active">Users</a>
   </div>
   <div class="navbar-user" *ngIf="currentUser">

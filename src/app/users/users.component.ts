@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthenticationService, UserService } from '../_services';
+import { User } from '../_models';
 import { AlertService } from '../_modules/alert';
 
 @Component({
@@ -10,7 +11,7 @@ import { AlertService } from '../_modules/alert';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-  public users: any[];
+  public users: User[];
 
   constructor(
     private alertService: AlertService,
@@ -21,7 +22,7 @@ export class UsersComponent implements OnInit {
   public ngOnInit(): void {
     this.userService
       .getAll()
-      .subscribe((users: any[]) => {
+      .subscribe((users: User[]) => {
         this.users = users;
       });
   }
@@ -30,7 +31,7 @@ export class UsersComponent implements OnInit {
     this.userService
       .remove(id)
       .subscribe(
-        (data: any) => {
+        () => {
           this.authenticationService.logout();
           this.router.navigate(['/']);
         },

@@ -26,8 +26,8 @@ export class SettingsComponent implements OnInit {
   public ngOnInit(): void {
     this.userService
       .getById(this.sessionService.user._id)
-      .subscribe((data: any) => {
-        this.settingsForm.reset(data);
+      .subscribe((user: User) => {
+        this.settingsForm.reset(user);
       });
   }
 

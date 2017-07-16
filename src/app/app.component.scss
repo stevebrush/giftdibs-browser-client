@@ -2,6 +2,21 @@
   padding: 10px 20px;
   background-color: #fff;
   border-bottom: 1px solid #eee;
+  display: flex;
+
+  > div {
+    flex: 1 0 auto;
+  }
+
+  .active {
+    text-decoration: none;
+    color: #000;
+    cursor: default;
+  }
+}
+
+.navbar-user {
+  text-align: right;
 }
 
 .container {

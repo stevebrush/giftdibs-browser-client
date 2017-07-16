@@ -1,35 +1,32 @@
 <h1>
   Register
 </h1>
-<form (ngSubmit)="register()" novalidate>
+<form [formGroup]="registerForm" (ngSubmit)="register()" novalidate>
   <!-- PREVENTS AUTOCOMPLETE OF EMAIL/PASSWORD -->
   <div style="display:none">
     <input type="email" name="emailAddress">
     <input type="password" name="password">
   </div>
 
-  <div class="form-group">
-    <label for="first-name">First name</label>
-    <input type="text" id="first-name" name="firstName" [(ngModel)]="model.firstName">
-  </div>
+  <app-form-group label="First name" [serverErrors]="errors">
+    <input type="text" formControlName="firstName">
+  </app-form-group>
 
-  <div class="form-group">
-    <label for="last-name">Last name</label>
-    <input type="text" id="last-name" name="lastName" [(ngModel)]="model.lastName">
-  </div>
+  <app-form-group label="Last name" [serverErrors]="errors">
+    <input type="text" formControlName="lastName">
+  </app-form-group>
 
-  <div class="form-group">
-    <label for="email-address">Email address</label>
-    <input type="email" id="email-address" name="emailAddress" [(ngModel)]="model.emailAddress">
-  </div>
+  <app-form-group label="Email address" [serverErrors]="errors">
+    <input type="email" formControlName="emailAddress">
+  </app-form-group>
 
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" id="password" name="password" [(ngModel)]="model.password">
-  </div>
+  <app-form-group label="New password" [serverErrors]="errors">
+    <input type="password" formControlName="password">
+  </app-form-group>
 
   <p>
     By submitting this form you are agreeing to our <a routerLink="/privacy">Privacy Policy</a> and <a routerLink="/terms">Terms</a>.
   </p>
+
   <button type="submit" [disabled]="isLoading">Register</button>
 </form>

@@ -1,13 +1,15 @@
 <nav class="navbar">
-  <a [routerLink]="['/']">Home</a>
-  <a [routerLink]="['/users']">Users</a>
-  <div *ngIf="currentUser">
-    <a [routerLink]="['/profile']">{{currentUser.firstName}} {{currentUser.lastName}}</a>
+  <div class="navbar-main">
+    <a [routerLink]="['/']" routerLinkExactActive="active">Home</a>
+    <a [routerLink]="['/users']" routerLinkActive="active">Users</a>
+  </div>
+  <div class="navbar-user" *ngIf="currentUser">
+    <a [routerLink]="['/profile']" routerLinkActive="active">{{currentUser.firstName}} {{currentUser.lastName}}</a>
     <a href="" (click)="logout()">Log out</a>
   </div>
-  <div *ngIf="!currentUser">
-    <a [routerLink]="['/login']">Log in</a>
-    <a [routerLink]="['/register']">Register</a>
+  <div class="navbar-user" *ngIf="!currentUser">
+    <a [routerLink]="['/login']" routerLinkActive="active">Log in</a>
+    <a [routerLink]="['/register']" routerLinkActive="active">Register</a>
   </div>
 </nav>
 <app-alert></app-alert>

@@ -13,6 +13,7 @@ import { User } from '../_models';
 export class SettingsComponent implements OnInit {
   public settingsForm: FormGroup;
   public isLoading = false;
+  public errors: any;
 
   public constructor(
     private formBuilder: FormBuilder,
@@ -41,15 +42,7 @@ export class SettingsComponent implements OnInit {
           this.alertService.success(result.message);
         },
         (error: any) => {
-          error.errors.forEach((err: any, i: number) => {
-            const control = this.settingsForm.controls[err.field];
-            if (control) {
-              control.setErrors({
-                [`schemaError.${i}`]: err.message
-              });
-            }
-          });
-
+          this.errors = error;
           this.alertService.error(error.message);
         }
       );

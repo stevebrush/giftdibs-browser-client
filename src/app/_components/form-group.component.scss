@@ -1,0 +1,25 @@
+.app-form-group {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
+
+.has-error {
+  label,
+  .app-form-group-alert {
+    color: #f00;
+  }
+}
+
+/deep/
+.has-error {
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="number"] {
+    border-color: #f00;
+  }
+}
+
+.app-form-group-alert {
+}

@@ -16,9 +16,9 @@ import { routing } from './app.routing';
 
 import { AuthGuard } from './_guards';
 import { AuthenticationService, UserService, SessionService } from './_services';
+import { AppFormGroupComponent } from './_components';
 
 import { AlertModule } from './_modules/alert';
-import { FormControlValidationErrorsModule } from './_modules/form-control-validation-errors';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,8 @@ import { FormControlValidationErrorsModule } from './_modules/form-control-valid
     UsersComponent,
     UserComponent,
     ProfileComponent,
-    SettingsComponent
+    SettingsComponent,
+    AppFormGroupComponent
   ],
   imports: [
     AlertModule,
@@ -37,7 +38,6 @@ import { FormControlValidationErrorsModule } from './_modules/form-control-valid
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    FormControlValidationErrorsModule,
     routing,
   ],
   providers: [

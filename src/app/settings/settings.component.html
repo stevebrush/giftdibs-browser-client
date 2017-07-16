@@ -3,29 +3,18 @@
 </h1>
 
 <form [formGroup]="settingsForm" (ngSubmit)="submit()" novalidate>
-  <div class="form-group">
-    <label for="first-name">First name</label>
-    <input type="text" id="first-name" formControlName="firstName">
-    <app-form-control-validation-errors
-      [control]="settingsForm.controls.firstName">
-    </app-form-control-validation-errors>
-  </div>
 
-  <div class="form-group">
-    <label for="last-name">Last name</label>
-    <input type="text" id="last-name" formControlName="lastName">
-    <app-form-control-validation-errors
-      [control]="settingsForm.controls.lastName">
-    </app-form-control-validation-errors>
-  </div>
+  <app-form-group label="First name" [serverErrors]="errors">
+    <input type="text" formControlName="firstName">
+  </app-form-group>
 
-  <div class="form-group">
-    <label for="email-address">Email address</label>
-    <input type="email" id="email-address" formControlName="emailAddress">
-    <app-form-control-validation-errors
-      [control]="settingsForm.controls.emailAddress">
-    </app-form-control-validation-errors>
-  </div>
+  <app-form-group label="Last name" [serverErrors]="errors">
+    <input type="text" formControlName="lastName">
+  </app-form-group>
+
+  <app-form-group label="Email address" [serverErrors]="errors">
+    <input type="email" formControlName="emailAddress">
+  </app-form-group>
 
   <button type="submit" [disabled]="isLoading">Save Changes</button>
 </form>

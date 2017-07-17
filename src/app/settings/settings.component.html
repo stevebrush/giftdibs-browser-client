@@ -16,5 +16,9 @@
     <input type="email" formControlName="emailAddress">
   </app-form-group>
 
+  <p>
+    <a [routerLink]="['/reset-password']">Reset password...</a>
+  </p>
+
   <button type="submit" [disabled]="isLoading">Save Changes</button>
 </form>

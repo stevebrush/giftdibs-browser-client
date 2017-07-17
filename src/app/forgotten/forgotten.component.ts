@@ -5,19 +5,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AlertService, AuthenticationService } from '../_services';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html'
+  selector: 'app-forgotten',
+  templateUrl: './forgotten.component.html'
 })
-export class LoginComponent implements OnInit {
-  public loginForm: FormGroup;
+export class ForgottenComponent implements OnInit {
+  public forgottenForm: FormGroup;
   public isLoading = false;
   public errors: any;
 
-  private redirectUrl: string;
-
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
     private formBuilder: FormBuilder,
     private alertService: AlertService,
     private authenticationService: AuthenticationService) {
@@ -26,19 +22,18 @@ export class LoginComponent implements OnInit {
 
   public ngOnInit() {
     this.authenticationService.logout();
-    this.redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/';
   }
 
-  public login() {
+  public requestLink() {
     this.isLoading = true;
-    const data = this.loginForm.value;
+    const data = this.forgottenForm.value;
     this.authenticationService
-      .login(data.emailAddress, data.password)
+      .forgotten(data.emailAddress)
       .finally(() => this.isLoading = false)
       .subscribe(
-        () => {
-          this.router.navigate([this.redirectUrl]);
-          window.location.reload();
+        (result: any) => {
+          this.alertService.success(result.message);
+          this.forgottenForm.reset();
         },
         (error: any) => {
           this.errors = error;
@@ -47,9 +42,8 @@ export class LoginComponent implements OnInit {
   }
 
   private createForm(): void {
-    this.loginForm = this.formBuilder.group({
-      emailAddress: '',
-      password: ''
+    this.forgottenForm = this.formBuilder.group({
+      emailAddress: ''
     });
   }
 }

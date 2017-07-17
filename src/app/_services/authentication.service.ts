@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, RequestOptions } from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
@@ -38,8 +38,32 @@ export class AuthenticationService {
       .catch(this.handleError);
   }
 
-  logout() {
+  public logout() {
     this.sessionService.clearAll();
+  }
+
+  public forgotten(emailAddress: string): Observable<any> {
+    const url = 'http://localhost:8080/v1/auth/forgotten';
+    return this.http
+      .post(url, { emailAddress })
+      .map((response: Response) => response.json())
+      .catch(this.handleError);
+  }
+
+  public resetPassword(formData: any): Observable<any> {
+    const url = 'http://localhost:8080/v1/auth/reset-password';
+    const token = this.sessionService.token;
+    const options = new RequestOptions();
+
+    if (token) {
+      const headers = new Headers({ 'Authorization': `JWT ${token}` });
+      options.headers = headers;
+    }
+
+    return this.http
+      .post(url, formData, options)
+      .map((response: Response) => response.json())
+      .catch(this.handleError);
   }
 
   private handleError(err: Response): ErrorObservable {

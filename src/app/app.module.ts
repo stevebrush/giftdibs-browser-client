@@ -11,6 +11,8 @@ import { UsersComponent } from './users';
 import { UserComponent } from './user';
 import { ProfileComponent } from './profile';
 import { SettingsComponent } from './settings';
+import { ForgottenComponent } from './forgotten';
+import { ResetPasswordComponent } from './reset-password';
 
 import { routing } from './app.routing';
 
@@ -29,7 +31,9 @@ import { AppFormGroupComponent, AlertComponent } from './_components';
     UserComponent,
     ProfileComponent,
     SettingsComponent,
-    AppFormGroupComponent
+    AppFormGroupComponent,
+    ForgottenComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

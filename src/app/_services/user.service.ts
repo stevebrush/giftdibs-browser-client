@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
+import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
@@ -16,6 +17,7 @@ export class UserService {
 
   constructor(
     private http: Http,
+    private router: Router,
     private sessionService: SessionService) { }
 
   public getAll(): Observable<any> {
@@ -26,7 +28,7 @@ export class UserService {
     return this.http
       .get(this.resourceUrl, options)
       .map((response: Response) => response.json())
-      .catch(this.handleError);
+      .catch((err) => this.handleError(err));
   }
 
   public getById(id: string): Observable<any> {
@@ -37,7 +39,7 @@ export class UserService {
     return this.http
       .get(`${this.resourceUrl}/${id}`, options)
       .map((response: Response) => response.json())
-      .catch(this.handleError);
+      .catch((err) => this.handleError(err));
   }
 
   public remove(id: string): Observable<any> {
@@ -48,7 +50,7 @@ export class UserService {
     return this.http
       .delete(`${this.resourceUrl}/${id}`, options)
       .map((response: Response) => response.json())
-      .catch(this.handleError);
+      .catch((err) => this.handleError(err));
   }
 
   public update(data: any): Observable<any> {
@@ -59,10 +61,20 @@ export class UserService {
     return this.http
       .patch(`${this.resourceUrl}/${data._id}`, data, options)
       .map((response: Response) => response.json())
-      .catch(this.handleError);
+      .catch((err) => this.handleError(err));
   }
 
   private handleError(err: Response): ErrorObservable {
+    if (err.status === 401) {
+      const routerOptions = {
+        queryParams: {
+          redirectUrl: this.router.url
+        }
+      };
+      this.router.navigate(['/login'], routerOptions);
+      return;
+    }
+
     const details = err.json();
     return Observable.throw(details);
   }

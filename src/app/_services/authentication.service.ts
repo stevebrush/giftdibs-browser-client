@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
@@ -14,6 +15,7 @@ import { SessionService } from './session.service';
 export class AuthenticationService {
   constructor(
     private http: Http,
+    private router: Router,
     private sessionService: SessionService) { }
 
   public login(emailAddress: string, password: string): Observable<any> {
@@ -27,7 +29,7 @@ export class AuthenticationService {
           this.sessionService.user = json.user;
         }
       })
-      .catch(this.handleError);
+      .catch((err) => this.handleError(err));
   }
 
   public register(formData: any): Observable<any> {
@@ -35,7 +37,7 @@ export class AuthenticationService {
     return this.http
       .post(url, formData)
       .map((response: Response) => response.json())
-      .catch(this.handleError);
+      .catch((err) => this.handleError(err));
   }
 
   public logout() {
@@ -47,7 +49,7 @@ export class AuthenticationService {
     return this.http
       .post(url, { emailAddress })
       .map((response: Response) => response.json())
-      .catch(this.handleError);
+      .catch((err) => this.handleError(err));
   }
 
   public resetPassword(formData: any): Observable<any> {
@@ -63,10 +65,20 @@ export class AuthenticationService {
     return this.http
       .post(url, formData, options)
       .map((response: Response) => response.json())
-      .catch(this.handleError);
+      .catch((err) => this.handleError(err));
   }
 
   private handleError(err: Response): ErrorObservable {
+    if (err.status === 401) {
+      const routerOptions = {
+        queryParams: {
+          redirectUrl: this.router.url
+        }
+      };
+      this.router.navigate(['/login'], routerOptions);
+      return;
+    }
+
     const details = err.json();
     return Observable.throw(details);
   }

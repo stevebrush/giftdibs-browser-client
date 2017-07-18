@@ -9,6 +9,8 @@ import { ProfileComponent } from './profile';
 import { SettingsComponent } from './settings';
 import { ForgottenComponent } from './forgotten';
 import { ResetPasswordComponent } from './reset-password';
+import { DeleteAccountComponent } from './delete-account';
+
 import { AuthGuard } from './_guards';
 
 const appRoutes: Routes = [
@@ -22,6 +24,7 @@ const appRoutes: Routes = [
     { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
     { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
     { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
+    { path: 'delete-account', component: DeleteAccountComponent, canActivate: [AuthGuard] },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

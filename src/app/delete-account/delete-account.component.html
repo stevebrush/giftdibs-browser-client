@@ -1,0 +1,17 @@
+<h1>
+  Delete your account
+</h1>
+<p>
+  Are you sure you want to delete your account? This action cannot be undone.
+</p>
+<form [formGroup]="deleteAccountForm" (ngSubmit)="deleteAccount()" novalidate>
+  <app-form-group label="Password" [serverErrors]="errors">
+    <input type="password" formControlName="password">
+  </app-form-group>
+
+  <button type="submit" [disabled]="isLoading">Yes, delete my account.</button>
+
+  <p>
+    <a routerLink="/profile">Cancel</a>
+  </p>
+</form>

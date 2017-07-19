@@ -1,36 +1,53 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { HttpModule } from '@angular/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { UserService, SessionService } from './shared/services';
-import { UserResolver } from './shared/user.resolver';
+import { HomeComponent } from './home';
+import { LoginComponent } from './login';
+import { RegisterComponent } from './register';
+import { UsersComponent } from './users';
+import { UserComponent } from './user';
+import { ProfileComponent } from './profile';
+import { SettingsComponent } from './settings';
+import { ForgottenComponent } from './forgotten';
+import { ResetPasswordComponent } from './reset-password';
+import { DeleteAccountComponent } from './delete-account';
 
-const appRoutes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'auth', loadChildren: './+authentication/authentication.module.ts#AuthenticationModule' },
-  { path: 'settings', loadChildren: './+settings/settings.module.ts#SettingsModule' },
-  { path: 'support', loadChildren: './+support/support.module.ts#SupportModule' },
-  { path: 'users', loadChildren: './+users/users.module.ts#UsersModule' },
-  { path: '404', component: PageNotFoundComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: '**', redirectTo: '/404' }
-];
+import { routing } from './app.routing';
+
+import { AuthGuard } from './_guards';
+import { AlertService, AuthenticationService, UserService, SessionService } from './_services';
+import { AppFormGroupComponent, AlertComponent } from './_components';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AlertComponent,
     HomeComponent,
-    PageNotFoundComponent
+    LoginComponent,
+    RegisterComponent,
+    UsersComponent,
+    UserComponent,
+    ProfileComponent,
+    SettingsComponent,
+    AppFormGroupComponent,
+    ForgottenComponent,
+    ResetPasswordComponent,
+    DeleteAccountComponent
   ],
   imports: [
-    RouterModule.forRoot(appRoutes),
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpModule,
+    routing,
   ],
   providers: [
-    UserResolver,
+    AlertService,
+    AuthGuard,
+    AuthenticationService,
     UserService,
     SessionService
   ],

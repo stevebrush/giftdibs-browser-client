@@ -1,0 +1,28 @@
+<h1>
+  Settings
+</h1>
+
+<form [formGroup]="settingsForm" (ngSubmit)="submit()" novalidate>
+
+  <app-form-group label="First name" [serverErrors]="errors">
+    <input type="text" formControlName="firstName">
+  </app-form-group>
+
+  <app-form-group label="Last name" [serverErrors]="errors">
+    <input type="text" formControlName="lastName">
+  </app-form-group>
+
+  <app-form-group label="Email address" [serverErrors]="errors">
+    <input type="email" formControlName="emailAddress">
+  </app-form-group>
+
+  <p>
+    <a [routerLink]="['/reset-password']">Reset password...</a>
+  </p>
+
+  <button type="submit" [disabled]="isLoading">Save Changes</button>
+</form>
+
+<p>
+  <a routerLink="/delete-account">Delete your account...</a>
+</p>

@@ -1,0 +1,32 @@
+<h1>
+  Register
+</h1>
+<form [formGroup]="registerForm" (ngSubmit)="register()" novalidate>
+  <!-- PREVENTS AUTOCOMPLETE OF EMAIL/PASSWORD -->
+  <div style="display:none">
+    <input type="email" name="emailAddress">
+    <input type="password" name="password">
+  </div>
+
+  <app-form-group label="First name" [serverErrors]="errors">
+    <input type="text" formControlName="firstName">
+  </app-form-group>
+
+  <app-form-group label="Last name" [serverErrors]="errors">
+    <input type="text" formControlName="lastName">
+  </app-form-group>
+
+  <app-form-group label="Email address" [serverErrors]="errors">
+    <input type="email" formControlName="emailAddress">
+  </app-form-group>
+
+  <app-form-group label="New password" [serverErrors]="errors">
+    <input type="password" formControlName="password">
+  </app-form-group>
+
+  <p>
+    By submitting this form you are agreeing to our <a routerLink="/privacy">Privacy Policy</a> and <a routerLink="/terms">Terms</a>.
+  </p>
+
+  <button type="submit" [disabled]="isLoading">Register</button>
+</form>

@@ -1,0 +1,3 @@
+<p class="alert" *ngIf="message" [ngClass]="{ 'error': message.type === 'error', 'success': message.type === 'success' }">
+  {{ message.text }}
+</p>

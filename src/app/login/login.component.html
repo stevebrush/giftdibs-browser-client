@@ -1,0 +1,18 @@
+<h1>
+  Log in
+</h1>
+<form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
+  <app-form-group label="Email address" [serverErrors]="errors">
+    <input type="email" formControlName="emailAddress">
+  </app-form-group>
+
+  <app-form-group label="New password" [serverErrors]="errors">
+    <input type="password" formControlName="password">
+  </app-form-group>
+
+  <button type="submit" [disabled]="isLoading">Log in</button>
+
+  <p>
+    <a [routerLink]="['/forgotten']">Forget your password?</a>
+  </p>
+</form>

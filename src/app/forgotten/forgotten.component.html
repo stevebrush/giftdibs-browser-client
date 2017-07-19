@@ -1,0 +1,20 @@
+<h1>
+  Password recovery
+</h1>
+
+<p>
+  Enter the email address you used to register. We will send you a link to reset your password.
+</p>
+
+<form [formGroup]="forgottenForm" (ngSubmit)="requestLink()" novalidate>
+
+  <app-form-group label="Email address" [serverErrors]="errors">
+    <input type="email" formControlName="emailAddress">
+  </app-form-group>
+
+  <button type="submit" [disabled]="isLoading">Submit request</button>
+
+  <p>
+    <a [routerLink]="['/login']">I'm ready to log in.</a>
+  </p>
+</form>

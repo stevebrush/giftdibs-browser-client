@@ -1,6 +1,24 @@
-@import "../styles/_variables";
+.navbar {
+  padding: 10px 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+  display: flex;
 
-#main {
-  padding-top: $padding-size;
-  padding-bottom: $padding-size;
+  > div {
+    flex: 1 0 auto;
+  }
+
+  .active {
+    text-decoration: none;
+    color: #000;
+    cursor: default;
+  }
+}
+
+.navbar-user {
+  text-align: right;
+}
+
+.container {
+  padding: 20px;
 }

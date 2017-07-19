@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+
 import { User } from '../_models';
 
 @Injectable()
@@ -8,11 +11,14 @@ export class SessionService {
   private _token: string;
   private _storageKey = 'giftdibs.session';
 
+  private userSubject = new BehaviorSubject<User>(undefined);
+
   constructor() {
     const storage = JSON.parse(localStorage.getItem(this._storageKey));
     if (storage) {
-      this._user = storage.user;
-      this._token = storage.token;
+      this.userSubject = new BehaviorSubject<User>(storage.user);
+      this.user = storage.user;
+      this.token = storage.token;
     }
   }
 
@@ -23,6 +29,7 @@ export class SessionService {
   set user(value: User) {
     this._user = value;
     this.save();
+    this.userSubject.next(value);
   }
 
   get token(): string {
@@ -35,7 +42,13 @@ export class SessionService {
   }
 
   public clearAll(): void {
+    this.user = undefined;
+    this.token = undefined;
     localStorage.removeItem(this._storageKey);
+  }
+
+  public onUserChanges(): Observable<User> {
+    return this.userSubject.asObservable();
   }
 
   private save(): void {

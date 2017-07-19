@@ -14,6 +14,7 @@ import { SettingsComponent } from './settings';
 import { ForgottenComponent } from './forgotten';
 import { ResetPasswordComponent } from './reset-password';
 import { DeleteAccountComponent } from './delete-account';
+import { PageNotFoundComponent } from './404';
 
 import { routing } from './app.routing';
 
@@ -35,7 +36,8 @@ import { AppFormGroupComponent, AlertComponent } from './_components';
     AppFormGroupComponent,
     ForgottenComponent,
     ResetPasswordComponent,
-    DeleteAccountComponent
+    DeleteAccountComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

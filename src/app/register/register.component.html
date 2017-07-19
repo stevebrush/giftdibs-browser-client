@@ -16,6 +16,10 @@
     <input type="text" formControlName="lastName">
   </app-form-group>
 
+  <app-form-group label="Nickname" style="display: none;">
+    <input type="text" formControlName="gdNickname">
+  </app-form-group>
+
   <app-form-group label="Email address" [serverErrors]="errors">
     <input type="email" formControlName="emailAddress">
   </app-form-group>

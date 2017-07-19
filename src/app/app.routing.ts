@@ -10,11 +10,13 @@ import { SettingsComponent } from './settings';
 import { ForgottenComponent } from './forgotten';
 import { ResetPasswordComponent } from './reset-password';
 import { DeleteAccountComponent } from './delete-account';
+import { PageNotFoundComponent } from './404';
 
 import { AuthGuard } from './_guards';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+    { path: '404', component: PageNotFoundComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'forgotten', component: ForgottenComponent },
@@ -27,7 +29,7 @@ const appRoutes: Routes = [
     { path: 'delete-account', component: DeleteAccountComponent, canActivate: [AuthGuard] },
 
     // otherwise redirect to home
-    { path: '**', redirectTo: '' }
+    { path: '**', redirectTo: '404' }
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

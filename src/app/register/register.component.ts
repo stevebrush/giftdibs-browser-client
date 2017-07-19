@@ -31,6 +31,11 @@ export class RegisterComponent {
           this.router.navigate(['/login']);
         },
         (error: any) => {
+          if (error.code === 108) {
+            this.router.navigate(['/404']);
+            return;
+          }
+
           this.errors = error;
           this.alertService.error(error.message);
         });
@@ -40,6 +45,7 @@ export class RegisterComponent {
     this.registerForm = this.formBuilder.group({
       firstName: '',
       lastName: '',
+      gdNickname: '',
       emailAddress: '',
       password: ''
     });

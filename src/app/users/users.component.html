@@ -12,6 +12,9 @@
       <em *ngIf="!user.emailAddressVerified">(unverified)</em>
     </td>
     <td>
+      <pre>{{user|json}}</pre>
+    </td>
+    <td>
       <app-button (click)="delete(user._id)">Delete</app-button>
     </td>
   </tr>

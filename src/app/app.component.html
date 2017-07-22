@@ -5,14 +5,19 @@
   </div>
   <div class="navbar-user" *ngIf="currentUser">
     <a [routerLink]="['/profile']" routerLinkActive="active">{{currentUser.firstName}} {{currentUser.lastName}}</a>
-    <a href="" (click)="logout()">Log out</a>
+    <a [routerLink]="['/settings']" routerLinkActive="active">Settings</a>
+    <a href="" (click)="logout($event)">Log out</a>
   </div>
   <div class="navbar-user" *ngIf="!currentUser">
     <a [routerLink]="['/login']" routerLinkActive="active">Log in</a>
     <a [routerLink]="['/register']" routerLinkActive="active">Register</a>
   </div>
 </nav>
-<app-alert></app-alert>
+
+<app-alert>
+</app-alert>
+
 <div class="container">
-  <router-outlet></router-outlet>
+  <router-outlet>
+  </router-outlet>
 </div>

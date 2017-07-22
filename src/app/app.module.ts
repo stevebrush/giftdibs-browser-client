@@ -15,12 +15,13 @@ import { ForgottenComponent } from './forgotten';
 import { ResetPasswordComponent } from './reset-password';
 import { DeleteAccountComponent } from './delete-account';
 import { PageNotFoundComponent } from './404';
+import { VerifyEmailComponent } from './verify-email';
 
 import { routing } from './app.routing';
 
 import { AuthGuard } from './_guards';
 import { AlertService, AuthenticationService, UserService, SessionService } from './_services';
-import { AppFormGroupComponent, AlertComponent } from './_components';
+import { AppFormGroupComponent, AlertComponent, EmailVerificationAlertComponent, ButtonComponent } from './_components';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,10 @@ import { AppFormGroupComponent, AlertComponent } from './_components';
     ForgottenComponent,
     ResetPasswordComponent,
     DeleteAccountComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    EmailVerificationAlertComponent,
+    ButtonComponent,
+    VerifyEmailComponent
   ],
   imports: [
     BrowserModule,

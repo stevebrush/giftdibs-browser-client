@@ -24,9 +24,10 @@ export class AppComponent implements OnDestroy {
         });
     }
 
-  public logout(): void {
+  public logout(event: MouseEvent): void {
+    event.preventDefault();
     this.authenticationService.logout();
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
   }
 
   public ngOnDestroy(): void {

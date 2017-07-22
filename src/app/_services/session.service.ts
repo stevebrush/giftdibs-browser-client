@@ -17,7 +17,7 @@ export class SessionService {
     const storage = JSON.parse(localStorage.getItem(this._storageKey));
     if (storage) {
       this.userSubject = new BehaviorSubject<User>(storage.user);
-      this.user = storage.user;
+      this.setUser(storage.user);
       this.token = storage.token;
     }
   }
@@ -26,10 +26,18 @@ export class SessionService {
     return this._user;
   }
 
-  set user(value: User) {
+  public setUser(value: User) {
     this._user = value;
     this.save();
     this.userSubject.next(value);
+  }
+
+  public modifyUser(partial: any) {
+    Object.keys(partial).forEach((key: string) => {
+      if (this._user.hasOwnProperty(key)) {
+        (this._user as any)[key] = partial[key];
+      }
+    });
   }
 
   get token(): string {
@@ -42,7 +50,7 @@ export class SessionService {
   }
 
   public clearAll(): void {
-    this.user = undefined;
+    this.setUser(undefined);
     this.token = undefined;
     localStorage.removeItem(this._storageKey);
   }

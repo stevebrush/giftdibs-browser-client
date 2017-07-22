@@ -12,7 +12,7 @@
     <input type="email" formControlName="emailAddress">
   </app-form-group>
 
-  <button type="submit" [disabled]="isLoading">Submit request</button>
+  <app-button type="submit" [disabled]="isLoading">Submit request</app-button>
 
   <p>
     <a [routerLink]="['/login']">I'm ready to log in.</a>

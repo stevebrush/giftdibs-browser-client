@@ -38,7 +38,6 @@ export class LoginComponent implements OnInit {
       .subscribe(
         () => {
           this.router.navigate([this.redirectUrl]);
-          window.location.reload();
         },
         (error: any) => {
           this.errors = error;

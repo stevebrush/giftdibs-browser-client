@@ -16,13 +16,12 @@
     <input type="email" formControlName="emailAddress">
   </app-form-group>
 
-  <p>
-    <a [routerLink]="['/reset-password']">Reset password...</a>
-  </p>
-
-  <button type="submit" [disabled]="isLoading">Save Changes</button>
+  <app-button type="submit" [disabled]="isLoading">Save Changes</app-button>
 </form>
 
 <p>
-  <a routerLink="/delete-account">Delete your account...</a>
+  <a [routerLink]="['/reset-password']">Reset password...</a>
+</p>
+<p>
+  <a routerLink="/delete-account">Delete account...</a>
 </p>

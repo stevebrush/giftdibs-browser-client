@@ -26,8 +26,8 @@ export class RegisterComponent {
     this.authenticationService.register(this.registerForm.value)
       .finally(() => this.isLoading = false)
       .subscribe(
-        () => {
-          this.alertService.success('Registration successful', true);
+        (result: any) => {
+          this.alertService.success(result.message, true);
           this.router.navigate(['/login']);
         },
         (error: any) => {

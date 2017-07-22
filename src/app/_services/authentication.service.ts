@@ -26,7 +26,7 @@ export class AuthenticationService {
         const json = response.json();
         if (json && json.token) {
           this.sessionService.token = json.token;
-          this.sessionService.user = json.user;
+          this.sessionService.setUser(json.user);
         }
       })
       .catch((err) => this.handleError(err));
@@ -64,6 +64,30 @@ export class AuthenticationService {
 
     return this.http
       .post(url, formData, options)
+      .map((response: Response) => response.json())
+      .catch((err) => this.handleError(err));
+  }
+
+  public resendEmailAddressVerification(id: string): Observable<any> {
+    const url = 'http://localhost:8080/v1/auth/resend-email-verification';
+    const token = this.sessionService.token;
+    const headers = new Headers({ 'Authorization': `JWT ${token}` });
+    const options = new RequestOptions({ headers });
+
+    return this.http
+      .post(url, { id }, options)
+      .map((response: Response) => response.json())
+      .catch((err) => this.handleError(err));
+  }
+
+  public verifyEmailAddress(emailAddressVerificationToken: string): Observable<any> {
+    const url = 'http://localhost:8080/v1/auth/verify-email';
+    const token = this.sessionService.token;
+    const headers = new Headers({ 'Authorization': `JWT ${token}` });
+    const options = new RequestOptions({ headers });
+
+    return this.http
+      .post(url, { emailAddressVerificationToken }, options)
       .map((response: Response) => response.json())
       .catch((err) => this.handleError(err));
   }

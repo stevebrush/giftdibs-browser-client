@@ -11,6 +11,7 @@ import { ForgottenComponent } from './forgotten';
 import { ResetPasswordComponent } from './reset-password';
 import { DeleteAccountComponent } from './delete-account';
 import { PageNotFoundComponent } from './404';
+import { VerifyEmailComponent } from './verify-email';
 
 import { AuthGuard } from './_guards';
 
@@ -27,6 +28,7 @@ const appRoutes: Routes = [
     { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
     { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
     { path: 'delete-account', component: DeleteAccountComponent, canActivate: [AuthGuard] },
+    { path: 'verify-email/:emailAddressVerificationToken', component: VerifyEmailComponent, canActivate: [AuthGuard] },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '404' }

@@ -1,0 +1,11 @@
+<div class="email-verification-alert" *ngIf="!currentUser?.emailAddressVerified">
+  <p>
+    You'll need to verify your email address before you can follow someone or dib their gifts.
+  </p>
+  <p>
+    <app-button [disabled]="isLoading" (click)="sendVerificationEmail()">Resend verification email</app-button> (Did you check your spam folder?)
+  </p>
+  <p>
+    <strong>{{currentUser?.emailAddress}}</strong> <a routerLink="/settings">Edit...</a>
+  </p>
+</div>

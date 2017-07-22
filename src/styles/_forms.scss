@@ -24,7 +24,7 @@ button {
   cursor: pointer;
 
   &[disabled] {
-    opacity: .65;
+    opacity: .5;
     cursor: default;
   }
 }

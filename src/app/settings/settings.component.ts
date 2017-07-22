@@ -36,8 +36,12 @@ export class SettingsComponent implements OnInit {
       .finally(() => this.isLoading = false)
       .subscribe(
         (result: any) => {
-          this.sessionService.user = this.settingsForm.value;
-          this.alertService.success(result.message);
+          this.userService
+            .getById(this.sessionService.user._id)
+            .subscribe((user: User) => {
+              this.sessionService.setUser(user);
+              this.alertService.success(result.message);
+            });
         },
         (error: any) => {
           this.errors = error;

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 
-import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/first';
 
 import { UserService, SessionService } from '../_services';
 import { User } from '../_models';
@@ -15,13 +14,13 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private sessionService: SessionService,
-    private route: ActivatedRoute) { }
+    private sessionService: SessionService) { }
 
   public ngOnInit(): void {
     const sessionUser = this.sessionService.user;
     this.userService
       .getById(sessionUser._id)
+      .first()
       .subscribe((user: User) => {
         this.user = user;
       });

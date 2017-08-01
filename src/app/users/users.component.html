@@ -4,12 +4,14 @@
   Users
 </h1>
 <table>
+  <tr>
+    <th>Name</th>
+    <th>Data</th>
+    <th></th>
+  </tr>
   <tr *ngFor="let user of users">
     <td>
       <a [routerLink]="['/users', user._id]">{{user.firstName}} {{user.lastName}}</a>
-    </td>
-    <td>
-      <em *ngIf="!user.emailAddressVerified">(unverified)</em>
     </td>
     <td>
       <pre>{{user|json}}</pre>

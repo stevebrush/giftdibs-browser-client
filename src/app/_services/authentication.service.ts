@@ -22,14 +22,19 @@ export class AuthenticationService {
     const url = 'http://localhost:8080/v1/auth/login';
     return this.http
       .post(url, { emailAddress, password })
-      .map((response: Response) => {
-        const json = response.json();
-        if (json && json.token) {
-          this.sessionService.token = json.token;
-          this.sessionService.setUser(json.user);
-        }
-      })
-      .catch((err) => this.handleError(err));
+      .map((response: Response) => this.handleLogin(response))
+      .catch((err: any) => this.handleError(err));
+  }
+
+  public loginUsingFacebook(facebookId: number, accessToken: string): Observable<any> {
+    const url = 'http://localhost:8080/v1/auth/login-facebook';
+    return this.http
+      .post(url, { facebookId, accessToken })
+      .map((response: Response) => this.handleLogin(response))
+      .catch((err: any) => {
+        const details = err.json();
+        return Observable.throw(details);
+      });
   }
 
   public register(formData: any): Observable<any> {
@@ -37,7 +42,18 @@ export class AuthenticationService {
     return this.http
       .post(url, formData)
       .map((response: Response) => response.json())
-      .catch((err) => this.handleError(err));
+      .catch((err: any) => this.handleError(err));
+  }
+
+  public registerWithFacebook(password: string, accessToken: string): Observable<any> {
+    const url = 'http://localhost:8080/v1/auth/register-facebook';
+    const headers = new Headers({ 'Authorization': `JWT ${accessToken}` });
+    const options = new RequestOptions({ headers });
+
+    return this.http
+      .post(url, { password }, options)
+      .map((response: Response) => this.handleLogin(response))
+      .catch((err: any) => this.handleError(err));
   }
 
   public logout() {
@@ -49,7 +65,7 @@ export class AuthenticationService {
     return this.http
       .post(url, { emailAddress })
       .map((response: Response) => response.json())
-      .catch((err) => this.handleError(err));
+      .catch((err: any) => this.handleError(err));
   }
 
   public resetPassword(formData: any): Observable<any> {
@@ -65,7 +81,7 @@ export class AuthenticationService {
     return this.http
       .post(url, formData, options)
       .map((response: Response) => response.json())
-      .catch((err) => this.handleError(err));
+      .catch((err: any) => this.handleError(err));
   }
 
   public resendEmailAddressVerification(id: string): Observable<any> {
@@ -77,7 +93,7 @@ export class AuthenticationService {
     return this.http
       .post(url, { id }, options)
       .map((response: Response) => response.json())
-      .catch((err) => this.handleError(err));
+      .catch((err: any) => this.handleError(err));
   }
 
   public verifyEmailAddress(emailAddressVerificationToken: string): Observable<any> {
@@ -89,7 +105,7 @@ export class AuthenticationService {
     return this.http
       .post(url, { emailAddressVerificationToken }, options)
       .map((response: Response) => response.json())
-      .catch((err) => this.handleError(err));
+      .catch((err: any) => this.handleError(err));
   }
 
   private handleError(err: Response): ErrorObservable {
@@ -105,5 +121,16 @@ export class AuthenticationService {
 
     const details = err.json();
     return Observable.throw(details);
+  }
+
+  private handleLogin(response: Response): any {
+    const json = response.json();
+
+    if (json && json.token) {
+      this.sessionService.token = json.token;
+      this.sessionService.setUser(json.user);
+    }
+
+    return response.json();
   }
 }

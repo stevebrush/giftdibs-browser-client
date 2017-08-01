@@ -10,21 +10,11 @@ input[type="email"],
 input[type="password"],
 input[type="number"],
 textarea {
-  border: 1px solid #000;
-  padding: 6px 10px;
-  height: 38px;
+  border: 1px solid $font-color;
+  padding: .5rem .75rem;
+  line-height: $line-height-reduced;
 }
 
-button {
-  height: 38px;
-  background-color: #000;
-  color: #fff;
-  padding: 6px 10px;
-  border: 1px solid #000;
-  cursor: pointer;
-
-  &[disabled] {
-    opacity: .5;
-    cursor: default;
-  }
+.facebook-button {
+  background-color: $background-color-facebook !important;
 }

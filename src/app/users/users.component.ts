@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import 'rxjs/add/operator/first';
+
 import { AuthenticationService, UserService, AlertService } from '../_services';
 import { User } from '../_models';
 
@@ -21,6 +23,7 @@ export class UsersComponent implements OnInit {
   public ngOnInit(): void {
     this.userService
       .getAll()
+      .first()
       .subscribe((users: User[]) => {
         this.users = users;
       });
@@ -29,6 +32,7 @@ export class UsersComponent implements OnInit {
   public delete(id: string): void {
     this.userService
       .remove(id)
+      .first()
       .subscribe(
         () => {
           this.authenticationService.logout();

@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/first';
 
 import { AuthenticationService, SessionService, UserService, AlertService } from '../_services';
-import { User } from '../_models';
 
 @Component({
   selector: 'app-delete-account',
@@ -32,6 +32,7 @@ export class DeleteAccountComponent {
 
     this.authenticationService
       .login(this.sessionService.user.emailAddress, data.password)
+      .first()
       .flatMap(() => this.userService.remove(this.sessionService.user._id))
       .finally(() => this.isLoading = false)
       .subscribe(

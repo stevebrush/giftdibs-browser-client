@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+
+import 'rxjs/add/operator/first';
 
 import { AlertService, AuthenticationService } from '../_services';
 
@@ -29,6 +30,7 @@ export class ForgottenComponent implements OnInit {
     const data = this.forgottenForm.value;
     this.authenticationService
       .forgotten(data.emailAddress)
+      .first()
       .finally(() => this.isLoading = false)
       .subscribe(
         (result: any) => {

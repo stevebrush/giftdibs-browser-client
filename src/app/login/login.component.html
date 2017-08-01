@@ -1,6 +1,14 @@
 <h1>
   Log in
 </h1>
+
+<p>
+  <app-facebook-login-button
+    [redirectUrl]="redirectUrl"
+    [disabled]="isLoading">
+  </app-facebook-login-button>
+</p>
+
 <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
   <app-form-group label="Email address" [serverErrors]="errors">
     <input type="email" formControlName="emailAddress">
@@ -13,6 +21,6 @@
   <app-button type="submit" [disabled]="isLoading">Log in</app-button>
 
   <p>
-    <a [routerLink]="['/forgotten']">Forget your password?</a>
+    <a [routerLink]="['/forgotten']">Forgot your password?</a>
   </p>
 </form>

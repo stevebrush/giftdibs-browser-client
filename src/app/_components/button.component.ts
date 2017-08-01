@@ -12,6 +12,9 @@ export class ButtonComponent implements OnChanges, AfterViewInit {
   @Input()
   public loadingText = 'Loading...';
 
+  @Input()
+  public classNames: string;
+
   @ViewChild('button')
   public button: ElementRef;
   public originalText: string;

@@ -16,16 +16,24 @@ import { ResetPasswordComponent } from './reset-password';
 import { DeleteAccountComponent } from './delete-account';
 import { PageNotFoundComponent } from './404';
 import { VerifyEmailComponent } from './verify-email';
+import { RegisterFacebookComponent } from './register-facebook';
 
 import { routing } from './app.routing';
 
 import { AuthGuard } from './_guards';
-import { AlertService, AuthenticationService, UserService, SessionService } from './_services';
-import { AppFormGroupComponent, AlertComponent, EmailVerificationAlertComponent, ButtonComponent } from './_components';
+import { AlertService, AuthenticationService, UserService, SessionService, WindowService } from './_services';
+import {
+  AppFormGroupComponent,
+  AppFacebookLoginButtonComponent,
+  AlertComponent,
+  EmailVerificationAlertComponent,
+  ButtonComponent
+} from './_components';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AppFacebookLoginButtonComponent,
     AlertComponent,
     HomeComponent,
     LoginComponent,
@@ -41,7 +49,8 @@ import { AppFormGroupComponent, AlertComponent, EmailVerificationAlertComponent,
     PageNotFoundComponent,
     EmailVerificationAlertComponent,
     ButtonComponent,
-    VerifyEmailComponent
+    VerifyEmailComponent,
+    RegisterFacebookComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +64,8 @@ import { AppFormGroupComponent, AlertComponent, EmailVerificationAlertComponent,
     AuthGuard,
     AuthenticationService,
     UserService,
-    SessionService
+    SessionService,
+    WindowService
   ],
   bootstrap: [AppComponent]
 })

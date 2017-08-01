@@ -1,6 +1,13 @@
 <h1>
   Register
 </h1>
+
+<p>
+  <app-facebook-login-button
+    [disabled]="isLoading">
+  </app-facebook-login-button>
+</p>
+
 <form [formGroup]="registerForm" (ngSubmit)="register()" novalidate>
   <!-- PREVENTS AUTOCOMPLETE OF EMAIL/PASSWORD -->
   <div style="display:none">

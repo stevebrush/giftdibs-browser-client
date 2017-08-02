@@ -1,4 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy
+  // ChangeDetectorRef
+} from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Subscription } from 'rxjs/subscription';
@@ -18,11 +23,13 @@ export class AppComponent implements OnInit, OnDestroy {
     private authenticationService: AuthenticationService,
     private sessionService: SessionService,
     private router: Router,
+    // private changeDetectionRef: ChangeDetectorRef,
     private windowService: WindowService) {
       this.userSubscription = this.sessionService
         .onUserChanges()
         .subscribe((user: any) => {
           this.currentUser = user;
+          // this.changeDetectionRef.detectChanges();
         });
     }
 

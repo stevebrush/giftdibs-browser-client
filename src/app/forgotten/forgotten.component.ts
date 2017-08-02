@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import 'rxjs/add/operator/first';
@@ -9,7 +9,7 @@ import { AlertService, AuthenticationService } from '../_services';
   selector: 'app-forgotten',
   templateUrl: './forgotten.component.html'
 })
-export class ForgottenComponent implements OnInit {
+export class ForgottenComponent {
   public forgottenForm: FormGroup;
   public isLoading = false;
   public errors: any;
@@ -20,10 +20,6 @@ export class ForgottenComponent implements OnInit {
     private authenticationService: AuthenticationService) {
       this.createForm();
     }
-
-  public ngOnInit() {
-    this.authenticationService.logout();
-  }
 
   public requestLink() {
     this.isLoading = true;

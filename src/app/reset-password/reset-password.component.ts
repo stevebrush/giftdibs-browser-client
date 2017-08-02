@@ -15,6 +15,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
   public resetPasswordForm: FormGroup;
   public isLoading = true;
   public errors: any;
+  public hasToken = false;
 
   private paramSubscription: Subscription;
 
@@ -29,15 +30,15 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     }
 
   public ngOnInit(): void {
-    // If the user is logged in, they should be able to access the form.
-    if (this.sessionService.user) {
-      this.isLoading = false;
-      return;
-    }
-
-    // Otherwise, the user will need a reset password token...
     this.paramSubscription = this.route.params.subscribe((params: any) => {
       if (!params.resetPasswordToken) {
+
+        // If the user is logged in, they should be able to access the form.
+        if (this.sessionService.user) {
+          this.isLoading = false;
+          return;
+        }
+
         this.alertService.error('A reset password token was not provided.', true);
         this.router.navigate(['/login']);
         return;
@@ -45,6 +46,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
 
       this.resetPasswordForm.controls.resetPasswordToken.setValue(params.resetPasswordToken);
       this.isLoading = false;
+      this.hasToken = true;
     });
   }
 
@@ -79,6 +81,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
 
   private createForm(): void {
     this.resetPasswordForm = this.formBuilder.group({
+      currentPassword: undefined,
       password: '',
       passwordAgain: '',
       resetPasswordToken: ''

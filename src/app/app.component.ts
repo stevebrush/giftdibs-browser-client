@@ -2,7 +2,6 @@ import {
   Component,
   OnInit,
   OnDestroy
-  // ChangeDetectorRef
 } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -23,13 +22,11 @@ export class AppComponent implements OnInit, OnDestroy {
     private authenticationService: AuthenticationService,
     private sessionService: SessionService,
     private router: Router,
-    // private changeDetectionRef: ChangeDetectorRef,
     private windowService: WindowService) {
       this.userSubscription = this.sessionService
         .onUserChanges()
         .subscribe((user: any) => {
           this.currentUser = user;
-          // this.changeDetectionRef.detectChanges();
         });
     }
 
@@ -40,11 +37,6 @@ export class AppComponent implements OnInit, OnDestroy {
       appId: '529193240473948',
       xfbml: false,
       version: 'v2.10'
-    });
-
-    FB.getLoginStatus((response: any) => {
-      console.log('fb login status response', response);
-      // Check login then redirect if needed?
     });
   }
 

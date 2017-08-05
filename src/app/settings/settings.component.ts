@@ -1,8 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import 'rxjs/add/operator/first';
-// import { Subscription } from 'rxjs/Subscription';
 
 import { UserService, AlertService, SessionService, WindowService } from '../_services';
 import { User } from '../_models';
@@ -11,13 +10,11 @@ import { User } from '../_models';
   selector: 'app-settings',
   templateUrl: './settings.component.html'
 })
-export class SettingsComponent implements OnInit, OnDestroy {
+export class SettingsComponent implements OnInit {
   public settingsForm: FormGroup;
   public isLoading = false;
   public errors: any;
   public user: User;
-
-  // private sessionSubscription: Subscription;
 
   public constructor(
     private formBuilder: FormBuilder,
@@ -29,17 +26,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     }
 
   public ngOnInit(): void {
-    // this.sessionSubscription = this.sessionService
-    //   .onUserChanges()
-    //   .subscribe((user: User) => {
-    //     this.user = user;
-    //     this.settingsForm.reset(user);
-    //   });
     this.updateForm();
-  }
-
-  public ngOnDestroy(): void {
-    // this.sessionSubscription.unsubscribe();
   }
 
   public submit(): void {

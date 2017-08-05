@@ -1,9 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import 'rxjs/add/operator/first';
 import { Subscription } from 'rxjs/Subscription';
 
-import { User } from '../_models';
 import { AlertService, AuthenticationService, SessionService } from '../_services';
 
 @Component({
@@ -22,6 +22,7 @@ export class VerifyEmailComponent implements OnDestroy {
     this.paramSubscription = this.route.params.subscribe((params: any) => {
       this.authenticationService
         .verifyEmailAddress(params.emailAddressVerificationToken)
+        .first()
         .subscribe(
           (data: any) => {
             this.sessionService.modifyUser({

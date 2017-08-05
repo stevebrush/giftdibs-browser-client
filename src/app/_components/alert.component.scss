@@ -1,15 +1,17 @@
+@import '../../styles/_variables';
+
 .alert {
   padding: 10px 20px;
   color: #fff;
-  background-color: #000;
+  background-color: $font-color;
   font-weight: 100;
   margin: 0;
 }
 
 .error {
-  background-color: #f00;
+  background-color: red;
 }
 
 .success {
-  background-color: #000;
+  background-color: $font-color;
 }

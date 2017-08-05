@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import 'rxjs/add/operator/first';
+
 import { AlertService, AuthenticationService } from '../_services';
 
 @Component({
@@ -12,8 +14,7 @@ export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
   public isLoading = false;
   public errors: any;
-
-  private redirectUrl: string;
+  public redirectUrl: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,18 +32,21 @@ export class LoginComponent implements OnInit {
 
   public login() {
     this.isLoading = true;
-    const data = this.loginForm.value;
+    const formData = this.loginForm.value;
     this.authenticationService
-      .login(data.emailAddress, data.password)
+      .login(formData.emailAddress, formData.password)
+      .first()
       .finally(() => this.isLoading = false)
       .subscribe(
-        () => {
+        (data: any) => {
+          this.alertService.success(data.message, true);
           this.router.navigate([this.redirectUrl]);
         },
         (error: any) => {
           this.errors = error;
           this.alertService.error(error.message);
-        });
+        }
+      );
   }
 
   private createForm(): void {

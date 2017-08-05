@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import 'rxjs/add/operator/first';
 import { Subscription } from 'rxjs/Subscription';
 
 import { User } from '../_models';
@@ -24,6 +25,7 @@ export class UserComponent implements OnInit, OnDestroy {
     this.paramSubscription = this.route.params.subscribe((params: any) => {
       this.userService
         .getById(params.id)
+        .first()
         .subscribe(
           (user: User) => {
             this.user = user;

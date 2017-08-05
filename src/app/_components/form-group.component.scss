@@ -1,13 +1,13 @@
 .app-form-group {
   display: flex;
   flex-direction: column;
-  margin: 10px 0;
+  margin: 1rem 0;
 }
 
 .has-error {
   label,
   .app-form-group-alert {
-    color: #f00;
+    color: red;
   }
 }
 
@@ -17,9 +17,6 @@
   input[type="password"],
   input[type="email"],
   input[type="number"] {
-    border-color: #f00;
+    border-color: red;
   }
-}
-
-.app-form-group-alert {
 }

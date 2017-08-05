@@ -2,6 +2,12 @@
   Settings
 </h1>
 
+<p>
+  <app-button (click)="linkFacebook()" [disabled]="isLoading" classNames="facebook-button" *ngIf="!user?.facebookId">Link Facebook account</app-button>
+  <app-button (click)="unlinkFacebook()" [disabled]="isLoading" classNames="facebook-button" *ngIf="user?.facebookId">Unlink Facebook account</app-button>
+  <app-button (click)="refreshFacebook()" [disabled]="isLoading" classNames="facebook-button" *ngIf="user?.facebookId">Refresh account information</app-button>
+</p>
+
 <form [formGroup]="settingsForm" (ngSubmit)="submit()" novalidate>
 
   <app-form-group label="First name" [serverErrors]="errors">

@@ -26,10 +26,10 @@ export class AuthenticationService {
       .catch((err: any) => this.handleError(err));
   }
 
-  public loginUsingFacebook(facebookId: number, accessToken: string): Observable<any> {
+  public loginUsingFacebook(facebookUserAccessToken: string): Observable<any> {
     const url = 'http://localhost:8080/v1/auth/login-facebook';
     return this.http
-      .post(url, { facebookId, accessToken })
+      .post(url, { facebookUserAccessToken })
       .map((response: Response) => this.handleLogin(response))
       .catch((err: any) => {
         const details = err.json();

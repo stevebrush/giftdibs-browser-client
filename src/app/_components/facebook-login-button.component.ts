@@ -11,12 +11,10 @@ import { AlertService, AuthenticationService, WindowService } from '../_services
 export class AppFacebookLoginButtonComponent {
   @Input()
   public disabled = false;
+
   @Input()
   public redirectUrl = '/';
   public isLoading = false;
-
-  // @Output()
-  // public onUserNotFound = new EventEmitter<any>();
 
   constructor(
     private alertService: AlertService,
@@ -37,7 +35,7 @@ export class AppFacebookLoginButtonComponent {
       }
 
       this.authenticationService
-        .loginUsingFacebook(response.authResponse.userID, response.authResponse.accessToken)
+        .loginUsingFacebook(response.authResponse.accessToken)
         .finally(() => this.isLoading = false)
         .subscribe(
           (data) => {
@@ -45,8 +43,6 @@ export class AppFacebookLoginButtonComponent {
             this.router.navigate([this.redirectUrl]);
           },
           (error: any) => {
-            // this.onUserNotFound.emit(error);
-
             // Facebook registration request.
             if (error.code === 111) {
               const data = JSON.parse(error.message);

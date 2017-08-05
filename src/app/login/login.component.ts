@@ -14,8 +14,7 @@ export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
   public isLoading = false;
   public errors: any;
-
-  private redirectUrl: string;
+  public redirectUrl: string;
 
   constructor(
     private route: ActivatedRoute,

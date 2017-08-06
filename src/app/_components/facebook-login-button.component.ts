@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
+import 'rxjs/add/operator/first';
+
 import { AlertService, AuthenticationService, WindowService } from '../_services';
 
 @Component({
@@ -36,6 +38,7 @@ export class AppFacebookLoginButtonComponent {
 
       this.authenticationService
         .loginUsingFacebook(response.authResponse.accessToken)
+        .first()
         .finally(() => this.isLoading = false)
         .subscribe(
           (data) => {

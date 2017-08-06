@@ -28,17 +28,17 @@ export class DeleteAccountComponent {
 
   public deleteAccount(): void {
     this.isLoading = true;
-    const data = this.deleteAccountForm.value;
+    const formData = this.deleteAccountForm.value;
 
     this.authenticationService
-      .login(this.sessionService.user.emailAddress, data.password)
+      .login(this.sessionService.user.emailAddress, formData.password)
       .first()
       .flatMap(() => this.userService.remove(this.sessionService.user._id))
       .finally(() => this.isLoading = false)
       .subscribe(
-        () => {
+        (data: any) => {
           this.authenticationService.logout();
-          this.alertService.success('Your account was successfully deleted. Goodbye!', true);
+          this.alertService.success(data.message, true);
           this.router.navigate(['/login']);
         },
         (err: any) => {

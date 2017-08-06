@@ -4,12 +4,13 @@ import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/finally';
 import 'rxjs/add/observable/throw';
 
 import { SessionService } from './session.service';
+import { AlertService } from './alert.service';
 
 @Injectable()
 export class UserService {
@@ -18,6 +19,7 @@ export class UserService {
   constructor(
     private http: Http,
     private router: Router,
+    private alertService: AlertService,
     private sessionService: SessionService) { }
 
   public getAll(): Observable<any> {
@@ -27,8 +29,8 @@ export class UserService {
 
     return this.http
       .get(this.resourceUrl, options)
-      .map((response: Response) => response.json())
-      .catch((err) => this.handleError(err));
+      .map((response: Response) => this.handleSuccess(response))
+      .catch((err: any) => this.handleError(err));
   }
 
   public getById(id: string): Observable<any> {
@@ -38,7 +40,7 @@ export class UserService {
 
     return this.http
       .get(`${this.resourceUrl}/${id}`, options)
-      .map((response: Response) => response.json())
+      .map((response: Response) => this.handleSuccess(response))
       .catch((err) => this.handleError(err));
   }
 
@@ -49,7 +51,7 @@ export class UserService {
 
     return this.http
       .delete(`${this.resourceUrl}/${id}`, options)
-      .map((response: Response) => response.json())
+      .map((response: Response) => this.handleSuccess(response))
       .catch((err) => this.handleError(err));
   }
 
@@ -60,8 +62,19 @@ export class UserService {
 
     return this.http
       .patch(`${this.resourceUrl}/${data._id}`, data, options)
-      .map((response: Response) => response.json())
+      .map((response: Response) => this.handleSuccess(response))
       .catch((err) => this.handleError(err));
+  }
+
+  private handleSuccess(response: Response): any {
+    const json = response.json();
+
+    if (json.authResponse) {
+      this.sessionService.setUser(json.authResponse.user);
+      this.sessionService.token = json.authResponse.token;
+    }
+
+    return json;
   }
 
   private handleError(err: Response): ErrorObservable {
@@ -71,8 +84,8 @@ export class UserService {
           redirectUrl: this.router.url
         }
       };
+      this.alertService.error('You must be logged in to view that page.', true);
       this.router.navigate(['/login'], routerOptions);
-      return;
     }
 
     const details = err.json();

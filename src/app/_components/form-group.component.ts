@@ -6,7 +6,7 @@ import { FormControlName } from '@angular/forms';
   templateUrl: './form-group.component.html',
   styleUrls: ['./form-group.component.scss']
 })
-export class AppFormGroupComponent implements OnChanges {
+export class FormGroupComponent implements OnChanges {
   @Input()
   public label: string;
 

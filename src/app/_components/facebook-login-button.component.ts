@@ -10,7 +10,7 @@ import { AlertService, AuthenticationService, WindowService } from '../_services
   templateUrl: './facebook-login-button.component.html',
   styleUrls: ['./facebook-login-button.component.scss']
 })
-export class AppFacebookLoginButtonComponent {
+export class FacebookLoginButtonComponent {
   @Input()
   public disabled = false;
 

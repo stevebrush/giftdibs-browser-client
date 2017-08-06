@@ -22,13 +22,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private authenticationService: AuthenticationService,
     private sessionService: SessionService,
     private router: Router,
-    private windowService: WindowService) {
-      this.userSubscription = this.sessionService
-        .onUserChanges()
-        .subscribe((user: any) => {
-          this.currentUser = user;
-        });
-    }
+    private windowService: WindowService) { }
 
   public ngOnInit(): void {
     const FB = this.windowService.nativeWindow.FB;
@@ -38,6 +32,15 @@ export class AppComponent implements OnInit, OnDestroy {
       xfbml: false,
       version: 'v2.10'
     });
+
+    this.userSubscription = this.sessionService
+      .onUserChanges()
+      .subscribe((user: any) => {
+        // Allow the page to 'tick' once.
+        setTimeout(() => {
+          this.currentUser = user;
+        }, 0);
+      });
   }
 
   public ngOnDestroy(): void {
@@ -48,5 +51,9 @@ export class AppComponent implements OnInit, OnDestroy {
     event.preventDefault();
     this.authenticationService.logout();
     this.router.navigate(['/login']);
+  }
+
+  public isLoggedIn(): boolean {
+    return (this.currentUser !== undefined);
   }
 }

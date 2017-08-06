@@ -3,12 +3,12 @@
     <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">GiftDibs</a> /
     <a [routerLink]="['/users']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Users</a>
   </div>
-  <div class="navbar-user" *ngIf="currentUser">
+  <div class="navbar-user" *ngIf="isLoggedIn()">
     <a [routerLink]="['/profile']" routerLinkActive="active">{{currentUser.firstName}} {{currentUser.lastName}}</a>
     <a [routerLink]="['/settings']" routerLinkActive="active">Settings</a>
     <a href="" (click)="logout($event)">Log out</a>
   </div>
-  <div class="navbar-user" *ngIf="!currentUser">
+  <div class="navbar-user" *ngIf="!isLoggedIn()">
     <a [routerLink]="['/login']" routerLinkActive="active">Log in</a>
     <a [routerLink]="['/register']" routerLinkActive="active">Register</a>
   </div>
@@ -17,7 +17,11 @@
 <app-alert>
 </app-alert>
 
-<div class="container">
+<div class="app-container">
   <router-outlet>
   </router-outlet>
 </div>
+
+<nav class="app-footer">
+  <a routerLink="/support">Support</a>
+</nav>

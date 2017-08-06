@@ -16,7 +16,8 @@ import { ResetPasswordComponent } from './reset-password';
 import { DeleteAccountComponent } from './delete-account';
 import { PageNotFoundComponent } from './404';
 import { VerifyEmailComponent } from './verify-email';
-import { RegisterFacebookComponent } from './register-facebook';
+
+import { AboutComponent, SupportComponent, PrivacyPolicyComponent, TermsComponent } from './support';
 
 import { routing } from './app.routing';
 
@@ -50,7 +51,10 @@ import {
     EmailVerificationAlertComponent,
     ButtonComponent,
     VerifyEmailComponent,
-    RegisterFacebookComponent
+    AboutComponent,
+    SupportComponent,
+    PrivacyPolicyComponent,
+    TermsComponent
   ],
   imports: [
     BrowserModule,

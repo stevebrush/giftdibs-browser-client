@@ -57,6 +57,7 @@ export class SettingsComponent implements OnInit {
             _id: this.sessionService.user._id,
             facebookId: response.authResponse.userID
           })
+          .first()
           .finally(() => this.isLoading = false)
           .subscribe(
             (data: any) => {
@@ -112,6 +113,7 @@ export class SettingsComponent implements OnInit {
 
         this.userService
           .update(changes)
+          .first()
           .finally(() => this.isLoading = false)
           .subscribe(
             (data: any) => {

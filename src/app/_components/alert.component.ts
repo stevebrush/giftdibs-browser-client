@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription } from 'rxjs/Subscription';
 
-import { AlertService } from '../_services';
+import { AlertService, WindowService } from '../_services';
 
 @Component({
   selector: 'app-alert',
@@ -15,12 +15,14 @@ export class AlertComponent implements OnInit, OnDestroy {
   private alertSubscription: Subscription;
 
   constructor(
-    private alertService: AlertService) {}
+    private alertService: AlertService,
+    private windowService: WindowService) {}
 
   public ngOnInit(): void {
     this.alertSubscription = this.alertService.getMessage()
       .subscribe(message => {
         this.message = message;
+        this.windowService.nativeWindow.scrollTo(0, 0);
       });
   }
 

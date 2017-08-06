@@ -24,8 +24,8 @@ import { routing } from './app.routing';
 import { AuthGuard } from './_guards';
 import { AlertService, AuthenticationService, UserService, SessionService, WindowService } from './_services';
 import {
-  AppFormGroupComponent,
-  AppFacebookLoginButtonComponent,
+  FormGroupComponent,
+  FacebookLoginButtonComponent,
   AlertComponent,
   EmailVerificationAlertComponent,
   ButtonComponent
@@ -34,7 +34,7 @@ import {
 @NgModule({
   declarations: [
     AppComponent,
-    AppFacebookLoginButtonComponent,
+    FacebookLoginButtonComponent,
     AlertComponent,
     HomeComponent,
     LoginComponent,
@@ -43,7 +43,7 @@ import {
     UserComponent,
     ProfileComponent,
     SettingsComponent,
-    AppFormGroupComponent,
+    FormGroupComponent,
     ForgottenComponent,
     ResetPasswordComponent,
     DeleteAccountComponent,

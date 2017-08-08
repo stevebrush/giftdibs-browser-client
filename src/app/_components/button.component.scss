@@ -1,11 +1,11 @@
 @import '../../styles/_variables';
 
 .app-button {
-  background-color: $font-color;
+  background-color: $background-color-primary;
   color: #fff;
-  padding: .5rem 1rem;
+  padding: .5rem .75rem .4rem;
   border: none;
-  border-radius: $border-radius;
+  border-bottom: .1rem solid darken($background-color-primary, 8%);
   cursor: pointer;
   line-height: $line-height-reduced;
   font-weight: $font-weight;

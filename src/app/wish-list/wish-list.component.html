@@ -1,0 +1,8 @@
+<div *ngIf="wishList">
+  <h1>
+    {{wishList.name}}
+  </h1>
+  <p>
+    <app-button (click)="deleteWishList(wishList._id)" [disabled]="isLoading">Delete</app-button>
+  </p>
+</div>

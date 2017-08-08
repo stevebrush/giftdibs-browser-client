@@ -3,3 +3,7 @@ export * from './alert.component';
 export * from './email-verification-alert.component';
 export * from './button.component';
 export * from './facebook-login-button.component';
+export * from './wish-list-create.component';
+export * from './wish-list-edit.component';
+export * from './modal.component';
+export * from './footer.component';

@@ -1,7 +1,8 @@
 <nav class="navbar">
   <div class="navbar-main">
     <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">GiftDibs</a> /
-    <a [routerLink]="['/users']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Users</a>
+    <a [routerLink]="['/users']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Users</a> /
+    <a [routerLink]="['/wish-lists']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Wish lists</a>
   </div>
   <div class="navbar-user" *ngIf="isLoggedIn()">
     <a [routerLink]="['/profile']" routerLinkActive="active">{{currentUser.firstName}} {{currentUser.lastName}}</a>
@@ -22,6 +23,5 @@
   </router-outlet>
 </div>
 
-<nav class="app-footer">
-  <a routerLink="/support">Support</a>
-</nav>
+<app-footer>
+</app-footer>

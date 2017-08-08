@@ -12,6 +12,8 @@ import { ResetPasswordComponent } from './reset-password';
 import { DeleteAccountComponent } from './delete-account';
 import { PageNotFoundComponent } from './404';
 import { VerifyEmailComponent } from './verify-email';
+import { WishListsComponent } from './wish-lists';
+import { WishListComponent } from './wish-list';
 
 import { SupportComponent, AboutComponent, PrivacyPolicyComponent, TermsComponent } from './support';
 
@@ -24,13 +26,18 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'forgotten', component: ForgottenComponent },
   { path: 'reset-password/:resetPasswordToken', component: ResetPasswordComponent },
-  { path: 'reset-password', component: ResetPasswordComponent },
-  { path: 'users/:id', component: UserComponent, canActivate: [AuthGuard] },
-  { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
+  { path: 'reset-password', component: ResetPasswordComponent, canActivate: [AuthGuard] },
+
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
   { path: 'delete-account', component: DeleteAccountComponent, canActivate: [AuthGuard] },
   { path: 'verify-email/:emailAddressVerificationToken', component: VerifyEmailComponent, canActivate: [AuthGuard] },
+
+  { path: 'users/:id', component: UserComponent, canActivate: [AuthGuard] },
+  { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
+
+  { path: 'wish-lists/:wishListId', component: WishListComponent, canActivate: [AuthGuard] },
+  { path: 'wish-lists', component: WishListsComponent, canActivate: [AuthGuard] },
 
   {
     path: 'support',

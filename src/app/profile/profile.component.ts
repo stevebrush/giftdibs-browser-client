@@ -13,9 +13,8 @@ export class ProfileComponent implements OnInit {
   public user: User;
   public wishLists: any[];
   public isCreateControlActive = false;
-
-  private isLoading = false;
-  private activeWishList: WishList;
+  public isLoading = false;
+  public activeWishList: WishList;
 
   constructor(
     private userService: UserService,

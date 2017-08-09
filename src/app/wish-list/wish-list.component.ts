@@ -18,7 +18,7 @@ import {
 })
 export class WishListComponent implements OnInit {
   public wishList: WishList;
-  private isLoading = false;
+  public isLoading = false;
 
   constructor(
     private alertService: AlertService,

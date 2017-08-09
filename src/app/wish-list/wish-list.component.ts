@@ -5,13 +5,10 @@ import 'rxjs/add/operator/first';
 
 import {
   AlertService,
-  // UserService,
-  // SessionService,
   WishListService
 } from '../_services';
 
 import {
-  // User,
   WishList
 } from '../_models';
 
@@ -20,18 +17,14 @@ import {
   templateUrl: './wish-list.component.html'
 })
 export class WishListComponent implements OnInit {
-  // public user: User;
   public wishList: WishList;
   private isLoading = false;
 
   constructor(
-    // private userService: UserService,
     private alertService: AlertService,
     private wishListService: WishListService,
     private route: ActivatedRoute,
-    private router: Router
-    // private sessionService: SessionService
-  ) { }
+    private router: Router) { }
 
   public ngOnInit(): void {
     this.isLoading = true;

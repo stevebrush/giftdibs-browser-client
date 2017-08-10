@@ -1,24 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 import 'rxjs/add/operator/first';
 
-import { AuthenticationService, UserService, AlertService } from '../_services';
+import { UserService } from '../_services';
 import { User } from '../_models';
 
 @Component({
   selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  templateUrl: './users.component.html'
 })
 export class UsersComponent implements OnInit {
   public users: User[];
 
   constructor(
-    private alertService: AlertService,
-    private authenticationService: AuthenticationService,
-    private userService: UserService,
-    private router: Router) { }
+    private userService: UserService) { }
 
   public ngOnInit(): void {
     this.userService
@@ -27,20 +22,5 @@ export class UsersComponent implements OnInit {
       .subscribe((users: User[]) => {
         this.users = users;
       });
-  }
-
-  public delete(id: string): void {
-    this.userService
-      .remove(id)
-      .first()
-      .subscribe(
-        () => {
-          this.authenticationService.logout();
-          this.router.navigate(['/']);
-        },
-        (err: any) => {
-          this.alertService.error(err.message);
-        }
-      );
   }
 }

@@ -13,14 +13,25 @@ import { SessionService } from './session.service';
 import { AlertService } from './alert.service';
 
 @Injectable()
-export class UserService {
-  private resourceUrl = 'http://localhost:8080/v1/users';
+export class WishListService {
+  private resourceUrl = 'http://localhost:8080/v1/wish-lists';
 
   constructor(
     private http: Http,
     private router: Router,
     private alertService: AlertService,
     private sessionService: SessionService) { }
+
+  public create(formData: any): Observable<any> {
+    const token = this.sessionService.token;
+    const headers = new Headers({ 'Authorization': `JWT ${token}` });
+    const options = new RequestOptions({ headers });
+
+    return this.http
+      .post(this.resourceUrl, formData, options)
+      .map((response: Response) => this.handleSuccess(response))
+      .catch((err: any) => this.handleError(err));
+  }
 
   public getAll(): Observable<any> {
     const token = this.sessionService.token;
@@ -40,17 +51,6 @@ export class UserService {
 
     return this.http
       .get(`${this.resourceUrl}/${id}`, options)
-      .map((response: Response) => this.handleSuccess(response))
-      .catch((err) => this.handleError(err));
-  }
-
-  public getWishListsByUserId(id: string): Observable<any> {
-    const token = this.sessionService.token;
-    const headers = new Headers({ 'Authorization': `JWT ${token}` });
-    const options = new RequestOptions({ headers });
-
-    return this.http
-      .get(`${this.resourceUrl}/${id}/wish-lists`, options)
       .map((response: Response) => this.handleSuccess(response))
       .catch((err) => this.handleError(err));
   }

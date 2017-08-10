@@ -8,11 +8,19 @@ body {
   font-weight: $font-weight;
   line-height: $line-height;
   color: $font-color;
+  background-color: #f2f2f2;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: .5rem 0;
 }
 
 h1 {
-  margin: .5rem 0;
   font-size: 3rem;
+}
+
+h2 {
+  font-size: 1.8rem;
 }
 
 p {
@@ -21,9 +29,4 @@ p {
 
 strong {
   font-weight: 700;
-}
-
-.container {
-  max-width: 750px;
-  margin: 0 auto;
 }

@@ -16,19 +16,33 @@ import { ResetPasswordComponent } from './reset-password';
 import { DeleteAccountComponent } from './delete-account';
 import { PageNotFoundComponent } from './404';
 import { VerifyEmailComponent } from './verify-email';
+import { WishListsComponent } from './wish-lists';
+import { WishListComponent } from './wish-list';
 
 import { AboutComponent, SupportComponent, PrivacyPolicyComponent, TermsComponent } from './support';
 
 import { routing } from './app.routing';
 
 import { AuthGuard } from './_guards';
-import { AlertService, AuthenticationService, UserService, SessionService, WindowService } from './_services';
+import {
+  AlertService,
+  AuthenticationService,
+  UserService,
+  SessionService,
+  WindowService,
+  WishListService
+} from './_services';
+
 import {
   FormGroupComponent,
   FacebookLoginButtonComponent,
   AlertComponent,
   EmailVerificationAlertComponent,
-  ButtonComponent
+  ButtonComponent,
+  WishListCreateComponent,
+  WishListEditComponent,
+  ModalComponent,
+  FooterComponent
 } from './_components';
 
 @NgModule({
@@ -54,7 +68,13 @@ import {
     AboutComponent,
     SupportComponent,
     PrivacyPolicyComponent,
-    TermsComponent
+    TermsComponent,
+    WishListCreateComponent,
+    WishListEditComponent,
+    WishListComponent,
+    WishListsComponent,
+    ModalComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +89,8 @@ import {
     AuthenticationService,
     UserService,
     SessionService,
-    WindowService
+    WindowService,
+    WishListService
   ],
   bootstrap: [AppComponent]
 })

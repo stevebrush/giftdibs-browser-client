@@ -1,23 +1,14 @@
 <app-email-verification-alert>
 </app-email-verification-alert>
+
 <h1>
   Users
 </h1>
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Data</th>
-    <th></th>
-  </tr>
+
+<table class="app-table">
   <tr *ngFor="let user of users">
     <td>
       <a [routerLink]="['/users', user._id]">{{user.firstName}} {{user.lastName}}</a>
-    </td>
-    <td>
-      <pre>{{user|json}}</pre>
-    </td>
-    <td>
-      <app-button (click)="delete(user._id)">Delete</app-button>
     </td>
   </tr>
 </table>

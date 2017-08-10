@@ -1,0 +1,8 @@
+<form [formGroup]="wishListForm" (ngSubmit)="createWishList()" novalidate>
+  <app-form-group label="New wish list" [serverErrors]="errors">
+    <input type="text" formControlName="name" #nameInput>
+  </app-form-group>
+
+  <app-button type="submit" [disabled]="isLoading">Create</app-button>
+  <app-button (click)="onCancel.emit()" [disabled]="isLoading">Cancel</app-button>
+</form>

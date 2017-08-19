@@ -1,0 +1,19 @@
+<h1>
+  Edit gift
+</h1>
+<form [formGroup]="giftForm" (ngSubmit)="updateGift()" novalidate>
+  <app-form-group label="Name" [serverErrors]="errors">
+    <input type="text" formControlName="name">
+  </app-form-group>
+
+  <app-form-group label="External URL" [serverErrors]="errors">
+    <input type="text" formControlName="externalUrl">
+  </app-form-group>
+
+  <app-form-group label="Budget" [serverErrors]="errors">
+    <input type="number" formControlName="budget">
+  </app-form-group>
+
+  <app-button type="submit" [disabled]="isLoading">Save changes</app-button>
+  <app-button [disabled]="isLoading" (click)="onCancel.emit($event)">Cancel</app-button>
+</form>

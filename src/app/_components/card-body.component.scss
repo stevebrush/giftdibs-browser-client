@@ -1,0 +1,14 @@
+.app-card-body {
+  padding: 15px 20px;
+  border-bottom: 1px solid #ccc;
+  background-color: #fff;
+  border-radius: 3px;
+  margin: 8px 0;
+}
+
+/deep/
+.app-card-body {
+  form {
+    margin: 0;
+  }
+}

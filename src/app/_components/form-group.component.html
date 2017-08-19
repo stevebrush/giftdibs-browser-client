@@ -1,7 +1,7 @@
 <div
   class="app-form-group"
   [ngClass]="{ 'has-error': !controlName.control.valid }">
-  <label>{{label}}</label>
+  <label class="app-form-group-label">{{ label }}</label>
   <ng-content></ng-content>
   <div class="app-form-group-alert" *ngIf="controlName.control.errors">
     <div *ngFor="let key of getObjectKeys(controlName.control.errors)">

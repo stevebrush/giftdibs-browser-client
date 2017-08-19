@@ -1,8 +1,30 @@
 <app-email-verification-alert>
 </app-email-verification-alert>
 
-<h1 *ngIf="user">
-  {{ user.firstName }} {{ user.lastName }}
-</h1>
+<div *ngIf="user">
+  <h1>
+    {{ user.firstName }} {{ user.lastName }}
+  </h1>
 
-<pre>{{user | json}}</pre>
+  <app-wish-list-create-form *ngIf="isCurrentUser"
+    (onSuccess)="onCreateSuccess()">
+  </app-wish-list-create-form>
+
+  <app-card *ngFor="let wishList of wishLists">
+    <app-card-title>
+      <a [routerLink]="['/wish-lists', wishList._id]">{{ wishList.name }}</a>
+    </app-card-title>
+    <app-card-body *ngIf="isCurrentUser">
+      <app-button (click)="activeWishList = wishList" [disabled]="isLoading">Edit</app-button>
+      <app-button (click)="deleteWishList(wishList._id)" [disabled]="isLoading">Delete</app-button>
+    </app-card-body>
+  </app-card>
+
+  <app-modal *ngIf="activeWishList">
+    <app-wish-list-edit-form
+      [wishList]="activeWishList"
+      (onSuccess)="onEditSuccess()"
+      (onCancel)="activeWishList = undefined">
+    </app-wish-list-edit-form>
+  </app-modal>
+</div>

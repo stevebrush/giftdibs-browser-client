@@ -41,7 +41,7 @@ export class SettingsComponent implements OnInit {
           this.alertService.success(result.message);
         },
         (error: any) => {
-          this.errors = error;
+          this.errors = error.errors;
           this.alertService.error(error.message);
         }
       );

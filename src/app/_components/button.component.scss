@@ -1,11 +1,11 @@
 @import '../../styles/_variables';
 
 .app-button {
-  background-color: $background-color-primary;
-  color: #fff;
-  padding: .5rem .75rem .4rem;
-  border: none;
-  border-bottom: .1rem solid darken($background-color-primary, 8%);
+  color: $font-color;
+  padding: .5rem .75rem;
+  border: 1px solid transparent;
+  border-bottom-width: .1rem;
+  border-radius: $border-radius;
   cursor: pointer;
   line-height: $line-height-reduced;
   font-weight: $font-weight;
@@ -13,9 +13,27 @@
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;
+  text-align: center;
 
   &[disabled] {
     opacity: .5;
     cursor: default;
+  }
+
+  &.app-button-block {
+    width: 100%;
+    display: block;
+  }
+
+  &.app-button-default {
+    border-color: $border-color-grey;
+    border-bottom-color: darken($border-color-grey, 8%);
+    background-color: white;
+  }
+
+  &.app-button-primary {
+    background-color: $background-color-primary;
+    border-bottom-color: darken($background-color-primary, 8%);
+    color: #fff;
   }
 }

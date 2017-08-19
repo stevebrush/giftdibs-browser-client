@@ -10,11 +10,7 @@
   align-items: center;
   justify-content: center;
   z-index: 999;
-  display: none;
-
-  &.show {
-    display: flex;
-  }
+  display: flex;
 }
 
 .app-modal {

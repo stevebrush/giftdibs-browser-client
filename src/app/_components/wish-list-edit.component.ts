@@ -44,7 +44,7 @@ export class WishListEditComponent implements OnInit {
           this.onSuccess.emit();
         },
         (err: any) => {
-          this.errors = err;
+          this.errors = err.errors;
           // this.alertService.error(err.message);
         }
       );
@@ -54,6 +54,6 @@ export class WishListEditComponent implements OnInit {
     this.wishListForm = this.formBuilder.group({
       _id: '',
       name: ''
-    });
+    } as WishList);
   }
 }

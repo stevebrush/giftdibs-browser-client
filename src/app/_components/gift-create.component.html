@@ -1,0 +1,15 @@
+<form [formGroup]="giftForm" (ngSubmit)="createGift()" novalidate>
+  <app-form-group label="URL or name" [serverErrors]="errors">
+    <textarea formControlName="name" #nameInput (keyup)="onKeyUp($event)"></textarea>
+  </app-form-group>
+
+  <!-- <app-form-group label="URL" [serverErrors]="errors">
+    <input type="text" formControlName="externalUrl" placeholder="http://" (keyup)="onKeyUp($event)">
+  </app-form-group>
+
+  <app-form-group label="Budget" [serverErrors]="errors">
+    <input type="number" formControlName="budget" placeholder="$" (keyup)="onKeyUp($event)">
+  </app-form-group> -->
+
+  <app-button type="submit" [disabled]="isLoading">Add</app-button>
+</form>

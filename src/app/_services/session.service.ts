@@ -59,6 +59,10 @@ export class SessionService {
     return this.userSubject.asObservable();
   }
 
+  public isCurrentUser(userId: string): boolean {
+    return (this.user._id === userId);
+  }
+
   private save(): void {
     const parsed = JSON.stringify({
       user: this.user,

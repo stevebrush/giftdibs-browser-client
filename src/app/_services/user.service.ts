@@ -44,17 +44,6 @@ export class UserService {
       .catch((err) => this.handleError(err));
   }
 
-  public getWishListsByUserId(id: string): Observable<any> {
-    const token = this.sessionService.token;
-    const headers = new Headers({ 'Authorization': `JWT ${token}` });
-    const options = new RequestOptions({ headers });
-
-    return this.http
-      .get(`${this.resourceUrl}/${id}/wish-lists`, options)
-      .map((response: Response) => this.handleSuccess(response))
-      .catch((err) => this.handleError(err));
-  }
-
   public remove(id: string): Observable<any> {
     const token = this.sessionService.token;
     const headers = new Headers({ 'Authorization': `JWT ${token}` });

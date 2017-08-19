@@ -1,8 +1,44 @@
 <div *ngIf="wishList">
   <h1>
-    {{wishList.name}}
+    {{ wishList.name }}
   </h1>
-  <p>
-    <app-button (click)="deleteWishList(wishList._id)" [disabled]="isLoading">Delete</app-button>
-  </p>
+
+  <app-card>
+    <app-card-body *ngIf="isCurrentUser">
+      <app-gift-create-form
+        [wishListId]="wishList._id"
+        (onSuccess)="onGiftCreateSuccess()">
+      </app-gift-create-form>
+    </app-card-body>
+    <app-card-body *ngFor="let gift of wishList.gifts">
+      <app-row>
+        <app-column screenSmall="9">
+            <div style="font-size:1.1rem;font-weight:700;">
+              {{ gift.name }}
+            </div>
+            <div *ngIf="gift.budget">
+              ${{ gift.budget }}
+            </div>
+            <div *ngIf="gift.externalUrl">
+              <a style="max-width:100%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display:inline-block;" href="{{ gift.externalUrl }}">{{ gift.externalUrl }}</a>
+            </div>
+        </app-column>
+        <app-column screenSmall="3">
+          <app-button-container *ngIf="isCurrentUser">
+            <app-button styleType="primary" fullWidth="true" (click)="activeGift = gift">Edit</app-button>
+            <app-button fullWidth="true" (click)="deleteGift(gift._id)">Delete</app-button>
+          </app-button-container>
+        </app-column>
+      </app-row>
+    </app-card-body>
+  </app-card>
+
+  <app-modal *ngIf="activeGift">
+    <app-gift-edit-form
+      [gift]="activeGift"
+      [wishListId]="wishList._id"
+      (onSuccess)="onGiftEditSuccess()"
+      (onCancel)="activeGift = undefined">
+    </app-gift-edit-form>
+  </app-modal>
 </div>

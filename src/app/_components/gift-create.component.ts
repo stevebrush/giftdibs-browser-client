@@ -90,7 +90,6 @@ export class GiftCreateComponent implements OnInit {
         (data: any) => {
           this.giftForm.reset();
           this.onSuccess.emit();
-          this.alertService.success(data.message);
         },
         (err: any) => {
           this.errors = err.errors;

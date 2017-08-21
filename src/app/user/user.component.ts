@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import 'rxjs/add/operator/first';
 import 'rxjs/add/operator/finally';
+import { Subscription } from 'rxjs/Subscription';
 
 import { User, WishList } from '../_models';
 import { UserService, AlertService, WishListService, SessionService } from '../_services';
@@ -11,7 +12,7 @@ import { UserService, AlertService, WishListService, SessionService } from '../_
   selector: 'app-user',
   templateUrl: './user.component.html'
 })
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit, OnDestroy {
   public isLoading = false;
 
   public user: User;
@@ -19,6 +20,8 @@ export class UserComponent implements OnInit {
 
   public wishLists: WishList[];
   public activeWishList: WishList;
+
+  private routeParamSubscription: Subscription;
 
   constructor(
     private userService: UserService,
@@ -29,25 +32,28 @@ export class UserComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   public ngOnInit(): void {
-    this.route.params
-    .first()
-    .subscribe((params: any) => {
-      this.userService
-        .getById(params.id)
-        .first()
-        .subscribe(
-          (user: User) => {
-            this.user = user;
-            this.isCurrentUser = this.sessionService.isCurrentUser(this.user._id);
-            this.getWishLists();
-          },
-          (error: any) => {
-            if (error.status === 400) {
-              this.alertService.error('User not found.', true);
-              this.router.navigate(['/']);
-            }
-          });
-    });
+    this.routeParamSubscription = this.route.params
+      .subscribe((params: any) => {
+        this.userService
+          .getById(params.id)
+          .first()
+          .subscribe(
+            (user: User) => {
+              this.user = user;
+              this.isCurrentUser = this.sessionService.isCurrentUser(this.user._id);
+              this.getWishLists();
+            },
+            (error: any) => {
+              if (error.status === 400) {
+                this.alertService.error('User not found.', true);
+                this.router.navigate(['/']);
+              }
+            });
+      });
+  }
+
+  public ngOnDestroy(): void {
+    this.routeParamSubscription.unsubscribe();
   }
 
   public onCreateSuccess(): void {

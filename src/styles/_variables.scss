@@ -8,11 +8,11 @@ $border-radius: 4px;
 
 $border-color-grey: #ccc;
 
-$background-color-primary: slateblue;
+$background-color-primary: $font-color;
 $background-color-facebook: #3b5998;
 
 $grid-columns: 12 !default;
-$grid-gutter: 15px !default;
+$grid-gutter: 10px !default;
 
 $screen-sm-min: 768px !default;
 $screen-md-min: 992px !default;

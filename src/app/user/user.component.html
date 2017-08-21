@@ -14,9 +14,11 @@
     <app-card-title>
       <a [routerLink]="['/wish-lists', wishList._id]">{{ wishList.name }}</a>
     </app-card-title>
-    <app-card-body *ngIf="isCurrentUser">
-      <app-button (click)="activeWishList = wishList" [disabled]="isLoading">Edit</app-button>
-      <app-button (click)="deleteWishList(wishList._id)" [disabled]="isLoading">Delete</app-button>
+    <app-card-body>
+      <app-button-container *ngIf="isCurrentUser">
+        <app-button (click)="activeWishList = wishList" [disabled]="isLoading">Edit</app-button>
+        <app-button (click)="deleteWishList(wishList._id)" [disabled]="isLoading">Delete</app-button>
+      </app-button-container>
     </app-card-body>
   </app-card>
 

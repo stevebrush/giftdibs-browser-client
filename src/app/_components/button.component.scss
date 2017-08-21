@@ -36,4 +36,9 @@
     border-bottom-color: darken($background-color-primary, 8%);
     color: #fff;
   }
+
+  &.app-button-danger {
+    color: #fff;
+    background-color: red;
+  }
 }

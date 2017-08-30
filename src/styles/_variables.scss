@@ -6,9 +6,9 @@ $font-color: #292b2c;
 $font-weight: 400;
 $border-radius: 4px;
 
-$border-color-grey: #ccc;
+$border-color-grey: #bbb;
 
-$background-color-primary: $font-color;
+$background-color-primary: slateblue;
 $background-color-facebook: #3b5998;
 
 $grid-columns: 12 !default;
@@ -17,3 +17,5 @@ $grid-gutter: 10px !default;
 $screen-sm-min: 768px !default;
 $screen-md-min: 992px !default;
 $screen-lg-min: 1200px !default;
+
+$screen-xs-max: $screen-sm-min - 1 !default;

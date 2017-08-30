@@ -8,6 +8,10 @@
   min-height: 1px;
 }
 
+@media (max-width: $screen-xs-max) {
+  @include create_columns(xs);
+}
+
 @media (min-width: $screen-sm-min) {
   @include create_columns(sm);
 }

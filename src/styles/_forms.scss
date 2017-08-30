@@ -26,7 +26,7 @@ textarea {
   border: 1px solid $border-color-grey;
   padding: .5rem;
   line-height: $line-height-reduced;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) inset;
   border-radius: $border-radius;
 }
 

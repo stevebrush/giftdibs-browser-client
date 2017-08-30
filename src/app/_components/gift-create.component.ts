@@ -23,6 +23,7 @@ export class GiftCreateComponent implements OnInit {
 
   @Output()
   public onSuccess: EventEmitter<void> = new EventEmitter<void>();
+
   @Output()
   public onError: EventEmitter<any> = new EventEmitter<any>();
 
@@ -56,24 +57,20 @@ export class GiftCreateComponent implements OnInit {
 
     if (isUrl) {
       this.scraperService
-        .getGiftDetailsFromUrl(formData.name)
+        .getProductDetailsFromUrl(formData.name)
         .first()
         .subscribe(
           (data: any) => {
+            const productInfo = data.products[0];
             this.addGift({
-              externalUrl: data.product.url,
-              name: data.product.name,
-              budget: data.product.price
+              externalUrls: [productInfo],
+              name: productInfo.name,
+              budget: productInfo.price
             });
-            // this.giftForm.reset({
-            //   externalUrl: data.product.url,
-            //   name: data.product.name,
-            //   budget: data.product.price
-            // });
-            // console.log('data?', data);
           },
           (err: any) => {
-            console.log('err?', err);
+            this.onError.emit(err);
+            this.alertService.error(err.message);
           }
         );
     } else {

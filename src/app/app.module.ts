@@ -51,6 +51,7 @@ import {
   FooterComponent,
   GiftCreateComponent,
   GiftEditComponent,
+  GiftExternalUrlPriceComponent,
   CardComponent,
   CardTitleComponent,
   CardBodyComponent
@@ -90,6 +91,7 @@ import { GridModule } from './_modules';
     FooterComponent,
     GiftCreateComponent,
     GiftEditComponent,
+    GiftExternalUrlPriceComponent,
     CardComponent,
     CardTitleComponent,
     CardBodyComponent

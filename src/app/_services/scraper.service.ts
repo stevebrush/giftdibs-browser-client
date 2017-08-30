@@ -24,7 +24,7 @@ export class ScraperService {
     private windowService: WindowService,
     private sessionService: SessionService) { }
 
-  public getGiftDetailsFromUrl(url: string): Observable<any> {
+  public getProductDetailsFromUrl(url: string): Observable<any> {
     const token = this.sessionService.token;
     const headers = new Headers({ 'Authorization': `JWT ${token}` });
     const options = new RequestOptions({ headers });

@@ -12,6 +12,9 @@ import {
 })
 export class ColumnComponent implements OnInit {
   @Input()
+  public screenXSmall: number;
+
+  @Input()
   public screenSmall: number;
 
   @Input()
@@ -27,6 +30,10 @@ export class ColumnComponent implements OnInit {
     const classNames = [
       'app-column'
     ];
+
+    if (this.screenXSmall) {
+      classNames.push(`app-column-xs-${this.screenXSmall}`);
+    }
 
     if (this.screenSmall) {
       classNames.push(`app-column-sm-${this.screenSmall}`);

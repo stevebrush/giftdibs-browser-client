@@ -14,10 +14,22 @@
         {{ gift.name }}
       </div>
       <div *ngIf="gift.budget">
-        ${{ gift.budget }}
+        Budget: ${{ gift.budget }}
       </div>
-      <div *ngIf="gift.externalUrl">
-        <a style="max-width:100%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display:inline-block;" href="{{ gift.externalUrl }}">{{ gift.externalUrl }}</a>
+      <div *ngIf="gift.externalUrls">
+        <app-row *ngFor="let externalUrl of gift.externalUrls">
+          <app-column screenXSmall="10" screenSmall="11">
+            <a style="max-width:100%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display:block;" href="{{ externalUrl.url }}">{{ externalUrl.url }}</a>
+          </app-column>
+          <app-column screenXSmall="2" screenSmall="1">
+            <app-gift-external-url-price
+              [wishListId]="wishListId"
+              [giftId]="gift._id"
+              [dateScrapedRecommended]="dateScrapedRecommended"
+              [externalUrl]="externalUrl">
+            </app-gift-external-url-price>
+          </app-column>
+        </app-row>
       </div>
       <app-button-container *ngIf="isCurrentUser">
         <app-button styleType="primary">Mark received</app-button>
@@ -29,8 +41,8 @@
 
   <app-modal *ngIf="activeGift">
     <app-gift-edit-form
-      [gift]="activeGift"
       [wishListId]="wishList._id"
+      [giftId]="activeGift._id"
       (onSuccess)="onGiftEditSuccess()"
       (onCancel)="activeGift = undefined">
     </app-gift-edit-form>

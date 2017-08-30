@@ -23,6 +23,7 @@ export class WishListComponent implements OnInit {
   public isLoading = false;
   public isCurrentUser = false;
   public activeGift: Gift;
+  public dateScrapedRecommended: number;
 
   private wishListId: string;
 
@@ -93,7 +94,8 @@ export class WishListComponent implements OnInit {
       .finally(() => this.isLoading = false)
       .subscribe(
         (data: any) => {
-          this.wishList = data;
+          this.wishList = data.wishList;
+          this.dateScrapedRecommended = data.externalUrls.dateScrapedRecommended;
           this.isCurrentUser = this.sessionService.isCurrentUser(this.wishList._user._id);
         },
         (err: any) => {

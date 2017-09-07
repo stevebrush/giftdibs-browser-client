@@ -8,12 +8,12 @@
 
 <form *ngIf="!isLoading" [formGroup]="giftForm" (ngSubmit)="updateGift()" novalidate>
   <app-row>
-    <app-column screenSmall="10">
+    <app-column screenXSmall="10">
       <app-form-group label="Name" [serverErrors]="errors">
         <input type="text" formControlName="name">
       </app-form-group>
     </app-column>
-    <app-column screenSmall="2">
+    <app-column screenXSmall="2">
       <app-form-group label="Budget" [serverErrors]="errors">
         <input type="number" formControlName="budget">
       </app-form-group>
@@ -25,12 +25,12 @@
     <app-row
       *ngFor="let externalUrl of giftForm.controls.externalUrls.controls; let i = index;"
       [formGroup]="externalUrl">
-      <app-column screenSmall="10">
+      <app-column screenXSmall="10">
         <app-form-group [serverErrors]="errors">
           <input type="text" formControlName="url">
         </app-form-group>
       </app-column>
-      <app-column screenSmall="2">
+      <app-column screenXSmall="2">
         <app-button fullWidth="true" (click)="removeUrl(i)" [disabled]="isLoading">Remove</app-button>
       </app-column>
     </app-row>

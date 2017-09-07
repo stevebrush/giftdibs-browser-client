@@ -22,7 +22,7 @@ export class WishListsComponent implements OnInit {
       .first()
       .subscribe(
         (data: any) => {
-          this.wishLists = data;
+          this.wishLists = data.wishLists;
         },
         (err: any) => {
           this.alertService.error(err.message);

@@ -86,6 +86,6 @@ export class UserComponent implements OnInit, OnDestroy {
     this.wishListService
       .getAllByUserId(this.user._id)
       .first()
-      .subscribe((data: any) => this.wishLists = data);
+      .subscribe((data: any) => this.wishLists = data.wishLists);
   }
 }

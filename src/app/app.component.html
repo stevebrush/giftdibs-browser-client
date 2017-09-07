@@ -5,13 +5,15 @@
     <a [routerLink]="['/wish-lists']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Wish lists</a>
   </div>
   <div class="navbar-user" *ngIf="isLoggedIn()">
-    <a [routerLink]="['/profile']" routerLinkActive="active">{{currentUser.firstName}} {{currentUser.lastName}}</a>
-    <a [routerLink]="['/settings']" routerLinkActive="active">Settings</a>
-    <a href="" (click)="logout($event)">Log out</a>
+    <a [routerLink]="['/users', currentUser._id]" routerLinkActive="active">{{currentUser.firstName}} {{currentUser.lastName}}</a> /
+    <a [routerLink]="['/settings']" routerLinkActive="active">Settings</a> /
+    <a href="" (click)="logout($event)">Log out</a> /
+    <a routerLink="/support">Support</a>
   </div>
   <div class="navbar-user" *ngIf="!isLoggedIn()">
-    <a [routerLink]="['/login']" routerLinkActive="active">Log in</a>
-    <a [routerLink]="['/register']" routerLinkActive="active">Register</a>
+    <a [routerLink]="['/login']" routerLinkActive="active">Log in</a> /
+    <a [routerLink]="['/register']" routerLinkActive="active">Register</a> /
+    <a routerLink="/support">Support</a>
   </div>
 </nav>
 
@@ -22,6 +24,3 @@
   <router-outlet>
   </router-outlet>
 </div>
-
-<app-footer>
-</app-footer>

@@ -1,8 +1,50 @@
 <div *ngIf="wishList">
   <h1>
-    {{wishList.name}}
+    {{ wishList.name }}
   </h1>
-  <p>
-    <app-button (click)="deleteWishList(wishList._id)" [disabled]="isLoading">Delete</app-button>
-  </p>
+
+  <app-gift-create-form *ngIf="isCurrentUser"
+    [wishListId]="wishList._id"
+    (onSuccess)="onGiftCreateSuccess()">
+  </app-gift-create-form>
+
+  <app-card *ngFor="let gift of wishList.gifts">
+    <app-card-body>
+      <div style="font-weight:bold;">
+        {{ gift.name }}
+      </div>
+      <div *ngIf="gift.budget">
+        Budget: ${{ gift.budget }}
+      </div>
+      <div *ngIf="gift.externalUrls">
+        <app-row *ngFor="let externalUrl of gift.externalUrls">
+          <app-column screenXSmall="10" screenSmall="11">
+            <a style="max-width:100%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display:block;" href="{{ externalUrl.url }}">{{ externalUrl.url }}</a>
+          </app-column>
+          <app-column screenXSmall="2" screenSmall="1">
+            <app-gift-external-url-price
+              [wishListId]="wishListId"
+              [giftId]="gift._id"
+              [dateScrapedRecommended]="dateScrapedRecommended"
+              [externalUrl]="externalUrl">
+            </app-gift-external-url-price>
+          </app-column>
+        </app-row>
+      </div>
+      <app-button-container *ngIf="isCurrentUser">
+        <app-button styleType="primary">Mark received</app-button>
+        <app-button (click)="activeGift = gift">Edit</app-button>
+        <app-button (click)="deleteGift(gift._id)">Delete</app-button>
+      </app-button-container>
+    </app-card-body>
+  </app-card>
+
+  <app-modal *ngIf="activeGift">
+    <app-gift-edit-form
+      [wishListId]="wishList._id"
+      [giftId]="activeGift._id"
+      (onSuccess)="onGiftEditSuccess()"
+      (onCancel)="activeGift = undefined">
+    </app-gift-edit-form>
+  </app-modal>
 </div>

@@ -1,7 +1,14 @@
+@import '../../styles/_variables';
+
 .app-form-group {
   display: flex;
   flex-direction: column;
-  margin: 1rem 0;
+  margin: 0 0 .65rem;
+}
+
+.app-form-group-label {
+  line-height: $line-height-reduced;
+  margin-bottom: .25rem;
 }
 
 .has-error {

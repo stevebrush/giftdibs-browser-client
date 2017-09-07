@@ -10,16 +10,12 @@
   align-items: center;
   justify-content: center;
   z-index: 999;
-  display: none;
-
-  &.show {
-    display: flex;
-  }
+  display: flex;
 }
 
 .app-modal {
   background-color: #fff;
-  max-width: 100%;
-  min-width: 500px;
+  max-width: 96%;
+  width: 700px;
   padding: 1rem;
 }

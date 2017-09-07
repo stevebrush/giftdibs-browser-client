@@ -1,8 +1,14 @@
-<form [formGroup]="wishListForm" (ngSubmit)="createWishList()" novalidate>
-  <app-form-group label="New wish list" [serverErrors]="errors">
-    <input type="text" formControlName="name" #nameInput>
-  </app-form-group>
+<p *ngIf="!isActive">
+  <app-button (click)="toggleIsActive()">Create a wish list...</app-button>
+</p>
 
-  <app-button type="submit" [disabled]="isLoading">Create</app-button>
-  <app-button (click)="onCancel.emit()" [disabled]="isLoading">Cancel</app-button>
-</form>
+<div *ngIf="isActive">
+  <form [formGroup]="wishListForm" (ngSubmit)="createWishList()" novalidate>
+    <app-form-group label="New wish list" [serverErrors]="errors">
+      <input type="text" formControlName="name" #nameInput>
+    </app-form-group>
+
+    <app-button type="submit" [disabled]="isLoading">Create</app-button>
+    <app-button (click)="toggleIsActive()" [disabled]="isLoading">Cancel</app-button>
+  </form>
+</div>

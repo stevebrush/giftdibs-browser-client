@@ -1,10 +1,21 @@
-$font-family: sans-serif;
-$font-size: 18px;
+$font-family: 'Helvetica Neue',Helvetica,Arial,'Verdana','Geneva',sans-serif;
+$font-size: 16px;
 $line-height: 1.5;
 $line-height-reduced: 1.25;
 $font-color: #292b2c;
 $font-weight: 400;
-$border-radius: .25rem;
+$border-radius: 4px;
+
+$border-color-grey: #bbb;
 
 $background-color-primary: slateblue;
 $background-color-facebook: #3b5998;
+
+$grid-columns: 12 !default;
+$grid-gutter: 10px !default;
+
+$screen-sm-min: 768px !default;
+$screen-md-min: 992px !default;
+$screen-lg-min: 1200px !default;
+
+$screen-xs-max: $screen-sm-min - 1 !default;

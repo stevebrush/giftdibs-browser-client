@@ -1,7 +1,8 @@
-import { User } from './user';
+import { Gift } from './gift';
 
 export interface WishList {
   _id: string;
-  _user: string | User;
+  _user: any;
   name: string;
+  gifts?: Gift[];
 }

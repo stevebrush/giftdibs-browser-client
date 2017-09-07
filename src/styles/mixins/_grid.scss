@@ -1,0 +1,9 @@
+@import '../_variables';
+
+@mixin create_columns($screen-size: sm) {
+  @for $i from 1 through $grid-columns {
+    :host.app-column-#{$screen-size}-#{$i} {
+      width: ($i / $grid-columns) * 100%;
+    }
+  }
+}

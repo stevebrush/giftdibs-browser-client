@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate([this.redirectUrl]);
         },
         (error: any) => {
-          this.errors = error;
+          this.errors = error.errors;
           this.alertService.error(error.message);
         }
       );

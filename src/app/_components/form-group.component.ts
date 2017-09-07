@@ -26,9 +26,16 @@ export class FormGroupComponent implements OnChanges {
     return Object.keys(obj);
   }
 
-  private handleErrors(error: any) {
-    error.errors.forEach((err: any, i: number) => {
-      if (err.field === this.controlName.name) {
+  private handleErrors(errors: any[]) {
+    errors.forEach((err: any, i: number) => {
+      let field = err.field;
+      const fragments = err.field.split('.');
+
+      if (fragments.length > 0) {
+        field = fragments[fragments.length - 1];
+      }
+
+      if (field === this.controlName.name) {
         this.controlName.control.setErrors({
           [`schemaError.${i}`]: err.message
         });

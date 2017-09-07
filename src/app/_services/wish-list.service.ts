@@ -11,6 +11,7 @@ import 'rxjs/add/observable/throw';
 
 import { SessionService } from './session.service';
 import { AlertService } from './alert.service';
+import { Gift, WishList } from '../_models';
 
 @Injectable()
 export class WishListService {
@@ -22,10 +23,8 @@ export class WishListService {
     private alertService: AlertService,
     private sessionService: SessionService) { }
 
-  public create(formData: any): Observable<any> {
-    const token = this.sessionService.token;
-    const headers = new Headers({ 'Authorization': `JWT ${token}` });
-    const options = new RequestOptions({ headers });
+  public create(formData: WishList): Observable<any> {
+    const options = this.getRequestOptions();
 
     return this.http
       .post(this.resourceUrl, formData, options)
@@ -34,9 +33,7 @@ export class WishListService {
   }
 
   public getAll(): Observable<any> {
-    const token = this.sessionService.token;
-    const headers = new Headers({ 'Authorization': `JWT ${token}` });
-    const options = new RequestOptions({ headers });
+    const options = this.getRequestOptions();
 
     return this.http
       .get(this.resourceUrl, options)
@@ -44,10 +41,17 @@ export class WishListService {
       .catch((err: any) => this.handleError(err));
   }
 
+  public getAllByUserId(userId: string): Observable<any> {
+    const options = this.getRequestOptions();
+
+    return this.http
+      .get(`${this.resourceUrl}?userId=${userId}`, options)
+      .map((response: Response) => this.handleSuccess(response))
+      .catch((err: any) => this.handleError(err));
+  }
+
   public getById(id: string): Observable<any> {
-    const token = this.sessionService.token;
-    const headers = new Headers({ 'Authorization': `JWT ${token}` });
-    const options = new RequestOptions({ headers });
+    const options = this.getRequestOptions();
 
     return this.http
       .get(`${this.resourceUrl}/${id}`, options)
@@ -56,9 +60,7 @@ export class WishListService {
   }
 
   public remove(id: string): Observable<any> {
-    const token = this.sessionService.token;
-    const headers = new Headers({ 'Authorization': `JWT ${token}` });
-    const options = new RequestOptions({ headers });
+    const options = this.getRequestOptions();
 
     return this.http
       .delete(`${this.resourceUrl}/${id}`, options)
@@ -66,15 +68,57 @@ export class WishListService {
       .catch((err) => this.handleError(err));
   }
 
-  public update(data: any): Observable<any> {
+  public update(formData: WishList): Observable<any> {
+    const options = this.getRequestOptions();
+
+    return this.http
+      .patch(`${this.resourceUrl}/${formData._id}`, formData, options)
+      .map((response: Response) => this.handleSuccess(response))
+      .catch((err) => this.handleError(err));
+  }
+
+  public addGift(wishListId: string, formData: Gift): Observable<any> {
+    const options = this.getRequestOptions();
+    console.log('formData?', formData);
+
+    return this.http
+      .post(`${this.resourceUrl}/${wishListId}/gifts/`, formData, options)
+      .map((response: Response) => this.handleSuccess(response))
+      .catch((err) => this.handleError(err));
+  }
+
+  public removeGift(wishListId: string, giftId: string): Observable<any> {
+    const options = this.getRequestOptions();
+
+    return this.http
+      .delete(`${this.resourceUrl}/${wishListId}/gifts/${giftId}`, options)
+      .map((response: Response) => this.handleSuccess(response))
+      .catch((err) => this.handleError(err));
+  }
+
+  public scrapeUrlContents(wishListId: string, giftId: string, externalUrlId: string): Observable<any> {
+    const options = this.getRequestOptions();
+
+    return this.http
+      .patch(`${this.resourceUrl}/${wishListId}/gifts/${giftId}/external-urls/${externalUrlId}/?scrapeUrl`, {}, options)
+      .map((response: Response) => this.handleSuccess(response))
+      .catch((err) => this.handleError(err));
+  }
+
+  public updateGift(wishListId: string, formData: Gift): Observable<any> {
+    const options = this.getRequestOptions();
+
+    return this.http
+      .patch(`${this.resourceUrl}/${wishListId}/gifts/${formData._id}`, formData, options)
+      .map((response: Response) => this.handleSuccess(response))
+      .catch((err) => this.handleError(err));
+  }
+
+  private getRequestOptions(): RequestOptions {
     const token = this.sessionService.token;
     const headers = new Headers({ 'Authorization': `JWT ${token}` });
     const options = new RequestOptions({ headers });
-
-    return this.http
-      .patch(`${this.resourceUrl}/${data._id}`, data, options)
-      .map((response: Response) => this.handleSuccess(response))
-      .catch((err) => this.handleError(err));
+    return options;
   }
 
   private handleSuccess(response: Response): any {
@@ -85,7 +129,7 @@ export class WishListService {
       this.sessionService.token = json.authResponse.token;
     }
 
-    return json;
+    return json as WishList;
   }
 
   private handleError(err: Response): ErrorObservable {

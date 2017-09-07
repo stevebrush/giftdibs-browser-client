@@ -1,0 +1,6 @@
+<form [formGroup]="giftForm" (ngSubmit)="createGift()" novalidate>
+  <app-form-group [serverErrors]="errors">
+    <textarea formControlName="name" placeholder="URL or name" #nameInput (keyup)="onKeyUp($event)"></textarea>
+  </app-form-group>
+  <app-button type="submit" [disabled]="isLoading">Add gift</app-button>
+</form>

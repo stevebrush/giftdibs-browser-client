@@ -73,7 +73,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
           }
         },
         (error: any) => {
-          this.errors = error;
+          this.errors = error.errors;
           this.alertService.error(error.message);
         }
       );

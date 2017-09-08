@@ -11,12 +11,13 @@
   <app-card *ngFor="let gift of wishList.gifts">
     <app-card-body>
       <div style="font-weight:bold;">
-        {{ gift.name }}
+        <del *ngIf="gift.isReceived">{{ gift.name }}</del>
+        <span *ngIf="!gift.isReceived">{{ gift.name }}</span>
       </div>
-      <div *ngIf="gift.budget">
+      <div *ngIf="gift.budget && !gift.isReceived">
         Budget: ${{ gift.budget }}
       </div>
-      <div *ngIf="gift.externalUrls">
+      <div *ngIf="gift.externalUrls && !gift.isReceived">
         <app-row *ngFor="let externalUrl of gift.externalUrls">
           <app-column screenXSmall="10" screenSmall="11">
             <a style="max-width:100%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display:block;" href="{{ externalUrl.url }}">{{ externalUrl.url }}</a>
@@ -32,9 +33,14 @@
         </app-row>
       </div>
       <app-button-container *ngIf="isCurrentUser">
-        <app-button styleType="primary">Mark received</app-button>
-        <app-button (click)="activeGift = gift">Edit</app-button>
-        <app-button (click)="deleteGift(gift._id)">Delete</app-button>
+        <app-button (click)="toggleReceived(gift)" styleType="primary">
+          <span *ngIf="!gift.isReceived">Mark received</span>
+          <span *ngIf="gift.isReceived === true">Undo received</span>
+        </app-button>
+        <span *ngIf="!gift.isReceived">
+          <app-button (click)="activeGift = gift">Edit</app-button>
+          <app-button (click)="deleteGift(gift._id)">Delete</app-button>
+        </span>
       </app-button-container>
     </app-card-body>
   </app-card>

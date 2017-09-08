@@ -96,20 +96,20 @@ export class WishListService {
       .catch((err) => this.handleError(err));
   }
 
-  public scrapeUrlContents(wishListId: string, giftId: string, externalUrlId: string): Observable<any> {
-    const options = this.getRequestOptions();
-
-    return this.http
-      .patch(`${this.resourceUrl}/${wishListId}/gifts/${giftId}/external-urls/${externalUrlId}/?scrapeUrl`, {}, options)
-      .map((response: Response) => this.handleSuccess(response))
-      .catch((err) => this.handleError(err));
-  }
-
   public updateGift(wishListId: string, formData: Gift): Observable<any> {
     const options = this.getRequestOptions();
 
     return this.http
       .patch(`${this.resourceUrl}/${wishListId}/gifts/${formData._id}`, formData, options)
+      .map((response: Response) => this.handleSuccess(response))
+      .catch((err) => this.handleError(err));
+  }
+
+  public scrapeUrlContents(wishListId: string, giftId: string, externalUrlId: string): Observable<any> {
+    const options = this.getRequestOptions();
+
+    return this.http
+      .patch(`${this.resourceUrl}/${wishListId}/gifts/${giftId}/external-urls/${externalUrlId}/?scrapeUrl`, {}, options)
       .map((response: Response) => this.handleSuccess(response))
       .catch((err) => this.handleError(err));
   }

@@ -61,10 +61,6 @@ export class WishListComponent implements OnInit {
       );
   }
 
-  public onGiftCreateSuccess() {
-    this.getWishList();
-  }
-
   public deleteGift(giftId: string): void {
     this.isLoading = true;
     this.wishListService
@@ -82,12 +78,33 @@ export class WishListComponent implements OnInit {
       );
   }
 
+  public toggleReceived(gift: Gift): void {
+    this.isLoading = true;
+    gift.isReceived = !gift.isReceived;
+    this.wishListService
+      .updateGift(this.wishListId, gift)
+      .first()
+      .subscribe(
+        (data: any) => {
+          this.getWishList();
+        },
+        (err: any) => {
+          this.alertService.error(err.message);
+        }
+      );
+  }
+
+  public onGiftCreateSuccess() {
+    this.getWishList();
+  }
+
   public onGiftEditSuccess(): void {
     this.getWishList();
     this.activeGift = undefined;
   }
 
   private getWishList(): void {
+    this.isLoading = true;
     this.wishListService
       .getById(this.wishListId)
       .first()

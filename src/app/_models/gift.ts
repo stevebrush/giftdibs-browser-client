@@ -1,10 +1,11 @@
 export interface Gift {
   _id?: string;
-  name: string;
+  budget?: number;
   externalUrls?: [{
     price?: number;
     url: string;
     dateScraped: Date;
   }];
-  budget?: number;
+  isReceived?: boolean;
+  name: string;
 }

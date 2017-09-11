@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import 'rxjs/add/operator/first';
 
+import { DragulaService } from 'ng2-dragula';
+
 import {
   AlertService,
   WishListService,
@@ -32,7 +34,26 @@ export class WishListComponent implements OnInit {
     private wishListService: WishListService,
     private sessionService: SessionService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private dragulaService: DragulaService) {
+      this.dragulaService.drag.subscribe((value: any) => {
+        console.log(`drag: ${value[0]}`);
+      });
+
+      this.dragulaService.drop.subscribe((value: any) => {
+        console.log(`drop: ${value[0]}`);
+        console.log('wishList?', this.wishList.gifts);
+        this.updateWishList();
+      });
+
+      this.dragulaService.over.subscribe((value: any) => {
+        console.log(`over: ${value[0]}`);
+      });
+
+      this.dragulaService.out.subscribe((value: any) => {
+        console.log(`out: ${value[0]}`);
+      });
+    }
 
   public ngOnInit(): void {
     this.isLoading = true;
@@ -114,6 +135,22 @@ export class WishListComponent implements OnInit {
           this.wishList = data.wishList;
           this.dateScrapedRecommended = data.externalUrls.dateScrapedRecommended;
           this.isCurrentUser = this.sessionService.isCurrentUser(this.wishList._user._id);
+        },
+        (err: any) => {
+          this.alertService.error(err.message);
+        }
+      );
+  }
+
+  private updateWishList(): void {
+    this.isLoading = true;
+    this.wishListService
+      .update(this.wishList)
+      .first()
+      .finally(() => this.isLoading = false)
+      .subscribe(
+        (data: any) => {
+          // this.getWishList();
         },
         (err: any) => {
           this.alertService.error(err.message);

@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Http, Headers, Response, RequestOptions } from '@angular/http';
+import {
+  Http,
+  // Headers,
+  Response,
+  // RequestOptions
+} from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
@@ -15,7 +20,10 @@ import { WindowService } from './window.service';
 
 @Injectable()
 export class ScraperService {
-  private resourceUrl = 'http://localhost:8080/v1/scrape-product-page';
+  // 24 hours
+  public dateScrapedRecommended = new Date().getTime() - (1000 * 60 * 60 * 24);
+
+  private resourceUrl = 'http://localhost:8888/v1/scrape-product-url';
 
   constructor(
     private http: Http,
@@ -25,13 +33,13 @@ export class ScraperService {
     private sessionService: SessionService) { }
 
   public getProductDetailsFromUrl(url: string): Observable<any> {
-    const token = this.sessionService.token;
-    const headers = new Headers({ 'Authorization': `JWT ${token}` });
-    const options = new RequestOptions({ headers });
+    // const token = this.sessionService.token;
+    // const headers = new Headers({ 'Authorization': `JWT ${token}` });
+    // const options = new RequestOptions({ headers });
     const encodedUrl = this.windowService.nativeWindow.encodeURIComponent(url).trim();
 
     return this.http
-      .get(`${this.resourceUrl}/?url=${encodedUrl}`, options)
+      .get(`${this.resourceUrl}/?url=${encodedUrl}`)
       .map((response: Response) => this.handleSuccess(response))
       .catch((err: any) => this.handleError(err));
   }

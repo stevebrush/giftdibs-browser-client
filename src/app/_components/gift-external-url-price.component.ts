@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { WishListService } from '../_services';
+import { ScraperService, WishListService } from '../_services';
+import { Gift, ExternalUrl } from '../_models';
 
 @Component({
   selector: 'app-gift-external-url-price',
@@ -11,16 +12,14 @@ export class GiftExternalUrlPriceComponent implements OnInit {
   public wishListId: string;
 
   @Input()
-  public giftId: string;
+  public gift: Gift;
 
   @Input()
-  public externalUrl: any;
-
-  @Input()
-  public dateScrapedRecommended: number;
+  public externalUrl: ExternalUrl;
   public isLoading = true;
 
   constructor(
+    private scraperService: ScraperService,
     private wishListService: WishListService) { }
 
   public ngOnInit(): void {
@@ -31,20 +30,31 @@ export class GiftExternalUrlPriceComponent implements OnInit {
       const dateScraped = new Date(this.externalUrl.dateScraped).getTime();
       const isValidDate = isFinite(dateScraped);
       if (isValidDate) {
-        isUrlCurrent = (dateScraped > this.dateScrapedRecommended);
+        isUrlCurrent = (dateScraped > this.scraperService.dateScrapedRecommended);
       }
     }
 
     if (isUrlCurrent) {
       this.isLoading = false;
     } else {
-      this.wishListService
-        .scrapeUrlContents(this.wishListId, this.giftId, this.externalUrl._id)
+      this.scraperService
+        .getProductDetailsFromUrl(this.externalUrl.url)
         .first()
-        .finally(() => this.isLoading = false)
-        .subscribe((data: any) => {
-          this.externalUrl = data.externalUrl;
+        .subscribe((scraperResponse: any) => {
+          const productInfo = scraperResponse.products[0];
+          this.externalUrl.price = productInfo.price;
+          this.externalUrl.dateScraped = productInfo.dateScraped;
+
+          this.updateGift();
         });
     }
   }
+
+  private updateGift(): void {
+    this.wishListService
+      .updateGift(this.wishListId, this.gift)
+      .first()
+      .finally(() => this.isLoading = false)
+      .subscribe((giftResponse: any) => {});
+  };
 }

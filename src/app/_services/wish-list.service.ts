@@ -79,7 +79,6 @@ export class WishListService {
 
   public addGift(wishListId: string, formData: Gift): Observable<any> {
     const options = this.getRequestOptions();
-    console.log('formData?', formData);
 
     return this.http
       .post(`${this.resourceUrl}/${wishListId}/gifts/`, formData, options)
@@ -105,14 +104,14 @@ export class WishListService {
       .catch((err) => this.handleError(err));
   }
 
-  public scrapeUrlContents(wishListId: string, giftId: string, externalUrlId: string): Observable<any> {
-    const options = this.getRequestOptions();
+  // public scrapeUrlContents(wishListId: string, giftId: string, externalUrlId: string): Observable<any> {
+  //   const options = this.getRequestOptions();
 
-    return this.http
-      .patch(`${this.resourceUrl}/${wishListId}/gifts/${giftId}/external-urls/${externalUrlId}/?scrapeUrl`, {}, options)
-      .map((response: Response) => this.handleSuccess(response))
-      .catch((err) => this.handleError(err));
-  }
+  //   return this.http
+  //     .patch(`${this.resourceUrl}/${wishListId}/gifts/${giftId}/external-urls/${externalUrlId}/?scrapeUrl`, {}, options)
+  //     .map((response: Response) => this.handleSuccess(response))
+  //     .catch((err) => this.handleError(err));
+  // }
 
   private getRequestOptions(): RequestOptions {
     const token = this.sessionService.token;

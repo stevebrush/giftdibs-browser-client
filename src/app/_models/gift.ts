@@ -6,4 +6,5 @@ export interface Gift {
   externalUrls?: ExternalUrl[];
   isReceived?: boolean;
   name: string;
+  order?: number;
 }

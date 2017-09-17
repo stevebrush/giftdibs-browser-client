@@ -21,7 +21,7 @@
   </app-row>
 
   <div formArrayName="externalUrls">
-    <label>Product URLs:</label>
+    <label>Product URLs</label>
     <app-row
       *ngFor="let externalUrl of giftForm.controls.externalUrls.controls; let i = index;"
       [formGroup]="externalUrl">

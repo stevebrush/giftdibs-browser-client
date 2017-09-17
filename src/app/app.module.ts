@@ -3,6 +3,8 @@ import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { DragulaModule } from 'ng2-dragula';
+
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
@@ -98,6 +100,7 @@ import { GridModule } from './_modules';
   ],
   imports: [
     BrowserModule,
+    DragulaModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,

@@ -1,7 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  OnInit
+} from '@angular/core';
+
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/first';
+
+import { DragulaService } from 'ng2-dragula';
 
 import {
   AlertService,
@@ -18,20 +26,35 @@ import {
   selector: 'app-wish-list',
   templateUrl: './wish-list.component.html'
 })
-export class WishListComponent implements OnInit {
+export class WishListComponent implements OnInit, OnDestroy {
   public wishList: WishList;
   public isLoading = false;
   public isCurrentUser = false;
   public activeGift: Gift;
 
   private wishListId: string;
+  private dragulaSubscription: Subscription;
 
   constructor(
     private alertService: AlertService,
     private wishListService: WishListService,
     private sessionService: SessionService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private dragulaService: DragulaService) {
+      dragulaService.setOptions('bag-one', {
+        moves: (el: any, container: any, handle: any) => {
+          return (handle.className === 'drag-handle');
+        }
+      });
+
+      this.dragulaSubscription = this.dragulaService.drop.subscribe((value: any) => {
+        this.wishList.gifts.forEach((gift: Gift, i: number) => {
+          gift.order = i;
+        });
+        this.updateWishList();
+      });
+    }
 
   public ngOnInit(): void {
     this.isLoading = true;
@@ -41,6 +64,11 @@ export class WishListComponent implements OnInit {
         this.wishListId = params.wishListId;
         this.getWishList();
     });
+  }
+
+  public ngOnDestroy(): void {
+    this.dragulaSubscription.unsubscribe();
+    this.dragulaService.destroy('bag-one');
   }
 
   public deleteWishList(wishListId: string): void {
@@ -113,6 +141,20 @@ export class WishListComponent implements OnInit {
           this.wishList = data.wishList;
           this.isCurrentUser = this.sessionService.isCurrentUser(this.wishList._user._id);
         },
+        (err: any) => {
+          this.alertService.error(err.message);
+        }
+      );
+  }
+
+  private updateWishList(): void {
+    this.isLoading = true;
+    this.wishListService
+      .update(this.wishList)
+      .first()
+      .finally(() => this.isLoading = false)
+      .subscribe(
+        (data: any) => {},
         (err: any) => {
           this.alertService.error(err.message);
         }

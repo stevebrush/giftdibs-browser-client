@@ -26,8 +26,7 @@
             <app-column screenXSmall="2" screenSmall="1">
               <app-gift-external-url-price
                 [wishListId]="wishListId"
-                [giftId]="gift._id"
-                [dateScrapedRecommended]="dateScrapedRecommended"
+                [gift]="gift"
                 [externalUrl]="externalUrl">
               </app-gift-external-url-price>
             </app-column>
@@ -42,11 +41,13 @@
             <app-button (click)="activeGift = gift">Edit</app-button>
             <app-button (click)="deleteGift(gift._id)">Delete</app-button>
           </span>
+          <button class="drag-handle">
+            Drag
+          </button>
         </app-button-container>
       </app-card-body>
     </app-card>
   </div>
-
   <app-modal *ngIf="activeGift">
     <app-gift-edit-form
       [wishListId]="wishList._id"

@@ -1,6 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  OnInit
+} from '@angular/core';
+
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/first';
 
 import { DragulaService } from 'ng2-dragula';
@@ -20,14 +26,14 @@ import {
   selector: 'app-wish-list',
   templateUrl: './wish-list.component.html'
 })
-export class WishListComponent implements OnInit {
+export class WishListComponent implements OnInit, OnDestroy {
   public wishList: WishList;
   public isLoading = false;
   public isCurrentUser = false;
   public activeGift: Gift;
-  public dateScrapedRecommended: number;
 
   private wishListId: string;
+  private dragulaSubscription: Subscription;
 
   constructor(
     private alertService: AlertService,
@@ -36,22 +42,17 @@ export class WishListComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private dragulaService: DragulaService) {
-      this.dragulaService.drag.subscribe((value: any) => {
-        console.log(`drag: ${value[0]}`);
+      dragulaService.setOptions('bag-one', {
+        moves: (el: any, container: any, handle: any) => {
+          return (handle.className === 'drag-handle');
+        }
       });
 
-      this.dragulaService.drop.subscribe((value: any) => {
-        console.log(`drop: ${value[0]}`);
-        console.log('wishList?', this.wishList.gifts);
+      this.dragulaSubscription = this.dragulaService.drop.subscribe((value: any) => {
+        this.wishList.gifts.forEach((gift: Gift, i: number) => {
+          gift.order = i;
+        });
         this.updateWishList();
-      });
-
-      this.dragulaService.over.subscribe((value: any) => {
-        console.log(`over: ${value[0]}`);
-      });
-
-      this.dragulaService.out.subscribe((value: any) => {
-        console.log(`out: ${value[0]}`);
       });
     }
 
@@ -63,6 +64,11 @@ export class WishListComponent implements OnInit {
         this.wishListId = params.wishListId;
         this.getWishList();
     });
+  }
+
+  public ngOnDestroy(): void {
+    this.dragulaSubscription.unsubscribe();
+    this.dragulaService.destroy('bag-one');
   }
 
   public deleteWishList(wishListId: string): void {
@@ -133,7 +139,6 @@ export class WishListComponent implements OnInit {
       .subscribe(
         (data: any) => {
           this.wishList = data.wishList;
-          this.dateScrapedRecommended = data.externalUrls.dateScrapedRecommended;
           this.isCurrentUser = this.sessionService.isCurrentUser(this.wishList._user._id);
         },
         (err: any) => {
@@ -149,9 +154,7 @@ export class WishListComponent implements OnInit {
       .first()
       .finally(() => this.isLoading = false)
       .subscribe(
-        (data: any) => {
-          // this.getWishList();
-        },
+        (data: any) => {},
         (err: any) => {
           this.alertService.error(err.message);
         }

@@ -1,11 +1,10 @@
+import { ExternalUrl } from './external-url';
+
 export interface Gift {
   _id?: string;
   budget?: number;
-  externalUrls?: [{
-    price?: number;
-    url: string;
-    dateScraped: Date;
-  }];
+  externalUrls?: ExternalUrl[];
   isReceived?: boolean;
   name: string;
+  order?: number;
 }

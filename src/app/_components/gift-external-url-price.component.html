@@ -1,2 +1,3 @@
-<span *ngIf="isLoading">...</span>
-<span *ngIf="!isLoading">${{ externalUrl.price }}</span>
+<span *ngIf="externalUrl.price">
+  ${{ externalUrl.price }} <span *ngIf="isLoading">...</span>
+</span>

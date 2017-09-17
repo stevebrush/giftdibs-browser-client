@@ -35,14 +35,17 @@ export class GiftEditComponent implements OnInit {
 
   public ngOnInit(): void {
     this.isLoading = true;
+
     this.wishListService
       .getById(this.wishListId)
       .first()
       .finally(() => this.isLoading = false)
       .subscribe((data: any) => {
         this.gift = data.wishList.gifts.filter((gift: Gift) => gift._id === this.giftId)[0];
+
         this.giftForm.reset(this.gift);
         this.giftForm.controls.externalUrls = this.formBuilder.array([]);
+
         this.gift.externalUrls.forEach((externalUrl: any) => {
           const control = <FormArray>this.giftForm.controls.externalUrls;
           control.push(this.formBuilder.group(externalUrl));

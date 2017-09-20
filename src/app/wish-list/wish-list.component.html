@@ -15,8 +15,13 @@
           <del *ngIf="gift.isReceived">{{ gift.name }}</del>
           <span *ngIf="!gift.isReceived">{{ gift.name }}</span>
         </div>
-        <div *ngIf="gift.budget && !gift.isReceived">
-          Budget: ${{ gift.budget }}
+        <div *ngIf="!gift.isReceived">
+          <div *ngIf="gift.budget">
+            Budget: ${{ gift.budget }}
+          </div>
+          <div *ngIf="gift.priority">
+            Priority: {{ gift.priority }}
+          </div>
         </div>
         <div *ngIf="gift.externalUrls && !gift.isReceived">
           <app-row *ngFor="let externalUrl of gift.externalUrls">

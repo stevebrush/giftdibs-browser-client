@@ -42,16 +42,18 @@ export class WishListComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private dragulaService: DragulaService) {
+      // Only drag with specific element:
       dragulaService.setOptions('bag-one', {
         moves: (el: any, container: any, handle: any) => {
           return (handle.className === 'drag-handle');
         }
       });
 
-      this.dragulaSubscription = this.dragulaService.drop.subscribe((value: any) => {
+      this.dragulaSubscription = this.dragulaService.dropModel.subscribe((value: any) => {
         this.wishList.gifts.forEach((gift: Gift, i: number) => {
           gift.order = i;
         });
+
         this.updateWishList();
       });
     }

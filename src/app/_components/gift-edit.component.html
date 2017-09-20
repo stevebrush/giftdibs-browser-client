@@ -7,15 +7,19 @@
 </div>
 
 <form *ngIf="!isLoading" [formGroup]="giftForm" (ngSubmit)="updateGift()" novalidate>
+  <app-form-group label="Name" [serverErrors]="errors">
+    <input type="text" formControlName="name">
+  </app-form-group>
+
   <app-row>
-    <app-column screenXSmall="10">
-      <app-form-group label="Name" [serverErrors]="errors">
-        <input type="text" formControlName="name">
-      </app-form-group>
-    </app-column>
-    <app-column screenXSmall="2">
+    <app-column screenXSmall="6">
       <app-form-group label="Budget" [serverErrors]="errors">
         <input type="number" formControlName="budget">
+      </app-form-group>
+    </app-column>
+    <app-column screenXSmall="6">
+      <app-form-group label="Priority" [serverErrors]="errors">
+        <input type="number" formControlName="priority">
       </app-form-group>
     </app-column>
   </app-row>

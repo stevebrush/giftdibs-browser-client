@@ -73,7 +73,6 @@ export class GiftEditComponent implements OnInit {
         },
         (err: any) => {
           this.errors = err.errors;
-          this.alertService.error(err.message);
         }
       );
   }
@@ -93,7 +92,8 @@ export class GiftEditComponent implements OnInit {
       _id: '',
       name: '',
       budget: undefined,
-      externalUrls: this.formBuilder.array([])
+      externalUrls: this.formBuilder.array([]),
+      priority: undefined
     });
   }
 

@@ -7,4 +7,5 @@ export interface Gift {
   isReceived?: boolean;
   name: string;
   order?: number;
+  priority?: number;
 }

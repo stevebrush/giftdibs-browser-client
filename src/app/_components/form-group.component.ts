@@ -1,5 +1,5 @@
 import { Component, Input, ContentChild, OnChanges } from '@angular/core';
-import { FormControlName } from '@angular/forms';
+import { FormControlName, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-form-group',
@@ -17,8 +17,10 @@ export class FormGroupComponent implements OnChanges {
   public controlName: FormControlName;
 
   public ngOnChanges(changes: any): void {
-    if (changes.serverErrors && !changes.serverErrors.firstChange) {
-      this.handleErrors(changes.serverErrors.currentValue);
+    if (changes.serverErrors.currentValue !== undefined) {
+      setTimeout(() => {
+        this.handleErrors(changes.serverErrors.currentValue);
+      });
     }
   }
 
@@ -36,6 +38,19 @@ export class FormGroupComponent implements OnChanges {
       }
 
       if (field === this.controlName.name) {
+        const formGroup = this.controlName.control.parent;
+        const formArray = formGroup.parent;
+
+        // This form control is part of a form array.
+        // Check to make sure the error from the server
+        // matches the index of the form array.
+        if (formArray instanceof FormArray) {
+          const index = parseInt(fragments[fragments.length - 2], 10);
+          if (formArray.controls[index] !== formGroup) {
+            return;
+          }
+        }
+
         this.controlName.control.setErrors({
           [`schemaError.${i}`]: err.message
         });

@@ -1,4 +1,5 @@
 import {
+  // ChangeDetectionStrategy,
   Component,
   OnDestroy,
   OnInit
@@ -13,11 +14,13 @@ import { DragulaService } from 'ng2-dragula';
 
 import {
   AlertService,
+  DibService,
   WishListService,
   SessionService
 } from '../_services';
 
 import {
+  Dib,
   Gift,
   WishList
 } from '../_models';
@@ -25,12 +28,14 @@ import {
 @Component({
   selector: 'app-wish-list',
   templateUrl: './wish-list.component.html'
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WishListComponent implements OnInit, OnDestroy {
   public wishList: WishList;
   public isLoading = false;
   public isCurrentUser = false;
   public activeGift: Gift;
+  // public activeDib: Dib;
 
   private wishListId: string;
   private dragulaSubscription: Subscription;
@@ -38,6 +43,7 @@ export class WishListComponent implements OnInit, OnDestroy {
   constructor(
     private alertService: AlertService,
     private wishListService: WishListService,
+    private dibService: DibService,
     private sessionService: SessionService,
     private route: ActivatedRoute,
     private router: Router,
@@ -107,6 +113,28 @@ export class WishListComponent implements OnInit, OnDestroy {
       );
   }
 
+  public dibGift(giftId: string): void {
+    this.isLoading = true;
+    this.dibService
+      .create({
+        _gift: giftId,
+        _user: this.sessionService.user._id
+      })
+      .first()
+      .finally(() => this.isLoading = false)
+      .subscribe(
+        (data: any) => this.getWishList(),
+        (err: any) => this.alertService.error(err.message)
+      );
+  }
+
+  public removeDib(dibId: string): void {
+    this.dibService.remove(dibId).first().subscribe(
+      (data: any) => this.getWishList(),
+      (err: any) => this.alertService.error(err.message)
+    );
+  }
+
   public toggleReceived(gift: Gift): void {
     this.isLoading = true;
     gift.isReceived = !gift.isReceived;
@@ -130,6 +158,10 @@ export class WishListComponent implements OnInit, OnDestroy {
   public onGiftEditSuccess(): void {
     this.getWishList();
     this.activeGift = undefined;
+  }
+
+  public isDibOwnedByCurrentUser(dib: Dib): boolean {
+    return (dib._user === this.sessionService.user._id);
   }
 
   private getWishList(): void {

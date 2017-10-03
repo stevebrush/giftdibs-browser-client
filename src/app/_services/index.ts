@@ -5,3 +5,4 @@ export * from './session.service';
 export * from './window.service';
 export * from './wish-list.service';
 export * from './scraper.service';
+export * from './dib.service';

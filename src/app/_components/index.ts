@@ -13,4 +13,6 @@ export * from './gift-edit.component';
 export * from './card.component';
 export * from './card-title.component';
 export * from './card-body.component';
+export * from './card-footer.component';
 export * from './gift-external-url-price.component';
+export * from './dib-edit.component';

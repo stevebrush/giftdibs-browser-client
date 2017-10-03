@@ -17,7 +17,7 @@ export class FormGroupComponent implements OnChanges {
   public controlName: FormControlName;
 
   public ngOnChanges(changes: any): void {
-    if (changes.serverErrors.currentValue !== undefined) {
+    if (changes.serverErrors && changes.serverErrors.currentValue !== undefined) {
       setTimeout(() => {
         this.handleErrors(changes.serverErrors.currentValue);
       });

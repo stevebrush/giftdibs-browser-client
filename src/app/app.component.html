@@ -6,6 +6,7 @@
   </div>
   <div class="navbar-user" *ngIf="isLoggedIn()">
     <a [routerLink]="['/users', currentUser._id]" routerLinkActive="active">{{currentUser.firstName}} {{currentUser.lastName}}</a> /
+    <a [routerLink]="['/dibs']" routerLinkActive="active">Dibs</a> /
     <a [routerLink]="['/settings']" routerLinkActive="active">Settings</a> /
     <a href="" (click)="logout($event)">Log out</a> /
     <a routerLink="/support">Support</a>

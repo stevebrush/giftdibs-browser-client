@@ -50,9 +50,21 @@
             Drag
           </button>
         </app-button-container>
+        <app-button-container *ngIf="!isCurrentUser">
+          <app-button *ngIf="!gift.dib" (click)="dibGift(gift._id)">
+            Dib this
+          </app-button>
+          <span *ngIf="gift.dib">
+            Dibbed! ({{ gift.dib.status }})
+            <span *ngIf="isDibOwnedByCurrentUser(gift.dib)">
+              <app-button (click)="removeDib(gift.dib._id)">Remove dib</app-button>
+            </span>
+          </span>
+        </app-button-container>
       </app-card-body>
     </app-card>
   </div>
+
   <app-modal *ngIf="activeGift">
     <app-gift-edit-form
       [wishListId]="wishList._id"

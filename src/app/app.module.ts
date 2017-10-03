@@ -19,6 +19,7 @@ import { PageNotFoundComponent } from './404';
 import { VerifyEmailComponent } from './verify-email';
 import { WishListsComponent } from './wish-lists';
 import { WishListComponent } from './wish-list';
+import { DibsComponent } from './dibs';
 
 import {
   AboutComponent,
@@ -27,12 +28,18 @@ import {
   TermsComponent
 } from './support';
 
-import { routing } from './app.routing';
+import {
+  routing
+} from './app.routing';
 
-import { AuthGuard } from './_guards';
+import {
+  AuthGuard
+} from './_guards';
+
 import {
   AlertService,
   AuthenticationService,
+  DibService,
   UserService,
   SessionService,
   WindowService,
@@ -56,10 +63,14 @@ import {
   GiftExternalUrlPriceComponent,
   CardComponent,
   CardTitleComponent,
-  CardBodyComponent
+  CardBodyComponent,
+  CardFooterComponent,
+  DibEditComponent
 } from './_components';
 
-import { GridModule } from './_modules';
+import {
+  GridModule
+} from './_modules';
 
 @NgModule({
   declarations: [
@@ -96,7 +107,10 @@ import { GridModule } from './_modules';
     GiftExternalUrlPriceComponent,
     CardComponent,
     CardTitleComponent,
-    CardBodyComponent
+    CardBodyComponent,
+    CardFooterComponent,
+    DibEditComponent,
+    DibsComponent
   ],
   imports: [
     BrowserModule,
@@ -115,7 +129,8 @@ import { GridModule } from './_modules';
     SessionService,
     WindowService,
     WishListService,
-    ScraperService
+    ScraperService,
+    DibService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,15 @@
-import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  Input,
+  OnInit
+} from '@angular/core';
+
+import {
+  FormBuilder,
+  FormGroup
+} from '@angular/forms';
 
 import {
   AlertService,
@@ -61,15 +71,4 @@ export class DibEditComponent implements OnInit {
       pricePaid: undefined
     });
   }
-
-  // private refreshDib(): void {
-  //   this.isLoading = true;
-  //   this.dibService
-  //     .getById(this.dib._id)
-  //     .first()
-  //     .finally(() => this.isLoading = false)
-  //     .subscribe((data: any) => {
-  //       this.dib = dib;
-  //     });
-  // }
 }

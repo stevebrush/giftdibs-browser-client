@@ -8,10 +8,6 @@ import {
   DibService
 } from '../_services';
 
-// import {
-//   Dib
-// } from '../_models';
-
 @Component({
   selector: 'app-dibs',
   templateUrl: './dibs.component.html'

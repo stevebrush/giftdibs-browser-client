@@ -55,7 +55,7 @@
             Dib this
           </app-button>
           <span *ngIf="gift.dib">
-            Dibbed! ({{ gift.dib.status }})
+            Dibbed!
             <span *ngIf="isDibOwnedByCurrentUser(gift.dib)">
               <app-button (click)="removeDib(gift.dib._id)">Remove dib</app-button>
             </span>

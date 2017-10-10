@@ -61,15 +61,12 @@ import {
   GiftCreateComponent,
   GiftEditComponent,
   GiftExternalUrlPriceComponent,
-  CardComponent,
-  CardTitleComponent,
-  CardBodyComponent,
-  CardFooterComponent,
   DibEditComponent
 } from './_components';
 
 import {
-  GridModule
+  GridModule,
+  GDCardModule
 } from './_modules';
 
 @NgModule({
@@ -105,10 +102,6 @@ import {
     GiftCreateComponent,
     GiftEditComponent,
     GiftExternalUrlPriceComponent,
-    CardComponent,
-    CardTitleComponent,
-    CardBodyComponent,
-    CardFooterComponent,
     DibEditComponent,
     DibsComponent
   ],
@@ -119,7 +112,8 @@ import {
     ReactiveFormsModule,
     HttpModule,
     routing,
-    GridModule
+    GridModule,
+    GDCardModule
   ],
   providers: [
     AlertService,

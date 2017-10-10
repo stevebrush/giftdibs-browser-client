@@ -83,7 +83,7 @@ export class GiftEditComponent implements OnInit {
   }
 
   public removeUrl(index: number) {
-    const externalUrls = <FormArray>this.giftForm.controls.externalUrls
+    const externalUrls = <FormArray>this.giftForm.controls.externalUrls;
     externalUrls.removeAt(index);
   }
 
@@ -92,6 +92,7 @@ export class GiftEditComponent implements OnInit {
       _id: '',
       name: '',
       budget: undefined,
+      quantity: undefined,
       externalUrls: this.formBuilder.array([]),
       priority: undefined
     });

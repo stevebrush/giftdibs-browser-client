@@ -1,12 +1,12 @@
-@import '../../styles/_variables';
+@import '../../../styles/_variables';
 
-.app-card-body {
+.gd-card-body {
   padding: 12px 15px;
   border-top: 1px solid #ddd;
 }
 
 /deep/
-.app-card-body {
+.gd-card-body {
   form {
     margin: 0;
   }

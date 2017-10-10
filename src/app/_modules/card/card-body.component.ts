@@ -1,8 +1,9 @@
+/*tslint:disable:component-selector*/
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-card-body',
+  selector: 'gd-card-body',
   templateUrl: './card-body.component.html',
   styleUrls: ['./card-body.component.scss']
 })
-export class CardBodyComponent { }
+export class GDCardBodyComponent { }

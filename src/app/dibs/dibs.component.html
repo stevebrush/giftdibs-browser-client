@@ -3,11 +3,11 @@
 </h1>
 
 <div *ngIf="recipients">
-  <app-card *ngFor="let recipient of recipients">
-    <app-card-title>
+  <gd-card *ngFor="let recipient of recipients">
+    <gd-card-title>
       {{ recipient.firstName }} {{ recipient.lastName }}
-    </app-card-title>
-    <app-card-body *ngFor="let gift of recipient.gifts">
+    </gd-card-title>
+    <gd-card-body *ngFor="let gift of recipient.gifts">
       <app-row>
         <app-column screenXSmall="6">
           <strong>{{ gift.name }}</strong><br>
@@ -24,8 +24,8 @@
           </div>
         </app-column>
       </app-row>
-    </app-card-body>
-    <app-card-footer>
+    </gd-card-body>
+    <gd-card-footer>
       <app-row>
         <app-column screenXSmall="9">
           Totals for {{ recipient.firstName }}:
@@ -34,6 +34,6 @@
           ${{ recipient.budget }}
         </app-column>
       </app-row>
-    </app-card-footer>
-  </app-card>
+    </gd-card-footer>
+  </gd-card>
 </div>

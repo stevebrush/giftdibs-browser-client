@@ -24,9 +24,8 @@ input[type="password"],
 input[type="number"],
 textarea {
   border: 1px solid $border-color-grey;
-  padding: .5rem;
+  padding: .5rem .75rem;
   line-height: $line-height-reduced;
-  border-radius: $border-radius;
 }
 
 .facebook-button {

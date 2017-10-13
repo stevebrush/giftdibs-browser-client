@@ -5,3 +5,12 @@
   background-color: #fff;
   margin-bottom: 10px;
 }
+
+/deep/
+.gd-drag-handle {
+  cursor: move;
+  background-color: #ddd;
+  display: inline-block;
+  padding: 3px 10px;
+  border: 1px dashed #bbb;
+}

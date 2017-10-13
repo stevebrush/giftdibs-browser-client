@@ -3,18 +3,20 @@
     {{ wishList.name }}
   </h1>
 
-  <app-gift-create-form *ngIf="isCurrentUser"
-    [wishListId]="wishList._id"
+  <app-gift-create-form
+    *ngIf="isCurrentUser"
+    [wishListId]="wishListId"
     (onSuccess)="onGiftCreateSuccess()">
   </app-gift-create-form>
 
-  <div dragula="bag-one" [dragulaModel]="wishList.gifts">
-    <gd-card *ngFor="let gift of wishList.gifts">
+  <div dragula="bag-one" [dragulaModel]="gifts">
+    <gd-card *ngFor="let gift of gifts">
+      <gd-card-title>
+        <del *ngIf="gift.isReceived">{{ gift.name }}</del>
+        <span *ngIf="!gift.isReceived">{{ gift.name }}</span>
+      </gd-card-title>
       <gd-card-body>
-        <div style="font-weight:bold;">
-          <del *ngIf="gift.isReceived">{{ gift.name }}</del>
-          <span *ngIf="!gift.isReceived">{{ gift.name }}</span>
-        </div>
+
         <div *ngIf="!gift.isReceived">
           <div *ngIf="gift.budget">
             Budget: ${{ gift.budget }}
@@ -22,7 +24,14 @@
           <div *ngIf="gift.priority">
             Priority: {{ gift.priority }}
           </div>
+          <div>
+            Quantity: {{ gift.quantity }}
+          </div>
+          <div>
+            Order: {{ gift.orderInWishList }}
+          </div>
         </div>
+
         <div *ngIf="gift.externalUrls && !gift.isReceived">
           <app-row *ngFor="let externalUrl of gift.externalUrls">
             <app-column screenXSmall="10" screenSmall="11">
@@ -30,13 +39,16 @@
             </app-column>
             <app-column screenXSmall="2" screenSmall="1">
               <app-gift-external-url-price
-                [wishListId]="wishListId"
                 [gift]="gift"
                 [externalUrl]="externalUrl">
               </app-gift-external-url-price>
             </app-column>
           </app-row>
         </div>
+
+      </gd-card-body>
+
+      <gd-card-footer>
         <app-button-container *ngIf="isCurrentUser">
           <app-button (click)="toggleReceived(gift)" styleType="primary">
             <span *ngIf="!gift.isReceived">Mark received</span>
@@ -46,30 +58,26 @@
             <app-button (click)="activeGift = gift">Edit</app-button>
             <app-button (click)="deleteGift(gift._id)">Delete</app-button>
           </span>
-          <button class="drag-handle">
-            Drag
-          </button>
+          <div class="gd-drag-handle">
+            (Drag)
+          </div>
         </app-button-container>
-        <app-button-container *ngIf="!isCurrentUser">
-          <app-button *ngIf="!gift.dib" (click)="dibGift(gift._id)">
-            Dib this
-          </app-button>
-          <span *ngIf="gift.dib">
-            Dibbed!
-            <span *ngIf="isDibOwnedByCurrentUser(gift.dib)">
-              <app-button (click)="removeDib(gift.dib._id)">Remove dib</app-button>
-            </span>
-          </span>
-        </app-button-container>
-      </gd-card-body>
+
+        <app-dib-controls
+          *ngIf="!isCurrentUser && dibs"
+          [gift]="gift"
+          [dibs]="filterDibsByGiftId(gift._id)"
+          (onChanges)="onDibChanges($event)"
+          (onError)="onDibError($event)">
+        </app-dib-controls>
+      </gd-card-footer>
     </gd-card>
   </div>
 
   <app-modal *ngIf="activeGift">
     <app-gift-edit-form
-      [wishListId]="wishList._id"
-      [giftId]="activeGift._id"
-      (onSuccess)="onGiftEditSuccess()"
+      [gift]="activeGift"
+      (onSuccess)="onGiftEditSuccess($event)"
       (onCancel)="activeGift = undefined">
     </app-gift-edit-form>
   </app-modal>

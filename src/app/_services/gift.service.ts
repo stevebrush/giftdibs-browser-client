@@ -11,11 +11,11 @@ import 'rxjs/add/observable/throw';
 
 import { SessionService } from './session.service';
 import { AlertService } from './alert.service';
-import { Dib } from '../_models';
+import { Gift } from '../_models';
 
 @Injectable()
-export class DibService {
-  private resourceUrl = 'http://localhost:8080/v1/dibs';
+export class GiftService {
+  private resourceUrl = 'http://localhost:8080/v1/gifts';
 
   constructor(
     private http: Http,
@@ -23,16 +23,16 @@ export class DibService {
     private alertService: AlertService,
     private sessionService: SessionService) { }
 
-  public create(formData: Dib): Observable<any> {
+  public getAll(): Observable<any> {
     const options = this.getRequestOptions();
 
     return this.http
-      .post(this.resourceUrl, formData, options)
+      .get(this.resourceUrl, options)
       .map((response: Response) => this.handleSuccess(response))
       .catch((err: any) => this.handleError(err));
   }
 
-  public getAllByWishListId(wishListId: string): Observable<any> {
+  public getAllByWishListId(wishListId: string): Observable<Gift[]> {
     const options = this.getRequestOptions();
 
     return this.http
@@ -41,34 +41,25 @@ export class DibService {
       .catch((err: any) => this.handleError(err));
   }
 
-  public getAllRecipients(): Observable<any> {
+  public create(formData: Gift): Observable<any> {
     const options = this.getRequestOptions();
 
     return this.http
-      .get(`${this.resourceUrl}-recipients`, options)
-      .map((response: Response) => this.handleSuccess(response))
-      .catch((err: any) => this.handleError(err));
-  }
-
-  public getById(id: string): Observable<any> {
-    const options = this.getRequestOptions();
-
-    return this.http
-      .get(`${this.resourceUrl}/${id}`, options)
+      .post(`${this.resourceUrl}`, formData, options)
       .map((response: Response) => this.handleSuccess(response))
       .catch((err) => this.handleError(err));
   }
 
-  public remove(id: string): Observable<any> {
+  public remove(giftId: string): Observable<any> {
     const options = this.getRequestOptions();
 
     return this.http
-      .delete(`${this.resourceUrl}/${id}`, options)
+      .delete(`${this.resourceUrl}/${giftId}`, options)
       .map((response: Response) => this.handleSuccess(response))
       .catch((err) => this.handleError(err));
   }
 
-  public update(formData: Dib): Observable<any> {
+  public update(formData: Gift): Observable<any> {
     const options = this.getRequestOptions();
 
     return this.http

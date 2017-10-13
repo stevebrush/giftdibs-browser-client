@@ -119,7 +119,7 @@ export class WishListService {
       this.sessionService.token = json.authResponse.token;
     }
 
-    return json as WishList;
+    return json;
   }
 
   private handleError(err: Response): ErrorObservable {

@@ -11,16 +11,16 @@
       <app-row>
         <app-column screenXSmall="6">
           <strong>{{ gift.name }}</strong><br>
-          <a routerLink="/wish-lists/{{ gift.wishList._id }}">{{ gift.wishList.name }}</a><br>
+          <a routerLink="/wish-lists/{{ gift._wishList._id }}">{{ gift._wishList.name }}</a><br>
           ${{ gift.budget }}
         </app-column>
         <app-column screenXSmall="6">
           <app-dib-edit
-            [dib]="gift.dib"
+            [dib]="gift._dib"
             (onSuccess)="onDibEdit()">
           </app-dib-edit>
-          <div *ngIf="gift.dib.dateDelivered">
-            Date delivered: {{ gift.dib.dateDelivered | date }}
+          <div *ngIf="gift._dib.isDelivered">
+            Date delivered: {{ gift._dib.dateDelivered | date }}
           </div>
         </app-column>
       </app-row>

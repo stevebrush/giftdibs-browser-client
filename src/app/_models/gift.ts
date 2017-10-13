@@ -1,13 +1,14 @@
 import { ExternalUrl } from './external-url';
-import { Dib } from './dib';
 
 export interface Gift {
   _id?: string;
+  _user?: string;
+  _wishList: string;
   budget?: number;
-  dib?: Dib;
   externalUrls?: ExternalUrl[];
   isReceived?: boolean;
   name: string;
-  order?: number;
+  orderInWishList?: number;
   priority?: number;
+  quantity: number;
 }

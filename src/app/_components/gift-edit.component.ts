@@ -1,8 +1,24 @@
-import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  Input,
+  OnInit
+} from '@angular/core';
 
-import { AlertService, WishListService } from '../_services';
-import { Gift } from '../_models';
+import {
+  FormBuilder,
+  FormGroup,
+  FormArray
+} from '@angular/forms';
+
+import {
+  GiftService
+} from '../_services';
+
+import {
+  Gift
+} from '../_models';
 
 @Component({
   selector: 'app-gift-edit-form',
@@ -10,47 +26,31 @@ import { Gift } from '../_models';
 })
 export class GiftEditComponent implements OnInit {
   @Input()
-  public giftId: string;
-
-  @Input()
-  public wishListId: string;
+  public gift: Gift;
 
   @Output()
-  public onSuccess: EventEmitter<void> = new EventEmitter<void>();
+  public onSuccess: EventEmitter<any> = new EventEmitter<any>();
 
   @Output()
   public onCancel: EventEmitter<void> = new EventEmitter<void>();
 
-  public gift: Gift;
   public giftForm: FormGroup;
   public isLoading = false;
   public errors: any;
 
   constructor(
-    private alertService: AlertService,
-    private wishListService: WishListService,
-    private formBuilder: FormBuilder) {
-      this.createForm();
-    }
+    private giftService: GiftService,
+    private formBuilder: FormBuilder) { }
 
   public ngOnInit(): void {
-    this.isLoading = true;
+    this.createForm();
+    this.giftForm.reset(this.gift);
+    this.giftForm.controls.externalUrls = this.formBuilder.array([]);
 
-    this.wishListService
-      .getById(this.wishListId)
-      .first()
-      .finally(() => this.isLoading = false)
-      .subscribe((data: any) => {
-        this.gift = data.wishList.gifts.filter((gift: Gift) => gift._id === this.giftId)[0];
-
-        this.giftForm.reset(this.gift);
-        this.giftForm.controls.externalUrls = this.formBuilder.array([]);
-
-        this.gift.externalUrls.forEach((externalUrl: any) => {
-          const control = <FormArray>this.giftForm.controls.externalUrls;
-          control.push(this.formBuilder.group(externalUrl));
-        });
-      });
+    this.gift.externalUrls.forEach((externalUrl: any) => {
+      const control = <FormArray>this.giftForm.controls.externalUrls;
+      control.push(this.formBuilder.group(externalUrl));
+    });
   }
 
   public updateGift(): void {
@@ -62,18 +62,16 @@ export class GiftEditComponent implements OnInit {
     const externalUrls = this.giftForm.controls.externalUrls;
     formData.externalUrls = externalUrls.value;
 
-    this.wishListService
-      .updateGift(this.wishListId, formData)
+    this.giftService
+      .update(formData)
       .first()
       .finally(() => this.isLoading = false)
       .subscribe(
-        (data: any) => {
-          this.alertService.success(data.message);
-          this.onSuccess.emit();
-        },
-        (err: any) => {
-          this.errors = err.errors;
-        }
+        (data: any) => this.onSuccess.emit({
+          gift: formData,
+          message: data.message
+        }),
+        (err: any) => this.errors = err.errors
       );
   }
 
@@ -90,12 +88,15 @@ export class GiftEditComponent implements OnInit {
   private createForm(): void {
     this.giftForm = this.formBuilder.group({
       _id: '',
-      name: '',
+      _user: undefined,
+      _wishList: undefined,
       budget: undefined,
-      quantity: undefined,
-      externalUrls: this.formBuilder.array([]),
-      priority: undefined
-    });
+      externalUrls: this.formBuilder.array([]) as any,
+      name: '',
+      orderInWishList: undefined,
+      priority: undefined,
+      quantity: undefined
+    } as Gift);
   }
 
   private createExternalUrlForm(): FormGroup {

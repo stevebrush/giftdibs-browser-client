@@ -1,9 +1,9 @@
-export type DibStatus = 'reserved' | 'purchased' | 'delivered';
 export interface Dib {
   _gift: string;
   _id?: string;
-  _user: string;
+  _user?: any;
   dateDelivered?: Date;
+  isDelivered?: boolean;
   pricePaid?: number;
-  status?: DibStatus;
+  quantity: number;
 }

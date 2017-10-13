@@ -1,4 +1,6 @@
 import {
+  ChangeDetectorRef,
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Output,
@@ -12,7 +14,6 @@ import {
 } from '@angular/forms';
 
 import {
-  AlertService,
   DibService
 } from '../_services';
 
@@ -22,24 +23,30 @@ import {
 
 @Component({
   selector: 'app-dib-edit',
-  templateUrl: './dib-edit.component.html'
+  templateUrl: './dib-edit.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DibEditComponent implements OnInit {
   @Input()
   public dib: Dib;
 
   @Output()
-  public onSuccess: EventEmitter<void> = new EventEmitter<void>();
+  public onSuccess: EventEmitter<any> = new EventEmitter<any>();
+
+  @Output()
+  public onError: EventEmitter<any> = new EventEmitter<any>();
+
+  @Output()
+  public onCancel: EventEmitter<void> = new EventEmitter<void>();
 
   public formModel: FormGroup;
   public isLoading = false;
   public errors: any;
 
   constructor(
-    private alertService: AlertService,
+    private changeDetector: ChangeDetectorRef,
     private dibService: DibService,
     private formBuilder: FormBuilder) {
-      this.isLoading = true;
       this.createForm();
     }
 
@@ -54,21 +61,28 @@ export class DibEditComponent implements OnInit {
     this.dibService
       .update(formData)
       .first()
-      .finally(() => this.isLoading = false)
+      .finally(() => {
+        this.isLoading = false;
+        this.changeDetector.detectChanges();
+      })
       .subscribe(
-        (data: any) => this.onSuccess.emit(),
+        (data: any) => {
+          this.onSuccess.emit(data);
+        },
         (err: any) => {
           this.errors = err.errors;
-          this.alertService.error(err.message);
+          this.onError.emit(err);
         }
       );
   }
 
   private createForm(): void {
     this.formModel = this.formBuilder.group({
+      _gift: undefined,
       _id: '',
       isDelivered: false,
-      pricePaid: undefined
+      pricePaid: undefined,
+      quantity: undefined
     });
   }
 }

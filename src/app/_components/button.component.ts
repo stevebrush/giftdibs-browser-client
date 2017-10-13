@@ -1,4 +1,12 @@
-import { Component, Input, OnInit, OnChanges, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  OnChanges,
+  ElementRef,
+  ViewChild,
+  AfterViewInit
+} from '@angular/core';
 
 @Component({
   selector: 'app-button',

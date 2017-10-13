@@ -40,11 +40,12 @@ import {
   AlertService,
   AuthenticationService,
   DibService,
-  UserService,
+  GiftService,
+  ScraperService,
   SessionService,
+  UserService,
   WindowService,
-  WishListService,
-  ScraperService
+  WishListService
 } from './_services';
 
 import {
@@ -61,7 +62,8 @@ import {
   GiftCreateComponent,
   GiftEditComponent,
   GiftExternalUrlPriceComponent,
-  DibEditComponent
+  DibEditComponent,
+  DibControlsComponent
 } from './_components';
 
 import {
@@ -103,7 +105,8 @@ import {
     GiftEditComponent,
     GiftExternalUrlPriceComponent,
     DibEditComponent,
-    DibsComponent
+    DibsComponent,
+    DibControlsComponent
   ],
   imports: [
     BrowserModule,
@@ -119,12 +122,13 @@ import {
     AlertService,
     AuthGuard,
     AuthenticationService,
-    UserService,
-    SessionService,
-    WindowService,
-    WishListService,
+    DibService,
+    GiftService,
     ScraperService,
-    DibService
+    SessionService,
+    UserService,
+    WindowService,
+    WishListService
   ],
   bootstrap: [AppComponent]
 })

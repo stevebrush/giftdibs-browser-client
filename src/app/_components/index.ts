@@ -12,3 +12,4 @@ export * from './gift-create.component';
 export * from './gift-edit.component';
 export * from './gift-external-url-price.component';
 export * from './dib-edit.component';
+export * from './dib-controls.component';

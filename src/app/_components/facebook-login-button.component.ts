@@ -32,7 +32,9 @@ export class FacebookLoginButtonComponent {
     FB.login((response: any) => {
       if (response.status === 'not_authorized') {
         this.isLoading = false;
-        this.alertService.error('Please provide the necessary permissions to continue with Facebook.');
+        this.alertService.error(
+          'Please provide the necessary permissions to continue with Facebook.'
+        );
         return;
       }
 

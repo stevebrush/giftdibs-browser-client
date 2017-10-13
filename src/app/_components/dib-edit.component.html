@@ -1,13 +1,30 @@
-<div *ngIf="isLoading">
-  Loading...
-</div>
+<h1>
+  Edit dib
+</h1>
 
-<form *ngIf="!isLoading" [formGroup]="formModel" (ngSubmit)="onSubmit()" novalidate>
-  <app-form-group label="Price paid" [serverErrors]="errors">
-    <input type="number" formControlName="pricePaid" (blur)="onSubmit()">
+<form [formGroup]="formModel" (ngSubmit)="onSubmit()" novalidate>
+  <app-form-group label="Quantity" [serverErrors]="errors">
+    <input type="number" formControlName="quantity">
   </app-form-group>
 
-  <div>
-    <label><input type="checkbox" formControlName="isDelivered" (change)="onSubmit()"> Delivered</label>
-  </div>
+  <app-form-group label="Price paid" [serverErrors]="errors">
+    <input type="number" formControlName="pricePaid">
+  </app-form-group>
+
+  <app-form-group [serverErrors]="errors">
+    <label><input type="checkbox" formControlName="isDelivered"> Delivered</label>
+  </app-form-group>
+
+  <app-button
+    type="submit"
+    [disabled]="isLoading"
+    (click)="onSubmit()">
+    Save changes
+  </app-button>
+
+  <app-button
+    [disabled]="isLoading"
+    (click)="onCancel.emit()">
+    Cancel
+  </app-button>
 </form>

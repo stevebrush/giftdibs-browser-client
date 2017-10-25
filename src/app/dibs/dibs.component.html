@@ -19,7 +19,7 @@
             [dib]="gift._dib"
             (onSuccess)="onDibEdit()">
           </app-dib-edit>
-          <div *ngIf="gift._dib.isDelivered">
+          <div *ngIf="gift._dib.dateDelivered">
             Date delivered: {{ gift._dib.dateDelivered | date }}
           </div>
         </app-column>

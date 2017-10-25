@@ -52,6 +52,7 @@ export class DibEditComponent implements OnInit {
 
   public ngOnInit(): void {
     this.formModel.reset(this.dib);
+    this.formModel.controls.isDelivered.reset(this.dib.dateDelivered);
     this.isLoading = false;
   }
 

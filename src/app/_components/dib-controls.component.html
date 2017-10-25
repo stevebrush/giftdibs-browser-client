@@ -6,9 +6,12 @@
 
     <div *ngIf="isDibOwnedByCurrentUser(dib)">
       You
-      <span *ngIf="dib.isDelivered">delivered</span>
-      <span *ngIf="!dib.isDelivered">dibbed</span>
-      ({{ dib.quantity }}) on {{ dib.dateUpdated|date }}
+      <span *ngIf="dib.dateDelivered">
+        delivered ({{ dib.quantity }}) on {{ dib.dateDelivered | date }}
+      </span>
+      <span *ngIf="!dib.dateDelivered">
+        dibbed ({{ dib.quantity }}) on {{ dib.dateUpdated | date }}
+      </span>
       <app-button
         (click)="activeDib = dib">
         Edit
@@ -22,11 +25,13 @@
 
     <div *ngIf="!isDibOwnedByCurrentUser(dib)">
       <span>{{ dib._user.firstName }} {{ dib._user.lastName }}</span>
-      <span *ngIf="dib.isDelivered">delivered</span>
-      <span *ngIf="!dib.isDelivered">dibbed</span>
-      ({{ dib.quantity }}) on {{ dib.dateUpdated|date }}
+      <span *ngIf="dib.dateDelivered">
+        delivered ({{ dib.quantity }}) on {{ dib.dateDelivered | date }}
+      </span>
+      <span *ngIf="!dib.dateDelivered">
+        dibbed ({{ dib.quantity }}) on {{ dib.dateUpdated | date }}
+      </span>
     </div>
-
   </div>
 
   <div *ngIf="!isDibbedByCurrentUser">

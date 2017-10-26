@@ -4,20 +4,29 @@ import {
   OnInit
 } from '@angular/core';
 
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  ActivatedRoute
+} from '@angular/router';
 
+import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/first';
+import 'rxjs/add/observable/merge';
 
-import { DragulaService } from 'ng2-dragula';
+import {
+  DragulaService
+} from 'ng2-dragula';
 
 import {
   AlertService,
+  DibService,
+  GiftService,
   WishListService,
   SessionService
 } from '../_services';
 
 import {
+  Dib,
   Gift,
   WishList
 } from '../_models';
@@ -28,34 +37,24 @@ import {
 })
 export class WishListComponent implements OnInit, OnDestroy {
   public wishList: WishList;
+  public gifts: Gift[];
+  public activeGift: Gift;
   public isLoading = false;
   public isCurrentUser = false;
-  public activeGift: Gift;
+  public wishListId: string;
 
-  private wishListId: string;
+  public dibs: Dib[];
   private dragulaSubscription: Subscription;
 
   constructor(
     private alertService: AlertService,
-    private wishListService: WishListService,
-    private sessionService: SessionService,
+    private dibService: DibService,
+    private dragulaService: DragulaService,
+    private giftService: GiftService,
     private route: ActivatedRoute,
-    private router: Router,
-    private dragulaService: DragulaService) {
-      // Only drag with specific element:
-      dragulaService.setOptions('bag-one', {
-        moves: (el: any, container: any, handle: any) => {
-          return (handle.className === 'drag-handle');
-        }
-      });
-
-      this.dragulaSubscription = this.dragulaService.dropModel.subscribe((value: any) => {
-        this.wishList.gifts.forEach((gift: Gift, i: number) => {
-          gift.order = i;
-        });
-
-        this.updateWishList();
-      });
+    private sessionService: SessionService,
+    private wishListService: WishListService) {
+      this.setupDragula();
     }
 
   public ngOnInit(): void {
@@ -64,8 +63,10 @@ export class WishListComponent implements OnInit, OnDestroy {
       .first()
       .subscribe((params: any) => {
         this.wishListId = params.wishListId;
-        this.getWishList();
-    });
+        this.fetchWishList();
+        this.fetchGifts();
+        this.fetchDibs();
+      });
   }
 
   public ngOnDestroy(): void {
@@ -73,49 +74,33 @@ export class WishListComponent implements OnInit, OnDestroy {
     this.dragulaService.destroy('bag-one');
   }
 
-  public deleteWishList(wishListId: string): void {
+  public deleteGift(giftId: string): void {
     this.isLoading = true;
-    this.wishListService
-      .remove(wishListId)
+    this.giftService
+      .remove(giftId)
       .first()
       .finally(() => this.isLoading = false)
       .subscribe(
-        (data: any) => {
-          this.alertService.success(data.message, true);
-          this.router.navigate(['/profile']);
-        },
-        (err: any) => {
-          this.alertService.error(err.message);
-        }
+        (data: any) => this.fetchGifts(),
+        (err: any) => this.alertService.error(err.message)
       );
   }
 
-  public deleteGift(giftId: string): void {
-    this.isLoading = true;
-    this.wishListService
-      .removeGift(this.wishListId, giftId)
-      .first()
-      .finally(() => this.isLoading = false)
-      .subscribe(
-        (data: any) => {
-          this.getWishList();
-          this.alertService.success(data.message);
-        },
-        (err: any) => {
-          this.alertService.error(err.message);
-        }
-      );
+  public filterDibsByGiftId(giftId: string): Dib[] {
+    return this.dibs.filter((dib: Dib) => {
+      return (dib._gift === giftId);
+    });
   }
 
   public toggleReceived(gift: Gift): void {
     this.isLoading = true;
     gift.isReceived = !gift.isReceived;
-    this.wishListService
-      .updateGift(this.wishListId, gift)
+    this.giftService
+      .update(gift)
       .first()
       .subscribe(
         (data: any) => {
-          this.getWishList();
+          console.log('toggleReceived', data);
         },
         (err: any) => {
           this.alertService.error(err.message);
@@ -123,16 +108,54 @@ export class WishListComponent implements OnInit, OnDestroy {
       );
   }
 
-  public onGiftCreateSuccess() {
-    this.getWishList();
+  public onDibChanges(data: any) {
+    this.alertService.success(data.message);
+    this.fetchDibs();
   }
 
-  public onGiftEditSuccess(): void {
-    this.getWishList();
+  public onDibError(data: any): void {
+    this.alertService.error(data.message);
+  }
+
+  public onGiftCreateSuccess() {
+    this.fetchGifts();
+  }
+
+  public onGiftEditSuccess(data: { gift: Gift, message: string }): void {
+    this.gifts.forEach((gift, i) => {
+      if (gift._id === data.gift._id) {
+        this.gifts[i] = data.gift;
+      }
+    });
+
+    this.alertService.success(data.message);
     this.activeGift = undefined;
   }
 
-  private getWishList(): void {
+  private fetchDibs(): void {
+    this.isLoading = true;
+    this.dibService
+      .getAllByWishListId(this.wishListId)
+      .first()
+      .finally(() => this.isLoading = false)
+      .subscribe((data: any) => {
+        this.dibs = data.dibs;
+      });
+  }
+
+  private fetchGifts(): void {
+    this.isLoading = true;
+    this.giftService
+      .getAllByWishListId(this.wishListId)
+      .first()
+      .finally(() => this.isLoading = false)
+      .subscribe(
+        (data: any) => this.gifts = data.gifts,
+        (err: any) => this.alertService.error(err.message)
+      );
+  }
+
+  private fetchWishList(): void {
     this.isLoading = true;
     this.wishListService
       .getById(this.wishListId)
@@ -143,23 +166,44 @@ export class WishListComponent implements OnInit, OnDestroy {
           this.wishList = data.wishList;
           this.isCurrentUser = this.sessionService.isCurrentUser(this.wishList._user._id);
         },
-        (err: any) => {
-          this.alertService.error(err.message);
-        }
+        (err: any) => this.alertService.error(err.message)
       );
   }
 
-  private updateWishList(): void {
-    this.isLoading = true;
-    this.wishListService
-      .update(this.wishList)
-      .first()
-      .finally(() => this.isLoading = false)
-      .subscribe(
-        (data: any) => {},
-        (err: any) => {
-          this.alertService.error(err.message);
+  private setupDragula(): void {
+    // Only drag with specific element:
+    this.dragulaService.setOptions('bag-one', {
+      moves: (el: any, container: any, handle: any) => {
+        return (handle.className === 'gd-drag-handle');
+      }
+    });
+
+    this.dragulaSubscription = this.dragulaService.dropModel
+      .subscribe((value: any) => {
+        const updates: Observable<any>[] = [];
+
+        this.gifts.forEach((gift: Gift, i: number) => {
+          if (gift.orderInWishList === undefined || gift.orderInWishList !== i) {
+            gift.orderInWishList = i;
+            updates.push(this.giftService.update(gift));
+          }
+        });
+
+        // Only update the gifts whose order has changed.
+        if (updates.length > 0) {
+          this.isLoading = true;
+
+          Observable
+            .merge(...updates)
+            .first()
+            .finally(() => this.isLoading = false)
+            .subscribe(
+              () => {},
+              (err: any) => {
+                this.alertService.error(err.message);
+              },
+            );
         }
-      );
+      });
   }
 }

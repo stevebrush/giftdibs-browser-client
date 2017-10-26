@@ -1,10 +1,22 @@
-import { Component, Input, ContentChild, OnChanges } from '@angular/core';
-import { FormControlName, FormArray } from '@angular/forms';
+import {
+  ChangeDetectorRef,
+  ChangeDetectionStrategy,
+  Component,
+  ContentChild,
+  Input,
+  OnChanges
+} from '@angular/core';
+
+import {
+  FormControlName,
+  FormArray
+} from '@angular/forms';
 
 @Component({
   selector: 'app-form-group',
   templateUrl: './form-group.component.html',
-  styleUrls: ['./form-group.component.scss']
+  styleUrls: ['./form-group.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormGroupComponent implements OnChanges {
   @Input()
@@ -16,8 +28,11 @@ export class FormGroupComponent implements OnChanges {
   @ContentChild(FormControlName)
   public controlName: FormControlName;
 
+  constructor(
+    private changeDetector: ChangeDetectorRef) { }
+
   public ngOnChanges(changes: any): void {
-    if (changes.serverErrors.currentValue !== undefined) {
+    if (changes.serverErrors && changes.serverErrors.currentValue !== undefined) {
       setTimeout(() => {
         this.handleErrors(changes.serverErrors.currentValue);
       });
@@ -54,6 +69,8 @@ export class FormGroupComponent implements OnChanges {
         this.controlName.control.setErrors({
           [`schemaError.${i}`]: err.message
         });
+
+        this.changeDetector.detectChanges();
       }
     });
   }

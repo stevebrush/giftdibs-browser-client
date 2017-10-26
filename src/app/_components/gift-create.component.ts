@@ -1,13 +1,26 @@
-import { Component, OnInit, EventEmitter, Input, Output, ViewChild, ElementRef } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+  Component,
+  OnInit,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+  ElementRef
+} from '@angular/core';
 
 import {
-  AlertService,
-  WishListService,
+  FormBuilder,
+  FormGroup
+} from '@angular/forms';
+
+import {
+  GiftService,
   ScraperService
 } from '../_services';
 
-import { Gift } from '../_models';
+import {
+  Gift
+} from '../_models';
 
 @Component({
   selector: 'app-gift-create-form',
@@ -22,7 +35,7 @@ export class GiftCreateComponent implements OnInit {
   public wishListId: string;
 
   @Output()
-  public onSuccess: EventEmitter<void> = new EventEmitter<void>();
+  public onSuccess: EventEmitter<string> = new EventEmitter<string>();
 
   @Output()
   public onError: EventEmitter<any> = new EventEmitter<any>();
@@ -31,21 +44,19 @@ export class GiftCreateComponent implements OnInit {
   public nameInput: ElementRef;
 
   constructor(
-    private alertService: AlertService,
-    private wishListService: WishListService,
+    private giftService: GiftService,
     private scraperService: ScraperService,
-    private formBuilder: FormBuilder) {
-      this.createForm();
-    }
+    private formBuilder: FormBuilder) { }
 
   public ngOnInit(): void {
+    this.createForm();
     this.nameInput.nativeElement.focus();
   }
 
   public onKeyUp(event: KeyboardEvent): void {
     if (event.which === 13 && !this.isLoading) {
-      this.createGift();
       event.preventDefault();
+      this.createGift();
     }
   }
 
@@ -63,15 +74,14 @@ export class GiftCreateComponent implements OnInit {
           (data: any) => {
             const productInfo = data.products[0];
             this.addGift({
+              _wishList: this.wishListId,
               externalUrls: [productInfo],
+              budget: productInfo.price,
               name: productInfo.name,
-              budget: productInfo.price
+              quantity: 1
             });
           },
-          (err: any) => {
-            this.onError.emit(err);
-            this.alertService.error(err.message);
-          }
+          (err: any) => this.onError.emit(err)
         );
     } else {
       this.addGift(formData);
@@ -79,28 +89,29 @@ export class GiftCreateComponent implements OnInit {
   }
 
   private addGift(formData: Gift): void {
-    this.wishListService
-      .addGift(this.wishListId, formData)
+    this.giftService
+      .create(formData)
       .first()
       .finally(() => this.isLoading = false)
       .subscribe(
         (data: any) => {
-          this.giftForm.reset();
-          this.onSuccess.emit();
+          this.giftForm.reset({
+            _wishList: this.wishListId
+          });
+          this.onSuccess.emit(data.giftId);
         },
         (err: any) => {
           this.errors = err.errors;
           this.onError.emit(err);
-          this.alertService.error(err.message);
         }
       );
   }
 
   private createForm(): void {
     this.giftForm = this.formBuilder.group({
+      _wishList: this.wishListId,
       name: '',
-      externalUrl: '',
-      budget: undefined
+      priority: 5
     } as Gift);
   }
 }

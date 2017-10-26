@@ -45,7 +45,6 @@ export class WishListEditComponent implements OnInit {
         },
         (err: any) => {
           this.errors = err.errors;
-          // this.alertService.error(err.message);
         }
       );
   }

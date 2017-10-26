@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+
 import {
   Http,
-  // Headers,
-  Response,
-  // RequestOptions
+  Response
 } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
@@ -33,9 +32,6 @@ export class ScraperService {
     private sessionService: SessionService) { }
 
   public getProductDetailsFromUrl(url: string): Observable<any> {
-    // const token = this.sessionService.token;
-    // const headers = new Headers({ 'Authorization': `JWT ${token}` });
-    // const options = new RequestOptions({ headers });
     const encodedUrl = this.windowService.nativeWindow.encodeURIComponent(url).trim();
 
     return this.http

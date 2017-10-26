@@ -101,7 +101,10 @@ export class SettingsComponent implements OnInit {
     FB.login((response: any) => {
       if (response.status === 'not_authorized') {
         this.isLoading = false;
-        this.alertService.error('Your profile information was not updated because you did not give Facebook permission to do so.');
+        this.alertService.error([
+          'Your profile information was not updated because',
+          'you did not give Facebook permission to do so.'
+        ].join(' '));
         return;
       }
 

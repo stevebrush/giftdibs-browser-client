@@ -1,11 +1,12 @@
+/*tslint:disable:component-selector*/
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-card',
+  selector: 'gd-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss']
 })
-export class CardComponent {
+export class GDCardComponent {
   @Input()
   public cardTitle: string;
 }

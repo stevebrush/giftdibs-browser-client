@@ -1,0 +1,53 @@
+<div>
+  <div>
+    {{ numRemaining }} remaining
+  </div>
+  <div *ngFor="let dib of dibs">
+
+    <div *ngIf="isDibOwnedByCurrentUser(dib)">
+      You
+      <span *ngIf="dib.dateDelivered">
+        delivered ({{ dib.quantity }}) on {{ dib.dateDelivered | date }}
+      </span>
+      <span *ngIf="!dib.dateDelivered">
+        dibbed ({{ dib.quantity }}) on {{ dib.dateUpdated | date }}
+      </span>
+      <app-button
+        (click)="activeDib = dib">
+        Edit
+      </app-button>
+      <app-button
+        [disabled]="isLoading"
+        (click)="removeDib(dib)">
+        Remove
+      </app-button>
+    </div>
+
+    <div *ngIf="!isDibOwnedByCurrentUser(dib)">
+      <span>{{ dib._user.firstName }} {{ dib._user.lastName }}</span>
+      <span *ngIf="dib.dateDelivered">
+        delivered ({{ dib.quantity }}) on {{ dib.dateDelivered | date }}
+      </span>
+      <span *ngIf="!dib.dateDelivered">
+        dibbed ({{ dib.quantity }}) on {{ dib.dateUpdated | date }}
+      </span>
+    </div>
+  </div>
+
+  <div *ngIf="!isDibbedByCurrentUser">
+    <app-button
+      [disabled]="isLoading"
+      (click)="createDib()">
+      Dib this
+    </app-button>
+  </div>
+</div>
+
+<app-modal *ngIf="activeDib">
+  <app-dib-edit
+    [dib]="activeDib"
+    (onSuccess)="onEditSuccess($event)"
+    (onError)="onEditError($event)"
+    (onCancel)="activeDib = undefined">
+  </app-dib-edit>
+</app-modal>

@@ -1,0 +1,13 @@
+@import '../../../styles/_variables';
+
+.gd-card-body {
+  padding: 12px 15px;
+  border-top: 1px solid #ddd;
+}
+
+/deep/
+.gd-card-body {
+  form {
+    margin: 0;
+  }
+}

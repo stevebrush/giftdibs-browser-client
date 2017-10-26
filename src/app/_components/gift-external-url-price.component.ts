@@ -1,7 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { ScraperService, WishListService } from '../_services';
-import { Gift, ExternalUrl } from '../_models';
+import {
+  ScraperService,
+  GiftService
+} from '../_services';
+
+import {
+  Gift,
+  ExternalUrl
+} from '../_models';
 
 @Component({
   selector: 'app-gift-external-url-price',
@@ -20,7 +27,7 @@ export class GiftExternalUrlPriceComponent implements OnInit {
 
   constructor(
     private scraperService: ScraperService,
-    private wishListService: WishListService) { }
+    private giftService: GiftService) { }
 
   public ngOnInit(): void {
     this.isLoading = true;
@@ -51,10 +58,10 @@ export class GiftExternalUrlPriceComponent implements OnInit {
   }
 
   private updateGift(): void {
-    this.wishListService
-      .updateGift(this.wishListId, this.gift)
+    this.giftService
+      .update(this.gift)
       .first()
       .finally(() => this.isLoading = false)
       .subscribe((giftResponse: any) => {});
-  };
+  }
 }

@@ -9,6 +9,7 @@
 .app-form-group-label {
   line-height: $line-height-reduced;
   margin-bottom: .25rem;
+  font-weight: 700;
 }
 
 .has-error {
@@ -23,7 +24,8 @@
   input[type="text"],
   input[type="password"],
   input[type="email"],
-  input[type="number"] {
+  input[type="number"],
+  textarea {
     border-color: red;
   }
 }

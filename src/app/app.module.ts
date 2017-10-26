@@ -19,6 +19,7 @@ import { PageNotFoundComponent } from './404';
 import { VerifyEmailComponent } from './verify-email';
 import { WishListsComponent } from './wish-lists';
 import { WishListComponent } from './wish-list';
+import { DibsComponent } from './dibs';
 
 import {
   AboutComponent,
@@ -27,17 +28,24 @@ import {
   TermsComponent
 } from './support';
 
-import { routing } from './app.routing';
+import {
+  routing
+} from './app.routing';
 
-import { AuthGuard } from './_guards';
+import {
+  AuthGuard
+} from './_guards';
+
 import {
   AlertService,
   AuthenticationService,
-  UserService,
+  DibService,
+  GiftService,
+  ScraperService,
   SessionService,
+  UserService,
   WindowService,
-  WishListService,
-  ScraperService
+  WishListService
 } from './_services';
 
 import {
@@ -54,12 +62,14 @@ import {
   GiftCreateComponent,
   GiftEditComponent,
   GiftExternalUrlPriceComponent,
-  CardComponent,
-  CardTitleComponent,
-  CardBodyComponent
+  DibEditComponent,
+  DibControlsComponent
 } from './_components';
 
-import { GridModule } from './_modules';
+import {
+  GridModule,
+  GDCardModule
+} from './_modules';
 
 @NgModule({
   declarations: [
@@ -94,9 +104,9 @@ import { GridModule } from './_modules';
     GiftCreateComponent,
     GiftEditComponent,
     GiftExternalUrlPriceComponent,
-    CardComponent,
-    CardTitleComponent,
-    CardBodyComponent
+    DibEditComponent,
+    DibsComponent,
+    DibControlsComponent
   ],
   imports: [
     BrowserModule,
@@ -105,17 +115,20 @@ import { GridModule } from './_modules';
     ReactiveFormsModule,
     HttpModule,
     routing,
-    GridModule
+    GridModule,
+    GDCardModule
   ],
   providers: [
     AlertService,
     AuthGuard,
     AuthenticationService,
-    UserService,
+    DibService,
+    GiftService,
+    ScraperService,
     SessionService,
+    UserService,
     WindowService,
-    WishListService,
-    ScraperService
+    WishListService
   ],
   bootstrap: [AppComponent]
 })

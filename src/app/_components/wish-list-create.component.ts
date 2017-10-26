@@ -1,5 +1,17 @@
-import { Component, EventEmitter, Input, Output, ViewChild, ElementRef } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+  ElementRef
+} from '@angular/core';
+
+import {
+  FormBuilder,
+  FormGroup
+} from '@angular/forms';
 
 import { User } from '../_models';
 import { AlertService, WishListService } from '../_services';
@@ -8,9 +20,8 @@ import { AlertService, WishListService } from '../_services';
   selector: 'app-wish-list-create-form',
   templateUrl: './wish-list-create.component.html'
 })
-export class WishListCreateComponent {
+export class WishListCreateComponent implements OnInit {
   public wishListForm: FormGroup;
-  // public isVisible = false;
   public isLoading = false;
   public isActive = false;
   public errors: any;
@@ -29,9 +40,11 @@ export class WishListCreateComponent {
   constructor(
     private alertService: AlertService,
     private wishListService: WishListService,
-    private formBuilder: FormBuilder) {
-      this.createForm();
-    }
+    private formBuilder: FormBuilder) { }
+
+  public ngOnInit(): void {
+    this.createForm();
+  }
 
   public createWishList(): void {
     this.isLoading = true;

@@ -11,18 +11,17 @@
     <input type="text" formControlName="name">
   </app-form-group>
 
-  <app-row>
-    <app-column screenXSmall="6">
-      <app-form-group label="Budget" [serverErrors]="errors">
-        <input type="number" formControlName="budget">
-      </app-form-group>
-    </app-column>
-    <app-column screenXSmall="6">
-      <app-form-group label="Priority" [serverErrors]="errors">
-        <input type="number" formControlName="priority">
-      </app-form-group>
-    </app-column>
-  </app-row>
+  <app-form-group label="Budget" [serverErrors]="errors">
+    <input type="number" formControlName="budget">
+  </app-form-group>
+
+  <app-form-group label="Priority" [serverErrors]="errors">
+    <input type="number" formControlName="priority">
+  </app-form-group>
+
+  <app-form-group label="Quantity" [serverErrors]="errors">
+    <input type="number" formControlName="quantity">
+  </app-form-group>
 
   <div formArrayName="externalUrls">
     <label>Product URLs</label>
@@ -39,7 +38,7 @@
       </app-column>
     </app-row>
     <p>
-      <app-button (click)="addExternalUrlField()">Add another URL</app-button>
+      <app-button (click)="addExternalUrlField()">Add URL</app-button>
     </p>
   </div>
 

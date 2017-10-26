@@ -1,19 +1,20 @@
 <nav class="navbar">
   <div class="navbar-main">
-    <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">GiftDibs</a> /
-    <a [routerLink]="['/users']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Users</a> /
-    <a [routerLink]="['/wish-lists']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Wish lists</a>
+    <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">giftdibs</a> /
+    <a [routerLink]="['/users']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">users</a> /
+    <a [routerLink]="['/wish-lists']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">wish lists</a>
   </div>
   <div class="navbar-user" *ngIf="isLoggedIn()">
-    <a [routerLink]="['/users', currentUser._id]" routerLinkActive="active">{{currentUser.firstName}} {{currentUser.lastName}}</a> /
-    <a [routerLink]="['/settings']" routerLinkActive="active">Settings</a> /
-    <a href="" (click)="logout($event)">Log out</a> /
-    <a routerLink="/support">Support</a>
+    <a [routerLink]="['/users', currentUser._id]" routerLinkActive="active">profile</a> /
+    <a [routerLink]="['/dibs']" routerLinkActive="active">dibs</a> /
+    <a [routerLink]="['/settings']" routerLinkActive="active">settings</a> /
+    <a href="" (click)="logout($event)">log out</a> /
+    <a routerLink="/support" routerLinkActive="active">support</a>
   </div>
   <div class="navbar-user" *ngIf="!isLoggedIn()">
-    <a [routerLink]="['/login']" routerLinkActive="active">Log in</a> /
-    <a [routerLink]="['/register']" routerLinkActive="active">Register</a> /
-    <a routerLink="/support">Support</a>
+    <a [routerLink]="['/login']" routerLinkActive="active">log in</a> /
+    <a [routerLink]="['/register']" routerLinkActive="active">register</a> /
+    <a routerLink="/support" routerLinkActive="active">support</a>
   </div>
 </nav>
 

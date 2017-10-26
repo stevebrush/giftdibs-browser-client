@@ -1,8 +1,16 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy
+} from '@angular/core';
 
-import { Subscription } from 'rxjs/Subscription';
+import {
+  Subscription
+} from 'rxjs/Subscription';
 
-import { AlertService, WindowService } from '../_services';
+import {
+  AlertService
+} from '../_services';
 
 @Component({
   selector: 'app-alert',
@@ -15,14 +23,13 @@ export class AlertComponent implements OnInit, OnDestroy {
   private alertSubscription: Subscription;
 
   constructor(
-    private alertService: AlertService,
-    private windowService: WindowService) {}
+    private alertService: AlertService
+  ) { }
 
   public ngOnInit(): void {
     this.alertSubscription = this.alertService.getMessage()
       .subscribe(message => {
         this.message = message;
-        this.windowService.nativeWindow.scrollTo(0, 0);
       });
   }
 

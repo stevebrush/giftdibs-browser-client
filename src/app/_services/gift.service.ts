@@ -11,26 +11,17 @@ import 'rxjs/add/observable/throw';
 
 import { SessionService } from './session.service';
 import { AlertService } from './alert.service';
-import { Gift, WishList } from '../_models';
+import { Gift } from '../_models';
 
 @Injectable()
-export class WishListService {
-  private resourceUrl = 'http://localhost:8080/v1/wish-lists';
+export class GiftService {
+  private resourceUrl = 'http://localhost:8080/v1/gifts';
 
   constructor(
     private http: Http,
     private router: Router,
     private alertService: AlertService,
     private sessionService: SessionService) { }
-
-  public create(formData: WishList): Observable<any> {
-    const options = this.getRequestOptions();
-
-    return this.http
-      .post(this.resourceUrl, formData, options)
-      .map((response: Response) => this.handleSuccess(response))
-      .catch((err: any) => this.handleError(err));
-  }
 
   public getAll(): Observable<any> {
     const options = this.getRequestOptions();
@@ -41,65 +32,38 @@ export class WishListService {
       .catch((err: any) => this.handleError(err));
   }
 
-  public getAllByUserId(userId: string): Observable<any> {
+  public getAllByWishListId(wishListId: string): Observable<Gift[]> {
     const options = this.getRequestOptions();
 
     return this.http
-      .get(`${this.resourceUrl}?userId=${userId}`, options)
+      .get(`${this.resourceUrl}?wishListId=${wishListId}`, options)
       .map((response: Response) => this.handleSuccess(response))
       .catch((err: any) => this.handleError(err));
   }
 
-  public getById(id: string): Observable<any> {
+  public create(formData: Gift): Observable<any> {
     const options = this.getRequestOptions();
 
     return this.http
-      .get(`${this.resourceUrl}/${id}`, options)
+      .post(`${this.resourceUrl}`, formData, options)
       .map((response: Response) => this.handleSuccess(response))
       .catch((err) => this.handleError(err));
   }
 
-  public remove(id: string): Observable<any> {
+  public remove(giftId: string): Observable<any> {
     const options = this.getRequestOptions();
 
     return this.http
-      .delete(`${this.resourceUrl}/${id}`, options)
+      .delete(`${this.resourceUrl}/${giftId}`, options)
       .map((response: Response) => this.handleSuccess(response))
       .catch((err) => this.handleError(err));
   }
 
-  public update(formData: WishList): Observable<any> {
+  public update(formData: Gift): Observable<any> {
     const options = this.getRequestOptions();
 
     return this.http
       .patch(`${this.resourceUrl}/${formData._id}`, formData, options)
-      .map((response: Response) => this.handleSuccess(response))
-      .catch((err) => this.handleError(err));
-  }
-
-  public addGift(wishListId: string, formData: Gift): Observable<any> {
-    const options = this.getRequestOptions();
-
-    return this.http
-      .post(`${this.resourceUrl}/${wishListId}/gifts/`, formData, options)
-      .map((response: Response) => this.handleSuccess(response))
-      .catch((err) => this.handleError(err));
-  }
-
-  public removeGift(wishListId: string, giftId: string): Observable<any> {
-    const options = this.getRequestOptions();
-
-    return this.http
-      .delete(`${this.resourceUrl}/${wishListId}/gifts/${giftId}`, options)
-      .map((response: Response) => this.handleSuccess(response))
-      .catch((err) => this.handleError(err));
-  }
-
-  public updateGift(wishListId: string, formData: Gift): Observable<any> {
-    const options = this.getRequestOptions();
-
-    return this.http
-      .patch(`${this.resourceUrl}/${wishListId}/gifts/${formData._id}`, formData, options)
       .map((response: Response) => this.handleSuccess(response))
       .catch((err) => this.handleError(err));
   }

@@ -47,7 +47,8 @@ import {
   SessionService,
   UserService,
   WindowService,
-  WishListService
+  WishListService,
+  FriendshipService
 } from './_services';
 
 import {
@@ -125,6 +126,7 @@ import {
     AuthGuard,
     AuthenticationService,
     DibService,
+    FriendshipService,
     GiftService,
     ScraperService,
     SessionService,

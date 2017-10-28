@@ -5,8 +5,14 @@ import 'rxjs/add/operator/first';
 import 'rxjs/add/operator/finally';
 import { Subscription } from 'rxjs/Subscription';
 
-import { User, WishList } from '../_models';
-import { UserService, AlertService, WishListService, SessionService } from '../_services';
+import { User, WishList, Friendship } from '../_models';
+import {
+  AlertService,
+  FriendshipService,
+  SessionService,
+  UserService,
+  WishListService
+} from '../_services';
 
 @Component({
   selector: 'app-user',
@@ -21,15 +27,20 @@ export class UserComponent implements OnInit, OnDestroy {
   public wishLists: WishList[];
   public activeWishList: WishList;
 
+  public friendships: Friendship[];
+  public isFollowing = false;
+
   private routeParamSubscription: Subscription;
 
   constructor(
-    private userService: UserService,
     private alertService: AlertService,
-    private wishListService: WishListService,
-    private sessionService: SessionService,
+    private friendshipService: FriendshipService,
+    private route: ActivatedRoute,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private sessionService: SessionService,
+    private userService: UserService,
+    private wishListService: WishListService
+  ) { }
 
   public ngOnInit(): void {
     this.routeParamSubscription = this.route.params
@@ -42,6 +53,7 @@ export class UserComponent implements OnInit, OnDestroy {
               this.user = user;
               this.isCurrentUser = this.sessionService.isCurrentUser(this.user._id);
               this.getWishLists();
+              this.getFriendships();
             },
             (error: any) => {
               if (error.status === 400) {
@@ -82,10 +94,69 @@ export class UserComponent implements OnInit, OnDestroy {
       );
   }
 
+  public createFriendship(): void {
+    this.isLoading = true;
+    const friendship: Friendship = {
+      _friend: this.user._id
+    };
+    console.log('providing:', friendship);
+    this.friendshipService
+      .create(friendship)
+      .first()
+      .finally(() => this.isLoading = false)
+      .subscribe(
+        (data: any) => this.getFriendships(),
+        (err: any) => this.alertService.error(err.message)
+      );
+  }
+
+  public removeFriendship(): void {
+    this.isLoading = true;
+
+    const currentUserId = this.sessionService.user._id;
+    let friendshipId: string;
+
+    this.friendships.forEach((friendship: Friendship) => {
+      if (friendship._user._id === currentUserId) {
+        friendshipId = friendship._id;
+      }
+    });
+
+    this.friendshipService
+      .remove(friendshipId)
+      .first()
+      .finally(() => this.isLoading = false)
+      .subscribe(
+        (data: any) => this.getFriendships(),
+        (err: any) => this.alertService.error(err.message)
+      );
+  }
+
   private getWishLists(): void {
     this.wishListService
       .getAllByUserId(this.user._id)
       .first()
-      .subscribe((data: any) => this.wishLists = data.wishLists);
+      .subscribe((data: any) => {
+        this.wishLists = data.wishLists;
+      });
+  }
+
+  private getFriendships(): void {
+    this.friendshipService
+      .getAllByUserId(this.user._id)
+      .first()
+      .subscribe((data: any) => {
+        const currentUserId = this.sessionService.user._id;
+        this.friendships = data.friendships;
+        this.isFollowing = false;
+        data.friendships.forEach((friendship: Friendship) => {
+          if (
+            friendship._user._id === currentUserId &&
+            friendship._friend._id === this.user._id
+          ) {
+            this.isFollowing = true;
+          }
+        });
+      });
   }
 }

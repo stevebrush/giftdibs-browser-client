@@ -6,21 +6,52 @@
     {{ user.firstName }} {{ user.lastName }}
   </h1>
 
-  <app-wish-list-create-form *ngIf="isCurrentUser"
-    (onSuccess)="onCreateSuccess()">
-  </app-wish-list-create-form>
+  <app-row>
+    <app-column screenSmall="9">
+      <app-wish-list-create-form
+        *ngIf="isCurrentUser"
+        (onSuccess)="onCreateSuccess()">
+      </app-wish-list-create-form>
 
-  <gd-card *ngFor="let wishList of wishLists">
-    <gd-card-title>
-      <a [routerLink]="['/wish-lists', wishList._id]">{{ wishList.name }}</a>
-    </gd-card-title>
-    <gd-card-body>
-      <app-button-container *ngIf="isCurrentUser">
-        <app-button (click)="activeWishList = wishList" [disabled]="isLoading">Edit</app-button>
-        <app-button (click)="deleteWishList(wishList._id)" [disabled]="isLoading">Delete</app-button>
-      </app-button-container>
-    </gd-card-body>
-  </gd-card>
+      <gd-card *ngFor="let wishList of wishLists">
+        <gd-card-title>
+          <a [routerLink]="['/wish-lists', wishList._id]">{{ wishList.name }}</a>
+        </gd-card-title>
+        <gd-card-body>
+          <app-button-container *ngIf="isCurrentUser">
+            <app-button (click)="activeWishList = wishList" [disabled]="isLoading">Edit</app-button>
+            <app-button (click)="deleteWishList(wishList._id)" [disabled]="isLoading">Delete</app-button>
+          </app-button-container>
+        </gd-card-body>
+      </gd-card>
+    </app-column>
+    <app-column screenSmall="3">
+      <div *ngIf="!isCurrentUser">
+        <app-button *ngIf="!isFollowing" (click)="createFriendship()" [disabled]="isLoading">
+          Follow
+        </app-button>
+        <app-button *ngIf="isFollowing" (click)="removeFriendship()" [disabled]="isLoading">
+          Unfollow
+        </app-button>
+      </div>
+      <h3>
+        Following
+      </h3>
+      <div *ngFor="let friendship of friendships">
+        <div *ngIf="friendship._user._id === user._id">
+          <a [routerLink]="['/users', friendship._friend._id]">{{ friendship._friend.firstName }} {{ friendship._friend.lastName }}</a>
+        </div>
+      </div>
+      <h3>
+        Followers
+      </h3>
+      <div *ngFor="let friendship of friendships">
+        <div *ngIf="friendship._friend._id === user._id">
+          <a [routerLink]="['/users', friendship._user._id]">{{ friendship._user.firstName }} {{ friendship._user.lastName }}</a>
+        </div>
+      </div>
+    </app-column>
+  </app-row>
 
   <app-modal *ngIf="activeWishList">
     <app-wish-list-edit-form

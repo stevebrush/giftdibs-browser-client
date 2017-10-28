@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -20,6 +20,8 @@ import { VerifyEmailComponent } from './verify-email';
 import { WishListsComponent } from './wish-lists';
 import { WishListComponent } from './wish-list';
 import { DibsComponent } from './dibs';
+
+import { GDAuthInterceptor } from './_services/auth.intercepter';
 
 import {
   AboutComponent,
@@ -113,7 +115,7 @@ import {
     DragulaModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
+    HttpClientModule,
     routing,
     GridModule,
     GDCardModule
@@ -128,7 +130,12 @@ import {
     SessionService,
     UserService,
     WindowService,
-    WishListService
+    WishListService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: GDAuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

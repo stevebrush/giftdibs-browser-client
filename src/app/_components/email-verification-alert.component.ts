@@ -44,7 +44,7 @@ export class EmailVerificationAlertComponent implements OnDestroy {
           this.alertService.success(data.message);
         },
         (err: any) => {
-          this.alertService.error(err.message);
+          this.alertService.error(err.error.message);
         }
       );
   }

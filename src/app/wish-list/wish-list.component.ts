@@ -82,7 +82,7 @@ export class WishListComponent implements OnInit, OnDestroy {
       .finally(() => this.isLoading = false)
       .subscribe(
         (data: any) => this.fetchGifts(),
-        (err: any) => this.alertService.error(err.message)
+        (err: any) => this.alertService.error(err.error.message)
       );
   }
 
@@ -103,7 +103,7 @@ export class WishListComponent implements OnInit, OnDestroy {
           console.log('toggleReceived', data);
         },
         (err: any) => {
-          this.alertService.error(err.message);
+          this.alertService.error(err.error.message);
         }
       );
   }
@@ -151,7 +151,7 @@ export class WishListComponent implements OnInit, OnDestroy {
       .finally(() => this.isLoading = false)
       .subscribe(
         (data: any) => this.gifts = data.gifts,
-        (err: any) => this.alertService.error(err.message)
+        (err: any) => this.alertService.error(err.error.message)
       );
   }
 
@@ -166,7 +166,7 @@ export class WishListComponent implements OnInit, OnDestroy {
           this.wishList = data.wishList;
           this.isCurrentUser = this.sessionService.isCurrentUser(this.wishList._user._id);
         },
-        (err: any) => this.alertService.error(err.message)
+        (err: any) => this.alertService.error(err.error.message)
       );
   }
 
@@ -200,7 +200,7 @@ export class WishListComponent implements OnInit, OnDestroy {
             .subscribe(
               () => {},
               (err: any) => {
-                this.alertService.error(err.message);
+                this.alertService.error(err.error.message);
               },
             );
         }

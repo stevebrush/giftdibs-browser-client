@@ -25,9 +25,4 @@ export class FriendshipService {
     return this.http.delete
       (`${this.resourceUrl}/${friendshipId}`);
   }
-
-  public update(formData: Friendship): Observable<any> {
-    return this.http.patch
-      (`${this.resourceUrl}/${formData._id}`, formData);
-  }
 }

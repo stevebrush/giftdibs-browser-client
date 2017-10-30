@@ -89,7 +89,7 @@ export class UserComponent implements OnInit, OnDestroy {
           this.getWishLists();
         },
         (err: any) => {
-          this.alertService.error(err.message);
+          this.alertService.error(err.error.message);
         }
       );
   }
@@ -99,36 +99,34 @@ export class UserComponent implements OnInit, OnDestroy {
     const friendship: Friendship = {
       _friend: this.user._id
     };
-    console.log('providing:', friendship);
     this.friendshipService
       .create(friendship)
       .first()
       .finally(() => this.isLoading = false)
       .subscribe(
         (data: any) => this.getFriendships(),
-        (err: any) => this.alertService.error(err.message)
+        (err: any) => {
+          this.alertService.error(err.error.message);
+        }
       );
   }
 
   public removeFriendship(): void {
+    const currentUserFriendship = this.getCurrentUserFriendship(this.friendships);
+
+    if (!currentUserFriendship) {
+      return;
+    }
+
     this.isLoading = true;
 
-    const currentUserId = this.sessionService.user._id;
-    let friendshipId: string;
-
-    this.friendships.forEach((friendship: Friendship) => {
-      if (friendship._user._id === currentUserId) {
-        friendshipId = friendship._id;
-      }
-    });
-
     this.friendshipService
-      .remove(friendshipId)
+      .remove(currentUserFriendship._id)
       .first()
       .finally(() => this.isLoading = false)
       .subscribe(
         (data: any) => this.getFriendships(),
-        (err: any) => this.alertService.error(err.message)
+        (err: any) => this.alertService.error(err.error.message)
       );
   }
 
@@ -146,17 +144,24 @@ export class UserComponent implements OnInit, OnDestroy {
       .getAllByUserId(this.user._id)
       .first()
       .subscribe((data: any) => {
-        const currentUserId = this.sessionService.user._id;
         this.friendships = data.friendships;
         this.isFollowing = false;
-        data.friendships.forEach((friendship: Friendship) => {
-          if (
-            friendship._user._id === currentUserId &&
-            friendship._friend._id === this.user._id
-          ) {
-            this.isFollowing = true;
-          }
-        });
+        if (this.getCurrentUserFriendship(data.friendships)) {
+          this.isFollowing = true;
+        }
       });
+  }
+
+  private getCurrentUserFriendship(friendships: Friendship[]): Friendship {
+    const found: Friendship = friendships.filter((friendship: Friendship) => {
+      if (
+        friendship._user._id === this.sessionService.user._id &&
+        friendship._friend._id === this.user._id
+      ) {
+        return friendship;
+      }
+    })[0];
+
+    return found;
   }
 }

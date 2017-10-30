@@ -65,7 +65,7 @@ export class SettingsComponent implements OnInit {
               this.alertService.success('Facebook profile successfully linked.');
             },
             (err: any) => {
-              this.alertService.error(err.message);
+              this.alertService.error(err.error.message);
             }
           );
       } else {
@@ -124,7 +124,7 @@ export class SettingsComponent implements OnInit {
               this.alertService.success(data.message);
             },
             (err: any) => {
-              this.alertService.error(err.message);
+              this.alertService.error(err.error.message);
             }
           );
       } else {

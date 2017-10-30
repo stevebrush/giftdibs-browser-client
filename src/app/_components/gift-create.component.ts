@@ -101,7 +101,7 @@ export class GiftCreateComponent implements OnInit {
           this.onSuccess.emit(data.giftId);
         },
         (err: any) => {
-          this.errors = err.errors;
+          this.errors = err.error.errors;
           this.onError.emit(err);
         }
       );

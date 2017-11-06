@@ -33,14 +33,14 @@ export class RegisterComponent {
           this.alertService.success(result.message, true);
           this.router.navigate(['/login']);
         },
-        (error: any) => {
-          if (error.code === 108) {
+        (err: any) => {
+          if (err.error.code === 108) {
             this.router.navigate(['/404']);
             return;
           }
 
-          this.errors = error.errors;
-          this.alertService.error(error.message);
+          this.errors = err.error.errors;
+          this.alertService.error(err.error.message);
         }
       );
   }

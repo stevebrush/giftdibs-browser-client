@@ -55,8 +55,8 @@ export class UserComponent implements OnInit, OnDestroy {
               this.getWishLists();
               this.getFriendships();
             },
-            (error: any) => {
-              if (error.status === 400) {
+            (err: any) => {
+              if (err.error.status === 400) {
                 this.alertService.error('User not found.', true);
                 this.router.navigate(['/']);
               }

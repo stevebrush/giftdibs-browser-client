@@ -40,9 +40,9 @@ export class SettingsComponent implements OnInit {
           this.updateForm();
           this.alertService.success(result.message);
         },
-        (error: any) => {
-          this.errors = error.errors;
-          this.alertService.error(error.message);
+        (err: any) => {
+          this.errors = err.error.errors;
+          this.alertService.error(err.error.message);
         }
       );
   }
@@ -89,8 +89,8 @@ export class SettingsComponent implements OnInit {
           this.updateForm();
           this.alertService.success('Facebook profile successfully unlinked.');
         },
-        (error: any) => {
-          this.alertService.error(error.message);
+        (err: any) => {
+          this.alertService.error(err.error.message);
         }
       );
   }

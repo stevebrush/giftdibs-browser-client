@@ -99,9 +99,7 @@ export class WishListComponent implements OnInit, OnDestroy {
       .update(gift)
       .first()
       .subscribe(
-        (data: any) => {
-          console.log('toggleReceived', data);
-        },
+        (data: any) => { },
         (err: any) => {
           this.alertService.error(err.error.message);
         }

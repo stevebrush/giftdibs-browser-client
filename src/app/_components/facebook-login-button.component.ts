@@ -43,19 +43,19 @@ export class FacebookLoginButtonComponent {
         .first()
         .finally(() => this.isLoading = false)
         .subscribe(
-          (data) => {
+          (data: any) => {
             this.alertService.success(data.message, true);
             this.router.navigate([this.redirectUrl]);
           },
-          (error: any) => {
+          (err: any) => {
             // Facebook registration request.
-            if (error.code === 111) {
-              const data = JSON.parse(error.message);
+            if (err.error.code === 111) {
+              const data = JSON.parse(err.error.message);
               this.router.navigate(['/register-facebook', data.accessToken]);
               return;
             }
 
-            this.alertService.error(error.message);
+            this.alertService.error(err.error.message);
           }
         );
     }, { scope: 'email' });

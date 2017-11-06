@@ -60,9 +60,9 @@ export class WishListCreateComponent implements OnInit {
           this.alertService.success(data.message);
         },
         (err: any) => {
-          this.errors = err.errors;
+          this.errors = err.error.errors;
           this.onError.emit(err);
-          this.alertService.error(err.message);
+          this.alertService.error(err.error.message);
         }
       );
   }

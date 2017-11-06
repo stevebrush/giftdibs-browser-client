@@ -71,7 +71,7 @@ export class GiftEditComponent implements OnInit {
           gift: formData,
           message: data.message
         }),
-        (err: any) => this.errors = err.errors
+        (err: any) => this.errors = err.error.errors
       );
   }
 

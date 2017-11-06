@@ -72,9 +72,9 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
             this.router.navigate(['/login']);
           }
         },
-        (error: any) => {
-          this.errors = error.errors;
-          this.alertService.error(error.message);
+        (err: any) => {
+          this.errors = err.error.errors;
+          this.alertService.error(err.error.message);
         }
       );
   }

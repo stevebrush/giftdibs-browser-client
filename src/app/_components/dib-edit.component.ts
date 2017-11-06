@@ -71,7 +71,7 @@ export class DibEditComponent implements OnInit {
           this.onSuccess.emit(data);
         },
         (err: any) => {
-          this.errors = err.errors;
+          this.errors = err.error.errors;
           this.onError.emit(err);
         }
       );

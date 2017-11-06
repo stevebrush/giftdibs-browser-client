@@ -33,7 +33,7 @@ export class DibsComponent implements OnInit {
       .first()
       .subscribe(
         (data: any) => this.recipients = data.recipients,
-        (err: any) => this.alertService.error(err.message)
+        (err: any) => this.alertService.error(err.error.message)
       );
   }
 }

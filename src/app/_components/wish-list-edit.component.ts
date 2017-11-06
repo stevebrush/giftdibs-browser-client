@@ -44,7 +44,7 @@ export class WishListEditComponent implements OnInit {
           this.onSuccess.emit();
         },
         (err: any) => {
-          this.errors = err.errors;
+          this.errors = err.error.errors;
         }
       );
   }

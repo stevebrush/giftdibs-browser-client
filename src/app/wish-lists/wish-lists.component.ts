@@ -25,7 +25,7 @@ export class WishListsComponent implements OnInit {
           this.wishLists = data.wishLists;
         },
         (err: any) => {
-          this.alertService.error(err.message);
+          this.alertService.error(err.error.message);
         }
       );
   }

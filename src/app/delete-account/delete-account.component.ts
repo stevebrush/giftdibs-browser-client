@@ -44,7 +44,7 @@ export class DeleteAccountComponent {
         (err: any) => {
           let message;
 
-          switch (err.code) {
+          switch (err.error.code) {
             case 100:
             message = 'Please provide a password.';
             break;
@@ -52,7 +52,7 @@ export class DeleteAccountComponent {
             message = 'The password you entered is invalid.';
             break;
             default:
-            message = err.message;
+            message = err.error.message;
             break;
           }
 

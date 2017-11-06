@@ -32,7 +32,7 @@ export class VerifyEmailComponent implements OnDestroy {
             this.router.navigate(['/']);
           },
           (err: any) => {
-            this.alertService.error(err.message, true);
+            this.alertService.error(err.error.message, true);
             this.router.navigate(['/']);
           }
         );

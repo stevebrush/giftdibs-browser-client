@@ -14,7 +14,8 @@ export class WishListsComponent implements OnInit {
 
   constructor(
     private alertService: AlertService,
-    private wishListService: WishListService) { }
+    private wishListService: WishListService
+  ) { }
 
   public ngOnInit(): void {
     this.wishListService

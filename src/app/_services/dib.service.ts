@@ -23,7 +23,7 @@ export class DibService {
 
   public getAllRecipients(): Observable<any> {
     return this.http.get
-      (`${this.resourceUrl}-recipients`);
+      (`${this.resourceUrl}/recipients`);
   }
 
   public getById(id: string): Observable<any> {

@@ -53,9 +53,10 @@ export class WishListComponent implements OnInit, OnDestroy {
     private giftService: GiftService,
     private route: ActivatedRoute,
     private sessionService: SessionService,
-    private wishListService: WishListService) {
-      this.setupDragula();
-    }
+    private wishListService: WishListService
+  ) {
+    this.setupDragula();
+  }
 
   public ngOnInit(): void {
     this.isLoading = true;
@@ -64,8 +65,6 @@ export class WishListComponent implements OnInit, OnDestroy {
       .subscribe((params: any) => {
         this.wishListId = params.wishListId;
         this.fetchWishList();
-        this.fetchGifts();
-        this.fetchDibs();
       });
   }
 
@@ -161,10 +160,15 @@ export class WishListComponent implements OnInit, OnDestroy {
       .finally(() => this.isLoading = false)
       .subscribe(
         (data: any) => {
+          this.fetchGifts();
+          this.fetchDibs();
           this.wishList = data.wishList;
           this.isCurrentUser = this.sessionService.isCurrentUser(this.wishList._user._id);
         },
-        (err: any) => this.alertService.error(err.error.message)
+        (err: any) => {
+          // If 403, show cannot-view message.
+          this.alertService.error(err.error.message);
+        }
       );
   }
 

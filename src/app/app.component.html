@@ -2,19 +2,18 @@
   <div class="navbar-main">
     <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">giftdibs</a> /
     <a [routerLink]="['/users']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">users</a> /
-    <a [routerLink]="['/wish-lists']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">wish lists</a>
+    <a [routerLink]="['/wish-lists']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">wish lists</a> /
+    <a routerLink="/support" routerLinkActive="active">support</a>
   </div>
   <div class="navbar-user" *ngIf="isLoggedIn()">
     <a [routerLink]="['/users', currentUser._id]" routerLinkActive="active">profile</a> /
     <a [routerLink]="['/dibs']" routerLinkActive="active">dibs</a> /
     <a [routerLink]="['/settings']" routerLinkActive="active">settings</a> /
-    <a href="" (click)="logout($event)">log out</a> /
-    <a routerLink="/support" routerLinkActive="active">support</a>
+    <a href="" (click)="logout($event)">log out</a>
   </div>
   <div class="navbar-user" *ngIf="!isLoggedIn()">
     <a [routerLink]="['/login']" routerLinkActive="active">log in</a> /
-    <a [routerLink]="['/register']" routerLinkActive="active">register</a> /
-    <a routerLink="/support" routerLinkActive="active">support</a>
+    <a [routerLink]="['/register']" routerLinkActive="active">register</a>
   </div>
 </nav>
 

@@ -16,3 +16,4 @@ before_install:
 
 script:
   - ng lint
+  - ng build --prod

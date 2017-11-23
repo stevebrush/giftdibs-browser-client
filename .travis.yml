@@ -12,7 +12,7 @@ git:
   depth: 5
 
 before_install:
-  - npm install -g @angular/cli@latest
+  - npm install -g @angular/cli
 
 script:
   - ng lint

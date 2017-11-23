@@ -17,7 +17,7 @@ import {
 
 import {
   Observable
-} from 'rxjs/observable';
+} from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 
 import {

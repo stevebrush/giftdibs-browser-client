@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 
-import { Subscription } from 'rxjs/subscription';
+import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/first';
 
 import { AlertService, AuthenticationService, SessionService } from '../_services';

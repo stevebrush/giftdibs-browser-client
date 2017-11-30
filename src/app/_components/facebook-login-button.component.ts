@@ -3,10 +3,12 @@ import { Router } from '@angular/router';
 
 import 'rxjs/add/operator/first';
 
-import { AlertService, AuthenticationService, WindowService } from '../_services';
+import { GDAlertService } from '../_modules';
+
+import { AuthenticationService, WindowService } from '../_services';
 
 @Component({
-  selector: 'app-facebook-login-button',
+  selector: 'gd-facebook-login-button',
   templateUrl: './facebook-login-button.component.html',
   styleUrls: ['./facebook-login-button.component.scss']
 })
@@ -16,13 +18,15 @@ export class FacebookLoginButtonComponent {
 
   @Input()
   public redirectUrl = '/';
+
   public isLoading = false;
 
   constructor(
-    private alertService: AlertService,
+    private alertService: GDAlertService,
     private authenticationService: AuthenticationService,
     private windowService: WindowService,
-    private router: Router) {}
+    private router: Router
+  ) { }
 
   public login(): void {
     const FB = this.windowService.nativeWindow.FB;

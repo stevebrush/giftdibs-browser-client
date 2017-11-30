@@ -9,26 +9,26 @@ import {
 } from 'rxjs/Subscription';
 
 import {
-  AlertService
-} from '../_services';
+  GDAlertService
+} from './alert.service';
 
 @Component({
-  selector: 'app-alert',
+  selector: 'gd-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss']
 })
-export class AlertComponent implements OnInit, OnDestroy {
+export class GDAlertComponent implements OnInit, OnDestroy {
   public message: string;
 
   private alertSubscription: Subscription;
 
   constructor(
-    private alertService: AlertService
+    private alertService: GDAlertService
   ) { }
 
   public ngOnInit(): void {
     this.alertSubscription = this.alertService.getMessage()
-      .subscribe(message => {
+      .subscribe((message: any) => {
         this.message = message;
       });
   }

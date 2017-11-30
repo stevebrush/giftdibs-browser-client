@@ -2,29 +2,58 @@
   Log in
 </h1>
 
+<form
+  [formGroup]="loginForm"
+  (ngSubmit)="login()"
+  novalidate>
+
+  <gd-form-field
+    label="Email address"
+    [serverErrors]="errors">
+    <input
+      gdInput
+      type="email"
+      formControlName="emailAddress">
+  </gd-form-field>
+
+  <gd-form-field
+    label="Password"
+    [serverErrors]="errors">
+    <input
+      gdInput
+      type="password"
+      formControlName="password">
+  </gd-form-field>
+
+  <button
+    gdButton
+    type="submit"
+    [disabled]="isLoading">
+    Log in
+  </button>
+</form>
+
+<h3>
+  OR
+</h3>
+
 <p>
-  <app-facebook-login-button
+  <gd-facebook-login-button
     [redirectUrl]="redirectUrl"
     [disabled]="isLoading">
-  </app-facebook-login-button>
+  </gd-facebook-login-button>
 </p>
 
-<form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
-  <app-form-group label="Email address" [serverErrors]="errors">
-    <input type="email" formControlName="emailAddress">
-  </app-form-group>
+<p>
+  <a
+    [routerLink]="['/forgotten']">
+    Forget your password?
+  </a>
+</p>
 
-  <app-form-group label="New password" [serverErrors]="errors">
-    <input type="password" formControlName="password">
-  </app-form-group>
-
-  <app-button type="submit" styleType="primary" [disabled]="isLoading">Log in</app-button>
-
-  <p>
-    <a [routerLink]="['/forgotten']">Forget your password?</a>
-  </p>
-
-  <p>
-    <a [routerLink]="['/register']">I need an account.</a>
-  </p>
-</form>
+<p>
+  <a
+    [routerLink]="['/register']">
+    I need an account.
+  </a>
+</p>

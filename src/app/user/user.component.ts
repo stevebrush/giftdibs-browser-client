@@ -5,9 +5,17 @@ import 'rxjs/add/operator/first';
 import 'rxjs/add/operator/finally';
 import { Subscription } from 'rxjs/Subscription';
 
-import { User, WishList, Friendship } from '../_models';
 import {
-  AlertService,
+  GDAlertService
+} from '../_modules';
+
+import {
+  User,
+  WishList,
+  Friendship
+} from '../_models';
+
+import {
   FriendshipService,
   SessionService,
   UserService,
@@ -33,7 +41,7 @@ export class UserComponent implements OnInit, OnDestroy {
   private routeParamSubscription: Subscription;
 
   constructor(
-    private alertService: AlertService,
+    private alertService: GDAlertService,
     private friendshipService: FriendshipService,
     private route: ActivatedRoute,
     private router: Router,
@@ -68,8 +76,8 @@ export class UserComponent implements OnInit, OnDestroy {
     this.routeParamSubscription.unsubscribe();
   }
 
-  public onCreateSuccess(): void {
-    this.getWishLists();
+  public onCreateSuccess(data: any): void {
+    this.router.navigate(['/wish-lists', data.wishListId]);
   }
 
   public onEditSuccess(): void {

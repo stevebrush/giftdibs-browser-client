@@ -7,41 +7,47 @@
 </div>
 
 <form *ngIf="!isLoading" [formGroup]="giftForm" (ngSubmit)="updateGift()" novalidate>
-  <app-form-group label="Name" [serverErrors]="errors">
+  <gd-form-field label="Name" [serverErrors]="errors">
     <input type="text" formControlName="name">
-  </app-form-group>
+  </gd-form-field>
 
-  <app-form-group label="Budget" [serverErrors]="errors">
+  <gd-form-field label="Budget" [serverErrors]="errors">
     <input type="number" formControlName="budget">
-  </app-form-group>
+  </gd-form-field>
 
-  <app-form-group label="Priority" [serverErrors]="errors">
+  <gd-form-field label="Priority" [serverErrors]="errors">
     <input type="number" formControlName="priority">
-  </app-form-group>
+  </gd-form-field>
 
-  <app-form-group label="Quantity" [serverErrors]="errors">
+  <gd-form-field label="Quantity" [serverErrors]="errors">
     <input type="number" formControlName="quantity">
-  </app-form-group>
+  </gd-form-field>
 
   <div formArrayName="externalUrls">
     <label>Product URLs</label>
-    <app-row
+    <gd-row
       *ngFor="let externalUrl of giftForm.controls.externalUrls.controls; let i = index;"
       [formGroup]="externalUrl">
-      <app-column screenXSmall="10">
-        <app-form-group [serverErrors]="errors">
-          <input type="text" formControlName="url">
-        </app-form-group>
-      </app-column>
-      <app-column screenXSmall="2">
-        <app-button fullWidth="true" (click)="removeUrl(i)" [disabled]="isLoading">Remove</app-button>
-      </app-column>
-    </app-row>
+      <gd-column screenXSmall="10">
+        <gd-form-field [serverErrors]="errors">
+          <input gdInput type="text" formControlName="url">
+        </gd-form-field>
+      </gd-column>
+      <gd-column screenXSmall="2">
+        <button
+          gdButton
+          type="button"
+          (click)="removeUrl(i)"
+          [disabled]="isLoading">
+          Remove
+        </button>
+      </gd-column>
+    </gd-row>
     <p>
-      <app-button (click)="addExternalUrlField()">Add URL</app-button>
+      <button (click)="addExternalUrlField()">Add URL</button>
     </p>
   </div>
 
-  <app-button styleType="primary" type="submit" [disabled]="isLoading">Save changes</app-button>
-  <app-button (click)="onCancel.emit($event)" [disabled]="isLoading">Cancel</app-button>
+  <button gdButton type="submit" [disabled]="isLoading">Save changes</button>
+  <button gdButton type="button" (click)="onCancel.emit($event)" [disabled]="isLoading">Cancel</button>
 </form>

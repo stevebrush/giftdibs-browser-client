@@ -24,7 +24,8 @@ import {
 
 @Component({
   selector: 'app-gift-create-form',
-  templateUrl: './gift-create.component.html'
+  templateUrl: './gift-create.component.html',
+  styleUrls: ['./gift-create.component.scss']
 })
 export class GiftCreateComponent implements OnInit {
   public giftForm: FormGroup;

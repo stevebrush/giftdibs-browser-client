@@ -1,10 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+
+import {
+  Router,
+  ActivatedRoute
+} from '@angular/router';
 
 import 'rxjs/add/operator/first';
 
-import { AlertService, AuthenticationService } from '../_services';
+import {
+  GDAlertService
+} from '../_modules';
+
+import {
+  AuthenticationService
+} from '../_services';
 
 @Component({
   selector: 'app-login',
@@ -20,10 +39,11 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
-    private alertService: AlertService,
-    private authenticationService: AuthenticationService) {
-      this.createForm();
-    }
+    private alertService: GDAlertService,
+    private authenticationService: AuthenticationService
+  ) {
+    this.createForm();
+  }
 
   public ngOnInit() {
     this.authenticationService.logout();
@@ -51,8 +71,12 @@ export class LoginComponent implements OnInit {
 
   private createForm(): void {
     this.loginForm = this.formBuilder.group({
-      emailAddress: '',
-      password: ''
+      emailAddress: new FormControl(null, [
+        Validators.required
+      ]),
+      password: new FormControl(null, [
+        Validators.required
+      ])
     });
   }
 }

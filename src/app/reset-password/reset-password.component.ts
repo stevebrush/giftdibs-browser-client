@@ -5,7 +5,11 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import 'rxjs/add/operator/first';
 import { Subscription } from 'rxjs/Subscription';
 
-import { AlertService, AuthenticationService, SessionService } from '../_services';
+import {
+  GDAlertService
+} from '../_modules';
+
+import { AuthenticationService, SessionService } from '../_services';
 
 @Component({
   selector: 'app-reset-password',
@@ -20,14 +24,15 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
   private paramSubscription: Subscription;
 
   constructor(
-    private alertService: AlertService,
+    private alertService: GDAlertService,
     private formBuilder: FormBuilder,
     private sessionService: SessionService,
     private authenticationService: AuthenticationService,
     private router: Router,
-    private route: ActivatedRoute) {
-      this.createForm();
-    }
+    private route: ActivatedRoute
+  ) {
+    this.createForm();
+  }
 
   public ngOnInit(): void {
     this.paramSubscription = this.route.params.subscribe((params: any) => {

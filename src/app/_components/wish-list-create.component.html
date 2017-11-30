@@ -1,14 +1,42 @@
-<p *ngIf="!isActive">
-  <app-button (click)="toggleIsActive()">Create a wish list...</app-button>
-</p>
+<div class="gd-wish-list-create">
+  <p *ngIf="!isActive">
+    <button
+      gdButton
+      type="button"
+      (click)="toggleIsActive()">
+      Create a wish list
+    </button>
+  </p>
 
-<div *ngIf="isActive">
-  <form [formGroup]="wishListForm" (ngSubmit)="createWishList()" novalidate>
-    <app-form-group label="New wish list" [serverErrors]="errors">
-      <input type="text" formControlName="name" #nameInput>
-    </app-form-group>
+  <div *ngIf="isActive">
+    <form
+      [formGroup]="wishListForm"
+      (ngSubmit)="createWishList()"
+      novalidate>
+      <gd-form-field
+        label="New wish list"
+        [serverErrors]="errors">
+        <input
+          gdInput
+          type="text"
+          formControlName="name"
+          #nameInput>
+      </gd-form-field>
 
-    <app-button type="submit" [disabled]="isLoading">Create</app-button>
-    <app-button (click)="toggleIsActive()" [disabled]="isLoading">Cancel</app-button>
-  </form>
+      <button
+        gdButton
+        type="submit"
+        [disabled]="isLoading">
+        Create
+      </button>
+
+      <button
+        gdButton
+        type="button"
+        (click)="toggleIsActive()"
+        [disabled]="isLoading">
+        Cancel
+      </button>
+    </form>
+  </div>
 </div>

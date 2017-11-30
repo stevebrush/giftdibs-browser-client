@@ -1,0 +1,46 @@
+@import '../../../styles/_variables';
+@import '../../../styles/mixins/_outline';
+
+.gd-navbar {
+  padding: 8px 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+  display: flex;
+}
+
+.gd-navbar-nav {
+  flex: 1 0 auto;
+  display: flex;
+
+  > li {
+    margin: 0 4px;
+
+    > a {
+      color: $gd-color-text;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 10px 15px;
+      display: block;
+      border-radius: 50px;
+
+      &:focus,
+      &:hover,
+      &.active {
+        background-color: $gd-background-color-neutral-light;
+        color: #000;
+      }
+
+      &:focus {
+        @include outline;
+      }
+
+      &.active {
+        cursor: default;
+      }
+    }
+  }
+}
+
+.gd-navbar-user {
+  justify-content: flex-end;
+}

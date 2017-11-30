@@ -1,31 +1,42 @@
+@import './mixins/_outline';
+
 * {
   box-sizing: border-box;
 }
 
+a {
+  color: $gd-color-anchor;
+
+  &:focus {
+    @include outline();
+  }
+}
+
 body {
-  font-family: $font-family;
-  font-size: $font-size;
-  font-weight: $font-weight;
-  line-height: $line-height;
-  color: $font-color;
-  background-color: #f2f2f2;
+  font-family: $gd-font-family;
+  font-size: $gd-font-size;
+  font-weight: $gd-font-weight;
+  line-height: $gd-line-height;
+  color: $gd-color-text;
+  background-color: #fff;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  margin: .5rem 0;
+  margin: 1em 0;
   font-weight: 700;
+  line-height: $gd-line-height-reduced;
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 48px;
 }
 
 h2 {
-  font-size: 1.5rem;
+  font-size: 36px;
 }
 
 p {
-  margin: 1rem 0;
+  margin: 1em 0;
 }
 
 strong {

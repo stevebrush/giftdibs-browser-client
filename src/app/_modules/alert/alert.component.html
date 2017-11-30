@@ -1,0 +1,9 @@
+<p
+  class="gd-alert"
+  *ngIf="message"
+  [ngClass]="{
+    'gd-alert-error': message.type === 'error',
+    'gd-alert-success': message.type === 'success'
+  }">
+  {{ message.text }}
+</p>

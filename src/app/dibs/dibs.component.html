@@ -8,13 +8,13 @@
       {{ recipient.firstName }} {{ recipient.lastName }}
     </gd-card-title>
     <gd-card-body *ngFor="let gift of recipient.gifts">
-      <app-row>
-        <app-column screenXSmall="6">
+      <gd-row>
+        <gd-column screenXSmall="6">
           <strong>{{ gift.name }}</strong><br>
           <a routerLink="/wish-lists/{{ gift._wishList._id }}">{{ gift._wishList.name }}</a><br>
           ${{ gift.budget }}
-        </app-column>
-        <app-column screenXSmall="6">
+        </gd-column>
+        <gd-column screenXSmall="6">
           <app-dib-edit
             [dib]="gift._dib"
             (onSuccess)="onDibEdit()">
@@ -22,18 +22,18 @@
           <div *ngIf="gift._dib.dateDelivered">
             Date delivered: {{ gift._dib.dateDelivered | date }}
           </div>
-        </app-column>
-      </app-row>
+        </gd-column>
+      </gd-row>
     </gd-card-body>
     <gd-card-footer>
-      <app-row>
-        <app-column screenXSmall="9">
+      <gd-row>
+        <gd-column screenXSmall="9">
           Totals for {{ recipient.firstName }}:
-        </app-column>
-        <app-column screenXSmall="3">
+        </gd-column>
+        <gd-column screenXSmall="3">
           ${{ recipient.budget }}
-        </app-column>
-      </app-row>
+        </gd-column>
+      </gd-row>
     </gd-card-footer>
   </gd-card>
 </div>

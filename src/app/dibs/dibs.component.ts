@@ -4,7 +4,10 @@ import {
 } from '@angular/core';
 
 import {
-  AlertService,
+  GDAlertService
+} from '../_modules';
+
+import {
   DibService
 } from '../_services';
 
@@ -16,7 +19,7 @@ export class DibsComponent implements OnInit {
   public recipients: any;
 
   constructor(
-    private alertService: AlertService,
+    private alertService: GDAlertService,
     private dibService: DibService) { }
 
   public ngOnInit(): void {

@@ -3,7 +3,11 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 
 import 'rxjs/add/operator/first';
 
-import { UserService, AlertService, SessionService, WindowService } from '../_services';
+import {
+  GDAlertService
+} from '../_modules';
+
+import { UserService, SessionService, WindowService } from '../_services';
 import { User } from '../_models';
 
 @Component({
@@ -18,12 +22,13 @@ export class SettingsComponent implements OnInit {
 
   public constructor(
     private formBuilder: FormBuilder,
-    private alertService: AlertService,
+    private alertService: GDAlertService,
     private userService: UserService,
     private windowService: WindowService,
-    private sessionService: SessionService) {
-      this.createForm();
-    }
+    private sessionService: SessionService
+  ) {
+    this.createForm();
+  }
 
   public ngOnInit(): void {
     this.updateForm();

@@ -4,7 +4,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import 'rxjs/add/operator/first';
 import { Subscription } from 'rxjs/Subscription';
 
-import { AlertService, AuthenticationService, SessionService } from '../_services';
+import {
+  GDAlertService
+} from '../_modules';
+
+import { AuthenticationService, SessionService } from '../_services';
 
 @Component({
   selector: 'app-verify-email',
@@ -16,9 +20,10 @@ export class VerifyEmailComponent implements OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private alertService: AlertService,
+    private alertService: GDAlertService,
     private sessionService: SessionService,
-    private authenticationService: AuthenticationService) {
+    private authenticationService: AuthenticationService
+  ) {
     this.paramSubscription = this.route.params.subscribe((params: any) => {
       this.authenticationService
         .verifyEmailAddress(params.emailAddressVerificationToken)

@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-row',
+  selector: 'gd-row',
   templateUrl: './row.component.html',
   styleUrls: ['./row.component.scss']
 })
-export class RowComponent {
+export class GDRowComponent {
   @Input()
   public reverseColumnOrder = false;
 }

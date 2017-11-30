@@ -6,11 +6,24 @@
   Enter the email address you used to register. We will send you a link to reset your password.
 </p>
 
-<form [formGroup]="forgottenForm" (ngSubmit)="requestLink()" novalidate>
+<form
+  [formGroup]="forgottenForm"
+  (ngSubmit)="requestLink()"
+  novalidate>
 
-  <app-form-group label="Email address" [serverErrors]="errors">
-    <input type="email" formControlName="emailAddress">
-  </app-form-group>
+  <gd-form-field
+    label="Email address"
+    [serverErrors]="errors">
+    <input
+      gdInput
+      type="email"
+      formControlName="emailAddress">
+  </gd-form-field>
 
-  <app-button type="submit" styleType="primary" [disabled]="isLoading">Submit request</app-button>
+  <button
+    gdButton
+    type="submit"
+    [disabled]="isLoading">
+    Submit request
+  </button>
 </form>

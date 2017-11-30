@@ -1,5 +1,11 @@
 @import '../../styles/_variables';
 
-.app-facebook-login-button {
+.gd-facebook-button {
+  background-color: $gd-background-color-facebook !important;
+  color: white !important;
+  border-color: darken($gd-background-color-facebook, 8%) !important;
+}
+
+.gd-facebook-login-button {
   display: inline-block;
 }

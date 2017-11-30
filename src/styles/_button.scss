@@ -1,0 +1,14 @@
+.gd-button {
+  font-size: $gd-font-size;
+  font-weight: 700;
+  border: 0;
+  background-color: $gd-background-color-neutral-light;
+  border-radius: $gd-border-radius;
+  color: $gd-color-text;
+  cursor: pointer;
+  padding: 10px 15px;
+
+  &:focus {
+    @include outline;
+  }
+}

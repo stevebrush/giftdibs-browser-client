@@ -1,0 +1,22 @@
+@import '../../../styles/_variables';
+
+.gd-form-field {
+  margin-bottom: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.gd-form-field-label {
+  display: inline-block;
+}
+
+.gd-form-field-subscript {
+  font-size: 85%;
+  color: red;
+}
+
+.gd-form-field-has-error {
+  .gd-form-field-label {
+    color: red;
+  }
+}

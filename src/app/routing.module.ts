@@ -1,4 +1,11 @@
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
+
+import {
+  Routes,
+  RouterModule
+} from '@angular/router';
+
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
@@ -22,6 +29,7 @@ import {
   TermsComponent
 } from './support';
 
+import { GDAuthInterceptor } from './_services/auth.intercepter';
 import { AuthGuard } from './_guards';
 
 const appRoutes: Routes = [
@@ -61,4 +69,20 @@ const appRoutes: Routes = [
   { path: '**', redirectTo: '404' }
 ];
 
-export const routing = RouterModule.forRoot(appRoutes);
+@NgModule({
+  imports: [
+    RouterModule.forRoot(appRoutes)
+  ],
+  exports: [
+    RouterModule
+  ],
+  providers: [
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: GDAuthInterceptor,
+      multi: true
+    }
+  ]
+})
+export class GDRoutingModule { }

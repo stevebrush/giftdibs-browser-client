@@ -3,28 +3,31 @@
 </h1>
 
 <form [formGroup]="formModel" (ngSubmit)="onSubmit()" novalidate>
-  <app-form-group label="Quantity" [serverErrors]="errors">
-    <input type="number" formControlName="quantity">
-  </app-form-group>
+  <gd-form-field label="Quantity" [serverErrors]="errors">
+    <input gdInput type="number" formControlName="quantity">
+  </gd-form-field>
 
-  <app-form-group label="Price paid" [serverErrors]="errors">
-    <input type="number" formControlName="pricePaid">
-  </app-form-group>
+  <gd-form-field label="Price paid" [serverErrors]="errors">
+    <input gdInput type="number" formControlName="pricePaid">
+  </gd-form-field>
 
-  <app-form-group [serverErrors]="errors">
+  <gd-form-field [serverErrors]="errors">
     <label><input type="checkbox" formControlName="isDelivered"> Delivered</label>
-  </app-form-group>
+  </gd-form-field>
 
-  <app-button
+  <button
+    gdButton
     type="submit"
     [disabled]="isLoading"
     (click)="onSubmit()">
     Save changes
-  </app-button>
+  </button>
 
-  <app-button
+  <button
+    gdButton
+    type="button"
     [disabled]="isLoading"
     (click)="onCancel.emit()">
     Cancel
-  </app-button>
+  </button>
 </form>

@@ -1,0 +1,6 @@
+@import '../_variables';
+
+@mixin outline() {
+  outline: none;
+  box-shadow: 0 0 0px 4px lightskyblue;
+}

@@ -5,7 +5,11 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/first';
 
-import { AuthenticationService, SessionService, UserService, AlertService } from '../_services';
+import {
+  GDAlertService
+} from '../_modules';
+
+import { AuthenticationService, SessionService, UserService } from '../_services';
 
 @Component({
   selector: 'app-delete-account',
@@ -17,7 +21,7 @@ export class DeleteAccountComponent {
   public errors: any;
 
   constructor(
-    private alertService: AlertService,
+    private alertService: GDAlertService,
     private authenticationService: AuthenticationService,
     private sessionService: SessionService,
     private userService: UserService,

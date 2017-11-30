@@ -2,42 +2,88 @@
   Register
 </h1>
 
-<p>
-  <app-facebook-login-button
-    [disabled]="isLoading">
-  </app-facebook-login-button>
-</p>
+<form
+  [formGroup]="registerForm"
+  (ngSubmit)="register()"
+  novalidate>
 
-<form [formGroup]="registerForm" (ngSubmit)="register()" novalidate>
   <!-- PREVENTS AUTOCOMPLETE OF EMAIL/PASSWORD -->
-  <div style="display:none">
+  <div
+    style="position:absolute;left:-500000px;"
+    aria-hidden="true">
     <input type="email" name="emailAddress">
     <input type="password" name="password">
   </div>
 
-  <app-form-group label="First name" [serverErrors]="errors">
-    <input type="text" formControlName="firstName">
-  </app-form-group>
+  <gd-row>
+    <gd-column screenSmall="6">
+      <gd-form-field
+        label="First name"
+        [serverErrors]="errors">
+        <input
+          gdInput
+          type="text"
+          formControlName="firstName">
+      </gd-form-field>
+    </gd-column>
+    <gd-column screenSmall="6">
+      <gd-form-field
+        label="Last name"
+        [serverErrors]="errors">
+        <input
+          gdInput
+          type="text"
+          formControlName="lastName">
+      </gd-form-field>
+    </gd-column>
+  </gd-row>
 
-  <app-form-group label="Last name" [serverErrors]="errors">
-    <input type="text" formControlName="lastName">
-  </app-form-group>
+  <gd-form-field
+    label="Nickname"
+    style="display: none;"
+    [serverErrors]="errors">
+    <input
+      gdInput
+      type="text"
+      formControlName="gdNickname">
+  </gd-form-field>
 
-  <app-form-group label="Nickname" style="display: none;">
-    <input type="text" formControlName="gdNickname">
-  </app-form-group>
+  <gd-form-field
+    label="Email address"
+    [serverErrors]="errors">
+    <input
+      gdInput
+      type="email"
+      formControlName="emailAddress">
+  </gd-form-field>
 
-  <app-form-group label="Email address" [serverErrors]="errors">
-    <input type="email" formControlName="emailAddress">
-  </app-form-group>
-
-  <app-form-group label="New password" [serverErrors]="errors">
-    <input type="password" formControlName="password">
-  </app-form-group>
+  <gd-form-field
+    label="New password"
+    [serverErrors]="errors">
+    <input
+      gdInput
+      type="password"
+      formControlName="password">
+  </gd-form-field>
 
   <p>
     By submitting this form you are agreeing to our <a routerLink="/support/privacy">Privacy Policy</a> and <a routerLink="/support/terms">Terms</a>.
   </p>
 
-  <app-button type="submit" styleType="primary" [disabled]="isLoading">Register</app-button>
+  <button
+    gdButton
+    type="submit"
+    [disabled]="isLoading">
+    Register
+  </button>
 </form>
+
+<h3>
+  OR
+</h3>
+
+<p>
+  <gd-facebook-login-button
+    [disabled]="isLoading">
+  </gd-facebook-login-button>
+</p>

@@ -1,7 +1,8 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { AlertService, WishListService } from '../_services';
+import { GDAlertService } from '../_modules';
+import { WishListService } from '../_services';
 import { WishList } from '../_models';
 
 @Component({
@@ -21,7 +22,7 @@ export class WishListEditComponent implements OnInit {
   public onCancel: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(
-    private alertService: AlertService,
+    private alertService: GDAlertService,
     private wishListService: WishListService,
     private formBuilder: FormBuilder) {
       this.createForm();

@@ -1,19 +1,35 @@
 <h1>
   Delete your account
 </h1>
+
 <p>
   Are you sure you want to delete your account? This action cannot be undone.
 </p>
-<form [formGroup]="deleteAccountForm" (ngSubmit)="deleteAccount()" novalidate>
-  <app-form-group label="Password" [serverErrors]="errors">
-    <input type="password" formControlName="password">
-  </app-form-group>
+
+<form
+  [formGroup]="deleteAccountForm"
+  (ngSubmit)="deleteAccount()"
+  novalidate>
+
+  <gd-form-field
+    label="Password"
+    [serverErrors]="errors">
+    <input
+      gdInput
+      type="password"
+      formControlName="password">
+  </gd-form-field>
 
   <p>
     <a [routerLink]="['/forgotten']">Forget your password?</a>
   </p>
 
-  <app-button type="submit" styleType="danger" [disabled]="isLoading">Yes, delete my account forever.</app-button>
+  <button
+    gdButton
+    type="submit"
+    [disabled]="isLoading">
+    Yes, delete my account forever.
+  </button>
 
   <p>
     <a routerLink="/settings">Cancel</a>

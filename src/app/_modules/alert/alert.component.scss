@@ -1,0 +1,16 @@
+@import '../../../styles/_variables';
+
+.gd-alert {
+  padding: 10px 20px;
+  color: #fff;
+  background-color: $gd-color-text;
+  margin: 0;
+}
+
+.gd-error {
+  background-color: red;
+}
+
+.gd-success {
+  background-color: $gd-color-text;
+}

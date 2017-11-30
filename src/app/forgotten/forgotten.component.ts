@@ -3,7 +3,11 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 
 import 'rxjs/add/operator/first';
 
-import { AlertService, AuthenticationService } from '../_services';
+import {
+  GDAlertService
+} from '../_modules';
+
+import { AuthenticationService } from '../_services';
 
 @Component({
   selector: 'app-forgotten',
@@ -16,7 +20,7 @@ export class ForgottenComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private alertService: AlertService,
+    private alertService: GDAlertService,
     private authenticationService: AuthenticationService) {
       this.createForm();
     }

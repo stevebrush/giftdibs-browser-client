@@ -3,7 +3,12 @@ import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/first';
 
-import { AlertService, AuthenticationService, SessionService } from '../_services';
+import { GDAlertService } from '../_modules';
+
+import {
+  AuthenticationService,
+  SessionService
+} from '../_services';
 
 @Component({
   selector: 'app-email-verification-alert',
@@ -17,7 +22,7 @@ export class EmailVerificationAlertComponent implements OnDestroy {
   private userSubscription: Subscription;
 
   constructor(
-    private alertService: AlertService,
+    private alertService: GDAlertService,
     private authenticationService: AuthenticationService,
     private sessionService: SessionService) {
       this.userSubscription = this.sessionService.onUserChanges()

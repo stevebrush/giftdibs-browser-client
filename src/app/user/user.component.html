@@ -6,11 +6,12 @@
     {{ user.firstName }} {{ user.lastName }}
   </h1>
 
-  <app-row>
-    <app-column screenSmall="9">
+  <gd-row>
+    <gd-column
+      screenSmall="9">
       <app-wish-list-create-form
         *ngIf="isCurrentUser"
-        (onSuccess)="onCreateSuccess()">
+        (onSuccess)="onCreateSuccess($event)">
       </app-wish-list-create-form>
 
       <gd-card *ngFor="let wishList of wishLists">
@@ -18,21 +19,44 @@
           <a [routerLink]="['/wish-lists', wishList._id]">{{ wishList.name }}</a>
         </gd-card-title>
         <gd-card-body>
-          <app-button-container *ngIf="isCurrentUser">
-            <app-button (click)="activeWishList = wishList" [disabled]="isLoading">Edit</app-button>
-            <app-button (click)="deleteWishList(wishList._id)" [disabled]="isLoading">Delete</app-button>
-          </app-button-container>
+          <div *ngIf="isCurrentUser">
+            <button
+              gdButton
+              type="button"
+              (click)="activeWishList = wishList"
+              [disabled]="isLoading">
+              Edit
+            </button>
+            <button
+              gdButton
+              type="button"
+              (click)="deleteWishList(wishList._id)"
+              [disabled]="isLoading">
+              Delete
+            </button>
+          </div>
         </gd-card-body>
       </gd-card>
-    </app-column>
-    <app-column screenSmall="3">
+    </gd-column>
+    <gd-column
+      screenSmall="3">
       <div *ngIf="!isCurrentUser">
-        <app-button *ngIf="!isFollowing" (click)="createFriendship()" [disabled]="isLoading">
+        <button
+          gdButton
+          type="button"
+          *ngIf="!isFollowing"
+          (click)="createFriendship()"
+          [disabled]="isLoading">
           Follow
-        </app-button>
-        <app-button *ngIf="isFollowing" (click)="removeFriendship()" [disabled]="isLoading">
+        </button>
+        <button
+          gdButton
+          type="button"
+          *ngIf="isFollowing"
+          (click)="removeFriendship()"
+          [disabled]="isLoading">
           Unfollow
-        </app-button>
+        </button>
       </div>
       <h3>
         Following
@@ -50,8 +74,8 @@
           <a [routerLink]="['/users', friendship._user._id]">{{ friendship._user.firstName }} {{ friendship._user.lastName }}</a>
         </div>
       </div>
-    </app-column>
-  </app-row>
+    </gd-column>
+  </gd-row>
 
   <app-modal *ngIf="activeWishList">
     <app-wish-list-edit-form

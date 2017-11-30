@@ -1,21 +1,25 @@
-$font-family: 'Helvetica Neue',Helvetica,Arial,'Verdana','Geneva',sans-serif;
-$font-size: 16px;
-$line-height: 1.5;
-$line-height-reduced: 1.25;
-$font-color: #292b2c;
-$font-weight: 400;
-$border-radius: 4px;
+$gd-font-family: sans-serif;
+$gd-font-size: 16px;
+$gd-line-height: 1.5em;
+$gd-line-height-reduced: 1.1em;
+$gd-font-weight: 400;
+$gd-border-radius: 4px;
 
-$border-color-grey: #ccc;
+$gd-border-color-grey: #ccc;
 
-$background-color-primary: black;
-$background-color-facebook: #3b5998;
+$gd-background-color-primary: #008A00;
+$gd-background-color-secondary: #70002D;
+$gd-background-color-facebook: #3b5998;
+$gd-background-color-neutral-light: #eee;
 
-$grid-columns: 12 !default;
-$grid-gutter: 10px !default;
+$gd-color-text: #555;
+$gd-color-anchor: slateblue;
 
-$screen-sm-min: 768px !default;
-$screen-md-min: 992px !default;
-$screen-lg-min: 1200px !default;
+$gd-grid-columns: 12 !default;
+$gd-grid-gutter: 10px !default;
 
-$screen-xs-max: $screen-sm-min - 1 !default;
+$gd-screen-sm-min: 768px !default;
+$gd-screen-md-min: 992px !default;
+$gd-screen-lg-min: 1200px !default;
+
+$gd-screen-xs-max: $gd-screen-sm-min - 1 !default;

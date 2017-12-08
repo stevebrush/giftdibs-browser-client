@@ -1,5 +1,4 @@
-@import '../../../styles/_variables';
-@import '../../../styles/mixins/_grid';
+@import '../../../styles/mixins';
 
 :host.gd-column {
   padding-right: $gd-grid-gutter;
@@ -8,16 +7,16 @@
   min-height: 1px;
 }
 
-@include create_columns(xs);
+@include gd_create_columns(xs);
 
 @media (min-width: $gd-screen-sm-min) {
-  @include create_columns(sm);
+  @include gd_create_columns(sm);
 }
 
 @media (min-width: $gd-screen-md-min) {
-  @include create_columns(md);
+  @include gd_create_columns(md);
 }
 
 @media (min-width: $gd-screen-lg-min) {
-  @include create_columns(lg);
+  @include gd_create_columns(lg);
 }

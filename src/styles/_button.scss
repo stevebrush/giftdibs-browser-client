@@ -1,14 +1,21 @@
-.gd-button {
-  font-size: $gd-font-size;
-  font-weight: 700;
-  border: 0;
-  background-color: $gd-background-color-neutral-light;
-  border-radius: $gd-border-radius;
-  color: $gd-color-text;
-  cursor: pointer;
-  padding: 10px 15px;
+@import './mixins';
 
-  &:focus {
-    @include outline;
-  }
+.gd-button {
+  @include gd_button();
+  cursor: pointer;
+}
+
+.gd-button-primary {
+  background-color: $gd-background-color-primary;
+  color: #fff;
+}
+
+.gd-button-danger {
+  background-color: $gd-background-color-danger;
+  color: #fff;
+}
+
+.gd-button-facebook {
+  background-color: $gd-background-color-facebook !important;
+  color: #fff;
 }

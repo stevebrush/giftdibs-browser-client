@@ -5,12 +5,14 @@ import 'rxjs/add/operator/first';
 
 import { GDAlertService } from '../_modules';
 
-import { AuthenticationService, WindowService } from '../_services';
+import {
+  AuthenticationService,
+  WindowService
+} from '../_services';
 
 @Component({
   selector: 'gd-facebook-login-button',
-  templateUrl: './facebook-login-button.component.html',
-  styleUrls: ['./facebook-login-button.component.scss']
+  templateUrl: './facebook-login-button.component.html'
 })
 export class FacebookLoginButtonComponent {
   @Input()

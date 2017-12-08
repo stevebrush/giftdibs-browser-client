@@ -1,6 +1,7 @@
 import {
   Directive,
   ElementRef,
+  Input,
   OnInit,
   Renderer2
 } from '@angular/core';
@@ -9,6 +10,10 @@ import {
   selector: '[gdButton]'
 })
 export class GDButtonDirective implements OnInit {
+
+  @Input()
+  public gdButton = 'default';
+
   constructor(
     private elementRef: ElementRef,
     private renderer: Renderer2
@@ -18,6 +23,10 @@ export class GDButtonDirective implements OnInit {
     this.renderer.addClass(
       this.elementRef.nativeElement,
       'gd-button'
+    );
+    this.renderer.addClass(
+      this.elementRef.nativeElement,
+      `gd-button-${this.gdButton}`
     );
   }
 }

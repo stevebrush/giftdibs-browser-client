@@ -2,8 +2,6 @@ export * from './email-verification-alert.component';
 export * from './facebook-login-button.component';
 export * from './wish-list-create.component';
 export * from './wish-list-edit.component';
-export * from './modal.component';
-export * from './footer.component';
 export * from './gift-create.component';
 export * from './gift-edit.component';
 export * from './gift-external-url-price.component';

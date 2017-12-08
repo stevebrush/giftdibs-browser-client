@@ -2,32 +2,34 @@
   Settings
 </h1>
 
-<p>
+<gd-button-container>
   <button
-    gdButton
+    gdButton="facebook"
     type="button"
     (click)="linkFacebook()"
     [disabled]="isLoading"
     *ngIf="!user?.facebookId">
     Link Facebook account
   </button>
+
   <button
-    gdButton
+    gdButton="facebook"
     type="button"
     (click)="unlinkFacebook()"
     [disabled]="isLoading"
     *ngIf="user?.facebookId">
     Unlink Facebook account
   </button>
+
   <button
-    gdButton
+    gdButton="facebook"
     type="button"
     (click)="refreshFacebook()"
     [disabled]="isLoading"
     *ngIf="user?.facebookId">
     Refresh account information
   </button>
-</p>
+</gd-button-container>
 
 <form
   [formGroup]="settingsForm"
@@ -68,17 +70,20 @@
       formControlName="emailAddress">
   </gd-form-field>
 
-  <button
-    gdButton
-    type="submit"
-    [disabled]="isLoading">
-    Save Changes
-  </button>
+  <gd-button-container>
+    <button
+      gdButton="primary"
+      type="submit"
+      [disabled]="isLoading">
+      Save Changes
+    </button>
+  </gd-button-container>
 </form>
 
 <p>
   <a [routerLink]="['/reset-password']">Reset password...</a>
 </p>
+
 <p>
   <a routerLink="/delete-account">Delete account...</a>
 </p>

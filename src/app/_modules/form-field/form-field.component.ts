@@ -46,7 +46,9 @@ export class GDFormFieldComponent implements AfterContentInit, OnChanges {
   ) { }
 
   public ngAfterContentInit(): void {
-    this.controlDirective.elementRef.nativeElement.id = this.uniqueIdentifier;
+    if (this.controlDirective) {
+      this.controlDirective.elementRef.nativeElement.id = this.uniqueIdentifier;
+    }
 
     this.controlName.valueAccessor.registerOnTouched(() => {
       this.getErrorMessages();

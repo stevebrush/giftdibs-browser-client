@@ -46,9 +46,10 @@ export class DibEditComponent implements OnInit {
   constructor(
     private changeDetector: ChangeDetectorRef,
     private dibService: DibService,
-    private formBuilder: FormBuilder) {
-      this.createForm();
-    }
+    private formBuilder: FormBuilder
+  ) {
+    this.createForm();
+  }
 
   public ngOnInit(): void {
     this.formModel.reset(this.dib);
@@ -82,6 +83,7 @@ export class DibEditComponent implements OnInit {
       _gift: undefined,
       _id: '',
       isDelivered: false,
+      notes: undefined,
       pricePaid: undefined,
       quantity: undefined
     });

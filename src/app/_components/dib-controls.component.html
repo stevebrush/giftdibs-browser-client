@@ -2,8 +2,8 @@
   <div>
     {{ numRemaining }} remaining
   </div>
-  <div *ngFor="let dib of dibs">
 
+  <div *ngFor="let dib of dibs">
     <div *ngIf="isDibOwnedByCurrentUser(dib)">
       You
       <span *ngIf="dib.dateDelivered">
@@ -40,7 +40,7 @@
 
   <div *ngIf="!isDibbedByCurrentUser">
     <button
-      gdButton
+      gdButton="primary"
       type="button"
       [disabled]="isLoading"
       (click)="createDib()">
@@ -49,11 +49,15 @@
   </div>
 </div>
 
-<app-modal *ngIf="activeDib">
+<gd-modal *ngIf="activeDib">
+  <h1>
+    Edit dib
+  </h1>
+
   <app-dib-edit
     [dib]="activeDib"
     (onSuccess)="onEditSuccess($event)"
     (onError)="onEditError($event)"
     (onCancel)="activeDib = undefined">
   </app-dib-edit>
-</app-modal>
+</gd-modal>

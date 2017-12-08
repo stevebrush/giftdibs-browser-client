@@ -18,24 +18,22 @@
         <gd-card-title>
           <a [routerLink]="['/wish-lists', wishList._id]">{{ wishList.name }}</a>
         </gd-card-title>
-        <gd-card-body>
-          <div *ngIf="isCurrentUser">
-            <button
-              gdButton
-              type="button"
-              (click)="activeWishList = wishList"
-              [disabled]="isLoading">
-              Edit
-            </button>
-            <button
-              gdButton
-              type="button"
-              (click)="deleteWishList(wishList._id)"
-              [disabled]="isLoading">
-              Delete
-            </button>
-          </div>
-        </gd-card-body>
+        <gd-card-footer *ngIf="isCurrentUser">
+          <button
+            gdButton
+            type="button"
+            (click)="activeWishList = wishList"
+            [disabled]="isLoading">
+            Edit
+          </button>
+          <button
+            gdButton
+            type="button"
+            (click)="deleteWishList(wishList._id)"
+            [disabled]="isLoading">
+            Delete
+          </button>
+        </gd-card-footer>
       </gd-card>
     </gd-column>
     <gd-column
@@ -58,17 +56,21 @@
           Unfollow
         </button>
       </div>
+
       <h3>
         Following
       </h3>
+
       <div *ngFor="let friendship of friendships">
         <div *ngIf="friendship._user._id === user._id">
           <a [routerLink]="['/users', friendship._friend._id]">{{ friendship._friend.firstName }} {{ friendship._friend.lastName }}</a>
         </div>
       </div>
+
       <h3>
         Followers
       </h3>
+
       <div *ngFor="let friendship of friendships">
         <div *ngIf="friendship._friend._id === user._id">
           <a [routerLink]="['/users', friendship._user._id]">{{ friendship._user.firstName }} {{ friendship._user.lastName }}</a>
@@ -77,11 +79,11 @@
     </gd-column>
   </gd-row>
 
-  <app-modal *ngIf="activeWishList">
+  <gd-modal *ngIf="activeWishList">
     <app-wish-list-edit-form
       [wishList]="activeWishList"
       (onSuccess)="onEditSuccess()"
       (onCancel)="activeWishList = undefined">
     </app-wish-list-edit-form>
-  </app-modal>
+  </gd-modal>
 </div>

@@ -1,4 +1,6 @@
-.app-modal-canvas {
+@import '../../../styles/mixins';
+
+.gd-modal-canvas {
   position: fixed;
   top: 0;
   right: 0;
@@ -11,11 +13,15 @@
   justify-content: center;
   z-index: 999;
   display: flex;
+  padding: $gd-padding-plus-half;
 }
 
-.app-modal {
+.gd-modal {
   background-color: #fff;
-  max-width: 96%;
+  max-width: 100%;
   width: 700px;
-  padding: 1rem;
+  padding: $gd-padding-plus-half;
+  border-radius: $gd-border-radius;
+  overflow-y: auto;
+  max-height: 100%;
 }

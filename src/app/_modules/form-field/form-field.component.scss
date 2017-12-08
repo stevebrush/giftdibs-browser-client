@@ -1,17 +1,19 @@
-@import '../../../styles/_variables';
+@import '../../../styles/mixins';
 
 .gd-form-field {
-  margin-bottom: 1em;
+  @include gd_box();
   display: flex;
   flex-direction: column;
 }
 
 .gd-form-field-label {
   display: inline-block;
+  margin: 0 0 $gd-margin-half;
+  line-height: $gd-line-height-reduced;
 }
 
 .gd-form-field-subscript {
-  font-size: 85%;
+  font-size: $gd-font-size-reduced;
   color: red;
 }
 

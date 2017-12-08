@@ -20,10 +20,12 @@
       formControlName="emailAddress">
   </gd-form-field>
 
-  <button
-    gdButton
-    type="submit"
-    [disabled]="isLoading">
-    Submit request
-  </button>
+  <gd-button-container>
+    <button
+      gdButton
+      type="submit"
+      [disabled]="isLoading">
+      Submit request
+    </button>
+  </gd-button-container>
 </form>

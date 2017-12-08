@@ -26,8 +26,6 @@ import {
   EmailVerificationAlertComponent,
   WishListCreateComponent,
   WishListEditComponent,
-  ModalComponent,
-  FooterComponent,
   GiftCreateComponent,
   GiftEditComponent,
   GiftExternalUrlPriceComponent,
@@ -42,6 +40,7 @@ import {
   GDFormFieldModule,
   GDGridModule,
   GDInputModule,
+  GDModalModule,
   GDNavbarModule
 } from './_modules';
 
@@ -96,8 +95,6 @@ import {
     EmailVerificationAlertComponent,
     WishListCreateComponent,
     WishListEditComponent,
-    ModalComponent,
-    FooterComponent,
     GiftCreateComponent,
     GiftEditComponent,
     GiftExternalUrlPriceComponent,
@@ -118,6 +115,7 @@ import {
     GDFormFieldModule,
     GDGridModule,
     GDInputModule,
+    GDModalModule,
     GDNavbarModule,
     GDRoutingModule
   ],

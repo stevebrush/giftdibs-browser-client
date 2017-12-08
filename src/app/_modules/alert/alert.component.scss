@@ -1,16 +1,16 @@
-@import '../../../styles/_variables';
+@import '../../../styles/variables';
 
 .gd-alert {
-  padding: 10px 20px;
+  padding: $gd-padding $gd-padding-plus-half;
   color: #fff;
   background-color: $gd-color-text;
   margin: 0;
 }
 
 .gd-error {
-  background-color: red;
+  background-color: $gd-background-color-danger;
 }
 
 .gd-success {
-  background-color: $gd-color-text;
+  background-color: $gd-background-color-success;
 }

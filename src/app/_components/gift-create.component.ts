@@ -47,11 +47,11 @@ export class GiftCreateComponent implements OnInit {
   constructor(
     private giftService: GiftService,
     private scraperService: ScraperService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder
+  ) { }
 
   public ngOnInit(): void {
     this.createForm();
-    this.nameInput.nativeElement.focus();
   }
 
   public onKeyUp(event: KeyboardEvent): void {

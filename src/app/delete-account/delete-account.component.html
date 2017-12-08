@@ -20,18 +20,20 @@
       formControlName="password">
   </gd-form-field>
 
-  <p>
-    <a [routerLink]="['/forgotten']">Forget your password?</a>
-  </p>
-
-  <button
-    gdButton
-    type="submit"
-    [disabled]="isLoading">
-    Yes, delete my account forever.
-  </button>
-
-  <p>
-    <a routerLink="/settings">Cancel</a>
-  </p>
+  <gd-button-container>
+    <button
+      gdButton="danger"
+      type="submit"
+      [disabled]="isLoading">
+      Yes, delete my account forever.
+    </button>
+  </gd-button-container>
 </form>
+
+<p>
+  <a [routerLink]="['/forgotten']">Forget your password?</a>
+</p>
+
+<p>
+  <a routerLink="/settings">Back to settings...</a>
+</p>

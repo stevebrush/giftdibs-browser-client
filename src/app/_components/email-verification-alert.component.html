@@ -1,7 +1,11 @@
-<div class="email-verification-alert" *ngIf="!currentUser?.emailAddressVerified">
+<div
+  class="gd-email-verification-alert"
+  *ngIf="!currentUser?.emailAddressVerified">
+
   <p>
     You'll need to verify your email address before you can follow someone or dib their gifts.
   </p>
+
   <p>
     <button
       gdButton
@@ -11,7 +15,8 @@
       Resend verification email
     </button> (Did you check your spam folder?)
   </p>
+
   <p>
-    <strong>{{ currentUser?.emailAddress }}</strong> <a routerLink="/settings">Edit...</a>
+    <strong>{{ currentUser?.emailAddress }}</strong> <a routerLink="/settings">Edit email address...</a>
   </p>
 </div>

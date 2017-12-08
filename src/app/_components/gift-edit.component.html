@@ -6,34 +6,68 @@
   Loading...
 </div>
 
-<form *ngIf="!isLoading" [formGroup]="giftForm" (ngSubmit)="updateGift()" novalidate>
-  <gd-form-field label="Name" [serverErrors]="errors">
-    <input type="text" formControlName="name">
+<form
+  *ngIf="!isLoading"
+  [formGroup]="giftForm"
+  (ngSubmit)="updateGift()"
+  novalidate>
+
+  <gd-form-field
+    label="Name"
+    [serverErrors]="errors">
+    <input
+      gdInput
+      type="text"
+      formControlName="name">
   </gd-form-field>
 
-  <gd-form-field label="Budget" [serverErrors]="errors">
-    <input type="number" formControlName="budget">
+  <gd-form-field
+    label="Budget"
+    [serverErrors]="errors">
+    <input
+      gdInput
+      type="number"
+      formControlName="budget">
   </gd-form-field>
 
-  <gd-form-field label="Priority" [serverErrors]="errors">
-    <input type="number" formControlName="priority">
+  <gd-form-field
+    label="Priority"
+    [serverErrors]="errors">
+    <input
+      gdInput
+      type="number"
+      formControlName="priority">
   </gd-form-field>
 
-  <gd-form-field label="Quantity" [serverErrors]="errors">
-    <input type="number" formControlName="quantity">
+  <gd-form-field
+    label="Quantity"
+    [serverErrors]="errors">
+    <input
+      gdInput
+      type="number"
+      formControlName="quantity">
   </gd-form-field>
 
-  <div formArrayName="externalUrls">
-    <label>Product URLs</label>
+  <div
+    formArrayName="externalUrls">
+    <label>
+      Product URLs:
+    </label>
     <gd-row
       *ngFor="let externalUrl of giftForm.controls.externalUrls.controls; let i = index;"
       [formGroup]="externalUrl">
-      <gd-column screenXSmall="10">
-        <gd-form-field [serverErrors]="errors">
-          <input gdInput type="text" formControlName="url">
+      <gd-column
+        screenXSmall="10">
+        <gd-form-field
+          [serverErrors]="errors">
+          <input
+            gdInput
+            type="text"
+            formControlName="url">
         </gd-form-field>
       </gd-column>
-      <gd-column screenXSmall="2">
+      <gd-column
+        screenXSmall="2">
         <button
           gdButton
           type="button"
@@ -43,11 +77,30 @@
         </button>
       </gd-column>
     </gd-row>
-    <p>
-      <button (click)="addExternalUrlField()">Add URL</button>
-    </p>
+    <gd-button-container>
+      <button
+        gdButton
+        type="button"
+        (click)="addExternalUrlField()">
+        Add URL
+      </button>
+    </gd-button-container>
   </div>
 
-  <button gdButton type="submit" [disabled]="isLoading">Save changes</button>
-  <button gdButton type="button" (click)="onCancel.emit($event)" [disabled]="isLoading">Cancel</button>
+  <gd-button-container>
+    <button
+      gdButton="primary"
+      type="submit"
+      [disabled]="isLoading">
+      Save changes
+    </button>
+
+    <button
+      gdButton
+      type="button"
+      (click)="onCancel.emit($event)"
+      [disabled]="isLoading">
+      Cancel
+    </button>
+  </gd-button-container>
 </form>

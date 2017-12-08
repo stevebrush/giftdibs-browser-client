@@ -8,35 +8,40 @@
     </button>
   </p>
 
-  <div *ngIf="isActive">
-    <form
-      [formGroup]="wishListForm"
-      (ngSubmit)="createWishList()"
-      novalidate>
-      <gd-form-field
-        label="New wish list"
-        [serverErrors]="errors">
-        <input
-          gdInput
-          type="text"
-          formControlName="name"
-          #nameInput>
-      </gd-form-field>
+  <gd-card *ngIf="isActive">
+    <gd-card-title>
+      Create a wish list
+    </gd-card-title>
+    <gd-card-body>
+      <form
+        [formGroup]="wishListForm"
+        (ngSubmit)="createWishList()"
+        novalidate>
+        <gd-form-field
+          label="Wish list name"
+          [serverErrors]="errors">
+          <input
+            gdInput
+            type="text"
+            formControlName="name"
+            #nameInput>
+        </gd-form-field>
 
-      <button
-        gdButton
-        type="submit"
-        [disabled]="isLoading">
-        Create
-      </button>
+        <button
+          gdButton="primary"
+          type="submit"
+          [disabled]="isLoading">
+          Create
+        </button>
 
-      <button
-        gdButton
-        type="button"
-        (click)="toggleIsActive()"
-        [disabled]="isLoading">
-        Cancel
-      </button>
-    </form>
-  </div>
+        <button
+          gdButton
+          type="button"
+          (click)="toggleIsActive()"
+          [disabled]="isLoading">
+          Cancel
+        </button>
+      </form>
+    </gd-card-body>
+  </gd-card>
 </div>

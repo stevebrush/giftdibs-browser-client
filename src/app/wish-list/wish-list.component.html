@@ -15,11 +15,12 @@
   </gd-column>
   <gd-column screenSmall="10">
     <div *ngIf="wishList">
-      <h4>
+      <div>
         <a [routerLink]="['/users', user._id]">
           {{ user.firstName }} {{ user.lastName }}
         </a>
-      </h4>
+      </div>
+
       <h1>
         {{ wishList.name }}
       </h1>
@@ -66,12 +67,14 @@
                 </gd-column>
               </gd-row>
             </div>
-
           </gd-card-body>
 
           <gd-card-footer>
             <div *ngIf="isCurrentUser">
-              <button gdButton type="button" (click)="toggleReceived(gift)">
+              <button
+                gdButton="primary"
+                type="button"
+                (click)="toggleReceived(gift)">
                 <span *ngIf="!gift.isReceived">Mark received</span>
                 <span *ngIf="gift.isReceived === true">Undo received</span>
               </button>
@@ -95,13 +98,13 @@
         </gd-card>
       </div>
 
-      <app-modal *ngIf="activeGift">
+      <gd-modal *ngIf="activeGift">
         <app-gift-edit-form
           [gift]="activeGift"
           (onSuccess)="onGiftEditSuccess($event)"
           (onCancel)="activeGift = undefined">
         </app-gift-edit-form>
-      </app-modal>
+      </gd-modal>
     </div>
   </gd-column>
 </gd-row>

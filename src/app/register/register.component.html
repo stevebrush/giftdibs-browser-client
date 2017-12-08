@@ -70,12 +70,14 @@
     By submitting this form you are agreeing to our <a routerLink="/support/privacy">Privacy Policy</a> and <a routerLink="/support/terms">Terms</a>.
   </p>
 
-  <button
-    gdButton
-    type="submit"
-    [disabled]="isLoading">
-    Register
-  </button>
+  <gd-button-container>
+    <button
+      gdButton
+      type="submit"
+      [disabled]="isLoading">
+      Register
+    </button>
+  </gd-button-container>
 </form>
 
 <h3>

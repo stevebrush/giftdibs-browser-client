@@ -2,11 +2,34 @@
   Edit wish list
 </h1>
 
-<form [formGroup]="wishListForm" (ngSubmit)="updateWishList()" novalidate>
-  <gd-form-field label="Name" [serverErrors]="errors">
-    <input type="text" formControlName="name">
+<form
+  [formGroup]="wishListForm"
+  (ngSubmit)="updateWishList()"
+  novalidate>
+
+  <gd-form-field
+    label="Name"
+    [serverErrors]="errors">
+    <input
+      gdInput
+      type="text"
+      formControlName="name">
   </gd-form-field>
 
-  <button gdButton type="submit" [disabled]="isLoading">Save</button>
-  <button gdButton type="button" (click)="onCancel.emit()" [disabled]="isLoading">Cancel</button>
+  <gd-button-container>
+    <button
+      gdButton="primary"
+      type="submit"
+      [disabled]="isLoading">
+      Save
+    </button>
+
+    <button
+      gdButton
+      type="button"
+      (click)="onCancel.emit()"
+      [disabled]="isLoading">
+      Cancel
+    </button>
+  </gd-button-container>
 </form>

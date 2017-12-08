@@ -25,16 +25,18 @@
       formControlName="password">
   </gd-form-field>
 
-  <button
-    gdButton
-    type="submit"
-    [disabled]="isLoading">
-    Log in
-  </button>
+  <gd-button-container>
+    <button
+      gdButton
+      type="submit"
+      [disabled]="isLoading">
+      Log in
+    </button>
+  </gd-button-container>
 </form>
 
 <h3>
-  OR
+  Or
 </h3>
 
 <p>

@@ -1,4 +1,4 @@
-@import './mixins/_outline';
+@import './mixins';
 
 * {
   box-sizing: border-box;
@@ -8,7 +8,7 @@ a {
   color: $gd-color-anchor;
 
   &:focus {
-    @include outline();
+    @include gd_outline();
   }
 }
 
@@ -18,27 +18,39 @@ body {
   font-weight: $gd-font-weight;
   line-height: $gd-line-height;
   color: $gd-color-text;
-  background-color: #fff;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  margin: 1em 0;
-  font-weight: 700;
+  margin: $gd-margin 0;
+  font-weight: $gd-font-weight-bold;
   line-height: $gd-line-height-reduced;
 }
 
 h1 {
-  font-size: 48px;
+  font-size: $gd-font-size-3x;
 }
 
 h2 {
-  font-size: 36px;
+  font-size: $gd-font-size-2x;
 }
 
 p {
-  margin: 1em 0;
+  margin: $gd-margin 0;
 }
 
 strong {
-  font-weight: 700;
+  font-weight: $gd-font-weight-bold;
+}
+
+[role=button],
+a,
+area,
+button,
+input:not([type=range]),
+label,
+select,
+summary,
+textarea {
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
 }

@@ -1,0 +1,24 @@
+@import '../../../styles/mixins';
+
+.gd-form-field {
+  @include gd_box();
+  display: flex;
+  flex-direction: column;
+}
+
+.gd-form-field-label {
+  display: inline-block;
+  margin: 0 0 $gd-margin-half;
+  line-height: $gd-line-height-reduced;
+}
+
+.gd-form-field-subscript {
+  font-size: $gd-font-size-reduced;
+  color: red;
+}
+
+.gd-form-field-has-error {
+  .gd-form-field-label {
+    color: red;
+  }
+}

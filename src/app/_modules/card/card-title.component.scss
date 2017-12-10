@@ -1,6 +1,8 @@
+@import '../../../styles/mixins';
+
 .gd-card-title {
-  font-size: 1.2rem;
+  font-size: $gd-font-size-2x;
   margin: 0;
-  padding: 12px 15px 10px;
-  font-weight: 700;
+  padding: $gd-padding-plus-half;
+  font-weight: $gd-font-weight-bold;
 }

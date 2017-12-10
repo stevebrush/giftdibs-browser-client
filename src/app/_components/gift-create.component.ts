@@ -24,7 +24,8 @@ import {
 
 @Component({
   selector: 'app-gift-create-form',
-  templateUrl: './gift-create.component.html'
+  templateUrl: './gift-create.component.html',
+  styleUrls: ['./gift-create.component.scss']
 })
 export class GiftCreateComponent implements OnInit {
   public giftForm: FormGroup;
@@ -46,11 +47,11 @@ export class GiftCreateComponent implements OnInit {
   constructor(
     private giftService: GiftService,
     private scraperService: ScraperService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder
+  ) { }
 
   public ngOnInit(): void {
     this.createForm();
-    this.nameInput.nativeElement.focus();
   }
 
   public onKeyUp(event: KeyboardEvent): void {

@@ -1,0 +1,45 @@
+@import '../../../styles/mixins';
+
+.gd-navbar {
+  padding: $gd-padding $gd-padding-plus-half;
+  background-color: #fff;
+  border-bottom: 1px solid $gd-border-color-neutral;
+  display: flex;
+}
+
+.gd-navbar-nav {
+  flex: 1 0 auto;
+  display: flex;
+
+  > li {
+    margin: 0 4px;
+
+    > a {
+      color: $gd-color-text;
+      font-weight: $gd-font-weight-bold;
+      text-decoration: none;
+      padding: $gd-padding $gd-padding-plus-half;
+      display: block;
+      border-radius: 50px;
+
+      &:focus,
+      &:hover,
+      &.active {
+        background-color: $gd-background-color-neutral-light;
+        color: #000;
+      }
+
+      &:focus {
+        @include gd_outline();
+      }
+
+      &.active {
+        cursor: default;
+      }
+    }
+  }
+}
+
+.gd-navbar-user {
+  justify-content: flex-end;
+}

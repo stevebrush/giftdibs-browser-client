@@ -1,30 +1,60 @@
-<h1>
-  Edit dib
-</h1>
+<form
+  [formGroup]="formModel"
+  (ngSubmit)="onSubmit()"
+  novalidate>
 
-<form [formGroup]="formModel" (ngSubmit)="onSubmit()" novalidate>
-  <app-form-group label="Quantity" [serverErrors]="errors">
-    <input type="number" formControlName="quantity">
-  </app-form-group>
+  <gd-form-field
+    label="Quantity"
+    [serverErrors]="errors">
+    <input
+      gdInput
+      type="number"
+      formControlName="quantity">
+  </gd-form-field>
 
-  <app-form-group label="Price paid" [serverErrors]="errors">
-    <input type="number" formControlName="pricePaid">
-  </app-form-group>
+  <gd-form-field
+    label="Price paid"
+    [serverErrors]="errors">
+    <input
+      gdInput
+      type="number"
+      formControlName="pricePaid">
+  </gd-form-field>
 
-  <app-form-group [serverErrors]="errors">
-    <label><input type="checkbox" formControlName="isDelivered"> Delivered</label>
-  </app-form-group>
+  <gd-form-field
+    label="Notes"
+    [serverErrors]="errors">
+    <textarea
+      gdInput
+      formControlName="notes">
+    </textarea>
+  </gd-form-field>
 
-  <app-button
-    type="submit"
-    [disabled]="isLoading"
-    (click)="onSubmit()">
-    Save changes
-  </app-button>
+  <gd-form-field
+    [serverErrors]="errors">
+    <label>
+      <input
+        type="checkbox"
+        formControlName="isDelivered">
+        Delivered
+    </label>
+  </gd-form-field>
 
-  <app-button
-    [disabled]="isLoading"
-    (click)="onCancel.emit()">
-    Cancel
-  </app-button>
+  <gd-button-container>
+    <button
+      gdButton="primary"
+      type="submit"
+      [disabled]="isLoading"
+      (click)="onSubmit()">
+      Save changes
+    </button>
+
+    <button
+      gdButton
+      type="button"
+      [disabled]="isLoading"
+      (click)="onCancel.emit()">
+      Cancel
+    </button>
+  </gd-button-container>
 </form>

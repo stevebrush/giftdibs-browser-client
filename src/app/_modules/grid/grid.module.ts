@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { RowComponent } from './row.component';
-import { ColumnComponent } from './column.component';
+import { GDRowComponent } from './row.component';
+import { GDColumnComponent } from './column.component';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   declarations: [
-    RowComponent,
-    ColumnComponent
+    GDRowComponent,
+    GDColumnComponent
   ],
   exports: [
-    RowComponent,
-    ColumnComponent
+    GDRowComponent,
+    GDColumnComponent
   ]
 })
-export class GridModule { }
+export class GDGridModule { }

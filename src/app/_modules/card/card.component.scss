@@ -1,16 +1,14 @@
-@import '../../../styles/_variables';
+@import '../../../styles/mixins';
 
 .gd-card {
-  border: 1px solid $border-color-grey;
+  border: 1px solid $gd-border-color-neutral;
   background-color: #fff;
-  margin-bottom: 10px;
+  margin-bottom: $gd-margin;
+  border-radius: $gd-border-radius;
 }
 
-/deep/
+::ng-deep
 .gd-drag-handle {
+  @include gd_button();
   cursor: move;
-  background-color: #ddd;
-  display: inline-block;
-  padding: 3px 10px;
-  border: 1px dashed #bbb;
 }

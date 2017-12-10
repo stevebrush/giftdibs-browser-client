@@ -5,7 +5,7 @@
   Users
 </h1>
 
-<table class="app-table">
+<table>
   <tr *ngFor="let user of users">
     <td>
       <a [routerLink]="['/users', user._id]">{{user.firstName}} {{user.lastName}}</a>

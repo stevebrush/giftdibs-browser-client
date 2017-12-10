@@ -1,23 +1,22 @@
-@import '../../../styles/_variables';
-@import '../../../styles/mixins/_grid';
+@import '../../../styles/mixins';
 
-:host.app-column {
-  padding-right: $grid-gutter;
-  padding-left: $grid-gutter;
+:host.gd-column {
+  padding-right: $gd-grid-gutter;
+  padding-left: $gd-grid-gutter;
   width: 100%;
   min-height: 1px;
 }
 
-@include create_columns(xs);
+@include gd_create_columns(xs);
 
-@media (min-width: $screen-sm-min) {
-  @include create_columns(sm);
+@media (min-width: $gd-screen-sm-min) {
+  @include gd_create_columns(sm);
 }
 
-@media (min-width: $screen-md-min) {
-  @include create_columns(md);
+@media (min-width: $gd-screen-md-min) {
+  @include gd_create_columns(md);
 }
 
-@media (min-width: $screen-lg-min) {
-  @include create_columns(lg);
+@media (min-width: $gd-screen-lg-min) {
+  @include gd_create_columns(lg);
 }

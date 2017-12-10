@@ -1,9 +1,50 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import {
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
 
 import { DragulaModule } from 'ng2-dragula';
+
+import {
+  AuthenticationService,
+  DibService,
+  GiftService,
+  ScraperService,
+  SessionService,
+  UserService,
+  WindowService,
+  WishListService,
+  FriendshipService
+} from './_services';
+
+import {
+  FacebookLoginButtonComponent,
+  EmailVerificationAlertComponent,
+  WishListCreateComponent,
+  WishListEditComponent,
+  GiftCreateComponent,
+  GiftEditComponent,
+  GiftExternalUrlPriceComponent,
+  DibEditComponent,
+  DibControlsComponent
+} from './_components';
+
+import {
+  GDAlertModule,
+  GDButtonModule,
+  GDCardModule,
+  GDFormFieldModule,
+  GDGridModule,
+  GDInputModule,
+  GDModalModule,
+  GDNavbarModule
+} from './_modules';
+
+import { GDRoutingModule } from './routing.module';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home';
@@ -21,109 +62,64 @@ import { WishListsComponent } from './wish-lists';
 import { WishListComponent } from './wish-list';
 import { DibsComponent } from './dibs';
 
-import { GDAuthInterceptor } from './_services/auth.intercepter';
-
 import {
-  AboutComponent,
   SupportComponent,
+  AboutComponent,
   PrivacyPolicyComponent,
   TermsComponent
 } from './support';
 
-import {
-  routing
-} from './app.routing';
-
-import {
-  AuthGuard
-} from './_guards';
-
-import {
-  AlertService,
-  AuthenticationService,
-  DibService,
-  GiftService,
-  ScraperService,
-  SessionService,
-  UserService,
-  WindowService,
-  WishListService,
-  FriendshipService
-} from './_services';
-
-import {
-  FormGroupComponent,
-  FacebookLoginButtonComponent,
-  AlertComponent,
-  EmailVerificationAlertComponent,
-  ButtonComponent,
-  ButtonContainerComponent,
-  WishListCreateComponent,
-  WishListEditComponent,
-  ModalComponent,
-  FooterComponent,
-  GiftCreateComponent,
-  GiftEditComponent,
-  GiftExternalUrlPriceComponent,
-  DibEditComponent,
-  DibControlsComponent
-} from './_components';
-
-import {
-  GridModule,
-  GDCardModule
-} from './_modules';
-
 @NgModule({
   declarations: [
-    AppComponent,
-    FacebookLoginButtonComponent,
-    AlertComponent,
+    AboutComponent,
+    DeleteAccountComponent,
+    DibsComponent,
+    ForgottenComponent,
     HomeComponent,
     LoginComponent,
+    PageNotFoundComponent,
+    PrivacyPolicyComponent,
     RegisterComponent,
+    ResetPasswordComponent,
+    SettingsComponent,
+    SupportComponent,
+    TermsComponent,
     UsersComponent,
     UserComponent,
-    SettingsComponent,
-    FormGroupComponent,
-    ForgottenComponent,
-    ResetPasswordComponent,
-    DeleteAccountComponent,
-    PageNotFoundComponent,
-    EmailVerificationAlertComponent,
-    ButtonComponent,
-    ButtonContainerComponent,
     VerifyEmailComponent,
-    AboutComponent,
-    SupportComponent,
-    PrivacyPolicyComponent,
-    TermsComponent,
-    WishListCreateComponent,
-    WishListEditComponent,
     WishListComponent,
     WishListsComponent,
-    ModalComponent,
-    FooterComponent,
+
+    AppComponent,
+    FacebookLoginButtonComponent,
+    EmailVerificationAlertComponent,
+    WishListCreateComponent,
+    WishListEditComponent,
     GiftCreateComponent,
     GiftEditComponent,
     GiftExternalUrlPriceComponent,
     DibEditComponent,
-    DibsComponent,
     DibControlsComponent
   ],
   imports: [
-    BrowserModule,
-    DragulaModule,
     FormsModule,
-    ReactiveFormsModule,
+    BrowserModule,
     HttpClientModule,
-    routing,
-    GridModule,
-    GDCardModule
+    ReactiveFormsModule,
+
+    DragulaModule,
+
+    GDAlertModule,
+    GDButtonModule,
+    GDCardModule,
+    GDFormFieldModule,
+    GDGridModule,
+    GDInputModule,
+    GDModalModule,
+    GDNavbarModule,
+    GDRoutingModule
   ],
   providers: [
-    AlertService,
-    AuthGuard,
     AuthenticationService,
     DibService,
     FriendshipService,
@@ -132,12 +128,7 @@ import {
     SessionService,
     UserService,
     WindowService,
-    WishListService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: GDAuthInterceptor,
-      multi: true
-    }
+    WishListService
   ],
   bootstrap: [AppComponent]
 })

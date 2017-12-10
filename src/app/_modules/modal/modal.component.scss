@@ -1,0 +1,27 @@
+@import '../../../styles/mixins';
+
+.gd-modal-canvas {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  display: flex;
+  padding: $gd-padding-plus-half;
+}
+
+.gd-modal {
+  background-color: #fff;
+  max-width: 100%;
+  width: 700px;
+  padding: $gd-padding-plus-half;
+  border-radius: $gd-border-radius;
+  overflow-y: auto;
+  max-height: 100%;
+}

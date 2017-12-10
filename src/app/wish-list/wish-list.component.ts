@@ -18,7 +18,10 @@ import {
 } from 'ng2-dragula';
 
 import {
-  AlertService,
+  GDAlertService
+} from '../_modules';
+
+import {
   DibService,
   GiftService,
   WishListService,
@@ -28,6 +31,7 @@ import {
 import {
   Dib,
   Gift,
+  User,
   WishList
 } from '../_models';
 
@@ -37,17 +41,19 @@ import {
 })
 export class WishListComponent implements OnInit, OnDestroy {
   public wishList: WishList;
+  public wishLists: WishList[];
   public gifts: Gift[];
   public activeGift: Gift;
   public isLoading = false;
+  public user: User;
   public isCurrentUser = false;
   public wishListId: string;
 
   public dibs: Dib[];
-  private dragulaSubscription: Subscription;
+  private subscriptions: Subscription[] = [];
 
   constructor(
-    private alertService: AlertService,
+    private alertService: GDAlertService,
     private dibService: DibService,
     private dragulaService: DragulaService,
     private giftService: GiftService,
@@ -60,16 +66,19 @@ export class WishListComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.isLoading = true;
-    this.route.params
-      .first()
-      .subscribe((params: any) => {
-        this.wishListId = params.wishListId;
-        this.fetchWishList();
-      });
+    this.subscriptions.push(
+      this.route.params
+        .subscribe((params: any) => {
+          this.wishListId = params.wishListId;
+          this.fetchWishList();
+        })
+      );
   }
 
   public ngOnDestroy(): void {
-    this.dragulaSubscription.unsubscribe();
+    this.subscriptions.forEach((subscription: Subscription) => {
+      subscription.unsubscribe();
+    });
     this.dragulaService.destroy('bag-one');
   }
 
@@ -160,16 +169,29 @@ export class WishListComponent implements OnInit, OnDestroy {
       .finally(() => this.isLoading = false)
       .subscribe(
         (data: any) => {
+          this.wishList = data.wishList;
+          this.user = this.wishList._user;
+          this.isCurrentUser = this.sessionService
+            .isCurrentUser(this.user._id);
+
           this.fetchGifts();
           this.fetchDibs();
-          this.wishList = data.wishList;
-          this.isCurrentUser = this.sessionService.isCurrentUser(this.wishList._user._id);
+          this.fetchWishLists();
         },
         (err: any) => {
           // If 403, show cannot-view message.
           this.alertService.error(err.error.message);
         }
       );
+  }
+
+  private fetchWishLists(): void {
+    this.wishListService
+      .getAllByUserId(this.user._id)
+      .first()
+      .subscribe((data: any) => {
+        this.wishLists = data.wishLists;
+      });
   }
 
   private setupDragula(): void {
@@ -180,8 +202,8 @@ export class WishListComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.dragulaSubscription = this.dragulaService.dropModel
-      .subscribe((value: any) => {
+    this.subscriptions.push(
+      this.dragulaService.dropModel.subscribe((value: any) => {
         const updates: Observable<any>[] = [];
 
         this.gifts.forEach((gift: Gift, i: number) => {
@@ -206,6 +228,6 @@ export class WishListComponent implements OnInit, OnDestroy {
               },
             );
         }
-      });
+      }));
   }
 }

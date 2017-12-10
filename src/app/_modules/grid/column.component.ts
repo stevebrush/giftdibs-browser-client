@@ -6,11 +6,11 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'app-column',
+  selector: 'gd-column',
   templateUrl: './column.component.html',
   styleUrls: ['./column.component.scss']
 })
-export class ColumnComponent implements OnInit {
+export class GDColumnComponent implements OnInit {
   @Input()
   public screenXSmall: number;
 
@@ -24,27 +24,27 @@ export class ColumnComponent implements OnInit {
   public screenLarge: number;
 
   @HostBinding('class')
-  private classnames: string;
+  public classnames: string;
 
   public getClassNames(): string {
     const classNames = [
-      'app-column'
+      'gd-column'
     ];
 
     if (this.screenXSmall) {
-      classNames.push(`app-column-xs-${this.screenXSmall}`);
+      classNames.push(`gd-column-xs-${this.screenXSmall}`);
     }
 
     if (this.screenSmall) {
-      classNames.push(`app-column-sm-${this.screenSmall}`);
+      classNames.push(`gd-column-sm-${this.screenSmall}`);
     }
 
     if (this.screenMedium) {
-      classNames.push(`app-column-md-${this.screenMedium}`);
+      classNames.push(`gd-column-md-${this.screenMedium}`);
     }
 
     if (this.screenLarge) {
-      classNames.push(`app-column-lg-${this.screenLarge}`);
+      classNames.push(`gd-column-lg-${this.screenLarge}`);
     }
 
     return classNames.join(' ');

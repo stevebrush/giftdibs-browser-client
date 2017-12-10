@@ -21,8 +21,8 @@ import {
 import 'rxjs/add/operator/do';
 
 import {
-  AlertService
-} from './alert.service';
+  GDAlertService
+} from '../_modules';
 
 import {
   SessionService
@@ -31,7 +31,7 @@ import {
 @Injectable()
 export class GDAuthInterceptor implements HttpInterceptor {
   constructor(
-    private alertService: AlertService,
+    private alertService: GDAlertService,
     private router: Router,
     private sessionService: SessionService
   ) { }

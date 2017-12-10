@@ -1,0 +1,21 @@
+@import './mixins';
+
+.gd-input {
+  font-size: $gd-font-size;
+  border: 0;
+  background-color: $gd-background-color-neutral-light;
+  border-radius: $gd-border-radius;
+  font-weight: $gd-font-weight-bold;
+  color: $gd-color-text;
+  padding: $gd-padding $gd-padding-plus-half;
+  display: block;
+  resize: none;
+
+  &:focus {
+    @include gd_outline();
+  }
+
+  &::placeholder {
+    font-weight: $gd-font-weight;
+  }
+}

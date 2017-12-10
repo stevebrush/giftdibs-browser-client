@@ -2,32 +2,88 @@
   Settings
 </h1>
 
-<p>
-  <app-button (click)="linkFacebook()" [disabled]="isLoading" classNames="facebook-button" *ngIf="!user?.facebookId">Link Facebook account</app-button>
-  <app-button (click)="unlinkFacebook()" [disabled]="isLoading" classNames="facebook-button" *ngIf="user?.facebookId">Unlink Facebook account</app-button>
-  <app-button (click)="refreshFacebook()" [disabled]="isLoading" classNames="facebook-button" *ngIf="user?.facebookId">Refresh account information</app-button>
-</p>
+<gd-button-container>
+  <button
+    gdButton="facebook"
+    type="button"
+    (click)="linkFacebook()"
+    [disabled]="isLoading"
+    *ngIf="!user?.facebookId">
+    Link Facebook account
+  </button>
 
-<form [formGroup]="settingsForm" (ngSubmit)="submit()" novalidate>
+  <button
+    gdButton="facebook"
+    type="button"
+    (click)="unlinkFacebook()"
+    [disabled]="isLoading"
+    *ngIf="user?.facebookId">
+    Unlink Facebook account
+  </button>
 
-  <app-form-group label="First name" [serverErrors]="errors">
-    <input type="text" formControlName="firstName">
-  </app-form-group>
+  <button
+    gdButton="facebook"
+    type="button"
+    (click)="refreshFacebook()"
+    [disabled]="isLoading"
+    *ngIf="user?.facebookId">
+    Refresh account information
+  </button>
+</gd-button-container>
 
-  <app-form-group label="Last name" [serverErrors]="errors">
-    <input type="text" formControlName="lastName">
-  </app-form-group>
+<form
+  [formGroup]="settingsForm"
+  (ngSubmit)="submit()"
+  novalidate>
 
-  <app-form-group label="Email address" [serverErrors]="errors">
-    <input type="email" formControlName="emailAddress">
-  </app-form-group>
+  <gd-row>
+    <gd-column
+      screenSmall="6">
+      <gd-form-field
+        label="First name"
+        [serverErrors]="errors">
+        <input
+          gdInput
+          type="text"
+          formControlName="firstName">
+      </gd-form-field>
+    </gd-column>
+    <gd-column
+      screenSmall="6">
+      <gd-form-field
+        label="Last name"
+        [serverErrors]="errors">
+        <input
+          gdInput
+          type="text"
+          formControlName="lastName">
+      </gd-form-field>
+    </gd-column>
+  </gd-row>
 
-  <app-button type="submit" styleType="primary" [disabled]="isLoading">Save Changes</app-button>
+  <gd-form-field
+    label="Email address"
+    [serverErrors]="errors">
+    <input
+      gdInput
+      type="email"
+      formControlName="emailAddress">
+  </gd-form-field>
+
+  <gd-button-container>
+    <button
+      gdButton="primary"
+      type="submit"
+      [disabled]="isLoading">
+      Save Changes
+    </button>
+  </gd-button-container>
 </form>
 
 <p>
   <a [routerLink]="['/reset-password']">Reset password...</a>
 </p>
+
 <p>
   <a routerLink="/delete-account">Delete account...</a>
 </p>

@@ -81,7 +81,7 @@ export class DibControlsComponent implements OnChanges {
           this.onChanges.emit(data);
         },
         (err: any) => {
-          this.onError.emit(err);
+          this.onError.emit(err.error);
         }
       );
   }

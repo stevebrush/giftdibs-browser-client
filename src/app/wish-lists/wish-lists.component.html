@@ -2,13 +2,17 @@
   Wish lists
 </h1>
 
-<table class="app-table">
+<table>
   <tr *ngFor="let wishList of wishLists">
     <td>
-      <a [routerLink]="['/wish-lists', wishList._id]">{{ wishList.name }}</a>
+      <a [routerLink]="['/wish-lists', wishList._id]">
+        {{ wishList.name }}
+      </a>
     </td>
     <td>
-      <a [routerLink]="['/users', wishList._user._id]">{{ wishList._user.firstName }} {{ wishList._user.lastName }}</a>
+      <a [routerLink]="['/users', wishList._user._id]">
+        {{ wishList._user.firstName }} {{ wishList._user.lastName }}
+      </a>
     </td>
   </tr>
 </table>

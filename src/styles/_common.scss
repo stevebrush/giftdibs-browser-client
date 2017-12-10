@@ -1,33 +1,56 @@
+@import './mixins';
+
 * {
   box-sizing: border-box;
 }
 
+a {
+  color: $gd-color-anchor;
+
+  &:focus {
+    @include gd_outline();
+  }
+}
+
 body {
-  font-family: $font-family;
-  font-size: $font-size;
-  font-weight: $font-weight;
-  line-height: $line-height;
-  color: $font-color;
-  background-color: #f2f2f2;
+  font-family: $gd-font-family;
+  font-size: $gd-font-size;
+  font-weight: $gd-font-weight;
+  line-height: $gd-line-height;
+  color: $gd-color-text;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  margin: .5rem 0;
-  font-weight: 700;
+  margin: $gd-margin 0;
+  font-weight: $gd-font-weight-bold;
+  line-height: $gd-line-height-reduced;
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: $gd-font-size-3x;
 }
 
 h2 {
-  font-size: 1.5rem;
+  font-size: $gd-font-size-2x;
 }
 
 p {
-  margin: 1rem 0;
+  margin: $gd-margin 0;
 }
 
 strong {
-  font-weight: 700;
+  font-weight: $gd-font-weight-bold;
+}
+
+[role=button],
+a,
+area,
+button,
+input:not([type=range]),
+label,
+select,
+summary,
+textarea {
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
 }

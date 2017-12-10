@@ -1,10 +1,27 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+  Component
+} from '@angular/core';
+
+import {
+  Router
+} from '@angular/router';
+
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 
 import 'rxjs/add/operator/first';
 
-import { AlertService, AuthenticationService } from '../_services';
+import {
+  GDAlertService
+} from '../_modules';
+
+import {
+  AuthenticationService
+} from '../_services';
 
 @Component({
   selector: 'app-register',
@@ -18,10 +35,11 @@ export class RegisterComponent {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private alertService: AlertService,
-    private authenticationService: AuthenticationService) {
-      this.createForm();
-    }
+    private alertService: GDAlertService,
+    private authenticationService: AuthenticationService
+  ) {
+    this.createForm();
+  }
 
   public register(): void {
     this.isLoading = true;
@@ -34,24 +52,35 @@ export class RegisterComponent {
           this.router.navigate(['/login']);
         },
         (err: any) => {
-          if (err.error.code === 108) {
+          const error = err.error;
+          console.log(err.error);
+
+          if (error.code === 108) {
             this.router.navigate(['/404']);
             return;
           }
 
-          this.errors = err.error.errors;
-          this.alertService.error(err.error.message);
+          this.errors = error.errors;
+          this.alertService.error(error.message);
         }
       );
   }
 
   private createForm(): void {
     this.registerForm = this.formBuilder.group({
-      firstName: '',
-      lastName: '',
-      gdNickname: '',
-      emailAddress: '',
-      password: ''
+      firstName: new FormControl(null, [
+        Validators.required
+      ]),
+      lastName: new FormControl(null, [
+        Validators.required
+      ]),
+      gdNickname: null,
+      emailAddress: new FormControl(null, [
+        Validators.required
+      ]),
+      password: new FormControl(null, [
+        Validators.required
+      ])
     });
   }
 }

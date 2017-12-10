@@ -1,6 +1,75 @@
-<form [formGroup]="giftForm" (ngSubmit)="createGift()" novalidate>
-  <app-form-group [serverErrors]="errors">
-    <textarea formControlName="name" placeholder="URL or name" #nameInput (keyup)="onKeyUp($event)"></textarea>
-  </app-form-group>
-  <app-button type="submit" [disabled]="isLoading">Add gift</app-button>
-</form>
+<div class="gd-gift-create">
+  <form
+    [formGroup]="giftForm"
+    (ngSubmit)="createGift()"
+    novalidate>
+
+    <gd-card>
+      <gd-card-body>
+        <gd-row>
+          <gd-column screenSmall="3">
+            <div class="gd-thumbnail-placeholder">
+              <div>
+                <p>
+                  <strong>Drop image to upload</strong><br>or click to browse.
+                </p>
+                <!-- <button gdButton type="button">
+                  Browse
+                </button> -->
+              </div>
+            </div>
+          </gd-column>
+          <gd-column screenSmall="9">
+            <gd-form-field>
+              <textarea
+                gdInput
+                formControlName="name"
+                placeholder="What do you want?"
+                aria-label="Add a gift to your wish list"
+                (keyup)="onKeyUp($event)"
+                #nameInput>
+              </textarea>
+            </gd-form-field>
+
+            <p>
+              <!-- <button
+                gdButton
+                type="button"
+                [disabled]="isLoading">
+                Add image
+              </button> -->
+
+              <button
+                gdButton
+                type="button"
+                [disabled]="isLoading">
+                Search Amazon.com
+              </button>
+
+              <!-- <button
+                gdButton
+                type="button">
+                ...
+              </button> -->
+            </p>
+            <p>
+              <span class="gd-icon-priority"></span>
+              <span class="gd-icon-priority"></span>
+              <span class="gd-icon-priority"></span>
+              <span class="gd-icon-priority"></span>
+              <span class="gd-icon-priority"></span>
+            </p>
+          </gd-column>
+        </gd-row>
+      </gd-card-body>
+      <gd-card-footer>
+        <button
+          gdButton="primary"
+          type="submit"
+          [disabled]="isLoading">
+          Submit
+        </button>
+      </gd-card-footer>
+    </gd-card>
+  </form>
+</div>

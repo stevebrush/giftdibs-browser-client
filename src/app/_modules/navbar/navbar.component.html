@@ -1,0 +1,58 @@
+<nav class="gd-navbar">
+  <ul class="gd-navbar-nav gd-navbar-main">
+    <li *ngFor="let route of routes">
+      <a
+        [routerLink]="route.path"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }">
+        {{ route.name }}
+      </a>
+    </li>
+  </ul>
+
+  <ul
+    class="gd-navbar-nav gd-navbar-user"
+    *ngIf="isLoggedIn()">
+    <li>
+      <a
+        [routerLink]="['/users', currentUser._id]"
+        routerLinkActive="active">
+        {{ currentUser.firstName }}
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/dibs']"
+        routerLinkActive="active">
+        Dibs
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/settings']"
+        routerLinkActive="active">
+        Settings
+      </a>
+    </li>
+    <li>
+      <a href="" (click)="logout($event)">Logout</a>
+    </li>
+  </ul>
+
+  <ul class="gd-navbar-nav gd-navbar-user" *ngIf="!isLoggedIn()">
+    <li>
+      <a
+        [routerLink]="['/login']"
+        routerLinkActive="active">
+        Login
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/register']"
+        routerLinkActive="active">
+        Register
+      </a>
+    </li>
+  </ul>
+</nav>

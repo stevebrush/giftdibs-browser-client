@@ -13,12 +13,15 @@ import {
   FormGroup
 } from '@angular/forms';
 
+import { GDAlertService } from '../_modules';
+
 import { User } from '../_models';
-import { AlertService, WishListService } from '../_services';
+import { WishListService } from '../_services';
 
 @Component({
   selector: 'app-wish-list-create-form',
-  templateUrl: './wish-list-create.component.html'
+  templateUrl: './wish-list-create.component.html',
+  styleUrls: ['./wish-list-create.component.scss']
 })
 export class WishListCreateComponent implements OnInit {
   public wishListForm: FormGroup;
@@ -38,7 +41,7 @@ export class WishListCreateComponent implements OnInit {
   public nameInput: ElementRef;
 
   constructor(
-    private alertService: AlertService,
+    private alertService: GDAlertService,
     private wishListService: WishListService,
     private formBuilder: FormBuilder) { }
 
@@ -56,7 +59,7 @@ export class WishListCreateComponent implements OnInit {
       .subscribe(
         (data: any) => {
           this.wishListForm.reset();
-          this.onSuccess.emit();
+          this.onSuccess.emit(data);
           this.alertService.success(data.message);
         },
         (err: any) => {

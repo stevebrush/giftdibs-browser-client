@@ -1,0 +1,41 @@
+@import '../../styles/mixins';
+
+.gd-gift-create {
+  margin-bottom: $gd-padding;
+}
+
+.gd-thumbnail-placeholder {
+  border-radius: $gd-border-radius;
+  width: 100%;
+  border: 2px dashed #ccc;
+  position: relative;
+  background-color: $gd-background-color-neutral-light;
+
+  > div {
+    text-align: center;
+    padding: $gd-padding-double;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: $gd-font-size-reduced;
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+  }
+}
+
+.gd-icon-priority {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-color: #ddd;
+  border-radius: 50%;
+}

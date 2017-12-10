@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 import 'rxjs/add/operator/first';
 
-import { AlertService, WishListService } from '../_services';
+import {
+  GDAlertService
+} from '../_modules';
+
+import { WishListService } from '../_services';
 import { WishList } from '../_models';
 
 @Component({
@@ -13,7 +17,7 @@ export class WishListsComponent implements OnInit {
   public wishLists: WishList[];
 
   constructor(
-    private alertService: AlertService,
+    private alertService: GDAlertService,
     private wishListService: WishListService
   ) { }
 

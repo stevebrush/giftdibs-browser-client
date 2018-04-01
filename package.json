@@ -8,7 +8,7 @@
     "build": "ng build --aot --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "build:serve": "npm run build && node server.js"
+    "build:serve": "npm run build && npm run start"
   },
   "private": true,
   "dependencies": {

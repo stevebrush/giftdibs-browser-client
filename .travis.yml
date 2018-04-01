@@ -2,7 +2,7 @@ language: node_js
 
 branches:
   only:
-  - master
+    - master
 
 git:
   depth: 5
@@ -22,3 +22,8 @@ deploy:
   on:
     repo: giftdibs/giftdibs-browser
     branch: master
+
+cache:
+  directories:
+    - /home/travis/.rvm/
+    - node_modules

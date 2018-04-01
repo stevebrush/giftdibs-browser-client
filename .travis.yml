@@ -1,21 +1,8 @@
 language: node_js
-sudo: required
-dist: trusty
-
-env:
-  - CXX=g++-4.8
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - g++-4.8
 
 branches:
   only:
     - master
-    - /^rc-.*$/
-    - /^[0-9]+\.[0-9]+\.[0-9]+.*/
 
 git:
   depth: 5
@@ -25,4 +12,18 @@ before_script:
 
 script:
   - ng lint
-  - ng build --prod
+  - npm run build
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: vo8NSkza+MrFb8WXIFKgwRFQ/ICurIL3GMtLY7KrHCSmsLLJtsmz1lSPkn6niJ9AU3ZIy/XqZAcycdPNwjDmDknz7rLnXv/Jr9f7dlSRvUBdTxvNFwFXt48mteT2T/OQ3f5Dzqae0J0N3hP5UBewqZyMzBD2aT/hT6kVvWti0zpXI+7h1SWZPGKaOeLraVRZ6FojjbjfTTH3UlxYX68sUYxU29kBl6KBwMpNb4r8TKbRACtnKutPsvQ9iur2AOI5bIROZoW5ErBv+8RY7ws+mEboogVjlWlVXhE1C2y7XMg1iBL2ek+oAWxuZ7xpa/YvQHmLVpQH7qB6jKfna8XMK3NZ+8oW2/u4KsSTM2t2QLJRTmqeVsNVljNhew7xfxkaY/7xA/J5i6hGoQYvJ0WitwxDW7H44zZTgtr33AosP/Abde2pEJbL7D6Oa2hh5UCAdpu6oJ3FaIXa6ui495QdtPfl/CBhSIrVeOEd57ryps87SAH9sIvG0ZWV/bfSYLQ9pVVFHXliGa3UbriKvbYpha4zYFRNFPTZwEPgD65cQiKyQ01TS5L0ovN1lPt7jtwZscZ+fbTLv6JI9iRX2OTRJJ7iaYE8DxeYt5DrvJqZkxE3IIuRAZkuzfM4l72NpuXEaT10tWRxEQm0IW0of1BH67HRFj6QmumGKZZsnvmd794=
+  app: giftdibs-browser
+  on:
+    repo: giftdibs/giftdibs-browser
+    branch: master
+
+cache:
+  directories:
+    - /home/travis/.rvm/
+    - node_modules

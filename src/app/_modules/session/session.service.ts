@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-
 import { SessionUser } from './session-user';
 
 @Injectable()
@@ -47,6 +44,10 @@ export class SessionService {
 
   public isCurrentUser(userId: string): boolean {
     return (this.user.id === userId);
+  }
+
+  public get isLoggedIn(): boolean {
+    return (this.token !== undefined);
   }
 
   private save(): void {

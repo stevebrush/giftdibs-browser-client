@@ -7,13 +7,21 @@ import {
   RouterModule
 } from '@angular/router';
 
-import { AuthGuard } from './_modules/session/authorization.guard';
+import { IsLoggedInGuard } from './_modules/session/is-logged-in.guard';
+import { IsLoggedOutGuard } from './_modules/session/is-logged-out.guard';
 
 const appRoutes: Routes = [
   {
     path: '',
+    loadChildren: 'app/_modules/welcome/welcome.module#WelcomeModule',
+    canLoad: [IsLoggedOutGuard],
+    pathMatch: 'full'
+  },
+  {
+    path: '',
     loadChildren: 'app/_modules/community/community.module#CommunityModule',
-    canActivate: [AuthGuard]
+    canLoad: [IsLoggedInGuard],
+    pathMatch: 'full'
   },
   {
     path: 'login',

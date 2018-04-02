@@ -1,0 +1,9 @@
+@import '../../../styles/mixins';
+
+.gd-form-field {
+  margin: $gd-spacing 0;
+}
+
+.gd-form-field-has-error {
+  color: red;
+}

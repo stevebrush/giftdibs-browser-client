@@ -13,6 +13,8 @@ import {
 import { AuthInterceptor } from './authorization.interceptor';
 import { AuthGuard } from './authorization.guard';
 import { SessionService } from './session.service';
+import { IsLoggedInGuard } from './is-logged-in.guard';
+import { IsLoggedOutGuard } from './is-logged-out.guard';
 
 @NgModule({
   imports: [
@@ -26,6 +28,8 @@ import { SessionService } from './session.service';
       useClass: AuthInterceptor,
       multi: true
     },
+    IsLoggedInGuard,
+    IsLoggedOutGuard,
     SessionService
   ]
 })

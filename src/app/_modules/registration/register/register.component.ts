@@ -1,5 +1,5 @@
 import {
-  Component, ElementRef
+  Component
 } from '@angular/core';
 
 import {
@@ -13,16 +13,15 @@ import {
   Validators
 } from '@angular/forms';
 
-import 'rxjs/add/operator/first';
-
 import { RegistrationService } from '../registration.service';
 
 @Component({
-  selector: 'app-register',
+  selector: 'gd-register',
   templateUrl: './register.component.html'
 })
 export class RegisterComponent {
   public registerForm: FormGroup;
+  public errors: any[] = [];
 
   constructor(
     private router: Router,
@@ -32,17 +31,22 @@ export class RegisterComponent {
     this.createForm();
   }
 
-  public register(): void {
+  public submit(): void {
+    if (this.registerForm.disabled) {
+      return;
+    }
+
+    this.registerForm.disable();
     this.registrationService
       .register(this.registerForm.value)
       .subscribe(
         (result: any) => {
           alert(result.message);
           this.router.navigate(['/login']);
+          this.registerForm.enable();
         },
         (err: any) => {
           const error = err.error;
-          console.log('errors?', error);
 
           if (error.code === 108) {
             this.router.navigate(['/page-not-found']);
@@ -50,16 +54,10 @@ export class RegisterComponent {
           }
 
           alert(error.message);
+          this.errors = error.errors;
+          this.registerForm.enable();
         }
       );
-  }
-
-  public togglePasswordInputType(input: HTMLInputElement) {
-    if (input.type === 'text') {
-      input.type = 'password';
-    } else {
-      input.type = 'text';
-    }
   }
 
   private createForm(): void {

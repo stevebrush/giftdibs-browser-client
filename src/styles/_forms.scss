@@ -1,0 +1,17 @@
+@import './mixins';
+
+.gd-control-label {
+  display: inline-block;
+}
+
+.gd-form-control {
+  @include gd_form_control();
+  color: $gd-text-color;
+  display: block;
+  width: 100%;
+  margin-bottom: 5px;
+
+  &:disabled {
+    @include gd_disabled();
+  }
+}

@@ -2,13 +2,18 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CommunityRoutingModule } from './community-routing.module';
-import { HomeComponent } from './home/home.component';
+import { CommunityComponent } from './community/community.component';
 
 @NgModule({
   imports: [
     CommonModule,
     CommunityRoutingModule
   ],
-  declarations: [HomeComponent]
+  declarations: [
+    CommunityComponent
+  ],
+  exports: [
+    CommunityComponent
+  ]
 })
 export class CommunityModule { }

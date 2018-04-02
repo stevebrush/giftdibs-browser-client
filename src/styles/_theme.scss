@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: $gd-font-size;
+  font-family: $gd-font-family;
+  color: $gd-text-color;
+  line-height: $gd-line-height;
+}
+
+h1 {
+  font-size: 300%;
+  font-weight: 900;
+  line-height: $gd-line-height-reduced;
+}
+
+p {
+  margin: $gd-spacing 0;
+}
+
+.gd-container {
+  padding: $gd-spacing * 2;
+}

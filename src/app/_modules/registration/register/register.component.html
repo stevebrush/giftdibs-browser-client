@@ -1,79 +1,97 @@
 <h1>
-  Sign up
+  Create a GiftDibs account
 </h1>
+
+<p>
+  Or <a routerLink="/login">log in to your account</a>
+</p>
 
 <form
   [formGroup]="registerForm"
-  (ngSubmit)="register()"
+  (ngSubmit)="submit()"
   aria-label="New user registration information"
   novalidate>
 
-  <div class="gd-form-group">
+  <gd-form-field [errors]="errors">
     <label
+      class="gd-control-label"
       for="gd-register-first-name">
       First name
     </label>
     <input
       type="text"
+      class="gd-form-control"
       id="gd-register-first-name"
       formControlName="firstName">
-  </div>
+  </gd-form-field>
 
-  <div class="gd-form-group">
+  <gd-form-field [errors]="errors">
     <label
+      class="gd-control-label"
       for="gd-register-last-name">
       Last name
     </label>
     <input
       type="text"
+      class="gd-form-control"
       id="gd-register-last-name"
       formControlName="lastName">
-  </div>
+  </gd-form-field>
 
-  <div class="gd-form-group">
+  <gd-form-field [errors]="errors">
     <label
+      class="gd-control-label"
       for="gd-register-email-address">
       Email
     </label>
     <input
       type="email"
+      class="gd-form-control"
       id="gd-register-email-address"
       formControlName="emailAddress">
-  </div>
+  </gd-form-field>
 
-  <div class="gd-form-group">
+  <gd-form-field [errors]="errors">
     <label
+      class="gd-control-label"
       for="gd-register-new-password">
       New password
     </label>
-    <input
-      type="password"
-      id="gd-register-new-password"
-      formControlName="password"
-      #passwordInput>
-    <button
-      type="button"
-      aria-hidden="true"
-      (click)="togglePasswordInputType(passwordInput)">
-      Show password
-    </button>
-  </div>
+    <gd-password-viewer
+      [disabled]="registerForm.disabled"
+      [inputElement]="passwordInput">
+      <input
+        type="password"
+        class="gd-form-control"
+        id="gd-register-new-password"
+        formControlName="password"
+        #passwordInput>
+    </gd-password-viewer>
+  </gd-form-field>
 
-  <div
-    class="gd-form-group"
-    aria-hidden="true">
+  <gd-form-field
+    aria-hidden="true"
+    [errors]="errors">
     <label
+      class="gd-control-label"
       for="gd-register-nickname">
       Nickname
     </label>
     <input
       type="text"
+      class="gd-form-control"
       id="gd-register-nickname"
       formControlName="gdNickname">
-  </div>
+  </gd-form-field>
+
+  <p>
+    By creating an account, you agree to our <a href="">Terms of Service</a> and <a href="">Privacy Policy</a>.
+  </p>
 
   <button
-    type="submit">
-    Submit
+    class="gd-button"
+    type="submit"
+    [disabled]="registerForm.disabled">
+    Create new account
   </button>
 </form>

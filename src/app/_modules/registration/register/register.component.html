@@ -1,0 +1,79 @@
+<h1>
+  Sign up
+</h1>
+
+<form
+  [formGroup]="registerForm"
+  (ngSubmit)="register()"
+  aria-label="New user registration information"
+  novalidate>
+
+  <div class="gd-form-group">
+    <label
+      for="gd-register-first-name">
+      First name
+    </label>
+    <input
+      type="text"
+      id="gd-register-first-name"
+      formControlName="firstName">
+  </div>
+
+  <div class="gd-form-group">
+    <label
+      for="gd-register-last-name">
+      Last name
+    </label>
+    <input
+      type="text"
+      id="gd-register-last-name"
+      formControlName="lastName">
+  </div>
+
+  <div class="gd-form-group">
+    <label
+      for="gd-register-email-address">
+      Email
+    </label>
+    <input
+      type="email"
+      id="gd-register-email-address"
+      formControlName="emailAddress">
+  </div>
+
+  <div class="gd-form-group">
+    <label
+      for="gd-register-new-password">
+      New password
+    </label>
+    <input
+      type="password"
+      id="gd-register-new-password"
+      formControlName="password"
+      #passwordInput>
+    <button
+      type="button"
+      aria-hidden="true"
+      (click)="togglePasswordInputType(passwordInput)">
+      Show password
+    </button>
+  </div>
+
+  <div
+    class="gd-form-group"
+    aria-hidden="true">
+    <label
+      for="gd-register-nickname">
+      Nickname
+    </label>
+    <input
+      type="text"
+      id="gd-register-nickname"
+      formControlName="gdNickname">
+  </div>
+
+  <button
+    type="submit">
+    Submit
+  </button>
+</form>

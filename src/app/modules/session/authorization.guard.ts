@@ -10,10 +10,12 @@ import {
 } from '@angular/router';
 
 import { SessionService } from './session.service';
+import { AlertService } from '../alert/alert.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(
+    private alertService: AlertService,
     private router: Router,
     private sessionService: SessionService
   ) { }
@@ -23,7 +25,7 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
-    alert('Please log in to view that page.');
+    this.alertService.info('Please log in to view that page.', true);
     this.router.navigate(['/login'], { queryParams: { redirectUrl: state.url }});
 
     return false;

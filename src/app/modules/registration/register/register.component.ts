@@ -14,6 +14,7 @@ import {
 } from '@angular/forms';
 
 import { RegistrationService } from '../registration.service';
+import { AlertService } from '../../alert/alert.service';
 
 @Component({
   selector: 'gd-register',
@@ -24,6 +25,7 @@ export class RegisterComponent {
   public errors: any[] = [];
 
   constructor(
+    private alertService: AlertService,
     private router: Router,
     private formBuilder: FormBuilder,
     private registrationService: RegistrationService
@@ -41,7 +43,7 @@ export class RegisterComponent {
       .register(this.registerForm.value)
       .subscribe(
         (result: any) => {
-          alert(result.message);
+          this.alertService.success(result.message, true);
           this.router.navigate(['/login']);
           this.registerForm.enable();
         },
@@ -53,7 +55,7 @@ export class RegisterComponent {
             return;
           }
 
-          alert(error.message);
+          this.alertService.error(error.message);
           this.errors = error.errors;
           this.registerForm.enable();
         }

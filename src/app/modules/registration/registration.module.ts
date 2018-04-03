@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { FormFieldModule } from '../form-field/form-field.module';
+import { PasswordViewerModule } from '../password-viewer/password-viewer.module';
 
 import { RegistrationRoutingModule } from './registration-routing.module';
 import { RegisterComponent } from './register/register.component';
 import { RegistrationService } from './registration.service';
-import { FormFieldModule } from '../form-field/form-field.module';
-import { PasswordViewerModule } from '../password-viewer/password-viewer.module';
 
 @NgModule({
   imports: [

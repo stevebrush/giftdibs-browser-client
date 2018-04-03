@@ -17,6 +17,7 @@ import {
 
 import { AuthenticationService } from './authentication.service';
 import { SessionService } from '../session/session.service';
+import { AlertService } from '../alert/alert.service';
 
 @Component({
   selector: 'gd-login',
@@ -28,6 +29,7 @@ export class LoginComponent implements OnInit {
   public redirectUrl: string;
 
   constructor(
+    private alertService: AlertService,
     private route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
@@ -53,12 +55,12 @@ export class LoginComponent implements OnInit {
       .login(formData.emailAddress, formData.password)
       .subscribe(
         (result: any) => {
-          alert(result.message);
+          this.alertService.success(result.message, true);
           this.router.navigate([this.redirectUrl]);
         },
         (err: any) => {
           this.errors = err.error.errors;
-          alert(err.error.message);
+          this.alertService.error(err.error.message);
           this.loginForm.enable();
         }
       );

@@ -9,12 +9,13 @@ import {
 import { SessionService } from './session.service';
 
 @Injectable()
-export class IsLoggedInGuard implements CanLoad {
+export class IsLoggedOutGuard implements CanLoad {
   constructor(
     private sessionService: SessionService
   ) { }
 
   public canLoad(): boolean  {
-    return (this.sessionService.isLoggedIn);
+    console.log('IsLoggedOutGuard', !this.sessionService.isLoggedIn);
+    return (!this.sessionService.isLoggedIn);
   }
 }

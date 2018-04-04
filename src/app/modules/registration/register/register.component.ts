@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component
 } from '@angular/core';
 
@@ -18,7 +19,8 @@ import { AlertService } from '../../alert/alert.service';
 
 @Component({
   selector: 'gd-register',
-  templateUrl: './register.component.html'
+  templateUrl: './register.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegisterComponent {
   public registerForm: FormGroup;

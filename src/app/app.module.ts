@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SessionModule } from './modules/session/session.module';
 import { AlertModule } from './modules/alert/alert.module';
+import { NavbarModule } from './modules/navbar/navbar.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AlertModule } from './modules/alert/alert.module';
     BrowserModule,
     AppRoutingModule,
     SessionModule,
-    AlertModule
+    AlertModule,
+    NavbarModule
   ],
   bootstrap: [
     AppComponent

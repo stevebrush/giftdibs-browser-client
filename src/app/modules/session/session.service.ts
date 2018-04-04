@@ -1,9 +1,16 @@
-import { Injectable } from '@angular/core';
+import {
+  Injectable,
+  OnDestroy
+} from '@angular/core';
+
+import { Subject } from 'rxjs/Subject';
 
 import { SessionUser } from './session-user';
 
 @Injectable()
-export class SessionService {
+export class SessionService implements OnDestroy {
+  public userStream = new Subject<SessionUser>();
+
   public get token(): string {
     return this._token;
   }
@@ -36,6 +43,10 @@ export class SessionService {
     }
   }
 
+  public ngOnDestroy() {
+    this.userStream.complete();
+  }
+
   public clearAll(): void {
     this.user = undefined;
     this.token = undefined;
@@ -56,5 +67,6 @@ export class SessionService {
       token: this.token
     });
     localStorage.setItem(this.storageKey, parsed);
+    this.userStream.next(this.user);
   }
 }

@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   OnInit
 } from '@angular/core';
@@ -21,7 +22,8 @@ import { AlertService } from '../alert/alert.service';
 
 @Component({
   selector: 'gd-login',
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent implements OnInit {
   public loginForm: FormGroup;

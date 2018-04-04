@@ -7,8 +7,6 @@ import {
 } from '@angular/common';
 
 import { SessionService } from './session.service';
-import { IsLoggedInGuard } from './is-logged-in.guard';
-import { IsLoggedOutGuard } from './is-logged-out.guard';
 
 @NgModule({
   imports: [
@@ -16,8 +14,6 @@ import { IsLoggedOutGuard } from './is-logged-out.guard';
   ],
   declarations: [],
   providers: [
-    IsLoggedInGuard,
-    IsLoggedOutGuard,
     SessionService
   ]
 })

@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   OnInit,
   OnDestroy
@@ -11,7 +12,8 @@ import { AlertService } from './alert.service';
 @Component({
   selector: 'gd-alert',
   templateUrl: './alert.component.html',
-  styleUrls: ['./alert.component.scss']
+  styleUrls: ['./alert.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AlertComponent implements OnInit, OnDestroy {
   public message: string;

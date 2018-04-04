@@ -27,9 +27,7 @@ export class AuthInterceptor implements HttpInterceptor {
     private alertService: AlertService,
     private router: Router,
     private sessionService: SessionService
-  ) {
-    console.log('AuthInterceptor');
-  }
+  ) { }
 
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = this.sessionService.token;
@@ -38,8 +36,6 @@ export class AuthInterceptor implements HttpInterceptor {
       headers: req.headers.set('Authorization', `JWT ${token}`)
     });
 
-    console.log('intercept!');
-
     return next.handle(authReq)
       .do(
         (event: HttpEvent<any>) => {
@@ -47,7 +43,6 @@ export class AuthInterceptor implements HttpInterceptor {
             const authResponse = event.body.authResponse;
 
             if (authResponse) {
-              console.log('Set token!', authResponse);
               this.sessionService.user = authResponse.user;
               this.sessionService.token = authResponse.token;
             }

@@ -3,15 +3,21 @@
 .gd-navbar {
   background-color: #fff;
   border-bottom: 1px solid #000;
-  display: flex;
   margin-bottom: $gd-spacing * 2;
+}
+
+.gd-container {
+  display: flex;
 }
 
 .gd-navbar-menu {
   flex: 1 0 auto;
-  display: flex;
+  display: inline-flex;
+  align-items: baseline;
 
   > li {
+    display: block;
+
     > a {
       padding: $gd-spacing;
       display: block;

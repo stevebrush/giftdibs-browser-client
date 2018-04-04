@@ -1,9 +1,7 @@
 <div
   class="gd-alert"
-  *ngIf="message"
-  [ngClass]="{
-    'gd-alert-error': message.type === 'error',
-    'gd-alert-success': message.type === 'success'
-  }">
-  {{ message.text }}
+  role="alert"
+  *ngIf="alert"
+  [ngClass]="'gd-alert-' + alert.type">
+  {{ alert.text }}
 </div>

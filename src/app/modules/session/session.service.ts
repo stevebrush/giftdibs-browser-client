@@ -3,13 +3,13 @@ import {
   OnDestroy
 } from '@angular/core';
 
-import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { SessionUser } from './session-user';
 
 @Injectable()
 export class SessionService implements OnDestroy {
-  public userStream = new Subject<SessionUser>();
+  public userStream = new BehaviorSubject<SessionUser>(undefined);
 
   public get token(): string {
     return this._token;

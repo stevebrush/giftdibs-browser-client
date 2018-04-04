@@ -1,12 +1,15 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
-  OnInit,
-  OnDestroy
+  OnDestroy,
+  OnInit
 } from '@angular/core';
 
-import { Subscription } from 'rxjs/Subscription';
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/takeUntil';
 
+import { Alert } from './alert';
 import { AlertService } from './alert.service';
 
 @Component({
@@ -16,22 +19,26 @@ import { AlertService } from './alert.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AlertComponent implements OnInit, OnDestroy {
-  public message: string;
+  public alert: Alert;
 
-  private alertSubscription: Subscription;
+  private ngUnsubscribe = new Subject();
 
   constructor(
-    private alertService: AlertService
+    private alertService: AlertService,
+    private changeDetector: ChangeDetectorRef
   ) { }
 
   public ngOnInit(): void {
-    this.alertSubscription = this.alertService.getMessage()
-      .subscribe((message: any) => {
-        this.message = message;
+    this.alertService.alertStream
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe((alert: Alert) => {
+        this.alert = alert;
+        this.changeDetector.markForCheck();
       });
   }
 
   public ngOnDestroy(): void {
-    this.alertSubscription.unsubscribe();
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

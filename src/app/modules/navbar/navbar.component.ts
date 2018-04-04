@@ -12,13 +12,6 @@ import {
 
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/takeUntil';
-// import { Subscription } from 'rxjs/Subscription';
-
-// import {
-//   AuthenticationService,
-//   SessionService,
-//   WindowService
-// } from '../../_services';
 
 import { SessionService } from '../session/session.service';
 import { SessionUser } from '../session/session-user';
@@ -31,17 +24,17 @@ import { SessionUser } from '../session/session-user';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   public currentUser: SessionUser;
-  // public routes: any[];
-  // private userSubscription: Subscription;
+  public routes: {
+    path: string[];
+    name: string;
+  }[];
 
   private ngUnsubscribe = new Subject();
 
   constructor(
-    // private authenticationService: AuthenticationService,
     private changeDetector: ChangeDetectorRef,
     private router: Router,
     private sessionService: SessionService
-    // private windowService: WindowService
   ) { }
 
   public ngOnInit(): void {
@@ -51,6 +44,26 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.currentUser = sessionUser;
         this.changeDetector.markForCheck();
       });
+
+      this.routes = [
+        {
+          name: 'GiftDibs',
+          path: ['/']
+        },
+        {
+          name: 'Users',
+          path: ['/users']
+        },
+        {
+          name: 'Wish lists',
+          path: ['/wish-lists']
+        },
+        {
+          name: 'Support',
+          path: ['/support']
+        }
+      ];
+
     // const FB = this.windowService.nativeWindow.FB;
 
     // FB.init({
@@ -89,7 +102,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    // this.userSubscription.unsubscribe();
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }

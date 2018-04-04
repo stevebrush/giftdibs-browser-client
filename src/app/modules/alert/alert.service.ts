@@ -1,46 +1,62 @@
-import { Injectable } from '@angular/core';
-import { Router, NavigationStart } from '@angular/router';
+import {
+  Injectable,
+  OnDestroy
+} from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
+import {
+  NavigationStart,
+  Router,
+  RouterEvent
+} from '@angular/router';
+
 import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/takeUntil';
+
+import { Alert } from './alert';
 
 @Injectable()
-export class AlertService {
-  private subject = new Subject<any>();
+export class AlertService implements OnDestroy {
+  public alertStream = new Subject();
+
   private keepAfterNavigationChange = false;
+  private ngUnsubscribe = new Subject();
 
   constructor(
     private router: Router
   ) {
-    // clear alert message on route change
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationStart) {
-        if (this.keepAfterNavigationChange) {
-          this.keepAfterNavigationChange = false;
-        } else {
-          // clear alert
-          this.subject.next();
+    // Clear alert message on route change?
+    this.router.events
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe((event: RouterEvent) => {
+        if (event instanceof NavigationStart) {
+          if (this.keepAfterNavigationChange) {
+            this.keepAfterNavigationChange = false;
+          } else {
+            this.alertStream.next();
+          }
         }
-      }
-    });
+      });
   }
 
-  public info(message: string, keepAfterNavigationChange = false) {
+  public ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
+  public error(message: string, keepAfterNavigationChange?: boolean) {
+    this.sendMessage({ text: message, type: 'error' }, keepAfterNavigationChange);
+  }
+
+  public info(message: string, keepAfterNavigationChange?: boolean) {
+    this.sendMessage({ text: message, type: 'info' }, keepAfterNavigationChange);
+  }
+
+  public success(message: string, keepAfterNavigationChange?: boolean) {
+    this.sendMessage({ text: message, type: 'success' }, keepAfterNavigationChange);
+  }
+
+  private sendMessage(alert: Alert, keepAfterNavigationChange = false) {
     this.keepAfterNavigationChange = keepAfterNavigationChange;
-    this.subject.next({ type: 'info', text: message });
-  }
-
-  public success(message: string, keepAfterNavigationChange = false) {
-    this.keepAfterNavigationChange = keepAfterNavigationChange;
-    this.subject.next({ type: 'success', text: message });
-  }
-
-  public error(message: string, keepAfterNavigationChange = false) {
-    this.keepAfterNavigationChange = keepAfterNavigationChange;
-    this.subject.next({ type: 'error', text: message });
-  }
-
-  public getMessage(): Observable<any> {
-    return this.subject.asObservable();
+    this.alertStream.next(alert);
   }
 }

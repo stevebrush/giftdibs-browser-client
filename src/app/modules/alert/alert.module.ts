@@ -1,5 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  NgModule
+} from '@angular/core';
+
+import {
+  CommonModule
+} from '@angular/common';
+
 import { AlertComponent } from './alert.component';
 import { AlertService } from './alert.service';
 
@@ -10,7 +16,9 @@ import { AlertService } from './alert.service';
   exports: [
     AlertComponent
   ],
-  declarations: [AlertComponent],
+  declarations: [
+    AlertComponent
+  ],
   providers: [
     AlertService
   ]

@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   OnInit
 } from '@angular/core';
@@ -32,6 +33,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private alertService: AlertService,
+    private changeDetector: ChangeDetectorRef,
     private route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
@@ -64,6 +66,7 @@ export class LoginComponent implements OnInit {
           this.errors = err.error.errors;
           this.alertService.error(err.error.message);
           this.loginForm.enable();
+          this.changeDetector.markForCheck();
         }
       );
   }

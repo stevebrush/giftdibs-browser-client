@@ -7,7 +7,7 @@ import { FormFieldModule } from '../form-field/form-field.module';
 import { PasswordViewerModule } from '../password-viewer/password-viewer.module';
 
 import { RegistrationRoutingModule } from './registration-routing.module';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './register.component';
 import { RegistrationService } from './registration.service';
 
 @NgModule({

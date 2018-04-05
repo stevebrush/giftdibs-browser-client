@@ -1,5 +1,6 @@
+
 <h1>
-  Log in to GiftDibs
+  Log in
 </h1>
 
 <p>
@@ -7,9 +8,10 @@
 </p>
 
 <form
+  class="gd-form"
+  aria-label="Log in to GiftDibs"
   [formGroup]="loginForm"
   (ngSubmit)="submit()"
-  aria-label="Log in to GiftDibs"
   novalidate>
 
   <gd-form-field [errors]="errors">
@@ -44,7 +46,7 @@
   </gd-form-field>
 
   <button
-    class="gd-button"
+    class="gd-button gd-button-primary"
     type="submit"
     [disabled]="loginForm.disabled">
     Log in

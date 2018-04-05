@@ -4,15 +4,21 @@
   @include gd_form_control();
   display: inline-block;
   text-align: center;
-  border-radius: $gd-border-radius;
-  color: $gd-text-color;
   white-space: nowrap;
+  color: $gd-text-color;
   user-select: none;
-  background-color: #f2f2f2;
-  font-weight: 700;
   cursor: pointer;
 
   &:disabled {
     @include gd_disabled();
   }
+}
+
+.gd-button-default {
+  background-color: $gd-background-color-neutral;
+}
+
+.gd-button-primary {
+  background-color: $gd-background-color-primary;
+  color: #fff;
 }

@@ -1,9 +1,19 @@
 @import '../../../styles/mixins';
 
 .gd-form-field {
-  margin: $gd-spacing 0;
+  margin: 1rem 0;
 }
 
 .gd-form-field-has-error {
-  color: red;
+  color: $gd-text-color-danger;
+
+  ::ng-deep {
+    .gd-form-control {
+      border-color: $gd-border-color-danger;
+    }
+  }
+}
+
+.gd-form-field-subscript {
+  font-size: 85%;
 }

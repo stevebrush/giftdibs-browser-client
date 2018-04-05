@@ -1,8 +1,7 @@
 @import '../../../styles/mixins';
 
 .gd-navbar {
-  background-color: #fff;
-  border-bottom: 1px solid #000;
+  background-color: #333;
   margin-bottom: $gd-spacing * 2;
 }
 
@@ -19,16 +18,20 @@
     display: block;
 
     > a {
-      padding: $gd-spacing;
+      padding: 15px;
       display: block;
+      color: #ddd;
+      font-weight: 300;
 
       &:focus,
       &:hover,
-      &.active { }
+      &.active {
+        color: #fff;
+        text-decoration: underline;
+      }
 
       &.active {
         cursor: default;
-        text-decoration: none;
       }
     }
   }

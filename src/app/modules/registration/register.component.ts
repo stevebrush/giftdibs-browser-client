@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
-  Component
+  Component,
+  ChangeDetectorRef
 } from '@angular/core';
 
 import {
@@ -14,8 +15,8 @@ import {
   Validators
 } from '@angular/forms';
 
-import { RegistrationService } from '../registration.service';
-import { AlertService } from '../../alert/alert.service';
+import { RegistrationService } from './registration.service';
+import { AlertService } from '../alert/alert.service';
 
 @Component({
   selector: 'gd-register',
@@ -28,6 +29,7 @@ export class RegisterComponent {
 
   constructor(
     private alertService: AlertService,
+    private changeDetector: ChangeDetectorRef,
     private router: Router,
     private formBuilder: FormBuilder,
     private registrationService: RegistrationService
@@ -60,6 +62,7 @@ export class RegisterComponent {
           this.alertService.error(error.message);
           this.errors = error.errors;
           this.registerForm.enable();
+          this.changeDetector.markForCheck();
         }
       );
   }

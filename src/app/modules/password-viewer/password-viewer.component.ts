@@ -16,16 +16,15 @@ export class PasswordViewerComponent {
 
   @Input()
   public disabled = false;
-
-  public isTypePassword = true;
+  public isVisible = false;
 
   public togglePasswordInputType() {
     if (this.inputElement.type === 'text') {
       this.inputElement.type = 'password';
-      this.isTypePassword = true;
+      this.isVisible = false;
     } else {
       this.inputElement.type = 'text';
-      this.isTypePassword = false;
+      this.isVisible = true;
     }
   }
 }

@@ -7,16 +7,28 @@ body {
   font-family: $gd-font-family;
   color: $gd-text-color;
   line-height: $gd-line-height;
+  background-color: $gd-background-color-reading;
+  font-weight: 300;
+}
+
+a {
+  font-weight: 900;
+  color: $gd-text-color;
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: $gd-line-height-reduced;
+  margin-bottom: .5rem;
+  font-weight: 500;
 }
 
 h1 {
-  font-size: 300%;
-  font-weight: 900;
-  line-height: $gd-line-height-reduced;
+  font-size: 2.5rem;
 }
 
 p {
-  margin: $gd-spacing 0;
+  margin: 1rem 0;
 }
 
 .gd-container {

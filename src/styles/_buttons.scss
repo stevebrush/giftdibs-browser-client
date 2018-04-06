@@ -12,6 +12,10 @@
   &:disabled {
     @include gd_disabled();
   }
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 .gd-button-default {

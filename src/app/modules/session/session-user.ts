@@ -1,5 +1,6 @@
 export interface SessionUser {
-  id: string;
+  _id: string;
+  emailAddressVerified: boolean;
   firstName: string;
   lastName: string;
 }

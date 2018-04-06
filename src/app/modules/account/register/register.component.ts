@@ -43,6 +43,8 @@ export class RegisterComponent {
     }
 
     this.registerForm.disable();
+    this.errors = [];
+
     this.accountService
       .register(this.registerForm.value)
       .subscribe(

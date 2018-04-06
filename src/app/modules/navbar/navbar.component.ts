@@ -24,7 +24,7 @@ import { SessionUser } from '../session/session-user';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-  public currentUser: SessionUser;
+  public sessionUser: SessionUser;
   public routes: {
     path: string[];
     name: string;
@@ -43,28 +43,28 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.sessionService.userStream
       .takeUntil(this.ngUnsubscribe)
       .subscribe((sessionUser: SessionUser) => {
-        this.currentUser = sessionUser;
+        this.sessionUser = sessionUser;
         this.changeDetector.markForCheck();
       });
 
-      this.routes = [
-        {
-          name: 'GiftDibs',
-          path: ['/']
-        },
-        {
-          name: 'Users',
-          path: ['/users']
-        },
-        {
-          name: 'Wish lists',
-          path: ['/wish-lists']
-        },
-        {
-          name: 'Support',
-          path: ['/support']
-        }
-      ];
+    this.routes = [
+      {
+        name: 'GiftDibs',
+        path: ['/']
+      },
+      {
+        name: 'Users',
+        path: ['/users']
+      },
+      {
+        name: 'Wish lists',
+        path: ['/wish-lists']
+      },
+      {
+        name: 'Support',
+        path: ['/support']
+      }
+    ];
 
     // const FB = this.windowService.nativeWindow.FB;
 
@@ -73,34 +73,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     //   xfbml: false,
     //   version: 'v2.10'
     // });
-
-    // this.userSubscription = this.sessionService
-    //   .onUserChanges()
-    //   .subscribe((user: any) => {
-    //     // Allow the page to 'tick' once.
-    //     setTimeout(() => {
-    //       this.currentUser = user;
-
-    //       this.routes = [
-    //         {
-    //           name: 'GiftDibs',
-    //           path: ['/']
-    //         },
-    //         {
-    //           name: 'Users',
-    //           path: ['/users']
-    //         },
-    //         {
-    //           name: 'Wish lists',
-    //           path: ['/wish-lists']
-    //         },
-    //         {
-    //           name: 'Support',
-    //           path: ['/support']
-    //         }
-    //       ];
-    //     }, 0);
-    //   });
   }
 
   public ngOnDestroy(): void {
@@ -115,6 +87,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   public isLoggedIn(): boolean {
-    return (this.currentUser !== undefined);
+    return (this.sessionUser !== undefined);
   }
 }

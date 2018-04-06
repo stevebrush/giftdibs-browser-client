@@ -9,7 +9,7 @@ import { SessionUser } from './session-user';
 
 @Injectable()
 export class SessionService implements OnDestroy {
-  public userStream = new BehaviorSubject<SessionUser>(undefined);
+  public userStream = new BehaviorSubject<SessionUser>({} as any);
 
   public get token(): string {
     return this._token;
@@ -54,7 +54,7 @@ export class SessionService implements OnDestroy {
   }
 
   public isCurrentUser(userId: string): boolean {
-    return (this.user.id === userId);
+    return (this.user._id === userId);
   }
 
   public get isLoggedIn(): boolean {

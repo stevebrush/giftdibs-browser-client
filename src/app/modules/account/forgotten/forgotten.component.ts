@@ -37,13 +37,14 @@ export class ForgottenComponent {
       return;
     }
 
-    const formData = this.forgottenForm.value;
     this.forgottenForm.disable();
+    this.errors = [];
+
+    const formData = this.forgottenForm.value;
     this.accountService
       .forgotten(formData.emailAddress)
       .subscribe(
         (result: any) => {
-          this.errors = [];
           this.alertService.success(result.message);
           this.forgottenForm.reset();
           this.forgottenForm.enable();

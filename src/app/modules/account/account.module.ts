@@ -24,6 +24,8 @@ import { RegisterComponent } from './register/register.component';
 
 import { AccountService } from './account.service';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { VerifyAccountComponent } from './verify/verify.component';
+import { NoticeModule } from '../notice/notice.module';
 
 @NgModule({
   imports: [
@@ -32,13 +34,15 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     ReactiveFormsModule,
     FormFieldModule,
     PasswordViewerModule,
-    AccountRoutingModule
+    AccountRoutingModule,
+    NoticeModule
   ],
   declarations: [
     ForgottenComponent,
     LoginComponent,
     RegisterComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    VerifyAccountComponent
   ],
   providers: [
     AccountService,

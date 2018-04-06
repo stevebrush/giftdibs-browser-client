@@ -54,6 +54,7 @@ export class LoginComponent implements OnInit {
     }
 
     this.loginForm.disable();
+    this.errors = [];
 
     const formData = this.loginForm.value;
     this.accountService
@@ -61,7 +62,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (result: any) => {
           this.alertService.success(result.message, true);
-          this.router.navigate([this.redirectUrl]);
+          this.router.navigate([...this.redirectUrl.split('/')]);
         },
         (err: any) => {
           this.errors = err.error.errors;

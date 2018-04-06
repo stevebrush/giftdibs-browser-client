@@ -26,9 +26,9 @@
       *ngIf="isLoggedIn()">
       <li>
         <a
-          [routerLink]="['/users', currentUser._id]"
+          [routerLink]="['/users', sessionUser._id]"
           routerLinkActive="active">
-          {{ currentUser.firstName }}
+          {{ sessionUser.firstName }}
         </a>
       </li>
       <li>

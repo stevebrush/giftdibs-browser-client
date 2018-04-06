@@ -3,17 +3,23 @@ $gd-font-weight-bold: 700 !default;
 $gd-font-family: sans-serif !default;
 $gd-line-height: 1.5 !default;
 $gd-line-height-reduced: 1.2 !default;
-
 $gd-text-color: #555 !default;
-$gd-text-color-danger: #e60000 !default;
 
+// PRIMARY
+$gd-color-primary: #009933 !default;
+$gd-background-color-primary: $gd-color-primary !default;
+
+// SUCCESS
+$gd-color-success: $gd-color-primary !default;
+$gd-background-color-success: desaturate(lighten($gd-color-success, 62%), 25%) !default;
+$gd-border-color-success: darken($gd-color-success, 5%) !default;
+$gd-text-color-success: darken($gd-color-success, 5%) !default;
+
+// DANGER
+$gd-color-danger: #990000 !default;
+$gd-background-color-danger: desaturate(lighten($gd-color-danger, 62%), 25%) !default;
 $gd-border-color-danger: #e60000 !default;
-
-$gd-background-color-primary: #009933 !default;
-$gd-background-color-danger: #990000 !default;
-$gd-background-color-success: $gd-background-color-primary !default;
-
-$gd-background-color-reading: #fff !default;
+$gd-text-color-danger: $gd-border-color-danger !default;
 
 $gd-background-color-neutral: #e2e2e2 !default;
 $gd-border-color-neutral: darken($gd-background-color-neutral, 15%) !default;

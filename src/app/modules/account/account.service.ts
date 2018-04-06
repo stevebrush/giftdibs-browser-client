@@ -36,4 +36,12 @@ export class AccountService {
   public register(formData: any): Observable<any> {
     return this.http.post(`${this.resourceUrl}/register`, formData);
   }
+
+  public resendEmailAddressVerification(id: string): Observable<any> {
+    return this.http.post(`${this.resourceUrl}/resend-email-verification`, { id });
+  }
+
+  public verifyEmailAddress(emailAddressVerificationToken: string): Observable<any> {
+    return this.http.post(`${this.resourceUrl}/verify-email`, { emailAddressVerificationToken });
+  }
 }

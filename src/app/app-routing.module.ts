@@ -18,6 +18,10 @@ const appRoutes: Routes = [
     loadChildren: 'app/modules/account/account.module#AccountModule'
   },
   {
+    path: 'support',
+    loadChildren: 'app/modules/support/support.module#SupportModule'
+  },
+  {
     path: 'page-not-found',
     loadChildren: 'app/modules/page-not-found/page-not-found.module#PageNotFoundModule'
   },

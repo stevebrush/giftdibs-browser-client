@@ -44,7 +44,7 @@ export class AlertService implements OnDestroy {
   }
 
   public error(message: string, keepAfterNavigationChange?: boolean) {
-    this.sendMessage({ text: message, type: 'error' }, keepAfterNavigationChange);
+    this.sendMessage({ text: message, type: 'danger' }, keepAfterNavigationChange);
   }
 
   public info(message: string, keepAfterNavigationChange?: boolean) {

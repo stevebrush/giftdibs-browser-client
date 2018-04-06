@@ -85,17 +85,22 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     }
 
     this.resetPasswordForm.disable();
+    this.errors = [];
 
     const formData = this.resetPasswordForm.value;
     this.accountService
       .resetPassword(formData)
       .subscribe(
         (result: any) => {
-          this.alertService.success(result.message, true);
-          this.errors = [];
-          this.resetPasswordForm.reset();
-          this.resetPasswordForm.enable();
-          this.changeDetector.markForCheck();
+          if (this.hasToken) {
+            this.alertService.success(result.message, true);
+            this.router.navigate(['/account', 'login']);
+          } else {
+            this.alertService.success(result.message);
+            this.resetPasswordForm.reset();
+            this.resetPasswordForm.enable();
+            this.changeDetector.markForCheck();
+          }
         },
         (err: any) => {
           this.errors = err.error.errors;

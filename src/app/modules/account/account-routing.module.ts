@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ForgottenComponent } from './forgotten/forgotten.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { VerifyAccountComponent } from './verify/verify.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,14 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'verify/:emailAddressVerificationToken',
+    component: VerifyAccountComponent
+  },
+  {
+    path: 'verify',
+    component: VerifyAccountComponent
   }
 ];
 

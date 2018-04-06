@@ -17,9 +17,9 @@ import {
   Validators
 } from '@angular/forms';
 
-import { AuthenticationService } from './authentication.service';
-import { SessionService } from '../session/session.service';
-import { AlertService } from '../alert/alert.service';
+import { AccountService } from '../account.service';
+import { SessionService } from '../../session/session.service';
+import { AlertService } from '../../alert/alert.service';
 
 @Component({
   selector: 'gd-login',
@@ -32,12 +32,12 @@ export class LoginComponent implements OnInit {
   public redirectUrl: string;
 
   constructor(
+    private accountService: AccountService,
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
+    private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private formBuilder: FormBuilder,
-    private authenticationService: AuthenticationService,
     private sessionService: SessionService
   ) {
     this.createForm();
@@ -53,9 +53,10 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    const formData = this.loginForm.value;
     this.loginForm.disable();
-    this.authenticationService
+
+    const formData = this.loginForm.value;
+    this.accountService
       .login(formData.emailAddress, formData.password)
       .subscribe(
         (result: any) => {

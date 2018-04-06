@@ -17,22 +17,31 @@ import { FormFieldModule } from '../form-field/form-field.module';
 import { PasswordViewerModule } from '../password-viewer/password-viewer.module';
 import { AuthInterceptor } from '../session/authorization.interceptor';
 
-import { LoginRoutingModule } from './login-routing.module';
-import { LoginComponent } from './login.component';
-import { AuthenticationService } from './authentication.service';
+import { AccountRoutingModule } from './account-routing.module';
+import { ForgottenComponent } from './forgotten/forgotten.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+
+import { AccountService } from './account.service';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
-    LoginRoutingModule,
     ReactiveFormsModule,
     FormFieldModule,
-    PasswordViewerModule
+    PasswordViewerModule,
+    AccountRoutingModule
   ],
-  declarations: [LoginComponent],
+  declarations: [
+    ForgottenComponent,
+    LoginComponent,
+    RegisterComponent,
+    ResetPasswordComponent
+  ],
   providers: [
-    AuthenticationService,
+    AccountService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
@@ -40,4 +49,4 @@ import { AuthenticationService } from './authentication.service';
     }
   ]
 })
-export class LoginModule { }
+export class AccountModule { }

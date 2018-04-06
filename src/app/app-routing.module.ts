@@ -14,12 +14,8 @@ const appRoutes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'login',
-    loadChildren: 'app/modules/login/login.module#LoginModule'
-  },
-  {
-    path: 'register',
-    loadChildren: 'app/modules/registration/registration.module#RegistrationModule'
+    path: 'account',
+    loadChildren: 'app/modules/account/account.module#AccountModule'
   },
   {
     path: 'page-not-found',

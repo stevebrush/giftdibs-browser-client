@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { environment } from '../../../environments/environment';
 
 @Injectable()
-export class AuthenticationService {
+export class AccountService {
   private resourceUrl = environment.apiUrl + '/auth';
 
   constructor(
@@ -31,5 +31,9 @@ export class AuthenticationService {
   public resetPassword(formData: any): Observable<any> {
     return this.http.post<any>
       (`${this.resourceUrl}/reset-password`, formData);
+  }
+
+  public register(formData: any): Observable<any> {
+    return this.http.post(`${this.resourceUrl}/register`, formData);
   }
 }

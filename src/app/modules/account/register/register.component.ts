@@ -15,8 +15,8 @@ import {
   Validators
 } from '@angular/forms';
 
-import { RegistrationService } from './registration.service';
-import { AlertService } from '../alert/alert.service';
+import { AccountService } from '../account.service';
+import { AlertService } from '../../alert/alert.service';
 
 @Component({
   selector: 'gd-register',
@@ -28,11 +28,11 @@ export class RegisterComponent {
   public errors: any[] = [];
 
   constructor(
+    private accountService: AccountService,
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
-    private router: Router,
     private formBuilder: FormBuilder,
-    private registrationService: RegistrationService
+    private router: Router
   ) {
     this.createForm();
   }
@@ -43,13 +43,12 @@ export class RegisterComponent {
     }
 
     this.registerForm.disable();
-    this.registrationService
+    this.accountService
       .register(this.registerForm.value)
       .subscribe(
         (result: any) => {
           this.alertService.success(result.message, true);
-          this.router.navigate(['/login']);
-          this.registerForm.enable();
+          this.router.navigate(['/account', 'login']);
         },
         (err: any) => {
           const error = err.error;

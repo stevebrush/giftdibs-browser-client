@@ -13,6 +13,7 @@ import {
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/takeUntil';
 
+import { AlertService } from '../alert/alert.service';
 import { SessionService } from '../session/session.service';
 import { SessionUser } from '../session/session-user';
 
@@ -32,6 +33,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   private ngUnsubscribe = new Subject();
 
   constructor(
+    private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
     private router: Router,
     private sessionService: SessionService
@@ -108,7 +110,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   public logout(): void {
     this.sessionService.clearAll();
-    this.router.navigate(['/login']);
+    this.alertService.info('You have been successfully logged out.', true);
+    this.router.navigate(['/account', 'login']);
   }
 
   public isLoggedIn(): boolean {

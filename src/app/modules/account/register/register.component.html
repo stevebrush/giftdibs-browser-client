@@ -3,7 +3,7 @@
 </h1>
 
 <p>
-  Or <a routerLink="/login">log in to your account</a>
+  Or <a routerLink="/account/login">log in to your account</a>
 </p>
 
 <form
@@ -71,6 +71,7 @@
 
   <gd-form-field
     aria-hidden="true"
+    class="gd-screen-reader-only"
     [errors]="errors">
     <label
       class="gd-control-label"
@@ -85,7 +86,7 @@
   </gd-form-field>
 
   <p>
-    By creating an account, you agree to our <a href="">Terms of Service</a> and <a href="">Privacy Policy</a>.
+    By creating an account, you agree to our <a routerLink="/support/terms">Terms of Service</a> and <a routerLink="/support/privacy">Privacy Policy</a>.
   </p>
 
   <button

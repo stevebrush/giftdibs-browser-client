@@ -57,7 +57,7 @@ export class AuthInterceptor implements HttpInterceptor {
                 }
               };
               this.alertService.info('You must be logged in to view that page.');
-              this.router.navigate(['/login'], routerOptions);
+              this.router.navigate(['/account', 'login'], routerOptions);
             }
           }
         }

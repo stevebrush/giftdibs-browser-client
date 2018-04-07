@@ -1,0 +1,56 @@
+<h1>
+  Account settings
+</h1>
+
+<form
+  [formGroup]="settingsForm"
+  (ngSubmit)="submit()"
+  aria-label="Account settings"
+  novalidate>
+
+  <gd-form-field [errors]="errors">
+    <label
+      class="gd-control-label"
+      for="gd-settings-first-name">
+      First name
+    </label>
+    <input
+      type="text"
+      class="gd-form-control"
+      id="gd-settings-first-name"
+      formControlName="firstName">
+  </gd-form-field>
+
+  <gd-form-field [errors]="errors">
+    <label
+      class="gd-control-label"
+      for="gd-settings-last-name">
+      Last name
+    </label>
+    <input
+      type="text"
+      class="gd-form-control"
+      id="gd-settings-last-name"
+      formControlName="lastName">
+  </gd-form-field>
+
+  <gd-form-field [errors]="errors">
+    <label
+      class="gd-control-label"
+      for="gd-settings-email-address">
+      Email
+    </label>
+    <input
+      type="email"
+      class="gd-form-control"
+      id="gd-settings-email-address"
+      formControlName="emailAddress">
+  </gd-form-field>
+
+  <button
+    class="gd-button gd-button-primary"
+    type="submit"
+    [disabled]="settingsForm.disabled">
+    Save changes
+  </button>
+</form>

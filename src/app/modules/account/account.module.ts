@@ -26,6 +26,7 @@ import { AccountService } from './account.service';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { VerifyAccountComponent } from './verify/verify.component';
 import { NoticeModule } from '../notice/notice.module';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   imports: [
@@ -42,7 +43,8 @@ import { NoticeModule } from '../notice/notice.module';
     LoginComponent,
     RegisterComponent,
     ResetPasswordComponent,
-    VerifyAccountComponent
+    VerifyAccountComponent,
+    SettingsComponent
   ],
   providers: [
     AccountService,

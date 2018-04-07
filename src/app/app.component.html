@@ -1,12 +1,14 @@
 <gd-navbar></gd-navbar>
 
-<div *ngIf="sessionUser?.isLoggedIn && !sessionUser.emailAddressVerified">
-  Your email address is not verified. <a routerLink="/account/verify">Verify your account</a>
-</div>
-
 <gd-alert></gd-alert>
 
 <main class="gd-container">
+  <ng-template [ngIf]="sessionUser">
+    <gd-notice noticeType="danger" *ngIf="isLoggedIn && !sessionUser.emailAddressVerified">
+      Your account email address is not verified. <a class="gd-button gd-button-danger" routerLink="/account/verify">Verify your account</a>
+    </gd-notice>
+  </ng-template>
+
   <router-outlet>
   </router-outlet>
 </main>

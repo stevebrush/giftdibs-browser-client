@@ -19,6 +19,7 @@ import { SessionUser } from './modules/session/session-user';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit, OnDestroy {
+  public isLoggedIn = false;
   public sessionUser: SessionUser;
 
   private ngUnsubscribe = new Subject();
@@ -33,6 +34,8 @@ export class AppComponent implements OnInit, OnDestroy {
       .takeUntil(this.ngUnsubscribe)
       .subscribe((sessionUser: SessionUser) => {
         this.sessionUser = sessionUser;
+        this.isLoggedIn = this.sessionService.isLoggedIn;
+        console.log('session user:', this.sessionUser);
         this.changeDetector.markForCheck();
       });
   }

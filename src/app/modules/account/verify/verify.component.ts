@@ -43,7 +43,6 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
   public ngOnInit() {
     this.sessionUser = this.sessionService.user;
     this.isVerified = this.sessionUser.emailAddressVerified;
-    console.log('isVerified?', this.isVerified);
 
     this.route.params
       .takeUntil(this.ngUnsubscribe)
@@ -51,20 +50,22 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
         this.hasToken = (params.emailAddressVerificationToken !== undefined);
         this.changeDetector.markForCheck();
 
-        if (!this.hasToken) {
+        if (!this.hasToken || this.sessionService.user.emailAddressVerified) {
+          this.isLoading = false;
+          this.changeDetector.markForCheck();
           return;
         }
 
         this.accountService
           .verifyEmailAddress(params.emailAddressVerificationToken)
           .subscribe(
-            (data: any) => {
+            () => {
               this.isLoading = false;
               this.isVerified = true;
               this.sessionService.user.emailAddressVerified = true;
               this.changeDetector.markForCheck();
             },
-            (err: any) => {
+            () => {
               this.isLoading = false;
               this.isVerified = false;
               this.changeDetector.markForCheck();

@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SessionModule } from './modules/session/session.module';
 import { AlertModule } from './modules/alert/alert.module';
 import { NavbarModule } from './modules/navbar/navbar.module';
+import { NoticeModule } from './modules/notice/notice.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { NavbarModule } from './modules/navbar/navbar.module';
     AppRoutingModule,
     SessionModule,
     AlertModule,
-    NavbarModule
+    NavbarModule,
+    NoticeModule
   ],
   bootstrap: [
     AppComponent

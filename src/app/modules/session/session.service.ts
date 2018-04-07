@@ -21,6 +21,7 @@ export class SessionService implements OnDestroy {
   }
 
   public get user(): SessionUser {
+    console.log('get user:', this._user);
     return this._user;
   }
 
@@ -59,6 +60,20 @@ export class SessionService implements OnDestroy {
 
   public get isLoggedIn(): boolean {
     return (this.token !== undefined);
+  }
+
+  public patchUser(data: SessionUser): SessionUser {
+    const user = this.user;
+    Object.keys(user).forEach((key: keyof SessionUser) => {
+      console.log('patch:', data, key, data[key]);
+      if (data[key] !== undefined) {
+        user[key] = data[key];
+      }
+    });
+
+    this.user = user;
+
+    return this.user;
   }
 
   private save(): void {

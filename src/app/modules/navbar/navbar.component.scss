@@ -17,11 +17,13 @@
   > li {
     display: block;
 
-    > a {
+    > a,
+    ::ng-deep .gd-button-link {
       padding: 15px;
       display: block;
       color: #ddd;
       font-weight: 300;
+      border: 0;
 
       &:focus,
       &:hover,

@@ -8,6 +8,7 @@ import { RegisterComponent } from './register/register.component';
 import { ForgottenComponent } from './forgotten/forgotten.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { VerifyAccountComponent } from './verify/verify.component';
+import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
     component: ForgottenComponent
   },
   {
+    path: 'register',
+    component: RegisterComponent
+  },
+  {
     path: 'reset-password/:resetPasswordToken',
     component: ResetPasswordComponent
   },
@@ -28,21 +33,25 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'register',
-    component: RegisterComponent
-  },
-  {
     path: 'verify/:emailAddressVerificationToken',
-    component: VerifyAccountComponent
+    component: VerifyAccountComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'verify',
-    component: VerifyAccountComponent
+    component: VerifyAccountComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'settings',
+    component: SettingsComponent,
+    canActivate: [AuthGuard]
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class AccountRoutingModule { }

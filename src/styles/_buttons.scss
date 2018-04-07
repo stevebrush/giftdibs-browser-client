@@ -26,3 +26,15 @@
   background-color: $gd-background-color-primary;
   color: #fff;
 }
+
+.gd-button-danger {
+  background-color: #fff;
+  color: $gd-text-color-danger;
+  border-color: $gd-border-color-danger;
+}
+
+.gd-button-link {
+  padding: 0;
+  background-color: transparent;
+  font-weight: 900;
+}

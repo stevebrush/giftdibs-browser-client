@@ -11,6 +11,10 @@ import { SessionUser } from './session-user';
 export class SessionService implements OnDestroy {
   public userStream = new BehaviorSubject<SessionUser>({} as any);
 
+  public get isLoggedIn(): boolean {
+    return (this.token !== undefined);
+  }
+
   public get token(): string {
     return this._token;
   }
@@ -21,12 +25,12 @@ export class SessionService implements OnDestroy {
   }
 
   public get user(): SessionUser {
-    console.log('get user:', this._user);
     return this._user;
   }
 
   public set user(value: SessionUser) {
     this._user = value;
+    this.userStream.next(this.user);
     this.save();
   }
 
@@ -39,8 +43,12 @@ export class SessionService implements OnDestroy {
     const storage = JSON.parse(localStorage.getItem(this.storageKey));
 
     if (storage) {
-      this.user = storage.user;
-      this.token = storage.token;
+      if (storage.user && storage.token) {
+        this.user = storage.user;
+        this.token = storage.token;
+      } else {
+        this.clearAll();
+      }
     }
   }
 
@@ -58,14 +66,9 @@ export class SessionService implements OnDestroy {
     return (this.user._id === userId);
   }
 
-  public get isLoggedIn(): boolean {
-    return (this.token !== undefined);
-  }
-
   public patchUser(data: SessionUser): SessionUser {
     const user = this.user;
     Object.keys(user).forEach((key: keyof SessionUser) => {
-      console.log('patch:', data, key, data[key]);
       if (data[key] !== undefined) {
         user[key] = data[key];
       }
@@ -82,6 +85,5 @@ export class SessionService implements OnDestroy {
       token: this.token
     });
     localStorage.setItem(this.storageKey, parsed);
-    this.userStream.next(this.user);
   }
 }

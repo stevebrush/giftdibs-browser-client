@@ -12,7 +12,7 @@ import {
 } from '@angular/forms';
 
 import { AccountService } from '../account.service';
-import { AlertService } from '../../alert/alert.service';
+import { AlertService } from '../../../modules/alert/alert.service';
 
 @Component({
   selector: 'gd-forgotten',

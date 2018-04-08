@@ -22,8 +22,8 @@ import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/takeUntil';
 
 import { AccountService } from '../account.service';
-import { SessionService } from '../../session/session.service';
-import { AlertService } from '../../alert/alert.service';
+import { SessionService } from '../../../modules/session/session.service';
+import { AlertService } from '../../../modules/alert/alert.service';
 
 @Component({
   selector: 'gd-reset-password',

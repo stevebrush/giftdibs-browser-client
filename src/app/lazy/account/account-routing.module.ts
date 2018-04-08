@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AuthGuard } from '../session/authorization.guard';
+import { AuthGuard } from '../../modules/session/authorization.guard';
 
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -9,6 +9,7 @@ import { ForgottenComponent } from './forgotten/forgotten.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { VerifyAccountComponent } from './verify/verify.component';
 import { SettingsComponent } from './settings/settings.component';
+import { DeleteComponent } from './delete/delete.component';
 
 const routes: Routes = [
   {
@@ -45,6 +46,11 @@ const routes: Routes = [
   {
     path: 'settings',
     component: SettingsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'delete',
+    component: DeleteComponent,
     canActivate: [AuthGuard]
   }
 ];

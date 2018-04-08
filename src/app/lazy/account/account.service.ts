@@ -40,4 +40,11 @@ export class AccountService {
   public verifyEmailAddress(emailAddressVerificationToken: string): Observable<any> {
     return this.http.post(`${this.resourceUrl}/verify-email`, { emailAddressVerificationToken });
   }
+
+  public destroyWithPassword(userId: string, password: string): Observable<any> {
+    return this.http.post(`${this.resourceUrl}/delete-account`, {
+      password,
+      userId
+    });
+  }
 }

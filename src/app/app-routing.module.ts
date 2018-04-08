@@ -10,20 +10,20 @@ import {
 const appRoutes: Routes = [
   {
     path: '',
-    loadChildren: 'app/modules/home/home.module#HomeModule',
+    loadChildren: 'app/lazy/home/home.module#HomeModule',
     pathMatch: 'full'
   },
   {
     path: 'account',
-    loadChildren: 'app/modules/account/account.module#AccountModule'
+    loadChildren: 'app/lazy/account/account.module#AccountModule'
   },
   {
     path: 'support',
-    loadChildren: 'app/modules/support/support.module#SupportModule'
+    loadChildren: 'app/lazy/support/support.module#SupportModule'
   },
   {
     path: 'page-not-found',
-    loadChildren: 'app/modules/page-not-found/page-not-found.module#PageNotFoundModule'
+    loadChildren: 'app/lazy/page-not-found/page-not-found.module#PageNotFoundModule'
   },
   {
     path: '**',

@@ -12,11 +12,11 @@ import {
   Validators
 } from '@angular/forms';
 
-import { SessionService } from '../../session/session.service';
+import { SessionService } from '../../../modules/session/session.service';
 import { UserService } from '../../users/user.service';
 import { User } from '../../users/user';
 
-import { AlertService } from '../../alert/alert.service';
+import { AlertService } from '../../../modules/alert/alert.service';
 
 @Component({
   selector: 'gd-settings',
@@ -35,12 +35,12 @@ export class SettingsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private sessionService: SessionService,
     private userService: UserService
-  ) {
+  ) { }
+
+  public ngOnInit() {
     this.createForm();
     this.updateForm();
   }
-
-  public ngOnInit() {}
 
   public submit(): void {
     if (this.settingsForm.disabled) {

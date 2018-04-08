@@ -3,9 +3,10 @@
 </h1>
 
 <form
+  aria-label="Account settings"
+  class="gd-form"
   [formGroup]="settingsForm"
   (ngSubmit)="submit()"
-  aria-label="Account settings"
   novalidate>
 
   <gd-form-field [errors]="errors">
@@ -54,3 +55,6 @@
     Save changes
   </button>
 </form>
+
+<p><a routerLink="/account/reset-password">Change password...</a></p>
+<p><a routerLink="/account/delete">Delete account...</a></p>

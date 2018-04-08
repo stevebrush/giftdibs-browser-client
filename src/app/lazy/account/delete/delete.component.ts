@@ -1,14 +1,8 @@
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Component,
-  OnInit
+  Component
 } from '@angular/core';
-
-import {
-  ActivatedRoute,
-  Router
-} from '@angular/router';
 
 import {
   FormBuilder,
@@ -17,67 +11,63 @@ import {
   Validators
 } from '@angular/forms';
 
+import {
+  Router
+} from '@angular/router';
+
+import { AlertService } from '../../../modules/alert/alert.service';
+import { SessionService } from '../../../modules/session/session.service';
+
 import { AccountService } from '../account.service';
-import { SessionService } from '../../session/session.service';
-import { AlertService } from '../../alert/alert.service';
 
 @Component({
-  selector: 'gd-login',
-  templateUrl: './login.component.html',
+  selector: 'gd-delete',
+  templateUrl: './delete.component.html',
+  styleUrls: ['./delete.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoginComponent implements OnInit {
-  public loginForm: FormGroup;
+export class DeleteComponent {
+  public deleteAccountForm: FormGroup;
   public errors: any[] = [];
-  public redirectUrl: string;
 
   constructor(
     private accountService: AccountService,
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
     private sessionService: SessionService
   ) {
     this.createForm();
   }
 
-  public ngOnInit() {
-    this.sessionService.clearAll();
-    this.redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/';
-  }
-
   public submit(): void {
-    if (this.loginForm.disabled) {
+    if (this.deleteAccountForm.disabled) {
       return;
     }
 
-    this.loginForm.disable();
+    this.deleteAccountForm.disable();
     this.errors = [];
 
-    const formData = this.loginForm.value;
-    this.accountService
-      .login(formData.emailAddress, formData.password)
+    const formData = this.deleteAccountForm.value;
+    this.accountService.destroyWithPassword(this.sessionService.user._id, formData.password)
       .subscribe(
         (result: any) => {
+          this.sessionService.clearAll();
           this.alertService.success(result.message, true);
-          this.router.navigate([...this.redirectUrl.split('/')]);
+          this.router.navigate(['/account', 'login']);
         },
         (err: any) => {
           this.errors = err.error.errors;
           this.alertService.error(err.error.message);
-          this.loginForm.enable();
+          this.deleteAccountForm.enable();
           this.changeDetector.markForCheck();
         }
       );
   }
 
   private createForm(): void {
-    this.loginForm = this.formBuilder.group({
-      emailAddress: new FormControl(null, [
-        Validators.required
-      ]),
+    this.deleteAccountForm = this.formBuilder.group({
       password: new FormControl(null, [
         Validators.required
       ])

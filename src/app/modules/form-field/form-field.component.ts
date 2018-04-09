@@ -34,12 +34,15 @@ export class FormFieldComponent implements AfterContentInit, OnChanges {
 
   public ngAfterContentInit(): void {
     this.controlName.valueAccessor.registerOnTouched(() => {
+      this.errors = [];
+      this.changeDetector.markForCheck();
       this.getErrorMessages();
     });
   }
 
   public ngOnChanges(changes: any): void {
     if (changes.errors && changes.errors.currentValue) {
+      console.log('errors?', changes.errors.currentValue);
       this.handleErrors(changes.errors.currentValue);
     }
   }

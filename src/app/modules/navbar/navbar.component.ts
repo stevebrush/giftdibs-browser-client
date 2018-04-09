@@ -51,19 +51,19 @@ export class NavbarComponent implements OnInit, OnDestroy {
       {
         name: 'GiftDibs',
         path: ['/']
-      },
-      {
-        name: 'Users',
-        path: ['/users']
-      },
-      {
-        name: 'Wish lists',
-        path: ['/wish-lists']
-      },
-      {
-        name: 'Support',
-        path: ['/support']
       }
+      // {
+      //   name: 'Users',
+      //   path: ['/users']
+      // },
+      // {
+      //   name: 'Wish lists',
+      //   path: ['/wish-lists']
+      // },
+      // {
+      //   name: 'Support',
+      //   path: ['/support']
+      // }
     ];
 
     // const FB = this.windowService.nativeWindow.FB;
@@ -87,6 +87,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   public isLoggedIn(): boolean {
-    return (this.sessionUser !== undefined);
+    return this.sessionService.isLoggedIn;
   }
 }

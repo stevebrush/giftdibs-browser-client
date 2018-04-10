@@ -1,0 +1,40 @@
+@import './mixins';
+
+.gd-button {
+  @include gd_form_control();
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+  color: $gd-text-color;
+  user-select: none;
+  cursor: pointer;
+
+  &:disabled {
+    @include gd_disabled();
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.gd-button-default {
+  background-color: $gd-background-color-neutral;
+}
+
+.gd-button-primary {
+  background-color: $gd-background-color-primary;
+  color: #fff;
+}
+
+.gd-button-danger {
+  background-color: #fff;
+  color: $gd-text-color-danger;
+  border-color: $gd-border-color-danger;
+}
+
+.gd-button-link {
+  padding: 0;
+  background-color: transparent;
+  font-weight: 900;
+}

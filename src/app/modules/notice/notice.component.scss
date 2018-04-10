@@ -1,0 +1,20 @@
+@import '../../../styles/variables';
+
+.gd-notice {
+  padding: 15px 20px;
+  color: $gd-text-color;
+  background-color: #fff;
+  margin: $gd-spacing 0;
+  border-radius: $gd-border-radius-sm;
+  font-weight: normal;
+}
+
+.gd-notice-danger {
+  background-color: $gd-background-color-danger;
+  color: $gd-text-color-danger;
+}
+
+.gd-notice-success {
+  background-color: $gd-background-color-success;
+  color: $gd-text-color-success;
+}

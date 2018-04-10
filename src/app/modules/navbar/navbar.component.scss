@@ -1,0 +1,43 @@
+@import '../../../styles/mixins';
+
+.gd-navbar {
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+  margin-bottom: $gd-spacing * 2;
+}
+
+.gd-container {
+  display: flex;
+}
+
+.gd-navbar-menu {
+  flex: 1 0 auto;
+  display: inline-flex;
+  align-items: baseline;
+
+  > li {
+    display: block;
+
+    > a,
+    ::ng-deep .gd-button-link {
+      padding: 15px;
+      display: block;
+      font-weight: 300;
+      border: 0;
+
+      &:focus,
+      &:hover,
+      &.active {
+        text-decoration: underline;
+      }
+
+      &.active {
+        cursor: default;
+      }
+    }
+  }
+}
+
+.gd-navbar-menu-user {
+  justify-content: flex-end;
+}

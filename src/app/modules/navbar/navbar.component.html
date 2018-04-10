@@ -1,0 +1,77 @@
+<nav
+  aria-labelledby="gd-primary-nav"
+  class="gd-navbar">
+
+  <div class="gd-container">
+    <h2
+      class="gd-screen-reader-only"
+      id="gd-primary-nav">
+      Primary site navigation
+    </h2>
+
+    <ul
+      class="gd-navbar-menu">
+      <li *ngFor="let route of routes">
+        <a
+          [routerLink]="route.path"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">
+          {{ route.name }}
+        </a>
+      </li>
+    </ul>
+
+    <ul
+      class="gd-navbar-menu gd-navbar-menu-user"
+      *ngIf="isLoggedIn()">
+      <li>
+        <a
+          [routerLink]="['/users', sessionUser._id]"
+          routerLinkActive="active">
+          {{ sessionUser.firstName }}
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/dibs"
+          routerLinkActive="active">
+          Dibs
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/account/settings"
+          routerLinkActive="active">
+          Settings
+        </a>
+      </li>
+      <li>
+        <button
+          type="button"
+          class="gd-button gd-button-link"
+          (click)="logout()">
+          Log out
+        </button>
+      </li>
+    </ul>
+
+    <ul
+      class="gd-navbar-menu gd-navbar-menu-user"
+      *ngIf="!isLoggedIn()">
+      <li>
+        <a
+          routerLink="/account/register"
+          routerLinkActive="active">
+          Sign up
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/account/login"
+          routerLinkActive="active">
+          Log in
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,17 @@
+@import '../../../styles/variables';
+
+.gd-alert {
+  padding: $gd-spacing ($gd-spacing * 2);
+  color: #fff;
+  background-color: $gd-text-color;
+  margin-top: -$gd-spacing * 2;
+  margin-bottom: $gd-spacing * 2;
+}
+
+.gd-alert-danger {
+  background-color: $gd-color-danger;
+}
+
+.gd-alert-success {
+  background-color: $gd-color-success;
+}

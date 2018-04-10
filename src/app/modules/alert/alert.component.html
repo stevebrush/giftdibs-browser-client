@@ -1,0 +1,7 @@
+<div
+  class="gd-alert"
+  role="alert"
+  *ngIf="alert"
+  [ngClass]="'gd-alert-' + alert.type">
+  {{ alert.text }}
+</div>

@@ -22,6 +22,12 @@ export class UserService {
     private http: HttpClient
   ) { }
 
+  public getAll(): Observable<User[]> {
+    return this.http.get(this.resourceUrl)
+      .map((result: any) => result.data.users)
+      .share();
+  }
+
   public getById(id: string): Observable<User> {
     return this.http.get(`${this.resourceUrl}/${id}`)
       .map((result: any) => result.data.user)

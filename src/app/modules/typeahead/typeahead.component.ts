@@ -6,8 +6,8 @@ import {
   ElementRef,
   Input,
   OnDestroy,
-  OnInit,
-  ViewChild
+  ViewChild,
+  TemplateRef
 } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
@@ -19,6 +19,11 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/map';
 
 import { TypeaheadSearchFunction } from './typeahead-search-function';
+import { TypeaheadResultsComponent } from './typeahead-results.component';
+
+import { OverlayService } from '../overlay/overlay.service';
+import { OverlayInstance } from '../overlay/overlay-instance';
+import { TypeaheadResultsContext } from './typeahead-results-context';
 
 @Component({
   selector: 'gd-typeahead',
@@ -26,7 +31,7 @@ import { TypeaheadSearchFunction } from './typeahead-search-function';
   styleUrls: ['./typeahead.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TypeaheadComponent implements OnInit, AfterViewInit, OnDestroy {
+export class TypeaheadComponent implements AfterViewInit, OnDestroy {
   @Input()
   public ariaDescribedBy: string;
 
@@ -36,18 +41,21 @@ export class TypeaheadComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input()
   public searchFunction: TypeaheadSearchFunction<any>;
 
+  @Input()
+  public searchResultTemplate: TemplateRef<any>;
+
   public results: any[] = [];
 
   @ViewChild('searchInput')
   private searchInput: ElementRef;
 
   private ngUnsubscribe = new Subject();
+  private overlayInstance: OverlayInstance<TypeaheadResultsComponent>;
 
   constructor(
-    private changeDetector: ChangeDetectorRef
+    private changeDetector: ChangeDetectorRef,
+    private overlayService: OverlayService
   ) { }
-
-  public ngOnInit() { }
 
   public ngAfterViewInit() {
     const element = this.searchInput.nativeElement;
@@ -68,12 +76,29 @@ export class TypeaheadComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private search(searchText: string) {
-    console.log('search()', searchText);
     this.searchFunction.call({}, searchText)
       .then((results: any[]) => {
-        console.log('search results:', results);
         this.results = results;
-        this.changeDetector.markForCheck();
+        this.showResults();
       });
+  }
+
+  private showResults() {
+    if (this.overlayInstance) {
+      this.overlayInstance.destroy();
+    }
+
+    const resultsContext = new TypeaheadResultsContext();
+    resultsContext.results = this.results;
+    resultsContext.templateRef = this.searchResultTemplate;
+
+    this.overlayInstance = this.overlayService.open(TypeaheadResultsComponent, {
+      showBackdrop: true,
+      providers: [
+        { provide: TypeaheadResultsContext, useValue: resultsContext }
+      ]
+    });
+
+    this.changeDetector.markForCheck();
   }
 }

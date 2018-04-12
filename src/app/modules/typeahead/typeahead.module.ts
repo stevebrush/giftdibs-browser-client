@@ -1,18 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TypeaheadComponent } from './typeahead.component';
-import { DropdownModule } from '../dropdown/dropdown.module';
+import { TypeaheadResultsComponent } from './typeahead-results.component';
 
 @NgModule({
   imports: [
-    CommonModule,
-    DropdownModule
+    CommonModule
   ],
   exports: [
     TypeaheadComponent
   ],
   declarations: [
-    TypeaheadComponent
+    TypeaheadComponent,
+    TypeaheadResultsComponent
+  ],
+  entryComponents: [
+    TypeaheadResultsComponent
   ]
 })
 export class TypeaheadModule { }

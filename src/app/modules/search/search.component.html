@@ -2,10 +2,15 @@
   class="gd-search">
   <gd-typeahead
     [ariaDescribedBy]="'gd-search-a11y-description-' + elementId"
-    [searchFunction]="searchFunction">
+    [searchFunction]="searchFunction"
+    [searchResultTemplate]="searchResultTemplate">
   </gd-typeahead>
 </div>
 
 <div class="gd-screen-reader-only" id="gd-search-a11y-description-{{ elementId }}">
   When search results are found, use the up and down arrow keys to review and the enter key to select.
 </div>
+
+<ng-template #searchResultTemplate let-result="result">
+  <a routerLink="/users/{{ result._id }}">{{ result.firstName }} {{ result.lastName }}</a>
+</ng-template>

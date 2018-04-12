@@ -12,6 +12,7 @@ import { SessionModule } from './modules/session/session.module';
 import { AlertModule } from './modules/alert/alert.module';
 import { NavbarModule } from './modules/navbar/navbar.module';
 import { VerifyEmailNoticeModule } from './modules/verify-email-notice/verify-email-notice.module';
+import { OverlayModule } from './modules/overlay/overlay.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { VerifyEmailNoticeModule } from './modules/verify-email-notice/verify-em
     SessionModule,
     AlertModule,
     NavbarModule,
+    OverlayModule,
     VerifyEmailNoticeModule
   ],
   bootstrap: [

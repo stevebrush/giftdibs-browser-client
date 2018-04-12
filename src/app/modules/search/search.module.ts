@@ -11,6 +11,10 @@ import {
   HttpClientModule
 } from '@angular/common/http';
 
+import {
+  RouterModule
+} from '@angular/router';
+
 import { AuthInterceptor } from '../session/authorization.interceptor';
 import { TypeaheadModule } from '../typeahead/typeahead.module';
 
@@ -20,7 +24,8 @@ import { SearchComponent } from './search.component';
   imports: [
     CommonModule,
     HttpClientModule,
-    TypeaheadModule
+    TypeaheadModule,
+    RouterModule
   ],
   exports: [
     SearchComponent

@@ -1,0 +1,13 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.gd-typeahead-results {
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 0 50px rgba(0,0,0,0.4);
+}

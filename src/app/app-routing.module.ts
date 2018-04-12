@@ -7,6 +7,8 @@ import {
   RouterModule
 } from '@angular/router';
 
+import { AuthGuard } from './modules/session/authorization.guard';
+
 const appRoutes: Routes = [
   {
     path: '',
@@ -20,6 +22,11 @@ const appRoutes: Routes = [
   {
     path: 'support',
     loadChildren: 'app/lazy/support/support.module#SupportModule'
+  },
+  {
+    path: 'users',
+    loadChildren: 'app/lazy/users/users.module#UsersModule',
+    canLoad: [AuthGuard]
   },
   {
     path: 'page-not-found',
@@ -37,6 +44,9 @@ const appRoutes: Routes = [
   ],
   exports: [
     RouterModule
+  ],
+  providers: [
+    AuthGuard
   ]
 })
 export class AppRoutingModule { }

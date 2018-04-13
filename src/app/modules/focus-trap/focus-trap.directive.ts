@@ -54,7 +54,6 @@ export class FocusTrapDirective implements AfterContentInit, OnDestroy {
 
   public ngAfterContentInit() {
     if (this.focusFirstOnLoad) {
-      console.log('focus first!');
       this.activateTrap();
       this.focusActiveElement();
     }

@@ -1,12 +1,16 @@
 @import '../../../styles/variables';
 
 .gd-notice {
-  padding: 15px 20px;
+  padding: $gd-spacing-padding-squish;
   color: $gd-text-color;
   background-color: #fff;
   margin: $gd-spacing 0;
   border-radius: $gd-border-radius-sm;
   font-weight: normal;
+
+  ::ng-deep p {
+    margin: $gd-spacing-sm 0;
+  }
 }
 
 .gd-notice-danger {

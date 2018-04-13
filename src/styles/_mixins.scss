@@ -7,7 +7,7 @@
   border-radius: $gd-border-radius;
   vertical-align: baseline;
   font-weight: normal;
-  padding: .375rem .75rem;
+  padding: $gd-spacing-padding-squish-compact;
 }
 
 @mixin gd_disabled() {

@@ -1,7 +1,13 @@
 @import '../../../styles/mixins';
 
 .gd-form-field {
-  margin: 1rem 0;
+  margin: $gd-spacing 0;
+
+  ::ng-deep {
+    .gd-form-field {
+      margin-bottom: $gd-spacing-xs;
+    }
+  }
 }
 
 .gd-form-field-has-error {

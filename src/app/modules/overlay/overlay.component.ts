@@ -62,7 +62,8 @@ export class OverlayComponent implements OnInit {
 
     let backdropRef: EmbeddedViewRef<any>;
     if (settings.showBackdrop) {
-      backdropRef = this.targetRef.createEmbeddedView(this.backdropRef);
+      const index = this.targetRef.indexOf(componentRef.hostView);
+      backdropRef = this.targetRef.createEmbeddedView(this.backdropRef, undefined, index);
     }
 
     overlayInstance.componentInstance = componentRef.instance;

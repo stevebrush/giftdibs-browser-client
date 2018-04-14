@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate, CanLoad {
     private sessionService: SessionService
   ) { }
 
-  public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     return this.validateOrRedirect(state.url);
   }
 

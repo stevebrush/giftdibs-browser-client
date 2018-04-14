@@ -28,7 +28,7 @@ export class SearchComponent implements OnInit {
     autoIncrementedId++;
     this.elementId = autoIncrementedId;
     this.searchFunction = (searchText: string) => {
-      return this.searchService.searchUsers(searchText).toPromise();
+      return this.searchService.searchUsers(searchText);
     };
   }
 

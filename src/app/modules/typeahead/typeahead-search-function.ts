@@ -1,1 +1,3 @@
-export type TypeaheadSearchFunction<T> = (searchText: string) => Promise<T[]>;
+import { Observable } from 'rxjs/Observable';
+
+export type TypeaheadSearchFunction<T> = (searchText: string) => Observable<T[]>;

@@ -37,7 +37,7 @@ export class OverlayService implements OnDestroy {
     return this.host;
   }
 
-  public open<T>(component: Type<T>, config?: OverlayConfig): OverlayInstance<T> {
+  public attach<T>(component: Type<T>, config?: OverlayConfig): OverlayInstance<T> {
     this.ensureHostExists();
     return this.host.instance.attach(component, config);
   }

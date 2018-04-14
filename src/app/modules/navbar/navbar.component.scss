@@ -5,20 +5,24 @@
   border-bottom: 1px solid #eee;
   margin-bottom: $gd-spacing-lg;
   padding: $gd-spacing-padding-squish;
+  padding-left: $gd-spacing-lg;
+  padding-right: $gd-spacing-lg;
   display: flex;
-  font-size: 85%;
+}
 
-  > * {
-    flex: 0 0 auto;
-  }
+.gd-navbar-primary,
+.gd-navbar-secondary {
+  flex: 0 0 auto;
+}
 
-  ::ng-deep {
-    gd-search {
-      flex: 1 1 auto !important;
-      padding-left: $gd-spacing-md * 2;
-      padding-right: $gd-spacing-md * 2;
-    }
-  }
+.gd-navbar-secondary {
+  justify-content: flex-end;
+}
+
+.gd-navbar-search {
+  flex: 1 1 auto;
+  padding-left: $gd-spacing-md * 2;
+  padding-right: $gd-spacing-md * 2;
 }
 
 .gd-navbar-menu {
@@ -31,7 +35,7 @@
   > li {
 
     > a,
-    ::ng-deep .gd-button-link {
+    .gd-button-link {
       color: $gd-text-color-deemphasized;
 
       &:focus,
@@ -46,8 +50,4 @@
       }
     }
   }
-}
-
-.gd-navbar-menu-user {
-  justify-content: flex-end;
 }

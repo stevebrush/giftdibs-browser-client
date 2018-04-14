@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   OnInit,
   TemplateRef
 } from '@angular/core';
@@ -20,6 +21,7 @@ export class TypeaheadResultsComponent implements OnInit {
   public templateRef: TemplateRef<any>;
 
   constructor(
+    public elementRef: ElementRef,
     private context: TypeaheadResultsContext,
     private overlay: OverlayInstance<any>
   ) { }

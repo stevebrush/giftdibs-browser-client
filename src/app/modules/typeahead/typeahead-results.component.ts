@@ -42,7 +42,7 @@ export class TypeaheadResultsComponent implements OnInit {
     this.close();
   }
 
-  private close() {
+  public close() {
     this.overlay.destroy();
   }
 }

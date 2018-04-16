@@ -1,11 +1,11 @@
 @import '../../../styles/variables';
 
 .gd-alert {
-  padding: $gd-spacing ($gd-spacing * 2);
+  padding: $gd-spacing-padding-squish;
   color: #fff;
   background-color: $gd-text-color;
-  margin-top: -$gd-spacing * 2;
-  margin-bottom: $gd-spacing * 2;
+  margin-top: -$gd-spacing-lg;
+  margin-bottom: $gd-spacing-lg;
 }
 
 .gd-alert-danger {

@@ -8,6 +8,7 @@
   color: $gd-text-color;
   user-select: none;
   cursor: pointer;
+  font-weight: 600;
 
   &:disabled {
     @include gd_disabled();
@@ -34,7 +35,9 @@
 }
 
 .gd-button-link {
-  padding: 0;
   background-color: transparent;
-  font-weight: 900;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }

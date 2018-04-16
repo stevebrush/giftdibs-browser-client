@@ -1,0 +1,10 @@
+<div class="gd-typeahead-results">
+  <ul (click)="close()">
+    <li *ngFor="let result of results">
+      <ng-container
+        *ngTemplateOutlet="templateRef; context: { result: result }"
+        (click)="onContainerClick()">
+      </ng-container>
+    </li>
+  </ul>
+</div>

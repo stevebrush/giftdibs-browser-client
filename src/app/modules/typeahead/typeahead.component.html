@@ -1,0 +1,10 @@
+<div class="gd-typeahead">
+  <input
+    type="text"
+    class="gd-form-control"
+    autocomplete="off"
+    [placeholder]="placeholder"
+    [attr.aria-describedby]="ariaDescribedBy"
+    (focus)="searchInput.select()"
+    #searchInput>
+</div>

@@ -1,9 +1,9 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
-  OnInit,
   OnDestroy,
-  ChangeDetectorRef
+  OnInit
 } from '@angular/core';
 
 import {
@@ -39,7 +39,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private sessionService: SessionService
   ) { }
 
-  public ngOnInit(): void {
+  public ngOnInit() {
     this.sessionService.userStream
       .takeUntil(this.ngUnsubscribe)
       .subscribe((sessionUser: SessionUser) => {
@@ -52,35 +52,15 @@ export class NavbarComponent implements OnInit, OnDestroy {
         name: 'GiftDibs',
         path: ['/']
       }
-      // {
-      //   name: 'Users',
-      //   path: ['/users']
-      // },
-      // {
-      //   name: 'Wish lists',
-      //   path: ['/wish-lists']
-      // },
-      // {
-      //   name: 'Support',
-      //   path: ['/support']
-      // }
     ];
-
-    // const FB = this.windowService.nativeWindow.FB;
-
-    // FB.init({
-    //   appId: '529193240473948',
-    //   xfbml: false,
-    //   version: 'v2.10'
-    // });
   }
 
-  public ngOnDestroy(): void {
+  public ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
 
-  public logout(): void {
+  public logout() {
     this.sessionService.clearAll();
     this.alertService.info('You have been successfully logged out.', true);
     this.router.navigate(['/account', 'login']);

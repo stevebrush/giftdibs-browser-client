@@ -2,42 +2,52 @@
 
 .gd-navbar {
   background-color: #fff;
-  border-bottom: 1px solid #eee;
-  margin-bottom: $gd-spacing * 2;
+  border-bottom: 1px solid $gd-background-color-neutral;
+  margin-bottom: $gd-spacing-lg;
+  padding: $gd-spacing-padding-squish;
+  padding-left: $gd-spacing-lg;
+  padding-right: $gd-spacing-lg;
+  display: flex;
 }
 
-.gd-container {
-  display: flex;
+.gd-navbar-primary,
+.gd-navbar-secondary {
+  flex: 0 0 auto;
+}
+
+.gd-navbar-secondary {
+  justify-content: flex-end;
+}
+
+.gd-navbar-search {
+  flex: 1 1 auto;
+  padding-left: $gd-spacing-md * 2;
+  padding-right: $gd-spacing-md * 2;
 }
 
 .gd-navbar-menu {
   flex: 1 0 auto;
   display: inline-flex;
   align-items: baseline;
+  margin-left: -$gd-spacing-md;
+  margin-right: -$gd-spacing-md;
 
   > li {
-    display: block;
 
     > a,
-    ::ng-deep .gd-button-link {
-      padding: 15px;
-      display: block;
-      font-weight: 300;
-      border: 0;
+    .gd-button-link {
+      color: $gd-text-color-deemphasized;
 
       &:focus,
-      &:hover,
-      &.active {
-        text-decoration: underline;
+      &:hover {
+        color: $gd-text-color;
+        text-decoration: none;
       }
 
       &.active {
         cursor: default;
+        color: $gd-text-color;
       }
     }
   }
-}
-
-.gd-navbar-menu-user {
-  justify-content: flex-end;
 }

@@ -13,33 +13,38 @@
   aria-label="New user registration information"
   novalidate>
 
-  <gd-form-field [errors]="errors">
-    <label
-      class="gd-control-label"
-      for="gd-register-first-name">
-      First name
-    </label>
-    <input
-      type="text"
-      class="gd-form-control"
-      id="gd-register-first-name"
-      formControlName="firstName"
-      autocomplete="off">
-  </gd-form-field>
-
-  <gd-form-field [errors]="errors">
-    <label
-      class="gd-control-label"
-      for="gd-register-last-name">
-      Last name
-    </label>
-    <input
-      type="text"
-      class="gd-form-control"
-      id="gd-register-last-name"
-      formControlName="lastName"
-      autocomplete="off">
-  </gd-form-field>
+  <gd-row>
+    <gd-column screenSmall="6">
+      <gd-form-field [errors]="errors">
+        <label
+          class="gd-control-label"
+          for="gd-register-first-name">
+          First name
+        </label>
+        <input
+          type="text"
+          class="gd-form-control"
+          id="gd-register-first-name"
+          formControlName="firstName"
+          autocomplete="off">
+      </gd-form-field>
+    </gd-column>
+    <gd-column screenSmall="6">
+      <gd-form-field [errors]="errors">
+        <label
+          class="gd-control-label"
+          for="gd-register-last-name">
+          Last name
+        </label>
+        <input
+          type="text"
+          class="gd-form-control"
+          id="gd-register-last-name"
+          formControlName="lastName"
+          autocomplete="off">
+      </gd-form-field>
+    </gd-column>
+  </gd-row>
 
   <gd-form-field [errors]="errors">
     <label

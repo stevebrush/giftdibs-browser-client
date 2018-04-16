@@ -16,6 +16,14 @@ $gd-spacing-xs: 0.250rem !default;
 $gd-spacing-padding-squish: $gd-spacing-md $gd-spacing !default;
 $gd-spacing-padding-squish-compact: $gd-spacing-sm $gd-spacing-md !default;
 
+$gd-screen-sm-min: 768px;
+$gd-screen-md-min: 992px;
+$gd-screen-lg-min: 1200px;
+
+$gd-screen-xs-max: $gd-screen-sm-min - 1;
+$gd-screen-sm-max: $gd-screen-md-min - 1;
+$gd-screen-md-max: $gd-screen-lg-min - 1;
+
 // PRIMARY
 $gd-color-primary: #009933 !default;
 $gd-background-color-primary: $gd-color-primary !default;

@@ -11,7 +11,7 @@ import 'rxjs/add/operator/map';
 
 import { environment } from '../../../environments/environment';
 
-import { User } from '../../lazy/users/user';
+import { User } from '../../features/users/user';
 
 @Injectable()
 export class SearchService {

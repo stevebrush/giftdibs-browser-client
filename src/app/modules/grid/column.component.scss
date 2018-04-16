@@ -1,0 +1,32 @@
+@import '../../../styles/mixins';
+
+$num-columns: 12;
+
+@mixin create_columns($screen-size: sm) {
+  @for $i from 1 through $num-columns {
+    :host.gd-column-#{$screen-size}-#{$i} {
+      width: ($i / $num-columns) * 100%;
+    }
+  }
+}
+
+:host.gd-column {
+  padding-right: $gd-spacing-md;
+  padding-left: $gd-spacing-md;
+  width: 100%;
+  min-height: 1px;
+}
+
+@include create_columns(xs);
+
+@media (min-width: $gd-screen-sm-min) {
+  @include create_columns(sm);
+}
+
+@media (min-width: $gd-screen-md-min) {
+  @include create_columns(md);
+}
+
+@media (min-width: $gd-screen-lg-min) {
+  @include create_columns(lg);
+}

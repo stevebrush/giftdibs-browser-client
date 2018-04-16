@@ -27,16 +27,18 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { VerifyAccountComponent } from './verify/verify.component';
 import { SettingsComponent } from './settings/settings.component';
 import { DeleteComponent } from './delete/delete.component';
+import { GridModule } from '../../modules/grid/grid.module';
 
 @NgModule({
   imports: [
-    CommonModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    FormFieldModule,
-    PasswordViewerModule,
     AccountRoutingModule,
-    NoticeModule
+    CommonModule,
+    FormFieldModule,
+    GridModule,
+    HttpClientModule,
+    NoticeModule,
+    PasswordViewerModule,
+    ReactiveFormsModule
   ],
   declarations: [
     ForgottenComponent,

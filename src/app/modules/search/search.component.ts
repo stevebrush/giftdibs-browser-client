@@ -3,7 +3,7 @@ import {
   Component
 } from '@angular/core';
 
-import { User } from '../../lazy/users/user';
+import { User } from '../../features/users/user';
 
 import { TypeaheadSearchFunction } from '../typeahead/typeahead-search-function';
 

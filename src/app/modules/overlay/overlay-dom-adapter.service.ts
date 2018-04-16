@@ -21,13 +21,11 @@ export class OverlayDomAdapterService {
   public appendToBody(element: any): void {
     const body = this.windowRef.nativeWindow.document.body;
     this.renderer.appendChild(body, element);
-    // this.renderer.setStyle(body, 'overflow', 'hidden');
   }
 
   public removeHostElement(): void {
     const documentObj = this.windowRef.nativeWindow.document;
     const hostElement = document.querySelector('gd-overlay');
     this.renderer.removeChild(documentObj.body, hostElement);
-    // this.renderer.removeStyle(documentObj.body, 'overflow');
   }
 }

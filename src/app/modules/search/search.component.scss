@@ -1,1 +1,24 @@
-.gd-search {}
+@import '../../../styles/mixins';
+
+.gd-search-result {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding: $gd-spacing-padding-squish;
+
+  &:hover {
+    background-color: $gd-background-color-neutral-lightest;
+  }
+}
+
+.gd-search-result-thumbnail {
+  width: 2rem;
+  height: 2rem;
+  flex: 0 0 auto;
+  margin-right: $gd-spacing-sm;
+  background-color: $gd-background-color-neutral;
+}
+
+.gd-search-result-content {
+  flex: 1 1 auto;
+}

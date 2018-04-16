@@ -8,12 +8,24 @@
   </gd-typeahead>
 </div>
 
-<div class="gd-screen-reader-only" id="gd-search-a11y-description-{{ elementId }}">
+<div
+  class="gd-screen-reader-only"
+  id="gd-search-a11y-description-{{ elementId }}">
   When search results are found, use the up and down arrow keys to review, and the enter key to select.
 </div>
 
-<ng-template #searchResultTemplate let-result="result">
-  <a routerLink="/users/{{ result._id }}">
-    {{ result.firstName }} {{ result.lastName }}
+<ng-template
+  #searchResultTemplate
+  let-result="result">
+  <a
+    class="gd-search-result"
+    routerLink="/users/{{ result._id }}">
+    <div
+      class="gd-search-result-thumbnail gd-circle"
+      aria-hidden="true">
+    </div>
+    <div class="gd-search-result-content">
+      {{ result.firstName }} {{ result.lastName }}
+    </div>
   </a>
 </ng-template>

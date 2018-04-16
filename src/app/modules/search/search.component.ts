@@ -1,11 +1,11 @@
 import {
   ChangeDetectionStrategy,
-  Component,
-  OnInit
+  Component
 } from '@angular/core';
 
-import { TypeaheadSearchFunction } from '../typeahead/typeahead-search-function';
 import { User } from '../../lazy/users/user';
+
+import { TypeaheadSearchFunction } from '../typeahead/typeahead-search-function';
 
 import { SearchService } from './search.service';
 
@@ -18,19 +18,17 @@ let autoIncrementedId = 0;
   providers: [SearchService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent {
   public elementId: number;
-  public searchFunction: TypeaheadSearchFunction<User>;
 
   constructor(
     private searchService: SearchService
   ) {
     autoIncrementedId++;
     this.elementId = autoIncrementedId;
-    this.searchFunction = (searchText: string) => {
-      return this.searchService.searchUsers(searchText);
-    };
   }
 
-  public ngOnInit() { }
+  public searchFunction: TypeaheadSearchFunction<User> = (searchText: string) => {
+    return this.searchService.searchUsers(searchText);
+  }
 }

@@ -11,5 +11,6 @@ export class OverlayInstance<T> {
 
   public destroy() {
     this.destroyStream.next();
+    this.destroyStream.complete();
   }
 }

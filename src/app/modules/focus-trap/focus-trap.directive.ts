@@ -43,9 +43,9 @@ export class FocusTrapDirective implements AfterContentInit, OnDestroy {
     }
   }
 
+  private _tabIndex = 0;
   private focusableElements: any[];
   private isActive = false;
-  private _tabIndex = 0;
   private observer: MutationObserver;
 
   constructor(

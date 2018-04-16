@@ -1,5 +1,6 @@
 import {
-  Injectable, TemplateRef
+  Injectable,
+  TemplateRef
 } from '@angular/core';
 
 @Injectable()

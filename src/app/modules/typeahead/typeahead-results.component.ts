@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  HostListener,
   OnInit,
   TemplateRef
 } from '@angular/core';
@@ -31,7 +32,17 @@ export class TypeaheadResultsComponent implements OnInit {
     this.templateRef = this.context.templateRef;
   }
 
-  public close() {
+  @HostListener('click', ['$event'])
+  public onClick(event: any) {
+    event.stopPropagation();
+  }
+
+  @HostListener('document:click')
+  public onDocumentClick() {
+    this.close();
+  }
+
+  private close() {
     this.overlay.destroy();
   }
 }

@@ -3,17 +3,13 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   ComponentFactoryResolver,
-  // ElementRef,
-  // HostListener,
+  EmbeddedViewRef,
   Injector,
-  // OnDestroy,
-  OnInit,
   ReflectiveInjector,
   TemplateRef,
   Type,
   ViewChild,
-  ViewContainerRef,
-  EmbeddedViewRef
+  ViewContainerRef
 } from '@angular/core';
 
 import { OverlayInstance } from './overlay-instance';
@@ -24,20 +20,18 @@ import { OverlayInstance } from './overlay-instance';
   styleUrls: ['./overlay.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class OverlayComponent implements OnInit {
-  @ViewChild('target', { read: ViewContainerRef })
-  private targetRef: ViewContainerRef;
-
+export class OverlayComponent {
   @ViewChild('backdrop')
   private backdropRef: TemplateRef<any>;
+
+  @ViewChild('target', { read: ViewContainerRef })
+  private targetRef: ViewContainerRef;
 
   constructor(
     private changeDetector: ChangeDetectorRef,
     private injector: Injector,
     private resolver: ComponentFactoryResolver
   ) { }
-
-  public ngOnInit() { }
 
   public attach<T>(component: Type<T>, config?: any): OverlayInstance<T> {
     const overlayInstance = new OverlayInstance<T>();
@@ -72,8 +66,6 @@ export class OverlayComponent implements OnInit {
       if (backdropRef) {
         backdropRef.destroy();
       }
-
-      overlayInstance.destroyStream.complete();
     });
 
     this.changeDetector.markForCheck();

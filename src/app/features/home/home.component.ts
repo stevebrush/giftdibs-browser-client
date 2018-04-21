@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
     private sessionService: SessionService
   ) { }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.isLoggedIn = this.sessionService.isLoggedIn;
   }
 }

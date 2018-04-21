@@ -12,6 +12,8 @@ import {
   Validators
 } from '@angular/forms';
 
+import 'rxjs/add/operator/finally';
+
 import { SessionService } from '../../../modules/session/session.service';
 import { UserService } from '../../users/user.service';
 import { User } from '../../users/user';
@@ -26,6 +28,7 @@ import { AlertService } from '../../../modules/alert/alert.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsComponent implements OnInit {
+  public isLoading = true;
   public settingsForm: FormGroup;
   public errors: any[] = [];
 
@@ -48,24 +51,27 @@ export class SettingsComponent implements OnInit {
     }
 
     this.settingsForm.disable();
+    this.isLoading = false;
     this.errors = [];
+    this.changeDetector.markForCheck();
 
     const formData = this.settingsForm.value;
 
     this.userService.update(this.sessionService.user._id, formData)
+      .finally(() => {
+        this.isLoading = false;
+        this.settingsForm.enable();
+        this.changeDetector.markForCheck();
+      })
       .subscribe(
         (result: any) => {
           this.alertService.success(result.message, true);
           this.sessionService.patchUser(result.data.user);
-          this.settingsForm.enable();
-          this.changeDetector.markForCheck();
         },
         (err: any) => {
           const error = err.error;
           this.alertService.error(error.message);
           this.errors = error.errors;
-          this.settingsForm.enable();
-          this.changeDetector.markForCheck();
         }
       );
   }
@@ -82,6 +88,7 @@ export class SettingsComponent implements OnInit {
         Validators.required
       ])
     });
+    this.settingsForm.disable();
   }
 
   private updateForm() {
@@ -89,6 +96,9 @@ export class SettingsComponent implements OnInit {
       .getById(this.sessionService.user._id)
       .subscribe((user: User) => {
         this.settingsForm.reset(user);
+        this.settingsForm.enable();
+        this.isLoading = false;
+        this.changeDetector.markForCheck();
       });
   }
 }

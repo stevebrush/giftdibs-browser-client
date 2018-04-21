@@ -62,7 +62,7 @@ export class SessionService implements OnDestroy {
     localStorage.removeItem(this.storageKey);
   }
 
-  public isCurrentUser(userId: string): boolean {
+  public isSessionUser(userId: string): boolean {
     return (this.user._id === userId);
   }
 

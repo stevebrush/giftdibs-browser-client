@@ -1,0 +1,23 @@
+@import '../../../styles/mixins';
+
+:host {
+  width: 100%;
+}
+
+.gd-media {
+  display: flex;
+  align-items: center;
+}
+
+::ng-deep {
+  .gd-media {
+    & > gd-media-thumbnail {
+      padding-right: $gd-spacing-sm;
+    }
+
+    & > gd-media-content + gd-media-thumbnail {
+      padding-left: $gd-spacing-sm;
+      padding-right: 0;
+    }
+  }
+}

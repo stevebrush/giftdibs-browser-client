@@ -150,7 +150,9 @@ export class TypeaheadComponent implements AfterViewInit, OnDestroy {
 
   private removeResults() {
     this.hasResults = false;
-    this.overlayInstance.destroy();
+    if (this.overlayInstance) {
+      this.overlayInstance.destroy();
+    }
     this.changeDetector.markForCheck();
   }
 

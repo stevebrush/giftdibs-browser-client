@@ -11,6 +11,10 @@ import { HomeComponent } from './home.component';
     CommonModule,
     HomeRoutingModule
   ],
-  declarations: [CommunityComponent, WelcomeComponent, HomeComponent]
+  declarations: [
+    CommunityComponent,
+    WelcomeComponent,
+    HomeComponent
+  ]
 })
 export class HomeModule { }

@@ -9,4 +9,6 @@ import {
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent { }
+export class AppComponent {
+  constructor() { }
+}

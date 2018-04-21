@@ -14,18 +14,22 @@
   When search results are found, use the up and down arrow keys to review, and the enter key to select.
 </div>
 
-<ng-template
-  #searchResultTemplate
-  let-result="result">
-  <a
-    class="gd-search-result"
-    routerLink="/users/{{ result._id }}">
-    <div
-      class="gd-search-result-thumbnail gd-circle"
-      aria-hidden="true">
-    </div>
-    <div class="gd-search-result-content">
-      {{ result.firstName }} {{ result.lastName }}
-    </div>
+<ng-template let-result="result" #searchResultTemplate>
+  <a [routerLink]="['/users', result._id]" class="gd-search-result">
+    <gd-media>
+      <gd-media-thumbnail>
+        <div
+          class="gd-search-result-thumbnail gd-circle"
+          aria-hidden="true">
+        </div>
+      </gd-media-thumbnail>
+      <gd-media-content>
+        <gd-media-header>
+          <gd-media-heading>
+            {{ result.firstName }} {{ result.lastName }}
+          </gd-media-heading>
+        </gd-media-header>
+      </gd-media-content>
+    </gd-media>
   </a>
 </ng-template>

@@ -37,6 +37,8 @@
     > a,
     .gd-button-link {
       color: $gd-text-color-deemphasized;
+      border-color: transparent;
+      box-shadow: none;
 
       &:focus,
       &:hover {

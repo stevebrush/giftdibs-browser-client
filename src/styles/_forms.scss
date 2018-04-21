@@ -14,7 +14,7 @@
   color: $gd-text-color;
   display: block;
   width: 100%;
-  font-weight: 700;
+  font-weight: $gd-font-weight-bold;
   background-color: $gd-background-color-neutral-light;
 
   &:disabled {

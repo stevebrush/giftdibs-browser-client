@@ -28,6 +28,7 @@ import { VerifyAccountComponent } from './verify/verify.component';
 import { SettingsComponent } from './settings/settings.component';
 import { DeleteComponent } from './delete/delete.component';
 import { GridModule } from '../../modules/grid/grid.module';
+import { HideUntilModule } from '../../modules/hide-until/hide-until.module';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { GridModule } from '../../modules/grid/grid.module';
     CommonModule,
     FormFieldModule,
     GridModule,
+    HideUntilModule,
     HttpClientModule,
     NoticeModule,
     PasswordViewerModule,

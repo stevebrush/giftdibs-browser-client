@@ -9,7 +9,7 @@ export class PrivacyComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  public ngOnInit() {
   }
 
 }

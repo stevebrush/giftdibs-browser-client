@@ -13,5 +13,5 @@ import {
 export class WelcomeComponent implements OnInit {
   constructor() { }
 
-  ngOnInit() { }
+  public ngOnInit() { }
 }

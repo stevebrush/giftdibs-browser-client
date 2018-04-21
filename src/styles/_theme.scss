@@ -8,11 +8,11 @@ body {
   color: $gd-text-color;
   line-height: $gd-line-height;
   background-color: $gd-background-color-neutral-lightest;
-  font-weight: 300;
+  font-weight: $gd-font-weight;
 }
 
 a {
-  font-weight: 900;
+  font-weight: $gd-font-weight-bold;
   color: $gd-text-color;
   text-decoration: none;
 
@@ -24,7 +24,7 @@ a {
 h1, h2, h3, h4, h5, h6 {
   line-height: $gd-line-height-reduced;
   margin-bottom: $gd-spacing;
-  font-weight: 500;
+  font-weight: $gd-font-weight-black;
 }
 
 h1 {
@@ -36,18 +36,18 @@ p {
 }
 
 strong {
-  font-weight: 900;
+  font-weight: $gd-font-weight-bold;
 }
 
-.gd-container-flex {
+.gd-container-fluid {
   padding: 0 $gd-spacing-lg;
-  width: 100%;
 }
 
 .gd-container {
   padding: 0 $gd-spacing-lg;
   max-width: 750px;
-  margin: 0 auto;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .gd-screen-reader-only {

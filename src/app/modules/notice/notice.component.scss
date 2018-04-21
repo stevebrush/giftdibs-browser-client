@@ -6,7 +6,7 @@
   background-color: #fff;
   margin: $gd-spacing 0;
   border-radius: $gd-border-radius-sm;
-  font-weight: normal;
+  font-weight: $gd-font-weight;
 
   ::ng-deep p {
     margin: $gd-spacing-sm 0;

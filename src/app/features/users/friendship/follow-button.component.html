@@ -1,0 +1,17 @@
+<ng-template [ngIf]="!isSessionUser && !isLoading">
+  <button
+    *ngIf="isFollowing"
+    type="button"
+    class="gd-button gd-button-default gd-follow-button"
+    (click)="removeFriendship()">
+    Unfollow
+  </button>
+
+  <button
+    *ngIf="!isFollowing"
+    type="button"
+    class="gd-button gd-button-default gd-follow-button"
+    (click)="createFriendship()">
+    Follow
+  </button>
+</ng-template>

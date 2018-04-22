@@ -13,12 +13,16 @@ import {
 import { SearchModule } from '../search/search.module';
 
 import { NavbarComponent } from './navbar.component';
+import { DropdownMenuModule } from '../dropdown-menu/dropdown-menu.module';
+import { UserThumbnailModule } from '../user-thumbnail/user-thumbnail.module';
 
 @NgModule({
   imports: [
     CommonModule,
+    DropdownMenuModule,
     RouterModule,
-    SearchModule
+    SearchModule,
+    UserThumbnailModule
   ],
   exports: [
     NavbarComponent

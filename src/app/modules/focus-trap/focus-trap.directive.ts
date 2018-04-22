@@ -26,7 +26,7 @@ const FOCUSABLE_SELECTORS: string = [
 })
 export class FocusTrapDirective implements AfterContentInit, OnDestroy {
   @Input()
-  public focusFirstOnLoad = false;
+  public activateOnLoad = false;
 
   private get tabIndex(): number {
     return this._tabIndex;
@@ -53,7 +53,7 @@ export class FocusTrapDirective implements AfterContentInit, OnDestroy {
   ) { }
 
   public ngAfterContentInit() {
-    if (this.focusFirstOnLoad) {
+    if (this.activateOnLoad) {
       this.activateTrap();
       this.focusActiveElement();
     }
@@ -81,20 +81,18 @@ export class FocusTrapDirective implements AfterContentInit, OnDestroy {
   public onKeyDown(event: KeyboardEvent) {
     const key = event.key.toLowerCase();
 
-    if (key !== 'tab') {
-      return;
+    if (key === 'tab') {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (event.shiftKey) {
+        this.tabIndex--;
+      } else {
+        this.tabIndex++;
+      }
+
+      this.focusActiveElement();
     }
-
-    event.preventDefault();
-    event.stopPropagation();
-
-    if (event.shiftKey) {
-      this.tabIndex--;
-    } else {
-      this.tabIndex++;
-    }
-
-    this.focusActiveElement();
   }
 
   private assignFocusableElements() {

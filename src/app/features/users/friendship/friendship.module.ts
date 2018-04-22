@@ -7,6 +7,7 @@ import { CardModule } from '../../../modules/card/card.module';
 import { FollowButtonComponent } from './follow-button.component';
 import { HideUntilModule } from '../../../modules/hide-until/hide-until.module';
 import { MediaModule } from '../../../modules/media/media.module';
+import { UserThumbnailModule } from '../../../modules/user-thumbnail/user-thumbnail.module';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { MediaModule } from '../../../modules/media/media.module';
     CommonModule,
     HideUntilModule,
     MediaModule,
-    RouterModule
+    RouterModule,
+    UserThumbnailModule
   ],
   exports: [
     FriendshipsComponent,

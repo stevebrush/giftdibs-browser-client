@@ -28,6 +28,8 @@ import { TypeaheadDomAdapterService } from './typeahead-dom-adapter.service';
 import { TypeaheadSearchFunction } from './typeahead-search-function';
 import { TypeaheadResultsComponent } from './typeahead-results.component';
 import { TypeaheadResultsContext } from './typeahead-results-context';
+import { TypeaheadSearchResultAction } from './typeahead-search-result-action';
+import { TypeaheadResultsSelectionChange } from './typeahead-results-selection-change';
 
 @Component({
   selector: 'gd-typeahead',
@@ -52,6 +54,9 @@ export class TypeaheadComponent implements AfterViewInit, OnDestroy {
   @Input()
   public searchResultTemplate: TemplateRef<any>;
 
+  @Input()
+  public searchResultAction: TypeaheadSearchResultAction<any>;
+
   @ViewChild('searchInput')
   private searchInput: ElementRef;
 
@@ -72,10 +77,24 @@ export class TypeaheadComponent implements AfterViewInit, OnDestroy {
     Observable
       .fromEvent(input, 'keyup')
       .takeUntil(this.ngUnsubscribe)
-      .debounceTime(400)
+      .debounceTime(300)
       .distinctUntilChanged()
       .subscribe((event: any) => {
-        this.search(event.target.value);
+        const key = event.key.toLowerCase();
+        switch (key) {
+          case 'tab':
+          case 'enter':
+          case 'escape':
+          case 'arrowup':
+          case 'arrowdown':
+          case 'up':
+          case 'down':
+          break;
+
+          default:
+          this.search(event.target.value);
+          break;
+        }
       });
   }
 
@@ -94,57 +113,41 @@ export class TypeaheadComponent implements AfterViewInit, OnDestroy {
           return;
         }
 
+        if (this.hasResults) {
+          this.overlayInstance.componentInstance.results = results;
+          return;
+        }
+
         this.showResults(results);
       });
   }
 
   private showResults(results: any[]) {
-    if (this.overlayInstance) {
-      this.overlayInstance.destroy();
-    }
-
-    if (results.length === 0) {
-      this.removeResults();
-    }
-
     const resultsContext = new TypeaheadResultsContext();
     resultsContext.results = results;
     resultsContext.templateRef = this.searchResultTemplate;
+    resultsContext.resultSelectedAction = this.searchResultAction;
 
     this.overlayInstance = this.overlayService.attach(TypeaheadResultsComponent, {
-      providers: [
-        {
-          provide: TypeaheadResultsContext,
-          useValue: resultsContext
-        }
-      ]
+      providers: [{
+        provide: TypeaheadResultsContext,
+        useValue: resultsContext
+      }]
     });
 
     this.hasResults = true;
     this.overlayInstance.destroyStream.subscribe(() => {
       this.hasResults = false;
+      this.changeDetector.markForCheck();
     });
 
-    Observable
-      .merge(
-        Observable.fromEvent(window, 'scroll').takeWhile(() => this.hasResults),
-        Observable.fromEvent(window, 'resize').takeWhile(() => this.hasResults)
-      )
-      .subscribe(() => {
-        this.positionResults();
-      });
-
-    Observable
-      .fromEvent(this.searchInput.nativeElement, 'keydown')
-      .takeWhile(() => this.hasResults)
-      .subscribe((event: any) => {
-        const key = event.key.toLowerCase();
-        if (key === 'tab') {
-          this.removeResults();
-        }
-      });
+    // Set the input value to what is selected in the dropdown.
+    this.overlayInstance.componentInstance.selectionChange.subscribe((change: TypeaheadResultsSelectionChange) => {
+      this.searchInput.nativeElement.value = change.label;
+    });
 
     this.positionResults();
+    this.addEventListeners();
     this.changeDetector.markForCheck();
   }
 
@@ -166,5 +169,49 @@ export class TypeaheadComponent implements AfterViewInit, OnDestroy {
       resultsRef,
       this.searchInput
     );
+  }
+
+  private addEventListeners() {
+    const resultsComponent = this.overlayInstance.componentInstance;
+
+    Observable
+      .merge(
+        Observable.fromEvent(window, 'scroll').takeWhile(() => this.hasResults),
+        Observable.fromEvent(window, 'resize').takeWhile(() => this.hasResults)
+      )
+      .subscribe(() => {
+        this.positionResults();
+      });
+
+    Observable
+      .fromEvent(this.searchInput.nativeElement, 'keydown')
+      .takeWhile(() => this.hasResults)
+      .subscribe((event: any) => {
+        const key = event.key.toLowerCase();
+
+        if (key === 'arrowdown' || key === 'down') {
+          resultsComponent.focusNextItem();
+        }
+
+        if (key === 'arrowup' || key === 'up') {
+          resultsComponent.focusPreviousItem();
+        }
+      });
+
+    Observable
+      .fromEvent(this.searchInput.nativeElement, 'keydown')
+      .takeWhile(() => this.hasResults)
+      .subscribe((event: any) => {
+        const key = event.key.toLowerCase();
+
+        if (key === 'tab' || key === 'escape') {
+          this.searchInput.nativeElement.value = '';
+          this.removeResults();
+        }
+
+        if (key === 'enter') {
+          resultsComponent.triggerActiveResultAction();
+        }
+      });
   }
 }

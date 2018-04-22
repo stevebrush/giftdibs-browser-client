@@ -10,6 +10,7 @@ import { UserService } from './user.service';
 import { GridModule } from '../../modules/grid/grid.module';
 import { HideUntilModule } from '../../modules/hide-until/hide-until.module';
 import { MediaModule } from '../../modules/media/media.module';
+import { UserThumbnailModule } from '../../modules/user-thumbnail/user-thumbnail.module';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { MediaModule } from '../../modules/media/media.module';
     GridModule,
     HideUntilModule,
     MediaModule,
-    UsersRoutingModule
+    UsersRoutingModule,
+    UserThumbnailModule
   ],
   declarations: [
     UsersComponent,

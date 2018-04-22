@@ -1,0 +1,26 @@
+<ul
+  class="gd-dropdown-menu"
+  (click)="close();$event.stopPropagation();">
+  <ng-template ngFor let-item [ngForOf]="items">
+    <li class="gd-dropdown-menu-item">
+      <button
+        type="button"
+        class="gd-button gd-dropdown-menu-item-button"
+        (click)="item.action()">
+        <ng-container
+          *ngTemplateOutlet="itemTemplate || defaultItemTemplate; context: { item: item }">
+        </ng-container>
+      </button>
+    </li>
+    <li
+      *ngIf="item.addSeparatorAfter"
+      class="gd-dropdown-menu-item-separator"
+      role="separator"
+      tabindex="-1">
+    </li>
+  </ng-template>
+</ul>
+
+<ng-template let-item="item" #defaultItemTemplate>
+  {{ item.label }}
+</ng-template>

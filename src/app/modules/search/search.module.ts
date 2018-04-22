@@ -20,6 +20,7 @@ import { TypeaheadModule } from '../typeahead/typeahead.module';
 
 import { SearchComponent } from './search.component';
 import { MediaModule } from '../media/media.module';
+import { UserThumbnailModule } from '../user-thumbnail/user-thumbnail.module';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { MediaModule } from '../media/media.module';
     HttpClientModule,
     MediaModule,
     TypeaheadModule,
-    RouterModule
+    RouterModule,
+    UserThumbnailModule
   ],
   exports: [
     SearchComponent

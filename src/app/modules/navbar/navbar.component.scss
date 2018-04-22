@@ -33,6 +33,7 @@
   margin-right: -$gd-spacing-md;
 
   > li {
+    padding: 0 0.175rem;
 
     > a,
     .gd-button-link {
@@ -52,4 +53,19 @@
       }
     }
   }
+}
+
+.gd-navbar-menu-user {
+  white-space: nowrap;
+
+  ::ng-deep {
+    .gd-user-thumbnail {
+      margin-top: -0.5rem;
+      margin-bottom: -0.5rem;
+    }
+  }
+}
+
+.gd-navbar-menu-user-name {
+  padding-left: $gd-spacing-xs;
 }

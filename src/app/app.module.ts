@@ -45,6 +45,7 @@ export function startupServiceFactory(startupService: AppStartupService): Functi
   ],
   bootstrap: [
     AppComponent
-  ]
+  ],
+  entryComponents: []
 })
 export class AppModule { }

@@ -65,7 +65,7 @@ export class SettingsComponent implements OnInit {
       })
       .subscribe(
         (result: any) => {
-          this.alertService.success(result.message, true);
+          this.alertService.success(result.message);
           this.sessionService.patchUser(result.data.user);
         },
         (err: any) => {

@@ -6,5 +6,13 @@
 
 .gd-typeahead-results {
   background-color: #fff;
-  box-shadow: 0 0 50px rgba(0,0,0,0.4);
+  box-shadow: $gd-box-shadow-lg;
+}
+
+.gd-typeahead-result {
+  padding: $gd-spacing-padding-squish;
+}
+
+.gd-typahead-result-active {
+  background-color: $gd-background-color-neutral-light;
 }

@@ -4,7 +4,8 @@
     placeholder="Find someone"
     [ariaDescribedBy]="'gd-search-a11y-description-' + elementId"
     [searchFunction]="searchFunction"
-    [searchResultTemplate]="searchResultTemplate">
+    [searchResultTemplate]="searchResultTemplate"
+    [searchResultAction]="searchResultAction">
   </gd-typeahead>
 </div>
 
@@ -15,21 +16,19 @@
 </div>
 
 <ng-template let-result="result" #searchResultTemplate>
-  <a [routerLink]="['/users', result._id]" class="gd-search-result">
-    <gd-media>
-      <gd-media-thumbnail>
-        <div
-          class="gd-search-result-thumbnail gd-circle"
-          aria-hidden="true">
-        </div>
-      </gd-media-thumbnail>
-      <gd-media-content>
-        <gd-media-header>
-          <gd-media-heading>
-            {{ result.firstName }} {{ result.lastName }}
-          </gd-media-heading>
-        </gd-media-header>
-      </gd-media-content>
-    </gd-media>
-  </a>
+  <gd-media>
+    <gd-media-thumbnail>
+      <gd-user-thumbnail
+        [user]="result"
+        size="xs">
+      </gd-user-thumbnail>
+    </gd-media-thumbnail>
+    <gd-media-content>
+      <gd-media-header>
+        <gd-media-heading>
+          {{ result.firstName }} {{ result.lastName }}
+        </gd-media-heading>
+      </gd-media-header>
+    </gd-media-content>
+  </gd-media>
 </ng-template>

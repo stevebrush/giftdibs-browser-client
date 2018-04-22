@@ -29,6 +29,11 @@ const appRoutes: Routes = [
     canLoad: [AuthGuard]
   },
   {
+    path: 'dibs',
+    loadChildren: 'app/features/dibs/dibs.module#DibsModule',
+    canLoad: [AuthGuard]
+  },
+  {
     path: 'page-not-found',
     loadChildren: 'app/features/page-not-found/page-not-found.module#PageNotFoundModule'
   },

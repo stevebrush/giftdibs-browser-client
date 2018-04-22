@@ -20,8 +20,8 @@
   }
 }
 
-.gd-friendships-user-thumbnail {
-  width: 2rem;
-  height: 2rem;
-  background-color: $gd-background-color-neutral;
+.gd-friendships-list-item-thumbnail {
+  &:hover {
+    text-decoration: none;
+  }
 }

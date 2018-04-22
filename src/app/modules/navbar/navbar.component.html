@@ -24,12 +24,18 @@
       <ul
         *ngIf="isLoggedIn()"
         class="gd-navbar-menu">
-        <li>
+        <li class="gd-navbar-menu-user">
           <a
             class="gd-button gd-button-link"
             [routerLink]="['/users', sessionUser._id]"
             routerLinkActive="active">
-            {{ sessionUser.firstName }}
+            <gd-user-thumbnail
+              [user]="sessionUser"
+              size="xs">
+            </gd-user-thumbnail>
+            <span class="gd-navbar-menu-user-name">
+              {{ sessionUser.firstName }}
+            </span>
           </a>
         </li>
         <li>
@@ -41,19 +47,13 @@
           </a>
         </li>
         <li>
-          <a
-            class="gd-button gd-button-link"
-            routerLink="/account/settings"
-            routerLinkActive="active">
-            Settings
-          </a>
-        </li>
-        <li>
           <button
             type="button"
             class="gd-button gd-button-link"
-            (click)="logout()">
-            Log out
+            title="Open user menu"
+            (click)="openMenu()"
+            #button>
+            <i class="fa fa-bars" aria-hidden="true"></i>
           </button>
         </li>
       </ul>

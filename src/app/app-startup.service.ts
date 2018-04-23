@@ -27,7 +27,7 @@ export class AppStartupService {
     const headers = new HttpHeaders({ 'Authorization': `JWT ${token}` });
 
     return this.http
-      .post(`${this.resourceUrl}/reset-token`, {}, { headers })
+      .post(`${this.resourceUrl}/refresh-token`, {}, { headers })
       .toPromise()
       .then((data: any) => {
         this.sessionService.user = data.authResponse.user;

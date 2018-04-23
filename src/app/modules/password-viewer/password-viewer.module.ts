@@ -1,5 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  NgModule
+} from '@angular/core';
+
+import {
+  CommonModule
+} from '@angular/common';
+
 import { PasswordViewerComponent } from './password-viewer.component';
 
 @NgModule({
@@ -9,6 +15,8 @@ import { PasswordViewerComponent } from './password-viewer.component';
   exports: [
     PasswordViewerComponent
   ],
-  declarations: [PasswordViewerComponent]
+  declarations: [
+    PasswordViewerComponent
+  ]
 })
 export class PasswordViewerModule { }

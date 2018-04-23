@@ -6,15 +6,12 @@ import {
   CommonModule
 } from '@angular/common';
 
-import { FocusTrapModule } from '../focus-trap/focus-trap.module';
-
 import { TypeaheadComponent } from './typeahead.component';
 import { TypeaheadResultsComponent } from './typeahead-results.component';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FocusTrapModule
+    CommonModule
   ],
   exports: [
     TypeaheadComponent

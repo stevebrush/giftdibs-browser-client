@@ -15,8 +15,10 @@ import {
   RouterModule
 } from '@angular/router';
 
+import { MediaModule } from '../media/media.module';
 import { AuthInterceptor } from '../session/authorization.interceptor';
 import { TypeaheadModule } from '../typeahead/typeahead.module';
+import { UserThumbnailModule } from '../user-thumbnail/user-thumbnail.module';
 
 import { SearchComponent } from './search.component';
 
@@ -24,8 +26,10 @@ import { SearchComponent } from './search.component';
   imports: [
     CommonModule,
     HttpClientModule,
+    MediaModule,
+    RouterModule,
     TypeaheadModule,
-    RouterModule
+    UserThumbnailModule
   ],
   exports: [
     SearchComponent

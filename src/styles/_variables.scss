@@ -1,11 +1,20 @@
 $gd-font-size: 17px !default;
+$gd-font-weight-light: 100 !default;
+$gd-font-weight: 400 !default;
 $gd-font-weight-bold: 700 !default;
+$gd-font-weight-black: 900 !default;
 $gd-font-family: sans-serif !default;
 $gd-line-height: 1.5 !default;
 $gd-line-height-reduced: 1.2 !default;
 
-$gd-text-color: #000 !default;
+$gd-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.15);
+$gd-box-shadow-lg: 0 0 50px rgba(0, 0, 0, 0.4);
+$gd-border-radius: 0.35rem !default;
+$gd-border-radius-sm: 0.175rem !default;
+
+$gd-text-color: #555 !default;
 $gd-text-color-deemphasized: #aaa !default;
+$gd-text-color-dark: #222 !default;
 
 $gd-spacing: 1.00rem !default;
 $gd-spacing-lg: 1.5rem !default;
@@ -16,9 +25,18 @@ $gd-spacing-xs: 0.250rem !default;
 $gd-spacing-padding-squish: $gd-spacing-md $gd-spacing !default;
 $gd-spacing-padding-squish-compact: $gd-spacing-sm $gd-spacing-md !default;
 
+$gd-screen-sm-min: 768px;
+$gd-screen-md-min: 992px;
+$gd-screen-lg-min: 1200px;
+
+$gd-screen-xs-max: $gd-screen-sm-min - 1;
+$gd-screen-sm-max: $gd-screen-md-min - 1;
+$gd-screen-md-max: $gd-screen-lg-min - 1;
+
 // PRIMARY
 $gd-color-primary: #009933 !default;
 $gd-background-color-primary: $gd-color-primary !default;
+$gd-border-color-primary: darken($gd-background-color-primary, 10%) !default;
 
 // SUCCESS
 $gd-color-success: $gd-color-primary !default;
@@ -32,14 +50,11 @@ $gd-background-color-danger: desaturate(lighten($gd-color-danger, 62%), 25%) !de
 $gd-border-color-danger: #e60000 !default;
 $gd-text-color-danger: $gd-border-color-danger !default;
 
-$gd-background-color-neutral-lightest: #f8f8f8 !default;
-
 $gd-background-color-neutral: #ccc !default;
-$gd-border-color-neutral: darken($gd-background-color-neutral, 15%) !default;
-
 $gd-background-color-neutral-light: #e8e8e8 !default;
-$gd-border-color-neutral-light: darken($gd-background-color-neutral-light, 15%) !default;
+$gd-background-color-neutral-lightest: #f8f8f8 !default;
+$gd-background-color-neutral-dark: #6c757d !default;
 
-$gd-box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
-$gd-border-radius: 4px !default;
-$gd-border-radius-sm: 3px !default;
+$gd-border-color-neutral: darken($gd-background-color-neutral, 15%) !default;
+$gd-border-color-neutral-light: darken($gd-background-color-neutral-light, 15%) !default;
+$gd-border-color-neutral-lightest: darken($gd-background-color-neutral-lightest, 15%) !default;

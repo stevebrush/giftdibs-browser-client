@@ -1,0 +1,57 @@
+<div
+  class="gd-friendships">
+  <gd-card [gdHideUntil]="following">
+    <gd-card-header>
+      <gd-card-heading>
+        {{ following?.length }} following
+      </gd-card-heading>
+    </gd-card-header>
+    <ul class="gd-friendships-list">
+      <li
+        *ngFor="let friend of following"
+        class="gd-friendships-list-item">
+        <ng-container
+          *ngTemplateOutlet="friendshipTemplate; context: { friend: friend }">
+        </ng-container>
+      </li>
+    </ul>
+  </gd-card>
+
+  <gd-card [gdHideUntil]="followers">
+    <gd-card-header>
+      <gd-card-heading>
+        {{ followers?.length }} followers
+      </gd-card-heading>
+    </gd-card-header>
+    <ul class="gd-friendships-list">
+      <li
+        *ngFor="let friend of followers"
+        class="gd-friendships-list-item">
+        <ng-container
+          *ngTemplateOutlet="friendshipTemplate; context: { friend: friend }">
+        </ng-container>
+      </li>
+    </ul>
+  </gd-card>
+</div>
+
+<ng-template let-friend="friend" #friendshipTemplate>
+  <gd-media>
+    <gd-media-thumbnail>
+      <a
+        class="gd-friendships-list-item-thumbnail"
+        tabindex="-1"
+        [routerLink]="['/users', friend._id]">
+        <gd-user-thumbnail
+          [user]="friend"
+          size="xs">
+        </gd-user-thumbnail>
+      </a>
+    </gd-media-thumbnail>
+    <gd-media-content>
+      <a [routerLink]="['/users', friend._id]">
+        {{ friend.firstName }} {{ friend.lastName }}
+      </a>
+    </gd-media-content>
+  </gd-media>
+</ng-template>

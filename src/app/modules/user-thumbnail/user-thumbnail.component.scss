@@ -1,0 +1,39 @@
+@import '../../../styles/mixins';
+
+.gd-user-thumbnail {
+  background-color: $gd-background-color-neutral-light;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: darken($gd-background-color-neutral-light, 8%);
+  font-weight: $gd-font-weight-light;
+  white-space: nowrap;
+  user-select: none;
+  text-shadow: 0 1px 0px rgba(255,255,255,0.35);
+  box-shadow: 0 0 0px 2px #fff;
+}
+
+.gd-user-thumbnail-xs {
+  width: 2rem;
+  height: 2rem;
+  font-size: 0.85rem;
+}
+
+.gd-user-thumbnail-sm {
+  width: 3.75rem;
+  height: 3.75rem;
+  font-size: 1.5rem;
+}
+
+.gd-user-thumbnail-md {
+  width: 6rem;
+  height: 6rem;
+  font-size: 3rem;
+}
+
+.gd-user-thumbnail-lg {
+  width: 10rem;
+  height: 10rem;
+  font-size: 5rem;
+  letter-spacing: -0.175rem;
+}

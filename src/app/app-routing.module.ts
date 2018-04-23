@@ -12,29 +12,30 @@ import { AuthGuard } from './modules/session/authorization.guard';
 const appRoutes: Routes = [
   {
     path: '',
-    loadChildren: 'app/lazy/home/home.module#HomeModule',
+    loadChildren: 'app/features/home/home.module#HomeModule',
     pathMatch: 'full'
   },
   {
     path: 'account',
-    loadChildren: 'app/lazy/account/account.module#AccountModule'
+    loadChildren: 'app/features/account/account.module#AccountModule'
   },
   {
     path: 'support',
-    loadChildren: 'app/lazy/support/support.module#SupportModule'
+    loadChildren: 'app/features/support/support.module#SupportModule'
   },
   {
     path: 'users',
-    loadChildren: 'app/lazy/users/users.module#UsersModule',
+    loadChildren: 'app/features/users/users.module#UsersModule',
     canLoad: [AuthGuard]
   },
   {
-    path: 'page-not-found',
-    loadChildren: 'app/lazy/page-not-found/page-not-found.module#PageNotFoundModule'
+    path: 'dibs',
+    loadChildren: 'app/features/dibs/dibs.module#DibsModule',
+    canLoad: [AuthGuard]
   },
   {
     path: '**',
-    redirectTo: 'page-not-found'
+    loadChildren: 'app/features/page-not-found/page-not-found.module#PageNotFoundModule'
   }
 ];
 

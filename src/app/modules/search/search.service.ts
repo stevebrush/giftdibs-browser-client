@@ -11,7 +11,7 @@ import 'rxjs/add/operator/map';
 
 import { environment } from '../../../environments/environment';
 
-import { User } from '../../lazy/users/user';
+import { User } from '../../features/users/user';
 
 @Injectable()
 export class SearchService {
@@ -24,6 +24,7 @@ export class SearchService {
   public searchUsers(searchText: string): Observable<User[]> {
     const encoded = encodeURIComponent(searchText);
     return this.http.get(`${this.resourceUrl}-users/${encoded}`)
-      .map((result: any) => result.data.results);
+      .map((result: any) => result.data.results)
+      .share();
   }
 }

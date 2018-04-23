@@ -4,7 +4,8 @@
     placeholder="Find someone"
     [ariaDescribedBy]="'gd-search-a11y-description-' + elementId"
     [searchFunction]="searchFunction"
-    [searchResultTemplate]="searchResultTemplate">
+    [searchResultTemplate]="searchResultTemplate"
+    [searchResultAction]="searchResultAction">
   </gd-typeahead>
 </div>
 
@@ -14,18 +15,20 @@
   When search results are found, use the up and down arrow keys to review, and the enter key to select.
 </div>
 
-<ng-template
-  #searchResultTemplate
-  let-result="result">
-  <a
-    class="gd-search-result"
-    routerLink="/users/{{ result._id }}">
-    <div
-      class="gd-search-result-thumbnail gd-circle"
-      aria-hidden="true">
-    </div>
-    <div class="gd-search-result-content">
-      {{ result.firstName }} {{ result.lastName }}
-    </div>
-  </a>
+<ng-template let-result="result" #searchResultTemplate>
+  <gd-media>
+    <gd-media-thumbnail>
+      <gd-user-thumbnail
+        [user]="result"
+        size="xs">
+      </gd-user-thumbnail>
+    </gd-media-thumbnail>
+    <gd-media-content>
+      <gd-media-header>
+        <gd-media-heading>
+          {{ result.firstName }} {{ result.lastName }}
+        </gd-media-heading>
+      </gd-media-header>
+    </gd-media-content>
+  </gd-media>
 </ng-template>

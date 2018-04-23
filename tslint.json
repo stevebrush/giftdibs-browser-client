@@ -32,7 +32,7 @@
       true,
       140
     ],
-    "member-access": false,
+    "member-access": true,
     "member-ordering": [
       true,
       {
@@ -98,6 +98,13 @@
       true,
       "always"
     ],
+    "trailing-comma": [
+      true,
+      {
+        "multiline": "never",
+        "singleline": "never"
+      }
+    ],
     "triple-equals": [
       true,
       "allow-null-check"
@@ -112,7 +119,6 @@
         "variable-declaration": "nospace"
       }
     ],
-    "typeof-compare": true,
     "unified-signatures": true,
     "variable-name": false,
     "whitespace": [

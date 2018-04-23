@@ -1,0 +1,13 @@
+@import '../../../styles/mixins';
+
+.gd-badge {
+  display: inline-block;
+  background-color: $gd-background-color-neutral-dark;
+  border-radius: $gd-border-radius;
+  color: #fff;
+  font-weight: $gd-font-weight-bold;
+  font-size: 75%;
+  padding: $gd-spacing-xs $gd-spacing-sm;
+  white-space: nowrap;
+  vertical-align: baseline;
+}

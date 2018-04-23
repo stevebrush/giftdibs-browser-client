@@ -22,7 +22,7 @@ export class OverlayService implements OnDestroy {
     private adapter: OverlayDomAdapterService,
     private appRef: ApplicationRef,
     private injector: Injector,
-    private resolver: ComponentFactoryResolver,
+    private resolver: ComponentFactoryResolver
   ) { }
 
   public ngOnDestroy() {

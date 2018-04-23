@@ -1,5 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  NgModule
+} from '@angular/core';
+
+import {
+  CommonModule
+} from '@angular/common';
+
 
 import { SupportRoutingModule } from './support-routing.module';
 import { AboutComponent } from './about/about.component';
@@ -14,6 +20,13 @@ import { SupportComponent } from './support.component';
     CommonModule,
     SupportRoutingModule
   ],
-  declarations: [AboutComponent, FaqComponent, PrivacyComponent, TermsComponent, FeedbackComponent, SupportComponent]
+  declarations: [
+    AboutComponent,
+    FaqComponent,
+    PrivacyComponent,
+    TermsComponent,
+    FeedbackComponent,
+    SupportComponent
+  ]
 })
 export class SupportModule { }

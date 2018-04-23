@@ -3,13 +3,16 @@ import {
   Component
 } from '@angular/core';
 
+import {
+  Router
+} from '@angular/router';
+
 import { User } from '../../features/users/user';
 
 import { TypeaheadSearchFunction } from '../typeahead/typeahead-search-function';
+import { TypeaheadSearchResultAction } from '../typeahead/typeahead-search-result-action';
 
 import { SearchService } from './search.service';
-import { TypeaheadSearchResultAction } from '../typeahead/typeahead-search-result-action';
-import { Router } from '@angular/router';
 
 let autoIncrementedId = 0;
 

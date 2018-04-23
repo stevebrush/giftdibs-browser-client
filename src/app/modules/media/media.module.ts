@@ -1,5 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  NgModule
+} from '@angular/core';
+
+import {
+  CommonModule
+} from '@angular/common';
+
 import { MediaComponent } from './media.component';
 import { MediaHeaderComponent } from './media-header.component';
 import { MediaHeadingComponent } from './media-heading.component';

@@ -1,5 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  NgModule
+} from '@angular/core';
+
+import {
+  CommonModule
+} from '@angular/common';
+
 
 import { DibsRoutingModule } from './dibs-routing.module';
 import { DibsComponent } from './dibs.component';
@@ -9,6 +15,8 @@ import { DibsComponent } from './dibs.component';
     CommonModule,
     DibsRoutingModule
   ],
-  declarations: [DibsComponent]
+  declarations: [
+    DibsComponent
+  ]
 })
 export class DibsModule { }

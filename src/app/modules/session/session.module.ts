@@ -12,7 +12,6 @@ import { SessionService } from './session.service';
   imports: [
     CommonModule
   ],
-  declarations: [],
   providers: [
     SessionService
   ]

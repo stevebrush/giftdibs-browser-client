@@ -11,7 +11,9 @@ import {
   HttpClientModule
 } from '@angular/common/http';
 
-import { ReactiveFormsModule } from '@angular/forms';
+import {
+  ReactiveFormsModule
+} from '@angular/forms';
 
 import { FormFieldModule } from '../../modules/form-field/form-field.module';
 import { PasswordViewerModule } from '../../modules/password-viewer/password-viewer.module';

@@ -1,4 +1,8 @@
-import { TemplateRef, ElementRef } from '@angular/core';
+import {
+  ElementRef,
+  TemplateRef
+} from '@angular/core';
+
 import { AffixAlignment } from '../affix/affix-alignment';
 
 export interface DropdownMenuConfig {

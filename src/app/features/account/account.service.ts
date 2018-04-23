@@ -1,5 +1,10 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {
+  Injectable
+} from '@angular/core';
+
+import {
+  HttpClient
+} from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -16,10 +21,6 @@ export class AccountService {
   public login(emailAddress: string, password: string): Observable<any> {
     return this.http.post(`${this.resourceUrl}/login`, { emailAddress, password });
   }
-
-  // public loginUsingFacebook(facebookUserAccessToken: string): Observable<any> {
-  //   return this.http.post(`${this.resourceUrl}/login-facebook`, { facebookUserAccessToken });
-  // }
 
   public forgotten(emailAddress: string): Observable<any> {
     return this.http.post(`${this.resourceUrl}/forgotten`, { emailAddress });

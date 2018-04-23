@@ -34,12 +34,8 @@ const appRoutes: Routes = [
     canLoad: [AuthGuard]
   },
   {
-    path: 'page-not-found',
-    loadChildren: 'app/features/page-not-found/page-not-found.module#PageNotFoundModule'
-  },
-  {
     path: '**',
-    redirectTo: 'page-not-found'
+    loadChildren: 'app/features/page-not-found/page-not-found.module#PageNotFoundModule'
   }
 ];
 

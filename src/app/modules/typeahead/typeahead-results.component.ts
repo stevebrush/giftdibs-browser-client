@@ -23,16 +23,6 @@ import { TypeaheadResultsSelectionChange } from './typeahead-results-selection-c
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TypeaheadResultsComponent implements OnInit, OnDestroy {
-  public get results(): any[] {
-    return this._results;
-  }
-
-  public set results(value: any[]) {
-    this._results = value;
-    this.activeIndex = 0;
-    this.changeDetector.markForCheck();
-  }
-
   public get activeIndex(): number {
     return this._activeIndex;
   }
@@ -52,6 +42,16 @@ export class TypeaheadResultsComponent implements OnInit, OnDestroy {
 
   public get activeResult(): any {
     return this.results[this.activeIndex];
+  }
+
+  public get results(): any[] {
+    return this._results;
+  }
+
+  public set results(value: any[]) {
+    this._results = value;
+    this.activeIndex = 0;
+    this.changeDetector.markForCheck();
   }
 
   public templateRef: TemplateRef<any>;
@@ -78,10 +78,7 @@ export class TypeaheadResultsComponent implements OnInit, OnDestroy {
 
   public onResultClick(result: any) {
     const label = this.context.resultSelectedAction.call({}, result);
-    this.selectionChange.next({
-      result,
-      label
-    });
+    this.selectionChange.next({ result, label });
     this.close();
   }
 

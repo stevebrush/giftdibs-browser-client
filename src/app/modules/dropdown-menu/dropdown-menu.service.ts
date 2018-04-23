@@ -7,23 +7,15 @@ import { OverlayService } from '../overlay/overlay.service';
 import { DropdownMenuConfig } from './dropdown-menu-config';
 import { DropdownMenuComponent } from './dropdown-menu.component';
 import { DropdownMenuContext } from './dropdown-menu-context';
-import { OverlayInstance } from '../overlay/overlay-instance';
+import { DropdownInstance } from './dropdown-instance';
 
 @Injectable()
 export class DropdownMenuService {
-  // private overlayInstance: OverlayInstance<DropdownMenuComponent>;
-
   constructor(
     private overlayService: OverlayService
   ) { }
 
-  public open(config: DropdownMenuConfig): OverlayInstance<DropdownMenuComponent> {
-    // if (this.overlayInstance) {
-    //   this.overlayInstance.destroy();
-    //   this.overlayInstance = undefined;
-    //   return;
-    // }
-
+  public open(config: DropdownMenuConfig): DropdownInstance<DropdownMenuComponent> {
     const context = new DropdownMenuContext();
     context.config = config;
 
@@ -33,10 +25,6 @@ export class DropdownMenuService {
         useValue: context
       }]
     });
-
-    // overlayInstance.destroyStream.subscribe(() => {
-    //   overlayInstance = undefined;
-    // });
 
     return overlayInstance;
   }

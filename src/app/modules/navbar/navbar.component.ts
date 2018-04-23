@@ -16,11 +16,11 @@ import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/takeUntil';
 
 import { AlertService } from '../alert/alert.service';
+import { DropdownMenuService } from '../dropdown-menu/dropdown-menu.service';
+import { DropdownMenuComponent } from '../dropdown-menu/dropdown-menu.component';
+import { OverlayInstance } from '../overlay/overlay-instance';
 import { SessionService } from '../session/session.service';
 import { SessionUser } from '../session/session-user';
-import { DropdownMenuService } from '../dropdown-menu/dropdown-menu.service';
-import { OverlayInstance } from '../overlay/overlay-instance';
-import { DropdownMenuComponent } from '../dropdown-menu/dropdown-menu.component';
 
 @Component({
   selector: 'gd-navbar',

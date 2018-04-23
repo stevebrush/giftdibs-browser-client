@@ -1,5 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  NgModule
+} from '@angular/core';
+
+import {
+  CommonModule
+} from '@angular/common';
+
 import { DropdownMenuComponent } from './dropdown-menu.component';
 import { DropdownMenuService } from './dropdown-menu.service';
 

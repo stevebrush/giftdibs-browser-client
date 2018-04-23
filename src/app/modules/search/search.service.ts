@@ -24,6 +24,7 @@ export class SearchService {
   public searchUsers(searchText: string): Observable<User[]> {
     const encoded = encodeURIComponent(searchText);
     return this.http.get(`${this.resourceUrl}-users/${encoded}`)
-      .map((result: any) => result.data.results);
+      .map((result: any) => result.data.results)
+      .share();
   }
 }

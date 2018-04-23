@@ -1,4 +1,9 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input
+} from '@angular/core';
+
 import { User } from '../../features/users/user';
 
 @Component({
@@ -7,19 +12,10 @@ import { User } from '../../features/users/user';
   styleUrls: ['./user-thumbnail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UserThumbnailComponent implements OnInit {
+export class UserThumbnailComponent {
   @Input()
   public user: User;
 
   @Input()
   public size: 'xs' | 'sm' | 'md' | 'lg' = 'md';
-
-  public get initials(): string {
-    return this.user.firstName.charAt(0) + this.user.lastName.charAt(0);
-  }
-
-  constructor() { }
-
-  public ngOnInit() {
-  }
 }

@@ -16,11 +16,9 @@ import 'rxjs/add/operator/takeUntil';
 
 import { AffixService } from '../affix/affix.service';
 import { OverlayInstance } from '../overlay/overlay-instance';
-
-// import { DropdownMenuMessage } from './dropdown-menu-message';
-// import { DropdownMenuMessageType } from './dropdown-menu-message-type';
-import { DropdownMenuContext } from './dropdown-menu-context';
 import { WindowRefService } from '../window/window-ref.service';
+
+import { DropdownMenuContext } from './dropdown-menu-context';
 
 @Component({
   selector: 'gd-dropdown-menu',
@@ -34,7 +32,6 @@ import { WindowRefService } from '../window/window-ref.service';
 export class DropdownMenuComponent implements OnInit, AfterContentInit, OnDestroy {
   public items: any[];
   public itemTemplate: TemplateRef<any>;
-  // public messageStream = new Subject<DropdownMenuMessage>();
 
   private ngUnsubscribe = new Subject();
   private buttons: any[];
@@ -71,12 +68,6 @@ export class DropdownMenuComponent implements OnInit, AfterContentInit, OnDestro
 
     this.items = this.context.config.items;
     this.itemTemplate = this.context.config.itemTemplate;
-
-    // this.messageStream
-    //   .takeUntil(this.ngUnsubscribe)
-    //   .subscribe((message: DropdownMenuMessage) => {
-    //     this.handleIncomingMessages(message);
-    //   });
 
     // Close the menu when clicking the window.
     // (Timeout needed so the click is not registered on the caller button.)
@@ -162,12 +153,4 @@ export class DropdownMenuComponent implements OnInit, AfterContentInit, OnDestro
   private focusActiveButton() {
     this.buttons[this.activeIndex].focus();
   }
-
-  // private handleIncomingMessages(message: DropdownMenuMessage) {
-  //   switch (message.type) {
-  //     case DropdownMenuMessageType.Toggle:
-  //     console.log('open!');
-  //     break;
-  //   }
-  // }
 }

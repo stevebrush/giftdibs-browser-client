@@ -10,11 +10,11 @@ import {
   RouterModule
 } from '@angular/router';
 
+import { DropdownMenuModule } from '../dropdown-menu/dropdown-menu.module';
 import { SearchModule } from '../search/search.module';
+import { UserThumbnailModule } from '../user-thumbnail/user-thumbnail.module';
 
 import { NavbarComponent } from './navbar.component';
-import { DropdownMenuModule } from '../dropdown-menu/dropdown-menu.module';
-import { UserThumbnailModule } from '../user-thumbnail/user-thumbnail.module';
 
 @NgModule({
   imports: [

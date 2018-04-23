@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component
+} from '@angular/core';
 
 @Component({
   selector: 'gd-dibs',
   templateUrl: './dibs.component.html',
-  styleUrls: ['./dibs.component.scss']
+  styleUrls: ['./dibs.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DibsComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}
+export class DibsComponent { }

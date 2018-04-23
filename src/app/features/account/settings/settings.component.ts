@@ -57,7 +57,8 @@ export class SettingsComponent implements OnInit {
 
     const formData = this.settingsForm.value;
 
-    this.userService.update(this.sessionService.user._id, formData)
+    this.userService
+      .update(this.sessionService.user._id, formData)
       .finally(() => {
         this.isLoading = false;
         this.settingsForm.enable();
@@ -94,11 +95,18 @@ export class SettingsComponent implements OnInit {
   private updateForm() {
     this.userService
       .getById(this.sessionService.user._id)
-      .subscribe((user: User) => {
-        this.settingsForm.reset(user);
-        this.settingsForm.enable();
+      .finally(() => {
         this.isLoading = false;
+        this.settingsForm.enable();
         this.changeDetector.markForCheck();
-      });
+      })
+      .subscribe(
+        (user: User) => {
+          this.settingsForm.reset(user);
+        },
+        (err: any) => {
+          this.alertService.error(err.error.message);
+        }
+      );
   }
 }

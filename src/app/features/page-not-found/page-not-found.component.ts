@@ -11,10 +11,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PageNotFoundComponent implements OnInit {
-
   constructor() { }
 
-  public ngOnInit() {
-  }
-
+  public ngOnInit() { }
 }

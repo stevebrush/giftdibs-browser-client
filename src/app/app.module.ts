@@ -7,7 +7,10 @@ import {
   BrowserModule
 } from '@angular/platform-browser';
 
-import { SessionModule } from './modules/session/session.module';
+import {
+  SessionModule
+} from './modules/session';
+
 import { AlertModule } from './modules/alert/alert.module';
 import { NavbarModule } from './modules/navbar/navbar.module';
 import { VerifyEmailNoticeModule } from './modules/verify-email-notice/verify-email-notice.module';

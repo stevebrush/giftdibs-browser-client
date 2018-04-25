@@ -4,7 +4,9 @@ import {
   OnInit
 } from '@angular/core';
 
-import { SessionService } from '../../modules/session/session.service';
+import {
+  SessionService
+} from '../../modules/session';
 
 @Component({
   selector: 'gd-home',

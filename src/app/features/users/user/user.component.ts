@@ -3,7 +3,9 @@ import {
   ChangeDetectorRef,
   Component,
   OnDestroy,
-  OnInit
+  OnInit,
+  ElementRef,
+  ViewChild
 } from '@angular/core';
 
 import {
@@ -16,11 +18,16 @@ import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/takeUntil';
 
-import { AlertService } from '../../modules/alert/alert.service';
+import { AlertService } from '../../../modules/alert/alert.service';
 
-import { User } from './user';
-import { UserService } from './user.service';
-import { SessionService } from '../../modules/session/session.service';
+import {
+  SessionService
+} from '../../../modules/session';
+
+import { User } from '../user';
+import { UserService } from '../user.service';
+import { WishList } from '../../wish-lists/wish-list';
+import { WishListService } from '../../wish-lists/wish-list.service';
 
 @Component({
   selector: 'gd-user',
@@ -29,9 +36,14 @@ import { SessionService } from '../../modules/session/session.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserComponent implements OnInit, OnDestroy {
+  public isWishListFormActive = false;
   public isLoading = true;
   public isSessionUser = false;
   public user: User;
+  public wishLists: WishList[];
+
+  @ViewChild('showWishListFormButton')
+  private showWishListFormButton: ElementRef;
 
   private ngUnsubscribe = new Subject();
 
@@ -41,7 +53,8 @@ export class UserComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private sessionService: SessionService,
-    private userService: UserService
+    private userService: UserService,
+    private wishListService: WishListService
   ) { }
 
   public ngOnInit() {
@@ -53,10 +66,14 @@ export class UserComponent implements OnInit, OnDestroy {
         this.changeDetector.markForCheck();
         return this.userService.getById(params.userId);
       })
-      .takeUntil(this.ngUnsubscribe)
-      .subscribe((user: User) => {
+      .mergeMap((user: User) => {
         this.user = user;
         this.isSessionUser = this.sessionService.isSessionUser(this.user._id);
+        return this.wishListService.getAllByUserId(user._id);
+      })
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe((wishLists: WishList[]) => {
+        this.wishLists = wishLists;
         this.isLoading = false;
         this.changeDetector.markForCheck();
       }, () => {
@@ -68,5 +85,22 @@ export class UserComponent implements OnInit, OnDestroy {
   public ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  public onShowWishListButtonClick() {
+    this.isWishListFormActive = true;
+  }
+
+  public onWishListFormCancel() {
+    this.isWishListFormActive = false;
+    this.changeDetector.detectChanges();
+    this.showWishListFormButton.nativeElement.focus();
+  }
+
+  public onWishListFormSuccess(wishList: WishList) {
+    this.wishLists.push(wishList);
+    this.isWishListFormActive = false;
+    this.changeDetector.detectChanges();
+    this.showWishListFormButton.nativeElement.focus();
   }
 }

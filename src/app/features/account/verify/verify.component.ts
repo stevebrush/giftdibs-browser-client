@@ -13,10 +13,14 @@ import {
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/takeUntil';
 
-import { AccountService } from '../account.service';
-import { SessionService } from '../../../modules/session/session.service';
-import { SessionUser } from '../../../modules/session/session-user';
 import { AlertService } from '../../../modules/alert/alert.service';
+
+import {
+  SessionService,
+  SessionUser
+} from '../../../modules/session';
+
+import { AccountService } from '../account.service';
 
 @Component({
   selector: 'gd-verify-account',

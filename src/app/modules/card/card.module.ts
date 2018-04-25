@@ -10,22 +10,25 @@ import { CardComponent } from './card.component';
 import { CardHeaderComponent } from './card-header.component';
 import { CardHeadingComponent } from './card-heading.component';
 import { CardBodyComponent } from './card-body.component';
+import { CardFooterComponent } from './card-footer.component';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   exports: [
+    CardBodyComponent,
     CardComponent,
+    CardFooterComponent,
     CardHeaderComponent,
-    CardHeadingComponent,
-    CardBodyComponent
+    CardHeadingComponent
   ],
   declarations: [
     CardComponent,
     CardHeaderComponent,
     CardHeadingComponent,
-    CardBodyComponent
+    CardBodyComponent,
+    CardFooterComponent
   ]
 })
 export class CardModule { }

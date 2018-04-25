@@ -35,8 +35,9 @@ export class FormFieldComponent implements AfterContentInit, OnChanges {
   public ngAfterContentInit(): void {
     this.controlName.valueAccessor.registerOnTouched(() => {
       this.errors = [];
+      this.controlName.control.markAsTouched();
       this.changeDetector.markForCheck();
-      this.getErrorMessages();
+      this.updateErrorMessages();
     });
   }
 
@@ -46,12 +47,13 @@ export class FormFieldComponent implements AfterContentInit, OnChanges {
     }
   }
 
-  public getErrorMessages(): string[] {
+  public updateErrorMessages() {
     const control = this.controlName.control;
+    const hasError = (control.invalid && (control.dirty || control.touched));
 
     this.errorMessages = [];
 
-    if (!control.errors) {
+    if (!control.errors || !hasError) {
       return;
     }
 
@@ -98,9 +100,9 @@ export class FormFieldComponent implements AfterContentInit, OnChanges {
         this.controlName.control.setErrors({
           validation: err.message
         });
-
-        this.getErrorMessages();
       }
     });
+
+    this.updateErrorMessages();
   }
 }

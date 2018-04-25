@@ -9,7 +9,10 @@ import {
 import 'rxjs/add/operator/finally';
 
 import { AlertService } from '../../../modules/alert/alert.service';
-import { SessionService } from '../../../modules/session/session.service';
+
+import {
+  SessionService
+} from '../../../modules/session';
 
 import { User } from '../user';
 

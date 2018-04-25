@@ -11,7 +11,9 @@ import 'rxjs/add/operator/toPromise';
 
 import { environment } from '../environments/environment';
 
-import { SessionService } from './modules/session/session.service';
+import {
+  SessionService
+} from './modules/session';
 
 @Injectable()
 export class AppStartupService {
@@ -34,6 +36,7 @@ export class AppStartupService {
         this.sessionService.token = data.authResponse.token;
       })
       .catch((err: any) => {
+        // Unauthenticated.
         if (err.status === 401) {
           this.sessionService.clearAll();
           return Promise.resolve();

@@ -19,8 +19,11 @@ import { AlertService } from '../alert/alert.service';
 import { DropdownMenuService } from '../dropdown-menu/dropdown-menu.service';
 import { DropdownMenuComponent } from '../dropdown-menu/dropdown-menu.component';
 import { OverlayInstance } from '../overlay/overlay-instance';
-import { SessionService } from '../session/session.service';
-import { SessionUser } from '../session/session-user';
+
+import {
+  SessionService,
+  SessionUser
+} from '../session';
 
 @Component({
   selector: 'gd-navbar',

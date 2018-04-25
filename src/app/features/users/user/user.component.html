@@ -1,0 +1,83 @@
+<div
+  class="gd-user"
+  [gdHideUntil]="!isLoading">
+
+  <ng-template [ngIf]="user">
+    <div class="gd-user-header gd-container">
+      <gd-media>
+        <gd-media-content>
+          <gd-media-header>
+            <h1>
+              {{ user.firstName }} {{ user.lastName }}
+            </h1>
+          </gd-media-header>
+          <gd-media-body>
+            <gd-follow-button
+              [friend]="user">
+            </gd-follow-button>
+          </gd-media-body>
+        </gd-media-content>
+        <gd-media-thumbnail>
+          <gd-user-thumbnail
+            [user]="user"
+            size="lg">
+          </gd-user-thumbnail>
+        </gd-media-thumbnail>
+      </gd-media>
+    </div>
+
+    <div class="gd-container-fluid">
+      <ng-container
+        *ngTemplateOutlet="(isSessionUser) ? sessionUserTemplate : userTemplate">
+      </ng-container>
+      <gd-friendships
+        [user]="user">
+      </gd-friendships>
+    </div>
+  </ng-template>
+</div>
+
+<ng-template #sessionUserTemplate>
+  <div class="gd-user-wish-lists">
+    <gd-row>
+      <ng-template [ngIf]="wishLists">
+        <gd-column *ngFor="let wishList of wishLists" screenSmall="4">
+          <gd-wish-list-preview
+            [wishList]="wishList">
+          </gd-wish-list-preview>
+        </gd-column>
+      </ng-template>
+      <gd-column screenSmall="4">
+        <div [ngClass]="{ 'gd-user-wish-list-create-form-active': isWishListFormActive }">
+          <gd-card>
+            <gd-card-body>
+              <button
+                aria-controls="gd-user-wish-list-create-form"
+                type="button"
+                class="gd-button gd-button-primary gd-button-block gd-user-wish-list-create-button"
+                [attr.aria-expanded]="isWishListFormActive"
+                (click)="onShowWishListButtonClick()"
+                #showWishListFormButton>
+                Add a new list...
+              </button>
+              <div
+                id="gd-user-wish-list-create-form"
+                class="gd-user-wish-list-create-form">
+                <div *ngIf="isWishListFormActive">
+                  <gd-wish-list-create
+                    (cancel)="onWishListFormCancel()"
+                    (success)="onWishListFormSuccess($event)">
+                  </gd-wish-list-create>
+                </div>
+              </div>
+            </gd-card-body>
+          </gd-card>
+        </div>
+      </gd-column>
+    </gd-row>
+  </div>
+</ng-template>
+
+<ng-template #userTemplate>
+  Non-session user
+</ng-template>

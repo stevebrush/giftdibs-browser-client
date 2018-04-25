@@ -14,7 +14,10 @@ import {
 
 import 'rxjs/add/operator/finally';
 
-import { SessionService } from '../../../modules/session/session.service';
+import {
+  SessionService
+} from '../../../modules/session';
+
 import { UserService } from '../../users/user.service';
 import { User } from '../../users/user';
 
@@ -51,7 +54,7 @@ export class SettingsComponent implements OnInit {
     }
 
     this.settingsForm.disable();
-    this.isLoading = false;
+    this.isLoading = true;
     this.errors = [];
     this.changeDetector.markForCheck();
 

@@ -7,7 +7,9 @@ import {
   Routes
 } from '@angular/router';
 
-import { AuthGuard } from '../../modules/session/authorization.guard';
+import {
+  AuthGuard
+} from '../../modules/session';
 
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';

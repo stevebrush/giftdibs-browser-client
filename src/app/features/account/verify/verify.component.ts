@@ -44,7 +44,7 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
     private sessionService: SessionService
   ) { }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.sessionUser = this.sessionService.user;
     this.isVerified = this.sessionUser.emailAddressVerified;
 
@@ -78,12 +78,12 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
       });
   }
 
-  public ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
 
-  public sendVerificationEmail() {
+  public sendVerificationEmail(): void {
     this.accountService
       .resendEmailAddressVerification(this.sessionUser._id)
       .subscribe(

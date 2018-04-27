@@ -43,7 +43,7 @@ export class SettingsComponent implements OnInit {
     private userService: UserService
   ) { }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.createForm();
     this.updateForm();
   }
@@ -95,7 +95,7 @@ export class SettingsComponent implements OnInit {
     this.settingsForm.disable();
   }
 
-  private updateForm() {
+  private updateForm(): void {
     this.userService
       .getById(this.sessionService.user._id)
       .finally(() => {

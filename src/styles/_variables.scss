@@ -33,22 +33,53 @@ $gd-screen-xs-max: $gd-screen-sm-min - 1;
 $gd-screen-sm-max: $gd-screen-md-min - 1;
 $gd-screen-md-max: $gd-screen-lg-min - 1;
 
+@function background_color($color) {
+  @return desaturate(lighten($color, 35%), 25%);
+}
+
+@function border_color($color) {
+  @return darken($color, 10%);
+}
+
+@function text_color($color) {
+  @return darken($color, 20%);
+}
+
 // PRIMARY
-$gd-color-primary: #009933 !default;
-$gd-background-color-primary: $gd-color-primary !default;
-$gd-border-color-primary: darken($gd-background-color-primary, 10%) !default;
+$gd-color-primary: #329B22 !default;
+$gd-background-color-primary: background_color($gd-color-primary) !default;
+$gd-border-color-primary: border_color($gd-color-primary) !default;
+$gd-text-color-primary: text_color($gd-color-primary) !default;
+
+// SECONDARY
+$gd-color-secondary: complement($gd-color-primary) !default;
+$gd-background-color-secondary: background_color($gd-color-secondary) !default;
+$gd-border-color-secondary: border_color($gd-color-secondary) !default;
+$gd-text-color-secondary: text_color($gd-color-secondary) !default;
+
+// INFO
+$gd-color-info: #0084FF !default;
+$gd-background-color-info: background_color($gd-color-info) !default;
+$gd-border-color-info: border_color($gd-color-info) !default;
+$gd-text-color-info: text_color($gd-color-info) !default;
 
 // SUCCESS
 $gd-color-success: $gd-color-primary !default;
-$gd-background-color-success: desaturate(lighten($gd-color-success, 62%), 25%) !default;
-$gd-border-color-success: darken($gd-color-success, 5%) !default;
-$gd-text-color-success: darken($gd-color-success, 5%) !default;
+$gd-background-color-success: background_color($gd-color-success) !default;
+$gd-border-color-success: border_color($gd-color-success) !default;
+$gd-text-color-success: text_color($gd-color-success) !default;
+
+// WARNING
+$gd-color-warning: #FF8C00 !default;
+$gd-background-color-warning: background_color($gd-color-warning) !default;
+$gd-border-color-warning: border_color($gd-color-warning) !default;
+$gd-text-color-warning: text_color($gd-color-warning) !default;
 
 // DANGER
-$gd-color-danger: #990000 !default;
-$gd-background-color-danger: desaturate(lighten($gd-color-danger, 62%), 25%) !default;
-$gd-border-color-danger: #e60000 !default;
-$gd-text-color-danger: $gd-border-color-danger !default;
+$gd-color-danger: #D4282F !default;
+$gd-background-color-danger: background_color($gd-color-danger) !default;
+$gd-border-color-danger: border_color($gd-color-danger) !default;
+$gd-text-color-danger: text_color($gd-color-danger) !default;
 
 $gd-background-color-neutral: #ccc !default;
 $gd-background-color-neutral-light: #e8e8e8 !default;

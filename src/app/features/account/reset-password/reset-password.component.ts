@@ -53,7 +53,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     this.createForm();
   }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.resetPasswordForm.disable();
 
     this.route.params
@@ -78,7 +78,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
       });
   }
 
-  public ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }

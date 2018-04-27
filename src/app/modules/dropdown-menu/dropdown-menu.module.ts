@@ -8,13 +8,18 @@ import {
 
 import { DropdownMenuComponent } from './dropdown-menu.component';
 import { DropdownMenuService } from './dropdown-menu.service';
+import { DropdownMenuTriggerDirective } from './dropdown-menu-trigger.directive';
 
 @NgModule({
   imports: [
     CommonModule
   ],
+  exports: [
+    DropdownMenuTriggerDirective
+  ],
   declarations: [
-    DropdownMenuComponent
+    DropdownMenuComponent,
+    DropdownMenuTriggerDirective
   ],
   providers: [
     DropdownMenuService

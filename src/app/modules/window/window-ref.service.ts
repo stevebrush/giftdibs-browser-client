@@ -4,7 +4,7 @@ import {
 
 @Injectable()
 export class WindowRefService {
-  public get nativeWindow() {
+  public get nativeWindow(): Window {
     return window;
   }
 }

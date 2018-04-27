@@ -71,7 +71,7 @@ export class TypeaheadComponent implements AfterViewInit, OnDestroy {
     private overlayService: OverlayService
   ) { }
 
-  public ngAfterViewInit() {
+  public ngAfterViewInit(): void {
     const input = this.searchInput.nativeElement;
 
     Observable
@@ -98,13 +98,13 @@ export class TypeaheadComponent implements AfterViewInit, OnDestroy {
       });
   }
 
-  public ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.removeResults();
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
 
-  private search(searchText: string) {
+  private search(searchText: string): void {
     this.searchFunction.call({}, searchText)
       .takeUntil(this.ngUnsubscribe)
       .subscribe((results: any[]) => {
@@ -122,7 +122,7 @@ export class TypeaheadComponent implements AfterViewInit, OnDestroy {
       });
   }
 
-  private showResults(results: any[]) {
+  private showResults(results: any[]): void {
     const resultsContext = new TypeaheadResultsContext();
     resultsContext.results = results;
     resultsContext.templateRef = this.searchResultTemplate;
@@ -151,7 +151,7 @@ export class TypeaheadComponent implements AfterViewInit, OnDestroy {
     this.changeDetector.markForCheck();
   }
 
-  private removeResults() {
+  private removeResults(): void {
     this.hasResults = false;
     if (this.overlayInstance) {
       this.overlayInstance.destroy();
@@ -159,7 +159,7 @@ export class TypeaheadComponent implements AfterViewInit, OnDestroy {
     this.changeDetector.markForCheck();
   }
 
-  private positionResults() {
+  private positionResults(): void {
     const resultsRef = this.overlayInstance.componentInstance.elementRef;
     this.affixService.affixTo(
       resultsRef,
@@ -171,7 +171,7 @@ export class TypeaheadComponent implements AfterViewInit, OnDestroy {
     );
   }
 
-  private addEventListeners() {
+  private addEventListeners(): void {
     const resultsComponent = this.overlayInstance.componentInstance;
 
     Observable

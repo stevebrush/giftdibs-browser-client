@@ -5,13 +5,14 @@
 </gd-alert>
 
 <main>
-  <gd-verify-email-notice
-    [visibleForRoutes]="[
-      '/',
-      '/account/settings'
-    ]">
-  </gd-verify-email-notice>
-
+  <div class="gd-container">
+    <gd-verify-email-notice
+      [visibleForRoutes]="[
+        '/',
+        '/account/settings'
+      ]">
+    </gd-verify-email-notice>
+  </div>
   <router-outlet>
   </router-outlet>
 </main>

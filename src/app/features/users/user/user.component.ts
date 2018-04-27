@@ -57,7 +57,7 @@ export class UserComponent implements OnInit, OnDestroy {
     private wishListService: WishListService
   ) { }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.route.params
       .mergeMap((params: Params) => {
         this.isLoading = true;
@@ -82,22 +82,22 @@ export class UserComponent implements OnInit, OnDestroy {
       });
   }
 
-  public ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
 
-  public onShowWishListButtonClick() {
+  public onShowWishListButtonClick(): void {
     this.isWishListFormActive = true;
   }
 
-  public onWishListFormCancel() {
+  public onWishListFormCancel(): void {
     this.isWishListFormActive = false;
     this.changeDetector.detectChanges();
     this.showWishListFormButton.nativeElement.focus();
   }
 
-  public onWishListFormSuccess(wishList: WishList) {
+  public onWishListFormSuccess(wishList: WishList): void {
     this.wishLists.push(wishList);
     this.isWishListFormActive = false;
     this.changeDetector.detectChanges();

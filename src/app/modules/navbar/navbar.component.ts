@@ -16,9 +16,10 @@ import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/takeUntil';
 
 import { AlertService } from '../alert/alert.service';
-import { DropdownMenuService } from '../dropdown-menu/dropdown-menu.service';
-import { DropdownMenuComponent } from '../dropdown-menu/dropdown-menu.component';
-import { OverlayInstance } from '../overlay/overlay-instance';
+
+import {
+  DropdownMenuItem
+} from '../dropdown-menu';
 
 import {
   SessionService,
@@ -38,21 +39,35 @@ export class NavbarComponent implements OnInit, OnDestroy {
     name: string;
   }[];
 
+  public menuItems: DropdownMenuItem[] = [
+    {
+      label: 'Settings',
+      action: () => {
+        this.router.navigate(['/account', 'settings']);
+      },
+      addSeparatorAfter: true
+    },
+    {
+      label: 'Log out',
+      action: () => {
+        this.logout();
+      }
+    }
+  ];
+
   @ViewChild('button')
   public buttonRef: ElementRef;
 
-  private overlayInstance: OverlayInstance<DropdownMenuComponent>;
   private ngUnsubscribe = new Subject();
 
   constructor(
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
-    private dropdownMenuService: DropdownMenuService,
     private router: Router,
     private sessionService: SessionService
   ) { }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.sessionService.userStream
       .takeUntil(this.ngUnsubscribe)
       .subscribe((sessionUser: SessionUser) => {
@@ -68,7 +83,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     ];
   }
 
-  public ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
@@ -77,39 +92,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     return this.sessionService.isLoggedIn;
   }
 
-  public openMenu() {
-    if (this.overlayInstance) {
-      this.overlayInstance.componentInstance.close();
-      this.overlayInstance = undefined;
-      return;
-    }
-
-    this.overlayInstance = this.dropdownMenuService.open({
-      alignment: 'right',
-      caller: this.buttonRef,
-      items: [
-        {
-          label: 'Settings',
-          action: () => {
-            this.router.navigate(['/account', 'settings']);
-          },
-          addSeparatorAfter: true
-        },
-        {
-          label: 'Log out',
-          action: () => {
-            this.logout();
-          }
-        }
-      ]
-    });
-
-    this.overlayInstance.destroyStream.subscribe(() => {
-      this.overlayInstance = undefined;
-    });
-  }
-
-  private logout() {
+  private logout(): void {
     this.sessionService.clearAll();
     this.alertService.info('You have been successfully logged out.', true);
     this.router.navigate(['/account', 'login']);

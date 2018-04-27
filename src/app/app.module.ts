@@ -14,7 +14,10 @@ import {
 import { AlertModule } from './modules/alert/alert.module';
 import { NavbarModule } from './modules/navbar/navbar.module';
 import { VerifyEmailNoticeModule } from './modules/verify-email-notice/verify-email-notice.module';
-import { OverlayModule } from './modules/overlay/overlay.module';
+
+import {
+  OverlayModule
+} from './modules/overlay';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';

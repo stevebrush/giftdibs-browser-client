@@ -41,7 +41,7 @@ export class FollowButtonComponent implements OnInit {
     private sessionService: SessionService
   ) { }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     const sessionUserId = this.sessionService.user._id;
     this.isSessionUser = this.sessionService.isSessionUser(this.friend._id);
 

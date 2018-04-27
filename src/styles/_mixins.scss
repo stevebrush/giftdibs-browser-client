@@ -8,9 +8,15 @@
   vertical-align: baseline;
   font-weight: $gd-font-weight;
   padding: $gd-spacing-padding-squish-compact;
+  color: $gd-text-color-dark;
 }
 
 @mixin gd_disabled() {
   opacity: 0.65;
   cursor: default;
+}
+
+@mixin gd_focus_indicator() {
+  outline: none !important;
+  box-shadow: 0 0 0 4px rgba($gd-color-info, .5) !important;
 }

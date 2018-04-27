@@ -1,5 +1,6 @@
 <ul
   class="gd-dropdown-menu"
+  [ngClass]="{ 'gd-dropdown-hidden': !isVisible }"
   (click)="close();$event.stopPropagation();">
   <ng-template ngFor let-item [ngForOf]="items">
     <li class="gd-dropdown-menu-item">
@@ -22,5 +23,10 @@
 </ul>
 
 <ng-template let-item="item" #defaultItemTemplate>
+  <i
+    *ngIf="item.icon"
+    aria-hidden="true"
+    class="fa"
+    [ngClass]="'fa-' + item.icon"></i>
   {{ item.label }}
 </ng-template>

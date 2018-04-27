@@ -5,8 +5,8 @@ import {
   OnInit,
   ChangeDetectorRef,
   Output,
-  ViewChild,
-  ElementRef,
+  // ViewChild,
+  // ElementRef,
   AfterViewInit
 } from '@angular/core';
 
@@ -37,8 +37,8 @@ export class WishListCreateComponent implements OnInit, AfterViewInit {
   public errors: any[];
   public isLoading = false;
 
-  @ViewChild('nameInput')
-  private nameInput: ElementRef;
+  // @ViewChild('nameInput')
+  // private nameInput: ElementRef;
 
   constructor(
     private alertService: AlertService,
@@ -47,15 +47,15 @@ export class WishListCreateComponent implements OnInit, AfterViewInit {
     private wishListService: WishListService
   ) { }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.createForm();
   }
 
-  public ngAfterViewInit() {
-    this.nameInput.nativeElement.focus();
+  public ngAfterViewInit(): void {
+    // this.nameInput.nativeElement.focus();
   }
 
-  public submit() {
+  public submit(): void {
     if (this.wishListForm.disabled) {
       return;
     }
@@ -85,12 +85,12 @@ export class WishListCreateComponent implements OnInit, AfterViewInit {
       );
   }
 
-  public triggerCancel() {
+  public triggerCancel(): void {
     this.resetFormState();
     this.cancel.emit();
   }
 
-  private triggerSuccess(wishList: WishList) {
+  private triggerSuccess(wishList: WishList): void {
     this.resetFormState();
     this.success.emit(wishList);
   }
@@ -101,7 +101,7 @@ export class WishListCreateComponent implements OnInit, AfterViewInit {
     });
   }
 
-  private resetFormState() {
+  private resetFormState(): void {
     this.isLoading = false;
     this.errors = [];
     this.wishListForm.reset();

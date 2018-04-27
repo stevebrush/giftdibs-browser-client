@@ -18,7 +18,7 @@ export class PasswordViewerComponent {
   public disabled = false;
   public isVisible = false;
 
-  public togglePasswordInputType() {
+  public togglePasswordInputType(): void {
     if (this.inputElement.type === 'text') {
       this.inputElement.type = 'password';
       this.isVisible = false;

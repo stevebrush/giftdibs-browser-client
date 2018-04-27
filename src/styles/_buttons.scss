@@ -9,7 +9,6 @@
   user-select: none;
   cursor: pointer;
   font-weight: $gd-font-weight-bold;
-  color: $gd-text-color;
 
   &:disabled {
     @include gd_disabled();
@@ -17,6 +16,10 @@
 
   &:hover {
     text-decoration: none;
+  }
+
+  &:focus {
+    @include gd_focus_indicator();
   }
 }
 
@@ -38,20 +41,42 @@
 }
 
 .gd-button-primary {
-  background-color: $gd-background-color-primary;
+  background-color: $gd-color-primary;
   box-shadow: inset 0 -2px 0px $gd-border-color-primary;
   color: #fff;
 
   &:hover {
-    background-color: lighten($gd-background-color-primary, 2%);
+    background-color: lighten($gd-color-primary, 2%);
     border-color: $gd-border-color-primary;
   }
+}
+
+.gd-button-success {
+  background-color: #fff;
+  color: $gd-text-color-success;
+  border-color: $gd-border-color-success;
+  box-shadow: inset 0 -2px 0px $gd-border-color-success;
+}
+
+.gd-button-warning {
+  background-color: #fff;
+  color: $gd-text-color-warning;
+  border-color: $gd-border-color-warning;
+  box-shadow: inset 0 -2px 0px $gd-border-color-warning;
 }
 
 .gd-button-danger {
   background-color: #fff;
   color: $gd-text-color-danger;
   border-color: $gd-border-color-danger;
+  box-shadow: inset 0 -2px 0px $gd-border-color-danger;
+}
+
+.gd-button-info {
+  background-color: #fff;
+  color: $gd-text-color-info;
+  border-color: $gd-border-color-info;
+  box-shadow: inset 0 -2px 0px $gd-border-color-info;
 }
 
 .gd-button-link {
@@ -59,5 +84,6 @@
 
   &:hover {
     text-decoration: underline;
+    color: $gd-text-color-dark;
   }
 }

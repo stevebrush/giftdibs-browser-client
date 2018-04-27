@@ -13,6 +13,7 @@ import {
 } from '@angular/core';
 
 import { OverlayInstance } from './overlay-instance';
+import { OverlayConfig } from './overlay-config';
 
 @Component({
   selector: 'gd-overlay',
@@ -33,15 +34,13 @@ export class OverlayComponent {
     private resolver: ComponentFactoryResolver
   ) { }
 
-  public attach<T>(component: Type<T>, config?: any): OverlayInstance<T> {
+  public attach<T>(component: Type<T>, config?: OverlayConfig): OverlayInstance<T> {
     const overlayInstance = new OverlayInstance<T>();
 
-    const defaultProviders = [
-      {
-        provide: OverlayInstance,
-        useValue: overlayInstance
-      }
-    ];
+    const defaultProviders: any[] = [{
+      provide: OverlayInstance,
+      useValue: overlayInstance
+    }];
 
     const settings = Object.assign({
       showBackdrop: false

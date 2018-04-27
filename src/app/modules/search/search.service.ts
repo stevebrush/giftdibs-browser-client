@@ -8,6 +8,7 @@ import {
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/share';
 
 import { environment } from '../../../environments/environment';
 

@@ -6,6 +6,7 @@ import {
   Input,
   OnDestroy
 } from '@angular/core';
+import { WindowRefService } from '../window/window-ref.service';
 
 const FOCUSABLE_SELECTORS: string = [
   'a[href]',
@@ -49,36 +50,37 @@ export class FocusTrapDirective implements AfterContentInit, OnDestroy {
   private observer: MutationObserver;
 
   constructor(
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private windowRef: WindowRefService
   ) { }
 
-  public ngAfterContentInit() {
+  public ngAfterContentInit(): void {
     if (this.activateOnLoad) {
       this.activateTrap();
       this.focusActiveElement();
     }
   }
 
-  public ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.deactivateTrap();
   }
 
   @HostListener('focusin', ['$event'])
-  public onFocus() {
+  public onFocus(): void {
     if (!this.isActive) {
       this.activateTrap();
     }
   }
 
   @HostListener('document:click', ['$event'])
-  public onWindowFocusIn(event: any) {
+  public onWindowFocusIn(event: any): void {
     if (!this.elementRef.nativeElement.contains(event.target)) {
       this.deactivateTrap();
     }
   }
 
   @HostListener('keydown', ['$event'])
-  public onKeyDown(event: KeyboardEvent) {
+  public onKeyDown(event: KeyboardEvent): void {
     const key = event.key.toLowerCase();
 
     if (key === 'tab') {
@@ -95,7 +97,7 @@ export class FocusTrapDirective implements AfterContentInit, OnDestroy {
     }
   }
 
-  private assignFocusableElements() {
+  private assignFocusableElements(): void {
     const elements: HTMLElement[] = [].slice.call(
       this.elementRef.nativeElement.querySelectorAll(FOCUSABLE_SELECTORS)
     );
@@ -107,7 +109,7 @@ export class FocusTrapDirective implements AfterContentInit, OnDestroy {
     this.focusableElements = focusableElements;
   }
 
-  private createObserver() {
+  private createObserver(): void {
     this.observer = new MutationObserver(() => {
       // Reset the focusable elements when the DOM changes.
       this.assignFocusableElements();
@@ -131,23 +133,25 @@ export class FocusTrapDirective implements AfterContentInit, OnDestroy {
     );
   }
 
-  private focusActiveElement() {
-    this.focusableElements[this.tabIndex].focus();
+  private focusActiveElement(): void {
+    this.windowRef.nativeWindow.setTimeout(() => {
+      this.focusableElements[this.tabIndex].focus();
+    });
   }
 
-  private disconnectObserver() {
+  private disconnectObserver(): void {
     if (this.observer) {
       this.observer.disconnect();
     }
   }
 
-  private activateTrap() {
+  private activateTrap(): void {
     this.isActive = true;
     this.assignFocusableElements();
     this.createObserver();
   }
 
-  private deactivateTrap() {
+  private deactivateTrap(): void {
     this.isActive = false;
     this.disconnectObserver();
   }

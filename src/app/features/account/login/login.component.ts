@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
     this.createForm();
   }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.sessionService.clearAll();
     this.redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/';
   }

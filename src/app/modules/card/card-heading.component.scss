@@ -1,5 +1,9 @@
 @import '../../../styles/mixins';
 
+:host {
+  flex: 1 1 auto;
+}
+
 .gd-card-heading {
   margin: 0;
   font-size: $gd-font-size;

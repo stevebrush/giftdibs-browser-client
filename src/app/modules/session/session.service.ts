@@ -52,7 +52,7 @@ export class SessionService implements OnDestroy {
     }
   }
 
-  public ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.userStream.complete();
   }
 

@@ -5,8 +5,13 @@
 }
 
 .gd-dropdown-menu {
-  width: 275px;
+  max-width: 275px;
   box-shadow: $gd-box-shadow-lg;
+  border: 1px solid $gd-border-color-neutral;
+}
+
+.gd-dropdown-hidden {
+  visibility: hidden;
 }
 
 .gd-dropdown-menu-item-button {
@@ -15,6 +20,10 @@
   text-align: left;
   border-radius: 0;
   font-weight: $gd-font-weight;
+
+  > .fa {
+    margin-right: 5px;
+  }
 
   &:hover {
     background-color: $gd-background-color-neutral-light;

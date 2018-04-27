@@ -38,24 +38,24 @@ export class AlertService implements OnDestroy {
       });
   }
 
-  public ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
 
-  public error(message: string, keepAfterNavigationChange?: boolean) {
+  public error(message: string, keepAfterNavigationChange?: boolean): void {
     this.sendMessage({ text: message, type: 'danger' }, keepAfterNavigationChange);
   }
 
-  public info(message: string, keepAfterNavigationChange?: boolean) {
+  public info(message: string, keepAfterNavigationChange?: boolean): void {
     this.sendMessage({ text: message, type: 'info' }, keepAfterNavigationChange);
   }
 
-  public success(message: string, keepAfterNavigationChange?: boolean) {
+  public success(message: string, keepAfterNavigationChange?: boolean): void {
     this.sendMessage({ text: message, type: 'success' }, keepAfterNavigationChange);
   }
 
-  private sendMessage(alert: Alert, keepAfterNavigationChange = false) {
+  private sendMessage(alert: Alert, keepAfterNavigationChange = false): void {
     this.keepAfterNavigationChange = keepAfterNavigationChange;
     this.alertStream.next(alert);
   }

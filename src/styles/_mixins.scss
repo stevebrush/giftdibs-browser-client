@@ -1,7 +1,7 @@
 @import './variables';
 
 @mixin gd_form_control() {
-  font-size: $gd-font-size;
+  font-size: $gd-font-size-default;
   line-height: $gd-line-height;
   border: 1px solid transparent;
   border-radius: $gd-border-radius;

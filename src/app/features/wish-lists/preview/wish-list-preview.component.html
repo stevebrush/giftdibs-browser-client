@@ -4,6 +4,7 @@
       {{ wishList.name }}
     </gd-card-heading>
     <button
+      *ngIf="isSessionUser"
       type="button"
       class="gd-button gd-button-link gd-text-deemphasized gd-wish-list-preview-settings-button"
       title="Toggle wish list options"

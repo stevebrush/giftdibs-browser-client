@@ -1,0 +1,10 @@
+@import '../../../styles/mixins';
+
+:host {
+  flex: 1 1 auto;
+}
+
+.gd-modal-heading {
+  font-size: $gd-font-size-large;
+  margin: 0;
+}

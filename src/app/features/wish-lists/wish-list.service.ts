@@ -33,4 +33,14 @@ export class WishListService {
       .map((result: any) => result.data.wishLists)
       .share();
   }
+
+  public remove(wishListId: string): Observable<any> {
+    return this.http.delete(`${this.resourceUrl}/${wishListId}`);
+  }
+
+  public update(wishListId: string, formData: WishList): Observable<any> {
+    return this.http.patch(`${this.resourceUrl}/${wishListId}`, {
+      attributes: formData
+    });
+  }
 }

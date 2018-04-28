@@ -16,12 +16,26 @@ import {
   GD_AUTHORIZATION_PROVIDERS
 } from '../../modules/session';
 
+import {
+  CardModule
+} from '../../modules/card';
+
+import {
+  ConfirmModule
+} from '../../modules/confirm';
+
+import {
+  DropdownMenuModule
+} from '../../modules/dropdown-menu';
+
+import {
+  ModalModule
+} from '../../modules/modal';
+
 import { WishListCreateComponent } from './create/wish-list-create.component';
-import { WishListService } from './wish-list.service';
 import { WishListPreviewComponent } from './preview/wish-list-preview.component';
-import { CardModule } from '../../modules/card/card.module';
-import { DropdownMenuModule } from '../../modules/dropdown-menu/dropdown-menu.module';
-import { ConfirmModule } from '../../modules/confirm';
+import { WishListEditComponent } from './edit/wish-list-edit.component';
+import { WishListService } from './wish-list.service';
 
 @NgModule({
   imports: [
@@ -30,6 +44,7 @@ import { ConfirmModule } from '../../modules/confirm';
     ConfirmModule,
     DropdownMenuModule,
     FormFieldModule,
+    ModalModule,
     ReactiveFormsModule
   ],
   exports: [
@@ -38,11 +53,15 @@ import { ConfirmModule } from '../../modules/confirm';
   ],
   declarations: [
     WishListCreateComponent,
-    WishListPreviewComponent
+    WishListPreviewComponent,
+    WishListEditComponent
   ],
   providers: [
     WishListService,
     GD_AUTHORIZATION_PROVIDERS
+  ],
+  entryComponents: [
+    WishListEditComponent
   ]
 })
 export class WishListsModule { }

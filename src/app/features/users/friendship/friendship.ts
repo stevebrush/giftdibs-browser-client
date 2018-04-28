@@ -1,13 +1,9 @@
+import {
+  User
+} from '../user';
+
 export interface Friendship {
   _id: string;
-  friend: {
-    _id: string;
-    firstName: string;
-    lastName: string;
-  };
-  user: {
-    _id: string;
-    firstName: string;
-    lastName: string;
-  };
+  friend: User;
+  user: User;
 }

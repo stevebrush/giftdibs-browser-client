@@ -46,7 +46,7 @@ export class OverlayComponent {
       showBackdrop: false
     }, config);
 
-    settings.providers = defaultProviders.concat(config.providers || []);
+    settings.providers = defaultProviders.concat(config && config.providers || []);
 
     const factory = this.resolver.resolveComponentFactory(component);
     const providers = ReflectiveInjector.resolve(settings.providers);

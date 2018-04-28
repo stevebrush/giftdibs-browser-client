@@ -1,13 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
   OnInit,
-  ChangeDetectorRef,
-  Output,
-  ViewChild,
-  ElementRef,
-  AfterViewInit
+  ChangeDetectorRef
 } from '@angular/core';
 
 import {
@@ -20,42 +15,35 @@ import {
   AlertService
 } from '../../../modules/alert';
 
-import { WishListService } from '../wish-list.service';
 import { WishList } from '../wish-list';
+import { WishListService } from '../wish-list.service';
+import { WishListEditContext } from './wish-list-edit-context';
 
 @Component({
-  selector: 'gd-wish-list-create',
-  templateUrl: './wish-list-create.component.html',
-  styleUrls: ['./wish-list-create.component.scss'],
+  selector: 'gd-wish-list-edit',
+  templateUrl: './wish-list-edit.component.html',
+  styleUrls: ['./wish-list-edit.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WishListCreateComponent implements OnInit, AfterViewInit {
-  @Output()
-  public cancelled = new EventEmitter<void>();
-
-  @Output()
-  public succeeded = new EventEmitter<WishList>();
-
+export class WishListEditComponent implements OnInit {
   public wishListForm: FormGroup;
   public errors: any[];
   public isLoading = false;
 
-  @ViewChild('nameInput')
-  private nameInput: ElementRef;
+  private wishList: WishList;
 
   constructor(
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
     private formBuilder: FormBuilder,
+    private context: WishListEditContext,
     private wishListService: WishListService
   ) { }
 
   public ngOnInit(): void {
     this.createForm();
-  }
-
-  public ngAfterViewInit(): void {
-    this.nameInput.nativeElement.focus();
+    this.wishList = this.context.wishList;
+    this.wishListForm.reset(this.wishList);
   }
 
   public submit(): void {
@@ -71,11 +59,10 @@ export class WishListCreateComponent implements OnInit, AfterViewInit {
     const formData: WishList = this.wishListForm.value;
 
     this.wishListService
-      .create(formData)
+      .update(this.wishList._id, formData)
       .subscribe(
         (result: any) => {
           this.alertService.success(result.message);
-          this.triggerSuccess(result.data.wishList);
         },
         (err: any) => {
           const error = err.error;
@@ -88,27 +75,9 @@ export class WishListCreateComponent implements OnInit, AfterViewInit {
       );
   }
 
-  public triggerCancel(): void {
-    this.resetFormState();
-    this.cancelled.emit();
-  }
-
-  private triggerSuccess(wishList: WishList): void {
-    this.resetFormState();
-    this.succeeded.emit(wishList);
-  }
-
   private createForm(): void {
     this.wishListForm = this.formBuilder.group({
       name: new FormControl(null, [])
     });
-  }
-
-  private resetFormState(): void {
-    this.isLoading = false;
-    this.errors = [];
-    this.wishListForm.reset();
-    this.wishListForm.enable();
-    this.changeDetector.markForCheck();
   }
 }

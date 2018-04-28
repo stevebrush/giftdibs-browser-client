@@ -1,8 +1,15 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Input
+  EventEmitter,
+  Input,
+  Output,
+  OnInit
 } from '@angular/core';
+
+import {
+  AlertService
+} from '../../../modules/alert';
 
 import {
   ConfirmAnswer,
@@ -13,7 +20,14 @@ import {
   DropdownMenuItem
 } from '../../../modules/dropdown-menu';
 
+import { ModalService } from '../../../modules/modal';
+
+import { SessionService } from '../../../modules/session';
+
 import { WishList } from '../wish-list';
+import { WishListService } from '../wish-list.service';
+import { WishListEditComponent } from '../edit/wish-list-edit.component';
+import { WishListEditContext } from '../edit/wish-list-edit-context';
 
 @Component({
   selector: 'gd-wish-list-preview',
@@ -21,16 +35,20 @@ import { WishList } from '../wish-list';
   styleUrls: ['./wish-list-preview.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WishListPreviewComponent {
+export class WishListPreviewComponent implements OnInit {
   @Input()
   public wishList: WishList;
 
+  @Output()
+  public removed = new EventEmitter<void>();
+
+  public isSessionUser = false;
   public menuItems: DropdownMenuItem[] = [
     {
       icon: 'pencil-alt',
       label: 'Edit',
       action: () => {
-        console.log('edit');
+        this.openEditModal();
       },
       addSeparatorAfter: true
     },
@@ -44,15 +62,46 @@ export class WishListPreviewComponent {
   ];
 
   constructor(
-    private confirmService: ConfirmService
+    private alertService: AlertService,
+    private confirmService: ConfirmService,
+    private modalService: ModalService,
+    private sessionService: SessionService,
+    private wishListService: WishListService
   ) { }
+
+  public ngOnInit(): void {
+    this.isSessionUser = this.sessionService.isSessionUser(this.wishList.user._id);
+  }
+
+  private openEditModal(): void {
+    const context = new WishListEditContext();
+    context.wishList = this.wishList;
+
+    this.modalService.open(WishListEditComponent, {
+      providers: [{
+        provide: WishListEditContext,
+        useValue: context
+      }]
+    });
+  }
 
   private confirmDelete(): void {
     this.confirmService.confirm({
       message: 'Are you sure?'
     }, (answer: ConfirmAnswer) => {
       if (answer.type === 'okay') {
-        console.log('DELETE WISH LIST');
+        this.wishListService
+          .remove(this.wishList._id)
+          .subscribe(
+            (data: any) => {
+              this.alertService.success(data.message);
+              this.removed.emit();
+              this.removed.complete();
+            },
+            (err: any) => {
+              this.alertService.error(err.error.message);
+            }
+          );
       }
     });
   }

@@ -3,7 +3,7 @@
 }
 
 body {
-  font-size: $gd-font-size;
+  font-size: $gd-font-size-default;
   font-family: $gd-font-family;
   color: $gd-text-color;
   line-height: $gd-line-height;
@@ -32,7 +32,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 3rem;
+  font-size: $gd-font-size-xl;
 }
 
 p {

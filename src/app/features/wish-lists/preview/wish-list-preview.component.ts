@@ -4,7 +4,8 @@ import {
   EventEmitter,
   Input,
   Output,
-  OnInit
+  OnInit,
+  ChangeDetectorRef
 } from '@angular/core';
 
 import {
@@ -63,6 +64,7 @@ export class WishListPreviewComponent implements OnInit {
 
   constructor(
     private alertService: AlertService,
+    private changeDetector: ChangeDetectorRef,
     private confirmService: ConfirmService,
     private modalService: ModalService,
     private sessionService: SessionService,
@@ -77,11 +79,16 @@ export class WishListPreviewComponent implements OnInit {
     const context = new WishListEditContext();
     context.wishList = this.wishList;
 
-    this.modalService.open(WishListEditComponent, {
+    const modalInstance = this.modalService.open(WishListEditComponent, {
       providers: [{
         provide: WishListEditContext,
         useValue: context
       }]
+    });
+
+    modalInstance.componentInstance.succeeded.subscribe((updated: WishList) => {
+      this.wishList = updated;
+      this.changeDetector.markForCheck();
     });
   }
 

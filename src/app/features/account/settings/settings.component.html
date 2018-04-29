@@ -7,7 +7,7 @@
     aria-label="Account settings"
     class="gd-form"
     [formGroup]="settingsForm"
-    [gdHideUntil]="!isLoading"
+    [gdHideUntil]="isReady"
     (ngSubmit)="submit()"
     novalidate>
 
@@ -66,6 +66,6 @@
     </button>
   </form>
 
-  <p><a routerLink="/account/reset-password">Change password...</a></p>
-  <p><a routerLink="/account/delete">Delete account...</a></p>
+  <p><a routerLink="/account/reset-password">Change password</a></p>
+  <p><a routerLink="/account/delete">Delete account</a></p>
 </div>

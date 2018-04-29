@@ -31,6 +31,7 @@ import { AlertService } from '../../../modules/alert/alert.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsComponent implements OnInit {
+  public isReady = false;
   public isLoading = true;
   public settingsForm: FormGroup;
   public errors: any[] = [];
@@ -100,6 +101,7 @@ export class SettingsComponent implements OnInit {
       .getById(this.sessionService.user._id)
       .finally(() => {
         this.isLoading = false;
+        this.isReady = true;
         this.settingsForm.enable();
         this.changeDetector.markForCheck();
       })

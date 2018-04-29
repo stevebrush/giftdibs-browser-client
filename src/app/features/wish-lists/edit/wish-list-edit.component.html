@@ -26,7 +26,8 @@
       </gd-form-field>
     </form>
   </gd-modal-body>
-  <gd-modal-footer>
+  <gd-modal-footer
+    (cancelClicked)="onCancelClicked()">
     <button
       type="button"
       class="gd-button gd-button-primary"

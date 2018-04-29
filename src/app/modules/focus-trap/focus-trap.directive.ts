@@ -113,8 +113,6 @@ export class FocusTrapDirective implements AfterContentInit, OnDestroy {
     this.observer = new MutationObserver(() => {
       // Reset the focusable elements when the DOM changes.
       this.assignFocusableElements();
-      this.tabIndex = 0;
-      this.focusActiveElement();
     });
 
     this.observer.observe(this.elementRef.nativeElement, {

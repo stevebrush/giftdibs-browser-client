@@ -1,7 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  OnInit
+  EventEmitter,
+  OnInit,
+  Output
 } from '@angular/core';
 
 @Component({
@@ -11,7 +13,15 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ModalFooterComponent implements OnInit {
+  @Output()
+  public cancelClicked = new EventEmitter<void>();
+
   constructor() { }
 
   public ngOnInit(): void { }
+
+  public onClick(): void {
+    this.cancelClicked.emit();
+    this.cancelClicked.complete();
+  }
 }

@@ -16,7 +16,10 @@ import {
 } from '@angular/router';
 
 import { AlertService } from '../../../modules/alert/alert.service';
-import { SessionService } from '../../../modules/session/session.service';
+
+import {
+  SessionService
+} from '../../../modules/session';
 
 import { AccountService } from '../account.service';
 

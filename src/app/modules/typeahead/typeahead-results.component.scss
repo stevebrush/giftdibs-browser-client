@@ -15,4 +15,8 @@
 
 .gd-typahead-result-active {
   background-color: $gd-background-color-neutral-light;
+
+  a {
+    color: $gd-text-color-dark;
+  }
 }

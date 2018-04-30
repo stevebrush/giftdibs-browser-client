@@ -49,11 +49,11 @@
         <li>
           <button
             type="button"
-            class="gd-button gd-button-link"
+            class="gd-button gd-button-link gd-text-deemphasized"
             title="Open user menu"
-            (click)="openMenu()"
-            #button>
-            <i class="fa fa-bars" aria-hidden="true"></i>
+            gdDropdownMenuTrigger
+            [menuItems]="menuItems">
+            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
           </button>
         </li>
       </ul>
@@ -63,7 +63,7 @@
         class="gd-navbar-menu">
         <li>
           <a
-            class="gd-button gd-button-link"
+            class="gd-button gd-button-link gd-text-deemphasized"
             routerLink="/account/register"
             routerLinkActive="active">
             Sign up
@@ -71,7 +71,7 @@
         </li>
         <li>
           <a
-            class="gd-button gd-button-link"
+            class="gd-button gd-button-link gd-text-deemphasized"
             routerLink="/account/login"
             routerLinkActive="active">
             Log in

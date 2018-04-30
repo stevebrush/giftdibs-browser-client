@@ -22,7 +22,11 @@ import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/takeUntil';
 
 import { AccountService } from '../account.service';
-import { SessionService } from '../../../modules/session/session.service';
+
+import {
+  SessionService
+} from '../../../modules/session';
+
 import { AlertService } from '../../../modules/alert/alert.service';
 
 @Component({
@@ -49,7 +53,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     this.createForm();
   }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.resetPasswordForm.disable();
 
     this.route.params
@@ -74,7 +78,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
       });
   }
 
-  public ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }

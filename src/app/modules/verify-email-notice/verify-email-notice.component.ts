@@ -18,8 +18,10 @@ import 'rxjs/add/operator/combineLatest';
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/filter';
 
-import { SessionService } from '../../modules/session/session.service';
-import { SessionUser } from '../../modules/session/session-user';
+import {
+  SessionService,
+  SessionUser
+} from '../../modules/session';
 
 @Component({
   selector: 'gd-verify-email-notice',

@@ -13,10 +13,14 @@ import {
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/takeUntil';
 
-import { AccountService } from '../account.service';
-import { SessionService } from '../../../modules/session/session.service';
-import { SessionUser } from '../../../modules/session/session-user';
 import { AlertService } from '../../../modules/alert/alert.service';
+
+import {
+  SessionService,
+  SessionUser
+} from '../../../modules/session';
+
+import { AccountService } from '../account.service';
 
 @Component({
   selector: 'gd-verify-account',
@@ -40,7 +44,7 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
     private sessionService: SessionService
   ) { }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.sessionUser = this.sessionService.user;
     this.isVerified = this.sessionUser.emailAddressVerified;
 
@@ -74,12 +78,12 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
       });
   }
 
-  public ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
 
-  public sendVerificationEmail() {
+  public sendVerificationEmail(): void {
     this.accountService
       .resendEmailAddressVerification(this.sessionUser._id)
       .subscribe(

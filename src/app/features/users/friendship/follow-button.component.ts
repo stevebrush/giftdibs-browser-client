@@ -9,7 +9,10 @@ import {
 import 'rxjs/add/operator/finally';
 
 import { AlertService } from '../../../modules/alert/alert.service';
-import { SessionService } from '../../../modules/session/session.service';
+
+import {
+  SessionService
+} from '../../../modules/session';
 
 import { User } from '../user';
 
@@ -38,7 +41,7 @@ export class FollowButtonComponent implements OnInit {
     private sessionService: SessionService
   ) { }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     const sessionUserId = this.sessionService.user._id;
     this.isSessionUser = this.sessionService.isSessionUser(this.friend._id);
 
@@ -63,7 +66,7 @@ export class FollowButtonComponent implements OnInit {
       .subscribe(
         (data: any) => {
           this.isFollowing = true;
-          this.friendshipId = data.data.friendshipId;
+          this.friendshipId = data.data.friendship._id;
           this.alertService.success(data.message);
         },
         (err: any) => {

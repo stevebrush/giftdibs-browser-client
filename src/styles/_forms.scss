@@ -1,9 +1,5 @@
 @import './mixins';
 
-.gd-form {
-  margin: $gd-spacing 0;
-}
-
 .gd-control-label {
   display: inline-block;
   margin-bottom: $gd-spacing-xs;
@@ -11,7 +7,6 @@
 
 .gd-form-control {
   @include gd_form_control();
-  color: $gd-text-color;
   display: block;
   width: 100%;
   font-weight: $gd-font-weight-bold;
@@ -19,5 +14,9 @@
 
   &:disabled {
     @include gd_disabled();
+  }
+
+  &:focus {
+    @include gd_focus_indicator();
   }
 }

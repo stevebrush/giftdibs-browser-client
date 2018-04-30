@@ -12,7 +12,7 @@ export class AffixService {
     private renderer: Renderer2
   ) { }
 
-  public affixTo(subject: ElementRef, target: ElementRef, config?: AffixConfig) {
+  public affixTo(subject: ElementRef, target: ElementRef, config?: AffixConfig): void {
     const defaults: AffixConfig = {
       alignment: 'left'
     };

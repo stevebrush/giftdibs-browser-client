@@ -18,7 +18,11 @@ import {
 } from '@angular/forms';
 
 import { AccountService } from '../account.service';
-import { SessionService } from '../../../modules/session/session.service';
+
+import {
+  SessionService
+} from '../../../modules/session';
+
 import { AlertService } from '../../../modules/alert/alert.service';
 
 @Component({
@@ -43,7 +47,7 @@ export class LoginComponent implements OnInit {
     this.createForm();
   }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.sessionService.clearAll();
     this.redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/';
   }

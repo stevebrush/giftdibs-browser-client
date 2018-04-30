@@ -25,11 +25,11 @@ export class OverlayService implements OnDestroy {
     private resolver: ComponentFactoryResolver
   ) { }
 
-  public ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.removeHostComponent();
   }
 
-  public ensureHostExists() {
+  public ensureHostExists(): ComponentRef<OverlayComponent> {
     if (!this.host) {
       this.host = this.createHostComponent();
     }
@@ -55,7 +55,7 @@ export class OverlayService implements OnDestroy {
     return componentRef;
   }
 
-  private removeHostComponent() {
+  private removeHostComponent(): void {
     if (this.host) {
       this.appRef.detachView(this.host.hostView);
       this.host.destroy();

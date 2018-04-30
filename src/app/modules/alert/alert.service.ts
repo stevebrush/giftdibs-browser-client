@@ -1,62 +1,48 @@
 import {
-  Injectable,
-  OnDestroy
+  Injectable
 } from '@angular/core';
 
 import {
-  NavigationStart,
-  Router,
-  RouterEvent
-} from '@angular/router';
-
-import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/operator/takeUntil';
+  OverlayInstance,
+  OverlayService
+} from '../overlay';
 
 import { Alert } from './alert';
+import { AlertComponent } from './alert.component';
+import { AlertContext } from './alert-context';
 
 @Injectable()
-export class AlertService implements OnDestroy {
-  public alertStream = new Subject();
-
-  private keepAfterNavigationChange = false;
-  private ngUnsubscribe = new Subject();
+export class AlertService {
+  private currentInstance: OverlayInstance<AlertComponent>;
 
   constructor(
-    private router: Router
-  ) {
-    // Clear alert message on route change?
-    this.router.events
-      .takeUntil(this.ngUnsubscribe)
-      .subscribe((event: RouterEvent) => {
-        if (event instanceof NavigationStart) {
-          if (this.keepAfterNavigationChange) {
-            this.keepAfterNavigationChange = false;
-          } else {
-            this.alertStream.next();
-          }
-        }
-      });
+    private overlayService: OverlayService
+  ) { }
+
+  public error(message: string, keepAfterNavigationChange = false): void {
+    this.sendMessage({ text: message, type: 'danger', keepAfterNavigationChange });
   }
 
-  public ngOnDestroy() {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
+  public info(message: string, keepAfterNavigationChange = false): void {
+    this.sendMessage({ text: message, type: 'info', keepAfterNavigationChange });
   }
 
-  public error(message: string, keepAfterNavigationChange?: boolean) {
-    this.sendMessage({ text: message, type: 'danger' }, keepAfterNavigationChange);
+  public success(message: string, keepAfterNavigationChange = false): void {
+    this.sendMessage({ text: message, type: 'success', keepAfterNavigationChange });
   }
 
-  public info(message: string, keepAfterNavigationChange?: boolean) {
-    this.sendMessage({ text: message, type: 'info' }, keepAfterNavigationChange);
-  }
+  private sendMessage(alert: Alert): void {
+    if (this.currentInstance) {
+      this.currentInstance.destroy();
+    }
 
-  public success(message: string, keepAfterNavigationChange?: boolean) {
-    this.sendMessage({ text: message, type: 'success' }, keepAfterNavigationChange);
-  }
+    const context = new AlertContext(alert);
 
-  private sendMessage(alert: Alert, keepAfterNavigationChange = false) {
-    this.keepAfterNavigationChange = keepAfterNavigationChange;
-    this.alertStream.next(alert);
+    this.currentInstance = this.overlayService.attach(AlertComponent, {
+      providers: [{
+        provide: AlertContext,
+        useValue: context
+      }]
+    });
   }
 }

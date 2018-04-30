@@ -9,7 +9,7 @@ export class OverlayInstance<T> {
   public componentInstance: T;
   public destroyStream = new Subject();
 
-  public destroy() {
+  public destroy(): void {
     this.destroyStream.next();
     this.destroyStream.complete();
   }

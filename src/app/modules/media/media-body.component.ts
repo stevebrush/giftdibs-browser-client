@@ -13,5 +13,5 @@ import {
 export class MediaBodyComponent implements OnInit {
   constructor() { }
 
-  public ngOnInit() { }
+  public ngOnInit(): void { }
 }

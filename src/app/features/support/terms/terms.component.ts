@@ -13,5 +13,5 @@ import {
 export class TermsComponent implements OnInit {
   constructor() { }
 
-  public ngOnInit() { }
+  public ngOnInit(): void { }
 }

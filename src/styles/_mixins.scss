@@ -1,16 +1,22 @@
 @import './variables';
 
 @mixin gd_form_control() {
-  font-size: $gd-font-size;
+  font-size: $gd-font-size-default;
   line-height: $gd-line-height;
   border: 1px solid transparent;
   border-radius: $gd-border-radius;
   vertical-align: baseline;
   font-weight: $gd-font-weight;
   padding: $gd-spacing-padding-squish-compact;
+  color: $gd-text-color-dark;
 }
 
 @mixin gd_disabled() {
   opacity: 0.65;
   cursor: default;
+}
+
+@mixin gd_focus_indicator() {
+  outline: none !important;
+  box-shadow: 0 0 0 4px rgba($gd-color-info, .5) !important;
 }

@@ -7,7 +7,9 @@ import {
   RouterModule
 } from '@angular/router';
 
-import { AuthGuard } from './modules/session/authorization.guard';
+import {
+  AuthGuard
+} from './modules/session';
 
 const appRoutes: Routes = [
   {

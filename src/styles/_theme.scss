@@ -3,7 +3,7 @@
 }
 
 body {
-  font-size: $gd-font-size;
+  font-size: $gd-font-size-default;
   font-family: $gd-font-family;
   color: $gd-text-color;
   line-height: $gd-line-height;
@@ -19,6 +19,10 @@ a {
   &:hover {
     text-decoration: underline;
   }
+
+  &:focus {
+    @include gd_focus_indicator();
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -28,7 +32,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: $gd-font-size-xl;
 }
 
 p {
@@ -61,6 +65,10 @@ strong {
   -webkit-clip-path: inset(50%);
   clip-path: inset(50%);
   border: 0;
+}
+
+.gd-text-deemphasized {
+  color: $gd-text-color-deemphasized;
 }
 
 .gd-circle {

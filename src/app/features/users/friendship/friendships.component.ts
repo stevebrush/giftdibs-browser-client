@@ -33,11 +33,11 @@ export class FriendshipsComponent implements OnInit, OnChanges {
     private friendshipService: FriendshipService
   ) { }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.assignFriendships();
   }
 
-  public ngOnChanges(changes: SimpleChanges) {
+  public ngOnChanges(changes: SimpleChanges): void {
     if (changes.user && !changes.user.isFirstChange()) {
       this.isLoading = true;
       this.changeDetector.markForCheck();
@@ -45,7 +45,7 @@ export class FriendshipsComponent implements OnInit, OnChanges {
     }
   }
 
-  private assignFriendships() {
+  private assignFriendships(): void {
     this.isLoading = true;
     this.changeDetector.markForCheck();
     this.friendshipService

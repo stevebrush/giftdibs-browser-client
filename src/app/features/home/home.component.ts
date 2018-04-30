@@ -4,7 +4,9 @@ import {
   OnInit
 } from '@angular/core';
 
-import { SessionService } from '../../modules/session/session.service';
+import {
+  SessionService
+} from '../../modules/session';
 
 @Component({
   selector: 'gd-home',
@@ -19,7 +21,7 @@ export class HomeComponent implements OnInit {
     private sessionService: SessionService
   ) { }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.isLoggedIn = this.sessionService.isLoggedIn;
   }
 }

@@ -7,18 +7,18 @@ import {
 } from '@angular/common';
 
 import {
-  HTTP_INTERCEPTORS,
-  HttpClientModule
-} from '@angular/common/http';
-
-import {
   ReactiveFormsModule
 } from '@angular/forms';
 
 import { FormFieldModule } from '../../modules/form-field/form-field.module';
+import { GridModule } from '../../modules/grid/grid.module';
+import { HideUntilModule } from '../../modules/hide-until/hide-until.module';
 import { PasswordViewerModule } from '../../modules/password-viewer/password-viewer.module';
-import { AuthInterceptor } from '../../modules/session/authorization.interceptor';
 import { NoticeModule } from '../../modules/notice/notice.module';
+
+import {
+  GD_AUTHORIZATION_PROVIDERS
+} from '../../modules/session';
 
 import { AccountRoutingModule } from './account-routing.module';
 import { ForgottenComponent } from './forgotten/forgotten.component';
@@ -29,8 +29,6 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { VerifyAccountComponent } from './verify/verify.component';
 import { SettingsComponent } from './settings/settings.component';
 import { DeleteComponent } from './delete/delete.component';
-import { GridModule } from '../../modules/grid/grid.module';
-import { HideUntilModule } from '../../modules/hide-until/hide-until.module';
 
 @NgModule({
   imports: [
@@ -39,7 +37,6 @@ import { HideUntilModule } from '../../modules/hide-until/hide-until.module';
     FormFieldModule,
     GridModule,
     HideUntilModule,
-    HttpClientModule,
     NoticeModule,
     PasswordViewerModule,
     ReactiveFormsModule
@@ -55,11 +52,7 @@ import { HideUntilModule } from '../../modules/hide-until/hide-until.module';
   ],
   providers: [
     AccountService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    }
+    GD_AUTHORIZATION_PROVIDERS
   ]
 })
 export class AccountModule { }

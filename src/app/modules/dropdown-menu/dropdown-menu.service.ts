@@ -2,12 +2,14 @@ import {
   Injectable
 } from '@angular/core';
 
-import { OverlayService } from '../overlay/overlay.service';
+import {
+  OverlayService
+} from '../overlay';
 
 import { DropdownMenuConfig } from './dropdown-menu-config';
 import { DropdownMenuComponent } from './dropdown-menu.component';
 import { DropdownMenuContext } from './dropdown-menu-context';
-import { DropdownInstance } from './dropdown-instance';
+import { DropdownMenuInstance } from './dropdown-menu-instance';
 
 @Injectable()
 export class DropdownMenuService {
@@ -15,7 +17,7 @@ export class DropdownMenuService {
     private overlayService: OverlayService
   ) { }
 
-  public open(config: DropdownMenuConfig): DropdownInstance<DropdownMenuComponent> {
+  public open(config: DropdownMenuConfig): DropdownMenuInstance {
     const context = new DropdownMenuContext();
     context.config = config;
 
@@ -26,6 +28,6 @@ export class DropdownMenuService {
       }]
     });
 
-    return overlayInstance;
+    return new DropdownMenuInstance(overlayInstance);
   }
 }

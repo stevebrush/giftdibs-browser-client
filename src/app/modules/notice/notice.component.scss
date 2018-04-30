@@ -5,8 +5,9 @@
   color: $gd-text-color;
   background-color: #fff;
   margin: $gd-spacing 0;
-  border-radius: $gd-border-radius-sm;
+  border-radius: $gd-border-radius;
   font-weight: $gd-font-weight;
+  border: 1px solid transparent;
 
   ::ng-deep p {
     margin: $gd-spacing-sm 0;
@@ -18,7 +19,17 @@
   color: $gd-text-color-danger;
 }
 
+.gd-notice-warning {
+  background-color: $gd-background-color-warning;
+  color: $gd-text-color-warning;
+}
+
 .gd-notice-success {
   background-color: $gd-background-color-success;
   color: $gd-text-color-success;
+}
+
+.gd-notice-info {
+  background-color: $gd-background-color-info;
+  color: $gd-text-color-info;
 }

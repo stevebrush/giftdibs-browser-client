@@ -67,44 +67,44 @@ export class TypeaheadResultsComponent implements OnInit, OnDestroy {
     private overlay: OverlayInstance<any>
   ) { }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.results = this.context.results;
     this.templateRef = this.context.templateRef;
   }
 
-  public ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.selectionChange.complete();
   }
 
-  public onResultClick(result: any) {
+  public onResultClick(result: any): void {
     const label = this.context.resultSelectedAction.call({}, result);
     this.selectionChange.next({ result, label });
     this.close();
   }
 
-  public triggerActiveResultAction() {
+  public triggerActiveResultAction(): void {
     this.onResultClick(this.activeResult);
   }
 
   @HostListener('click', ['$event'])
-  public onClick(event: any) {
+  public onClick(event: any): void {
     event.stopPropagation();
   }
 
   @HostListener('document:click')
-  public onDocumentClick() {
+  public onDocumentClick(): void {
     this.close();
   }
 
-  public focusNextItem() {
+  public focusNextItem(): void {
     this.activeIndex++;
   }
 
-  public focusPreviousItem() {
+  public focusPreviousItem(): void {
     this.activeIndex--;
   }
 
-  private close() {
+  private close(): void {
     this.overlay.destroy();
   }
 }

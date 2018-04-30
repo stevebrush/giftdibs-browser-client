@@ -16,24 +16,24 @@
 .gd-user-thumbnail-xs {
   width: 2rem;
   height: 2rem;
-  font-size: 0.85rem;
+  font-size: $gd-font-size-small;
 }
 
 .gd-user-thumbnail-sm {
   width: 3.75rem;
   height: 3.75rem;
-  font-size: 1.5rem;
+  font-size: $gd-font-size-larger;
 }
 
 .gd-user-thumbnail-md {
   width: 6rem;
   height: 6rem;
-  font-size: 3rem;
+  font-size: $gd-font-size-xl;
 }
 
 .gd-user-thumbnail-lg {
   width: 10rem;
   height: 10rem;
-  font-size: 5rem;
+  font-size: $gd-font-size-xxl;
   letter-spacing: -0.175rem;
 }

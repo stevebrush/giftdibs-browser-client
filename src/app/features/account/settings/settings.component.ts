@@ -14,7 +14,10 @@ import {
 
 import 'rxjs/add/operator/finally';
 
-import { SessionService } from '../../../modules/session/session.service';
+import {
+  SessionService
+} from '../../../modules/session';
+
 import { UserService } from '../../users/user.service';
 import { User } from '../../users/user';
 
@@ -28,6 +31,7 @@ import { AlertService } from '../../../modules/alert/alert.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsComponent implements OnInit {
+  public isReady = false;
   public isLoading = true;
   public settingsForm: FormGroup;
   public errors: any[] = [];
@@ -40,7 +44,7 @@ export class SettingsComponent implements OnInit {
     private userService: UserService
   ) { }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.createForm();
     this.updateForm();
   }
@@ -51,7 +55,7 @@ export class SettingsComponent implements OnInit {
     }
 
     this.settingsForm.disable();
-    this.isLoading = false;
+    this.isLoading = true;
     this.errors = [];
     this.changeDetector.markForCheck();
 
@@ -92,11 +96,12 @@ export class SettingsComponent implements OnInit {
     this.settingsForm.disable();
   }
 
-  private updateForm() {
+  private updateForm(): void {
     this.userService
       .getById(this.sessionService.user._id)
       .finally(() => {
         this.isLoading = false;
+        this.isReady = true;
         this.settingsForm.enable();
         this.changeDetector.markForCheck();
       })

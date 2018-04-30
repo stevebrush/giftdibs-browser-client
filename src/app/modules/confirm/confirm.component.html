@@ -1,0 +1,25 @@
+<div
+  class="gd-confirm"
+  role="alertdialog"
+  [attr.aria-label]="message"
+  gdFocusTrap
+  [activateOnLoad]="true">
+
+  <p class="gd-confirm-message">
+    {{ message }}
+  </p>
+
+  <button
+    class="gd-button gd-button-primary"
+    type="button"
+    (click)="confirm()">
+    Okay
+  </button>
+
+  <button
+    class="gd-button gd-button-default"
+    type="button"
+    (click)="cancel()">
+    Cancel
+  </button>
+</div>

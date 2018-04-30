@@ -13,5 +13,5 @@ import {
 export class FaqComponent implements OnInit {
   constructor() { }
 
-  public ngOnInit() { }
+  public ngOnInit(): void { }
 }

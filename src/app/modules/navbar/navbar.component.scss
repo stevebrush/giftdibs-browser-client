@@ -35,12 +35,17 @@
   > li {
     padding: 0 0.175rem;
 
-    > a,
-    .gd-button-link {
+    > a {
       color: $gd-text-color-deemphasized;
+    }
+
+    .gd-button-link {
       border-color: transparent;
       box-shadow: none;
+    }
 
+    > a,
+    .gd-button-link {
       &:focus,
       &:hover {
         color: $gd-text-color;

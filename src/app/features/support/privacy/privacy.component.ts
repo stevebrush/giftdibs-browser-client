@@ -13,5 +13,5 @@ import {
 export class PrivacyComponent implements OnInit {
   constructor() { }
 
-  public ngOnInit() { }
+  public ngOnInit(): void { }
 }

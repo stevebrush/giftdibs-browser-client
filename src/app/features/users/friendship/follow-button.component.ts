@@ -66,7 +66,7 @@ export class FollowButtonComponent implements OnInit {
       .subscribe(
         (data: any) => {
           this.isFollowing = true;
-          this.friendshipId = data.data.friendshipId;
+          this.friendshipId = data.data.friendship._id;
           this.alertService.success(data.message);
         },
         (err: any) => {

@@ -2,13 +2,19 @@ import {
   Injectable
 } from '@angular/core';
 
+import {
+  OverlayInstance,
+  OverlayService
+} from '../overlay';
+
 import { Alert } from './alert';
-import { OverlayService } from '../overlay';
 import { AlertComponent } from './alert.component';
 import { AlertContext } from './alert-context';
 
 @Injectable()
 export class AlertService {
+  private currentInstance: OverlayInstance<AlertComponent>;
+
   constructor(
     private overlayService: OverlayService
   ) { }
@@ -26,9 +32,13 @@ export class AlertService {
   }
 
   private sendMessage(alert: Alert): void {
+    if (this.currentInstance) {
+      this.currentInstance.destroy();
+    }
+
     const context = new AlertContext(alert);
 
-    this.overlayService.attach(AlertComponent, {
+    this.currentInstance = this.overlayService.attach(AlertComponent, {
       providers: [{
         provide: AlertContext,
         useValue: context

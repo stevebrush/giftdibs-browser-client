@@ -1,11 +1,13 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
+  ElementRef,
   EventEmitter,
   Input,
   Output,
   OnInit,
-  ChangeDetectorRef
+  ViewChild
 } from '@angular/core';
 
 import {
@@ -21,9 +23,13 @@ import {
   DropdownMenuItem
 } from '../../../modules/dropdown-menu';
 
-import { ModalService } from '../../../modules/modal';
+import {
+  ModalService
+} from '../../../modules/modal';
 
-import { SessionService } from '../../../modules/session';
+import {
+  SessionService
+} from '../../../modules/session';
 
 import { WishList } from '../wish-list';
 import { WishListService } from '../wish-list.service';
@@ -62,6 +68,9 @@ export class WishListPreviewComponent implements OnInit {
     }
   ];
 
+  @ViewChild('dropdownTrigger')
+  private dropdownTrigger: ElementRef;
+
   constructor(
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
@@ -84,6 +93,10 @@ export class WishListPreviewComponent implements OnInit {
         provide: WishListEditContext,
         useValue: context
       }]
+    });
+
+    modalInstance.closed.subscribe(() => {
+      this.dropdownTrigger.nativeElement.focus();
     });
 
     modalInstance.componentInstance.succeeded.subscribe((updated: WishList) => {

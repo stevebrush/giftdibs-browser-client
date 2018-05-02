@@ -1,7 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  OnInit
+  OnInit,
+  ChangeDetectorRef
 } from '@angular/core';
 
 import { UserService } from './user.service';
@@ -17,6 +18,7 @@ export class UsersComponent implements OnInit {
   public users: User[];
 
   constructor(
+    private changeDetector: ChangeDetectorRef,
     private userService: UserService
   ) { }
 
@@ -24,6 +26,7 @@ export class UsersComponent implements OnInit {
     this.userService.getAll()
       .subscribe((users: User[]) => {
         this.users = users;
+        this.changeDetector.markForCheck();
       });
   }
 }

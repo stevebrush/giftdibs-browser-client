@@ -3,6 +3,14 @@
     <gd-card-heading>
       {{ wishList.name }}
     </gd-card-heading>
+    <div
+      class="gd-text-deemphasized" style="font-weight:400;">
+      <i
+        class="fa fa-eye"
+        aria-hidden="true">
+      </i>
+      {{ wishList.privacy.type }}
+    </div>
     <button
       *ngIf="isSessionUser"
       type="button"

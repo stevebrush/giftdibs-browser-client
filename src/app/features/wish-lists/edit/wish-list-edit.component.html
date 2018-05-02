@@ -24,6 +24,12 @@
           formControlName="name"
           autocomplete="off">
       </gd-form-field>
+
+      <gd-form-field [errors]="errors">
+        <gd-wish-list-privacy-selector
+          formControlName="privacy">
+        </gd-wish-list-privacy-selector>
+      </gd-form-field>
     </form>
   </gd-modal-body>
   <gd-modal-footer

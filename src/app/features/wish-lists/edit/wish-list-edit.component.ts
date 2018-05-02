@@ -33,7 +33,7 @@ export class WishListEditComponent implements OnInit {
   public errors: any[];
   public isLoading = false;
 
-  public succeeded = new EventEmitter<WishList>();
+  public succeeded = new EventEmitter<string>();
 
   private wishList: WishList;
 
@@ -69,7 +69,7 @@ export class WishListEditComponent implements OnInit {
       .subscribe(
         (result: any) => {
           this.alertService.success(result.message);
-          this.succeeded.emit(result.data.wishList);
+          this.succeeded.emit(this.wishList._id);
           this.succeeded.complete();
           this.instance.destroy();
         },
@@ -92,7 +92,8 @@ export class WishListEditComponent implements OnInit {
     this.wishListForm = this.formBuilder.group({
       name: new FormControl(null, [
         Validators.required
-      ])
+      ]),
+      privacy: new FormControl(null, [])
     });
   }
 }

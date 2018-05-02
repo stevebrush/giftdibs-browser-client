@@ -71,7 +71,8 @@ export class SettingsComponent implements OnInit {
       .subscribe(
         (result: any) => {
           this.alertService.success(result.message);
-          this.sessionService.patchUser(result.data.user);
+          this.updateForm();
+          this.sessionService.patchUser(this.settingsForm.value);
         },
         (err: any) => {
           const error = err.error;

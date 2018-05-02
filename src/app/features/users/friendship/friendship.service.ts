@@ -27,7 +27,7 @@ export class FriendshipService {
   }
 
   public getAllByUserId(userId: string): Observable<Friendship[]> {
-    return this.http.get(`${this.resourceUrl}`)
+    return this.http.get(`${this.resourceUrl}?userId=${userId}`)
       .map((result: any) => result.data.friendships)
       .share();
   }

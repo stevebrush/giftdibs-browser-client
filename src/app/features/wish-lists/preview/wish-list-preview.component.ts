@@ -99,9 +99,11 @@ export class WishListPreviewComponent implements OnInit {
       this.dropdownTrigger.nativeElement.focus();
     });
 
-    modalInstance.componentInstance.succeeded.subscribe((updated: WishList) => {
-      this.wishList = updated;
-      this.changeDetector.markForCheck();
+    modalInstance.componentInstance.succeeded.subscribe((updatedId: string) => {
+      this.wishListService.getById(updatedId).subscribe((wishList: WishList) => {
+        this.wishList = wishList;
+        this.changeDetector.markForCheck();
+      });
     });
   }
 

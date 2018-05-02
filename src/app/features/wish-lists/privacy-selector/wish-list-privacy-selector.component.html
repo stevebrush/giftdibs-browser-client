@@ -1,0 +1,45 @@
+<div class="gd-wish-list-privacy-selector">
+  <label>
+    Privacy:
+  </label>
+  <label>
+    <input
+      type="radio"
+      value="everyone"
+      [checked]="value.type === 'everyone'"
+      [disabled]="disabled"
+      [name]="name"
+      (change)="onRadioChange($event)">
+      Everyone
+  </label>
+  <label>
+    <input
+      type="radio"
+      value="friends"
+      [checked]="value.type === 'friends'"
+      [disabled]="disabled"
+      [name]="name"
+      (change)="onRadioChange($event)">
+      People I follow
+  </label>
+  <label>
+    <input
+      type="radio"
+      value="custom"
+      [checked]="value.type === 'custom'"
+      [disabled]="disabled"
+      [name]="name"
+      (change)="onRadioChange($event)">
+      Specific friends
+  </label>
+  <label>
+    <input
+      type="radio"
+      value="me"
+      [checked]="value.type === 'me'"
+      [disabled]="disabled"
+      [name]="name"
+      (change)="onRadioChange($event)">
+      Only me
+  </label>
+</div>

@@ -97,11 +97,14 @@ export class UserComponent implements OnInit, OnDestroy {
     this.showWishListFormButton.nativeElement.focus();
   }
 
-  public onWishListFormSucceeded(wishList: WishList): void {
-    this.wishLists.push(wishList);
-    this.isWishListFormActive = false;
-    this.changeDetector.detectChanges();
-    this.showWishListFormButton.nativeElement.focus();
+  public onWishListFormSucceeded(createdId: string): void {
+    this.wishListService.getAllByUserId(this.user._id)
+      .subscribe((wishLists: WishList[]) => {
+        this.wishLists = wishLists;
+        this.isWishListFormActive = false;
+        this.changeDetector.detectChanges();
+        this.showWishListFormButton.nativeElement.focus();
+      });
   }
 
   public onWishListRemoved(wishListId: string): void {

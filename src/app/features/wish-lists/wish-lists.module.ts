@@ -33,8 +33,9 @@ import {
 } from '../../modules/modal';
 
 import { WishListCreateComponent } from './create/wish-list-create.component';
-import { WishListPreviewComponent } from './preview/wish-list-preview.component';
 import { WishListEditComponent } from './edit/wish-list-edit.component';
+import { WishListPreviewComponent } from './preview/wish-list-preview.component';
+import { WishListPrivacySelectorComponent } from './privacy-selector/wish-list-privacy-selector.component';
 import { WishListService } from './wish-list.service';
 
 @NgModule({
@@ -49,12 +50,14 @@ import { WishListService } from './wish-list.service';
   ],
   exports: [
     WishListCreateComponent,
-    WishListPreviewComponent
+    WishListPreviewComponent,
+    WishListPrivacySelectorComponent
   ],
   declarations: [
     WishListCreateComponent,
     WishListPreviewComponent,
-    WishListEditComponent
+    WishListEditComponent,
+    WishListPrivacySelectorComponent
   ],
   providers: [
     WishListService,

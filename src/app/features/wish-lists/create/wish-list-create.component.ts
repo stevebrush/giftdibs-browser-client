@@ -75,7 +75,8 @@ export class WishListCreateComponent implements OnInit, AfterViewInit {
       .subscribe(
         (result: any) => {
           this.alertService.success(result.message);
-          this.triggerSuccess(result.data.wishList);
+          this.resetFormState();
+          this.succeeded.emit(result.data.wishListId);
         },
         (err: any) => {
           const error = err.error;
@@ -93,14 +94,10 @@ export class WishListCreateComponent implements OnInit, AfterViewInit {
     this.cancelled.emit();
   }
 
-  private triggerSuccess(wishList: WishList): void {
-    this.resetFormState();
-    this.succeeded.emit(wishList);
-  }
-
   private createForm(): void {
     this.wishListForm = this.formBuilder.group({
-      name: new FormControl(null, [])
+      name: new FormControl(null, []),
+      privacy: new FormControl(null, [])
     });
   }
 

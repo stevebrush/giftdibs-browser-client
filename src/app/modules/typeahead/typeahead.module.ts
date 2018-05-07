@@ -6,8 +6,8 @@ import {
   CommonModule
 } from '@angular/common';
 
-import { TypeaheadComponent } from './typeahead.component';
 import { TypeaheadResultsComponent } from './typeahead-results.component';
+import { TypeaheadComponent } from './typeahead.component';
 
 @NgModule({
   imports: [

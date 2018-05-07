@@ -1,0 +1,12 @@
+@import '../../../../styles/mixins';
+
+.gd-wish-list-privacy-selector-item {
+  display: flex;
+  padding: $gd-spacing-padding-squish-compact;
+}
+
+.gd-wish-list-privacy-selector-item-body {
+  flex: 1 1 auto;
+  padding-left: $gd-spacing-md;
+  padding-right: $gd-spacing-md;
+}

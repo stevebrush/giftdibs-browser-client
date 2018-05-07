@@ -8,7 +8,9 @@ import {
 
 import 'rxjs/add/operator/finally';
 
-import { AlertService } from '../../../modules/alert/alert.service';
+import {
+  AlertService
+} from '../../../modules/alert';
 
 import {
   SessionService
@@ -16,8 +18,8 @@ import {
 
 import { User } from '../user';
 
-import { FriendshipService } from './friendship.service';
 import { Friendship } from './friendship';
+import { FriendshipService } from './friendship.service';
 
 @Component({
   selector: 'gd-follow-button',

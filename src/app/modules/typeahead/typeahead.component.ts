@@ -6,30 +6,35 @@ import {
   ElementRef,
   Input,
   OnDestroy,
-  ViewChild,
-  TemplateRef
+  TemplateRef,
+  ViewChild
 } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
+
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/observable/merge';
 
 import { Subject } from 'rxjs/Subject';
+
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/takeWhile';
 
-import { AffixService } from '../affix/affix.service';
-import { OverlayService } from '../overlay/overlay.service';
+import {
+  AffixService
+} from '../affix';
+
 import { OverlayInstance } from '../overlay/overlay-instance';
+import { OverlayService } from '../overlay/overlay.service';
 
 import { TypeaheadDomAdapterService } from './typeahead-dom-adapter.service';
-import { TypeaheadSearchFunction } from './typeahead-search-function';
-import { TypeaheadResultsComponent } from './typeahead-results.component';
 import { TypeaheadResultsContext } from './typeahead-results-context';
-import { TypeaheadSearchResultAction } from './typeahead-search-result-action';
 import { TypeaheadResultsSelectionChange } from './typeahead-results-selection-change';
+import { TypeaheadResultsComponent } from './typeahead-results.component';
+import { TypeaheadSearchFunction } from './typeahead-search-function';
+import { TypeaheadSearchResultAction } from './typeahead-search-result-action';
 
 @Component({
   selector: 'gd-typeahead',

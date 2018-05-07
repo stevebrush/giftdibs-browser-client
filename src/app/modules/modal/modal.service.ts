@@ -4,8 +4,10 @@ import {
 } from '@angular/core';
 
 import {
-  OverlayService, OverlayInstance
+  OverlayInstance,
+  OverlayService
 } from '../overlay';
+
 import { ModalConfig } from './modal-config';
 import { ModalInstance } from './modal-instance';
 

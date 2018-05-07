@@ -8,8 +8,8 @@ import {
 } from '../overlay';
 
 import { Alert } from './alert';
-import { AlertComponent } from './alert.component';
 import { AlertContext } from './alert-context';
+import { AlertComponent } from './alert.component';
 
 @Injectable()
 export class AlertService {
@@ -37,8 +37,8 @@ export class AlertService {
     }
 
     const context = new AlertContext(alert);
-
     this.currentInstance = this.overlayService.attach(AlertComponent, {
+      keepAfterNavigationChange: alert.keepAfterNavigationChange,
       providers: [{
         provide: AlertContext,
         useValue: context

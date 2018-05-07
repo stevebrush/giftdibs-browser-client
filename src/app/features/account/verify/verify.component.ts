@@ -11,9 +11,12 @@ import {
 } from '@angular/router';
 
 import { Subject } from 'rxjs/Subject';
+
 import 'rxjs/add/operator/takeUntil';
 
-import { AlertService } from '../../../modules/alert/alert.service';
+import {
+  AlertService
+} from '../../../modules/alert';
 
 import {
   SessionService,

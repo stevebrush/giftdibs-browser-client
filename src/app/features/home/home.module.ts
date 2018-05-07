@@ -6,11 +6,10 @@ import {
   CommonModule
 } from '@angular/common';
 
-
-import { HomeRoutingModule } from './home-routing.module';
 import { CommunityComponent } from './community/community.component';
-import { WelcomeComponent } from './welcome/welcome.component';
+import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 @NgModule({
   imports: [

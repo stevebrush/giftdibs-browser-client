@@ -7,9 +7,9 @@ import {
 } from '../overlay';
 
 import { ConfirmAnswer } from './confirm-answer';
-import { ConfirmComponent } from './confirm.component';
 import { ConfirmConfig } from './confirm-config';
 import { ConfirmContext } from './confirm-context';
+import { ConfirmComponent } from './confirm.component';
 
 @Injectable()
 export class ConfirmService {

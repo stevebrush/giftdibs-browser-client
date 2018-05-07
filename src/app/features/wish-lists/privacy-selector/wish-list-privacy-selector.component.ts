@@ -1,9 +1,11 @@
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
+  ElementRef,
   forwardRef,
   OnInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef
+  ViewChild
 } from '@angular/core';
 
 import {
@@ -11,9 +13,26 @@ import {
   NG_VALUE_ACCESSOR
 } from '@angular/forms';
 
+import {
+  DropdownMenuItem
+} from '../../../modules/dropdown-menu';
+
+import {
+  ModalService
+} from '../../../modules/modal';
+
+import {
+  SessionService
+} from '../../../modules/session';
+
+import {
+  User
+} from '../../users';
+
 import { WishListPrivacy } from '../wish-list-privacy';
 
-let nextUniqueId = 0;
+import { WishListPrivacySelectorUsersContext } from './wish-list-privacy-selector-users-context';
+import { WishListPrivacySelectorUsersComponent } from './wish-list-privacy-selector-users.component';
 
 @Component({
   selector: 'gd-wish-list-privacy-selector',
@@ -29,9 +48,8 @@ let nextUniqueId = 0;
 })
 export class WishListPrivacySelectorComponent
   implements OnInit, ControlValueAccessor {
-
   public disabled = false;
-  public name = `gdWishListPrivacySelectorName${nextUniqueId++}`;
+  public menuItems: DropdownMenuItem[];
 
   public get value(): WishListPrivacy {
     return this._value;
@@ -39,18 +57,105 @@ export class WishListPrivacySelectorComponent
 
   public set value(value: WishListPrivacy) {
     this._value = value;
-    console.log('set value()', this._value);
     this.onChange(this.value);
     this.onTouched();
   }
 
+  public get valueLabel(): string {
+    const value = this.value;
+    const found = this.menuItems.find(item => {
+      return (item.custom.type === value.type);
+    });
+    return found.label;
+  }
+
+  @ViewChild('privacyButton')
+  private privacyButton: ElementRef;
   private _value: WishListPrivacy;
+  private user: User;
 
   constructor(
-    private changeDetector: ChangeDetectorRef
+    private changeDetector: ChangeDetectorRef,
+    private modalService: ModalService,
+    private sessionService: SessionService
   ) { }
 
-  public ngOnInit(): void { }
+  public ngOnInit(): void {
+    this.user = this.sessionService.user;
+
+    this.menuItems = [
+      {
+        label: 'Everyone',
+        icon: 'globe',
+        action: () => {
+          this.value = {
+            type: 'everyone'
+          };
+          this.changeDetector.markForCheck();
+        },
+        custom: {
+          type: 'everyone'
+        }
+      },
+      {
+        label: 'Friends',
+        icon: 'users',
+        action: () => {
+          this.value = {
+            type: 'friends'
+          };
+          this.changeDetector.markForCheck();
+        },
+        custom: {
+          type: 'friends'
+        }
+      },
+      {
+        label: 'Specific friends...',
+        icon: 'user-shield',
+        action: () => {
+          const context = new WishListPrivacySelectorUsersContext();
+          context.user = this.user;
+          context.selected = this.value._allow;
+
+          const instance = this.modalService.open(WishListPrivacySelectorUsersComponent, {
+            providers: [{
+              provide: WishListPrivacySelectorUsersContext,
+              useValue: context
+            }]
+          });
+
+          instance.componentInstance.saved.subscribe((result: { value: string[] }) => {
+            this.value = {
+              type: 'custom',
+              _allow: result.value
+            };
+            this.changeDetector.markForCheck();
+          });
+
+          instance.closed.subscribe(() => {
+            this.privacyButton.nativeElement.focus();
+          });
+        },
+        custom: {
+          type: 'custom'
+        }
+      },
+      {
+        label: 'Only you',
+        icon: 'eye-slash',
+        action: () => {
+          this.value = {
+            type: 'me'
+          };
+          this.changeDetector.markForCheck();
+        },
+        custom: {
+          type: 'me'
+        }
+      }
+    ];
+  }
 
   public writeValue(value: WishListPrivacy): void {
     this.value = value;

@@ -1,12 +1,12 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
-  OnInit,
-  ChangeDetectorRef
+  OnInit
 } from '@angular/core';
 
-import { UserService } from './user.service';
 import { User } from './user';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'gd-users',

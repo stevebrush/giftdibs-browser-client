@@ -9,10 +9,10 @@ import {
   Type
 } from '@angular/core';
 
-import { OverlayComponent } from './overlay.component';
-import { OverlayInstance } from './overlay-instance';
-import { OverlayDomAdapterService } from './overlay-dom-adapter.service';
 import { OverlayConfig } from './overlay-config';
+import { OverlayDomAdapterService } from './overlay-dom-adapter.service';
+import { OverlayInstance } from './overlay-instance';
+import { OverlayComponent } from './overlay.component';
 
 @Injectable()
 export class OverlayService implements OnDestroy {

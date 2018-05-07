@@ -5,7 +5,9 @@ import {
   RendererFactory2
 } from '@angular/core';
 
-import { WindowRefService } from '../window/window-ref.service';
+import {
+  WindowRefService
+} from '../window';
 
 @Injectable()
 export class OverlayDomAdapterService {

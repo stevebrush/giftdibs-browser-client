@@ -1,10 +1,11 @@
 import {
-  Component,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
+  Component,
   ComponentFactoryResolver,
   EmbeddedViewRef,
   Injector,
+  OnDestroy,
   ReflectiveInjector,
   TemplateRef,
   Type,
@@ -12,8 +13,17 @@ import {
   ViewContainerRef
 } from '@angular/core';
 
-import { OverlayInstance } from './overlay-instance';
+import {
+  NavigationStart,
+  Router
+} from '@angular/router';
+
+import { Subject } from 'rxjs/Subject';
+
+import 'rxjs/add/operator/takeUntil';
+
 import { OverlayConfig } from './overlay-config';
+import { OverlayInstance } from './overlay-instance';
 
 @Component({
   selector: 'gd-overlay',
@@ -21,30 +31,34 @@ import { OverlayConfig } from './overlay-config';
   styleUrls: ['./overlay.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class OverlayComponent {
+export class OverlayComponent implements OnDestroy {
   @ViewChild('backdrop')
   private backdropRef: TemplateRef<any>;
 
   @ViewChild('target', { read: ViewContainerRef })
   private targetRef: ViewContainerRef;
 
+  private ngUnsubscribe = new Subject<void>();
+
   constructor(
     private changeDetector: ChangeDetectorRef,
     private injector: Injector,
-    private resolver: ComponentFactoryResolver
+    private resolver: ComponentFactoryResolver,
+    private router: Router
   ) { }
 
   public attach<T>(component: Type<T>, config?: OverlayConfig): OverlayInstance<T> {
-    const overlayInstance = new OverlayInstance<T>();
+    const defaults: OverlayConfig = {
+      keepAfterNavigationChange: false,
+      showBackdrop: false
+    };
+    const settings = Object.assign(defaults, config);
 
+    const overlayInstance = new OverlayInstance<T>();
     const defaultProviders: any[] = [{
       provide: OverlayInstance,
       useValue: overlayInstance
     }];
-
-    const settings = Object.assign({
-      showBackdrop: false
-    }, config);
 
     settings.providers = defaultProviders.concat(config && config.providers || []);
 
@@ -59,6 +73,18 @@ export class OverlayComponent {
       backdropRef = this.targetRef.createEmbeddedView(this.backdropRef, undefined, index);
     }
 
+    this.router.events
+      .takeUntil(overlayInstance.destroyStream)
+      .subscribe(event => {
+        if (event instanceof NavigationStart) {
+          if (settings.keepAfterNavigationChange) {
+            settings.keepAfterNavigationChange = false;
+          } else {
+            overlayInstance.destroy();
+          }
+        }
+      });
+
     overlayInstance.componentInstance = componentRef.instance;
     overlayInstance.destroyStream.subscribe(() => {
       componentRef.destroy();
@@ -70,5 +96,10 @@ export class OverlayComponent {
     this.changeDetector.markForCheck();
 
     return overlayInstance;
+  }
+
+  public ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

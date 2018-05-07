@@ -3,29 +3,22 @@ import {
 } from '@angular/core';
 
 import {
-  Router
-} from '@angular/router';
-
-import {
-  HttpErrorResponse,
   HttpEvent,
-  HttpInterceptor,
   HttpHandler,
+  HttpInterceptor,
   HttpRequest,
   HttpResponse
 } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
+
 import 'rxjs/add/operator/do';
 
 import { SessionService } from './session.service';
-import { AlertService } from '../alert/alert.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   constructor(
-    private alertService: AlertService,
-    private router: Router,
     private sessionService: SessionService
   ) { }
 
@@ -36,31 +29,17 @@ export class AuthInterceptor implements HttpInterceptor {
       headers: req.headers.set('Authorization', `JWT ${token}`)
     });
 
+    // Automatically saves the returned token.
+    // Automatically attaches the JWT to every request.
     return next.handle(authReq)
-      .do(
-        (event: HttpEvent<any>) => {
-          if (event instanceof HttpResponse) {
-            const authResponse = event.body.authResponse;
-
-            if (authResponse) {
-              this.sessionService.user = authResponse.user;
-              this.sessionService.token = authResponse.token;
-            }
-          }
-        },
-        (err: any) => {
-          if (err instanceof HttpErrorResponse) {
-            if (err.status === 401) {
-              const routerOptions = {
-                queryParams: {
-                  redirectUrl: this.router.url
-                }
-              };
-              this.alertService.info('You must be logged in to view that page.');
-              this.router.navigate(['/account', 'login'], routerOptions);
-            }
+      .do((event: HttpEvent<any>) => {
+        if (event instanceof HttpResponse) {
+          const authResponse = event.body.authResponse;
+          if (authResponse) {
+            this.sessionService.user = authResponse.user;
+            this.sessionService.token = authResponse.token;
           }
         }
-      );
+      });
   }
 }

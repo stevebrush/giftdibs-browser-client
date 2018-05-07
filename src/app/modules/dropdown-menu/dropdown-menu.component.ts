@@ -1,28 +1,35 @@
 import {
   AfterContentInit,
-  Component,
-  OnInit,
   ChangeDetectionStrategy,
-  OnDestroy,
-  TemplateRef,
   ChangeDetectorRef,
-  ElementRef
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  TemplateRef,
+  ViewChild
 } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromEvent';
 import { Subject } from 'rxjs/Subject';
+
+import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/takeUntil';
 
-import { AffixService } from '../affix/affix.service';
+import {
+  AffixService
+} from '../affix';
 
 import {
   OverlayInstance
 } from '../overlay';
 
-import { WindowRefService } from '../window/window-ref.service';
+import {
+  WindowRefService
+} from '../window';
 
 import { DropdownMenuContext } from './dropdown-menu-context';
+import { DropdownMenuItem } from './dropdown-menu-item';
 
 @Component({
   selector: 'gd-dropdown-menu',
@@ -34,10 +41,21 @@ import { DropdownMenuContext } from './dropdown-menu-context';
   ]
 })
 export class DropdownMenuComponent implements OnInit, AfterContentInit, OnDestroy {
+  public set itemTemplate(value: TemplateRef<any>) {
+    this._itemTemplate = value;
+  }
+
+  public get itemTemplate(): TemplateRef<any> {
+    return this._itemTemplate || this.defaultItemTemplate;
+  }
+
   public items: any[];
-  public itemTemplate: TemplateRef<any>;
   public isVisible = false;
 
+  @ViewChild('defaultItemTemplate')
+  private defaultItemTemplate: TemplateRef<any>;
+
+  private _itemTemplate: TemplateRef<any>;
   private ngUnsubscribe = new Subject();
   private buttons: any[];
 
@@ -57,12 +75,15 @@ export class DropdownMenuComponent implements OnInit, AfterContentInit, OnDestro
     this._activeIndex = value;
   }
 
-  private _activeIndex = 0;
+  private _activeIndex = -1;
+
+  @ViewChild('menuElementRef')
+  private menuElementRef: ElementRef;
 
   constructor(
-    public context: DropdownMenuContext,
     private affixService: AffixService,
     private changeDetector: ChangeDetectorRef,
+    private context: DropdownMenuContext,
     private elementRef: ElementRef,
     private overlayInstance: OverlayInstance<any>,
     private windowRef: WindowRefService
@@ -155,13 +176,18 @@ export class DropdownMenuComponent implements OnInit, AfterContentInit, OnDestro
     this.windowRef.nativeWindow.setTimeout(() => {
       this.positionMenu();
       this.buttons = [].slice.call(this.elementRef.nativeElement.querySelectorAll('.gd-button'));
-      this.buttons[0].focus();
+      this.menuElementRef.nativeElement.focus();
     });
   }
 
   public ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  public handleItemAction(item: DropdownMenuItem): void {
+    item.action();
+    this.close();
   }
 
   public close(): void {

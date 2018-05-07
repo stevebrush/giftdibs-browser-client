@@ -6,25 +6,33 @@ import {
   CommonModule
 } from '@angular/common';
 
-
-import { FriendshipModule } from './friendship/friendship.module';
-
-import { UsersRoutingModule } from './users-routing.module';
-import { UsersComponent } from './users.component';
-import { UserComponent } from './user/user.component';
-import { UserService } from './user.service';
-
-import { GridModule } from '../../modules/grid/grid.module';
-import { HideUntilModule } from '../../modules/hide-until/hide-until.module';
-import { MediaModule } from '../../modules/media/media.module';
+import {
+  CardModule
+} from '../../modules/card';
 
 import {
-  GD_AUTHORIZATION_PROVIDERS
-} from '../../modules/session';
+  GridModule
+} from '../../modules/grid';
 
-import { UserThumbnailModule } from '../../modules/user-thumbnail/user-thumbnail.module';
+import {
+  HideUntilModule
+} from '../../modules/hide-until';
+
+import {
+  MediaModule
+} from '../../modules/media';
+
+import {
+  UserThumbnailModule
+} from '../../modules/user-thumbnail';
+
 import { WishListsModule } from '../wish-lists/wish-lists.module';
-import { CardModule } from '../../modules/card/card.module';
+
+import { FriendshipModule } from './friendship/friendship.module';
+import { UserService } from './user.service';
+import { UserComponent } from './user/user.component';
+import { UsersRoutingModule } from './users-routing.module';
+import { UsersComponent } from './users.component';
 
 @NgModule({
   imports: [
@@ -43,8 +51,7 @@ import { CardModule } from '../../modules/card/card.module';
     UserComponent
   ],
   providers: [
-    UserService,
-    GD_AUTHORIZATION_PROVIDERS
+    UserService
   ]
 })
 export class UsersModule { }

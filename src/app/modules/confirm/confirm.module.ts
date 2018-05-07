@@ -1,8 +1,20 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  NgModule
+} from '@angular/core';
+
+import {
+  CommonModule
+} from '@angular/common';
+
+import {
+  FocusTrapModule
+} from '../focus-trap';
+
+import {
+  OverlayModule
+} from '../overlay';
+
 import { ConfirmComponent } from './confirm.component';
-import { OverlayModule } from '../overlay/overlay.module';
-import { FocusTrapModule } from '../focus-trap/focus-trap.module';
 import { ConfirmService } from './confirm.service';
 
 @NgModule({

@@ -3,16 +3,19 @@ import {
 } from '@angular/core';
 
 import {
-  Router,
-  CanActivate,
   ActivatedRouteSnapshot,
-  RouterStateSnapshot,
+  CanActivate,
   CanLoad,
-  Route
+  Route,
+  Router,
+  RouterStateSnapshot
 } from '@angular/router';
 
+import {
+  AlertService
+} from '../alert';
+
 import { SessionService } from './session.service';
-import { AlertService } from '../alert/alert.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanLoad {

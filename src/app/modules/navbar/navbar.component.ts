@@ -13,9 +13,8 @@ import {
 } from '@angular/router';
 
 import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/operator/takeUntil';
 
-import { AlertService } from '../alert/alert.service';
+import 'rxjs/add/operator/takeUntil';
 
 import {
   DropdownMenuItem
@@ -61,7 +60,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   private ngUnsubscribe = new Subject();
 
   constructor(
-    private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
     private router: Router,
     private sessionService: SessionService
@@ -94,7 +92,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   private logout(): void {
     this.sessionService.clearAll();
-    this.alertService.info('You have been successfully logged out.', true);
     this.router.navigate(['/account', 'login']);
   }
 }

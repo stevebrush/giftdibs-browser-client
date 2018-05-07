@@ -4,9 +4,13 @@ import {
   ElementRef,
   HostListener,
   Input,
-  OnDestroy
+  OnDestroy,
+  Renderer2
 } from '@angular/core';
-import { WindowRefService } from '../window/window-ref.service';
+
+import {
+  WindowRefService
+} from '../window';
 
 const FOCUSABLE_SELECTORS: string = [
   'a[href]',
@@ -44,20 +48,24 @@ export class FocusTrapDirective implements AfterContentInit, OnDestroy {
     }
   }
 
-  private _tabIndex = 0;
+  private _tabIndex = -1;
   private focusableElements: any[];
   private isActive = false;
   private observer: MutationObserver;
 
   constructor(
     private elementRef: ElementRef,
+    private renderer: Renderer2,
     private windowRef: WindowRefService
   ) { }
 
   public ngAfterContentInit(): void {
     if (this.activateOnLoad) {
       this.activateTrap();
-      this.focusActiveElement();
+
+      // Focus the host element:
+      this.renderer.setAttribute(this.elementRef.nativeElement, 'tabindex', '-1');
+      this.elementRef.nativeElement.focus();
     }
   }
 
@@ -133,7 +141,10 @@ export class FocusTrapDirective implements AfterContentInit, OnDestroy {
 
   private focusActiveElement(): void {
     this.windowRef.nativeWindow.setTimeout(() => {
-      this.focusableElements[this.tabIndex].focus();
+      const element = this.focusableElements[this.tabIndex];
+      if (element) {
+        element.focus();
+      }
     });
   }
 

@@ -1,7 +1,7 @@
 import {
   ChangeDetectionStrategy,
-  Component,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  Component
 } from '@angular/core';
 
 import {
@@ -15,8 +15,11 @@ import {
   Validators
 } from '@angular/forms';
 
+import {
+  AlertService
+} from '../../../modules/alert';
+
 import { AccountService } from '../account.service';
-import { AlertService } from '../../../modules/alert/alert.service';
 
 @Component({
   selector: 'gd-register',

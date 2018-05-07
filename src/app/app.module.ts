@@ -8,20 +8,20 @@ import {
 } from '@angular/platform-browser';
 
 import {
+  NavbarModule
+} from './modules/navbar';
+
+import {
   SessionModule
 } from './modules/session';
 
-import { AlertModule } from './modules/alert/alert.module';
-import { NavbarModule } from './modules/navbar/navbar.module';
-import { VerifyEmailNoticeModule } from './modules/verify-email-notice/verify-email-notice.module';
-
 import {
-  OverlayModule
-} from './modules/overlay';
+  VerifyEmailNoticeModule
+} from './modules/verify-email-notice';
 
-import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppStartupService } from './app-startup.service';
+import { AppComponent } from './app.component';
 
 export function startupServiceFactory(startupService: AppStartupService): Function {
   return () => startupService.load();
@@ -34,10 +34,8 @@ export function startupServiceFactory(startupService: AppStartupService): Functi
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SessionModule,
-    AlertModule,
     NavbarModule,
-    OverlayModule,
+    SessionModule,
     VerifyEmailNoticeModule
   ],
   providers: [

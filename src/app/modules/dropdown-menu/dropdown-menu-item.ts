@@ -3,4 +3,5 @@ export interface DropdownMenuItem {
   label: string;
   icon?: string;
   addSeparatorAfter?: boolean;
+  custom?: any;
 }

@@ -10,20 +10,29 @@ import {
   RouterModule
 } from '@angular/router';
 
-import { CardModule } from '../../../modules/card/card.module';
-import { HideUntilModule } from '../../../modules/hide-until/hide-until.module';
-import { MediaModule } from '../../../modules/media/media.module';
+import {
+  CardModule
+} from '../../../modules/card';
 
 import {
-  GD_AUTHORIZATION_PROVIDERS
-} from '../../../modules/session';
+  GridModule
+} from '../../../modules/grid';
 
-import { UserThumbnailModule } from '../../../modules/user-thumbnail/user-thumbnail.module';
+import {
+  HideUntilModule
+} from '../../../modules/hide-until';
+
+import {
+  MediaModule
+} from '../../../modules/media';
+
+import {
+  UserThumbnailModule
+} from '../../../modules/user-thumbnail';
 
 import { FollowButtonComponent } from './follow-button.component';
 import { FriendshipService } from './friendship.service';
 import { FriendshipsComponent } from './friendships.component';
-import { GridModule } from '../../../modules/grid/grid.module';
 
 @NgModule({
   imports: [
@@ -44,8 +53,7 @@ import { GridModule } from '../../../modules/grid/grid.module';
     FollowButtonComponent
   ],
   providers: [
-    FriendshipService,
-    GD_AUTHORIZATION_PROVIDERS
+    FriendshipService
   ]
 })
 export class FriendshipModule { }

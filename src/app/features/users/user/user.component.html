@@ -56,7 +56,7 @@
                     <div *ngIf="isWishListFormActive">
                       <gd-wish-list-create
                         (cancelled)="onWishListFormCancelled()"
-                        (succeeded)="onWishListFormSucceeded($event)">
+                        (saved)="onWishListFormSaved($event)">
                       </gd-wish-list-create>
                     </div>
                   </div>

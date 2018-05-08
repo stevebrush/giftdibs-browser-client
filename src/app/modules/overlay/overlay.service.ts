@@ -29,14 +29,6 @@ export class OverlayService implements OnDestroy {
     this.removeHostComponent();
   }
 
-  public ensureHostExists(): ComponentRef<OverlayComponent> {
-    if (!this.host) {
-      this.host = this.createHostComponent();
-    }
-
-    return this.host;
-  }
-
   public attach<T>(component: Type<T>, config?: OverlayConfig): OverlayInstance<T> {
     this.ensureHostExists();
     return this.host.instance.attach(component, config);
@@ -53,6 +45,14 @@ export class OverlayService implements OnDestroy {
     this.adapter.appendToBody(domElem);
 
     return componentRef;
+  }
+
+  private ensureHostExists(): ComponentRef<OverlayComponent> {
+    if (!this.host) {
+      this.host = this.createHostComponent();
+    }
+
+    return this.host;
   }
 
   private removeHostComponent(): void {

@@ -1,4 +1,5 @@
-<div class="gd-wish-list-privacy-selector">
+<div
+  class="gd-wish-list-privacy-selector">
   <button
     type="button"
     class="gd-button gd-button-default"
@@ -7,55 +8,22 @@
     [menuItems]="menuItems"
     #privacyButton>
     Privacy: {{ valueLabel }}
-    <gd-icon icon="caret-down"></gd-icon>
+    <gd-icon
+      icon="caret-down">
+    </gd-icon>
   </button>
-
-  <!-- <label>
-    <input
-      type="radio"
-      value="everyone"
-      [checked]="value.type === 'everyone'"
-      [disabled]="disabled"
-      [name]="name"
-      (change)="onRadioChange($event)">
-      Everyone
-  </label>
-  <label>
-    <input
-      type="radio"
-      value="friends"
-      [checked]="value.type === 'friends'"
-      [disabled]="disabled"
-      [name]="name"
-      (change)="onRadioChange($event)">
-      People I follow
-  </label>
-  <label>
-    <input
-      type="radio"
-      value="custom"
-      [checked]="value.type === 'custom'"
-      [disabled]="disabled"
-      [name]="name"
-      (change)="onRadioChange($event)">
-      Specific friends
-  </label>
-  <label>
-    <input
-      type="radio"
-      value="me"
-      [checked]="value.type === 'me'"
-      [disabled]="disabled"
-      [name]="name"
-      (change)="onRadioChange($event)">
-      Only me
-  </label> -->
 </div>
 
-<ng-template let-item="item" #menuItemTemplate>
-  <div class="gd-wish-list-privacy-selector-item">
-    <gd-icon [icon]="item.icon"></gd-icon>
-    <span class="gd-wish-list-privacy-selector-item-body">
+<ng-template
+  let-item="item"
+  #menuItemTemplate>
+  <div
+    class="gd-wish-list-privacy-selector-item">
+    <gd-icon
+      [icon]="item.icon">
+    </gd-icon>
+    <span
+      class="gd-wish-list-privacy-selector-item-body">
       {{ item.label }}
     </span>
     <gd-icon

@@ -52,7 +52,9 @@ export class WishListPrivacySelectorComponent
   public menuItems: DropdownMenuItem[];
 
   public get value(): WishListPrivacy {
-    return this._value;
+    return this._value || {
+      type: 'everyone'
+    };
   }
 
   public set value(value: WishListPrivacy) {

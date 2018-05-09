@@ -1,4 +1,4 @@
 export interface WishListPrivacy {
-  type: 'everyone' | 'friends' | 'me' | 'custom';
+  type: 'everyone' | 'me' | 'custom';
   _allow?: string[];
 }

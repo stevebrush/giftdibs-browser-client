@@ -87,8 +87,8 @@ export class WishListPrivacySelectorComponent
 
     this.menuItems = [
       {
-        label: 'Everyone',
-        icon: 'globe',
+        label: 'Community',
+        icon: 'users',
         action: () => {
           this.value = {
             type: 'everyone'
@@ -97,19 +97,6 @@ export class WishListPrivacySelectorComponent
         },
         custom: {
           type: 'everyone'
-        }
-      },
-      {
-        label: 'Friends',
-        icon: 'users',
-        action: () => {
-          this.value = {
-            type: 'friends'
-          };
-          this.changeDetector.markForCheck();
-        },
-        custom: {
-          type: 'friends'
         }
       },
       {

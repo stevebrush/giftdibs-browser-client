@@ -7,6 +7,7 @@ import {
 } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
+
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/share';
 
@@ -27,7 +28,7 @@ export class FriendshipService {
   }
 
   public getAllByUserId(userId: string): Observable<Friendship[]> {
-    return this.http.get(`${this.resourceUrl}`)
+    return this.http.get(`${this.resourceUrl}?userId=${userId}`)
       .map((result: any) => result.data.friendships)
       .share();
   }

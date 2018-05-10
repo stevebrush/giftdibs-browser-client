@@ -8,6 +8,11 @@
   max-width: 275px;
   box-shadow: $gd-box-shadow-lg;
   border: 1px solid $gd-border-color-neutral;
+  background-color: #fff;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .gd-dropdown-hidden {
@@ -15,19 +20,26 @@
 }
 
 .gd-dropdown-menu-item-button {
-  display: block;
-  width: 100%;
-  text-align: left;
+  padding: 0;
   border-radius: 0;
-  font-weight: $gd-font-weight;
-
-  > .fa {
-    margin-right: 5px;
-  }
+  width: 100%;
+  display: block;
+  text-align: left;
 
   &:hover {
     background-color: $gd-background-color-neutral-light;
     color: $gd-text-color-dark;
+  }
+}
+
+.gd-dropdown-menu-item-container {
+  display: block;
+  width: 100%;
+  font-weight: $gd-font-weight;
+  padding: $gd-spacing-padding-squish-compact;
+
+  gd-icon {
+    margin-right: 5px;
   }
 }
 

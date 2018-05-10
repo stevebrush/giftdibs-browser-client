@@ -3,12 +3,13 @@ import {
 } from '@angular/core';
 
 import {
-  Routes,
-  RouterModule
+  RouterModule,
+  Routes
 } from '@angular/router';
 
 import {
-  AuthGuard
+  AuthGuard,
+  GD_AUTHORIZATION_PROVIDERS
 } from './modules/session';
 
 const appRoutes: Routes = [
@@ -49,7 +50,8 @@ const appRoutes: Routes = [
     RouterModule
   ],
   providers: [
-    AuthGuard
+    AuthGuard,
+    GD_AUTHORIZATION_PROVIDERS
   ]
 })
 export class AppRoutingModule { }

@@ -17,10 +17,14 @@ import {
   AlertService
 } from '../../../modules/alert';
 
+import {
+  OverlayInstance
+} from '../../../modules/overlay';
+
 import { WishList } from '../wish-list';
 import { WishListService } from '../wish-list.service';
+
 import { WishListEditContext } from './wish-list-edit-context';
-import { OverlayInstance } from '../../../modules/overlay';
 
 @Component({
   selector: 'gd-wish-list-edit',
@@ -33,7 +37,7 @@ export class WishListEditComponent implements OnInit {
   public errors: any[];
   public isLoading = false;
 
-  public succeeded = new EventEmitter<WishList>();
+  public saved = new EventEmitter<string>();
 
   private wishList: WishList;
 
@@ -63,14 +67,13 @@ export class WishListEditComponent implements OnInit {
     this.changeDetector.markForCheck();
 
     const formData: WishList = this.wishListForm.value;
-
     this.wishListService
       .update(this.wishList._id, formData)
       .subscribe(
         (result: any) => {
           this.alertService.success(result.message);
-          this.succeeded.emit(result.data.wishList);
-          this.succeeded.complete();
+          this.saved.emit(this.wishList._id);
+          this.saved.complete();
           this.instance.destroy();
         },
         (err: any) => {
@@ -92,7 +95,8 @@ export class WishListEditComponent implements OnInit {
     this.wishListForm = this.formBuilder.group({
       name: new FormControl(null, [
         Validators.required
-      ])
+      ]),
+      privacy: new FormControl(null, [])
     });
   }
 }

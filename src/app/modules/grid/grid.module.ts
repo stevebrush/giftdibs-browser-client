@@ -6,9 +6,8 @@ import {
   CommonModule
 } from '@angular/common';
 
-
-import { RowComponent } from './row.component';
 import { ColumnComponent } from './column.component';
+import { RowComponent } from './row.component';
 
 @NgModule({
   imports: [

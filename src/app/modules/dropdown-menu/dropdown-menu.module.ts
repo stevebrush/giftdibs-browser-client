@@ -6,13 +6,23 @@ import {
   CommonModule
 } from '@angular/common';
 
+import {
+  IconModule
+} from '../icon';
+
+import {
+  OverlayModule
+} from '../overlay';
+
+import { DropdownMenuTriggerDirective } from './dropdown-menu-trigger.directive';
 import { DropdownMenuComponent } from './dropdown-menu.component';
 import { DropdownMenuService } from './dropdown-menu.service';
-import { DropdownMenuTriggerDirective } from './dropdown-menu-trigger.directive';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    IconModule,
+    OverlayModule
   ],
   exports: [
     DropdownMenuTriggerDirective

@@ -19,15 +19,18 @@ import {
 } from '@angular/forms';
 
 import { Subject } from 'rxjs/Subject';
+
 import 'rxjs/add/operator/takeUntil';
 
-import { AccountService } from '../account.service';
+import {
+  AlertService
+} from '../../../modules/alert';
 
 import {
   SessionService
 } from '../../../modules/session';
 
-import { AlertService } from '../../../modules/alert/alert.service';
+import { AccountService } from '../account.service';
 
 @Component({
   selector: 'gd-reset-password',

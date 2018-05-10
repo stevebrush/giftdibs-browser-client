@@ -11,8 +11,11 @@ import {
   Validators
 } from '@angular/forms';
 
+import {
+  AlertService
+} from '../../../modules/alert';
+
 import { AccountService } from '../account.service';
-import { AlertService } from '../../../modules/alert/alert.service';
 
 @Component({
   selector: 'gd-forgotten',

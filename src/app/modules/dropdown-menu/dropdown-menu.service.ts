@@ -7,9 +7,9 @@ import {
 } from '../overlay';
 
 import { DropdownMenuConfig } from './dropdown-menu-config';
-import { DropdownMenuComponent } from './dropdown-menu.component';
 import { DropdownMenuContext } from './dropdown-menu-context';
 import { DropdownMenuInstance } from './dropdown-menu-instance';
+import { DropdownMenuComponent } from './dropdown-menu.component';
 
 @Injectable()
 export class DropdownMenuService {

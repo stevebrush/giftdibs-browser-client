@@ -15,7 +15,9 @@ import {
   Router
 } from '@angular/router';
 
-import { AlertService } from '../../../modules/alert/alert.service';
+import {
+  AlertService
+} from '../../../modules/alert';
 
 import {
   SessionService

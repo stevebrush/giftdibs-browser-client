@@ -1,16 +1,19 @@
 import {
   Directive,
+  ElementRef,
   HostListener,
   Input,
-  ElementRef
+  TemplateRef
 } from '@angular/core';
 
-import { AffixAlignment } from '../affix/affix-alignment';
+import {
+  AffixAlignment
+} from '../affix';
 
-import { DropdownMenuInstance } from './dropdown-menu-instance';
-import { DropdownMenuService } from './dropdown-menu.service';
 import { DropdownMenuConfig } from './dropdown-menu-config';
+import { DropdownMenuInstance } from './dropdown-menu-instance';
 import { DropdownMenuItem } from './dropdown-menu-item';
+import { DropdownMenuService } from './dropdown-menu.service';
 
 @Directive({
   selector: '[gdDropdownMenuTrigger]'
@@ -24,6 +27,9 @@ export class DropdownMenuTriggerDirective {
   public get menuAlignment(): AffixAlignment {
     return this._menuAlignment || 'right';
   }
+
+  @Input()
+  public menuItemTemplate: TemplateRef<any>;
 
   @Input()
   public set menuItems(value: DropdownMenuItem[]) {
@@ -54,7 +60,8 @@ export class DropdownMenuTriggerDirective {
     const config: DropdownMenuConfig = {
       alignment: this.menuAlignment,
       caller: this.elementRef,
-      items: this.menuItems
+      items: this.menuItems,
+      itemTemplate: this.menuItemTemplate
     };
 
     this.menuInstance = this.dropdownMenuService.open(config);

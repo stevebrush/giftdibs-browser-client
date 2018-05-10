@@ -6,10 +6,12 @@ import {
   CommonModule
 } from '@angular/common';
 
-import { WindowRefService } from '../window/window-ref.service';
+import {
+  WindowRefService
+} from '../window';
 
-import { OverlayComponent } from './overlay.component';
 import { OverlayDomAdapterService } from './overlay-dom-adapter.service';
+import { OverlayComponent } from './overlay.component';
 import { OverlayService } from './overlay.service';
 
 @NgModule({

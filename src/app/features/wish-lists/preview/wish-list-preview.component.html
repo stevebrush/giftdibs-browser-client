@@ -3,18 +3,20 @@
     <gd-card-heading>
       {{ wishList.name }}
     </gd-card-heading>
+    <div
+      *ngIf="isSessionUser && wishList.privacy.type !== 'everyone'"
+      class="gd-deemphasized">
+      <gd-icon icon="eye"></gd-icon>
+    </div>
     <button
       *ngIf="isSessionUser"
       type="button"
-      class="gd-button gd-button-link gd-text-deemphasized gd-wish-list-preview-settings-button"
+      class="gd-button gd-button-link gd-deemphasized gd-wish-list-preview-settings-button"
       title="Toggle wish list options"
       gdDropdownMenuTrigger
       [menuItems]="menuItems"
       #dropdownTrigger>
-      <i
-        class="fa fa-ellipsis-v"
-        aria-hidden="true">
-      </i>
+      <gd-icon icon="ellipsis-v"></gd-icon>
     </button>
   </gd-card-header>
 </gd-card>

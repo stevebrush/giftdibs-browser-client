@@ -1,13 +1,13 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
+  ElementRef,
   EventEmitter,
   OnInit,
-  ChangeDetectorRef,
   Output,
-  ViewChild,
-  ElementRef,
-  AfterViewInit
+  ViewChild
 } from '@angular/core';
 
 import {
@@ -20,8 +20,8 @@ import {
   AlertService
 } from '../../../modules/alert';
 
-import { WishListService } from '../wish-list.service';
 import { WishList } from '../wish-list';
+import { WishListService } from '../wish-list.service';
 
 @Component({
   selector: 'gd-wish-list-create',
@@ -34,7 +34,7 @@ export class WishListCreateComponent implements OnInit, AfterViewInit {
   public cancelled = new EventEmitter<void>();
 
   @Output()
-  public succeeded = new EventEmitter<WishList>();
+  public saved = new EventEmitter<WishList>();
 
   public wishListForm: FormGroup;
   public errors: any[];
@@ -75,7 +75,8 @@ export class WishListCreateComponent implements OnInit, AfterViewInit {
       .subscribe(
         (result: any) => {
           this.alertService.success(result.message);
-          this.triggerSuccess(result.data.wishList);
+          this.resetFormState();
+          this.saved.emit(result.data.wishListId);
         },
         (err: any) => {
           const error = err.error;
@@ -93,14 +94,10 @@ export class WishListCreateComponent implements OnInit, AfterViewInit {
     this.cancelled.emit();
   }
 
-  private triggerSuccess(wishList: WishList): void {
-    this.resetFormState();
-    this.succeeded.emit(wishList);
-  }
-
   private createForm(): void {
     this.wishListForm = this.formBuilder.group({
-      name: new FormControl(null, [])
+      name: new FormControl(null, []),
+      privacy: new FormControl(null, [])
     });
   }
 

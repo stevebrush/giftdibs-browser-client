@@ -2,9 +2,9 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ElementRef,
   OnDestroy,
   OnInit,
-  ElementRef,
   ViewChild
 } from '@angular/core';
 
@@ -15,19 +15,23 @@ import {
 } from '@angular/router';
 
 import { Subject } from 'rxjs/Subject';
+
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/takeUntil';
 
-import { AlertService } from '../../../modules/alert/alert.service';
+import {
+  AlertService
+} from '../../../modules/alert';
 
 import {
   SessionService
 } from '../../../modules/session';
 
-import { User } from '../user';
-import { UserService } from '../user.service';
 import { WishList } from '../../wish-lists/wish-list';
 import { WishListService } from '../../wish-lists/wish-list.service';
+
+import { User } from '../user';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'gd-user',
@@ -44,7 +48,6 @@ export class UserComponent implements OnInit, OnDestroy {
 
   @ViewChild('showWishListFormButton')
   private showWishListFormButton: ElementRef;
-
   private ngUnsubscribe = new Subject();
 
   constructor(
@@ -97,11 +100,14 @@ export class UserComponent implements OnInit, OnDestroy {
     this.showWishListFormButton.nativeElement.focus();
   }
 
-  public onWishListFormSucceeded(wishList: WishList): void {
-    this.wishLists.push(wishList);
-    this.isWishListFormActive = false;
-    this.changeDetector.detectChanges();
-    this.showWishListFormButton.nativeElement.focus();
+  public onWishListFormSaved(createdId: string): void {
+    this.wishListService.getAllByUserId(this.user._id)
+      .subscribe((wishLists: WishList[]) => {
+        this.wishLists = wishLists;
+        this.isWishListFormActive = false;
+        this.changeDetector.detectChanges();
+        this.showWishListFormButton.nativeElement.focus();
+      });
   }
 
   public onWishListRemoved(wishListId: string): void {

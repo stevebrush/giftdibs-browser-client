@@ -1,7 +1,7 @@
 import {
   ChangeDetectionStrategy,
-  Component,
   ChangeDetectorRef,
+  Component,
   OnInit
 } from '@angular/core';
 
@@ -15,13 +15,15 @@ import {
 import 'rxjs/add/operator/finally';
 
 import {
+  AlertService
+} from '../../../modules/alert';
+
+import {
   SessionService
 } from '../../../modules/session';
 
-import { UserService } from '../../users/user.service';
 import { User } from '../../users/user';
-
-import { AlertService } from '../../../modules/alert/alert.service';
+import { UserService } from '../../users/user.service';
 
 @Component({
   selector: 'gd-settings',
@@ -71,7 +73,8 @@ export class SettingsComponent implements OnInit {
       .subscribe(
         (result: any) => {
           this.alertService.success(result.message);
-          this.sessionService.patchUser(result.data.user);
+          this.updateForm();
+          this.sessionService.patchUser(this.settingsForm.value);
         },
         (err: any) => {
           const error = err.error;

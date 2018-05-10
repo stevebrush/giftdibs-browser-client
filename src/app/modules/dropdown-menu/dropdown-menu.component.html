@@ -1,17 +1,20 @@
 <ul
+  tabindex="0"
   class="gd-dropdown-menu"
   [ngClass]="{ 'gd-dropdown-hidden': !isVisible }"
-  (click)="close();$event.stopPropagation();">
+  #menuElementRef>
   <ng-template ngFor let-item [ngForOf]="items">
     <li class="gd-dropdown-menu-item">
-      <button
-        type="button"
+      <div
+        role="button"
         class="gd-button gd-dropdown-menu-item-button"
-        (click)="item.action()">
+        tabindex="0"
+        (click)="handleItemAction(item);"
+        (keydown.enter)="handleItemAction(item);$event.preventDefault();">
         <ng-container
-          *ngTemplateOutlet="itemTemplate || defaultItemTemplate; context: { item: item }">
+          *ngTemplateOutlet="itemTemplate; context: { item: item }">
         </ng-container>
-      </button>
+      </div>
     </li>
     <li
       *ngIf="item.addSeparatorAfter"
@@ -23,10 +26,11 @@
 </ul>
 
 <ng-template let-item="item" #defaultItemTemplate>
-  <i
-    *ngIf="item.icon"
-    aria-hidden="true"
-    class="fa"
-    [ngClass]="'fa-' + item.icon"></i>
-  {{ item.label }}
+  <div class="gd-dropdown-menu-item-container">
+    <gd-icon
+      *ngIf="item.icon"
+      [icon]="item.icon">
+    </gd-icon>
+    {{ item.label }}
+  </div>
 </ng-template>

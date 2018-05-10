@@ -7,6 +7,7 @@ import {
 } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
+
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/share';
 
@@ -28,9 +29,19 @@ export class WishListService {
     });
   }
 
+  public getById(wishListId: string): Observable<WishList> {
+    return this.http.get(`${this.resourceUrl}/${wishListId}`)
+      .map((result: any) => {
+        return result.data.wishList;
+      })
+      .share();
+  }
+
   public getAllByUserId(userId: string): Observable<WishList[]> {
     return this.http.get(`${this.resourceUrl}?userId=${userId}`)
-      .map((result: any) => result.data.wishLists)
+      .map((result: any) => {
+        return result.data.wishLists;
+      })
       .share();
   }
 

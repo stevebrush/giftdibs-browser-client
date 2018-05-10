@@ -5,8 +5,8 @@ import {
   ElementRef,
   EventEmitter,
   Input,
-  Output,
   OnInit,
+  Output,
   ViewChild
 } from '@angular/core';
 
@@ -31,10 +31,10 @@ import {
   SessionService
 } from '../../../modules/session';
 
+import { WishListEditContext } from '../edit/wish-list-edit-context';
+import { WishListEditComponent } from '../edit/wish-list-edit.component';
 import { WishList } from '../wish-list';
 import { WishListService } from '../wish-list.service';
-import { WishListEditComponent } from '../edit/wish-list-edit.component';
-import { WishListEditContext } from '../edit/wish-list-edit-context';
 
 @Component({
   selector: 'gd-wish-list-preview',
@@ -99,9 +99,11 @@ export class WishListPreviewComponent implements OnInit {
       this.dropdownTrigger.nativeElement.focus();
     });
 
-    modalInstance.componentInstance.succeeded.subscribe((updated: WishList) => {
-      this.wishList = updated;
-      this.changeDetector.markForCheck();
+    modalInstance.componentInstance.saved.subscribe((updatedId: string) => {
+      this.wishListService.getById(updatedId).subscribe((wishList: WishList) => {
+        this.wishList = wishList;
+        this.changeDetector.markForCheck();
+      });
     });
   }
 

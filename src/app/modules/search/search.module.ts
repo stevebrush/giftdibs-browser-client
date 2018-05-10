@@ -14,14 +14,17 @@ import {
   RouterModule
 } from '@angular/router';
 
-import { MediaModule } from '../media/media.module';
+import {
+  MediaModule
+} from '../media';
 
 import {
-  GD_AUTHORIZATION_PROVIDERS
-} from '../session';
+  TypeaheadModule
+} from '../typeahead';
 
-import { TypeaheadModule } from '../typeahead/typeahead.module';
-import { UserThumbnailModule } from '../user-thumbnail/user-thumbnail.module';
+import {
+  UserThumbnailModule
+} from '../user-thumbnail';
 
 import { SearchComponent } from './search.component';
 
@@ -39,9 +42,6 @@ import { SearchComponent } from './search.component';
   ],
   declarations: [
     SearchComponent
-  ],
-  providers: [
-    GD_AUTHORIZATION_PROVIDERS
   ]
 })
 export class SearchModule { }

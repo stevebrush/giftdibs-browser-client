@@ -17,13 +17,15 @@ import {
   Validators
 } from '@angular/forms';
 
-import { AccountService } from '../account.service';
+import {
+  AlertService
+} from '../../../modules/alert';
 
 import {
   SessionService
 } from '../../../modules/session';
 
-import { AlertService } from '../../../modules/alert/alert.service';
+import { AccountService } from '../account.service';
 
 @Component({
   selector: 'gd-login',

@@ -1,10 +1,10 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Input,
-  OnInit,
   OnDestroy,
-  ChangeDetectorRef
+  OnInit
 } from '@angular/core';
 
 import {
@@ -14,9 +14,10 @@ import {
 } from '@angular/router';
 
 import { Subject } from 'rxjs/Subject';
+
 import 'rxjs/add/operator/combineLatest';
-import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/takeUntil';
 
 import {
   SessionService,

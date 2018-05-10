@@ -8,6 +8,10 @@ import {
   SimpleChanges
 } from '@angular/core';
 
+import {
+  WindowRefService
+} from '../window';
+
 @Directive({
   selector: '[gdHideUntil]'
 })
@@ -17,13 +21,17 @@ export class HideUntilDirective implements OnInit, OnChanges {
 
   constructor(
     private elementRef: ElementRef,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private windowRef: WindowRefService
   ) { }
 
   public ngOnInit(): void {
     this.renderer.setStyle(this.elementRef.nativeElement, 'transition', 'opacity 150ms');
     this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'block');
-    this.setOpacity(this.gdHideUntil);
+    this.setOpacity(false);
+    this.windowRef.nativeWindow.setTimeout(() => {
+      this.setOpacity(this.gdHideUntil);
+    });
   }
 
   public ngOnChanges(changes: SimpleChanges): void {

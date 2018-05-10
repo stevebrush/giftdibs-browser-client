@@ -9,10 +9,10 @@ import {
   Type
 } from '@angular/core';
 
-import { OverlayComponent } from './overlay.component';
-import { OverlayInstance } from './overlay-instance';
-import { OverlayDomAdapterService } from './overlay-dom-adapter.service';
 import { OverlayConfig } from './overlay-config';
+import { OverlayDomAdapterService } from './overlay-dom-adapter.service';
+import { OverlayInstance } from './overlay-instance';
+import { OverlayComponent } from './overlay.component';
 
 @Injectable()
 export class OverlayService implements OnDestroy {
@@ -27,14 +27,6 @@ export class OverlayService implements OnDestroy {
 
   public ngOnDestroy(): void {
     this.removeHostComponent();
-  }
-
-  public ensureHostExists(): ComponentRef<OverlayComponent> {
-    if (!this.host) {
-      this.host = this.createHostComponent();
-    }
-
-    return this.host;
   }
 
   public attach<T>(component: Type<T>, config?: OverlayConfig): OverlayInstance<T> {
@@ -53,6 +45,14 @@ export class OverlayService implements OnDestroy {
     this.adapter.appendToBody(domElem);
 
     return componentRef;
+  }
+
+  private ensureHostExists(): ComponentRef<OverlayComponent> {
+    if (!this.host) {
+      this.host = this.createHostComponent();
+    }
+
+    return this.host;
   }
 
   private removeHostComponent(): void {

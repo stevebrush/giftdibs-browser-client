@@ -3,7 +3,9 @@ import {
   TemplateRef
 } from '@angular/core';
 
-import { AffixAlignment } from '../affix/affix-alignment';
+import {
+  AffixAlignment
+} from '../affix';
 
 import { DropdownMenuItem } from './dropdown-menu-item';
 

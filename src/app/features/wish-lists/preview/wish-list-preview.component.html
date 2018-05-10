@@ -4,7 +4,7 @@
       {{ wishList.name }}
     </gd-card-heading>
     <div
-      *ngIf="wishList.privacy.type === 'me'"
+      *ngIf="isSessionUser && wishList.privacy.type !== 'everyone'"
       class="gd-deemphasized">
       <gd-icon icon="eye"></gd-icon>
     </div>

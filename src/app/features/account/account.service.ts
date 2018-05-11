@@ -6,7 +6,9 @@ import {
   HttpClient
 } from '@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
+import {
+  Observable
+} from 'rxjs';
 
 import { environment } from '../../../environments/environment';
 

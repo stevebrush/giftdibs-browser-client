@@ -10,9 +10,13 @@ import {
   HttpResponse
 } from '@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
+import {
+  Observable
+} from 'rxjs';
 
-import 'rxjs/add/operator/do';
+import {
+  tap
+} from 'rxjs/operators';
 
 import { SessionService } from './session.service';
 
@@ -32,14 +36,16 @@ export class AuthInterceptor implements HttpInterceptor {
     // Automatically saves the returned token.
     // Automatically attaches the JWT to every request.
     return next.handle(authReq)
-      .do((event: HttpEvent<any>) => {
-        if (event instanceof HttpResponse) {
-          const authResponse = event.body.authResponse;
-          if (authResponse) {
-            this.sessionService.user = authResponse.user;
-            this.sessionService.token = authResponse.token;
+      .pipe(
+        tap((event: HttpEvent<any>) => {
+          if (event instanceof HttpResponse) {
+            const authResponse = event.body.authResponse;
+            if (authResponse) {
+              this.sessionService.user = authResponse.user;
+              this.sessionService.token = authResponse.token;
+            }
           }
-        }
-      });
+        })
+      );
   }
 }

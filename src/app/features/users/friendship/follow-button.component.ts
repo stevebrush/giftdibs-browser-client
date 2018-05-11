@@ -6,8 +6,6 @@ import {
   OnInit
 } from '@angular/core';
 
-import 'rxjs/add/operator/finally';
-
 import {
   AlertService
 } from '../../../modules/alert';
@@ -61,10 +59,6 @@ export class FollowButtonComponent implements OnInit {
 
     this.friendshipService
       .create(this.friend._id)
-      .finally(() => {
-        this.isLoading = false;
-        this.changeDetector.markForCheck();
-      })
       .subscribe(
         (data: any) => {
           this.isFollowing = true;
@@ -73,6 +67,10 @@ export class FollowButtonComponent implements OnInit {
         },
         (err: any) => {
           this.alertService.error(err.error.message);
+        },
+        () => {
+          this.isLoading = false;
+          this.changeDetector.markForCheck();
         }
       );
   }
@@ -83,10 +81,6 @@ export class FollowButtonComponent implements OnInit {
 
     this.friendshipService
       .remove(this.friendshipId)
-      .finally(() => {
-        this.isLoading = false;
-        this.changeDetector.markForCheck();
-      })
       .subscribe(
         (data: any) => {
           this.isFollowing = false;
@@ -94,6 +88,10 @@ export class FollowButtonComponent implements OnInit {
         },
         (err: any) => {
           this.alertService.error(err.error.message);
+        },
+        () => {
+          this.isLoading = false;
+          this.changeDetector.markForCheck();
         }
       );
   }

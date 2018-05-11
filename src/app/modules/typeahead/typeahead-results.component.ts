@@ -9,7 +9,9 @@ import {
   TemplateRef
 } from '@angular/core';
 
-import { Subject } from 'rxjs/Subject';
+import {
+  Subject
+} from 'rxjs';
 
 import { OverlayInstance } from '../overlay/overlay-instance';
 

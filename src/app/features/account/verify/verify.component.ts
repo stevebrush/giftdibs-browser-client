@@ -10,9 +10,13 @@ import {
   ActivatedRoute
 } from '@angular/router';
 
-import { Subject } from 'rxjs/Subject';
+import {
+  Subject
+} from 'rxjs';
 
-import 'rxjs/add/operator/takeUntil';
+import {
+  takeUntil
+} from 'rxjs/operators';
 
 import {
   AlertService
@@ -52,7 +56,9 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
     this.isVerified = this.sessionUser.emailAddressVerified;
 
     this.route.params
-      .takeUntil(this.ngUnsubscribe)
+      .pipe(
+        takeUntil(this.ngUnsubscribe)
+      )
       .subscribe((params: any) => {
         this.hasToken = (params.emailAddressVerificationToken !== undefined);
         this.changeDetector.markForCheck();

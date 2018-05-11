@@ -6,10 +6,14 @@ import {
   HttpClient
 } from '@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
+import {
+  Observable
+} from 'rxjs';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/share';
+import {
+  map,
+  share
+} from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 
@@ -25,14 +29,18 @@ export class UserService {
 
   public getAll(): Observable<User[]> {
     return this.http.get(this.resourceUrl)
-      .map((result: any) => result.data.users)
-      .share();
+      .pipe(
+        map((result: any) => result.data.users),
+        share()
+      );
   }
 
   public getById(id: string): Observable<User> {
     return this.http.get(`${this.resourceUrl}/${id}`)
-      .map((result: any) => result.data.user)
-      .share();
+      .pipe(
+        map((result: any) => result.data.user),
+        share()
+      );
   }
 
   public update(id: string, attributes: any): Observable<any> {

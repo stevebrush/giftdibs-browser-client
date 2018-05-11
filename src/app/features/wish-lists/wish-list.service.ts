@@ -6,10 +6,14 @@ import {
   HttpClient
 } from '@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
+import {
+  Observable
+} from 'rxjs';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/share';
+import {
+  map,
+  share
+} from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 
@@ -31,18 +35,18 @@ export class WishListService {
 
   public getById(wishListId: string): Observable<WishList> {
     return this.http.get(`${this.resourceUrl}/${wishListId}`)
-      .map((result: any) => {
-        return result.data.wishList;
-      })
-      .share();
+      .pipe(
+        map((result: any) => result.data.wishList),
+        share()
+      );
   }
 
   public getAllByUserId(userId: string): Observable<WishList[]> {
     return this.http.get(`${this.resourceUrl}?userId=${userId}`)
-      .map((result: any) => {
-        return result.data.wishLists;
-      })
-      .share();
+      .pipe(
+        map((result: any) => result.data.wishLists),
+        share()
+      );
   }
 
   public remove(wishListId: string): Observable<any> {

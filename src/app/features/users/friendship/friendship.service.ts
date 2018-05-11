@@ -6,10 +6,14 @@ import {
   HttpClient
 } from '@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
+import {
+  Observable
+} from 'rxjs';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/share';
+import {
+  map,
+  share
+} from 'rxjs/operators';
 
 import { environment } from '../../../../environments/environment';
 
@@ -29,8 +33,10 @@ export class FriendshipService {
 
   public getAllByUserId(userId: string): Observable<Friendship[]> {
     return this.http.get(`${this.resourceUrl}?userId=${userId}`)
-      .map((result: any) => result.data.friendships)
-      .share();
+      .pipe(
+        map((result: any) => result.data.friendships),
+        share()
+      );
   }
 
   public remove(friendshipId: string): Observable<any> {

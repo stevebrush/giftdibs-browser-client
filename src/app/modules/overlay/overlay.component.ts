@@ -6,7 +6,6 @@ import {
   EmbeddedViewRef,
   Injector,
   OnDestroy,
-  ReflectiveInjector,
   TemplateRef,
   Type,
   ViewChild,
@@ -18,9 +17,13 @@ import {
   Router
 } from '@angular/router';
 
-import { Subject } from 'rxjs/Subject';
+import {
+  Subject
+} from 'rxjs';
 
-import 'rxjs/add/operator/takeUntil';
+import {
+  takeUntil
+} from 'rxjs/operators';
 
 import { OverlayConfig } from './overlay-config';
 import { OverlayInstance } from './overlay-instance';
@@ -62,9 +65,12 @@ export class OverlayComponent implements OnDestroy {
 
     settings.providers = defaultProviders.concat(config && config.providers || []);
 
+    const injector = Injector.create({
+      providers: settings.providers,
+      parent: this.injector
+    });
+
     const factory = this.resolver.resolveComponentFactory(component);
-    const providers = ReflectiveInjector.resolve(settings.providers);
-    const injector = ReflectiveInjector.fromResolvedProviders(providers, this.injector);
     const componentRef = this.targetRef.createComponent(factory, undefined, injector);
 
     let backdropRef: EmbeddedViewRef<any>;
@@ -74,7 +80,9 @@ export class OverlayComponent implements OnDestroy {
     }
 
     this.router.events
-      .takeUntil(overlayInstance.destroyStream)
+      .pipe(
+        takeUntil(this.ngUnsubscribe)
+      )
       .subscribe(event => {
         if (event instanceof NavigationStart) {
           if (settings.keepAfterNavigationChange) {

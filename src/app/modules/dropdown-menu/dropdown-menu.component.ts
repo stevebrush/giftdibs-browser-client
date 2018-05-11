@@ -10,11 +10,14 @@ import {
   ViewChild
 } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+import {
+  fromEvent,
+  Subject
+} from 'rxjs';
 
-import 'rxjs/add/observable/fromEvent';
-import 'rxjs/add/operator/takeUntil';
+import {
+  takeUntil
+} from 'rxjs/operators';
 
 import {
   AffixService
@@ -101,18 +104,20 @@ export class DropdownMenuComponent implements OnInit, AfterContentInit, OnDestro
     // Close the menu when clicking the window.
     // (Timeout needed so the click is not registered on the caller button.)
     nativeWindow.setTimeout(() => {
-      Observable
-        .fromEvent(nativeWindow, 'click')
-        .takeUntil(this.ngUnsubscribe)
+      fromEvent(nativeWindow, 'click')
+        .pipe(
+          takeUntil(this.ngUnsubscribe)
+        )
         .subscribe(() => {
           this.close();
         });
     });
 
     // Close the menu with escape key.
-    Observable
-      .fromEvent(hostElement, 'keyup')
-      .takeUntil(this.ngUnsubscribe)
+    fromEvent(hostElement, 'keyup')
+      .pipe(
+        takeUntil(this.ngUnsubscribe)
+      )
       .subscribe((event: any) => {
         const key = event.key.toLowerCase();
         if (key === 'escape') {
@@ -121,9 +126,10 @@ export class DropdownMenuComponent implements OnInit, AfterContentInit, OnDestro
       });
 
     // Navigate the items with arrow keys.
-    Observable
-      .fromEvent(hostElement, 'keydown')
-      .takeUntil(this.ngUnsubscribe)
+    fromEvent(hostElement, 'keydown')
+      .pipe(
+        takeUntil(this.ngUnsubscribe)
+      )
       .subscribe((event: any) => {
         const key = event.key.toLowerCase();
 
@@ -148,23 +154,26 @@ export class DropdownMenuComponent implements OnInit, AfterContentInit, OnDestro
       });
 
     // This will check if the focus leaves the document.
-    Observable
-      .fromEvent(hostElement, 'focusin')
-      .takeUntil(this.ngUnsubscribe)
+    fromEvent(hostElement, 'focusin')
+      .pipe(
+        takeUntil(this.ngUnsubscribe)
+      )
       .subscribe((event: any) => {
         isLastButtonFocused = event.target === this.buttons[this.buttons.length - 1];
       });
 
-    Observable
-      .fromEvent(nativeWindow, 'scroll')
-      .takeUntil(this.ngUnsubscribe)
+    fromEvent(nativeWindow, 'scroll')
+      .pipe(
+        takeUntil(this.ngUnsubscribe)
+      )
       .subscribe(() => {
         this.positionMenu();
       });
 
-    Observable
-      .fromEvent(nativeWindow, 'resize')
-      .takeUntil(this.ngUnsubscribe)
+    fromEvent(nativeWindow, 'resize')
+      .pipe(
+        takeUntil(this.ngUnsubscribe)
+      )
       .subscribe(() => {
         this.positionMenu();
       });

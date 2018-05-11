@@ -18,9 +18,13 @@ import {
   Validators
 } from '@angular/forms';
 
-import { Subject } from 'rxjs/Subject';
+import {
+  Subject
+} from 'rxjs';
 
-import 'rxjs/add/operator/takeUntil';
+import {
+  takeUntil
+} from 'rxjs/operators';
 
 import {
   AlertService
@@ -59,26 +63,26 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.resetPasswordForm.disable();
 
-    this.route.params
-      .takeUntil(this.ngUnsubscribe)
-      .subscribe((params: any) => {
-        if (!params.resetPasswordToken) {
+    this.route.params.pipe(
+      takeUntil(this.ngUnsubscribe)
+    ).subscribe((params: any) => {
+      if (!params.resetPasswordToken) {
 
-          // If the user is logged in, they should be able to access the form.
-          if (this.sessionService.isLoggedIn) {
-            this.resetPasswordForm.enable();
-            return;
-          }
-
-          this.alertService.error('A reset password token was not provided.', true);
-          this.router.navigate(['/account/forgotten']);
+        // If the user is logged in, they should be able to access the form.
+        if (this.sessionService.isLoggedIn) {
+          this.resetPasswordForm.enable();
           return;
         }
 
-        this.resetPasswordForm.controls.resetPasswordToken.setValue(params.resetPasswordToken);
-        this.resetPasswordForm.enable();
-        this.hasToken = true;
-      });
+        this.alertService.error('A reset password token was not provided.', true);
+        this.router.navigate(['/account/forgotten']);
+        return;
+      }
+
+      this.resetPasswordForm.controls.resetPasswordToken.setValue(params.resetPasswordToken);
+      this.resetPasswordForm.enable();
+      this.hasToken = true;
+    });
   }
 
   public ngOnDestroy(): void {

@@ -7,8 +7,6 @@ import {
   HttpHeaders
 } from '@angular/common/http';
 
-import 'rxjs/add/operator/toPromise';
-
 import { environment } from '../environments/environment';
 
 import {

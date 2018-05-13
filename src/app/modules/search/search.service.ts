@@ -6,10 +6,14 @@ import {
   HttpClient
 } from '@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
+import {
+  Observable
+} from 'rxjs';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/share';
+import {
+  map,
+  share
+} from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 
@@ -26,7 +30,9 @@ export class SearchService {
   public searchUsers(searchText: string): Observable<User[]> {
     const encoded = encodeURIComponent(searchText);
     return this.http.get(`${this.resourceUrl}-users/${encoded}`)
-      .map((result: any) => result.data.results)
-      .share();
+      .pipe(
+        map((result: any) => result.data.results),
+        share()
+      );
   }
 }

@@ -14,10 +14,14 @@ import {
   Router
 } from '@angular/router';
 
-import { Subject } from 'rxjs/Subject';
+import {
+  Subject
+} from 'rxjs';
 
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/takeUntil';
+import {
+  mergeMap,
+  takeUntil
+} from 'rxjs/operators';
 
 import {
   AlertService
@@ -62,27 +66,32 @@ export class UserComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.route.params
-      .mergeMap((params: Params) => {
-        this.isLoading = true;
-        this.user = undefined;
-        this.isSessionUser = false;
-        this.changeDetector.markForCheck();
-        return this.userService.getById(params.userId);
-      })
-      .mergeMap((user: User) => {
-        this.user = user;
-        this.isSessionUser = this.sessionService.isSessionUser(this.user._id);
-        return this.wishListService.getAllByUserId(user._id);
-      })
-      .takeUntil(this.ngUnsubscribe)
-      .subscribe((wishLists: WishList[]) => {
-        this.wishLists = wishLists;
-        this.isLoading = false;
-        this.changeDetector.markForCheck();
-      }, () => {
-        this.alertService.error('User not found.', true);
-        this.router.navigate(['/users']);
-      });
+      .pipe(
+        mergeMap((params: Params) => {
+          this.isLoading = true;
+          this.user = undefined;
+          this.isSessionUser = false;
+          this.changeDetector.markForCheck();
+          return this.userService.getById(params.userId);
+        }),
+        mergeMap((user: User) => {
+          this.user = user;
+          this.isSessionUser = this.sessionService.isSessionUser(this.user._id);
+          return this.wishListService.getAllByUserId(user._id);
+        }),
+        takeUntil(this.ngUnsubscribe)
+      )
+      .subscribe(
+        (wishLists: WishList[]) => {
+          this.wishLists = wishLists;
+          this.isLoading = false;
+          this.changeDetector.markForCheck();
+        },
+        () => {
+          this.alertService.error('User not found.', true);
+          this.router.navigate(['/users']);
+        }
+      );
   }
 
   public ngOnDestroy(): void {

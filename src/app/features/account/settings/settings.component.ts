@@ -12,8 +12,6 @@ import {
   Validators
 } from '@angular/forms';
 
-import 'rxjs/add/operator/finally';
-
 import {
   AlertService
 } from '../../../modules/alert';
@@ -65,11 +63,6 @@ export class SettingsComponent implements OnInit {
 
     this.userService
       .update(this.sessionService.user._id, formData)
-      .finally(() => {
-        this.isLoading = false;
-        this.settingsForm.enable();
-        this.changeDetector.markForCheck();
-      })
       .subscribe(
         (result: any) => {
           this.alertService.success(result.message);
@@ -80,6 +73,11 @@ export class SettingsComponent implements OnInit {
           const error = err.error;
           this.alertService.error(error.message);
           this.errors = error.errors;
+        },
+        () => {
+          this.isLoading = false;
+          this.settingsForm.enable();
+          this.changeDetector.markForCheck();
         }
       );
   }
@@ -102,18 +100,18 @@ export class SettingsComponent implements OnInit {
   private updateForm(): void {
     this.userService
       .getById(this.sessionService.user._id)
-      .finally(() => {
-        this.isLoading = false;
-        this.isReady = true;
-        this.settingsForm.enable();
-        this.changeDetector.markForCheck();
-      })
       .subscribe(
         (user: User) => {
           this.settingsForm.reset(user);
         },
         (err: any) => {
           this.alertService.error(err.error.message);
+        },
+        () => {
+          this.isLoading = false;
+          this.isReady = true;
+          this.settingsForm.enable();
+          this.changeDetector.markForCheck();
         }
       );
   }

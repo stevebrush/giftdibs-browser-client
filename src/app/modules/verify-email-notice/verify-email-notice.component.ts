@@ -13,11 +13,15 @@ import {
   RouterEvent
 } from '@angular/router';
 
-import { Subject } from 'rxjs/Subject';
+import {
+  combineLatest,
+  Subject
+} from 'rxjs';
 
-import 'rxjs/add/operator/combineLatest';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/takeUntil';
+import {
+  filter,
+  takeUntil
+} from 'rxjs/operators';
 
 import {
   SessionService,
@@ -45,21 +49,25 @@ export class VerifyEmailNoticeComponent implements OnInit, OnDestroy {
   ) { }
 
   public ngOnInit(): void {
-    this.sessionService.userStream
-      .combineLatest(this.router.events.filter(event => event instanceof NavigationStart))
-      .takeUntil(this.ngUnsubscribe)
-      .subscribe((value: [SessionUser, RouterEvent]) => {
-        const sessionUser: SessionUser = value[0];
-        const event: RouterEvent = value[1];
+    combineLatest(
+      this.sessionService.userStream,
+      this.router.events.pipe(
+        filter(event => event instanceof NavigationStart)
+      )
+    ).pipe(
+      takeUntil(this.ngUnsubscribe)
+    ).subscribe((value: [SessionUser, RouterEvent]) => {
+      const sessionUser: SessionUser = value[0];
+      const event: RouterEvent = value[1];
 
-        if (this.visibleForRoutes.includes(event.url)) {
-          this.isActive = (this.sessionService.isLoggedIn && (sessionUser && !sessionUser.emailAddressVerified));
-        } else {
-          this.isActive = false;
-        }
+      if (this.visibleForRoutes.includes(event.url)) {
+        this.isActive = (this.sessionService.isLoggedIn && (sessionUser && !sessionUser.emailAddressVerified));
+      } else {
+        this.isActive = false;
+      }
 
-        this.changeDetector.markForCheck();
-      });
+      this.changeDetector.markForCheck();
+    });
   }
 
   public ngOnDestroy(): void {

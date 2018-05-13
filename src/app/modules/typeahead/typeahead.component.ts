@@ -10,17 +10,18 @@ import {
   ViewChild
 } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
+import {
+  fromEvent,
+  merge,
+  Subject
+} from 'rxjs';
 
-import 'rxjs/add/observable/fromEvent';
-import 'rxjs/add/observable/merge';
-
-import { Subject } from 'rxjs/Subject';
-
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/takeUntil';
-import 'rxjs/add/operator/takeWhile';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  takeUntil,
+  takeWhile
+} from 'rxjs/operators';
 
 import {
   AffixService
@@ -79,11 +80,12 @@ export class TypeaheadComponent implements AfterViewInit, OnDestroy {
   public ngAfterViewInit(): void {
     const input = this.searchInput.nativeElement;
 
-    Observable
-      .fromEvent(input, 'keyup')
-      .takeUntil(this.ngUnsubscribe)
-      .debounceTime(300)
-      .distinctUntilChanged()
+    fromEvent(input, 'keyup')
+      .pipe(
+        takeUntil(this.ngUnsubscribe),
+        debounceTime(300),
+        distinctUntilChanged()
+      )
       .subscribe((event: any) => {
         const key = event.key.toLowerCase();
         switch (key) {
@@ -111,7 +113,9 @@ export class TypeaheadComponent implements AfterViewInit, OnDestroy {
 
   private search(searchText: string): void {
     this.searchFunction.call({}, searchText)
-      .takeUntil(this.ngUnsubscribe)
+      .pipe(
+        takeUntil(this.ngUnsubscribe)
+      )
       .subscribe((results: any[]) => {
         if (results.length === 0) {
           this.removeResults();
@@ -179,18 +183,23 @@ export class TypeaheadComponent implements AfterViewInit, OnDestroy {
   private addEventListeners(): void {
     const resultsComponent = this.overlayInstance.componentInstance;
 
-    Observable
-      .merge(
-        Observable.fromEvent(window, 'scroll').takeWhile(() => this.hasResults),
-        Observable.fromEvent(window, 'resize').takeWhile(() => this.hasResults)
-      )
-      .subscribe(() => {
-        this.positionResults();
-      });
+    merge(
+      fromEvent(window, 'scroll')
+        .pipe(
+          takeWhile(() => this.hasResults)
+        ),
+      fromEvent(window, 'resize')
+        .pipe(
+          takeWhile(() => this.hasResults)
+        )
+    ).subscribe(() => {
+      this.positionResults();
+    });
 
-    Observable
-      .fromEvent(this.searchInput.nativeElement, 'keydown')
-      .takeWhile(() => this.hasResults)
+    fromEvent(this.searchInput.nativeElement, 'keydown')
+      .pipe(
+        takeWhile(() => this.hasResults)
+      )
       .subscribe((event: any) => {
         const key = event.key.toLowerCase();
 
@@ -203,9 +212,10 @@ export class TypeaheadComponent implements AfterViewInit, OnDestroy {
         }
       });
 
-    Observable
-      .fromEvent(this.searchInput.nativeElement, 'keydown')
-      .takeWhile(() => this.hasResults)
+    fromEvent(this.searchInput.nativeElement, 'keydown')
+      .pipe(
+        takeWhile(() => this.hasResults)
+      )
       .subscribe((event: any) => {
         const key = event.key.toLowerCase();
 

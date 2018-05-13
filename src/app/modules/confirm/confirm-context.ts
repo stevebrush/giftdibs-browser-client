@@ -1,4 +1,6 @@
-import { Subject } from 'rxjs/Subject';
+import {
+  Subject
+} from 'rxjs';
 
 import { ConfirmAnswer } from './confirm-answer';
 import { ConfirmConfig } from './confirm-config';

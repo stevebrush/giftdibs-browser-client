@@ -12,9 +12,13 @@ import {
   Router
 } from '@angular/router';
 
-import { Subject } from 'rxjs/Subject';
+import {
+  Subject
+} from 'rxjs';
 
-import 'rxjs/add/operator/takeUntil';
+import {
+  takeUntil
+} from 'rxjs/operators';
 
 import {
   DropdownMenuItem
@@ -67,7 +71,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.sessionService.userStream
-      .takeUntil(this.ngUnsubscribe)
+      .pipe(
+        takeUntil(this.ngUnsubscribe)
+      )
       .subscribe((sessionUser: SessionUser) => {
         this.sessionUser = sessionUser;
         this.changeDetector.markForCheck();

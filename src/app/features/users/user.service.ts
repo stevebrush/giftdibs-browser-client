@@ -43,7 +43,7 @@ export class UserService {
       );
   }
 
-  public update(id: string, attributes: any): Observable<any> {
-    return this.http.patch(`${this.resourceUrl}/${id}`, { attributes });
+  public update(id: string, formData: User): Observable<any> {
+    return this.http.patch(`${this.resourceUrl}/${id}`, formData);
   }
 }

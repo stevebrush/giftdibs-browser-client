@@ -24,6 +24,7 @@ import {
 } from '../../../modules/dropdown-menu';
 
 import {
+  ModalClosedEventArgs,
   ModalService
 } from '../../../modules/modal';
 
@@ -35,6 +36,15 @@ import { WishListEditContext } from '../edit/wish-list-edit-context';
 import { WishListEditComponent } from '../edit/wish-list-edit.component';
 import { WishList } from '../wish-list';
 import { WishListService } from '../wish-list.service';
+
+import {
+  GiftEditComponent,
+  GiftEditContext
+} from '../gifts/edit';
+
+import {
+  Gift
+} from '../gifts';
 
 @Component({
   selector: 'gd-wish-list-preview',
@@ -84,6 +94,21 @@ export class WishListPreviewComponent implements OnInit {
     this.isSessionUser = this.sessionService.isSessionUser(this.wishList.user._id);
   }
 
+  public openGiftModal(gift?: Gift): void {
+    const context = new GiftEditContext(gift, this.wishList._id);
+
+    const modalInstance = this.modalService.open(GiftEditComponent, {
+      providers: [{
+        provide: GiftEditContext,
+        useValue: context
+      }]
+    });
+
+    modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
+      console.log('closed', args);
+    });
+  }
+
   private openEditModal(): void {
     const context = new WishListEditContext();
     context.wishList = this.wishList;
@@ -95,15 +120,17 @@ export class WishListPreviewComponent implements OnInit {
       }]
     });
 
-    modalInstance.closed.subscribe(() => {
-      this.dropdownTrigger.nativeElement.focus();
-    });
+    modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
+      if (args.reason === 'save') {
+        this.wishListService
+          .getById(this.wishList._id)
+          .subscribe((wishList: WishList) => {
+            this.wishList = wishList;
+            this.changeDetector.markForCheck();
+          });
+      }
 
-    modalInstance.componentInstance.saved.subscribe((updatedId: string) => {
-      this.wishListService.getById(updatedId).subscribe((wishList: WishList) => {
-        this.wishList = wishList;
-        this.changeDetector.markForCheck();
-      });
+      this.dropdownTrigger.nativeElement.focus();
     });
   }
 

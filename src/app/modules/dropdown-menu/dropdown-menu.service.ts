@@ -28,6 +28,8 @@ export class DropdownMenuService {
       }]
     });
 
-    return new DropdownMenuInstance(overlayInstance);
+    const dropdownInstance = new DropdownMenuInstance(overlayInstance);
+
+    return dropdownInstance;
   }
 }

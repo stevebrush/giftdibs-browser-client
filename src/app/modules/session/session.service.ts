@@ -11,7 +11,7 @@ import { SessionUser } from './session-user';
 
 @Injectable()
 export class SessionService implements OnDestroy {
-  public userStream = new BehaviorSubject<SessionUser>({} as any);
+  public userStream = new BehaviorSubject<SessionUser>({} as SessionUser);
 
   public get isLoggedIn(): boolean {
     return (this.token !== undefined);

@@ -8,8 +8,13 @@ import {
   OverlayService
 } from '../overlay';
 
-import { ModalConfig } from './modal-config';
-import { ModalInstance } from './modal-instance';
+import {
+  ModalConfig
+} from './types';
+
+import {
+  ModalInstance
+} from './modal-instance';
 
 @Injectable()
 export class ModalService {
@@ -17,13 +22,28 @@ export class ModalService {
     private overlayService: OverlayService
   ) { }
 
-  public open<T>(component: Type<T>, config: ModalConfig): ModalInstance<T> {
+  public open<T>(
+    component: Type<T>,
+    config: ModalConfig
+  ): ModalInstance<T> {
     const settings = Object.assign({}, {
       showBackdrop: true
     }, config);
 
+    const modalInstance = new ModalInstance<T>();
+
+    config.providers.push({
+      provide: ModalInstance,
+      useValue: modalInstance
+    });
+
     const overlayInstance: OverlayInstance<T> = this.overlayService.attach(component, settings);
-    const modalInstance = new ModalInstance<T>(overlayInstance);
+
+    modalInstance.componentInstance = overlayInstance.componentInstance;
+
+    modalInstance.closed.subscribe(() => {
+      overlayInstance.destroy();
+    });
 
     return modalInstance;
   }

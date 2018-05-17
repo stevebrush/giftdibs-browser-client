@@ -28,9 +28,7 @@ export class WishListService {
   ) { }
 
   public create(formData: WishList): Observable<any> {
-    return this.http.post(`${this.resourceUrl}`, {
-      attributes: formData
-    });
+    return this.http.post(`${this.resourceUrl}`, formData);
   }
 
   public getById(wishListId: string): Observable<WishList> {
@@ -54,8 +52,6 @@ export class WishListService {
   }
 
   public update(wishListId: string, formData: WishList): Observable<any> {
-    return this.http.patch(`${this.resourceUrl}/${wishListId}`, {
-      attributes: formData
-    });
+    return this.http.patch(`${this.resourceUrl}/${wishListId}`, formData);
   }
 }

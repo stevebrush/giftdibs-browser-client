@@ -1,0 +1,12 @@
+@import '../../../styles/mixins';
+
+.gd-card-controls {
+  margin-right: -$gd-spacing-sm;
+  margin-top: -$gd-spacing-sm;
+  margin-bottom: -$gd-spacing-sm;
+
+  ::ng-deep .gd-button {
+    padding-left: $gd-spacing-sm;
+    padding-right: $gd-spacing-sm;
+  }
+}

@@ -3,20 +3,40 @@
     <gd-card-heading>
       {{ wishList.name }}
     </gd-card-heading>
-    <div
-      *ngIf="isSessionUser && wishList.privacy.type !== 'everyone'"
-      class="gd-deemphasized">
-      <gd-icon icon="eye"></gd-icon>
-    </div>
-    <button
-      *ngIf="isSessionUser"
-      type="button"
-      class="gd-button gd-button-link gd-deemphasized gd-wish-list-preview-settings-button"
-      title="Toggle wish list options"
-      gdDropdownMenuTrigger
-      [menuItems]="menuItems"
-      #dropdownTrigger>
-      <gd-icon icon="ellipsis-v"></gd-icon>
-    </button>
+    <gd-card-controls *ngIf="isSessionUser">
+      <button
+        class="gd-button gd-button-link gd-deemphasized"
+        type="button"
+        (click)="openGiftModal()">
+        <gd-icon icon="plus"></gd-icon>
+      </button>
+      <button
+        class="gd-button gd-button-link gd-deemphasized"
+        title="Toggle wish list options"
+        type="button"
+        gdDropdownMenuTrigger
+        [menuItems]="menuItems"
+        #dropdownTrigger>
+        <gd-icon icon="ellipsis-v"></gd-icon>
+      </button>
+    </gd-card-controls>
   </gd-card-header>
+  <gd-card-body *ngIf="wishList.gifts">
+    <!-- TODO: MAKE THIS A REPEATER COMPONENT! -->
+    <ul class="gd-wish-list-preview-gifts">
+      <li *ngFor="let gift of wishList.gifts"
+        class="gd-wish-list-preview-gift"
+      >
+        {{ gift.name }}
+        <button
+          class="gd-button gd-button-link gd-deemphasized"
+          title="Toggle gift options"
+          type="button"
+          gdDropdownMenuTrigger
+          [menuItems]="[]">
+          <gd-icon icon="ellipsis-v"></gd-icon>
+        </button>
+      </li>
+    </ul>
+  </gd-card-body>
 </gd-card>

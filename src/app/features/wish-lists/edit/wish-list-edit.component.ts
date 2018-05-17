@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  EventEmitter,
   OnInit
 } from '@angular/core';
 
@@ -18,8 +17,8 @@ import {
 } from '../../../modules/alert';
 
 import {
-  OverlayInstance
-} from '../../../modules/overlay';
+  ModalInstance
+} from '../../../modules/modal';
 
 import { WishList } from '../wish-list';
 import { WishListService } from '../wish-list.service';
@@ -37,16 +36,14 @@ export class WishListEditComponent implements OnInit {
   public errors: any[];
   public isLoading = false;
 
-  public saved = new EventEmitter<string>();
-
   private wishList: WishList;
 
   constructor(
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
-    private context: WishListEditContext,
     private formBuilder: FormBuilder,
-    private instance: OverlayInstance<WishListEditComponent>,
+    private modal: ModalInstance<any>,
+    private context: WishListEditContext,
     private wishListService: WishListService
   ) { }
 
@@ -72,9 +69,7 @@ export class WishListEditComponent implements OnInit {
       .subscribe(
         (result: any) => {
           this.alertService.success(result.message);
-          this.saved.emit(this.wishList._id);
-          this.saved.complete();
-          this.instance.destroy();
+          this.modal.close('save');
         },
         (err: any) => {
           const error = err.error;
@@ -88,7 +83,7 @@ export class WishListEditComponent implements OnInit {
   }
 
   public onCancelClicked(): void {
-    this.instance.destroy();
+    this.modal.close('cancel');
   }
 
   private createForm(): void {

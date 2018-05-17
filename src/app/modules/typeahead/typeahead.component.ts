@@ -145,7 +145,7 @@ export class TypeaheadComponent implements AfterViewInit, OnDestroy {
     });
 
     this.hasResults = true;
-    this.overlayInstance.destroyStream.subscribe(() => {
+    this.overlayInstance.destroyed.subscribe(() => {
       this.hasResults = false;
       this.changeDetector.markForCheck();
     });

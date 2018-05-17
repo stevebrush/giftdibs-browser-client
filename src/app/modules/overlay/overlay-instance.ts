@@ -1,18 +1,24 @@
 import {
+  EventEmitter,
   Injectable
 } from '@angular/core';
 
 import {
-  Subject
+  Observable
 } from 'rxjs';
 
 @Injectable()
 export class OverlayInstance<T> {
   public componentInstance: T;
-  public destroyStream = new Subject();
+
+  public get destroyed(): Observable<void> {
+    return this._destroyed;
+  }
+
+  private _destroyed = new EventEmitter<void>();
 
   public destroy(): void {
-    this.destroyStream.next();
-    this.destroyStream.complete();
+    this._destroyed.next();
+    this._destroyed.complete();
   }
 }

@@ -1,5 +1,9 @@
+import {
+  StaticProvider
+} from '@angular/core';
+
 export interface OverlayConfig {
   keepAfterNavigationChange?: boolean;
-  providers?: any[];
+  providers?: StaticProvider[];
   showBackdrop?: boolean;
 }

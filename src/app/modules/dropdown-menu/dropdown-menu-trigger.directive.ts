@@ -66,7 +66,7 @@ export class DropdownMenuTriggerDirective {
 
     this.menuInstance = this.dropdownMenuService.open(config);
 
-    this.menuInstance.closeStream.subscribe(() => {
+    this.menuInstance.closed.subscribe(() => {
       this.menuInstance = undefined;
     });
   }

@@ -1,7 +1,10 @@
 @import '../../../../styles/mixins';
 
-.gd-wish-list-preview-settings-button {
-  margin-right: -$gd-spacing-md;
-  margin-top: -$gd-spacing-md;
-  margin-bottom: -$gd-spacing-md;
+.gd-wish-list-preview-gift {
+  border-top: 1px solid $gd-border-color-neutral-lightest;
+  padding-top: $gd-spacing-md;
+
+  + .gd-wish-list-preview-gift {
+    margin-top: $gd-spacing-md;
+  }
 }

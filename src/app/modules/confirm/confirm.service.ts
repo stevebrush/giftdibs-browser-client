@@ -28,7 +28,7 @@ export class ConfirmService {
       showBackdrop: true
     });
 
-    context.answerStream.subscribe((answer: ConfirmAnswer) => {
+    context.answered.subscribe((answer: ConfirmAnswer) => {
       callback(answer);
       overlayInstance.destroy();
     });

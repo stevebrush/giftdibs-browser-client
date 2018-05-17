@@ -18,6 +18,7 @@ import {
 } from '../../../modules/dropdown-menu';
 
 import {
+  ModalClosedEventArgs,
   ModalService
 } from '../../../modules/modal';
 
@@ -114,15 +115,15 @@ export class WishListPrivacySelectorComponent
             }]
           });
 
-          instance.componentInstance.saved.subscribe((result: { value: string[] }) => {
-            this.value = {
-              type: 'custom',
-              _allow: result.value
-            };
-            this.changeDetector.markForCheck();
-          });
+          instance.closed.subscribe((args: ModalClosedEventArgs) => {
+            if (args.reason === 'save') {
+              this.value = {
+                type: 'custom',
+                _allow: args.data.value
+              };
+              this.changeDetector.markForCheck();
+            }
 
-          instance.closed.subscribe(() => {
             this.privacyButton.nativeElement.focus();
           });
         },

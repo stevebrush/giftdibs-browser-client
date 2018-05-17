@@ -17,3 +17,9 @@
     display: block;
   }
 }
+
+.gd-user-wish-lists {
+  ::ng-deep .gd-card {
+    margin-bottom: $gd-spacing;
+  }
+}

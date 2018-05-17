@@ -3,20 +3,30 @@ import {
 } from '@angular/core';
 
 import {
-  OverlayInstance
-} from '../overlay';
+  Observable
+} from 'rxjs';
+
+import {
+  ModalClosedEventArgs, ModalClosedEventReason
+} from './types';
 
 export class ModalInstance<T> {
   public componentInstance: T;
-  public closed = new EventEmitter<void>();
 
-  constructor(
-    private overlayInstance: OverlayInstance<T>
-  ) {
-    this.componentInstance = this.overlayInstance.componentInstance;
-    this.overlayInstance.destroyStream.subscribe(() => {
-      this.closed.emit();
-      this.closed.complete();
+  public get closed(): Observable<ModalClosedEventArgs> {
+    return this._closed;
+  }
+
+  private _closed = new EventEmitter<ModalClosedEventArgs>();
+
+  public close(
+    reason: ModalClosedEventReason,
+    data?: any
+  ): void {
+    this._closed.emit({
+      data,
+      reason
     });
+    this._closed.complete();
   }
 }

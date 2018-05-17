@@ -42,6 +42,10 @@ import {
   ModalModule
 } from '../../modules/modal';
 
+import {
+  GiftsModule
+} from './gifts';
+
 import { WishListCreateComponent } from './create/wish-list-create.component';
 import { WishListEditComponent } from './edit/wish-list-edit.component';
 import { WishListPreviewComponent } from './preview/wish-list-preview.component';
@@ -57,6 +61,7 @@ import { WishListService } from './wish-list.service';
     ConfirmModule,
     DropdownMenuModule,
     FormFieldModule,
+    GiftsModule,
     HideUntilModule,
     IconModule,
     ModalModule,

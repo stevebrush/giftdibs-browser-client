@@ -28,7 +28,7 @@ export class FriendshipService {
   ) { }
 
   public create(friendId: string): Observable<any> {
-    return this.http.post(`${this.resourceUrl}`, { attributes: { friendId } });
+    return this.http.post(`${this.resourceUrl}`, { friendId });
   }
 
   public getAllByUserId(userId: string): Observable<Friendship[]> {

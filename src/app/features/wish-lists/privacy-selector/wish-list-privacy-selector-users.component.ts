@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  EventEmitter,
   OnInit
 } from '@angular/core';
 
@@ -17,8 +16,8 @@ import {
 } from '../../../modules/checklist';
 
 import {
-  OverlayInstance
-} from '../../../modules/overlay';
+  ModalInstance
+} from '../../../modules/modal';
 
 import { User } from '../../users';
 import { Friendship } from '../../users/friendship/friendship';
@@ -36,14 +35,13 @@ export class WishListPrivacySelectorUsersComponent implements OnInit {
   public choices: ChecklistChoice[];
   public isReady = false;
   public usersForm: FormGroup;
-  public saved = new EventEmitter<any>();
 
   constructor(
     private changeDetector: ChangeDetectorRef,
     private context: WishListPrivacySelectorUsersContext,
     private formBuilder: FormBuilder,
     private friendshipService: FriendshipService,
-    private overlayInstance: OverlayInstance<any>
+    private modal: ModalInstance<any>
   ) { }
 
   public ngOnInit(): void {
@@ -82,13 +80,11 @@ export class WishListPrivacySelectorUsersComponent implements OnInit {
 
   public save(): void {
     const value = this.usersForm.controls.friends.value;
-    this.saved.emit({ value });
-    this.saved.complete();
-    this.overlayInstance.destroy();
+    this.modal.close('save', { value });
   }
 
   public onCancelClicked(): void {
-    this.overlayInstance.destroy();
+    this.modal.close('cancel');
   }
 
   private createForm(): void {

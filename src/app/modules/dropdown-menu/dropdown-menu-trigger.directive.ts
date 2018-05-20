@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 
 import {
-  AffixAlignment
+  AffixHorizontalAlignment
 } from '../affix';
 
 import { DropdownMenuConfig } from './dropdown-menu-config';
@@ -20,12 +20,12 @@ import { DropdownMenuService } from './dropdown-menu.service';
 })
 export class DropdownMenuTriggerDirective {
   @Input()
-  public set menuAlignment(value: AffixAlignment) {
-    this._menuAlignment = value;
+  public set menuHorizontalAlignment(value: AffixHorizontalAlignment) {
+    this._menuHorizontalAlignment = value;
   }
 
-  public get menuAlignment(): AffixAlignment {
-    return this._menuAlignment || 'right';
+  public get menuHorizontalAlignment(): AffixHorizontalAlignment {
+    return this._menuHorizontalAlignment || 'right';
   }
 
   @Input()
@@ -40,7 +40,7 @@ export class DropdownMenuTriggerDirective {
     return this._menuItems || [];
   }
 
-  private _menuAlignment: AffixAlignment;
+  private _menuHorizontalAlignment: AffixHorizontalAlignment;
   private _menuItems: DropdownMenuItem[];
   private menuInstance: DropdownMenuInstance;
 
@@ -58,7 +58,7 @@ export class DropdownMenuTriggerDirective {
     }
 
     const config: DropdownMenuConfig = {
-      alignment: this.menuAlignment,
+      horizontalAlignment: this.menuHorizontalAlignment,
       caller: this.elementRef,
       items: this.menuItems,
       itemTemplate: this.menuItemTemplate

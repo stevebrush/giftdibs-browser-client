@@ -13,6 +13,10 @@ import {
 } from '@angular/forms';
 
 import {
+  finalize
+} from 'rxjs/operators';
+
+import {
   AlertService
 } from '../../../modules/alert';
 
@@ -63,21 +67,23 @@ export class SettingsComponent implements OnInit {
 
     this.userService
       .update(this.sessionService.user._id, formData)
-      .subscribe(
-        (result: any) => {
-          this.alertService.success(result.message);
-          this.updateForm();
-          this.sessionService.patchUser(this.settingsForm.value);
-        },
-        (err: any) => {
-          const error = err.error;
-          this.alertService.error(error.message);
-          this.errors = error.errors;
-        },
-        () => {
+      .pipe(
+        finalize(() => {
           this.isLoading = false;
           this.settingsForm.enable();
           this.changeDetector.markForCheck();
+        })
+      )
+      .subscribe(
+        (result: any) => {
+          this.updateForm();
+          this.sessionService.patchUser(this.settingsForm.value);
+          this.alertService.success(result.message);
+        },
+        (err: any) => {
+          const error = err.error;
+          this.errors = error.errors;
+          this.alertService.error(error.message);
         }
       );
   }
@@ -100,18 +106,20 @@ export class SettingsComponent implements OnInit {
   private updateForm(): void {
     this.userService
       .getById(this.sessionService.user._id)
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+          this.isReady = true;
+          this.settingsForm.enable();
+          this.changeDetector.markForCheck();
+        })
+      )
       .subscribe(
         (user: User) => {
           this.settingsForm.reset(user);
         },
         (err: any) => {
           this.alertService.error(err.error.message);
-        },
-        () => {
-          this.isLoading = false;
-          this.isReady = true;
-          this.settingsForm.enable();
-          this.changeDetector.markForCheck();
         }
       );
   }

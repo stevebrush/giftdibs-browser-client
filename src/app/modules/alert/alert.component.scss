@@ -12,8 +12,9 @@
   max-width: 100%;
   position: fixed;
   bottom: $gd-spacing;
+  left: $gd-spacing;
   padding: $gd-spacing-padding-squish;
-  border-radius: 0 0.5rem 0.5rem 0;
+  border-radius: $gd-border-radius-sm;
   color: #fff;
   background-color: $gd-text-color;
   box-shadow: $gd-box-shadow;

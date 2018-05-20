@@ -10,10 +10,14 @@
 .gd-confirm {
   background-color: #fff;
   padding: $gd-spacing-padding-squish;
-  border-radius: $gd-border-radius;
+  border-radius: $gd-border-radius-sm;
   max-width: 500px;
   position: relative;
   box-shadow: $gd-box-shadow-lg;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .gd-confirm-message {

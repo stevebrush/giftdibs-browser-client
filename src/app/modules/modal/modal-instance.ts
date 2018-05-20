@@ -7,7 +7,8 @@ import {
 } from 'rxjs';
 
 import {
-  ModalClosedEventArgs, ModalClosedEventReason
+  ModalClosedEventArgs,
+  ModalClosedEventReason
 } from './types';
 
 export class ModalInstance<T> {

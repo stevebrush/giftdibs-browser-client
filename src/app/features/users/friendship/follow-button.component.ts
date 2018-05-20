@@ -7,6 +7,10 @@ import {
 } from '@angular/core';
 
 import {
+  finalize
+} from 'rxjs/operators';
+
+import {
   AlertService
 } from '../../../modules/alert';
 
@@ -45,12 +49,14 @@ export class FollowButtonComponent implements OnInit {
     const sessionUserId = this.sessionService.user._id;
     this.isSessionUser = this.sessionService.isSessionUser(this.friend._id);
 
-    this.friendshipService.getAllByUserId(sessionUserId).subscribe((friendships: Friendship[]) => {
-      this.friendshipId = this.getSessionUserFriendship(friendships);
-      this.isFollowing = !!this.friendshipId;
-      this.isLoading = false;
-      this.changeDetector.markForCheck();
-    });
+    this.friendshipService
+      .getAllByUserId(sessionUserId)
+      .subscribe((friendships: Friendship[]) => {
+        this.friendshipId = this.getSessionUserFriendship(friendships);
+        this.isFollowing = !!this.friendshipId;
+        this.isLoading = false;
+        this.changeDetector.markForCheck();
+      });
   }
 
   public createFriendship(): void {
@@ -59,6 +65,12 @@ export class FollowButtonComponent implements OnInit {
 
     this.friendshipService
       .create(this.friend._id)
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+          this.changeDetector.markForCheck();
+        })
+      )
       .subscribe(
         (data: any) => {
           this.isFollowing = true;
@@ -67,10 +79,6 @@ export class FollowButtonComponent implements OnInit {
         },
         (err: any) => {
           this.alertService.error(err.error.message);
-        },
-        () => {
-          this.isLoading = false;
-          this.changeDetector.markForCheck();
         }
       );
   }
@@ -81,6 +89,12 @@ export class FollowButtonComponent implements OnInit {
 
     this.friendshipService
       .remove(this.friendshipId)
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+          this.changeDetector.markForCheck();
+        })
+      )
       .subscribe(
         (data: any) => {
           this.isFollowing = false;
@@ -88,10 +102,6 @@ export class FollowButtonComponent implements OnInit {
         },
         (err: any) => {
           this.alertService.error(err.error.message);
-        },
-        () => {
-          this.isLoading = false;
-          this.changeDetector.markForCheck();
         }
       );
   }

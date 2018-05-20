@@ -43,7 +43,8 @@ import {
 } from '../gifts/edit';
 
 import {
-  Gift
+  Gift,
+  GiftService
 } from '../gifts';
 
 @Component({
@@ -62,15 +63,12 @@ export class WishListPreviewComponent implements OnInit {
   public isSessionUser = false;
   public menuItems: DropdownMenuItem[] = [
     {
-      icon: 'pencil-alt',
       label: 'Edit',
       action: () => {
-        this.openEditModal();
-      },
-      addSeparatorAfter: true
+        this.openWishListEditModal();
+      }
     },
     {
-      icon: 'trash-alt',
       label: 'Delete',
       action: () => {
         this.confirmDelete();
@@ -85,6 +83,7 @@ export class WishListPreviewComponent implements OnInit {
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
     private confirmService: ConfirmService,
+    private giftService: GiftService,
     private modalService: ModalService,
     private sessionService: SessionService,
     private wishListService: WishListService
@@ -94,7 +93,7 @@ export class WishListPreviewComponent implements OnInit {
     this.isSessionUser = this.sessionService.isSessionUser(this.wishList.user._id);
   }
 
-  public openGiftModal(gift?: Gift): void {
+  public openGiftEditModal(gift?: Gift): void {
     const context = new GiftEditContext(gift, this.wishList._id);
 
     const modalInstance = this.modalService.open(GiftEditComponent, {
@@ -105,11 +104,59 @@ export class WishListPreviewComponent implements OnInit {
     });
 
     modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
-      console.log('closed', args);
+      if (args.reason === 'save') {
+        this.giftService
+          .getById(args.data.giftId)
+          .subscribe(
+            (newGift: Gift) => {
+              if (gift) {
+                this.wishList.gifts[this.wishList.gifts.indexOf(gift)] = newGift;
+                this.changeDetector.markForCheck();
+                return;
+              }
+
+              if (!this.wishList.gifts) {
+                this.wishList.gifts = [];
+              }
+
+              this.wishList.gifts.push(newGift);
+              this.changeDetector.markForCheck();
+            },
+            (err: any) => {
+              this.alertService.error(err.error.message);
+            }
+          );
+      }
     });
   }
 
-  private openEditModal(): void {
+  public getGiftDropdownMenuItems(gift: Gift): DropdownMenuItem[] {
+    return [
+      {
+        label: 'Edit',
+        action: () => {
+          this.openGiftEditModal(gift);
+        }
+      },
+      {
+        label: 'Delete',
+        action: () => {
+          this.giftService.remove(gift._id).subscribe(
+            () => {
+              const oldGift = this.wishList.gifts.find((g) => g._id === gift._id);
+              this.wishList.gifts.splice(this.wishList.gifts.indexOf(oldGift), 1);
+              this.changeDetector.markForCheck();
+            },
+            (err: any) => {
+              this.alertService.error(err.error.message);
+            }
+          );
+        }
+      }
+    ];
+  }
+
+  private openWishListEditModal(): void {
     const context = new WishListEditContext();
     context.wishList = this.wishList;
 

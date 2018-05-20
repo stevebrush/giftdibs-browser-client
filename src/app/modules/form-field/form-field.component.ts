@@ -50,15 +50,9 @@ export class FormFieldComponent implements AfterContentInit, OnChanges {
   public updateErrorMessages(): void {
     const control = this.controlName.control;
 
-    if (!control) {
-      return;
-    }
-
-    const hasError = (control.invalid && (control.dirty || control.touched));
-
     this.errorMessages = [];
 
-    if (!control.errors || !hasError) {
+    if (!control.errors) {
       return;
     }
 
@@ -77,6 +71,8 @@ export class FormFieldComponent implements AfterContentInit, OnChanges {
   }
 
   private handleErrors(errors: any[]): void {
+    let hasErrors = false;
+
     errors.forEach((err: any) => {
       let field = err.field;
       const fragments = err.field.split('.');
@@ -102,12 +98,15 @@ export class FormFieldComponent implements AfterContentInit, OnChanges {
           }
         }
 
+        hasErrors = true;
         this.controlName.control.setErrors({
           validation: err.message
         });
       }
     });
 
-    this.updateErrorMessages();
+    if (hasErrors) {
+      this.updateErrorMessages();
+    }
   }
 }

@@ -1,7 +1,12 @@
 <gd-modal>
   <gd-modal-header>
     <gd-modal-heading>
-      Edit gift
+      <ng-template [ngIf]="!gift">
+        New gift
+      </ng-template>
+      <ng-template [ngIf]="gift">
+        Edit gift
+      </ng-template>
     </gd-modal-heading>
   </gd-modal-header>
   <gd-modal-body>

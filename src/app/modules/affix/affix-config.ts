@@ -1,7 +1,12 @@
-import { AffixAlignment } from './affix-alignment';
-import { AffixPlacement } from './affix-placement';
+import {
+  AffixHorizontalAlignment
+} from './affix-horizontal-alignment';
+
+import {
+  AffixVerticalAlignment
+} from './affix-vertical-alignment';
 
 export interface AffixConfig {
-  alignment?: AffixAlignment;
-  placement?: AffixPlacement;
+  horizontalAlignment?: AffixHorizontalAlignment;
+  verticalAlignment?: AffixVerticalAlignment;
 }

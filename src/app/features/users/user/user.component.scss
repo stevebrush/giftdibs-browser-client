@@ -1,7 +1,7 @@
 @import '../../../../styles/mixins';
 
 .gd-user-header {
-  margin-bottom: $gd-spacing-lg;
+  margin-bottom: $gd-spacing-xl;
 }
 
 .gd-user-wish-list-create-form {
@@ -20,6 +20,6 @@
 
 .gd-user-wish-lists {
   ::ng-deep .gd-card {
-    margin-bottom: $gd-spacing;
+    margin-bottom: $gd-spacing-xl;
   }
 }

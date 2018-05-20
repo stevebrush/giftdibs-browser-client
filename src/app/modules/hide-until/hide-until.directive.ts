@@ -26,7 +26,7 @@ export class HideUntilDirective implements OnInit, OnChanges {
   ) { }
 
   public ngOnInit(): void {
-    this.renderer.setStyle(this.elementRef.nativeElement, 'transition', 'opacity 100ms');
+    this.renderer.setStyle(this.elementRef.nativeElement, 'transition', 'opacity 200ms');
     this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'block');
     this.setOpacity(false);
     this.windowRef.nativeWindow.setTimeout(() => {

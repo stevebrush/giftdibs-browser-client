@@ -43,6 +43,10 @@ import {
 } from '../../modules/modal';
 
 import {
+  RepeaterModule
+} from '../../modules/repeater';
+
+import {
   GiftsModule
 } from './gifts';
 
@@ -65,7 +69,8 @@ import { WishListService } from './wish-list.service';
     HideUntilModule,
     IconModule,
     ModalModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RepeaterModule
   ],
   exports: [
     WishListCreateComponent,

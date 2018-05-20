@@ -1,4 +1,4 @@
-$gd-font-size-default: 17px !default;
+$gd-font-size-default: 18px !default;
 $gd-font-size-small: 85% !default;
 $gd-font-size-smaller: 75% !default;
 $gd-font-size-large: 1.2em !default;
@@ -16,16 +16,17 @@ $gd-line-height-reduced: 1.2 !default;
 
 $gd-zindex-alert: 999 !default;
 
-$gd-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.35);
+$gd-box-shadow: 0 2px 2px rgba(0,0,0,.24), 0 0 2px rgba(0,0,0,.12);
 $gd-box-shadow-lg: 0 0 50px rgba(0, 0, 0, 0.4);
 $gd-border-radius: 0.35rem !default;
-$gd-border-radius-sm: 0.175rem !default;
+$gd-border-radius-sm: 0.1rem !default;
 
 $gd-text-color: #555 !default;
 $gd-text-color-deemphasized: #aaa !default;
 $gd-text-color-dark: #222 !default;
 
 $gd-spacing: 1.00rem !default;
+$gd-spacing-xl: 2rem !default;
 $gd-spacing-lg: 1.5rem !default;
 $gd-spacing-md: 0.750rem !default;
 $gd-spacing-sm: 0.375rem !default;

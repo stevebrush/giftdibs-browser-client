@@ -5,13 +5,12 @@ import {
 } from '@angular/core';
 
 import {
-  animate,
-  AnimationEvent,
-  state,
-  style,
-  transition,
-  trigger
+  AnimationEvent
 } from '@angular/animations';
+
+import {
+  gdAnimationEmerge
+} from '../animation';
 
 import {
   OverlayInstance
@@ -26,20 +25,12 @@ import { AlertContext } from './alert-context';
   styleUrls: ['./alert.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
-    trigger('gdSlideIn', [
-      state('hidden', style({ transform: 'translateX(-100%)' })),
-      state('visible', style({ transform: 'translateX(0)' })),
-      transition('void => *', [
-        style({ transform: 'translateX(-100%)' }),
-        animate('250ms ease-in-out')
-      ]),
-      transition(`* <=> *`, animate('250ms ease-in-out'))
-    ])
+    gdAnimationEmerge
   ]
 })
 export class AlertComponent implements OnInit {
   public alert: Alert;
-  public animationState: 'hidden' | 'visible' = 'hidden';
+  public animationState: 'open' | 'closed' = 'closed';
 
   public get ariaLive(): string {
     let live: string;
@@ -63,16 +54,16 @@ export class AlertComponent implements OnInit {
 
   public ngOnInit(): void {
     this.alert = this.context.alert;
-    this.animationState = 'visible';
+    this.animationState = 'open';
   }
 
   public onAnimationDone(event: AnimationEvent): void {
-    if (event.toState === 'hidden') {
+    if (event.toState === 'closed') {
       this.instance.destroy();
     }
   }
 
   public close(): void {
-    this.animationState = 'hidden';
+    this.animationState = 'closed';
   }
 }

@@ -29,12 +29,12 @@
     <div class="gd-container-fluid">
       <div class="gd-user-wish-lists">
         <gd-row>
-          <ng-container
-            *ngTemplateOutlet="wishListsTemplate">
+          <ng-container *ngTemplateOutlet="wishListsTemplate">
           </ng-container>
-          <gd-column
-            *ngIf="isSessionUser"
-            screenSmall="4">
+          <gd-column *ngIf="isSessionUser"
+            screenSmall="6"
+            screenLarge="4"
+          >
             <div
               [ngClass]="{
                 'gd-user-wish-list-create-form-active': isWishListFormActive
@@ -75,12 +75,14 @@
 </div>
 
 <ng-template #wishListsTemplate>
-  <gd-column
-    *ngFor="let wishList of wishLists"
-    screenSmall="4">
+  <gd-column *ngFor="let wishList of wishLists"
+    screenSmall="6"
+    screenLarge="4"
+  >
     <gd-wish-list-preview
       [wishList]="wishList"
-      (removed)="onWishListRemoved(wishList._id)">
+      (removed)="onWishListRemoved(wishList._id)"
+    >
     </gd-wish-list-preview>
   </gd-column>
 </ng-template>

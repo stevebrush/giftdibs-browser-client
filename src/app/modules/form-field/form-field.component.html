@@ -1,10 +1,11 @@
 <div
   class="gd-form-field"
-  [ngClass]="{ 'gd-form-field-has-error': errorMessages.length > 0 }">
+  [ngClass]="{ 'gd-form-field-has-error': errorMessages.length > 0 }"
+>
   <ng-content></ng-content>
-  <div
+  <div *ngIf="errorMessages.length > 0"
     class="gd-form-field-subscript"
-    *ngIf="errorMessages.length > 0">
+  >
     <div *ngFor="let message of errorMessages">
       {{ message }}
     </div>

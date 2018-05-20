@@ -1,8 +1,10 @@
 <ul
   tabindex="0"
   class="gd-dropdown-menu"
-  [ngClass]="{ 'gd-dropdown-hidden': !isVisible }"
-  #menuElementRef>
+  [@gdAnimationEmerge]="animationState"
+  (@gdAnimationEmerge.done)="onAnimationDone($event)"
+  #menuElementRef
+>
   <ng-template ngFor let-item [ngForOf]="items">
     <li class="gd-dropdown-menu-item">
       <div

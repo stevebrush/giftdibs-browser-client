@@ -2,5 +2,7 @@
 
 .gd-card-footer {
   padding: $gd-spacing-padding-squish;
-  background-color: $gd-background-color-neutral-lightest;
+  margin-left: -$gd-spacing;
+  margin-right: -$gd-spacing;
+  margin-bottom: -$gd-spacing-md;
 }

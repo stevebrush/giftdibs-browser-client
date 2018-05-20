@@ -12,18 +12,34 @@ export class AffixService {
     private renderer: Renderer2
   ) { }
 
-  public affixTo(subject: ElementRef, target: ElementRef, config?: AffixConfig): void {
+  public affixTo(
+    subject: ElementRef,
+    target: ElementRef,
+    config?: AffixConfig
+  ): void {
     const defaults: AffixConfig = {
-      alignment: 'left'
+      horizontalAlignment: 'left',
+      verticalAlignment: 'bottom'
     };
 
     const settings = Object.assign({}, defaults, config);
-
     const subjectRect = subject.nativeElement.getBoundingClientRect();
     const targetRect = target.nativeElement.getBoundingClientRect();
 
+    let top: number;
+    switch (settings.verticalAlignment) {
+      default:
+      case 'top':
+      top = targetRect.top;
+      break;
+
+      case 'bottom':
+      top = targetRect.top - subjectRect.height;
+      break;
+    }
+
     let left: number;
-    switch (settings.alignment) {
+    switch (settings.horizontalAlignment) {
       default:
       case 'left':
       left = targetRect.left;
@@ -34,7 +50,7 @@ export class AffixService {
       break;
     }
 
-    this.renderer.setStyle(subject.nativeElement, 'top', `${targetRect.bottom}px`);
+    this.renderer.setStyle(subject.nativeElement, 'top', `${top}px`);
     this.renderer.setStyle(subject.nativeElement, 'left', `${left}px`);
   }
 }

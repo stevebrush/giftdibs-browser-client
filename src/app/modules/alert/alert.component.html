@@ -4,8 +4,8 @@
   class="gd-alert"
   [ngClass]="'gd-alert-' + alert.type"
   [attr.aria-live]="ariaLive"
-  [@gdSlideIn]="animationState"
-  (@gdSlideIn.done)="onAnimationDone($event)">
+  [@gdAnimationEmerge]="animationState"
+  (@gdAnimationEmerge.done)="onAnimationDone($event)">
   <div class="gd-alert-message">
     {{ alert.text }}
   </div>

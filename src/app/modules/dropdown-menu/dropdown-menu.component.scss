@@ -5,10 +5,12 @@
 }
 
 .gd-dropdown-menu {
+  min-width: 100px;
   max-width: 275px;
-  box-shadow: $gd-box-shadow-lg;
-  border: 1px solid $gd-border-color-neutral;
+  box-shadow: $gd-box-shadow;
   background-color: #fff;
+  padding: $gd-spacing-sm 0;
+  border-radius: $gd-border-radius-sm;
 
   &:focus {
     outline: none;
@@ -25,9 +27,10 @@
   width: 100%;
   display: block;
   text-align: left;
+  background-color: transparent;
 
   &:hover {
-    background-color: $gd-background-color-neutral-light;
+    background-color: $gd-background-color-neutral-lightest;
     color: $gd-text-color-dark;
   }
 }
@@ -44,5 +47,5 @@
 }
 
 .gd-dropdown-menu-item-separator {
-  border-bottom: 1px solid $gd-border-color-neutral-lightest;
+  border-bottom: 1px solid $gd-background-color-neutral-light;
 }

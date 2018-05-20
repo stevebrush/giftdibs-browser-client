@@ -21,12 +21,15 @@ export class DropdownMenuService {
     const context = new DropdownMenuContext();
     context.config = config;
 
-    const overlayInstance = this.overlayService.attach(DropdownMenuComponent, {
-      providers: [{
-        provide: DropdownMenuContext,
-        useValue: context
-      }]
-    });
+    const overlayInstance = this.overlayService.attach(
+      DropdownMenuComponent,
+      {
+        providers: [{
+          provide: DropdownMenuContext,
+          useValue: context
+        }]
+      }
+    );
 
     const dropdownInstance = new DropdownMenuInstance(overlayInstance);
 

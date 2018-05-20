@@ -11,6 +11,10 @@ import {
 } from '@angular/core';
 
 import {
+  AnimationEvent
+} from '@angular/animations';
+
+import {
   fromEvent,
   Subject
 } from 'rxjs';
@@ -22,6 +26,10 @@ import {
 import {
   AffixService
 } from '../affix';
+
+import {
+  gdAnimationEmerge
+} from '../animation';
 
 import {
   OverlayInstance
@@ -39,11 +47,18 @@ import { DropdownMenuItem } from './dropdown-menu-item';
   templateUrl: './dropdown-menu.component.html',
   styleUrls: ['./dropdown-menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    gdAnimationEmerge
+  ],
   providers: [
     AffixService
   ]
 })
 export class DropdownMenuComponent implements OnInit, AfterContentInit, OnDestroy {
+  public get animationState(): string {
+    return (this.isOpen) ? 'open' : 'closed';
+  }
+
   public set itemTemplate(value: TemplateRef<any>) {
     this._itemTemplate = value;
   }
@@ -57,10 +72,6 @@ export class DropdownMenuComponent implements OnInit, AfterContentInit, OnDestro
 
   @ViewChild('defaultItemTemplate')
   private defaultItemTemplate: TemplateRef<any>;
-
-  private _itemTemplate: TemplateRef<any>;
-  private ngUnsubscribe = new Subject();
-  private buttons: any[];
 
   private get activeIndex(): number {
     return this._activeIndex;
@@ -78,7 +89,12 @@ export class DropdownMenuComponent implements OnInit, AfterContentInit, OnDestro
     this._activeIndex = value;
   }
 
+  private buttons: any[];
+  private isOpen = true;
+  private ngUnsubscribe = new Subject();
+
   private _activeIndex = -1;
+  private _itemTemplate: TemplateRef<any>;
 
   @ViewChild('menuElementRef')
   private menuElementRef: ElementRef;
@@ -101,7 +117,7 @@ export class DropdownMenuComponent implements OnInit, AfterContentInit, OnDestro
     this.items = this.context.config.items;
     this.itemTemplate = this.context.config.itemTemplate;
 
-    // Close the menu when clicking the window.
+    // Close the menu after any click event.
     // (Timeout needed so the click is not registered on the caller button.)
     nativeWindow.setTimeout(() => {
       fromEvent(nativeWindow, 'click')
@@ -196,11 +212,17 @@ export class DropdownMenuComponent implements OnInit, AfterContentInit, OnDestro
 
   public handleItemAction(item: DropdownMenuItem): void {
     item.action();
-    this.close();
+  }
+
+  public onAnimationDone(event: AnimationEvent): void {
+    if (event.toState === 'closed') {
+      this.overlayInstance.destroy();
+    }
   }
 
   public close(): void {
-    this.overlayInstance.destroy();
+    this.isOpen = false;
+    this.changeDetector.markForCheck();
     this.context.config.caller.nativeElement.focus();
   }
 
@@ -213,7 +235,8 @@ export class DropdownMenuComponent implements OnInit, AfterContentInit, OnDestro
       this.elementRef,
       this.context.config.caller,
       {
-        alignment: this.context.config.alignment || 'left'
+        horizontalAlignment: this.context.config.horizontalAlignment,
+        verticalAlignment: this.context.config.verticalAlignment
       }
     );
 

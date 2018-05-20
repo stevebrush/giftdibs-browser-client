@@ -1,15 +1,10 @@
 <gd-card>
   <gd-card-header>
     <gd-card-heading>
+      <gd-icon icon="list-alt"></gd-icon>
       {{ wishList.name }}
     </gd-card-heading>
     <gd-card-controls *ngIf="isSessionUser">
-      <button
-        class="gd-button gd-button-link gd-deemphasized"
-        type="button"
-        (click)="openGiftModal()">
-        <gd-icon icon="plus"></gd-icon>
-      </button>
       <button
         class="gd-button gd-button-link gd-deemphasized"
         title="Toggle wish list options"
@@ -22,21 +17,31 @@
     </gd-card-controls>
   </gd-card-header>
   <gd-card-body *ngIf="wishList.gifts">
-    <!-- TODO: MAKE THIS A REPEATER COMPONENT! -->
-    <ul class="gd-wish-list-preview-gifts">
-      <li *ngFor="let gift of wishList.gifts"
+    <gd-repeater>
+      <gd-repeater-item *ngFor="let gift of wishList.gifts"
         class="gd-wish-list-preview-gift"
       >
         {{ gift.name }}
-        <button
-          class="gd-button gd-button-link gd-deemphasized"
-          title="Toggle gift options"
-          type="button"
-          gdDropdownMenuTrigger
-          [menuItems]="[]">
-          <gd-icon icon="ellipsis-v"></gd-icon>
-        </button>
-      </li>
-    </ul>
+        <gd-repeater-controls>
+          <button
+            class="gd-button gd-button-link gd-deemphasized"
+            title="Toggle gift options"
+            type="button"
+            gdDropdownMenuTrigger
+            [menuItems]="getGiftDropdownMenuItems(gift)"
+          >
+            <gd-icon icon="ellipsis-v"></gd-icon>
+          </button>
+        </gd-repeater-controls>
+      </gd-repeater-item>
+    </gd-repeater>
   </gd-card-body>
+  <gd-card-footer *ngIf="isSessionUser">
+    <button
+      class="gd-button gd-button-block gd-button-default"
+      type="button"
+      (click)="openGiftEditModal()">
+      Add gift...
+    </button>
+  </gd-card-footer>
 </gd-card>

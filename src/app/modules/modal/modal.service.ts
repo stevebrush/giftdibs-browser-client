@@ -4,7 +4,6 @@ import {
 } from '@angular/core';
 
 import {
-  OverlayInstance,
   OverlayService
 } from '../overlay';
 
@@ -15,6 +14,10 @@ import {
 import {
   ModalInstance
 } from './modal-instance';
+
+import {
+  ModalWrapperComponent
+} from './modal-wrapper.component';
 
 @Injectable()
 export class ModalService {
@@ -32,18 +35,26 @@ export class ModalService {
 
     const modalInstance = new ModalInstance<T>();
 
-    config.providers.push({
+    const overlayInstance = this.overlayService.attach(
+      ModalWrapperComponent,
+      settings
+    );
+
+    const wrapper = overlayInstance.componentInstance;
+    const componentRef = wrapper.attach(component, [{
       provide: ModalInstance,
       useValue: modalInstance
-    });
+    }]);
 
-    const overlayInstance: OverlayInstance<T> = this.overlayService.attach(component, settings);
-
-    modalInstance.componentInstance = overlayInstance.componentInstance;
-
-    modalInstance.closed.subscribe(() => {
+    wrapper.closed.subscribe(() => {
       overlayInstance.destroy();
     });
+
+    modalInstance.closed.subscribe(() => {
+      wrapper.close();
+    });
+
+    modalInstance.componentInstance = componentRef.instance;
 
     return modalInstance;
   }

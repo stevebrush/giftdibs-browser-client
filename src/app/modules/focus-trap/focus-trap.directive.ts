@@ -61,11 +61,14 @@ export class FocusTrapDirective implements AfterContentInit, OnDestroy {
 
   public ngAfterContentInit(): void {
     if (this.activateOnLoad) {
-      this.activateTrap();
+      // Timeout needed in case outside elements also request focus.
+      this.windowRef.nativeWindow.setTimeout(() => {
+        this.activateTrap();
 
-      // Focus the host element:
-      this.renderer.setAttribute(this.elementRef.nativeElement, 'tabindex', '-1');
-      this.elementRef.nativeElement.focus();
+        // Focus the host element:
+        this.renderer.setAttribute(this.elementRef.nativeElement, 'tabindex', '-1');
+        this.elementRef.nativeElement.focus();
+      });
     }
   }
 

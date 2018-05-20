@@ -48,7 +48,8 @@ export class WishListPrivacySelectorUsersComponent implements OnInit {
     this.createForm();
     this.usersForm.controls.friends.reset(this.context.selected);
 
-    this.friendshipService.getAllByUserId(this.context.user._id)
+    this.friendshipService
+      .getAllByUserId(this.context.user._id)
       .subscribe((friendships: Friendship[]) => {
         const friends: User[] = friendships.map((friendship: Friendship) => {
           if (friendship.user._id === this.context.user._id) {

@@ -1,0 +1,7 @@
+@import '../../../styles/mixins';
+
+.gd-repeater {
+  ::deep gd-repeater-item:first-child .gd-repeater-item {
+    border-top: 0;
+  }
+}

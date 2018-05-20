@@ -3,6 +3,10 @@ import {
 } from '@angular/core';
 
 import {
+  CommonModule
+} from '@angular/common';
+
+import {
   FormsModule,
   ReactiveFormsModule
 } from '@angular/forms';
@@ -31,6 +35,7 @@ import {
     GiftEditComponent
   ],
   imports: [
+    CommonModule,
     FormFieldModule,
     FormsModule,
     ModalModule,

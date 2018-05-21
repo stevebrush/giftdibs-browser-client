@@ -19,3 +19,7 @@
     @include gd_focus_indicator();
   }
 }
+
+textarea.gd-form-control {
+  resize: vertical;
+}

@@ -11,7 +11,8 @@
         type="button"
         gdDropdownMenuTrigger
         [menuItems]="menuItems"
-        #dropdownTrigger>
+        #dropdownTrigger
+      >
         <gd-icon icon="ellipsis-v"></gd-icon>
       </button>
     </gd-card-controls>
@@ -40,8 +41,10 @@
     <button
       class="gd-button gd-button-block gd-button-default"
       type="button"
-      (click)="openGiftEditModal()">
-      Add gift...
+      (click)="openGiftEditModal()"
+      #addGiftButton
+    >
+      Add item...
     </button>
   </gd-card-footer>
 </gd-card>

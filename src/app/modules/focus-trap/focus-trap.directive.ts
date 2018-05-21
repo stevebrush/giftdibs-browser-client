@@ -4,8 +4,7 @@ import {
   ElementRef,
   HostListener,
   Input,
-  OnDestroy,
-  Renderer2
+  OnDestroy
 } from '@angular/core';
 
 import {
@@ -48,14 +47,13 @@ export class FocusTrapDirective implements AfterContentInit, OnDestroy {
     }
   }
 
-  private _tabIndex = -1;
+  private _tabIndex = 0;
   private focusableElements: any[];
   private isActive = false;
   private observer: MutationObserver;
 
   constructor(
     private elementRef: ElementRef,
-    private renderer: Renderer2,
     private windowRef: WindowRefService
   ) { }
 
@@ -66,8 +64,9 @@ export class FocusTrapDirective implements AfterContentInit, OnDestroy {
         this.activateTrap();
 
         // Focus the host element:
-        this.renderer.setAttribute(this.elementRef.nativeElement, 'tabindex', '-1');
-        this.elementRef.nativeElement.focus();
+        // this.renderer.setAttribute(this.elementRef.nativeElement, 'tabindex', '-1');
+        // this.elementRef.nativeElement.focus();
+        this.focusActiveElement();
       });
     }
   }

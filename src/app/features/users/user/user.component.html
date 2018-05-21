@@ -38,27 +38,29 @@
             <div
               [ngClass]="{
                 'gd-user-wish-list-create-form-active': isWishListFormActive
-              }">
+              }"
+            >
               <gd-card>
-                <gd-card-body>
-                  <button
-                    aria-controls="gd-user-wish-list-create-form"
-                    type="button"
-                    class="gd-button gd-button-primary gd-button-block gd-user-wish-list-create-button"
-                    [attr.aria-expanded]="isWishListFormActive"
-                    (click)="onShowWishListButtonClick()"
-                    #showWishListFormButton>
-                    Add a new list...
-                  </button>
+                <button
+                  aria-controls="gd-user-wish-list-create-form"
+                  type="button"
+                  class="gd-button gd-button-primary gd-button-block gd-user-wish-list-create-button"
+                  [attr.aria-expanded]="isWishListFormActive"
+                  (click)="onShowWishListButtonClick()"
+                  #showWishListFormButton
+                >
+                  Create a new list...
+                </button>
+                <gd-card-body *ngIf="isWishListFormActive">
                   <div
                     id="gd-user-wish-list-create-form"
-                    class="gd-user-wish-list-create-form">
-                    <div *ngIf="isWishListFormActive">
-                      <gd-wish-list-create
-                        (cancelled)="onWishListFormCancelled()"
-                        (saved)="onWishListFormSaved($event)">
-                      </gd-wish-list-create>
-                    </div>
+                    class="gd-user-wish-list-create-form"
+                  >
+                    <gd-wish-list-create
+                      (cancelled)="onWishListFormCancelled()"
+                      (saved)="onWishListFormSaved($event)"
+                    >
+                    </gd-wish-list-create>
                   </div>
                 </gd-card-body>
               </gd-card>

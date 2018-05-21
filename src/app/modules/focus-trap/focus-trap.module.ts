@@ -6,7 +6,9 @@ import {
   CommonModule
 } from '@angular/common';
 
-import { FocusTrapDirective } from './focus-trap.directive';
+import {
+  FocusTrapDirective
+} from './focus-trap.directive';
 
 @NgModule({
   imports: [

@@ -76,6 +76,9 @@ export class WishListPreviewComponent implements OnInit {
     }
   ];
 
+  @ViewChild('addGiftButton')
+  private addGiftButton: ElementRef;
+
   @ViewChild('dropdownTrigger')
   private dropdownTrigger: ElementRef;
 
@@ -126,6 +129,10 @@ export class WishListPreviewComponent implements OnInit {
               this.alertService.error(err.error.message);
             }
           );
+      }
+
+      if (!gift) {
+        this.addGiftButton.nativeElement.focus();
       }
     });
   }

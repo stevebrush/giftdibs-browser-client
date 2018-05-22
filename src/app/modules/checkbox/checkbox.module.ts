@@ -12,28 +12,25 @@ import {
 } from '@angular/forms';
 
 import {
-  CheckboxModule
-} from '../checkbox';
+  IconModule
+} from '../icon';
 
 import {
-  HideUntilModule
-} from '../hide-until';
-
-import { ChecklistComponent } from './checklist.component';
+  CheckboxComponent
+} from './checkbox.component';
 
 @NgModule({
   imports: [
-    CheckboxModule,
     CommonModule,
     FormsModule,
-    HideUntilModule,
+    IconModule,
     ReactiveFormsModule
   ],
   declarations: [
-    ChecklistComponent
+    CheckboxComponent
   ],
   exports: [
-    ChecklistComponent
+    CheckboxComponent
   ]
 })
-export class ChecklistModule { }
+export class CheckboxModule { }

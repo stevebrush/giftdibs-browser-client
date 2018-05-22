@@ -23,12 +23,14 @@ import { User } from '../../users';
 import { Friendship } from '../../users/friendship/friendship';
 import { FriendshipService } from '../../users/friendship/friendship.service';
 
-import { WishListPrivacySelectorUsersContext } from './wish-list-privacy-selector-users-context';
+import {
+  WishListPrivacySelectorUsersContext
+} from './privacy-selector-users-context';
 
 @Component({
-  selector: 'gd-wish-list-privacy-selector-users',
-  templateUrl: './wish-list-privacy-selector-users.component.html',
-  styleUrls: ['./wish-list-privacy-selector-users.component.scss'],
+  selector: 'gd-privacy-selector-users',
+  templateUrl: './privacy-selector-users.component.html',
+  styleUrls: ['./privacy-selector-users.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WishListPrivacySelectorUsersComponent implements OnInit {

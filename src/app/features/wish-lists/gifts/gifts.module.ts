@@ -12,6 +12,10 @@ import {
 } from '@angular/forms';
 
 import {
+  CheckboxModule
+} from '../../../modules/checkbox';
+
+import {
   FormFieldModule
 } from '../../../modules/form-field';
 
@@ -35,6 +39,7 @@ import {
     GiftEditComponent
   ],
   imports: [
+    CheckboxModule,
     CommonModule,
     FormFieldModule,
     FormsModule,

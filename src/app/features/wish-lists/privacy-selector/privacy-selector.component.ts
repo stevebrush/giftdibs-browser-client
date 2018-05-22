@@ -32,13 +32,13 @@ import {
 
 import { WishListPrivacy } from '../wish-list-privacy';
 
-import { WishListPrivacySelectorUsersContext } from './wish-list-privacy-selector-users-context';
-import { WishListPrivacySelectorUsersComponent } from './wish-list-privacy-selector-users.component';
+import { WishListPrivacySelectorUsersContext } from './privacy-selector-users-context';
+import { WishListPrivacySelectorUsersComponent } from './privacy-selector-users.component';
 
 @Component({
-  selector: 'gd-wish-list-privacy-selector',
-  templateUrl: './wish-list-privacy-selector.component.html',
-  styleUrls: ['./wish-list-privacy-selector.component.scss'],
+  selector: 'gd-privacy-selector',
+  templateUrl: './privacy-selector.component.html',
+  styleUrls: ['./privacy-selector.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{
     provide: NG_VALUE_ACCESSOR,
@@ -74,8 +74,9 @@ export class WishListPrivacySelectorComponent
 
   @ViewChild('privacyButton')
   private privacyButton: ElementRef;
-  private _value: WishListPrivacy;
   private user: User;
+
+  private _value: WishListPrivacy;
 
   constructor(
     private changeDetector: ChangeDetectorRef,

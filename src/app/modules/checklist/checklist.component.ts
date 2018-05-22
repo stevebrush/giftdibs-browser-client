@@ -11,7 +11,9 @@ import {
   NG_VALUE_ACCESSOR
 } from '@angular/forms';
 
-import { ChecklistChoice } from './checklist-choice';
+import {
+  ChecklistChoice
+} from './checklist-choice';
 
 let nextUniqueId = 0;
 
@@ -53,8 +55,13 @@ export class ChecklistComponent implements ControlValueAccessor {
     private changeDetector: ChangeDetectorRef
   ) { }
 
-  public onCheckboxChange(event: any): void {
-    this.addValue(event.target.value);
+  public onCheckboxChange(choice: ChecklistChoice, checked: boolean): void {
+    console.log('event?', choice, checked);
+    if (checked) {
+      this.addValue(choice.value);
+    } else {
+      this.removeValue(choice.value);
+    }
   }
 
   public isChecked(choice: ChecklistChoice): boolean {
@@ -84,13 +91,17 @@ export class ChecklistComponent implements ControlValueAccessor {
 
   private addValue(value: any): void {
     const valueArray = this.value;
-
     if (valueArray.indexOf(value) === -1) {
       valueArray.push(value);
-    } else {
-      valueArray.splice(valueArray.indexOf(value), 1);
+      this.value = valueArray;
     }
+  }
 
-    this.value = valueArray;
+  private removeValue(value: any): void {
+    const valueArray = this.value;
+    if (valueArray.indexOf(value) > -1) {
+      valueArray.splice(valueArray.indexOf(value), 1);
+      this.value = valueArray;
+    }
   }
 }

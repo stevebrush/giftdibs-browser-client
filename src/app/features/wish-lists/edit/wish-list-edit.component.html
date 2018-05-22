@@ -29,12 +29,13 @@
       </gd-form-field>
 
       <gd-form-field [errors]="errors">
-        <gd-wish-list-privacy-selector
+        <gd-privacy-selector
           formControlName="privacy"
         >
-        </gd-wish-list-privacy-selector>
+        </gd-privacy-selector>
       </gd-form-field>
     </form>
+    <pre>{{wishListForm.value|json}}</pre>
   </gd-modal-body>
   <gd-modal-footer
     (cancelClicked)="onCancelClicked()"

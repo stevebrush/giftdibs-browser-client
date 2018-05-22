@@ -1,0 +1,40 @@
+@import '../../../styles/mixins';
+
+$gd-checkbox-size: #{$gd-line-height}rem;
+
+.gd-checkbox {
+  cursor: pointer;
+  display: inline-flex;
+  white-space: nowrap;
+  align-items: baseline;
+}
+
+.gd-checkbox-checked {
+  .gd-checkbox-control {
+    border-color: $gd-border-color-info;
+    background-color: $gd-background-color-info;
+    border-width: 2px;
+  }
+}
+
+.gd-checkbox-control {
+  width: $gd-checkbox-size;
+  height: $gd-checkbox-size;
+  flex: 1 0 $gd-checkbox-size;
+  margin: auto;
+  margin-right: $gd-spacing-sm;
+  display: inline-flex;
+  position: relative;
+  border: 1px solid $gd-border-color-neutral-light;
+  border-radius: $gd-border-radius-sm;
+  background-color: #fff;
+  color: $gd-text-color;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.gd-checkbox-label {
+  flex: 1 1 auto;
+  width: 100%;
+}

@@ -1,11 +1,11 @@
 @import '../../../styles/mixins';
 
 .gd-user-thumbnail {
-  background-color: $gd-background-color-neutral-light;
+  background-color: $gd-background-color-neutral;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: darken($gd-background-color-neutral-light, 8%);
+  color: $gd-text-color;
   font-weight: $gd-font-weight-light;
   white-space: nowrap;
   user-select: none;

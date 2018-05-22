@@ -106,7 +106,8 @@ export class GiftEditComponent implements OnInit {
     this.giftForm = this.formBuilder.group({
       name: new FormControl(null, [
         Validators.required
-      ])
+      ]),
+      isReceived: new FormControl(false)
     });
   }
 }

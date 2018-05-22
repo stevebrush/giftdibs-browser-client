@@ -2,6 +2,11 @@
   box-sizing: border-box;
 }
 
+html {
+  // Used for rem calculations:
+  font-size: $gd-font-size-default;
+}
+
 body {
   font-size: $gd-font-size-default;
   font-family: $gd-font-family;

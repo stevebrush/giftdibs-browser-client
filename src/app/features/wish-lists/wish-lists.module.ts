@@ -53,8 +53,8 @@ import {
 import { WishListCreateComponent } from './create/wish-list-create.component';
 import { WishListEditComponent } from './edit/wish-list-edit.component';
 import { WishListPreviewComponent } from './preview/wish-list-preview.component';
-import { WishListPrivacySelectorUsersComponent } from './privacy-selector/wish-list-privacy-selector-users.component';
-import { WishListPrivacySelectorComponent } from './privacy-selector/wish-list-privacy-selector.component';
+import { WishListPrivacySelectorUsersComponent } from './privacy-selector/privacy-selector-users.component';
+import { WishListPrivacySelectorComponent } from './privacy-selector/privacy-selector.component';
 import { WishListService } from './wish-list.service';
 
 @NgModule({

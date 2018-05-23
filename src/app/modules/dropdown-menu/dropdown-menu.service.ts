@@ -3,6 +3,11 @@ import {
 } from '@angular/core';
 
 import {
+  AffixHorizontalAlignment,
+  AffixVerticalAlignment
+} from '../affix';
+
+import {
   OverlayService
 } from '../overlay';
 
@@ -18,8 +23,14 @@ export class DropdownMenuService {
   ) { }
 
   public open(config: DropdownMenuConfig): DropdownMenuInstance {
+    const defaults = {
+      horizontalAlignment: AffixHorizontalAlignment.Right,
+      verticalAlignment: AffixVerticalAlignment.Top
+    };
+
+    const settings = Object.assign({}, defaults, config);
     const context = new DropdownMenuContext();
-    context.config = config;
+    context.config = settings;
 
     const overlayInstance = this.overlayService.attach(
       DropdownMenuComponent,

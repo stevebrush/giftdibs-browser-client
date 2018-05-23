@@ -83,7 +83,6 @@ export class GiftEditComponent implements OnInit {
 
     obs.subscribe(
       (result: any) => {
-        this.alertService.success(result.message);
         const giftId = (this.gift) ? this.gift._id : result.data.giftId;
         this.modal.close('save', { giftId });
       },

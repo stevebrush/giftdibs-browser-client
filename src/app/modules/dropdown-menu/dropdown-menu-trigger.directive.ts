@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 
 import {
-  AffixHorizontalAlignment
+  AffixHorizontalAlignment, AffixVerticalAlignment
 } from '../affix';
 
 import { DropdownMenuConfig } from './dropdown-menu-config';
@@ -20,13 +20,10 @@ import { DropdownMenuService } from './dropdown-menu.service';
 })
 export class DropdownMenuTriggerDirective {
   @Input()
-  public set menuHorizontalAlignment(value: AffixHorizontalAlignment) {
-    this._menuHorizontalAlignment = value;
-  }
+  public menuHorizontalAlignment: AffixHorizontalAlignment;
 
-  public get menuHorizontalAlignment(): AffixHorizontalAlignment {
-    return this._menuHorizontalAlignment || 'right';
-  }
+  @Input()
+  public menuVerticalAlignment: AffixVerticalAlignment;
 
   @Input()
   public menuItemTemplate: TemplateRef<any>;
@@ -40,9 +37,9 @@ export class DropdownMenuTriggerDirective {
     return this._menuItems || [];
   }
 
-  private _menuHorizontalAlignment: AffixHorizontalAlignment;
-  private _menuItems: DropdownMenuItem[];
   private menuInstance: DropdownMenuInstance;
+
+  private _menuItems: DropdownMenuItem[];
 
   constructor(
     private dropdownMenuService: DropdownMenuService,
@@ -58,11 +55,18 @@ export class DropdownMenuTriggerDirective {
     }
 
     const config: DropdownMenuConfig = {
-      horizontalAlignment: this.menuHorizontalAlignment,
       caller: this.elementRef,
       items: this.menuItems,
       itemTemplate: this.menuItemTemplate
     };
+
+    if (this.menuHorizontalAlignment) {
+      config.horizontalAlignment = this.menuHorizontalAlignment;
+    }
+
+    if (this.menuVerticalAlignment) {
+      config.verticalAlignment = this.menuVerticalAlignment;
+    }
 
     this.menuInstance = this.dropdownMenuService.open(config);
 

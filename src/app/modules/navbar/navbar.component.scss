@@ -48,13 +48,13 @@
     .gd-button-link {
       &:focus,
       &:hover {
-        color: $gd-text-color;
+        color: $gd-text-color-default;
         text-decoration: none;
       }
 
       &.active {
         cursor: default;
-        color: $gd-text-color;
+        color: $gd-text-color-default;
       }
     }
   }

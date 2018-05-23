@@ -1,3 +1,2 @@
-export * from './affix-horizontal-alignment';
-export * from './affix-vertical-alignment';
+export * from './types';
 export * from './affix.service';

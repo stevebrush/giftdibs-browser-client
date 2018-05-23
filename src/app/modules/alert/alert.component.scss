@@ -16,7 +16,7 @@
   padding: $gd-spacing-padding-squish;
   border-radius: $gd-border-radius-sm;
   color: #fff;
-  background-color: $gd-text-color;
+  background-color: $gd-text-color-default;
   box-shadow: $gd-box-shadow;
   border: 1px solid transparent;
   border-left: 0;
@@ -28,7 +28,6 @@
 .gd-alert-message {
   flex: 1 1 auto;
   padding-right: $gd-spacing;
-  padding-left: $gd-spacing;
 }
 
 .gd-alert-info {

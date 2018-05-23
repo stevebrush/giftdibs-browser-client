@@ -56,7 +56,6 @@ export class ChecklistComponent implements ControlValueAccessor {
   ) { }
 
   public onCheckboxChange(choice: ChecklistChoice, checked: boolean): void {
-    console.log('event?', choice, checked);
     if (checked) {
       this.addValue(choice.value);
     } else {

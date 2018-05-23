@@ -10,7 +10,7 @@ html {
 body {
   font-size: $gd-font-size-default;
   font-family: $gd-font-family;
-  color: $gd-text-color;
+  color: $gd-text-color-default;
   line-height: $gd-line-height;
   background-color: $gd-background-color-neutral-lightest;
   font-weight: $gd-font-weight;
@@ -18,7 +18,7 @@ body {
 
 a {
   font-weight: $gd-font-weight-bold;
-  color: $gd-text-color;
+  color: $gd-text-color-default;
   text-decoration: none;
 
   &:hover {
@@ -72,7 +72,7 @@ strong {
   border: 0;
 }
 
-.gd-deemphasized {
+.gd-text-deemphasized {
   color: $gd-text-color-deemphasized;
 }
 

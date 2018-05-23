@@ -4,7 +4,11 @@ import {
   Renderer2
 } from '@angular/core';
 
-import { AffixConfig } from './affix-config';
+import {
+  AffixConfig,
+  AffixHorizontalAlignment,
+  AffixVerticalAlignment
+} from './types';
 
 @Injectable()
 export class AffixService {
@@ -18,8 +22,8 @@ export class AffixService {
     config?: AffixConfig
   ): void {
     const defaults: AffixConfig = {
-      horizontalAlignment: 'left',
-      verticalAlignment: 'bottom'
+      horizontalAlignment: AffixHorizontalAlignment.Left,
+      verticalAlignment: AffixVerticalAlignment.Top
     };
 
     const settings = Object.assign({}, defaults, config);
@@ -34,7 +38,7 @@ export class AffixService {
       break;
 
       case 'bottom':
-      top = targetRect.top - subjectRect.height;
+      top = targetRect.bottom;
       break;
     }
 

@@ -24,11 +24,14 @@ import {
 } from 'rxjs/operators';
 
 import {
-  AffixService
+  AffixService,
+  AffixVerticalAlignment
 } from '../affix';
 
-import { OverlayInstance } from '../overlay/overlay-instance';
-import { OverlayService } from '../overlay/overlay.service';
+import {
+  OverlayInstance,
+  OverlayService
+} from '../overlay';
 
 import { TypeaheadDomAdapterService } from './typeahead-dom-adapter.service';
 import { TypeaheadResultsContext } from './typeahead-results-context';
@@ -172,7 +175,10 @@ export class TypeaheadComponent implements AfterViewInit, OnDestroy {
     const resultsRef = this.overlayInstance.componentInstance.elementRef;
     this.affixService.affixTo(
       resultsRef,
-      this.searchInput
+      this.searchInput,
+      {
+        verticalAlignment: AffixVerticalAlignment.Bottom
+      }
     );
     this.domAdapter.matchWidth(
       resultsRef,

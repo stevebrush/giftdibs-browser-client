@@ -29,6 +29,7 @@
           class="gd-form-control"
           formControlName="name"
           id="gd-gift-edit-name"
+          (keydown.enter)="submit();$event.preventDefault();"
         >
         </textarea>
       </gd-form-field>

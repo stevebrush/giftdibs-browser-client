@@ -1,11 +1,12 @@
 <gd-card>
   <gd-card-header>
     <gd-card-heading>
+      <gd-icon icon="list-alt"></gd-icon>
       {{ wishList.name }}
     </gd-card-heading>
     <gd-card-controls *ngIf="isSessionUser">
       <button
-        class="gd-button gd-button-link gd-deemphasized"
+        class="gd-button gd-button-link gd-text-deemphasized"
         title="Toggle wish list options"
         type="button"
         gdDropdownMenuTrigger
@@ -21,10 +22,15 @@
       <gd-repeater-item *ngFor="let gift of wishList.gifts"
         class="gd-wish-list-preview-gift"
       >
-        {{ gift.name }}
+        <span [ngClass]="{
+          'gd-wish-list-preview-gift-received': gift.isReceived,
+          'gd-text-deemphasized': gift.isReceived
+        }">
+          {{ gift.name }}
+        </span>
         <gd-repeater-controls>
           <button
-            class="gd-button gd-button-link gd-deemphasized"
+            class="gd-button gd-button-link gd-text-deemphasized"
             title="Toggle gift options"
             type="button"
             gdDropdownMenuTrigger

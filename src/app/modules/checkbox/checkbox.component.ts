@@ -74,13 +74,28 @@ export class CheckboxComponent
   ) { }
 
   public ngOnInit(): void {
-    fromEvent(this.elementRef.nativeElement, 'click')
+    const element = this.elementRef.nativeElement;
+
+    fromEvent(element, 'click')
       .pipe(
         takeUntil(this.ngUnsubscribe)
       )
       .subscribe(() => {
         this.checked = !this.checked;
         this.changeDetector.markForCheck();
+      });
+
+    fromEvent(element, 'keydown')
+      .pipe(
+        takeUntil(this.ngUnsubscribe)
+      )
+      .subscribe((event: any) => {
+        // Spacebar
+        if (event.keyCode === 32) {
+          this.checked = !this.checked;
+          this.changeDetector.markForCheck();
+          event.preventDefault();
+        }
       });
   }
 
@@ -90,7 +105,6 @@ export class CheckboxComponent
   }
 
   public writeValue(value: boolean): void {
-    console.log('writeValue:', value);
     this.checked = !!value;
     this.changeDetector.markForCheck();
   }

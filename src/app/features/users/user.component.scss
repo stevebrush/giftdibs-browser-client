@@ -1,0 +1,37 @@
+@import '../../../styles/mixins';
+
+.gd-user-header {
+  margin-bottom: $gd-spacing-lg;
+}
+
+.gd-user-wish-list-create-form {
+  display: none;
+}
+
+.gd-user-wish-list-create-form-active {
+  .gd-user-wish-list-create-button {
+    display: none;
+  }
+
+  .gd-user-wish-list-create-form {
+    display: block;
+  }
+}
+
+$gd-board-item-size: 400px;
+
+.gd-board {
+  display: flex;
+  padding: $gd-spacing-lg $gd-spacing-md $gd-spacing-xl;
+  overflow-x: auto;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-top: 1px solid rgba(0, 0, 0, 0.075);
+  border-bottom: 1px solid #fff;
+  margin-bottom: $gd-spacing-xl;
+}
+
+.gd-board-item {
+  width: $gd-board-item-size;
+  flex: 0 0 $gd-board-item-size;
+  padding: 0 $gd-spacing-md;
+}

@@ -27,6 +27,10 @@ import {
 } from '../../../modules/media';
 
 import {
+  RepeaterModule
+} from '../../../modules/repeater';
+
+import {
   UserThumbnailModule
 } from '../../../modules/user-thumbnail';
 
@@ -41,6 +45,7 @@ import { FriendshipsComponent } from './friendships.component';
     GridModule,
     HideUntilModule,
     MediaModule,
+    RepeaterModule,
     RouterModule,
     UserThumbnailModule
   ],

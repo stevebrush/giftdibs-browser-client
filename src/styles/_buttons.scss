@@ -24,14 +24,11 @@
   }
 }
 
-.gd-button + .gd-button {
-  margin-left: $gd-spacing-sm;
-}
-
 .gd-button-block {
   width: 100%;
   display: block;
   text-align: left;
+  margin-bottom: $gd-spacing-sm;
 }
 
 .gd-button-default {

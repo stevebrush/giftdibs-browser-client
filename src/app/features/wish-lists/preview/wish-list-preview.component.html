@@ -19,16 +19,19 @@
   </gd-card-header>
   <gd-card-body *ngIf="wishList.gifts">
     <gd-repeater>
-      <gd-repeater-item *ngFor="let gift of wishList.gifts"
-        class="gd-wish-list-preview-gift"
-      >
-        <span [ngClass]="{
-          'gd-wish-list-preview-gift-received': gift.isReceived,
-          'gd-text-deemphasized': gift.isReceived
-        }">
+      <gd-repeater-item *ngFor="let gift of wishList.gifts">
+        <a
+          [ngClass]="{
+            'gd-wish-list-preview-gift-received': gift.isReceived,
+            'gd-text-deemphasized': gift.isReceived
+          }"
+          [routerLink]="[]"
+          [queryParams]="{ giftId: gift._id }"
+          (click)="openGiftPreviewModal(gift, $event)"
+        >
           {{ gift.name }}
-        </span>
-        <gd-repeater-controls>
+        </a>
+        <gd-repeater-controls *ngIf="isSessionUser">
           <button
             class="gd-button gd-button-link gd-text-deemphasized"
             title="Toggle gift options"

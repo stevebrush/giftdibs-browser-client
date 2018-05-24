@@ -1,39 +1,39 @@
 <div class="gd-friendships">
   <gd-row>
-    <gd-column screenSmall="4">
+    <gd-column screenSmall="3">
       <gd-card [gdHideUntil]="following">
         <gd-card-header>
           <gd-card-heading>
             {{ following?.length }} following
           </gd-card-heading>
         </gd-card-header>
-        <ul class="gd-friendships-list">
-          <li
-            *ngFor="let friend of following"
-            class="gd-friendships-list-item">
-            <ng-container
-              *ngTemplateOutlet="friendshipTemplate; context: { friend: friend }">
-            </ng-container>
-          </li>
-        </ul>
+        <gd-card-body>
+          <gd-repeater>
+            <gd-repeater-item *ngFor="let friend of following">
+              <ng-container
+                *ngTemplateOutlet="friendshipTemplate; context: { friend: friend }">
+              </ng-container>
+            </gd-repeater-item>
+          </gd-repeater>
+        </gd-card-body>
       </gd-card>
     </gd-column>
-    <gd-column screenSmall="4">
+    <gd-column screenSmall="3">
       <gd-card [gdHideUntil]="followers">
         <gd-card-header>
           <gd-card-heading>
             {{ followers?.length }} followers
           </gd-card-heading>
         </gd-card-header>
-        <ul class="gd-friendships-list">
-          <li
-            *ngFor="let friend of followers"
-            class="gd-friendships-list-item">
-            <ng-container
-              *ngTemplateOutlet="friendshipTemplate; context: { friend: friend }">
-            </ng-container>
-          </li>
-        </ul>
+        <gd-card-body>
+          <gd-repeater>
+            <gd-repeater-item *ngFor="let friend of followers">
+              <ng-container
+                *ngTemplateOutlet="friendshipTemplate; context: { friend: friend }">
+              </ng-container>
+            </gd-repeater-item>
+          </gd-repeater>
+        </gd-card-body>
       </gd-card>
     </gd-column>
   </gd-row>

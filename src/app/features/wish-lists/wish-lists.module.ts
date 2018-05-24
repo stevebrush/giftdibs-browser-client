@@ -11,6 +11,10 @@ import {
 } from '@angular/forms';
 
 import {
+  RouterModule
+} from '@angular/router';
+
+import {
   CardModule
 } from '../../modules/card';
 
@@ -70,7 +74,8 @@ import { WishListService } from './wish-list.service';
     IconModule,
     ModalModule,
     ReactiveFormsModule,
-    RepeaterModule
+    RepeaterModule,
+    RouterModule
   ],
   exports: [
     WishListCreateComponent,

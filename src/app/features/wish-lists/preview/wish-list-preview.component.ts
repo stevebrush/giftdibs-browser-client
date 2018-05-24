@@ -38,6 +38,11 @@ import { WishList } from '../wish-list';
 import { WishListService } from '../wish-list.service';
 
 import {
+  GiftDetailComponent,
+  GiftDetailContext
+} from '../gifts/detail';
+
+import {
   GiftEditComponent,
   GiftEditContext
 } from '../gifts/edit';
@@ -137,6 +142,48 @@ export class WishListPreviewComponent implements OnInit {
     });
   }
 
+  public openGiftPreviewModal(gift: Gift, event: any): void {
+    const context = new GiftDetailContext(gift, this.wishList._id);
+
+    const modalInstance = this.modalService.open(GiftDetailComponent, {
+      providers: [{
+        provide: GiftDetailContext,
+        useValue: context
+      }]
+    });
+
+    modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
+      console.log('modal closed!');
+      // if (args.reason === 'save') {
+      //   this.giftService
+      //     .getById(args.data.giftId)
+      //     .subscribe(
+      //       (newGift: Gift) => {
+      //         if (gift) {
+      //           this.wishList.gifts[this.wishList.gifts.indexOf(gift)] = newGift;
+      //           this.changeDetector.markForCheck();
+      //           return;
+      //         }
+
+      //         if (!this.wishList.gifts) {
+      //           this.wishList.gifts = [];
+      //         }
+
+      //         this.wishList.gifts.push(newGift);
+      //         this.changeDetector.markForCheck();
+      //       },
+      //       (err: any) => {
+      //         this.alertService.error(err.error.message);
+      //       }
+      //     );
+      // }
+
+      // if (!gift) {
+      //   this.addGiftButton.nativeElement.focus();
+      // }
+    });
+  }
+
   public getGiftDropdownMenuItems(gift: Gift): DropdownMenuItem[] {
     return [
       {
@@ -197,7 +244,6 @@ export class WishListPreviewComponent implements OnInit {
           .remove(this.wishList._id)
           .subscribe(
             (data: any) => {
-              this.alertService.success(data.message);
               this.removed.emit();
               this.removed.complete();
             },

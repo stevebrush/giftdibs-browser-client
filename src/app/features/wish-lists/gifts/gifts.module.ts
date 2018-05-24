@@ -20,8 +20,20 @@ import {
 } from '../../../modules/form-field';
 
 import {
+  GridModule
+} from '../../../modules/grid';
+
+import {
+  IconModule
+} from '../../../modules/icon';
+
+import {
   ModalModule
 } from '../../../modules/modal';
+
+import {
+  GiftDetailComponent
+} from './detail';
 
 import {
   GiftEditComponent
@@ -33,9 +45,11 @@ import {
 
 @NgModule({
   declarations: [
+    GiftDetailComponent,
     GiftEditComponent
   ],
   entryComponents: [
+    GiftDetailComponent,
     GiftEditComponent
   ],
   imports: [
@@ -43,8 +57,10 @@ import {
     CommonModule,
     FormFieldModule,
     FormsModule,
+    IconModule,
     ModalModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    GridModule
   ],
   providers: [
     GiftService

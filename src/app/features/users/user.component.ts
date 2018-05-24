@@ -25,17 +25,17 @@ import {
 
 import {
   AlertService
-} from '../../../modules/alert';
+} from '../../modules/alert';
 
 import {
   SessionService
-} from '../../../modules/session';
+} from '../../modules/session';
 
-import { WishList } from '../../wish-lists/wish-list';
-import { WishListService } from '../../wish-lists/wish-list.service';
+import { WishList } from '../wish-lists/wish-list';
+import { WishListService } from '../wish-lists/wish-list.service';
 
-import { User } from '../user';
-import { UserService } from '../user.service';
+import { User } from './user';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'gd-user',

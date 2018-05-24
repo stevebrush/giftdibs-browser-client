@@ -1,0 +1,31 @@
+<gd-modal>
+  <gd-modal-header>
+    <gd-modal-heading>
+      {{ gift.name }}
+    </gd-modal-heading>
+  </gd-modal-header>
+  <gd-modal-body>
+    <gd-row>
+      <gd-column screenSmall="8">
+        Gift info here.
+      </gd-column>
+      <gd-column screenSmall="4">
+        <button
+          class="gd-button gd-button-primary gd-button-block"
+          type="button"
+        >
+          <gd-icon icon="hand-paper"></gd-icon>
+          Dib this
+        </button>
+        <button
+          class="gd-button gd-button-default gd-button-block"
+          type="button"
+          (click)="close()"
+        >
+          <gd-icon icon="times"></gd-icon>
+          Close
+        </button>
+      </gd-column>
+    </gd-row>
+  </gd-modal-body>
+</gd-modal>

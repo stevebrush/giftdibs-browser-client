@@ -21,7 +21,7 @@ export class ModalInstance<T> {
   private _closed = new EventEmitter<ModalClosedEventArgs>();
 
   public close(
-    reason: ModalClosedEventReason,
+    reason: ModalClosedEventReason = 'cancel',
     data?: any
   ): void {
     this._closed.emit({

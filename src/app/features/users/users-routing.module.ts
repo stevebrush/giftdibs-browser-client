@@ -7,7 +7,7 @@ import {
   Routes
 } from '@angular/router';
 
-import { UserComponent } from './user/user.component';
+import { UserComponent } from './user.component';
 import { UsersComponent } from './users.component';
 
 const routes: Routes = [

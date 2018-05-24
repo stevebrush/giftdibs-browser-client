@@ -29,8 +29,9 @@ import {
 import { WishListsModule } from '../wish-lists/wish-lists.module';
 
 import { FriendshipModule } from './friendship/friendship.module';
+
+import { UserComponent } from './user.component';
 import { UserService } from './user.service';
-import { UserComponent } from './user/user.component';
 import { UsersRoutingModule } from './users-routing.module';
 import { UsersComponent } from './users.component';
 

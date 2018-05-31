@@ -17,6 +17,7 @@ import { OverlayComponent } from './overlay.component';
 @Injectable()
 export class OverlayService implements OnDestroy {
   private host: ComponentRef<OverlayComponent>;
+  private instances: OverlayInstance<any>[] = [];
 
   constructor(
     private adapter: OverlayDomAdapterService,
@@ -29,9 +30,24 @@ export class OverlayService implements OnDestroy {
     this.removeHostComponent();
   }
 
-  public attach<T>(component: Type<T>, config?: OverlayConfig): OverlayInstance<T> {
+  public attach<T>(
+    component: Type<T>,
+    config?: OverlayConfig
+  ): OverlayInstance<T> {
     this.ensureHostExists();
-    return this.host.instance.attach(component, config);
+
+    const instance = this.host.instance.attach(component, config);
+
+    instance.destroyed.subscribe(() => {
+      this.instances.splice(this.instances.indexOf(instance), 1);
+      if (this.instances.length === 0) {
+        this.removeHostComponent();
+      }
+    });
+
+    this.instances.push(instance);
+
+    return instance;
   }
 
   private createHostComponent(): ComponentRef<OverlayComponent> {

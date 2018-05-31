@@ -24,9 +24,7 @@ $gd-board-item-size: 400px;
   display: flex;
   padding: $gd-spacing-lg $gd-spacing-md $gd-spacing-xl;
   overflow-x: auto;
-  background-color: rgba(0, 0, 0, 0.05);
-  border-top: 1px solid rgba(0, 0, 0, 0.075);
-  border-bottom: 1px solid #fff;
+  background-color: rgba(0, 0, 0, 0.5);
   margin-bottom: $gd-spacing-xl;
 }
 

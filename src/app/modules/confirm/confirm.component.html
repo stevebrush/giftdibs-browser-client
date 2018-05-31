@@ -3,7 +3,9 @@
   role="alertdialog"
   [attr.aria-label]="message"
   gdFocusTrap
-  [activateOnLoad]="true">
+  [activateOnLoad]="true"
+  [@gdAnimationEmerge]="animationState"
+  (@gdAnimationEmerge.done)="onAnimationDone($event)">
 
   <p class="gd-confirm-message">
     {{ message }}

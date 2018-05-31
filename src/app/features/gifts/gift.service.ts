@@ -17,7 +17,7 @@ import {
 
 import {
   environment
-} from '../../../../environments/environment';
+} from '../../../environments/environment';
 
 import {
   Gift
@@ -31,7 +31,10 @@ export class GiftService {
     private http: HttpClient
   ) { }
 
-  public create(wishListId: string, formData: Gift): Observable<any> {
+  public create(
+    wishListId: string,
+    formData: Gift
+  ): Observable<any> {
     const reqBody: any = formData;
     reqBody.wishListId = wishListId;
     return this.http.post(`${this.resourceUrl}`, reqBody);

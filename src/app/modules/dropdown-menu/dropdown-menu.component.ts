@@ -125,7 +125,6 @@ export class DropdownMenuComponent implements OnInit, AfterContentInit, OnDestro
           takeUntil(this.ngUnsubscribe)
         )
         .subscribe(() => {
-          console.log('clicked!');
           this.close();
         });
     });

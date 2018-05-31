@@ -11,7 +11,7 @@
   </gd-modal-header>
   <gd-modal-body>
     <form
-      aria-label="Edit gift"
+      [attr.aria-label]="(gift) ? 'Edit gift' : 'New gift'"
       class="gd-form"
       novalidate
       [formGroup]="giftForm"
@@ -32,6 +32,21 @@
           (keydown.enter)="submit();$event.preventDefault();"
         >
         </textarea>
+      </gd-form-field>
+      <gd-form-field [errors]="errors">
+        <label
+          class="gd-control-label"
+          for="gd-gift-edit-quantity"
+        >
+          Quantity
+        </label>
+        <input
+          autocomplete="off"
+          class="gd-form-control"
+          formControlName="quantity"
+          id="gd-gift-edit-quantity"
+          type="number"
+        >
       </gd-form-field>
       <gd-form-field>
         <gd-checkbox

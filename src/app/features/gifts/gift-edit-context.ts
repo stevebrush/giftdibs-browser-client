@@ -4,7 +4,7 @@ import {
 
 import {
   Gift
-} from '../gift';
+} from './gift';
 
 @Injectable()
 export class GiftEditContext {

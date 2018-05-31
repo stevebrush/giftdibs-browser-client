@@ -7,7 +7,9 @@ import {
   HttpHeaders
 } from '@angular/common/http';
 
-import { environment } from '../environments/environment';
+import {
+  environment
+} from '../environments/environment';
 
 import {
   SessionService
@@ -24,7 +26,9 @@ export class AppStartupService {
 
   public load(): Promise<any> {
     const token = this.sessionService.token;
-    const headers = new HttpHeaders({ 'Authorization': `JWT ${token}` });
+    const headers = new HttpHeaders({
+      'Authorization': `JWT ${token}`
+    });
 
     return this.http
       .post(`${this.resourceUrl}/refresh-token`, {}, { headers })

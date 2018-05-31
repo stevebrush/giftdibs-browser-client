@@ -20,6 +20,7 @@ import {
 
 import {
   mergeMap,
+  // take,
   takeUntil
 } from 'rxjs/operators';
 
@@ -27,15 +28,30 @@ import {
   AlertService
 } from '../../modules/alert';
 
+// import {
+//   ModalClosedEventArgs,
+//   ModalService
+// } from '../../modules/modal';
+
 import {
   SessionService
 } from '../../modules/session';
+
+// import {
+//   WindowRefService
+// } from '../../modules/window';
+
+// import {
+//   GiftDetailComponent,
+//   GiftDetailContext
+// } from '../gifts/detail';
 
 import { WishList } from '../wish-lists/wish-list';
 import { WishListService } from '../wish-lists/wish-list.service';
 
 import { User } from './user';
 import { UserService } from './user.service';
+// import { Gift } from '../gifts';
 
 @Component({
   selector: 'gd-user',
@@ -44,28 +60,31 @@ import { UserService } from './user.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserComponent implements OnInit, OnDestroy {
-  public isWishListFormActive = false;
   public isLoading = true;
   public isSessionUser = false;
+  public isWishListFormActive = false;
   public user: User;
   public wishLists: WishList[];
 
   @ViewChild('showWishListFormButton')
   private showWishListFormButton: ElementRef;
+
   private ngUnsubscribe = new Subject();
 
   constructor(
+    private activatedRoute: ActivatedRoute,
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
-    private route: ActivatedRoute,
+    // private modalService: ModalService,
     private router: Router,
     private sessionService: SessionService,
     private userService: UserService,
+    // private windowRef: WindowRefService,
     private wishListService: WishListService
   ) { }
 
   public ngOnInit(): void {
-    this.route.params
+    this.activatedRoute.params
       .pipe(
         mergeMap((params: Params) => {
           this.isLoading = true;
@@ -92,6 +111,20 @@ export class UserComponent implements OnInit, OnDestroy {
           this.router.navigate(['/users']);
         }
       );
+
+    // Show gift detail?
+    // this.activatedRoute.queryParams
+    //   .pipe(
+    //     takeUntil(this.ngUnsubscribe)
+    //   )
+    //   .subscribe((params: Params) => {
+    //     const giftId = params.giftId;
+    //     if (giftId) {
+    //       this.windowRef.nativeWindow.setTimeout(() => {
+    //         this.openGiftDetailModal(giftId);
+    //       });
+    //     }
+    //   });
   }
 
   public ngOnDestroy(): void {
@@ -124,4 +157,40 @@ export class UserComponent implements OnInit, OnDestroy {
       return (wishList._id !== wishListId);
     });
   }
+
+  // public openGiftDetailModal(giftId: string): void {
+  //   const context = new GiftDetailContext(giftId);
+
+  //   const modalInstance = this.modalService.open(GiftDetailComponent, {
+  //     providers: [{
+  //       provide: GiftDetailContext,
+  //       useValue: context
+  //     }]
+  //   });
+
+  //   modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
+  //     // Update the gift in the wish list preview.
+  //     if (args.reason === 'save') {
+  //       const updatedGift = args.data.gift;
+
+  //       this.wishLists.forEach((wishList: WishList, i: number) => {
+  //         if (wishList._id === updatedGift.wishListId) {
+  //           wishList.gifts.forEach((gift: Gift, j: number) => {
+  //             if (gift._id === updatedGift._id) {
+  //               this.wishLists[i].gifts[j] = updatedGift;
+  //             }
+  //           });
+  //         }
+  //       });
+
+  //       this.changeDetector.markForCheck();
+  //     }
+
+  //     // Remove giftId from URL.
+  //     this.router.navigate(['.'], {
+  //       relativeTo: this.activatedRoute,
+  //       queryParams: {}
+  //     });
+  //   });
+  // }
 }

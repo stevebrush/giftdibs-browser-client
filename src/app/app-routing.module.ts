@@ -32,6 +32,11 @@ const appRoutes: Routes = [
     canLoad: [AuthGuard]
   },
   {
+    path: 'wish-lists',
+    loadChildren: 'app/features/wish-lists/wish-lists.module#WishListsModule',
+    canLoad: [AuthGuard]
+  },
+  {
     path: 'dibs',
     loadChildren: 'app/features/dibs/dibs.module#DibsModule',
     canLoad: [AuthGuard]

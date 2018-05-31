@@ -76,6 +76,10 @@ strong {
   color: $gd-text-color-deemphasized;
 }
 
+.gd-text-strikethrough {
+  text-decoration: line-through;
+}
+
 .gd-circle {
   display: block;
   border-radius: 10rem;

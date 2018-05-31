@@ -1,3 +1,7 @@
+import {
+  ConfirmAnswerType
+} from './confirm-answer-type';
+
 export interface ConfirmAnswer {
-  type: 'okay' | 'cancel';
+  type: ConfirmAnswerType;
 }

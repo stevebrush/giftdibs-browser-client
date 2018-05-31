@@ -1,12 +1,14 @@
 import {
+  Gift
+} from '../gifts';
+
+import {
   User
 } from '../users';
 
 import {
-  Gift
-} from './gifts';
-
-import { WishListPrivacy } from './wish-list-privacy';
+  WishListPrivacy
+} from './wish-list-privacy';
 
 export interface WishList {
   _id?: string;

@@ -13,31 +13,35 @@ import {
 
 import {
   CheckboxModule
-} from '../../../modules/checkbox';
+} from '../../modules/checkbox';
 
 import {
   FormFieldModule
-} from '../../../modules/form-field';
+} from '../../modules/form-field';
 
 import {
   GridModule
-} from '../../../modules/grid';
+} from '../../modules/grid';
 
 import {
   IconModule
-} from '../../../modules/icon';
+} from '../../modules/icon';
 
 import {
   ModalModule
-} from '../../../modules/modal';
+} from '../../modules/modal';
+
+import {
+  DibsModule
+} from '../dibs';
 
 import {
   GiftDetailComponent
-} from './detail';
+} from './gift-detail.component';
 
 import {
   GiftEditComponent
-} from './edit';
+} from './gift-edit.component';
 
 import {
   GiftService
@@ -55,6 +59,7 @@ import {
   imports: [
     CheckboxModule,
     CommonModule,
+    DibsModule,
     FormFieldModule,
     FormsModule,
     IconModule,

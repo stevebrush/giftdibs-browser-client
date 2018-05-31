@@ -15,22 +15,35 @@ import {
   AlertService
 } from '../alert';
 
-import { SessionService } from './session.service';
+import {
+  WindowRefService
+} from '../window';
+
+import {
+  SessionService
+} from './session.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanLoad {
   constructor(
     private alertService: AlertService,
     private router: Router,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private windowRef: WindowRefService
   ) { }
 
-  public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+  public canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): boolean {
     return this.validateOrRedirect(state.url);
   }
 
+  // Using native Window pathname until Angular provides query params in route:
+  // https://github.com/angular/angular/issues/12411
   public canLoad(route: Route): boolean {
-    return this.validateOrRedirect('/' + route.path);
+    const url = this.windowRef.nativeWindow.location.pathname;
+    return this.validateOrRedirect(url);
   }
 
   private validateOrRedirect(redirectUrl: string): boolean {

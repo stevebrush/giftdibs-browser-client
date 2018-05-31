@@ -1,0 +1,50 @@
+<gd-modal *ngIf="gift">
+  <gd-modal-header>
+    <gd-modal-heading>
+      {{ gift.name }}
+    </gd-modal-heading>
+  </gd-modal-header>
+  <gd-modal-body>
+    <gd-row>
+      <gd-column screenSmall="8">
+        <gd-dib-controls
+          [gift]="gift"
+          (change)="onDibChange($event)"
+        >
+        </gd-dib-controls>
+        <pre>
+{{ gift | json }}
+        </pre>
+      </gd-column>
+      <gd-column screenSmall="4">
+        <div class="gd-button-container">
+          <button *ngIf="isSessionUser && !gift.isReceived"
+            class="gd-button gd-button-primary gd-button-block"
+            type="button"
+            [disabled]="isLoading"
+            (click)="markReceived()"
+          >
+            <gd-icon icon="check"></gd-icon>
+            Mark received
+          </button>
+
+          <div *ngIf="isSessionUser && gift.isReceived"
+            class="gd-button gd-button-primary gd-button-block gd-button-disabled"
+          >
+            <gd-icon icon="check"></gd-icon>
+            Received!
+          </div>
+
+          <button
+            class="gd-button gd-button-default gd-button-block"
+            type="button"
+            (click)="close()"
+          >
+            <gd-icon icon="times"></gd-icon>
+            Close
+          </button>
+        </div>
+      </gd-column>
+    </gd-row>
+  </gd-modal-body>
+</gd-modal>

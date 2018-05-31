@@ -14,19 +14,19 @@ import {
 
 import {
   AlertService
-} from '../../../../modules/alert';
+} from '../../modules/alert';
 
 import {
   ModalInstance
-} from '../../../../modules/modal';
+} from '../../modules/modal';
 
 import {
   Gift
-} from '../gift';
+} from './gift';
 
 import {
   GiftService
-} from '../gift.service';
+} from './gift.service';
 
 import {
   GiftEditContext
@@ -103,10 +103,11 @@ export class GiftEditComponent implements OnInit {
 
   private createForm(): void {
     this.giftForm = this.formBuilder.group({
+      isReceived: new FormControl(false),
       name: new FormControl(null, [
         Validators.required
       ]),
-      isReceived: new FormControl(false)
+      quantity: 1
     });
   }
 }

@@ -52,14 +52,19 @@ import {
 
 import {
   GiftsModule
-} from './gifts';
+} from '../gifts';
 
 import { WishListCreateComponent } from './create/wish-list-create.component';
+
 import { WishListEditComponent } from './edit/wish-list-edit.component';
+
 import { WishListPreviewComponent } from './preview/wish-list-preview.component';
 import { WishListPrivacySelectorUsersComponent } from './privacy-selector/privacy-selector-users.component';
 import { WishListPrivacySelectorComponent } from './privacy-selector/privacy-selector.component';
+
+import { WishListComponent } from './wish-list.component';
 import { WishListService } from './wish-list.service';
+import { WishListsRoutingModule } from './wish-lists-routing.module';
 
 @NgModule({
   imports: [
@@ -75,7 +80,8 @@ import { WishListService } from './wish-list.service';
     ModalModule,
     ReactiveFormsModule,
     RepeaterModule,
-    RouterModule
+    RouterModule,
+    WishListsRoutingModule
   ],
   exports: [
     WishListCreateComponent,
@@ -87,7 +93,8 @@ import { WishListService } from './wish-list.service';
     WishListPreviewComponent,
     WishListEditComponent,
     WishListPrivacySelectorComponent,
-    WishListPrivacySelectorUsersComponent
+    WishListPrivacySelectorUsersComponent,
+    WishListComponent
   ],
   providers: [
     WishListService

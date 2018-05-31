@@ -15,9 +15,13 @@ import {
   share
 } from 'rxjs/operators';
 
-import { environment } from '../../../environments/environment';
+import {
+  environment
+} from '../../../environments/environment';
 
-import { WishList } from './wish-list';
+import {
+  WishList
+} from './wish-list';
 
 @Injectable()
 export class WishListService {

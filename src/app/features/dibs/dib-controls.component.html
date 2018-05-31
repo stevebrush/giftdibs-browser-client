@@ -1,0 +1,101 @@
+<div *ngIf="!isSessionUser"
+  class="gd-dib-controls"
+>
+  <p *ngIf="gift.isReceived else controlsTemplate">
+    This gift was delivered by...
+  </p>
+
+  <ng-template #controlsTemplate>
+    <p>
+      {{ numRemaining }} available
+    </p>
+
+    <gd-repeater>
+      <ng-template ngFor let-dib [ngForOf]="gift.dibs">
+        <gd-repeater-item *ngIf="isDibOwnedBySessionUser(dib)">
+          You
+          <span *ngIf="dib.dateDelivered">
+            delivered ({{ dib.quantity }}) on {{ dib.dateDelivered | date }}
+          </span>
+          <span *ngIf="!dib.dateDelivered">
+            dibbed ({{ dib.quantity }}) on {{ dib.dateUpdated | date }}
+          </span>
+          <gd-repeater-controls>
+            <button
+              class="gd-button gd-button-primary"
+              type="button"
+              [disabled]="isLoading"
+              (click)="openDibModal(dib)"
+            >
+              Edit
+            </button>
+            <button
+              class="gd-button gd-button-default"
+              type="button"
+              [disabled]="isLoading"
+              (click)="removeDib(dib)"
+            >
+              Remove
+            </button>
+          </gd-repeater-controls>
+        </gd-repeater-item>
+        <gd-repeater-item *ngIf="!isDibOwnedBySessionUser(dib)">
+          <span>{{ dib.user.firstName }} {{ dib.user.lastName }}</span>
+          <span *ngIf="dib.dateDelivered">
+            delivered ({{ dib.quantity }}) on {{ dib.dateDelivered | date }}
+          </span>
+          <span *ngIf="!dib.dateDelivered">
+            dibbed ({{ dib.quantity }}) on {{ dib.dateUpdated | date }}
+          </span>
+        </gd-repeater-item>
+      </ng-template>
+    </gd-repeater>
+
+    <!-- <div *ngFor="let dib of gift.dibs">
+      <div *ngIf="isDibOwnedBySessionUser(dib)">
+        You
+        <span *ngIf="dib.dateDelivered">
+          delivered ({{ dib.quantity }}) on {{ dib.dateDelivered | date }}
+        </span>
+        <span *ngIf="!dib.dateDelivered">
+          dibbed ({{ dib.quantity }}) on {{ dib.dateUpdated | date }}
+        </span>
+        <button
+          class="gd-button gd-button-primary"
+          type="button"
+          (click)="openDibModal(dib)">
+          Edit
+        </button>
+        <button
+          class="gd-button gd-button-default"
+          type="button"
+          [disabled]="isLoading"
+          (click)="removeDib(dib)">
+          Remove
+        </button>
+      </div>
+
+      <div *ngIf="!isDibOwnedBySessionUser(dib)">
+        <span>{{ dib.user.firstName }} {{ dib.user.lastName }}</span>
+        <span *ngIf="dib.dateDelivered">
+          delivered ({{ dib.quantity }}) on {{ dib.dateDelivered | date }}
+        </span>
+        <span *ngIf="!dib.dateDelivered">
+          dibbed ({{ dib.quantity }}) on {{ dib.dateUpdated | date }}
+        </span>
+      </div>
+    </div> -->
+
+    <div *ngIf="!isDibbedBySessionUser">
+      <button
+        class="gd-button gd-button-primary"
+        type="button"
+        [disabled]="isLoading"
+        (click)="openDibModal()"
+      >
+        <gd-icon icon="hand-paper"></gd-icon>
+        Dib this
+      </button>
+    </div>
+  </ng-template>
+</div>

@@ -27,10 +27,12 @@
           }"
           [routerLink]="[]"
           [queryParams]="{ giftId: gift._id }"
-          (click)="openGiftPreviewModal(gift, $event)"
-        >
-          {{ gift.name }}
+        >{{ gift.name }}
+          <ng-template [ngIf]="gift.quantity > 1">
+            ({{ gift.quantity }})
+          </ng-template>
         </a>
+        <gd-icon *ngIf="gift.dibs && gift.dibs.length" icon="check"></gd-icon>
         <gd-repeater-controls *ngIf="isSessionUser">
           <button
             class="gd-button gd-button-link gd-text-deemphasized"

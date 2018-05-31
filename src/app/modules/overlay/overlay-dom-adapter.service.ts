@@ -11,6 +11,7 @@ import {
 
 @Injectable()
 export class OverlayDomAdapterService {
+  private hostElement: any;
   private renderer: Renderer2;
 
   constructor(
@@ -22,12 +23,12 @@ export class OverlayDomAdapterService {
 
   public appendToBody(element: any): void {
     const body = this.windowRef.nativeWindow.document.body;
+    this.hostElement = element;
     this.renderer.appendChild(body, element);
   }
 
   public removeHostElement(): void {
     const documentObj = this.windowRef.nativeWindow.document;
-    const hostElement = document.querySelector('gd-overlay');
-    this.renderer.removeChild(documentObj.body, hostElement);
+    this.renderer.removeChild(documentObj.body, this.hostElement);
   }
 }

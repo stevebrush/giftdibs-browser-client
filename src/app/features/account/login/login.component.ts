@@ -67,8 +67,6 @@ export class LoginComponent implements OnInit {
       .login(formData.emailAddress, formData.password)
       .subscribe(
         (result: any) => {
-          this.alertService.success(result.message, true);
-
           let redirect;
           if (this.redirectUrl === '/') {
             redirect = ['/'];

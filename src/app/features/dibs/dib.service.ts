@@ -10,10 +10,10 @@ import {
   Observable
 } from 'rxjs';
 
-// import {
-//   map,
-//   share
-// } from 'rxjs/operators';
+import {
+  map,
+  share
+} from 'rxjs/operators';
 
 import {
   environment
@@ -33,6 +33,14 @@ export class DibService {
 
   public create(formData: Dib): Observable<any> {
     return this.http.post(`${this.resourceUrl}`, formData);
+  }
+
+  public getAllRecipients(): Observable<any> {
+    return this.http.get(`${this.resourceUrl}/recipients`)
+      .pipe(
+        map((result: any) => result.data),
+        share()
+      );
   }
 
   // public getAllByGiftId(giftId: string): Observable<Dib[]> {

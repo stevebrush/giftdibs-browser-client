@@ -12,20 +12,15 @@ import {
 } from '@angular/forms';
 
 import {
-  FormFieldModule
-} from '../../modules/form-field';
-
-import {
-  IconModule
-} from '../../modules/icon';
-
-import {
-  ModalModule
-} from '../../modules/modal';
-
-import {
-  RepeaterModule
-} from '../../modules/repeater';
+  CardModule,
+  FormFieldModule,
+  GridModule,
+  IconModule,
+  MediaModule,
+  ModalModule,
+  RepeaterModule,
+  ThumbnailModule
+} from '../../modules';
 
 import {
   DibControlsComponent
@@ -41,14 +36,18 @@ import { DibsComponent } from './dibs.component';
 
 @NgModule({
   imports: [
+    CardModule,
     CommonModule,
     DibsRoutingModule,
     FormFieldModule,
     FormsModule,
+    GridModule,
     IconModule,
+    MediaModule,
     ModalModule,
     ReactiveFormsModule,
-    RepeaterModule
+    RepeaterModule,
+    ThumbnailModule
   ],
   declarations: [
     DibsComponent,

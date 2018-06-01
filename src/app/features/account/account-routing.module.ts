@@ -9,7 +9,7 @@ import {
 
 import {
   AuthGuard
-} from '../../modules/session';
+} from '../../guards';
 
 import { DeleteComponent } from './delete/delete.component';
 import { ForgottenComponent } from './forgotten/forgotten.component';

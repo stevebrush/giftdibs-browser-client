@@ -10,9 +10,13 @@ import {
   RouterModule
 } from '@angular/router';
 
-import { NoticeModule } from '../notice/notice.module';
+import {
+  NoticeModule
+} from '../notice';
 
-import { VerifyEmailNoticeComponent } from './verify-email-notice.component';
+import {
+  VerifyEmailNoticeComponent
+} from './verify-email-notice.component';
 
 @NgModule({
   imports: [

@@ -8,7 +8,9 @@ import {
   SimpleChanges
 } from '@angular/core';
 
-import { User } from '../user';
+import {
+  User
+} from '../users';
 
 import { Friendship } from './friendship';
 import { FriendshipService } from './friendship.service';

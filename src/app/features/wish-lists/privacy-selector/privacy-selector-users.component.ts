@@ -12,16 +12,18 @@ import {
 } from '@angular/forms';
 
 import {
-  ChecklistChoice
-} from '../../../modules/checklist';
+  ChecklistChoice,
+  ModalInstance
+} from '../../../modules';
 
 import {
-  ModalInstance
-} from '../../../modules/modal';
+  Friendship,
+  FriendshipService
+} from '../../friendships';
 
-import { User } from '../../users';
-import { Friendship } from '../../users/friendship/friendship';
-import { FriendshipService } from '../../users/friendship/friendship.service';
+import {
+  User
+} from '../../users';
 
 import {
   WishListPrivacySelectorUsersContext

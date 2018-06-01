@@ -8,16 +8,14 @@ import {
 } from '@angular/platform-browser';
 
 import {
-  NavbarModule
-} from './modules/navbar';
-
-import {
   SessionModule
-} from './modules/session';
+} from './features/account/session';
 
 import {
+  AlertModule,
+  NavbarModule,
   VerifyEmailNoticeModule
-} from './modules/verify-email-notice';
+} from './modules';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppStartupService } from './app-startup.service';
@@ -32,8 +30,9 @@ export function startupServiceFactory(startupService: AppStartupService): Functi
     AppComponent
   ],
   imports: [
-    BrowserModule,
+    AlertModule,
     AppRoutingModule,
+    BrowserModule,
     NavbarModule,
     SessionModule,
     VerifyEmailNoticeModule

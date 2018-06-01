@@ -26,7 +26,7 @@ import {
 import {
   SessionService,
   SessionUser
-} from '../../modules/session';
+} from '../../features/account/session';
 
 @Component({
   selector: 'gd-verify-email-notice',

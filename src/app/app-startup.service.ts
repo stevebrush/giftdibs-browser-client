@@ -13,7 +13,7 @@ import {
 
 import {
   SessionService
-} from './modules/session';
+} from './features/account/session';
 
 @Injectable()
 export class AppStartupService {

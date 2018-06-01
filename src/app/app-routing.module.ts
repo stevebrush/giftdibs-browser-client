@@ -8,9 +8,12 @@ import {
 } from '@angular/router';
 
 import {
-  AuthGuard,
   GD_AUTHORIZATION_PROVIDERS
-} from './modules/session';
+} from './features/account/session';
+
+import {
+  AuthGuard
+} from './guards';
 
 const appRoutes: Routes = [
   {

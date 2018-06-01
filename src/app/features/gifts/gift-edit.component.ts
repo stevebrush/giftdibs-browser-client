@@ -13,12 +13,9 @@ import {
 } from '@angular/forms';
 
 import {
-  AlertService
-} from '../../modules/alert';
-
-import {
+  AlertService,
   ModalInstance
-} from '../../modules/modal';
+} from '../../modules';
 
 import {
   Gift

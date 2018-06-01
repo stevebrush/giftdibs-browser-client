@@ -11,28 +11,13 @@ import {
 } from '@angular/router';
 
 import {
-  CardModule
-} from '../../../modules/card';
-
-import {
-  GridModule
-} from '../../../modules/grid';
-
-import {
-  HideUntilModule
-} from '../../../modules/hide-until';
-
-import {
-  MediaModule
-} from '../../../modules/media';
-
-import {
-  RepeaterModule
-} from '../../../modules/repeater';
-
-import {
-  UserThumbnailModule
-} from '../../../modules/user-thumbnail';
+  CardModule,
+  GridModule,
+  HideUntilModule,
+  MediaModule,
+  RepeaterModule,
+  ThumbnailModule
+} from '../../modules';
 
 import { FollowButtonComponent } from './follow-button.component';
 import { FriendshipService } from './friendship.service';
@@ -47,7 +32,7 @@ import { FriendshipsComponent } from './friendships.component';
     MediaModule,
     RepeaterModule,
     RouterModule,
-    UserThumbnailModule
+    ThumbnailModule
   ],
   exports: [
     FriendshipsComponent,

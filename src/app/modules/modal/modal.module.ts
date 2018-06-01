@@ -10,6 +10,10 @@ import {
   FocusTrapModule
 } from '../focus-trap';
 
+import {
+  OverlayModule
+} from '../overlay';
+
 import { ModalBodyComponent } from './modal-body.component';
 import { ModalFooterComponent } from './modal-footer.component';
 import { ModalHeaderComponent } from './modal-header.component';
@@ -21,7 +25,8 @@ import { ModalService } from './modal.service';
 @NgModule({
   imports: [
     CommonModule,
-    FocusTrapModule
+    FocusTrapModule,
+    OverlayModule
   ],
   exports: [
     ModalComponent,

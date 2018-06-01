@@ -26,30 +26,18 @@ import {
 } from 'rxjs/operators';
 
 import {
-  AlertService
-} from '../../../modules/alert';
-
-import {
+  AlertService,
   ConfirmAnswer,
-  ConfirmService
-} from '../../../modules/confirm';
-
-import {
-  DropdownMenuItem
-} from '../../../modules/dropdown-menu';
-
-import {
+  ConfirmService,
+  DropdownMenuItem,
   ModalClosedEventArgs,
-  ModalService
-} from '../../../modules/modal';
+  ModalService,
+  WindowRefService
+} from '../../../modules';
 
 import {
   SessionService
-} from '../../../modules/session';
-
-import {
-  WindowRefService
-} from '../../../modules/window';
+} from '../../account/session';
 
 import {
   GiftDetailComponent,
@@ -220,31 +208,28 @@ export class WishListPreviewComponent implements OnInit, OnDestroy {
   }
 
   public openGiftDetailModal(giftId: string): void {
-    // this.dibService.getAllByWishListId(this.wishList._id)
-      // .subscribe((dibs: Dib[]) => {
-        const context = new GiftDetailContext(giftId);
+    const context = new GiftDetailContext(giftId);
 
-        const modalInstance = this.modalService.open(GiftDetailComponent, {
-          providers: [{
-            provide: GiftDetailContext,
-            useValue: context
-          }]
-        });
+    const modalInstance = this.modalService.open(GiftDetailComponent, {
+      providers: [{
+        provide: GiftDetailContext,
+        useValue: context
+      }]
+    });
 
-        modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
-          // Update the gift in the wish list preview.
-          const updatedGift = args.data.gift;
-          this.wishList.gifts.forEach((gift: Gift, j: number) => {
-            if (gift._id === updatedGift._id) {
-              this.wishList.gifts[j] = updatedGift;
-            }
-          });
+    modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
+      // Update the gift in the wish list preview.
+      const updatedGift = args.data.gift;
+      this.wishList.gifts.forEach((gift: Gift, j: number) => {
+        if (gift._id === updatedGift._id) {
+          this.wishList.gifts[j] = updatedGift;
+        }
+      });
 
-          this.changeDetector.markForCheck();
+      this.changeDetector.markForCheck();
 
-          this.clearGiftIdFromUrl();
-        });
-      // });
+      this.clearGiftIdFromUrl();
+    });
   }
 
   private openWishListEditModal(): void {

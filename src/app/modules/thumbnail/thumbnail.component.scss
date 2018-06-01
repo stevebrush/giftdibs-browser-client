@@ -1,6 +1,6 @@
 @import '../../../styles/mixins';
 
-.gd-user-thumbnail {
+.gd-thumbnail {
   background-color: $gd-background-color-neutral-light;
   display: inline-flex;
   align-items: center;
@@ -11,25 +11,25 @@
   user-select: none;
 }
 
-.gd-user-thumbnail-xs {
+.gd-thumbnail-xs {
   width: 2rem;
   height: 2rem;
   font-size: $gd-font-size-small;
 }
 
-.gd-user-thumbnail-sm {
+.gd-thumbnail-sm {
   width: 3.75rem;
   height: 3.75rem;
   font-size: $gd-font-size-larger;
 }
 
-.gd-user-thumbnail-md {
+.gd-thumbnail-md {
   width: 6rem;
   height: 6rem;
   font-size: $gd-font-size-xl;
 }
 
-.gd-user-thumbnail-lg {
+.gd-thumbnail-lg {
   width: 10rem;
   height: 10rem;
   font-size: $gd-font-size-xxl;

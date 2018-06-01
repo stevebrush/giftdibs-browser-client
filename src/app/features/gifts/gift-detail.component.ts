@@ -6,29 +6,19 @@ import {
 } from '@angular/core';
 
 import {
-  zip
-} from 'rxjs';
-
-import {
   finalize
 } from 'rxjs/operators';
 
 import {
-  AlertService
-} from '../../modules/alert';
-
-import {
+  AlertService,
   ConfirmAnswer,
-  ConfirmService
-} from '../../modules/confirm';
-
-import {
+  ConfirmService,
   ModalInstance
-} from '../../modules/modal';
+} from '../../modules';
 
 import {
   SessionService
-} from '../../modules/session';
+} from '../account/session';
 
 import {
   Gift
@@ -64,21 +54,20 @@ export class GiftDetailComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    zip(
-      this.giftService.getById(this.context.giftId)
-    )
-      .subscribe((value) => {
-        this.gift = value[0];
+    this.giftService.getById(this.context.giftId)
+      .subscribe((gift: Gift) => {
+        this.gift = gift;
         this.isSessionUser = this.sessionService.isSessionUser(this.gift.user._id);
         this.changeDetector.markForCheck();
       });
   }
 
   public onDibChange(): void {
-    this.giftService.getById(this.gift._id).subscribe((gift: Gift) => {
-      this.gift = gift;
-      this.changeDetector.markForCheck();
-    });
+    this.giftService.getById(this.gift._id)
+      .subscribe((gift: Gift) => {
+        this.gift = gift;
+        this.changeDetector.markForCheck();
+      });
   }
 
   public markReceived(): void {

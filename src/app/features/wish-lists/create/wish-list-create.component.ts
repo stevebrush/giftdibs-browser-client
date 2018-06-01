@@ -18,7 +18,7 @@ import {
 
 import {
   AlertService
-} from '../../../modules/alert';
+} from '../../../modules';
 
 import { WishList } from '../wish-list';
 import { WishListService } from '../wish-list.service';

@@ -14,17 +14,14 @@ import {
 } from 'rxjs/operators';
 
 import {
-  AlertService
-} from '../../modules/alert';
-
-import {
+  AlertService,
   ModalClosedEventArgs,
   ModalService
-} from '../../modules/modal';
+} from '../../modules';
 
 import {
   SessionService
-} from '../../modules/session';
+} from '../account/session';
 
 import {
   Gift

@@ -27,7 +27,7 @@ import {
 import {
   SessionService,
   SessionUser
-} from '../session';
+} from '../../features/account/session';
 
 @Component({
   selector: 'gd-navbar',

@@ -1,6 +1,6 @@
 import {
   User
-} from '../user';
+} from '../users';
 
 export interface Friendship {
   _id: string;

@@ -26,32 +26,17 @@ import {
 
 import {
   AlertService
-} from '../../modules/alert';
-
-// import {
-//   ModalClosedEventArgs,
-//   ModalService
-// } from '../../modules/modal';
+} from '../../modules';
 
 import {
   SessionService
-} from '../../modules/session';
-
-// import {
-//   WindowRefService
-// } from '../../modules/window';
-
-// import {
-//   GiftDetailComponent,
-//   GiftDetailContext
-// } from '../gifts/detail';
+} from '../account/session';
 
 import { WishList } from '../wish-lists/wish-list';
 import { WishListService } from '../wish-lists/wish-list.service';
 
 import { User } from './user';
 import { UserService } from './user.service';
-// import { Gift } from '../gifts';
 
 @Component({
   selector: 'gd-user',
@@ -75,11 +60,9 @@ export class UserComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
-    // private modalService: ModalService,
     private router: Router,
     private sessionService: SessionService,
     private userService: UserService,
-    // private windowRef: WindowRefService,
     private wishListService: WishListService
   ) { }
 

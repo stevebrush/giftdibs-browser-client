@@ -23,8 +23,8 @@ import {
 } from '../typeahead';
 
 import {
-  UserThumbnailModule
-} from '../user-thumbnail';
+  ThumbnailModule
+} from '../thumbnail';
 
 import { SearchComponent } from './search.component';
 
@@ -35,7 +35,7 @@ import { SearchComponent } from './search.component';
     MediaModule,
     RouterModule,
     TypeaheadModule,
-    UserThumbnailModule
+    ThumbnailModule
   ],
   exports: [
     SearchComponent

@@ -15,9 +15,13 @@ import {
   share
 } from 'rxjs/operators';
 
-import { environment } from '../../../../environments/environment';
+import {
+  environment
+} from '../../../environments/environment';
 
-import { Friendship } from './friendship';
+import {
+  Friendship
+} from './friendship';
 
 @Injectable()
 export class FriendshipService {

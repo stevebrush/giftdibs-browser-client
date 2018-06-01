@@ -15,40 +15,16 @@ import {
 } from '@angular/router';
 
 import {
-  CardModule
-} from '../../modules/card';
-
-import {
-  ChecklistModule
-} from '../../modules/checklist';
-
-import {
-  ConfirmModule
-} from '../../modules/confirm';
-
-import {
-  DropdownMenuModule
-} from '../../modules/dropdown-menu';
-
-import {
-  FormFieldModule
-} from '../../modules/form-field';
-
-import {
-  HideUntilModule
-} from '../../modules/hide-until';
-
-import {
-  IconModule
-} from '../../modules/icon';
-
-import {
-  ModalModule
-} from '../../modules/modal';
-
-import {
+  CardModule,
+  ChecklistModule,
+  ConfirmModule,
+  DropdownMenuModule,
+  FormFieldModule,
+  HideUntilModule,
+  IconModule,
+  ModalModule,
   RepeaterModule
-} from '../../modules/repeater';
+} from '../../modules';
 
 import {
   GiftsModule

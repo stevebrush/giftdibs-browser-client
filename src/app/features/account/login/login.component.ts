@@ -19,13 +19,15 @@ import {
 
 import {
   AlertService
-} from '../../../modules/alert';
+} from '../../../modules';
 
 import {
   SessionService
-} from '../../../modules/session';
+} from '../../account/session';
 
-import { AccountService } from '../account.service';
+import {
+  AccountService
+} from '../account.service';
 
 @Component({
   selector: 'gd-login',

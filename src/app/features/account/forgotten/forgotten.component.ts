@@ -13,9 +13,11 @@ import {
 
 import {
   AlertService
-} from '../../../modules/alert';
+} from '../../../modules';
 
-import { AccountService } from '../account.service';
+import {
+  AccountService
+} from '../account.service';
 
 @Component({
   selector: 'gd-forgotten',

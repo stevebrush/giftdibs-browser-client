@@ -12,24 +12,12 @@ import {
 } from '@angular/forms';
 
 import {
-  CheckboxModule
-} from '../../modules/checkbox';
-
-import {
-  FormFieldModule
-} from '../../modules/form-field';
-
-import {
-  GridModule
-} from '../../modules/grid';
-
-import {
-  IconModule
-} from '../../modules/icon';
-
-import {
+  CheckboxModule,
+  FormFieldModule,
+  GridModule,
+  IconModule,
   ModalModule
-} from '../../modules/modal';
+} from '../../modules';
 
 import {
   DibsModule

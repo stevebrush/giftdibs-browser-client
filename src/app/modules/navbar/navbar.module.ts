@@ -19,10 +19,12 @@ import {
 } from '../search';
 
 import {
-  UserThumbnailModule
-} from '../user-thumbnail';
+  ThumbnailModule
+} from '../thumbnail';
 
-import { NavbarComponent } from './navbar.component';
+import {
+  NavbarComponent
+} from './navbar.component';
 
 @NgModule({
   imports: [
@@ -30,7 +32,7 @@ import { NavbarComponent } from './navbar.component';
     DropdownMenuModule,
     RouterModule,
     SearchModule,
-    UserThumbnailModule
+    ThumbnailModule
   ],
   exports: [
     NavbarComponent

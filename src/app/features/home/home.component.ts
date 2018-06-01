@@ -6,7 +6,7 @@ import {
 
 import {
   SessionService
-} from '../../modules/session';
+} from '../account/session';
 
 @Component({
   selector: 'gd-home',

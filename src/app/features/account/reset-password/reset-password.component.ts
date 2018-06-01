@@ -28,13 +28,15 @@ import {
 
 import {
   AlertService
-} from '../../../modules/alert';
+} from '../../../modules';
 
 import {
   SessionService
-} from '../../../modules/session';
+} from '..//session';
 
-import { AccountService } from '../account.service';
+import {
+  AccountService
+} from '../account.service';
 
 @Component({
   selector: 'gd-reset-password',

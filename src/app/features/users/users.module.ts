@@ -7,28 +7,20 @@ import {
 } from '@angular/common';
 
 import {
-  CardModule
-} from '../../modules/card';
+  CardModule,
+  GridModule,
+  HideUntilModule,
+  MediaModule,
+  ThumbnailModule
+} from '../../modules';
 
 import {
-  GridModule
-} from '../../modules/grid';
+  FriendshipModule
+} from '../friendships';
 
 import {
-  HideUntilModule
-} from '../../modules/hide-until';
-
-import {
-  MediaModule
-} from '../../modules/media';
-
-import {
-  UserThumbnailModule
-} from '../../modules/user-thumbnail';
-
-import { WishListsModule } from '../wish-lists/wish-lists.module';
-
-import { FriendshipModule } from './friendship/friendship.module';
+  WishListsModule
+} from '../wish-lists';
 
 import { UserComponent } from './user.component';
 import { UserService } from './user.service';
@@ -44,7 +36,7 @@ import { UsersComponent } from './users.component';
     HideUntilModule,
     MediaModule,
     UsersRoutingModule,
-    UserThumbnailModule,
+    ThumbnailModule,
     WishListsModule
   ],
   declarations: [

@@ -12,13 +12,15 @@ import {
 
 import {
   AlertService
-} from '../../../modules/alert';
+} from '../../modules';
 
 import {
   SessionService
-} from '../../../modules/session';
+} from '../account/session';
 
-import { User } from '../user';
+import {
+  User
+} from '../users';
 
 import { Friendship } from './friendship';
 import { FriendshipService } from './friendship.service';

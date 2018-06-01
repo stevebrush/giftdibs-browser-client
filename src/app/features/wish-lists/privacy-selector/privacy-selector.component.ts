@@ -14,17 +14,14 @@ import {
 } from '@angular/forms';
 
 import {
-  DropdownMenuItem
-} from '../../../modules/dropdown-menu';
-
-import {
+  DropdownMenuItem,
   ModalClosedEventArgs,
   ModalService
-} from '../../../modules/modal';
+} from '../../../modules';
 
 import {
   SessionService
-} from '../../../modules/session';
+} from '../../account/session';
 
 import {
   User

@@ -18,11 +18,11 @@ import {
 
 import {
   AlertService
-} from '../../../modules/alert';
+} from '../../../modules';
 
 import {
   SessionService
-} from '../../../modules/session';
+} from '../../account/session';
 
 import { User } from '../../users/user';
 import { UserService } from '../../users/user.service';

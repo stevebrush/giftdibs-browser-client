@@ -11,24 +11,12 @@ import {
 } from '@angular/forms';
 
 import {
-  FormFieldModule
-} from '../../modules/form-field';
-
-import {
-  GridModule
-} from '../../modules/grid';
-
-import {
-  HideUntilModule
-} from '../../modules/hide-until';
-
-import {
-  NoticeModule
-} from '../../modules/notice';
-
-import {
+  FormFieldModule,
+  GridModule,
+  HideUntilModule,
+  NoticeModule,
   PasswordViewerModule
-} from '../../modules/password-viewer';
+} from '../../modules';
 
 import { AccountRoutingModule } from './account-routing.module';
 import { AccountService } from './account.service';

@@ -10,8 +10,13 @@ import {
   BrowserAnimationsModule
 } from '@angular/platform-browser/animations';
 
-import { AlertComponent } from './alert.component';
-import { AlertService } from './alert.service';
+import {
+  AlertComponent
+} from './alert.component';
+
+import {
+  AlertService
+} from './alert.service';
 
 @NgModule({
   imports: [

@@ -2,4 +2,83 @@
   <h1>
     Dibs
   </h1>
+  <div *ngIf="recipients">
+    <gd-card *ngFor="let recipient of recipients">
+      <gd-card-header>
+        <gd-media>
+          <gd-media-thumbnail>
+            <gd-thumbnail
+              size="xs"
+            >
+            </gd-thumbnail>
+          </gd-media-thumbnail>
+          <gd-media-body>
+            <gd-media-header>
+              <gd-media-heading>
+                {{ recipient.firstName }} {{ recipient.lastName }}
+              </gd-media-heading>
+            </gd-media-header>
+          </gd-media-body>
+        </gd-media>
+      </gd-card-header>
+      <gd-card-body>
+        <ng-template ngFor let-wishList [ngForOf]="recipient.wishLists">
+          <gd-card *ngFor="let gift of wishList.gifts">
+            <gd-card-header>
+              <gd-card-heading>
+                {{ gift.name }}
+              </gd-card-heading>
+              {{ wishList.name }}
+            </gd-card-header>
+            <gd-card-body>
+
+              <gd-dib-controls
+                [gift]="gift"
+                (change)="onDibChange($event)"
+              >
+              </gd-dib-controls>
+
+            </gd-card-body>
+          </gd-card>
+        </ng-template>
+      </gd-card-body>
+      <gd-card-footer>
+        Totals for {{ recipient.firstName }}: ${{ recipient.budget }}
+      </gd-card-footer>
+    </gd-card>
+
+    <pre>
+{{recipients|json}}
+    </pre>
+    <!-- <gd-card *ngFor="let recipient of recipients">
+      <gd-card-header>
+        {{ recipient.firstName }} {{ recipient.lastName }}
+      </gd-card-header>
+      <gd-card-body *ngFor="let gift of recipient.gifts">
+        <gd-row>
+          <gd-column screenXSmall="6">
+            <strong>{{ gift.name }}</strong><br>
+            <a routerLink="/wish-lists/{{ gift._wishList._id }}">{{ gift._wishList.name }}</a><br>
+            ${{ gift.budget }}
+          </gd-column>
+          <gd-column screenXSmall="6">
+            [edit button]
+            <div *ngIf="gift._dib.dateDelivered">
+              Date delivered: {{ gift._dib.dateDelivered | date }}
+            </div>
+          </gd-column>
+        </gd-row>
+      </gd-card-body>
+      <gd-card-footer>
+        <gd-row>
+          <gd-column screenXSmall="9">
+            Totals for {{ recipient.firstName }}:
+          </gd-column>
+          <gd-column screenXSmall="3">
+            ${{ recipient.budget }}
+          </gd-column>
+        </gd-row>
+      </gd-card-footer>
+    </gd-card> -->
+  </div>
 </div>

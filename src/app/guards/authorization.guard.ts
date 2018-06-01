@@ -12,16 +12,13 @@ import {
 } from '@angular/router';
 
 import {
-  AlertService
-} from '../alert';
-
-import {
+  AlertService,
   WindowRefService
-} from '../window';
+} from '../modules';
 
 import {
   SessionService
-} from './session.service';
+} from '../features/account/session';
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanLoad {

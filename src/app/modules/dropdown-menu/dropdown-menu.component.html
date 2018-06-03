@@ -7,7 +7,7 @@
 >
   <ng-template ngFor let-item [ngForOf]="items">
     <li class="gd-dropdown-menu-item">
-      <div
+      <div *ngIf="item.action else routerTemplate"
         role="button"
         class="gd-button gd-dropdown-menu-item-button"
         tabindex="0"
@@ -17,6 +17,16 @@
           *ngTemplateOutlet="itemTemplate; context: { item: item }">
         </ng-container>
       </div>
+      <ng-template #routerTemplate>
+        <a
+          class="gd-button gd-dropdown-menu-item-button"
+          [routerLink]="item.route"
+        >
+          <ng-container
+            *ngTemplateOutlet="itemTemplate; context: { item: item }">
+          </ng-container>
+        </a>
+      </ng-template>
     </li>
     <li
       *ngIf="item.addSeparatorAfter"

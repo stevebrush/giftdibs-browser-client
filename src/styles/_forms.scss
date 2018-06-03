@@ -23,3 +23,41 @@
 textarea.gd-form-control {
   resize: vertical;
 }
+
+.gd-input-group {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  align-content: baseline;
+  width: 100%;
+
+  .gd-form-control {
+    position: relative;
+    flex: 1 1 auto;
+    width: 1%;
+    margin-bottom: 0;
+  }
+}
+
+.gd-input-group-prepend {
+  display: flex;
+  margin-right: -1px;
+  text-align: center;
+  align-items: center;
+  padding: $gd-spacing-padding-squish-compact;
+  background-color: $gd-color-neutral-lighter;
+  color: $gd-text-color-dark;
+  border: 1px solid transparent;
+}
+
+.gd-input-group-append {
+  display: flex;
+  margin-left: -1px;
+  text-align: center;
+  align-items: center;
+  padding: $gd-spacing-padding-squish-compact;
+  background-color: $gd-color-neutral-lighter;
+  color: $gd-text-color-dark;
+  border: 1px solid transparent;
+}

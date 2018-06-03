@@ -4,12 +4,11 @@
   font-size: $gd-font-size-default;
   line-height: $gd-line-height;
   border: 1px solid transparent;
-  border-radius: $gd-border-radius-sm;
   vertical-align: baseline;
   font-weight: $gd-font-weight;
   padding: $gd-spacing-padding-squish-compact;
   color: $gd-text-color-dark;
-  background-color: $gd-background-color-neutral-light;
+  background-color: $gd-color-neutral-lightest;
 }
 
 @mixin gd_disabled() {

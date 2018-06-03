@@ -1,62 +1,23 @@
-<div class="gd-friendships">
-  <gd-row>
-    <gd-column screenSmall="3">
-      <gd-card [gdHideUntil]="following">
-        <gd-card-header>
-          <gd-card-heading>
-            {{ following?.length }} following
-          </gd-card-heading>
-        </gd-card-header>
-        <gd-card-body>
-          <gd-repeater>
-            <gd-repeater-item *ngFor="let friend of following">
-              <ng-container
-                *ngTemplateOutlet="friendshipTemplate; context: { friend: friend }">
-              </ng-container>
-            </gd-repeater-item>
-          </gd-repeater>
-        </gd-card-body>
-      </gd-card>
-    </gd-column>
-    <gd-column screenSmall="3">
-      <gd-card [gdHideUntil]="followers">
-        <gd-card-header>
-          <gd-card-heading>
-            {{ followers?.length }} followers
-          </gd-card-heading>
-        </gd-card-header>
-        <gd-card-body>
-          <gd-repeater>
-            <gd-repeater-item *ngFor="let friend of followers">
-              <ng-container
-                *ngTemplateOutlet="friendshipTemplate; context: { friend: friend }">
-              </ng-container>
-            </gd-repeater-item>
-          </gd-repeater>
-        </gd-card-body>
-      </gd-card>
-    </gd-column>
-  </gd-row>
-</div>
+<span class="gd-friendships gd-button-group">
+  <button
+    class="gd-button gd-button-default"
+    title="Toggle following"
+    type="button"
+    gdDropdownMenuTrigger
+    [menuItems]="followingMenuItems"
+  >
+    <gd-icon icon="user"></gd-icon>
+    {{ following?.length }} Following
+  </button>
 
-<ng-template
-  let-friend="friend"
-  #friendshipTemplate>
-  <gd-media>
-    <gd-media-thumbnail>
-      <a
-        class="gd-friendships-list-item-thumbnail"
-        tabindex="-1"
-        [routerLink]="['/users', friend._id]">
-        <gd-thumbnail
-          size="xs">
-        </gd-thumbnail>
-      </a>
-    </gd-media-thumbnail>
-    <gd-media-content>
-      <a [routerLink]="['/users', friend._id]">
-        {{ friend.firstName }} {{ friend.lastName }}
-      </a>
-    </gd-media-content>
-  </gd-media>
-</ng-template>
+  <button
+    class="gd-button gd-button-default"
+    title="Toggle followers"
+    type="button"
+    gdDropdownMenuTrigger
+    [menuItems]="followersMenuItems"
+  >
+    <gd-icon icon="user"></gd-icon>
+    {{ followers?.length }} Followers
+  </button>
+</span>

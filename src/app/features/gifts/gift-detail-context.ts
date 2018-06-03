@@ -2,9 +2,11 @@ import {
   Injectable
 } from '@angular/core';
 
+import { Gift } from './gift';
+
 @Injectable()
 export class GiftDetailContext {
   constructor(
-    public giftId?: string
+    public gift?: Gift
   ) { }
 }

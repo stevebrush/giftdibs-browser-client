@@ -44,19 +44,36 @@ import {
 } from './dib.service';
 
 @Component({
-  selector: 'gd-dib-controls',
-  templateUrl: './dib-controls.component.html',
-  styleUrls: ['./dib-controls.component.scss'],
+  selector: 'gd-dibs-summary',
+  templateUrl: './dibs-summary.component.html',
+  styleUrls: ['./dibs-summary.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DibControlsComponent implements OnInit, OnDestroy {
+export class DibsSummaryComponent implements OnInit, OnDestroy {
   @Input()
   public gift: Gift;
 
   @Output()
   public change = new EventEmitter<void>();
 
-  public dib: Dib;
+  public get isDibbedBySessionUser(): boolean {
+    return this.gift.dibs && !!this.gift.dibs.find((dib: Dib) => {
+      return this.isDibOwnedBySessionUser(dib);
+    });
+  }
+
+  public get numRemaining(): number {
+    let numRemaining = this.gift.quantity;
+
+    if (this.gift.dibs) {
+      this.gift.dibs.forEach((dib: Dib) => {
+        numRemaining -= dib.quantity;
+      });
+    }
+
+    return numRemaining;
+  }
+
   public isSessionUser = false;
   public isLoading = false;
 
@@ -70,20 +87,17 @@ export class DibControlsComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.isSessionUser = this.sessionService.isSessionUser(this.gift.user._id);
-    this.dib = this.gift.dibs.find((dib) => {
-      return (dib.user._id === this.sessionService.user._id);
-    });
   }
 
   public ngOnDestroy(): void {
     this.change.complete();
   }
 
-  public removeDib(): void {
+  public removeDib(dib: Dib): void {
     this.isLoading = true;
     this.changeDetector.markForCheck();
 
-    this.dibService.remove(this.dib._id)
+    this.dibService.remove(dib._id)
       .pipe(
         finalize(() => {
           this.isLoading = false;
@@ -92,7 +106,7 @@ export class DibControlsComponent implements OnInit, OnDestroy {
       )
       .subscribe(
         (data: any) => {
-          this.gift.dibs.splice(this.gift.dibs.indexOf(this.dib), 1);
+          this.gift.dibs.splice(this.gift.dibs.indexOf(dib), 1);
           this.change.emit();
         },
         (err: any) => {
@@ -101,14 +115,11 @@ export class DibControlsComponent implements OnInit, OnDestroy {
       );
   }
 
-  public openDibModal(): void {
+  public openDibModal(dib?: Dib): void {
     this.isLoading = true;
     this.changeDetector.markForCheck();
 
-    const context = new DibEditContext(
-      this.dib,
-      this.gift
-    );
+    const context = new DibEditContext(dib, this.gift);
 
     const modalInstance = this.modalService.open(
       DibEditComponent,
@@ -128,5 +139,9 @@ export class DibControlsComponent implements OnInit, OnDestroy {
       this.isLoading = false;
       this.changeDetector.markForCheck();
     });
+  }
+
+  public isDibOwnedBySessionUser(dib: Dib): boolean {
+    return (this.sessionService.isSessionUser(dib.user._id));
   }
 }

@@ -1,7 +1,8 @@
 export interface DropdownMenuItem {
-  action: Function;
   label: string;
+  action?: Function;
   icon?: string;
   addSeparatorAfter?: boolean;
-  custom?: any;
+  data?: any;
+  route?: string;
 }

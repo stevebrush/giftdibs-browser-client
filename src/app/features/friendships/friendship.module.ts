@@ -12,8 +12,10 @@ import {
 
 import {
   CardModule,
+  DropdownMenuModule,
   GridModule,
   HideUntilModule,
+  IconModule,
   MediaModule,
   RepeaterModule,
   ThumbnailModule
@@ -27,9 +29,11 @@ import { FriendshipsComponent } from './friendships.component';
   imports: [
     CardModule,
     CommonModule,
+    DropdownMenuModule,
     GridModule,
     HideUntilModule,
     MediaModule,
+    IconModule,
     RepeaterModule,
     RouterModule,
     ThumbnailModule

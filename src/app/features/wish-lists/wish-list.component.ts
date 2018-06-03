@@ -32,7 +32,8 @@ import {
 
 import {
   GiftDetailComponent,
-  GiftDetailContext
+  GiftDetailContext,
+  Gift
 } from '../gifts';
 
 import {
@@ -102,8 +103,8 @@ export class WishListComponent implements OnInit {
       );
   }
 
-  public openGiftDetailModal(giftId: string): void {
-    const context = new GiftDetailContext(giftId);
+  public openGiftDetailModal(gift: Gift): void {
+    const context = new GiftDetailContext(gift);
 
     const modalInstance = this.modalService.open(GiftDetailComponent, {
       providers: [{

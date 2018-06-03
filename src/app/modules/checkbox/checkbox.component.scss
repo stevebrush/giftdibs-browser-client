@@ -13,6 +13,7 @@ $gd-checkbox-size: #{$gd-line-height}rem;
   .gd-checkbox-control {
     border-color: $gd-border-color-info;
     background-color: $gd-background-color-info;
+    color: $gd-text-color-info;
     border-width: 2px;
   }
 }
@@ -26,7 +27,6 @@ $gd-checkbox-size: #{$gd-line-height}rem;
   display: inline-flex;
   position: relative;
   border: 1px solid $gd-border-color-neutral-light;
-  border-radius: $gd-border-radius-sm;
   background-color: #fff;
   color: $gd-text-color-default;
   text-align: center;

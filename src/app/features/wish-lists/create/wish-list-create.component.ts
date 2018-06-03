@@ -74,7 +74,6 @@ export class WishListCreateComponent implements OnInit, AfterViewInit {
       .create(formData)
       .subscribe(
         (result: any) => {
-          this.alertService.success(result.message);
           this.resetFormState();
           this.saved.emit(result.data.wishListId);
         },

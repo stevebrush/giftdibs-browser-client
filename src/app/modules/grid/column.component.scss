@@ -11,8 +11,8 @@ $num-columns: 12;
 }
 
 :host.gd-column {
-  padding-right: $gd-spacing-md;
-  padding-left: $gd-spacing-md;
+  padding-right: $gd-spacing-lg;
+  padding-left: $gd-spacing-lg;
   width: 100%;
   min-height: 1px;
 }

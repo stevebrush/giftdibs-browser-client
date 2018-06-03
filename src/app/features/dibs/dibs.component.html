@@ -1,51 +1,110 @@
-<div class="gd-container-fluid">
+<div class="gd-container-fluid gd-canvas">
   <h1>
     Dibs
   </h1>
-  <div *ngIf="recipients">
-    <gd-card *ngFor="let recipient of recipients">
-      <gd-card-header>
-        <gd-media>
-          <gd-media-thumbnail>
-            <gd-thumbnail
-              size="xs"
-            >
-            </gd-thumbnail>
-          </gd-media-thumbnail>
-          <gd-media-body>
-            <gd-media-header>
-              <gd-media-heading>
-                {{ recipient.firstName }} {{ recipient.lastName }}
-              </gd-media-heading>
-            </gd-media-header>
-          </gd-media-body>
-        </gd-media>
-      </gd-card-header>
-      <gd-card-body>
-        <ng-template ngFor let-wishList [ngForOf]="recipient.wishLists">
-          <gd-card *ngFor="let gift of wishList.gifts">
-            <gd-card-header>
-              <gd-card-heading>
-                {{ gift.name }}
-              </gd-card-heading>
-              {{ wishList.name }}
-            </gd-card-header>
-            <gd-card-body>
 
-              <gd-dib-controls
-                [gift]="gift"
-                (change)="onDibChange($event)"
-              >
-              </gd-dib-controls>
+  <gd-repeater *ngIf="recipients">
+    <gd-repeater-item *ngFor="let recipient of recipients">
+      <gd-card>
+        <gd-card-header>
+          <gd-card-heading>
+            <gd-media>
+              <gd-media-thumbnail>
+                <gd-thumbnail
+                  size="xs"
+                  type="user"
+                >
+                </gd-thumbnail>
+              </gd-media-thumbnail>
+              <gd-media-body>
+                <gd-media-header>
+                  {{ recipient.firstName }} {{ recipient.lastName }}
+                </gd-media-header>
+              </gd-media-body>
+            </gd-media>
+          </gd-card-heading>
+        </gd-card-header>
+        <gd-card-body>
+          <ng-template ngFor let-wishList [ngForOf]="recipient.wishLists">
+            <gd-repeater>
+              <gd-repeater-item *ngFor="let gift of wishList.gifts">
+                <gd-row>
+                  <gd-column screenSmall="4">
+                    <gd-media>
+                      <gd-media-thumbnail>
+                        <gd-thumbnail>
+                        </gd-thumbnail>
+                      </gd-media-thumbnail>
+                      <gd-media-content>
+                        <gd-media-header>
+                          <gd-media-heading>
+                            <a
+                              [ngClass]="{
+                                'gd-wish-list-preview-gift-received': gift.isReceived,
+                                'gd-text-deemphasized': gift.isReceived
+                              }"
+                              [routerLink]="[]"
+                              [queryParams]="{ giftId: gift._id }"
+                            >{{ gift.name }}
+                              <ng-template [ngIf]="gift.quantity > 1">
+                                ({{ gift.quantity }})
+                              </ng-template>
+                            </a>
+                          </gd-media-heading>
+                        </gd-media-header>
+                        <gd-media-body>
+                          <div>
+                            in {{ wishList.name }}
+                          </div>
+                          <div class="gd-text-color-danger">
+                            ${{ gift.budget || '--' }}
+                            <span *ngIf="gift.quantity > 1">ea.</span>
+                          </div>
+                        </gd-media-body>
+                      </gd-media-content>
+                    </gd-media>
+                  </gd-column>
+                  <gd-column screenSmall="5">
+                    <pre>{{ gift.dibs[0] | json }}</pre>
+                  </gd-column>
+                  <gd-column screenSmall="3">
+                    <gd-dib-controls
+                      [gift]="gift"
+                      (change)="onDibChange($event)"
+                    >
+                    </gd-dib-controls>
+                  </gd-column>
+                </gd-row>
+              </gd-repeater-item>
+            </gd-repeater>
 
-            </gd-card-body>
-          </gd-card>
-        </ng-template>
-      </gd-card-body>
-      <gd-card-footer>
-        Totals for {{ recipient.firstName }}: ${{ recipient.budget }}
-      </gd-card-footer>
-    </gd-card>
+            <!-- <gd-card *ngFor="let gift of wishList.gifts">
+              <gd-card-header>
+                <gd-card-heading>
+                  {{ gift.name }}
+                </gd-card-heading>
+                {{ wishList.name }}
+              </gd-card-header>
+              <gd-card-body>
+                <div>
+                  ${{ gift.budget || '--' }}
+                  <span *ngIf="gift.quantity > 1">ea.</span>
+                </div>
+                <gd-dib-controls
+                  [gift]="gift"
+                  (change)="onDibChange($event)"
+                >
+                </gd-dib-controls>
+
+              </gd-card-body>
+            </gd-card> -->
+          </ng-template>
+        </gd-card-body>
+        <gd-card-footer>
+          Totals for {{ recipient.firstName }}: ${{ recipient.budget }}
+        </gd-card-footer>
+      </gd-card>
+    </gd-repeater-item>
 
     <pre>
 {{recipients|json}}
@@ -80,5 +139,5 @@
         </gd-row>
       </gd-card-footer>
     </gd-card> -->
-  </div>
+  </gd-repeater>
 </div>

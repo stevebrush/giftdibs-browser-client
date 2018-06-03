@@ -29,7 +29,10 @@
             class="gd-button gd-button-link"
             [routerLink]="['/users', sessionUser._id]"
             routerLinkActive="active">
-            <gd-thumbnail size="xs">
+            <gd-thumbnail
+              size="xs"
+              type="user"
+            >
             </gd-thumbnail>
             <span class="gd-navbar-menu-user-name">
               {{ sessionUser.firstName }}

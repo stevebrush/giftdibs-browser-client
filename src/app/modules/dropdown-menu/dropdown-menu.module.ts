@@ -7,6 +7,10 @@ import {
 } from '@angular/common';
 
 import {
+  RouterModule
+} from '@angular/router';
+
+import {
   IconModule
 } from '../icon';
 
@@ -22,7 +26,8 @@ import { DropdownMenuService } from './dropdown-menu.service';
   imports: [
     CommonModule,
     IconModule,
-    OverlayModule
+    OverlayModule,
+    RouterModule
   ],
   exports: [
     DropdownMenuTriggerDirective

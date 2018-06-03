@@ -2,7 +2,6 @@
 
 .gd-card {
   background-color: #fff;
-  box-shadow: $gd-box-shadow;
-  border-radius: $gd-border-radius-sm;
-  padding: $gd-spacing;
+  padding: $gd-spacing-padding-squish;
+  box-shadow: 0 2px 9px rgba(0,0,0,0.04);
 }

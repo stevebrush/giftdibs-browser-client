@@ -32,6 +32,46 @@
           type="number"
         >
       </gd-form-field>
+      <gd-form-field *ngIf="dib" [errors]="errors">
+        <label
+          class="gd-control-label"
+          for="gd-dib-edit-price-paid"
+        >
+          Price paid
+        </label>
+        <span class="gd-input-group">
+          <span class="gd-input-group-prepend">$</span>
+          <input
+            autocomplete="off"
+            class="gd-form-control"
+            formControlName="pricePaid"
+            id="gd-dib-edit-price-paid"
+            type="number"
+          >
+          <span class="gd-input-group-append">.00</span>
+        </span>
+      </gd-form-field>
+      <gd-form-field *ngIf="dib" [errors]="errors">
+        <label
+          class="gd-control-label"
+          for="gd-dib-edit-notes"
+        >
+          Notes
+        </label>
+        <textarea
+          class="gd-form-control"
+          formControlName="notes"
+          id="gd-dib-edit-notes"
+        >
+        </textarea>
+      </gd-form-field>
+      <gd-form-field>
+        <gd-checkbox
+          formControlName="isAnonymous"
+        >
+          Make this dib anonymous
+        </gd-checkbox>
+      </gd-form-field>
     </form>
   </gd-modal-body>
   <gd-modal-footer

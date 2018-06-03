@@ -2,16 +2,16 @@
   <gd-modal-header>
     <gd-modal-heading>
       <ng-template [ngIf]="!gift">
-        New gift
+        New item
       </ng-template>
       <ng-template [ngIf]="gift">
-        Edit gift
+        Edit item
       </ng-template>
     </gd-modal-heading>
   </gd-modal-header>
   <gd-modal-body>
     <form
-      [attr.aria-label]="(gift) ? 'Edit gift' : 'New gift'"
+      [attr.aria-label]="(gift) ? 'Edit item' : 'New item'"
       class="gd-form"
       novalidate
       [formGroup]="giftForm"
@@ -22,7 +22,7 @@
           class="gd-control-label"
           for="gd-gift-edit-name"
         >
-          Gift name
+          Item name
         </label>
         <textarea
           autocomplete="off"
@@ -32,6 +32,40 @@
           (keydown.enter)="submit();$event.preventDefault();"
         >
         </textarea>
+      </gd-form-field>
+      <gd-form-field [errors]="errors">
+        <label
+          class="gd-control-label"
+          for="gd-gift-edit-priority"
+        >
+          Priority
+        </label>
+        <input
+          autocomplete="off"
+          class="gd-form-control"
+          formControlName="priority"
+          id="gd-gift-edit-priority"
+          type="number"
+        >
+      </gd-form-field>
+      <gd-form-field [errors]="errors">
+        <label
+          class="gd-control-label"
+          for="gd-gift-edit-budget"
+        >
+          Budget
+        </label>
+        <span class="gd-input-group">
+          <span class="gd-input-group-prepend">$</span>
+          <input
+            autocomplete="off"
+            class="gd-form-control"
+            formControlName="budget"
+            id="gd-gift-edit-budget"
+            type="number"
+          >
+          <span class="gd-input-group-append">.00</span>
+        </span>
       </gd-form-field>
       <gd-form-field [errors]="errors">
         <label

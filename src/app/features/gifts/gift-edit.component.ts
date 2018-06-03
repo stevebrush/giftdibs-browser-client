@@ -56,7 +56,9 @@ export class GiftEditComponent implements OnInit {
     this.createForm();
     this.gift = this.context.gift;
     this.wishListId = this.context.wishListId;
-    this.giftForm.reset(this.gift);
+    if (this.gift) {
+      this.giftForm.reset(this.gift);
+    }
   }
 
   public submit(): void {
@@ -81,7 +83,9 @@ export class GiftEditComponent implements OnInit {
     obs.subscribe(
       (result: any) => {
         const giftId = (this.gift) ? this.gift._id : result.data.giftId;
-        this.modal.close('save', { giftId });
+        this.giftService.getById(giftId).subscribe((gift: Gift) => {
+          this.modal.close('save', { gift });
+        });
       },
       (err: any) => {
         const error = err.error;
@@ -100,10 +104,12 @@ export class GiftEditComponent implements OnInit {
 
   private createForm(): void {
     this.giftForm = this.formBuilder.group({
+      budget: undefined,
       isReceived: new FormControl(false),
       name: new FormControl(null, [
         Validators.required
       ]),
+      priority: 3,
       quantity: 1
     });
   }

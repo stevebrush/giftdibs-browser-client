@@ -24,12 +24,12 @@
       {{ item.label }}
     </span>
     <gd-icon
-      *ngIf="item.custom.type === value.type"
+      *ngIf="item.data.type === value.type"
       icon="check-circle"
       iconStyle="success">
     </gd-icon>
     <gd-icon
-      *ngIf="item.custom.type !== value.type"
+      *ngIf="item.data.type !== value.type"
       icon="circle"
       iconStyle="deemphasized">
     </gd-icon>

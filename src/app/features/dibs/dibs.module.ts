@@ -13,6 +13,7 @@ import {
 
 import {
   CardModule,
+  CheckboxModule,
   FormFieldModule,
   GridModule,
   IconModule,
@@ -37,6 +38,7 @@ import { DibsComponent } from './dibs.component';
 @NgModule({
   imports: [
     CardModule,
+    CheckboxModule,
     CommonModule,
     DibsRoutingModule,
     FormFieldModule,

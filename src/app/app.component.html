@@ -2,14 +2,12 @@
 </gd-navbar>
 
 <main>
-  <div class="gd-container">
-    <gd-verify-email-notice
-      [visibleForRoutes]="[
-        '/',
-        '/account/settings'
-      ]">
-    </gd-verify-email-notice>
-  </div>
+  <gd-verify-email-notice
+    [visibleForRoutes]="[
+      '/',
+      '/account/settings'
+    ]">
+  </gd-verify-email-notice>
   <router-outlet>
   </router-outlet>
 </main>

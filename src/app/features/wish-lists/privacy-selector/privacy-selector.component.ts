@@ -64,7 +64,7 @@ export class WishListPrivacySelectorComponent
   public get valueLabel(): string {
     const value = this.value;
     const found = this.menuItems.find(item => {
-      return (item.custom.type === value.type);
+      return (item.data.type === value.type);
     });
     return found.label;
   }
@@ -94,7 +94,7 @@ export class WishListPrivacySelectorComponent
           };
           this.changeDetector.markForCheck();
         },
-        custom: {
+        data: {
           type: 'everyone'
         }
       },
@@ -125,7 +125,7 @@ export class WishListPrivacySelectorComponent
             this.privacyButton.nativeElement.focus();
           });
         },
-        custom: {
+        data: {
           type: 'custom'
         }
       },
@@ -138,7 +138,7 @@ export class WishListPrivacySelectorComponent
           };
           this.changeDetector.markForCheck();
         },
-        custom: {
+        data: {
           type: 'me'
         }
       }

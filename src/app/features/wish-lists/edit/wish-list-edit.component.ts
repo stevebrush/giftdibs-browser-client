@@ -65,7 +65,6 @@ export class WishListEditComponent implements OnInit {
       .update(this.wishList._id, formData)
       .subscribe(
         (result: any) => {
-          this.alertService.success(result.message);
           this.modal.close('save');
         },
         (err: any) => {

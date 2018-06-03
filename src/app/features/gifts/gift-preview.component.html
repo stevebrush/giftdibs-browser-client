@@ -1,0 +1,50 @@
+<div
+  class="gd-gift-preview"
+  [ngClass]="{ 'gd-gift-preview-received': gift.isReceived }"
+>
+  <gd-media>
+    <gd-media-thumbnail>
+      <gd-thumbnail size="sm">
+      </gd-thumbnail>
+    </gd-media-thumbnail>
+    <gd-media-content>
+      <gd-media-header>
+        <gd-media-heading>
+          <a
+            [routerLink]="[]"
+            [queryParams]="{ giftId: gift._id }"
+          >{{ gift.name }}
+            <ng-template [ngIf]="gift.quantity > 1">
+              ({{ gift.quantity }})
+            </ng-template>
+          </a>
+        </gd-media-heading>
+        <gd-media-controls>
+          <button *ngIf="isSessionUser"
+            class="gd-button gd-button-link gd-text-deemphasized"
+            title="Toggle gift options"
+            type="button"
+            gdDropdownMenuTrigger
+            [menuItems]="menuItems"
+          >
+            <gd-icon icon="ellipsis-v"></gd-icon>
+          </button>
+        </gd-media-controls>
+      </gd-media-header>
+      <gd-media-body>
+        <gd-gift-priority
+          [priority]="gift.priority"
+        >
+        </gd-gift-priority>
+        <div class="gd-text-color-danger">
+          ${{ gift.budget || '--' }}
+          <span *ngIf="gift.quantity > 1">ea.</span>
+        </div>
+        <gd-icon *ngIf="gift.dibs && gift.dibs.length"
+          icon="hand-paper"
+          iconStyle="deemphasized"
+        ></gd-icon>
+      </gd-media-body>
+    </gd-media-content>
+  </gd-media>
+</div>

@@ -46,13 +46,15 @@ export class ModalService {
       useValue: modalInstance
     }]);
 
+    modalInstance.wrapperInstance = wrapper;
+
     wrapper.closed.subscribe(() => {
       overlayInstance.destroy();
     });
 
-    modalInstance.closed.subscribe(() => {
-      wrapper.close();
-    });
+    // modalInstance.closed.subscribe(() => {
+    //   wrapper.close();
+    // });
 
     modalInstance.componentInstance = componentRef.instance;
 

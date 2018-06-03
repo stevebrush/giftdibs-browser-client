@@ -1,3 +1,4 @@
+// #region imports
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -31,6 +32,7 @@ import {
 import {
   GiftDetailContext
 } from './gift-detail-context';
+// #endregion
 
 @Component({
   selector: 'gd-gift-detail',
@@ -54,12 +56,8 @@ export class GiftDetailComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    this.giftService.getById(this.context.giftId)
-      .subscribe((gift: Gift) => {
-        this.gift = gift;
-        this.isSessionUser = this.sessionService.isSessionUser(this.gift.user._id);
-        this.changeDetector.markForCheck();
-      });
+    this.gift = this.context.gift;
+    this.isSessionUser = this.sessionService.isSessionUser(this.gift.user._id);
   }
 
   public onDibChange(): void {

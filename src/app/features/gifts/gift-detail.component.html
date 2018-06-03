@@ -7,17 +7,15 @@
   <gd-modal-body>
     <gd-row>
       <gd-column screenSmall="8">
+        <pre>{{ gift | json }}</pre>
+      </gd-column>
+      <gd-column screenSmall="4">
         <gd-dib-controls
           [gift]="gift"
           (change)="onDibChange($event)"
         >
         </gd-dib-controls>
-        <pre>
-{{ gift | json }}
-        </pre>
-      </gd-column>
-      <gd-column screenSmall="4">
-        <div class="gd-button-container">
+        <div class="gd-button-group">
           <button *ngIf="isSessionUser && !gift.isReceived"
             class="gd-button gd-button-primary gd-button-block"
             type="button"

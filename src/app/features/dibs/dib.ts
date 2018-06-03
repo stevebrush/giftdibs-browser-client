@@ -1,14 +1,12 @@
-// import {
-//   Gift
-// } from '../gifts';
-
 import {
   User
 } from '../users';
 
 export interface Dib {
   _id?: string;
-  giftId: string;
+  isAnonymous?: boolean;
   quantity: number;
+  notes?: string;
+  pricePaid?: number;
   user: User;
 }

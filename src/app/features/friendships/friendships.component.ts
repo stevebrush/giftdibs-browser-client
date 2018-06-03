@@ -9,6 +9,10 @@ import {
 } from '@angular/core';
 
 import {
+  DropdownMenuItem
+} from '../../modules';
+
+import {
   User
 } from '../users';
 
@@ -29,6 +33,8 @@ export class FriendshipsComponent implements OnInit, OnChanges {
   public followers: any[];
   public following: any[];
   public isLoading = true;
+  public followersMenuItems: DropdownMenuItem[] = [];
+  public followingMenuItems: DropdownMenuItem[] = [];
 
   constructor(
     private changeDetector: ChangeDetectorRef,
@@ -62,6 +68,20 @@ export class FriendshipsComponent implements OnInit, OnChanges {
         this.following = friendships
           .filter(friendship => friendship.user._id === this.user._id)
           .map(friendship => friendship.friend);
+
+        this.followingMenuItems = this.following.map((friend) => {
+          return {
+            label: `${friend.firstName} ${friend.lastName}`,
+            route: `/users/${friend._id}`
+          };
+        });
+
+        this.followersMenuItems = this.followers.map((friend) => {
+          return {
+            label: `${friend.firstName} ${friend.lastName}`,
+            route: `/users/${friend._id}`
+          };
+        });
 
         this.isLoading = false;
         this.changeDetector.markForCheck();

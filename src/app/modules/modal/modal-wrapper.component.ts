@@ -7,7 +7,6 @@ import {
   EventEmitter,
   Injector,
   OnDestroy,
-  OnInit,
   StaticProvider,
   Type,
   ViewChild,
@@ -35,7 +34,7 @@ import {
     gdAnimationEmerge
   ]
 })
-export class ModalWrapperComponent implements OnInit, OnDestroy {
+export class ModalWrapperComponent implements OnDestroy {
   public get closed(): Observable<void> {
     return this._closed;
   }
@@ -47,7 +46,7 @@ export class ModalWrapperComponent implements OnInit, OnDestroy {
   @ViewChild('target', { read: ViewContainerRef })
   private targetRef: ViewContainerRef;
 
-  private isOpen = true;
+  private isOpen = false;
 
   private _closed = new EventEmitter<void>();
 
@@ -56,8 +55,6 @@ export class ModalWrapperComponent implements OnInit, OnDestroy {
     private resolver: ComponentFactoryResolver,
     private injector: Injector
   ) { }
-
-  public ngOnInit(): void { }
 
   public ngOnDestroy(): void {
     this._closed.complete();
@@ -78,6 +75,7 @@ export class ModalWrapperComponent implements OnInit, OnDestroy {
 
     const factory = this.resolver.resolveComponentFactory(component);
     const componentRef = this.targetRef.createComponent(factory, undefined, injector);
+    this.isOpen = true;
     this.changeDetector.markForCheck();
 
     return componentRef;

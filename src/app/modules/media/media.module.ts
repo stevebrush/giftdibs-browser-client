@@ -8,6 +8,7 @@ import {
 
 import { MediaBodyComponent } from './media-body.component';
 import { MediaContentComponent } from './media-content.component';
+import { MediaControlsComponent } from './media-controls.component';
 import { MediaHeaderComponent } from './media-header.component';
 import { MediaHeadingComponent } from './media-heading.component';
 import { MediaThumbnailComponent } from './media-thumbnail.component';
@@ -21,8 +22,9 @@ import { MediaComponent } from './media.component';
     MediaComponent,
     MediaHeaderComponent,
     MediaHeadingComponent,
-    MediaContentComponent,
     MediaBodyComponent,
+    MediaContentComponent,
+    MediaControlsComponent,
     MediaThumbnailComponent
   ],
   declarations: [
@@ -30,6 +32,7 @@ import { MediaComponent } from './media.component';
     MediaHeaderComponent,
     MediaHeadingComponent,
     MediaContentComponent,
+    MediaControlsComponent,
     MediaBodyComponent,
     MediaThumbnailComponent
   ]

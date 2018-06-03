@@ -22,8 +22,10 @@ import {
   FormFieldModule,
   HideUntilModule,
   IconModule,
+  MediaModule,
   ModalModule,
-  RepeaterModule
+  RepeaterModule,
+  ThumbnailModule
 } from '../../modules';
 
 import {
@@ -53,10 +55,12 @@ import { WishListsRoutingModule } from './wish-lists-routing.module';
     GiftsModule,
     HideUntilModule,
     IconModule,
+    MediaModule,
     ModalModule,
     ReactiveFormsModule,
     RepeaterModule,
     RouterModule,
+    ThumbnailModule,
     WishListsRoutingModule
   ],
   exports: [

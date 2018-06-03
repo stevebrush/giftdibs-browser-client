@@ -12,7 +12,7 @@ body {
   font-family: $gd-font-family;
   color: $gd-text-color-default;
   line-height: $gd-line-height;
-  background-color: $gd-background-color-neutral-lightest;
+  background-color: #fff;
   font-weight: $gd-font-weight;
 }
 
@@ -49,11 +49,11 @@ strong {
 }
 
 .gd-container-fluid {
-  padding: 0 $gd-spacing-lg;
+  padding: $gd-spacing-xl $gd-spacing;
 }
 
 .gd-container {
-  padding: 0 $gd-spacing-lg;
+  padding: $gd-spacing-xl $gd-spacing-lg;
   max-width: 750px;
   margin-right: auto;
   margin-left: auto;
@@ -82,5 +82,13 @@ strong {
 
 .gd-rounded-corners-circle {
   display: block;
-  border-radius: 10rem;
+  border-radius: 50%;
+}
+
+.gd-text-color-danger {
+  color: $gd-text-color-danger;
+}
+
+.gd-canvas {
+  background-color: $gd-color-neutral-lighter;
 }

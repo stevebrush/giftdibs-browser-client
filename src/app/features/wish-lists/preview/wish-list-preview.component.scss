@@ -1,3 +1,33 @@
-.gd-wish-list-preview-gift-received {
-  text-decoration: line-through;
+@import '../../../../styles/mixins';
+
+$gd-wish-list-preview-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+
+.gd-wish-list-preview {
+  // .gd-wish-list-preview-button-add-item {
+  //   &:focus,
+  //   &:hover {
+  //     background-color: #fff;
+  //     box-shadow: $gd-wish-list-preview-box-shadow;
+  //   }
+  // }
+
+  // ::ng-deep {
+  //   .gd-card-body {
+  //     background-color: $gd-color-neutral-lightest;
+  //     padding: $gd-spacing-md;
+  //   }
+
+  //   .gd-repeater-item {
+  //     background-color: #fff;
+  //     padding: $gd-spacing-md;
+  //     margin-bottom: $gd-spacing-sm;
+  //     box-shadow: $gd-wish-list-preview-box-shadow;
+  //   }
+
+  //   gd-repeater-item:last-child {
+  //     .gd-repeater-item {
+  //       margin-bottom: 0;
+  //     }
+  //   }
+  // }
 }

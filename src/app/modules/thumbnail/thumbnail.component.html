@@ -1,6 +1,7 @@
 <div
   aria-hidden="true"
-  class="gd-thumbnail gd-rounded-corners-circle"
-  [ngClass]="'gd-thumbnail-' + size">
-  <gd-icon icon="user"></gd-icon>
+  class="gd-thumbnail"
+  [ngClass]="classNames"
+>
+  <gd-icon [icon]="(type === 'user') ? 'user' : 'image'"></gd-icon>
 </div>

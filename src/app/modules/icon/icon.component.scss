@@ -1,11 +1,9 @@
 @import '../../../styles/mixins';
 
-.gd-icon {}
-
 .gd-icon-success {
   color: $gd-color-success;
 }
 
 .gd-icon-deemphasized {
-  color: $gd-text-color-deemphasized;
+  color: $gd-color-neutral-lighter;
 }

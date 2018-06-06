@@ -1,6 +1,6 @@
 // #region imports
 import {
-  AfterContentInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   Input,
@@ -27,6 +27,7 @@ import {
   DropdownMenuItem,
   ModalClosedEventArgs,
   ModalService,
+  ModalSize,
   WindowRefService
 } from '../../modules';
 
@@ -38,19 +39,27 @@ import {
   WishList
 } from '../wish-lists/wish-list';
 
+import {
+  WishListBoardService
+} from '../wish-lists/wish-list-board.service';
+
 import { Gift } from './gift';
 import { GiftDetailContext } from './gift-detail-context';
 import { GiftDetailComponent } from './gift-detail.component';
 import { GiftEditContext } from './gift-edit-context';
 import { GiftEditComponent } from './gift-edit.component';
+import { GiftMoveContext } from './gift-move-context';
+import { GiftMoveComponent } from './gift-move.component';
 import { GiftService } from './gift.service';
 // #endregion
 
 @Component({
   selector: 'gd-gift-preview',
-  templateUrl: './gift-preview.component.html'
+  templateUrl: './gift-preview.component.html',
+  styleUrls: ['./gift-preview.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GiftPreviewComponent implements OnInit, AfterContentInit, OnDestroy {
+export class GiftPreviewComponent implements OnInit, OnDestroy {
   @Input()
   public gift: Gift;
 
@@ -62,39 +71,20 @@ export class GiftPreviewComponent implements OnInit, AfterContentInit, OnDestroy
   public menuItems: DropdownMenuItem[] = [
     {
       label: 'Edit',
-      icon: 'pencil-alt',
       action: () => {
         this.openGiftEditModal();
       }
     },
     {
       label: 'Move',
-      icon: 'arrows-alt-h',
       action: () => {
-        console.log('Move item!');
+        this.openGiftMoveModal();
       }
     },
     {
-      label: 'Mark received',
-      icon: 'check',
-      action: () => {
-        console.log('Mark received!');
-      },
-      addSeparatorAfter: true
-    },
-    {
       label: 'Delete',
-      icon: 'trash-alt',
       action: () => {
-        this.giftService.remove(this.gift._id).subscribe(
-          () => {
-            this.wishList.gifts.splice(this.wishList.gifts.indexOf(this.gift), 1);
-            this.changeDetector.markForCheck();
-          },
-          (err: any) => {
-            this.alertService.error(err.error.message);
-          }
-        );
+        this.deleteGift();
       }
     }
   ];
@@ -109,7 +99,8 @@ export class GiftPreviewComponent implements OnInit, AfterContentInit, OnDestroy
     private modalService: ModalService,
     private router: Router,
     private sessionService: SessionService,
-    private windowRef: WindowRefService
+    private windowRef: WindowRefService,
+    private wishListBoardService: WishListBoardService
   ) { }
 
   public ngOnInit(): void {
@@ -131,8 +122,6 @@ export class GiftPreviewComponent implements OnInit, AfterContentInit, OnDestroy
         }
       });
   }
-
-  public ngAfterContentInit(): void { }
 
   public ngOnDestroy(): void {
     this.ngUnsubscribe.next();
@@ -176,11 +165,49 @@ export class GiftPreviewComponent implements OnInit, AfterContentInit, OnDestroy
     });
   }
 
+  private openGiftMoveModal(): void {
+    const context = new GiftMoveContext(
+      this.gift,
+      this.wishList
+    );
+
+    const modalInstance = this.modalService.open(GiftMoveComponent, {
+      size: ModalSize.Small,
+      providers: [{
+        provide: GiftMoveContext,
+        useValue: context
+      }]
+    });
+
+    modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
+      if (args.reason === 'save') {
+        // Notify the board service that wish lists have changed:
+        if (args.data.wishListIds) {
+          this.wishListBoardService.notifyChange({
+            wishListIds: args.data.wishListIds
+          });
+        }
+      }
+    });
+  }
+
   private clearGiftIdFromUrl(): void {
     // Remove giftId from URL.
     this.router.navigate(['.'], {
       relativeTo: this.activatedRoute,
       queryParams: {}
     });
+  }
+
+  private deleteGift(): void {
+    this.giftService.remove(this.gift._id).subscribe(
+      () => {
+        this.wishList.gifts.splice(this.wishList.gifts.indexOf(this.gift), 1);
+        this.changeDetector.markForCheck();
+      },
+      (err: any) => {
+        this.alertService.error(err.error.message);
+      }
+    );
   }
 }

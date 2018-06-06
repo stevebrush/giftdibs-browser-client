@@ -1,5 +1,6 @@
 <div
   class="gd-modal-wrapper"
+  [ngClass]="'gd-modal-wrapper-' + size"
   [@gdAnimationEmerge]="animationState"
   (@gdAnimationEmerge.done)="onAnimationDone($event)"
 >

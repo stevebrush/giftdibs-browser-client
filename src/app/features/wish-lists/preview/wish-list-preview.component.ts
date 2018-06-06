@@ -5,6 +5,7 @@ import {
   ElementRef,
   EventEmitter,
   Input,
+  OnDestroy,
   OnInit,
   Output,
   ViewChild
@@ -16,13 +17,13 @@ import {
 //   Router
 // } from '@angular/router';
 
-// import {
-//   Subject
-// } from 'rxjs';
+import {
+  Subject
+} from 'rxjs';
 
-// import {
-//   takeUntil
-// } from 'rxjs/operators';
+import {
+  takeUntil
+} from 'rxjs/operators';
 
 import {
   AlertService,
@@ -48,6 +49,7 @@ import { WishListEditContext } from '../edit/wish-list-edit-context';
 import { WishListEditComponent } from '../edit/wish-list-edit.component';
 
 import { WishList } from '../wish-list';
+import { WishListBoardService } from '../wish-list-board.service';
 import { WishListService } from '../wish-list.service';
 
 @Component({
@@ -56,7 +58,7 @@ import { WishListService } from '../wish-list.service';
   styleUrls: ['./wish-list-preview.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WishListPreviewComponent implements OnInit {
+export class WishListPreviewComponent implements OnInit, OnDestroy {
   @Input()
   public wishList: WishList;
 
@@ -85,7 +87,7 @@ export class WishListPreviewComponent implements OnInit {
   @ViewChild('dropdownTrigger')
   private dropdownTrigger: ElementRef;
 
-  // private ngUnsubscribe = new Subject();
+  private ngUnsubscribe = new Subject();
 
   constructor(
     // private activatedRoute: ActivatedRoute,
@@ -97,11 +99,26 @@ export class WishListPreviewComponent implements OnInit {
     // private router: Router,
     private sessionService: SessionService,
     // private windowRef: WindowRefService,
+    private wishListBoardService: WishListBoardService,
     private wishListService: WishListService
   ) { }
 
   public ngOnInit(): void {
     this.isSessionUser = this.sessionService.isSessionUser(this.wishList.user._id);
+
+    // Refresh the wish list if the board requests an update.
+    this.wishListBoardService.change.pipe(
+      takeUntil(this.ngUnsubscribe)
+    ).subscribe((change: any) => {
+      const found = (
+        change.wishListIds &&
+        change.wishListIds.find((wishListId: string) => this.wishList._id)
+      );
+
+      if (found) {
+        this.refreshWishList();
+      }
+    });
 
     // // Show gift detail?
     // this.activatedRoute.queryParams
@@ -128,10 +145,10 @@ export class WishListPreviewComponent implements OnInit {
     //   });
   }
 
-  // public ngOnDestroy(): void {
-  //   this.ngUnsubscribe.next();
-  //   this.ngUnsubscribe.complete();
-  // }
+  public ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
 
   public openGiftCreateModal(): void {
     const context = new GiftEditContext(undefined, this.wishList._id);
@@ -236,12 +253,7 @@ export class WishListPreviewComponent implements OnInit {
 
     modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
       if (args.reason === 'save') {
-        this.wishListService
-          .getById(this.wishList._id)
-          .subscribe((wishList: WishList) => {
-            this.wishList = wishList;
-            this.changeDetector.markForCheck();
-          });
+        this.refreshWishList();
       }
 
       this.dropdownTrigger.nativeElement.focus();
@@ -275,4 +287,13 @@ export class WishListPreviewComponent implements OnInit {
   //     queryParams: {}
   //   });
   // }
+
+  private refreshWishList(): void {
+    this.wishListService
+      .getById(this.wishList._id)
+      .subscribe((wishList: WishList) => {
+        this.wishList = wishList;
+        this.changeDetector.markForCheck();
+      });
+  }
 }

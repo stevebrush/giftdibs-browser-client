@@ -8,11 +8,11 @@ import {
 
 export interface Gift {
   _id?: string;
-  budget: number;
+  budget?: number;
   dibs?: Dib[];
   isReceived?: boolean;
-  name: string;
-  quantity: number;
+  name?: string;
+  quantity?: number;
   user?: User;
   wishListId?: string;
 }

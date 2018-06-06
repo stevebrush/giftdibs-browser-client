@@ -1,6 +1,12 @@
 import {
-  OverlayConfig
-} from '../../overlay/overlay-config';
+  StaticProvider
+} from '@angular/core';
 
-/* tslint:disable-next-line:no-empty-interface */
-export interface ModalConfig extends OverlayConfig { }
+import {
+  ModalSize
+} from './modal-size';
+
+export interface ModalConfig {
+  providers?: StaticProvider[];
+  size?: ModalSize;
+}

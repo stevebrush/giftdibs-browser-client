@@ -1,3 +1,4 @@
+// #region imports
 import {
   NgModule
 } from '@angular/core';
@@ -39,6 +40,10 @@ import {
 } from './gift-edit.component';
 
 import {
+  GiftMoveComponent
+} from './gift-move.component';
+
+import {
   GiftPreviewComponent
 } from './gift-preview.component';
 
@@ -49,17 +54,20 @@ import {
 import {
   GiftService
 } from './gift.service';
+// #endregion
 
 @NgModule({
   declarations: [
     GiftDetailComponent,
     GiftEditComponent,
+    GiftMoveComponent,
     GiftPreviewComponent,
     GiftPriorityComponent
   ],
   entryComponents: [
     GiftDetailComponent,
-    GiftEditComponent
+    GiftEditComponent,
+    GiftMoveComponent
   ],
   imports: [
     CheckboxModule,

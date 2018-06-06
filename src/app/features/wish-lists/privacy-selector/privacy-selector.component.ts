@@ -104,7 +104,7 @@ export class WishListPrivacySelectorComponent
         action: () => {
           const context = new WishListPrivacySelectorUsersContext();
           context.user = this.user;
-          context.selected = this.value._allow;
+          context.selected = this.value.allowedUserIds;
 
           const instance = this.modalService.open(WishListPrivacySelectorUsersComponent, {
             providers: [{
@@ -117,7 +117,7 @@ export class WishListPrivacySelectorComponent
             if (args.reason === 'save') {
               this.value = {
                 type: 'custom',
-                _allow: args.data.value
+                allowedUserIds: args.data.value
               };
               this.changeDetector.markForCheck();
             }

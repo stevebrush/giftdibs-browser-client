@@ -7,7 +7,6 @@ import {
   EventEmitter,
   Injector,
   OnDestroy,
-  StaticProvider,
   Type,
   ViewChild,
   ViewContainerRef
@@ -24,6 +23,11 @@ import {
 import {
   gdAnimationEmerge
 } from '../animation';
+
+import {
+  ModalConfig,
+  ModalSize
+} from './types';
 
 @Component({
   selector: 'gd-modal-wrapper',
@@ -43,12 +47,21 @@ export class ModalWrapperComponent implements OnDestroy {
     return (this.isOpen) ? 'open' : 'closed';
   }
 
+  public get size(): ModalSize {
+    return this._size || ModalSize.Medium;
+  }
+
+  public set size(value: ModalSize) {
+    this._size = value;
+  }
+
   @ViewChild('target', { read: ViewContainerRef })
   private targetRef: ViewContainerRef;
 
   private isOpen = false;
 
   private _closed = new EventEmitter<void>();
+  private _size: ModalSize;
 
   constructor(
     private changeDetector: ChangeDetectorRef,
@@ -67,15 +80,17 @@ export class ModalWrapperComponent implements OnDestroy {
     }
   }
 
-  public attach<T>(component: Type<T>, providers: StaticProvider[]): ComponentRef<T> {
+  public attach<T>(component: Type<T>, config: ModalConfig): ComponentRef<T> {
     const injector = Injector.create({
-      providers: providers,
+      providers: config.providers,
       parent: this.injector
     });
 
     const factory = this.resolver.resolveComponentFactory(component);
     const componentRef = this.targetRef.createComponent(factory, undefined, injector);
+
     this.isOpen = true;
+    this.size = config.size;
     this.changeDetector.markForCheck();
 
     return componentRef;

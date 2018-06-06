@@ -70,9 +70,11 @@ export class DibControlsComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.isSessionUser = this.sessionService.isSessionUser(this.gift.user._id);
-    this.dib = this.gift.dibs.find((dib) => {
-      return (dib.user._id === this.sessionService.user._id);
-    });
+    if (this.gift.dibs) {
+      this.dib = this.gift.dibs.find((dib) => {
+        return (dib.user._id === this.sessionService.user._id);
+      });
+    }
   }
 
   public ngOnDestroy(): void {

@@ -1,6 +1,8 @@
-<div
+<a
   class="gd-gift-preview"
   [ngClass]="{ 'gd-gift-preview-received': gift.isReceived }"
+  [routerLink]="[]"
+  [queryParams]="{ giftId: gift._id }"
 >
   <gd-media>
     <gd-media-thumbnail>
@@ -10,14 +12,10 @@
     <gd-media-content>
       <gd-media-header>
         <gd-media-heading>
-          <a
-            [routerLink]="[]"
-            [queryParams]="{ giftId: gift._id }"
-          >{{ gift.name }}
-            <ng-template [ngIf]="gift.quantity > 1">
-              ({{ gift.quantity }})
-            </ng-template>
-          </a>
+          {{ gift.name }}
+          <ng-template [ngIf]="gift.quantity > 1">
+            ({{ gift.quantity }})
+          </ng-template>
         </gd-media-heading>
         <gd-media-controls>
           <button *ngIf="isSessionUser"
@@ -26,6 +24,7 @@
             type="button"
             gdDropdownMenuTrigger
             [menuItems]="menuItems"
+            (click)="$event.stopPropagation();$event.preventDefault();"
           >
             <gd-icon icon="ellipsis-v"></gd-icon>
           </button>
@@ -47,4 +46,4 @@
       </gd-media-body>
     </gd-media-content>
   </gd-media>
-</div>
+</a>

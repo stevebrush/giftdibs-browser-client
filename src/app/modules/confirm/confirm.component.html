@@ -11,17 +11,19 @@
     {{ message }}
   </p>
 
-  <button
-    class="gd-button gd-button-primary"
-    type="button"
-    (click)="confirm()">
-    Okay
-  </button>
+  <div class="gd-button-group">
+    <button
+      class="gd-button gd-button-primary"
+      type="button"
+      (click)="confirm()">
+      Okay
+    </button>
 
-  <button
-    class="gd-button gd-button-default"
-    type="button"
-    (click)="cancel()">
-    Cancel
-  </button>
+    <button
+      class="gd-button gd-button-default"
+      type="button"
+      (click)="cancel()">
+      Cancel
+    </button>
+  </div>
 </div>

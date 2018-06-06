@@ -33,6 +33,7 @@ import {
 } from '../account/session';
 
 import { WishList } from '../wish-lists/wish-list';
+import { WishListBoardService } from '../wish-lists/wish-list-board.service';
 import { WishListService } from '../wish-lists/wish-list.service';
 
 import { User } from './user';
@@ -42,7 +43,10 @@ import { UserService } from './user.service';
   selector: 'gd-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    WishListBoardService
+  ]
 })
 export class UserComponent implements OnInit, OnDestroy {
   public isLoading = true;

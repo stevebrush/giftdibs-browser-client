@@ -30,21 +30,25 @@ export class ModalService {
     config: ModalConfig
   ): ModalInstance<T> {
     const settings = Object.assign({}, {
-      showBackdrop: true
+      providers: []
     }, config);
 
     const modalInstance = new ModalInstance<T>();
 
     const overlayInstance = this.overlayService.attach(
       ModalWrapperComponent,
-      settings
+      {
+        showBackdrop: true
+      }
     );
 
-    const wrapper = overlayInstance.componentInstance;
-    const componentRef = wrapper.attach(component, [{
+    settings.providers.push({
       provide: ModalInstance,
       useValue: modalInstance
-    }]);
+    });
+
+    const wrapper = overlayInstance.componentInstance;
+    const componentRef = wrapper.attach(component, settings);
 
     modalInstance.wrapperInstance = wrapper;
 

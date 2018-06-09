@@ -75,14 +75,14 @@ export class RegisterComponent {
 
   private createForm(): void {
     this.registerForm = this.formBuilder.group({
-      firstName: new FormControl(null, [
+      first_name: new FormControl(null, [
         Validators.required
       ]),
-      lastName: new FormControl(null, [
+      last_name: new FormControl(null, [
         Validators.required
       ]),
-      gdNickname: null,
-      emailAddress: new FormControl(null, [
+      gd_nickname: null,
+      email_address: new FormControl(null, [
         Validators.required
       ]),
       password: new FormControl(null, [

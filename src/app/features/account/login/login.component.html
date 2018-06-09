@@ -12,43 +12,50 @@
     aria-label="Log in to GiftDibs"
     [formGroup]="loginForm"
     (ngSubmit)="submit()"
-    novalidate>
+    novalidate
+  >
 
     <gd-form-field [errors]="errors">
       <label
         class="gd-control-label"
-        for="gd-login-email-address">
+        for="gd-login-email-address"
+      >
         Email
       </label>
       <input
         type="email"
         class="gd-form-control"
         id="gd-login-email-address"
-        formControlName="emailAddress">
+        formControlName="email_address"
+      />
     </gd-form-field>
 
     <gd-form-field [errors]="errors">
       <label
         class="gd-control-label"
-        for="gd-login-password">
+        for="gd-login-password"
+      >
         Password
       </label>
       <gd-password-viewer
         [disabled]="loginForm.disabled"
-        [inputElement]="passwordInput">
+        [inputElement]="passwordInput"
+      >
         <input
           type="password"
           class="gd-form-control"
           id="gd-login-password"
           formControlName="password"
-          #passwordInput>
+          #passwordInput
+        />
       </gd-password-viewer>
     </gd-form-field>
 
     <button
       class="gd-button gd-button-primary"
       type="submit"
-      [disabled]="loginForm.disabled">
+      [disabled]="loginForm.disabled"
+    >
       Log in
     </button>
   </form>

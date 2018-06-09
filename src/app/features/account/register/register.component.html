@@ -12,37 +12,41 @@
     [formGroup]="registerForm"
     (ngSubmit)="submit()"
     aria-label="New user registration information"
-    novalidate>
-
+    novalidate
+  >
     <gd-row>
       <gd-column screenSmall="6">
         <gd-form-field [errors]="errors">
           <label
             class="gd-control-label"
-            for="gd-register-first-name">
+            for="gd-register-first-name"
+          >
             First name
           </label>
           <input
             type="text"
             class="gd-form-control"
             id="gd-register-first-name"
-            formControlName="firstName"
-            autocomplete="off">
+            formControlName="first_name"
+            autocomplete="off"
+          />
         </gd-form-field>
       </gd-column>
       <gd-column screenSmall="6">
         <gd-form-field [errors]="errors">
           <label
             class="gd-control-label"
-            for="gd-register-last-name">
+            for="gd-register-last-name"
+          >
             Last name
           </label>
           <input
             type="text"
             class="gd-form-control"
             id="gd-register-last-name"
-            formControlName="lastName"
-            autocomplete="off">
+            formControlName="last_name"
+            autocomplete="off"
+          />
         </gd-form-field>
       </gd-column>
     </gd-row>
@@ -50,51 +54,59 @@
     <gd-form-field [errors]="errors">
       <label
         class="gd-control-label"
-        for="gd-register-email-address">
+        for="gd-register-email-address"
+      >
         Email
       </label>
       <input
         type="email"
         class="gd-form-control"
         id="gd-register-email-address"
-        formControlName="emailAddress"
-        autocomplete="off">
+        formControlName="email_address"
+        autocomplete="off"
+      />
     </gd-form-field>
 
     <gd-form-field [errors]="errors">
       <label
         class="gd-control-label"
-        for="gd-register-new-password">
+        for="gd-register-new-password"
+      >
         New password
       </label>
       <gd-password-viewer
         [disabled]="registerForm.disabled"
-        [inputElement]="passwordInput">
+        [inputElement]="passwordInput"
+      >
         <input
           type="password"
           class="gd-form-control"
           id="gd-register-new-password"
           formControlName="password"
           autocomplete="off"
-          #passwordInput>
+          #passwordInput
+        />
       </gd-password-viewer>
     </gd-form-field>
 
     <gd-form-field
       aria-hidden="true"
       class="gd-screen-reader-only"
-      [errors]="errors">
+      [errors]="errors"
+    >
       <label
         class="gd-control-label"
-        for="gd-register-nickname">
+        for="gd-register-nickname"
+      >
         Nickname
       </label>
       <input
         type="text"
         class="gd-form-control"
         id="gd-register-nickname"
-        formControlName="gdNickname"
-        autocomplete="off">
+        formControlName="gd_nickname"
+        autocomplete="off"
+      />
     </gd-form-field>
 
     <p>

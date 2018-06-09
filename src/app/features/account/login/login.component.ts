@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
 
     const formData = this.loginForm.value;
     this.accountService
-      .login(formData.emailAddress, formData.password)
+      .login(formData.email_address, formData.password)
       .subscribe(
         (result: any) => {
           let redirect;
@@ -89,7 +89,7 @@ export class LoginComponent implements OnInit {
 
   private createForm(): void {
     this.loginForm = this.formBuilder.group({
-      emailAddress: new FormControl(null, [
+      email_address: new FormControl(null, [
         Validators.required
       ]),
       password: new FormControl(null, [

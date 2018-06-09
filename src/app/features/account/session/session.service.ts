@@ -7,7 +7,9 @@ import {
   BehaviorSubject
 } from 'rxjs';
 
-import { SessionUser } from './session-user';
+import {
+  SessionUser
+} from './session-user';
 
 @Injectable()
 export class SessionService implements OnDestroy {

@@ -10,7 +10,9 @@ import {
   Observable
 } from 'rxjs';
 
-import { environment } from '../../../environments/environment';
+import {
+  environment
+} from '../../../environments/environment';
 
 @Injectable()
 export class AccountService {
@@ -21,11 +23,16 @@ export class AccountService {
   ) { }
 
   public login(emailAddress: string, password: string): Observable<any> {
-    return this.http.post(`${this.resourceUrl}/login`, { emailAddress, password });
+    return this.http.post(`${this.resourceUrl}/login`, {
+      email_address: emailAddress,
+      password
+    });
   }
 
   public forgotten(emailAddress: string): Observable<any> {
-    return this.http.post(`${this.resourceUrl}/forgotten`, { emailAddress });
+    return this.http.post(`${this.resourceUrl}/forgotten`, {
+      email_address: emailAddress
+    });
   }
 
   public resetPassword(formData: any): Observable<any> {
@@ -41,13 +48,15 @@ export class AccountService {
   }
 
   public verifyEmailAddress(emailAddressVerificationToken: string): Observable<any> {
-    return this.http.post(`${this.resourceUrl}/verify-email`, { emailAddressVerificationToken });
+    return this.http.post(`${this.resourceUrl}/verify-email`, {
+      email_address_verification_token: emailAddressVerificationToken
+    });
   }
 
   public destroyWithPassword(userId: string, password: string): Observable<any> {
     return this.http.post(`${this.resourceUrl}/delete-account`, {
       password,
-      userId
+      member_id: userId
     });
   }
 }

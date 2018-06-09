@@ -26,6 +26,7 @@ import {
 import {
   SessionService
 } from './session.service';
+import { SessionUser } from './session-user';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -53,7 +54,13 @@ export class AuthInterceptor implements HttpInterceptor {
             if (event instanceof HttpResponse) {
               const authResponse = event.body.authResponse;
               if (authResponse) {
-                this.sessionService.user = authResponse.user;
+                const sessionUser: SessionUser = {
+                  id: authResponse.user.id,
+                  firstName: authResponse.user.first_name,
+                  lastName: authResponse.user.last_name,
+                  emailAddressVerified: authResponse.user.email_address_verified
+                };
+                this.sessionService.user = sessionUser;
                 this.sessionService.token = authResponse.token;
               }
             }

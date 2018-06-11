@@ -104,21 +104,23 @@ export class WishListPreviewComponent implements OnInit, OnDestroy {
   ) { }
 
   public ngOnInit(): void {
-    this.isSessionUser = this.sessionService.isSessionUser(this.wishList.user._id);
+    this.isSessionUser = this.sessionService.isSessionUser(this.wishList.user.id);
 
     // Refresh the wish list if the board requests an update.
-    this.wishListBoardService.change.pipe(
-      takeUntil(this.ngUnsubscribe)
-    ).subscribe((change: any) => {
-      const found = (
-        change.wishListIds &&
-        change.wishListIds.find((wishListId: string) => this.wishList._id)
-      );
+    this.wishListBoardService.change
+      .pipe(
+        takeUntil(this.ngUnsubscribe)
+      )
+      .subscribe((change: any) => {
+        const found = (
+          change.wishListIds &&
+          change.wishListIds.find((wishListId: string) => this.wishList.id)
+        );
 
-      if (found) {
-        this.refreshWishList();
-      }
-    });
+        if (found) {
+          this.refreshWishList();
+        }
+      });
 
     // // Show gift detail?
     // this.activatedRoute.queryParams
@@ -135,7 +137,7 @@ export class WishListPreviewComponent implements OnInit, OnDestroy {
     //         return;
     //       }
 
-    //       const found = this.wishList.gifts.find((gift) => gift._id === giftId);
+    //       const found = this.wishList.gifts.find((gift) => gift.id === giftId);
     //       if (found) {
     //         this.windowRef.nativeWindow.setTimeout(() => {
     //           this.openGiftDetailModal(giftId);
@@ -151,7 +153,7 @@ export class WishListPreviewComponent implements OnInit, OnDestroy {
   }
 
   public openGiftCreateModal(): void {
-    const context = new GiftEditContext(undefined, this.wishList._id);
+    const context = new GiftEditContext(undefined, this.wishList.id);
 
     const modalInstance = this.modalService.open(GiftEditComponent, {
       providers: [{
@@ -169,7 +171,7 @@ export class WishListPreviewComponent implements OnInit, OnDestroy {
         this.wishList.gifts.push(args.data.gift);
         this.changeDetector.markForCheck();
         // this.giftService
-        //   .getById(args.data.gift._id)
+        //   .getById(args.data.gift.id)
         //   .subscribe(
         //     (newGift: Gift) => {
         //       if (!this.wishList.gifts) {
@@ -200,9 +202,9 @@ export class WishListPreviewComponent implements OnInit, OnDestroy {
   //     {
   //       label: 'Delete',
   //       action: () => {
-  //         this.giftService.remove(gift._id).subscribe(
+  //         this.giftService.remove(gift.id).subscribe(
   //           () => {
-  //             const oldGift = this.wishList.gifts.find((g) => g._id === gift._id);
+  //             const oldGift = this.wishList.gifts.find((g) => g.id === gift.id);
   //             this.wishList.gifts.splice(this.wishList.gifts.indexOf(oldGift), 1);
   //             this.changeDetector.markForCheck();
   //           },
@@ -229,7 +231,7 @@ export class WishListPreviewComponent implements OnInit, OnDestroy {
   //     // Update the gift in the wish list preview.
   //     const updatedGift = args.data.gift;
   //     this.wishList.gifts.forEach((gift: Gift, j: number) => {
-  //       if (gift._id === updatedGift._id) {
+  //       if (gift.id === updatedGift.id) {
   //         this.wishList.gifts[j] = updatedGift;
   //       }
   //     });
@@ -266,7 +268,7 @@ export class WishListPreviewComponent implements OnInit, OnDestroy {
     }, (answer: ConfirmAnswer) => {
       if (answer.type === 'okay') {
         this.wishListService
-          .remove(this.wishList._id)
+          .remove(this.wishList.id)
           .subscribe(
             (data: any) => {
               this.removed.emit();
@@ -280,17 +282,9 @@ export class WishListPreviewComponent implements OnInit, OnDestroy {
     });
   }
 
-  // private clearGiftIdFromUrl(): void {
-  //   // Remove giftId from URL.
-  //   this.router.navigate(['.'], {
-  //     relativeTo: this.activatedRoute,
-  //     queryParams: {}
-  //   });
-  // }
-
   private refreshWishList(): void {
     this.wishListService
-      .getById(this.wishList._id)
+      .getById(this.wishList.id)
       .subscribe((wishList: WishList) => {
         this.wishList = wishList;
         this.changeDetector.markForCheck();

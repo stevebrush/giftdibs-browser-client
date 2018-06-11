@@ -92,7 +92,7 @@ export class WishListComponent implements OnInit {
       .subscribe(
         (wishList: WishList) => {
           this.wishList = wishList;
-          this.isSessionUser = this.sessionService.isSessionUser(this.wishList.user._id);
+          this.isSessionUser = this.sessionService.isSessionUser(this.wishList.user.id);
           this.isLoading = false;
           this.changeDetector.markForCheck();
         },
@@ -116,7 +116,7 @@ export class WishListComponent implements OnInit {
     modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
       // Update the gift in the wish list preview.
       // this.wishList.gifts.forEach((g: Gift) => {
-      //   if (g._id === args.data.gift._id) {
+      //   if (g.id === args.data.gift.id) {
       //     g = args.data.gift;
       //     this.changeDetector.markForCheck();
       //   }

@@ -53,10 +53,10 @@ export class WishListPrivacySelectorUsersComponent implements OnInit {
     this.usersForm.controls.friends.reset(this.context.selected);
 
     this.friendshipService
-      .getAllByUserId(this.context.user._id)
+      .getAllByUserId(this.context.user.id)
       .subscribe((friendships: Friendship[]) => {
         const friends: User[] = friendships.map((friendship: Friendship) => {
-          if (friendship.user._id === this.context.user._id) {
+          if (friendship.user.id === this.context.user.id) {
             return friendship.friend;
           }
 
@@ -65,7 +65,7 @@ export class WishListPrivacySelectorUsersComponent implements OnInit {
 
         const unique: User[] = [];
         friends.forEach(friend => {
-          const found = unique.find(u => u._id === friend._id);
+          const found = unique.find(u => u.id === friend.id);
           if (!found) {
             unique.push(friend);
           }
@@ -73,7 +73,7 @@ export class WishListPrivacySelectorUsersComponent implements OnInit {
 
         this.choices = unique.map((friend) => {
           return {
-            value: friend._id,
+            value: friend.id,
             label: `${friend.firstName} ${friend.lastName}`
           };
         });

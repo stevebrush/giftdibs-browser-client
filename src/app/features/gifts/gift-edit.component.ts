@@ -75,14 +75,14 @@ export class GiftEditComponent implements OnInit {
 
     let obs: any;
     if (this.gift) {
-      obs = this.giftService.update(this.gift._id, formData);
+      obs = this.giftService.update(this.gift.id, formData);
     } else {
       obs = this.giftService.create(this.wishListId, formData);
     }
 
     obs.subscribe(
       (result: any) => {
-        const giftId = (this.gift) ? this.gift._id : result.data.giftId;
+        const giftId = (this.gift) ? this.gift.id : result.data.giftId;
         this.giftService.getById(giftId).subscribe((gift: Gift) => {
           this.modal.close('save', { gift });
         });

@@ -104,7 +104,7 @@ export class GiftPreviewComponent implements OnInit, OnDestroy {
   ) { }
 
   public ngOnInit(): void {
-    this.isSessionUser = this.sessionService.isSessionUser(this.wishList.user._id);
+    this.isSessionUser = this.sessionService.isSessionUser(this.wishList.user.id);
 
     // Show gift detail?
     this.activatedRoute.queryParams
@@ -114,7 +114,7 @@ export class GiftPreviewComponent implements OnInit, OnDestroy {
       .subscribe((params: Params) => {
         const giftId = params.giftId;
         if (giftId) {
-          if (this.gift._id === giftId) {
+          if (this.gift.id === giftId) {
             this.windowRef.nativeWindow.setTimeout(() => {
               this.openGiftDetailModal();
             });
@@ -129,7 +129,7 @@ export class GiftPreviewComponent implements OnInit, OnDestroy {
   }
 
   private openGiftEditModal(): void {
-    const context = new GiftEditContext(this.gift, this.wishList._id);
+    const context = new GiftEditContext(this.gift, this.wishList.id);
 
     const modalInstance = this.modalService.open(GiftEditComponent, {
       providers: [{
@@ -147,7 +147,7 @@ export class GiftPreviewComponent implements OnInit, OnDestroy {
   }
 
   private openGiftDetailModal(): void {
-    this.giftService.getById(this.gift._id).subscribe((gift: Gift) => {
+    this.giftService.getById(this.gift.id).subscribe((gift: Gift) => {
       const context = new GiftDetailContext(gift);
 
       const modalInstance = this.modalService.open(GiftDetailComponent, {
@@ -200,7 +200,7 @@ export class GiftPreviewComponent implements OnInit, OnDestroy {
   }
 
   private deleteGift(): void {
-    this.giftService.remove(this.gift._id).subscribe(
+    this.giftService.remove(this.gift.id).subscribe(
       () => {
         this.wishList.gifts.splice(this.wishList.gifts.indexOf(this.gift), 1);
         this.changeDetector.markForCheck();

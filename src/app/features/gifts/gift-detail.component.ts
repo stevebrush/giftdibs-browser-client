@@ -57,11 +57,11 @@ export class GiftDetailComponent implements OnInit {
 
   public ngOnInit(): void {
     this.gift = this.context.gift;
-    this.isSessionUser = this.sessionService.isSessionUser(this.gift.user._id);
+    this.isSessionUser = this.sessionService.isSessionUser(this.gift.user.id);
   }
 
   public onDibChange(): void {
-    this.giftService.getById(this.gift._id)
+    this.giftService.getById(this.gift.id)
       .subscribe((gift: Gift) => {
         this.gift = gift;
         this.changeDetector.markForCheck();
@@ -77,7 +77,7 @@ export class GiftDetailComponent implements OnInit {
     }, (answer: ConfirmAnswer) => {
       if (answer.type === 'okay') {
         this.gift.isReceived = true;
-        this.giftService.update(this.gift._id, this.gift)
+        this.giftService.update(this.gift.id, this.gift)
           .pipe(
             finalize(() => {
               this.isLoading = false;

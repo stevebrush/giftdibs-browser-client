@@ -48,8 +48,8 @@ export class FollowButtonComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    const sessionUserId = this.sessionService.user._id;
-    this.isSessionUser = this.sessionService.isSessionUser(this.friend._id);
+    const sessionUserId = this.sessionService.user.id;
+    this.isSessionUser = this.sessionService.isSessionUser(this.friend.id);
 
     this.friendshipService
       .getAllByUserId(sessionUserId)
@@ -66,7 +66,7 @@ export class FollowButtonComponent implements OnInit {
     this.changeDetector.markForCheck();
 
     this.friendshipService
-      .create(this.friend._id)
+      .create(this.friend.id)
       .pipe(
         finalize(() => {
           this.isLoading = false;
@@ -74,10 +74,9 @@ export class FollowButtonComponent implements OnInit {
         })
       )
       .subscribe(
-        (data: any) => {
+        (result: any) => {
           this.isFollowing = true;
-          this.friendshipId = data.data.friendship._id;
-          this.alertService.success(data.message);
+          this.friendshipId = result.data.friendshipId;
         },
         (err: any) => {
           this.alertService.error(err.error.message);
@@ -100,7 +99,6 @@ export class FollowButtonComponent implements OnInit {
       .subscribe(
         (data: any) => {
           this.isFollowing = false;
-          this.alertService.success(data.message);
         },
         (err: any) => {
           this.alertService.error(err.error.message);
@@ -109,14 +107,14 @@ export class FollowButtonComponent implements OnInit {
   }
 
   private getSessionUserFriendship(friendships: Friendship[]): string {
-    const sessionUserId = this.sessionService.user._id;
+    const sessionUserId = this.sessionService.user.id;
     const found = friendships.find((friendship: Friendship) => {
       return (
-        friendship.user._id === sessionUserId &&
-        friendship.friend._id === this.friend._id
+        friendship.user.id === sessionUserId &&
+        friendship.friend.id === this.friend.id
       );
     });
 
-    return found && found._id;
+    return found && found.id;
   }
 }

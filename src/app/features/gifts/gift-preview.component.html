@@ -2,7 +2,7 @@
   class="gd-gift-preview"
   [ngClass]="{ 'gd-gift-preview-received': gift.isReceived }"
   [routerLink]="[]"
-  [queryParams]="{ giftId: gift._id }"
+  [queryParams]="{ giftId: gift.id }"
 >
   <gd-media>
     <gd-media-thumbnail>

@@ -7,7 +7,7 @@ import {
 } from '../users';
 
 export interface Gift {
-  _id?: string;
+  id?: string;
   budget?: number;
   dibs?: Dib[];
   isReceived?: boolean;

@@ -6,7 +6,7 @@
       {{ wishList.name }}
     </h1>
     <a
-      [routerLink]="['/users', wishList.user._id]"
+      [routerLink]="['/users', wishList.user.id]"
     >
       {{ wishList.user.firstName }} {{ wishList.user.lastName }}
     </a>
@@ -22,7 +22,7 @@
             'gd-text-deemphasized': gift.isReceived
           }"
           [routerLink]="[]"
-          [queryParams]="{ giftId: gift._id }"
+          [queryParams]="{ giftId: gift.id }"
         >
           {{ gift.name }}
         </a>

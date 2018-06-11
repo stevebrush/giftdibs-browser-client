@@ -57,29 +57,29 @@ export class FriendshipsComponent implements OnInit, OnChanges {
     this.isLoading = true;
     this.changeDetector.markForCheck();
     this.friendshipService
-      .getAllByUserId(this.user._id)
+      .getAllByUserId(this.user.id)
       .subscribe((friendships: Friendship[]) => {
         this.friendships = friendships;
 
         this.followers = friendships
-          .filter(friendship => friendship.friend._id === this.user._id)
+          .filter(friendship => friendship.friend.id === this.user.id)
           .map(friendship => friendship.user);
 
         this.following = friendships
-          .filter(friendship => friendship.user._id === this.user._id)
+          .filter(friendship => friendship.user.id === this.user.id)
           .map(friendship => friendship.friend);
 
         this.followingMenuItems = this.following.map((friend) => {
           return {
             label: `${friend.firstName} ${friend.lastName}`,
-            route: `/users/${friend._id}`
+            route: `/users/${friend.id}`
           };
         });
 
         this.followersMenuItems = this.followers.map((friend) => {
           return {
             label: `${friend.firstName} ${friend.lastName}`,
-            route: `/users/${friend._id}`
+            route: `/users/${friend.id}`
           };
         });
 

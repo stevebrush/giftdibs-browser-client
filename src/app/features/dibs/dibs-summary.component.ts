@@ -86,7 +86,7 @@ export class DibsSummaryComponent implements OnInit, OnDestroy {
   ) { }
 
   public ngOnInit(): void {
-    this.isSessionUser = this.sessionService.isSessionUser(this.gift.user._id);
+    this.isSessionUser = this.sessionService.isSessionUser(this.gift.user.id);
   }
 
   public ngOnDestroy(): void {
@@ -97,7 +97,7 @@ export class DibsSummaryComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.changeDetector.markForCheck();
 
-    this.dibService.remove(dib._id)
+    this.dibService.remove(dib.id)
       .pipe(
         finalize(() => {
           this.isLoading = false;
@@ -142,6 +142,6 @@ export class DibsSummaryComponent implements OnInit, OnDestroy {
   }
 
   public isDibOwnedBySessionUser(dib: Dib): boolean {
-    return (this.sessionService.isSessionUser(dib.user._id));
+    return (this.sessionService.isSessionUser(dib.user.id));
   }
 }

@@ -81,7 +81,7 @@ export class DibEditComponent implements OnInit {
 
     let obs: any;
     if (this.dib) {
-      obs = this.dibService.update(this.dib._id, formData);
+      obs = this.dibService.update(this.dib.id, formData);
     } else {
       obs = this.dibService.create(formData);
     }
@@ -105,7 +105,7 @@ export class DibEditComponent implements OnInit {
 
   private createForm(): void {
     this.dibForm = this.formBuilder.group({
-      giftId: new FormControl(this.gift._id),
+      giftId: new FormControl(this.gift.id),
       isAnonymous: true,
       notes: undefined,
       pricePaid: undefined,

@@ -70,8 +70,7 @@ export class WishListCreateComponent implements OnInit, AfterViewInit {
 
     const formData: WishList = this.wishListForm.value;
 
-    this.wishListService
-      .create(formData)
+    this.wishListService.create(formData)
       .subscribe(
         (result: any) => {
           this.resetFormState();

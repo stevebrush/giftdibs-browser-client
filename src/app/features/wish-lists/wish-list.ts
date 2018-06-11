@@ -11,7 +11,7 @@ import {
 } from './wish-list-privacy';
 
 export interface WishList {
-  _id?: string;
+  id?: string;
   gifts?: Gift[];
   name: string;
   privacy?: WishListPrivacy;

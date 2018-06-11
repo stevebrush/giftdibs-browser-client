@@ -96,7 +96,7 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
 
   public sendVerificationEmail(): void {
     this.accountService
-      .resendEmailAddressVerification(this.sessionUser._id)
+      .resendEmailAddressVerification(this.sessionUser.id)
       .subscribe(
         (data: any) => {
           this.sessionService.user.emailAddressVerified = true;

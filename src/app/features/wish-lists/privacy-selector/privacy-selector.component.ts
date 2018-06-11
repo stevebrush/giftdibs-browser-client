@@ -71,6 +71,7 @@ export class WishListPrivacySelectorComponent
 
   @ViewChild('privacyButton')
   private privacyButton: ElementRef;
+
   private user: User;
 
   private _value: WishListPrivacy;
@@ -106,12 +107,15 @@ export class WishListPrivacySelectorComponent
           context.user = this.user;
           context.selected = this.value.allowedUserIds;
 
-          const instance = this.modalService.open(WishListPrivacySelectorUsersComponent, {
-            providers: [{
-              provide: WishListPrivacySelectorUsersContext,
-              useValue: context
-            }]
-          });
+          const instance = this.modalService.open(
+            WishListPrivacySelectorUsersComponent,
+            {
+              providers: [{
+                provide: WishListPrivacySelectorUsersContext,
+                useValue: context
+              }]
+            }
+          );
 
           instance.closed.subscribe((args: ModalClosedEventArgs) => {
             if (args.reason === 'save') {

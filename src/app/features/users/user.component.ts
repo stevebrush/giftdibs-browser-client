@@ -82,8 +82,8 @@ export class UserComponent implements OnInit, OnDestroy {
         }),
         mergeMap((user: User) => {
           this.user = user;
-          this.isSessionUser = this.sessionService.isSessionUser(this.user._id);
-          return this.wishListService.getAllByUserId(user._id);
+          this.isSessionUser = this.sessionService.isSessionUser(this.user.id);
+          return this.wishListService.getAllByUserId(user.id);
         }),
         takeUntil(this.ngUnsubscribe)
       )
@@ -130,7 +130,7 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   public onWishListFormSaved(createdId: string): void {
-    this.wishListService.getAllByUserId(this.user._id)
+    this.wishListService.getAllByUserId(this.user.id)
       .subscribe((wishLists: WishList[]) => {
         this.wishLists = wishLists;
         this.isWishListFormActive = false;
@@ -141,7 +141,7 @@ export class UserComponent implements OnInit, OnDestroy {
 
   public onWishListRemoved(wishListId: string): void {
     this.wishLists = this.wishLists.filter((wishList: WishList) => {
-      return (wishList._id !== wishListId);
+      return (wishList.id !== wishListId);
     });
   }
 
@@ -161,9 +161,9 @@ export class UserComponent implements OnInit, OnDestroy {
   //       const updatedGift = args.data.gift;
 
   //       this.wishLists.forEach((wishList: WishList, i: number) => {
-  //         if (wishList._id === updatedGift.wishListId) {
+  //         if (wishList.id === updatedGift.wishListId) {
   //           wishList.gifts.forEach((gift: Gift, j: number) => {
-  //             if (gift._id === updatedGift._id) {
+  //             if (gift.id === updatedGift.id) {
   //               this.wishLists[i].gifts[j] = updatedGift;
   //             }
   //           });

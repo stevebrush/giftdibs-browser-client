@@ -3,7 +3,7 @@ import {
 } from '../users';
 
 export interface Dib {
-  _id?: string;
+  id?: string;
   isAnonymous?: boolean;
   quantity: number;
   notes?: string;

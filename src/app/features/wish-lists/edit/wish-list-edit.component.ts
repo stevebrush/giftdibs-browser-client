@@ -62,7 +62,7 @@ export class WishListEditComponent implements OnInit {
 
     const formData: WishList = this.wishListForm.value;
     this.wishListService
-      .update(this.wishList._id, formData)
+      .update(this.wishList.id, formData)
       .subscribe(
         (result: any) => {
           this.modal.close('save');

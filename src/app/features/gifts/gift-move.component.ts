@@ -13,12 +13,7 @@ import {
 
 import {
   Observable
-  // zip
 } from 'rxjs';
-
-// import {
-//   take, mergeMap
-// } from 'rxjs/operators';
 
 import {
   AlertService,
@@ -45,7 +40,9 @@ import {
   GiftMoveContext
 } from './gift-move-context';
 
-import { GiftService } from './gift.service';
+import {
+  GiftService
+} from './gift.service';
 // #endregion
 
 @Component({
@@ -79,9 +76,9 @@ export class GiftMoveComponent implements OnInit {
     this.gift = this.context.gift;
     this.wishList = this.context.wishList;
     this.moveForm.reset({
-      wishListId: this.wishList._id
+      wishListId: this.wishList.id
     });
-    this.wishLists = this.wishListService.getAllByUserId(this.sessionService.user._id);
+    this.wishLists = this.wishListService.getAllByUserId(this.sessionService.user.id);
   }
 
   public submit(): void {
@@ -96,7 +93,7 @@ export class GiftMoveComponent implements OnInit {
 
     const wishListId = this.moveForm.value.wishListId;
 
-    this.giftService.update(this.gift._id, { wishListId })
+    this.giftService.update(this.gift.id, { wishListId })
       .subscribe(
         (result: any) => {
           this.modal.close('save', result.data);
@@ -110,64 +107,6 @@ export class GiftMoveComponent implements OnInit {
           this.changeDetector.markForCheck();
         }
       );
-
-    // const selectedWishListId = this.moveForm.value.wishListId;
-
-    // if (selectedWishListId === this.wishList._id) {
-    //   console.log('Same!');
-    //   this.onCancelClicked();
-    //   return;
-    // }
-
-    // this.wishLists.pipe(
-    //   take(1),
-    //   mergeMap((wishLists) => {
-    //     const selectedWishList = wishLists.find(w => w._id === selectedWishListId);
-
-    //     return zip(
-    //       this.wishListService.update(selectedWishListId, selectedWishList),
-    //       this.wishListService.update(this.wishList._id, this.wishList)
-    //     );
-    //   })
-    // ).subscribe(
-    //   (result: any) => {
-    //     console.log('result?', result);
-    //   },
-    //   (err: any) => {
-    //     const error = err.error;
-    //     this.alertService.error(error.message);
-    //     this.errors = error.errors;
-    //     this.moveForm.enable();
-    //     this.isLoading = false;
-    //     this.changeDetector.markForCheck();
-    //   }
-    // );
-
-    // console.log('wishLists:', this.wishList._id, selectedWishListId);
-
-    // let obs: any;
-    // if (this.gift) {
-    //   obs = this.giftService.update(this.gift._id, formData);
-    // } else {
-    //   obs = this.giftService.create(this.wishListId, formData);
-    // }
-
-    // obs.subscribe(
-    //   (result: any) => {
-    //     const giftId = (this.gift) ? this.gift._id : result.data.giftId;
-    //     this.giftService.getById(giftId).subscribe((gift: Gift) => {
-    //       this.modal.close('save', { gift });
-    //     });
-    //   },
-    //   (err: any) => {
-    //     const error = err.error;
-    //     this.alertService.error(error.message);
-    //     this.errors = error.errors;
-    //     this.moveForm.enable();
-    //     this.isLoading = false;
-    //     this.changeDetector.markForCheck();
-    //   }
-    // );
   }
 
   public onCancelClicked(): void {

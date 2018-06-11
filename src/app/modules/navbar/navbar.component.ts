@@ -44,42 +44,15 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   public menuItems: DropdownMenuItem[] = [
     {
-      label: 'Notifications',
-      action: () => {
-        console.log('show notifications!');
-      }
-    },
-    {
-      label: 'Messages',
-      route: '/account/messages',
-      addSeparatorAfter: true
-    },
-    {
       label: 'Settings',
-      route: '/account/settings'
-    },
-    {
-      label: 'Report a problem',
-      route: '/support/feedback'
+      route: '/account/settings',
+      addSeparatorAfter: true
     },
     {
       label: 'Log out',
       action: () => {
         this.logout();
-      },
-      addSeparatorAfter: true
-    },
-    {
-      label: 'Find friends',
-      route: '/'
-    },
-    {
-      label: 'About',
-      route: '/support'
-    },
-    {
-      label: 'Help',
-      route: '/support'
+      }
     }
   ];
 

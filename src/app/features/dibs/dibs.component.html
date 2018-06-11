@@ -44,7 +44,7 @@
                                 'gd-text-deemphasized': gift.isReceived
                               }"
                               [routerLink]="[]"
-                              [queryParams]="{ giftId: gift._id }"
+                              [queryParams]="{ giftId: gift.id }"
                             >{{ gift.name }}
                               <ng-template [ngIf]="gift.quantity > 1">
                                 ({{ gift.quantity }})
@@ -117,7 +117,7 @@
         <gd-row>
           <gd-column screenXSmall="6">
             <strong>{{ gift.name }}</strong><br>
-            <a routerLink="/wish-lists/{{ gift._wishList._id }}">{{ gift._wishList.name }}</a><br>
+            <a routerLink="/wish-lists/{{ gift._wishList.id }}">{{ gift._wishList.name }}</a><br>
             ${{ gift.budget }}
           </gd-column>
           <gd-column screenXSmall="6">

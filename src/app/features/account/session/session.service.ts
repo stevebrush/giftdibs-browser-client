@@ -65,7 +65,7 @@ export class SessionService implements OnDestroy {
   }
 
   public isSessionUser(userId: string): boolean {
-    return (this.user._id === userId);
+    return (this.user.id === userId);
   }
 
   public patchUser(data: SessionUser): SessionUser {

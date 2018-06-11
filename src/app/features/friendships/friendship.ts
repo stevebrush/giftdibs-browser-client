@@ -3,7 +3,7 @@ import {
 } from '../users';
 
 export interface Friendship {
-  _id: string;
+  id: string;
   friend: User;
   user: User;
 }

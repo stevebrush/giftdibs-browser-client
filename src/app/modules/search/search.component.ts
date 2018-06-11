@@ -20,7 +20,9 @@ let autoIncrementedId = 0;
   selector: 'gd-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
-  providers: [SearchService],
+  providers: [
+    SearchService
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchComponent {
@@ -39,7 +41,7 @@ export class SearchComponent {
   }
 
   public searchResultAction: TypeaheadSearchResultAction<User> = (searchResult: User) => {
-    this.router.navigate(['/users', searchResult._id]);
-    return searchResult.firstName + ' ' + searchResult.lastName;
+    this.router.navigate(['/users', searchResult.id]);
+    return `${searchResult.firstName} ${searchResult.lastName}`;
   }
 }

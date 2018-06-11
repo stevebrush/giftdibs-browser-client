@@ -57,7 +57,7 @@ export class DeleteComponent {
     this.errors = [];
 
     const formData = this.deleteAccountForm.value;
-    this.accountService.destroyWithPassword(this.sessionService.user._id, formData.password)
+    this.accountService.destroyWithPassword(this.sessionService.user.id, formData.password)
       .subscribe(
         (result: any) => {
           this.sessionService.clearAll();

@@ -66,7 +66,7 @@ export class SettingsComponent implements OnInit {
     const formData = this.settingsForm.value;
 
     this.userService
-      .update(this.sessionService.user._id, formData)
+      .update(this.sessionService.user.id, formData)
       .pipe(
         finalize(() => {
           this.isLoading = false;
@@ -105,7 +105,7 @@ export class SettingsComponent implements OnInit {
 
   private updateForm(): void {
     this.userService
-      .getById(this.sessionService.user._id)
+      .getById(this.sessionService.user.id)
       .pipe(
         finalize(() => {
           this.isLoading = false;

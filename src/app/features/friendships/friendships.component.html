@@ -1,5 +1,5 @@
 <span class="gd-friendships gd-button-group">
-  <button
+  <button *ngIf="following?.length else followingPlaceholder"
     class="gd-button gd-button-default"
     title="Toggle following"
     type="button"
@@ -10,7 +10,7 @@
     {{ following?.length }} Following
   </button>
 
-  <button
+  <button *ngIf="followers?.length else followersPlaceholder"
     class="gd-button gd-button-default"
     title="Toggle followers"
     type="button"
@@ -20,4 +20,18 @@
     <gd-icon icon="user"></gd-icon>
     {{ followers?.length }} Followers
   </button>
+
+  <ng-template #followingPlaceholder>
+    <span class="gd-button gd-button-default gd-button-disabled">
+      <gd-icon icon="user"></gd-icon>
+      0 Following
+    </span>
+  </ng-template>
+
+  <ng-template #followersPlaceholder>
+    <span class="gd-button gd-button-default gd-button-disabled">
+      <gd-icon icon="user"></gd-icon>
+      0 Followers
+    </span>
+  </ng-template>
 </span>

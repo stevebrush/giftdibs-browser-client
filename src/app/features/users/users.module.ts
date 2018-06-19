@@ -19,6 +19,14 @@ import {
 } from '../friendships';
 
 import {
+  WishListCreateModule
+} from '../shared/wish-list-create';
+
+import {
+  WishListPreviewModule
+} from '../shared/wish-list-preview';
+
+import {
   WishListsModule
 } from '../wish-lists';
 
@@ -37,7 +45,9 @@ import { UsersComponent } from './users.component';
     MediaModule,
     UsersRoutingModule,
     ThumbnailModule,
-    WishListsModule
+    WishListsModule,
+    WishListCreateModule,
+    WishListPreviewModule
   ],
   declarations: [
     UsersComponent,

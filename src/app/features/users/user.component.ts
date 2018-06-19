@@ -32,9 +32,11 @@ import {
   SessionService
 } from '../account/session';
 
-import { WishList } from '../wish-lists/wish-list';
-import { WishListBoardService } from '../wish-lists/wish-list-board.service';
-import { WishListService } from '../wish-lists/wish-list.service';
+import {
+  WishList,
+  WishListBoardService,
+  WishListService
+} from '../wish-lists';
 
 import { User } from './user';
 import { UserService } from './user.service';

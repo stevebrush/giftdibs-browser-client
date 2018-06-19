@@ -5,6 +5,13 @@
   <ng-template [ngIf]="user">
     <div class="gd-user-header gd-container">
       <gd-media>
+        <gd-media-thumbnail>
+          <gd-thumbnail
+            size="md"
+            type="user"
+          >
+          </gd-thumbnail>
+        </gd-media-thumbnail>
         <gd-media-content>
           <gd-media-header>
             <h1>
@@ -22,13 +29,6 @@
             </gd-friendships>
           </gd-media-body>
         </gd-media-content>
-        <gd-media-thumbnail>
-          <gd-thumbnail
-            size="md"
-            type="user"
-          >
-          </gd-thumbnail>
-        </gd-media-thumbnail>
       </gd-media>
     </div>
 

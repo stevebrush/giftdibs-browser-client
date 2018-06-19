@@ -7,63 +7,50 @@ import {
 } from '@angular/common';
 
 import {
-  FormsModule,
-  ReactiveFormsModule
-} from '@angular/forms';
-
-import {
   CardModule,
-  CheckboxModule,
-  FormFieldModule,
   GridModule,
-  IconModule,
   MediaModule,
-  ModalModule,
   RepeaterModule,
   ThumbnailModule
 } from '../../modules';
 
 import {
-  DibControlsComponent
-} from './dib-controls.component';
+  DibControlsModule
+} from '../shared/dib-controls';
 
 import {
-  DibEditComponent
-} from './dib-edit.component';
+  GiftPreviewModule
+} from '../shared/gift-preview';
 
-import { DibService } from './dib.service';
-import { DibsRoutingModule } from './dibs-routing.module';
-import { DibsComponent } from './dibs.component';
+import {
+  DibService
+} from './dib.service';
+
+import {
+  DibsComponent
+} from './dibs.component';
+
+import {
+  DibsRoutingModule
+} from './dibs-routing.module';
 
 @NgModule({
   imports: [
     CardModule,
-    CheckboxModule,
     CommonModule,
+    DibControlsModule,
     DibsRoutingModule,
-    FormFieldModule,
-    FormsModule,
+    GiftPreviewModule,
     GridModule,
-    IconModule,
     MediaModule,
-    ModalModule,
-    ReactiveFormsModule,
     RepeaterModule,
     ThumbnailModule
   ],
   declarations: [
-    DibsComponent,
-    DibControlsComponent,
-    DibEditComponent
-  ],
-  exports: [
-    DibControlsComponent
+    DibsComponent
   ],
   providers: [
     DibService
-  ],
-  entryComponents: [
-    DibEditComponent
   ]
 })
 export class DibsModule { }

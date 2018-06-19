@@ -53,7 +53,8 @@ strong {
 }
 
 .gd-container {
-  padding: $gd-spacing-xl $gd-spacing-lg;
+  padding: $gd-spacing-xl $gd-spacing;
+  width: 100%;
   max-width: 750px;
   margin-right: auto;
   margin-left: auto;

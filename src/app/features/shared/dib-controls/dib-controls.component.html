@@ -1,24 +1,45 @@
 <div *ngIf="!isSessionUser"
   class="gd-dib-controls gd-button-group"
 >
-  <button *ngIf="dib"
-    class="gd-button gd-button-primary gd-button-block"
-    type="button"
-    [disabled]="isLoading"
-    (click)="openDibModal()"
-  >
-    <gd-icon icon="pencil-alt"></gd-icon>
-    Edit dib
-  </button>
-  <button *ngIf="dib"
-    class="gd-button gd-button-default gd-button-block"
-    type="button"
-    [disabled]="isLoading"
-    (click)="removeDib()"
-  >
-    <gd-icon icon="minus"></gd-icon>
-    Remove dib
-  </button>
+  <ng-template [ngIf]="dib">
+    <button *ngIf="!dib.isDelivered"
+      class="gd-button gd-button-primary gd-button-block"
+      type="button"
+      [disabled]="isLoading"
+      (click)="markAsDelivered()"
+    >
+      <gd-icon icon="box"></gd-icon>
+      Mark as delivered
+    </button>
+    <button *ngIf="dib.isDelivered"
+      class="gd-button gd-button-primary gd-button-block"
+      type="button"
+      [disabled]="true"
+    >
+      <gd-icon icon="box-open"></gd-icon>
+      Delivered!
+    </button>
+    <div class="gd-button-group-fluid">
+      <button
+        class="gd-button gd-button-default"
+        type="button"
+        [disabled]="isLoading"
+        (click)="openDibModal()"
+      >
+        <gd-icon icon="pencil-alt"></gd-icon>
+        Edit
+      </button>
+      <button
+        class="gd-button gd-button-default"
+        type="button"
+        [disabled]="isLoading"
+        (click)="removeDib()"
+      >
+        <gd-icon icon="trash-alt"></gd-icon>
+        Remove
+      </button>
+    </div>
+  </ng-template>
   <button *ngIf="!dib"
     class="gd-button gd-button-primary gd-button-block"
     type="button"

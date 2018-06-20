@@ -17,6 +17,8 @@ import {
 
 import {
   AlertService,
+  ConfirmAnswer,
+  ConfirmService,
   ModalClosedEventArgs,
   ModalService
 } from '../../../modules';
@@ -59,6 +61,7 @@ export class DibControlsComponent implements OnInit, OnChanges, OnDestroy {
   constructor(
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
+    private confirmService: ConfirmService,
     private dibService: DibService,
     private modalService: ModalService,
     private sessionService: SessionService
@@ -91,8 +94,8 @@ export class DibControlsComponent implements OnInit, OnChanges, OnDestroy {
         })
       )
       .subscribe(
-        (data: any) => {
-          // this.gift.dibs.splice(this.gift.dibs.indexOf(this.dib), 1);
+        () => {
+          this.refreshDib();
           this.change.emit();
         },
         (err: any) => {
@@ -127,6 +130,39 @@ export class DibControlsComponent implements OnInit, OnChanges, OnDestroy {
 
       this.isLoading = false;
       this.changeDetector.markForCheck();
+    });
+  }
+
+  public markAsDelivered(): void {
+    this.isLoading = true;
+    this.changeDetector.markForCheck();
+
+    this.confirmService.confirm({
+      message: 'Are you sure? This action cannot be undone.'
+    }, (answer: ConfirmAnswer) => {
+      if (answer.type === 'okay') {
+        this.dibService.update(this.dib.id, {
+          isDelivered: true
+        })
+          .pipe(
+            finalize(() => {
+              this.isLoading = false;
+              this.changeDetector.markForCheck();
+            })
+          )
+          .subscribe(
+            () => {
+              this.refreshDib();
+              this.change.emit();
+            },
+            (err: any) => {
+              this.alertService.error(err.error.message);
+            }
+          );
+      } else {
+        this.isLoading = false;
+        this.changeDetector.markForCheck();
+      }
     });
   }
 

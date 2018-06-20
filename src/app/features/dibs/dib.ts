@@ -3,10 +3,12 @@ import {
 } from '../users';
 
 export interface Dib {
+  dateDelivered?: Date;
   id?: string;
   isAnonymous?: boolean;
-  quantity: number;
+  isDelivered?: boolean;
+  quantity?: number;
   notes?: string;
   pricePaid?: number;
-  user: User;
+  user?: User;
 }

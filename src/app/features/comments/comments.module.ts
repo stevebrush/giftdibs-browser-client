@@ -8,8 +8,8 @@ import {
 } from '@angular/common';
 
 import {
-  GiftService
-} from './gift.service';
+  CommentService
+} from './comment.service';
 // #endregion
 
 @NgModule({
@@ -17,7 +17,7 @@ import {
     CommonModule
   ],
   providers: [
-    GiftService
+    CommentService
   ]
 })
-export class GiftsModule { }
+export class CommentsModule { }

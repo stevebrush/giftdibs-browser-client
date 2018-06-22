@@ -12,33 +12,30 @@ import {
 } from '@angular/forms';
 
 import {
-  CheckboxModule,
-  FormFieldModule,
-  GridModule,
-  IconModule,
-  ModalModule
+  FormFieldModule
 } from '../../../modules';
 
 import {
-  GiftEditComponent
-} from './gift-edit.component';
+  CommentsModule
+} from '../../comments';
+
+import {
+  CommentEditComponent
+} from './comment-edit.component';
 
 @NgModule({
   imports: [
-    CheckboxModule,
+    CommentsModule,
     CommonModule,
     FormFieldModule,
     FormsModule,
-    GridModule,
-    IconModule,
-    ModalModule,
     ReactiveFormsModule
   ],
   declarations: [
-    GiftEditComponent
+    CommentEditComponent
   ],
   exports: [
-    GiftEditComponent
+    CommentEditComponent
   ]
 })
-export class GiftEditModule { }
+export class CommentEditModule { }

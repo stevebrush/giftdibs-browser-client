@@ -7,6 +7,9 @@
   <gd-modal-body>
     <gd-row>
       <gd-column screenSmall="8">
+        <gd-comment-edit
+          [giftId]="gift.id">
+        </gd-comment-edit>
         <pre>{{ gift | json }}</pre>
       </gd-column>
       <gd-column screenSmall="4">

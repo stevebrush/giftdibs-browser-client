@@ -18,7 +18,7 @@ import {
 } from '../../../modules';
 
 import {
-  GiftService
+  GiftsModule
 } from '../../gifts';
 
 import {
@@ -48,6 +48,7 @@ import {
   imports: [
     CommonModule,
     DropdownMenuModule,
+    GiftsModule,
     GiftDetailModule,
     GiftEditModule,
     GiftMoveModule,
@@ -62,9 +63,6 @@ import {
   ],
   exports: [
     GiftPreviewComponent
-  ],
-  providers: [
-    GiftService
   ],
   entryComponents: [
     GiftDetailComponent,

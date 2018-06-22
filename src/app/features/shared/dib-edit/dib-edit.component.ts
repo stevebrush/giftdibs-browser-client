@@ -80,7 +80,7 @@ export class DibEditComponent implements OnInit {
     if (this.dib) {
       obs = this.dibService.update(this.dib.id, formData);
     } else {
-      obs = this.dibService.create(formData);
+      obs = this.dibService.create(this.gift.id, formData);
     }
 
     obs.subscribe(

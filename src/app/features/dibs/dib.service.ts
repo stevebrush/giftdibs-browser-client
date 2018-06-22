@@ -31,8 +31,13 @@ export class DibService {
     private http: HttpClient
   ) { }
 
-  public create(formData: Dib): Observable<any> {
-    return this.http.post(`${this.resourceUrl}`, formData);
+  public create(
+    giftId: string,
+    formData: Dib
+  ): Observable<any> {
+    const reqBody: any = formData;
+    reqBody.giftId = giftId;
+    return this.http.post(`${this.resourceUrl}`, reqBody);
   }
 
   public getAllRecipients(): Observable<any> {

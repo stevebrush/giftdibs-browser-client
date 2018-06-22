@@ -17,6 +17,7 @@
       [formGroup]="giftForm"
       (ngSubmit)="submit()"
     >
+
       <gd-form-field [errors]="errors">
         <label
           class="gd-control-label"
@@ -33,6 +34,45 @@
         >
         </textarea>
       </gd-form-field>
+
+      <div formArrayName="externalUrls">
+        <h4>
+          Product URLs:
+        </h4>
+
+        <gd-row *ngFor="let externalUrl of giftForm.controls.externalUrls.controls; let i = index;"
+          [formGroup]="externalUrl"
+        >
+          <gd-column screenXSmall="10">
+            <gd-form-field [errors]="errors">
+              <input
+                class="gd-form-control"
+                type="text"
+                formControlName="url"
+              />
+            </gd-form-field>
+          </gd-column>
+          <gd-column screenXSmall="2">
+            <button
+              class="gd-button gd-button-default gd-button-block"
+              title="Remove URL"
+              type="button"
+              [disabled]="isLoading"
+              (click)="removeUrl(i)"
+            >
+              Remove
+            </button>
+          </gd-column>
+        </gd-row>
+        <button
+          class="gd-button gd-button-default"
+          type="button"
+          (click)="addExternalUrlField()"
+        >
+          Add URL
+        </button>
+      </div>
+
       <gd-form-field [errors]="errors">
         <label
           class="gd-control-label"
@@ -48,6 +88,7 @@
           type="number"
         >
       </gd-form-field>
+
       <gd-form-field [errors]="errors">
         <label
           class="gd-control-label"
@@ -67,6 +108,7 @@
           <span class="gd-input-group-append">.00</span>
         </span>
       </gd-form-field>
+
       <gd-form-field [errors]="errors">
         <label
           class="gd-control-label"
@@ -82,6 +124,7 @@
           type="number"
         >
       </gd-form-field>
+
       <gd-form-field>
         <gd-checkbox
           formControlName="isReceived"
@@ -89,6 +132,7 @@
           Received
         </gd-checkbox>
       </gd-form-field>
+
     </form>
   </gd-modal-body>
   <gd-modal-footer

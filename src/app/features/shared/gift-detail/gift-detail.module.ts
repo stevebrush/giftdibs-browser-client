@@ -14,6 +14,10 @@ import {
 } from '../../../modules';
 
 import {
+  CommentEditModule
+} from '../comment-edit';
+
+import {
   DibControlsModule
 } from '../dib-controls';
 
@@ -23,6 +27,7 @@ import {
 
 @NgModule({
   imports: [
+    CommentEditModule,
     CommonModule,
     ConfirmModule,
     DibControlsModule,

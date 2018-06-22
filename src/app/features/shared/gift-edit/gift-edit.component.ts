@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 
 import {
+  FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -53,8 +54,15 @@ export class GiftEditComponent implements OnInit {
     this.createForm();
     this.gift = this.context.gift;
     this.wishListId = this.context.wishListId;
+
     if (this.gift) {
       this.giftForm.reset(this.gift);
+      this.giftForm.controls.externalUrls = this.formBuilder.array([]);
+
+      this.gift.externalUrls.forEach((externalUrl: any) => {
+        const control = <FormArray>this.giftForm.controls.externalUrls;
+        control.push(this.formBuilder.group(externalUrl));
+      });
     }
   }
 
@@ -69,6 +77,10 @@ export class GiftEditComponent implements OnInit {
     this.changeDetector.markForCheck();
 
     const formData: Gift = this.giftForm.value;
+
+    // Need to manually retrieve the form data of the nested forms:
+    const externalUrls = this.giftForm.controls.externalUrls;
+    formData.externalUrls = externalUrls.value;
 
     let obs: any;
     if (this.gift) {
@@ -99,15 +111,32 @@ export class GiftEditComponent implements OnInit {
     this.modal.close('cancel');
   }
 
+  public addExternalUrlField(): void {
+    const externalUrls = <FormArray>this.giftForm.controls.externalUrls;
+    externalUrls.push(this.createExternalUrlForm());
+  }
+
+  public removeUrl(index: number): void {
+    const externalUrls = <FormArray>this.giftForm.controls.externalUrls;
+    externalUrls.removeAt(index);
+  }
+
   private createForm(): void {
     this.giftForm = this.formBuilder.group({
       budget: undefined,
+      externalUrls: this.formBuilder.array([]) as any,
       isReceived: new FormControl(false),
       name: new FormControl(null, [
         Validators.required
       ]),
       priority: 3,
       quantity: 1
+    });
+  }
+
+  private createExternalUrlForm(): FormGroup {
+    return this.formBuilder.group({
+      url: undefined
     });
   }
 }

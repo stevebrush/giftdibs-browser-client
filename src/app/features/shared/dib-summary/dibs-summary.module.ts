@@ -7,12 +7,19 @@ import {
 } from '@angular/common';
 
 import {
+  IconModule,
+  RepeaterModule
+} from '../../../modules';
+
+import {
   DibsSummaryComponent
 } from './dibs-summary.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    IconModule,
+    RepeaterModule
   ],
   declarations: [
     DibsSummaryComponent

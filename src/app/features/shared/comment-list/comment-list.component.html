@@ -1,0 +1,10 @@
+<div class="gd-comment-list">
+  <gd-repeater *ngIf="comments">
+    <gd-repeater-item *ngFor="let comment of comments">
+      <gd-comment-preview
+        [comment]="comment"
+      >
+      </gd-comment-preview>
+    </gd-repeater-item>
+  </gd-repeater>
+</div>

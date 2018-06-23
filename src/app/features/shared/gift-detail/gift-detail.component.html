@@ -7,6 +7,10 @@
   <gd-modal-body>
     <gd-row>
       <gd-column screenSmall="8">
+        <gd-comment-list
+          [comments]="gift.comments"
+        >
+        </gd-comment-list>
         <gd-comment-edit
           [giftId]="gift.id">
         </gd-comment-edit>

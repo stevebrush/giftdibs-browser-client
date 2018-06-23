@@ -1,0 +1,36 @@
+<div class="gd-comment-preview">
+  <gd-media>
+    <gd-media-thumbnail>
+      <gd-thumbnail
+        size="xs"
+        type="user"
+      >
+      </gd-thumbnail>
+    </gd-media-thumbnail>
+    <gd-media-content>
+      <gd-media-header>
+        <gd-media-heading>
+          {{ comment.user.firstName }} {{ comment.user.lastName }}
+        </gd-media-heading>
+        <time class="gd-text-deemphasized">
+          {{ comment.dateUpdated | date }}
+        </time>
+        <gd-media-controls>
+          <button *ngIf="isOwner"
+            class="gd-button gd-button-link gd-text-deemphasized"
+            title="Toggle comment options"
+            type="button"
+            gdDropdownMenuTrigger
+            [menuItems]="menuItems"
+            (click)="$event.stopPropagation();$event.preventDefault();"
+          >
+            <gd-icon icon="ellipsis-v"></gd-icon>
+          </button>
+        </gd-media-controls>
+      </gd-media-header>
+      <gd-media-body>
+        {{ comment.body }}
+      </gd-media-body>
+    </gd-media-content>
+  </gd-media>
+</div>

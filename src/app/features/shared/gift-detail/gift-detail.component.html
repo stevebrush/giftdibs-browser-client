@@ -12,7 +12,9 @@
         >
         </gd-comment-list>
         <gd-comment-edit
-          [giftId]="gift.id">
+          [giftId]="gift.id"
+          (saved)="onCommentSaved()"
+        >
         </gd-comment-edit>
         <pre>{{ gift | json }}</pre>
       </gd-column>

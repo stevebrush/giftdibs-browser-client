@@ -18,6 +18,10 @@ import {
   PasswordViewerModule
 } from '../../modules';
 
+import {
+  FacebookModule
+} from './facebook';
+
 import { AccountRoutingModule } from './account-routing.module';
 import { AccountService } from './account.service';
 import { DeleteComponent } from './delete/delete.component';
@@ -32,6 +36,7 @@ import { VerifyAccountComponent } from './verify/verify.component';
   imports: [
     AccountRoutingModule,
     CommonModule,
+    FacebookModule,
     FormFieldModule,
     GridModule,
     HideUntilModule,

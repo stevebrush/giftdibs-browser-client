@@ -2,14 +2,21 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  EventEmitter,
   Input,
-  OnInit
+  OnDestroy,
+  OnInit,
+  Output
 } from '@angular/core';
 
 import {
   FormBuilder,
   FormGroup
 } from '@angular/forms';
+
+import {
+  finalize
+} from 'rxjs/operators';
 
 import {
   AlertService
@@ -26,12 +33,18 @@ import {
   styleUrls: ['./comment-edit.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CommentEditComponent implements OnInit {
+export class CommentEditComponent implements OnInit, OnDestroy {
   @Input()
   public comment: Comment;
 
   @Input()
   public giftId: string;
+
+  @Output()
+  public cancelled = new EventEmitter<void>();
+
+  @Output()
+  public saved = new EventEmitter<void>();
 
   public errors: any[];
   public commentForm: FormGroup;
@@ -49,6 +62,11 @@ export class CommentEditComponent implements OnInit {
     if (this.comment) {
       this.commentForm.reset(this.comment);
     }
+  }
+
+  public ngOnDestroy(): void {
+    this.cancelled.complete();
+    this.saved.complete();
   }
 
   public submit(): void {
@@ -70,19 +88,31 @@ export class CommentEditComponent implements OnInit {
       obs = this.commentService.create(this.giftId, formData);
     }
 
-    obs.subscribe(
-      (result: any) => {
-        console.log('COMMENT SUCCESS');
-      },
-      (err: any) => {
-        const error = err.error;
-        this.alertService.error(error.message);
-        this.errors = error.errors;
-        this.commentForm.enable();
-        this.isLoading = false;
-        this.changeDetector.markForCheck();
-      }
-    );
+    obs
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+          this.commentForm.reset();
+          this.commentForm.enable();
+          this.changeDetector.markForCheck();
+        })
+      )
+      .subscribe(
+        (result: any) => {
+          this.saved.emit();
+          this.saved.complete();
+        },
+        (err: any) => {
+          const error = err.error;
+          this.alertService.error(error.message);
+          this.errors = error.errors;
+        }
+      );
+  }
+
+  public onCancelClick(): void {
+    this.cancelled.emit();
+    this.cancelled.complete();
   }
 
   private createForm(): void {

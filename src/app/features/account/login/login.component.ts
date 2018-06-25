@@ -69,14 +69,7 @@ export class LoginComponent implements OnInit {
       .login(formData.emailAddress, formData.password)
       .subscribe(
         (result: any) => {
-          let redirect;
-          if (this.redirectUrl === '/') {
-            redirect = ['/'];
-          } else {
-            redirect = this.redirectUrl.split('/');
-          }
-
-          this.router.navigate(redirect);
+          this.redirect();
         },
         (err: any) => {
           this.errors = err.error.errors;
@@ -85,6 +78,10 @@ export class LoginComponent implements OnInit {
           this.changeDetector.markForCheck();
         }
       );
+  }
+
+  public onFacebookLoginSuccess(): void {
+    this.redirect();
   }
 
   private createForm(): void {
@@ -96,5 +93,16 @@ export class LoginComponent implements OnInit {
         Validators.required
       ])
     });
+  }
+
+  private redirect(): void {
+    let redirect;
+    if (this.redirectUrl === '/') {
+      redirect = ['/'];
+    } else {
+      redirect = this.redirectUrl.split('/');
+    }
+
+    this.router.navigate(redirect);
   }
 }

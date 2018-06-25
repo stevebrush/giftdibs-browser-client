@@ -6,27 +6,30 @@
   (ngSubmit)="submit()"
 >
   <gd-form-field [errors]="errors">
-    <label
-      class="gd-control-label"
-      for="gd-comment-edit-body"
-    >
-      Comment body
-    </label>
     <textarea
       class="gd-form-control"
       formControlName="body"
-      id="gd-comment-edit-body"
+      placeholder="Add a comment"
     >
       {{ comment?.body }}
     </textarea>
   </gd-form-field>
 
-  <button
-    class="gd-button gd-button-primary"
-    type="button"
-    [disabled]="commentForm.disabled"
-    (click)="submit()"
-  >
-    Submit
-  </button>
+  <div class="gd-button-group">
+    <button
+      class="gd-button gd-button-primary"
+      type="submit"
+      [disabled]="commentForm.disabled"
+    >
+      Submit
+    </button>
+    <button *ngIf="comment"
+      class="gd-button gd-button-default"
+      type="button"
+      [disabled]="commentForm.disabled"
+      (click)="onCancelClick()"
+    >
+      Cancel
+    </button>
+  </div>
 </form>

@@ -57,13 +57,12 @@ export class GiftDetailComponent implements OnInit {
     this.isSessionUser = this.sessionService.isSessionUser(this.gift.user.id);
   }
 
+  public onCommentSaved(): void {
+    this.fetchGift();
+  }
+
   public onDibChange(): void {
-    this.giftService.getById(this.gift.id)
-      .subscribe((gift: Gift) => {
-        this.gift = gift;
-        console.log('gift?', gift);
-        this.changeDetector.markForCheck();
-      });
+    this.fetchGift();
   }
 
   public markReceived(): void {
@@ -104,5 +103,13 @@ export class GiftDetailComponent implements OnInit {
     this.modal.close('cancel', {
       gift: this.gift
     });
+  }
+
+  private fetchGift(): void {
+    this.giftService.getById(this.gift.id)
+      .subscribe((gift: Gift) => {
+        this.gift = gift;
+        this.changeDetector.markForCheck();
+      });
   }
 }

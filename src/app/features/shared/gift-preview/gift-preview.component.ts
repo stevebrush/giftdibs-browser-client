@@ -19,6 +19,7 @@ import {
 } from 'rxjs';
 
 import {
+  distinctUntilChanged,
   takeUntil
 } from 'rxjs/operators';
 
@@ -117,6 +118,7 @@ export class GiftPreviewComponent implements OnInit, OnDestroy {
     // Show gift detail?
     this.activatedRoute.queryParams
       .pipe(
+        distinctUntilChanged(),
         takeUntil(this.ngUnsubscribe)
       )
       .subscribe((params: Params) => {
@@ -155,6 +157,7 @@ export class GiftPreviewComponent implements OnInit, OnDestroy {
   }
 
   private openGiftDetailModal(): void {
+    // TODO: Need to create a "wait" component here!
     this.giftService.getById(this.gift.id).subscribe((gift: Gift) => {
       const context = new GiftDetailContext(gift);
 

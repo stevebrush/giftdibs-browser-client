@@ -48,6 +48,14 @@ export class CommentService {
       );
   }
 
+  public getById(commentId: string): Observable<Comment> {
+    return this.http.get(`${this.resourceUrl}/${commentId}`)
+      .pipe(
+        map((result: any) => result.data.comment),
+        share()
+      );
+  }
+
   public remove(commentId: string): Observable<any> {
     return this.http.delete(`${this.resourceUrl}/${commentId}`);
   }

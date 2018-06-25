@@ -14,11 +14,16 @@ import {
 } from '../../../modules';
 
 import {
+  CommentEditModule
+} from '../comment-edit';
+
+import {
   CommentPreviewComponent
 } from './comment-preview.component';
 
 @NgModule({
   imports: [
+    CommentEditModule,
     CommonModule,
     DropdownMenuModule,
     IconModule,

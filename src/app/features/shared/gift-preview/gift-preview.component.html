@@ -43,6 +43,10 @@
           icon="hand-paper"
           iconStyle="deemphasized"
         ></gd-icon>
+        <gd-icon *ngIf="gift.comments && gift.comments.length"
+          icon="comment-dots"
+          iconStyle="deemphasized"
+        ></gd-icon>
       </gd-media-body>
     </gd-media-content>
   </gd-media>

@@ -24,6 +24,10 @@ export class AccountService {
     return this.http.post(`${this.resourceUrl}/login`, { emailAddress, password });
   }
 
+  public loginUsingFacebook(facebookUserAccessToken: string): Observable<any> {
+    return this.http.post(`${this.resourceUrl}/login-facebook`, { facebookUserAccessToken });
+  }
+
   public forgotten(emailAddress: string): Observable<any> {
     return this.http.post(`${this.resourceUrl}/forgotten`, { emailAddress });
   }

@@ -22,6 +22,7 @@ export interface Gift {
   externalUrls?: GiftExternalUrl[];
   isReceived?: boolean;
   name?: string;
+  priority?: number;
   quantity?: number;
   user?: User;
   wishListId?: string;

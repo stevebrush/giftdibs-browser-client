@@ -42,6 +42,11 @@ export class RegisterComponent {
     this.createForm();
   }
 
+  public onFacebookLoginSuccess(): void {
+    // TODO: Redirect to profile instead?
+    this.router.navigate(['/']);
+  }
+
   public submit(): void {
     if (this.registerForm.disabled) {
       return;
@@ -50,16 +55,15 @@ export class RegisterComponent {
     this.registerForm.disable();
     this.errors = [];
 
-    this.accountService
-      .register(this.registerForm.value)
+    this.accountService.register(this.registerForm.value)
       .subscribe(
-        (result: any) => {
-          this.alertService.success(result.message, true);
+        () => {
           this.router.navigate(['/account', 'login']);
         },
         (err: any) => {
           const error = err.error;
 
+          // Spam control
           if (error.code === 108) {
             this.router.navigate(['/page-not-found']);
             return;

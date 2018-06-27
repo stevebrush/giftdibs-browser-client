@@ -40,7 +40,7 @@
           Product URLs:
         </h4>
 
-        <gd-row *ngFor="let externalUrl of giftForm.controls.externalUrls.controls; let i = index;"
+        <gd-row *ngFor="let externalUrl of externalUrls.controls; let i = index;"
           [formGroup]="externalUrl"
         >
           <gd-column screenXSmall="10">

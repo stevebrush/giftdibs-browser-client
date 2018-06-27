@@ -34,6 +34,10 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GiftEditComponent implements OnInit {
+  public get externalUrls(): FormArray {
+    return <FormArray>this.giftForm.get('externalUrls');
+  }
+
   public errors: any[];
   public gift: Gift;
   public giftForm: FormGroup;
@@ -52,15 +56,16 @@ export class GiftEditComponent implements OnInit {
 
   public ngOnInit(): void {
     this.createForm();
+
     this.gift = this.context.gift;
     this.wishListId = this.context.wishListId;
 
     if (this.gift) {
       this.giftForm.reset(this.gift);
-      this.giftForm.controls.externalUrls = this.formBuilder.array([]);
+      this.giftForm.setControl('externalUrls', this.formBuilder.array([]));
 
+      const control = this.externalUrls;
       this.gift.externalUrls.forEach((externalUrl: any) => {
-        const control = <FormArray>this.giftForm.controls.externalUrls;
         control.push(this.formBuilder.group(externalUrl));
       });
     }
@@ -79,8 +84,7 @@ export class GiftEditComponent implements OnInit {
     const formData: Gift = this.giftForm.value;
 
     // Need to manually retrieve the form data of the nested forms:
-    const externalUrls = this.giftForm.controls.externalUrls;
-    formData.externalUrls = externalUrls.value;
+    formData.externalUrls = this.externalUrls.value;
 
     let obs: any;
     if (this.gift) {
@@ -117,8 +121,7 @@ export class GiftEditComponent implements OnInit {
   }
 
   public removeUrl(index: number): void {
-    const externalUrls = <FormArray>this.giftForm.controls.externalUrls;
-    externalUrls.removeAt(index);
+    this.externalUrls.removeAt(index);
   }
 
   private createForm(): void {

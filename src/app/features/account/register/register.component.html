@@ -12,14 +12,15 @@
     [formGroup]="registerForm"
     (ngSubmit)="submit()"
     aria-label="New user registration information"
-    novalidate>
-
+    novalidate
+  >
     <gd-row>
       <gd-column screenSmall="6">
         <gd-form-field [errors]="errors">
           <label
             class="gd-control-label"
-            for="gd-register-first-name">
+            for="gd-register-first-name"
+          >
             First name
           </label>
           <input
@@ -27,14 +28,16 @@
             class="gd-form-control"
             id="gd-register-first-name"
             formControlName="firstName"
-            autocomplete="off">
+            autocomplete="off"
+          />
         </gd-form-field>
       </gd-column>
       <gd-column screenSmall="6">
         <gd-form-field [errors]="errors">
           <label
             class="gd-control-label"
-            for="gd-register-last-name">
+            for="gd-register-last-name"
+          >
             Last name
           </label>
           <input
@@ -42,7 +45,8 @@
             class="gd-form-control"
             id="gd-register-last-name"
             formControlName="lastName"
-            autocomplete="off">
+            autocomplete="off"
+          />
         </gd-form-field>
       </gd-column>
     </gd-row>
@@ -108,4 +112,10 @@
       Create new account
     </button>
   </form>
+
+  <gd-facebook-login-button
+    [disabled]="registerForm.disabled"
+    (success)="onFacebookLoginSuccess()"
+  >
+  </gd-facebook-login-button>
 </div>

@@ -150,7 +150,9 @@ export class GiftPreviewComponent implements OnInit, OnDestroy {
 
     modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
       if (args.reason === 'save') {
-        this.gift = args.data.gift;
+        const updatedGift = args.data.gift;
+        this.wishList.gifts[this.wishList.gifts.indexOf(this.gift)] = updatedGift;
+        this.gift = updatedGift;
         this.changeDetector.markForCheck();
       }
     });
@@ -213,7 +215,10 @@ export class GiftPreviewComponent implements OnInit, OnDestroy {
   private deleteGift(): void {
     this.giftService.remove(this.gift.id).subscribe(
       () => {
-        this.wishList.gifts.splice(this.wishList.gifts.indexOf(this.gift), 1);
+        this.wishList.gifts.splice(
+          this.wishList.gifts.indexOf(this.gift),
+          1
+        );
         this.changeDetector.markForCheck();
       },
       (err: any) => {

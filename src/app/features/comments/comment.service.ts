@@ -25,7 +25,7 @@ import {
 
 @Injectable()
 export class CommentService {
-  private resourceUrl = environment.apiUrl + '/comments';
+  private resourceUrl = environment.apiUrl + '/gifts';
 
   constructor(
     private http: HttpClient
@@ -35,21 +35,19 @@ export class CommentService {
     giftId: string,
     formData: Comment
   ): Observable<any> {
-    const reqBody: any = formData;
-    reqBody.giftId = giftId;
-    return this.http.post(`${this.resourceUrl}`, reqBody);
+    return this.http.post(`${this.resourceUrl}/${giftId}/comments`, formData);
   }
 
-  public getAllByGiftId(giftId: string): Observable<Comment[]> {
-    return this.http.get(`${this.resourceUrl}?giftId=${giftId}`)
-      .pipe(
-        map((result: any) => result.data.comments),
-        share()
-      );
-  }
+  // public getAllByGiftId(giftId: string): Observable<Comment[]> {
+  //   return this.http.get(`${this.resourceUrl}?giftId=${giftId}`)
+  //     .pipe(
+  //       map((result: any) => result.data.comments),
+  //       share()
+  //     );
+  // }
 
   public getById(commentId: string): Observable<Comment> {
-    return this.http.get(`${this.resourceUrl}/${commentId}`)
+    return this.http.get(`${this.resourceUrl}/comments/${commentId}`)
       .pipe(
         map((result: any) => result.data.comment),
         share()
@@ -57,10 +55,10 @@ export class CommentService {
   }
 
   public remove(commentId: string): Observable<any> {
-    return this.http.delete(`${this.resourceUrl}/${commentId}`);
+    return this.http.delete(`${this.resourceUrl}/comments/${commentId}`);
   }
 
   public update(commentId: string, formData: Comment): Observable<any> {
-    return this.http.patch(`${this.resourceUrl}/${commentId}`, formData);
+    return this.http.patch(`${this.resourceUrl}/comments/${commentId}`, formData);
   }
 }

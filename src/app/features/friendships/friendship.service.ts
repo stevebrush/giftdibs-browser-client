@@ -25,18 +25,18 @@ import {
 
 @Injectable()
 export class FriendshipService {
-  private resourceUrl = environment.apiUrl + '/friendships';
+  private resourceUrl = environment.apiUrl;
 
   constructor(
     private http: HttpClient
   ) { }
 
   public create(friendId: string): Observable<any> {
-    return this.http.post(`${this.resourceUrl}`, { friendId });
+    return this.http.post(`${this.resourceUrl}/users/${friendId}/friendships`, { friendId });
   }
 
   public getAllByUserId(userId: string): Observable<Friendship[]> {
-    return this.http.get(`${this.resourceUrl}?userId=${userId}`)
+    return this.http.get(`${this.resourceUrl}/users/${userId}/friendships`)
       .pipe(
         map((result: any) => result.data.friendships),
         share()
@@ -44,6 +44,6 @@ export class FriendshipService {
   }
 
   public remove(friendshipId: string): Observable<any> {
-    return this.http.delete(`${this.resourceUrl}/${friendshipId}`);
+    return this.http.delete(`${this.resourceUrl}/friendships/${friendshipId}`);
   }
 }

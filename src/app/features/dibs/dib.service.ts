@@ -25,7 +25,7 @@ import {
 
 @Injectable()
 export class DibService {
-  private resourceUrl = environment.apiUrl + '/dibs';
+  private resourceUrl = environment.apiUrl;
 
   constructor(
     private http: HttpClient
@@ -35,13 +35,11 @@ export class DibService {
     giftId: string,
     formData: Dib
   ): Observable<any> {
-    const reqBody: any = formData;
-    reqBody.giftId = giftId;
-    return this.http.post(`${this.resourceUrl}`, reqBody);
+    return this.http.post(`${this.resourceUrl}/gifts/${giftId}/dibs`, formData);
   }
 
   public getAllRecipients(): Observable<any> {
-    return this.http.get(`${this.resourceUrl}/recipients`)
+    return this.http.get(`${this.resourceUrl}/dibs/recipients`)
       .pipe(
         map((result: any) => result.data),
         share()
@@ -73,10 +71,10 @@ export class DibService {
   // }
 
   public remove(dibId: string): Observable<any> {
-    return this.http.delete(`${this.resourceUrl}/${dibId}`);
+    return this.http.delete(`${this.resourceUrl}/dibs/${dibId}`);
   }
 
   public update(dibId: string, formData: Dib): Observable<any> {
-    return this.http.patch(`${this.resourceUrl}/${dibId}`, formData);
+    return this.http.patch(`${this.resourceUrl}/dibs/${dibId}`, formData);
   }
 }

@@ -25,7 +25,7 @@ import {
 
 @Injectable()
 export class GiftService {
-  private resourceUrl = environment.apiUrl + '/gifts';
+  private resourceUrl = environment.apiUrl;
 
   constructor(
     private http: HttpClient
@@ -35,13 +35,11 @@ export class GiftService {
     wishListId: string,
     formData: Gift
   ): Observable<any> {
-    const reqBody: any = formData;
-    reqBody.wishListId = wishListId;
-    return this.http.post(`${this.resourceUrl}`, reqBody);
+    return this.http.post(`${this.resourceUrl}/wish-lists/${wishListId}/gifts`, formData);
   }
 
   public getById(giftId: string): Observable<Gift> {
-    return this.http.get(`${this.resourceUrl}/${giftId}`)
+    return this.http.get(`${this.resourceUrl}/gifts/${giftId}`)
       .pipe(
         map((result: any) => result.data.gift),
         share()
@@ -49,10 +47,10 @@ export class GiftService {
   }
 
   public remove(giftId: string): Observable<any> {
-    return this.http.delete(`${this.resourceUrl}/${giftId}`);
+    return this.http.delete(`${this.resourceUrl}/gifts/${giftId}`);
   }
 
   public update(giftId: string, formData: Gift): Observable<any> {
-    return this.http.patch(`${this.resourceUrl}/${giftId}`, formData);
+    return this.http.patch(`${this.resourceUrl}/gifts/${giftId}`, formData);
   }
 }

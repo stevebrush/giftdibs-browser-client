@@ -25,18 +25,18 @@ import {
 
 @Injectable()
 export class WishListService {
-  private resourceUrl = environment.apiUrl + '/wish-lists';
+  private resourceUrl = environment.apiUrl;
 
   constructor(
     private http: HttpClient
   ) { }
 
   public create(formData: WishList): Observable<any> {
-    return this.http.post(`${this.resourceUrl}`, formData);
+    return this.http.post(`${this.resourceUrl}/wish-lists`, formData);
   }
 
   public getById(wishListId: string): Observable<WishList> {
-    return this.http.get(`${this.resourceUrl}/${wishListId}`)
+    return this.http.get(`${this.resourceUrl}/wish-lists/${wishListId}`)
       .pipe(
         map((result: any) => result.data.wishList),
         share()
@@ -44,7 +44,7 @@ export class WishListService {
   }
 
   public getAllByUserId(userId: string): Observable<WishList[]> {
-    return this.http.get(`${this.resourceUrl}?userId=${userId}`)
+    return this.http.get(`${this.resourceUrl}/users/${userId}/wish-lists`)
       .pipe(
         map((result: any) => result.data.wishLists),
         share()
@@ -52,10 +52,10 @@ export class WishListService {
   }
 
   public remove(wishListId: string): Observable<any> {
-    return this.http.delete(`${this.resourceUrl}/${wishListId}`);
+    return this.http.delete(`${this.resourceUrl}/wish-lists/${wishListId}`);
   }
 
   public update(wishListId: string, formData: WishList): Observable<any> {
-    return this.http.patch(`${this.resourceUrl}/${wishListId}`, formData);
+    return this.http.patch(`${this.resourceUrl}/wish-lists/${wishListId}`, formData);
   }
 }

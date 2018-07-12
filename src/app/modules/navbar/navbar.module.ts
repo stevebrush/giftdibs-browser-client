@@ -15,6 +15,10 @@ import {
 } from '../dropdown-menu';
 
 import {
+  IconModule
+} from '../icon';
+
+import {
   SearchModule
 } from '../search';
 
@@ -30,6 +34,7 @@ import {
   imports: [
     CommonModule,
     DropdownMenuModule,
+    IconModule,
     RouterModule,
     SearchModule,
     ThumbnailModule

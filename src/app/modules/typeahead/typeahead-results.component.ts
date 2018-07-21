@@ -3,7 +3,6 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  HostListener,
   OnDestroy,
   OnInit,
   TemplateRef
@@ -12,8 +11,6 @@ import {
 import {
   Subject
 } from 'rxjs';
-
-import { OverlayInstance } from '../overlay/overlay-instance';
 
 import { TypeaheadResultsContext } from './typeahead-results-context';
 import { TypeaheadResultsSelectionChange } from './typeahead-results-selection-change';
@@ -65,8 +62,7 @@ export class TypeaheadResultsComponent implements OnInit, OnDestroy {
   constructor(
     public elementRef: ElementRef,
     private changeDetector: ChangeDetectorRef,
-    private context: TypeaheadResultsContext,
-    private overlay: OverlayInstance<any>
+    private context: TypeaheadResultsContext
   ) { }
 
   public ngOnInit(): void {
@@ -81,21 +77,10 @@ export class TypeaheadResultsComponent implements OnInit, OnDestroy {
   public onResultClick(result: any): void {
     const label = this.context.resultSelectedAction.call({}, result);
     this.selectionChange.next({ result, label });
-    this.close();
   }
 
   public triggerActiveResultAction(): void {
     this.onResultClick(this.activeResult);
-  }
-
-  @HostListener('click', ['$event'])
-  public onClick(event: any): void {
-    event.stopPropagation();
-  }
-
-  @HostListener('document:click')
-  public onDocumentClick(): void {
-    this.close();
   }
 
   public focusNextItem(): void {
@@ -104,9 +89,5 @@ export class TypeaheadResultsComponent implements OnInit, OnDestroy {
 
   public focusPreviousItem(): void {
     this.activeIndex--;
-  }
-
-  private close(): void {
-    this.overlay.destroy();
   }
 }

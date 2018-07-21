@@ -10,13 +10,11 @@ import {
 } from 'rxjs/operators';
 
 import {
-  NotificationService
-} from './notification.service';
+  AlertService
+} from '../../modules';
 
-import {
-  Notification
-} from './notification';
-import { AlertService } from '../../modules';
+import { Notification } from './notification';
+import { NotificationService } from './notification.service';
 
 @Component({
   selector: 'gd-notifications',
@@ -25,7 +23,7 @@ import { AlertService } from '../../modules';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NotificationsComponent implements OnInit {
-  public isLoading = false;
+  public isLoading = true;
   public notifications: Notification[];
 
   constructor(
@@ -35,25 +33,7 @@ export class NotificationsComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    this.isLoading = true;
-    this.changeDetector.markForCheck();
-
-    this.notificationService.getAll()
-      .pipe(
-        finalize(() => {
-          this.isLoading = false;
-          this.changeDetector.markForCheck();
-        })
-      )
-      .subscribe(
-        (notifications: Notification[]) => {
-          this.notifications = notifications;
-          this.changeDetector.markForCheck();
-        },
-        (err: any) => {
-          this.alertService.error(err.error.message);
-        }
-      );
+    this.fetchNotifications();
   }
 
   public removeNotification(notification: Notification): void {
@@ -70,6 +50,28 @@ export class NotificationsComponent implements OnInit {
       .subscribe(
         () => {
           this.notifications.splice(this.notifications.indexOf(notification), 1);
+        },
+        (err: any) => {
+          this.alertService.error(err.error.message);
+        }
+      );
+  }
+
+  private fetchNotifications(): void {
+    this.isLoading = true;
+    this.changeDetector.markForCheck();
+
+    this.notificationService.getAll()
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+          this.changeDetector.markForCheck();
+        })
+      )
+      .subscribe(
+        (notifications: Notification[]) => {
+          this.notifications = notifications;
+          this.changeDetector.markForCheck();
         },
         (err: any) => {
           this.alertService.error(err.error.message);

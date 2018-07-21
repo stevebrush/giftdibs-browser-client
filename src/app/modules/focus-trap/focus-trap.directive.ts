@@ -8,22 +8,12 @@ import {
 } from '@angular/core';
 
 import {
+  GD_FOCUSABLE_SELECTORS
+} from '../shared';
+
+import {
   WindowRefService
 } from '../window';
-
-const FOCUSABLE_SELECTORS: string = [
-  'a[href]',
-  'area[href]',
-  'button:not([disabled])',
-  'embed',
-  'iframe',
-  'input:not([disabled])',
-  'object',
-  'select:not([disabled])',
-  'textarea:not([disabled])',
-  '[contenteditable=true]',
-  '[tabindex]'
-].join(', ');
 
 @Directive({
   selector: '[gdFocusTrap]'
@@ -64,8 +54,6 @@ export class FocusTrapDirective implements AfterContentInit, OnDestroy {
         this.activateTrap();
 
         // Focus the host element:
-        // this.renderer.setAttribute(this.elementRef.nativeElement, 'tabindex', '-1');
-        // this.elementRef.nativeElement.focus();
         this.focusActiveElement();
       });
     }
@@ -109,7 +97,7 @@ export class FocusTrapDirective implements AfterContentInit, OnDestroy {
 
   private assignFocusableElements(): void {
     const elements: HTMLElement[] = [].slice.call(
-      this.elementRef.nativeElement.querySelectorAll(FOCUSABLE_SELECTORS)
+      this.elementRef.nativeElement.querySelectorAll(GD_FOCUSABLE_SELECTORS)
     );
 
     const focusableElements = elements

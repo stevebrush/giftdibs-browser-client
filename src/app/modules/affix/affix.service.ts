@@ -56,5 +56,6 @@ export class AffixService {
 
     this.renderer.setStyle(subject.nativeElement, 'top', `${top}px`);
     this.renderer.setStyle(subject.nativeElement, 'left', `${left}px`);
+    this.renderer.setStyle(subject.nativeElement, 'position', 'fixed');
   }
 }

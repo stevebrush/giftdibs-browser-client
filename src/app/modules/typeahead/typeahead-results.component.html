@@ -1,13 +1,16 @@
 <ul class="gd-typeahead-results">
-  <li
-    *ngFor="let result of results; let i = index;"
+  <li *ngFor="let result of results; let i = index;"
     class="gd-typeahead-result"
     [ngClass]="{ 'gd-typahead-result-active': i === activeIndex }"
-    (mouseenter)="activeIndex = i">
-    <a href (click)="onResultClick(result);$event.preventDefault();">
+    (mouseenter)="activeIndex = i"
+  >
+    <button
+      type="button"
+      (click)="onResultClick(result);$event.preventDefault();"
+    >
       <ng-container
         *ngTemplateOutlet="templateRef; context: { result: result }">
       </ng-container>
-    </a>
+    </button>
   </li>
 </ul>

@@ -1,12 +1,7 @@
 @import '../../../styles/mixins';
 
-:host {
-  position: absolute;
-}
-
 .gd-dropdown-menu {
-  min-width: 100px;
-  max-width: 275px;
+  width: 275px;
   box-shadow: $gd-box-shadow;
   background-color: #fff;
   padding: $gd-spacing-sm 0;

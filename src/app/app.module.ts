@@ -8,12 +8,15 @@ import {
 } from '@angular/platform-browser';
 
 import {
+  NavbarModule
+} from './features/navbar';
+
+import {
   SessionModule
 } from './features/account/session';
 
 import {
   AlertModule,
-  NavbarModule,
   VerifyEmailNoticeModule
 } from './modules';
 

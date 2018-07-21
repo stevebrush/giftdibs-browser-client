@@ -22,12 +22,12 @@ import {
 
 import {
   DropdownMenuItem
-} from '../dropdown-menu';
+} from '../../modules/dropdown-menu';
 
 import {
   SessionService,
   SessionUser
-} from '../../features/account/session';
+} from '../account/session';
 
 @Component({
   selector: 'gd-navbar',

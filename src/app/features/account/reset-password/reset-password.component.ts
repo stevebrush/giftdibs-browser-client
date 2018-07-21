@@ -32,7 +32,7 @@ import {
 
 import {
   SessionService
-} from '..//session';
+} from '../session';
 
 import {
   AccountService

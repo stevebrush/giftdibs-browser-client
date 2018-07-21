@@ -9,14 +9,15 @@
     [formGroup]="settingsForm"
     [gdHideUntil]="isReady"
     (ngSubmit)="submit()"
-    novalidate>
-
+    novalidate
+  >
     <gd-row>
       <gd-column screenSmall="6">
         <gd-form-field [errors]="errors">
           <label
             class="gd-control-label"
-            for="gd-settings-first-name">
+            for="gd-settings-first-name"
+          >
             First name
           </label>
           <input
@@ -24,14 +25,16 @@
             class="gd-form-control"
             id="gd-settings-first-name"
             formControlName="firstName"
-            autocomplete="off">
+            autocomplete="off"
+          />
         </gd-form-field>
       </gd-column>
       <gd-column screenSmall="6">
         <gd-form-field [errors]="errors">
           <label
             class="gd-control-label"
-            for="gd-settings-last-name">
+            for="gd-settings-last-name"
+          >
             Last name
           </label>
           <input
@@ -39,7 +42,8 @@
             class="gd-form-control"
             id="gd-settings-last-name"
             formControlName="lastName"
-            autocomplete="off">
+            autocomplete="off"
+          />
         </gd-form-field>
       </gd-column>
     </gd-row>
@@ -47,7 +51,8 @@
     <gd-form-field [errors]="errors">
       <label
         class="gd-control-label"
-        for="gd-settings-email-address">
+        for="gd-settings-email-address"
+      >
         Email
       </label>
       <input
@@ -55,13 +60,15 @@
         class="gd-form-control"
         id="gd-settings-email-address"
         formControlName="emailAddress"
-        autocomplete="off">
+        autocomplete="off"
+      />
     </gd-form-field>
 
     <button
       class="gd-button gd-button-primary"
       type="submit"
-      [disabled]="settingsForm.disabled">
+      [disabled]="settingsForm.disabled"
+    >
       Save changes
     </button>
   </form>

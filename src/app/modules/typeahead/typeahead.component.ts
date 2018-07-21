@@ -106,6 +106,14 @@ export class TypeaheadComponent implements AfterViewInit, OnDestroy {
           break;
         }
       });
+
+    fromEvent(document, 'click')
+      .pipe(
+        takeUntil(this.ngUnsubscribe)
+      )
+      .subscribe(() => {
+        this.removeResults();
+      });
   }
 
   public ngOnDestroy(): void {
@@ -147,15 +155,17 @@ export class TypeaheadComponent implements AfterViewInit, OnDestroy {
       }]
     });
 
+    // Set the input value to what is selected in the dropdown.
+    this.overlayInstance.componentInstance.selectionChange.subscribe((change: TypeaheadResultsSelectionChange) => {
+      console.log('change?', change);
+      this.searchInput.nativeElement.value = change.label;
+      this.overlayInstance.destroy();
+    });
+
     this.hasResults = true;
     this.overlayInstance.destroyed.subscribe(() => {
       this.hasResults = false;
       this.changeDetector.markForCheck();
-    });
-
-    // Set the input value to what is selected in the dropdown.
-    this.overlayInstance.componentInstance.selectionChange.subscribe((change: TypeaheadResultsSelectionChange) => {
-      this.searchInput.nativeElement.value = change.label;
     });
 
     this.positionResults();
@@ -168,11 +178,13 @@ export class TypeaheadComponent implements AfterViewInit, OnDestroy {
     if (this.overlayInstance) {
       this.overlayInstance.destroy();
     }
+
     this.changeDetector.markForCheck();
   }
 
   private positionResults(): void {
     const resultsRef = this.overlayInstance.componentInstance.elementRef;
+
     this.affixService.affixTo(
       resultsRef,
       this.searchInput,
@@ -180,6 +192,7 @@ export class TypeaheadComponent implements AfterViewInit, OnDestroy {
         verticalAlignment: AffixVerticalAlignment.Bottom
       }
     );
+
     this.domAdapter.matchWidth(
       resultsRef,
       this.searchInput
@@ -216,14 +229,6 @@ export class TypeaheadComponent implements AfterViewInit, OnDestroy {
         if (key === 'arrowup' || key === 'up') {
           resultsComponent.focusPreviousItem();
         }
-      });
-
-    fromEvent(this.searchInput.nativeElement, 'keydown')
-      .pipe(
-        takeWhile(() => this.hasResults)
-      )
-      .subscribe((event: any) => {
-        const key = event.key.toLowerCase();
 
         if (key === 'tab' || key === 'escape') {
           this.searchInput.nativeElement.value = '';
@@ -233,6 +238,14 @@ export class TypeaheadComponent implements AfterViewInit, OnDestroy {
         if (key === 'enter') {
           resultsComponent.triggerActiveResultAction();
         }
+      });
+
+    fromEvent(resultsComponent.elementRef.nativeElement, 'click')
+      .pipe(
+        takeWhile(() => this.hasResults)
+      )
+      .subscribe((event: any) => {
+        event.stopPropagation();
       });
   }
 }

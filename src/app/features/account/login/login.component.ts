@@ -23,7 +23,7 @@ import {
 
 import {
   SessionService
-} from '../../account/session';
+} from '../session';
 
 import {
   AccountService

@@ -25,7 +25,7 @@ export class DropdownMenuService {
   public open(config: DropdownMenuConfig): DropdownMenuInstance {
     const defaults = {
       horizontalAlignment: AffixHorizontalAlignment.Right,
-      verticalAlignment: AffixVerticalAlignment.Top
+      verticalAlignment: AffixVerticalAlignment.Bottom
     };
 
     const settings = Object.assign({}, defaults, config);

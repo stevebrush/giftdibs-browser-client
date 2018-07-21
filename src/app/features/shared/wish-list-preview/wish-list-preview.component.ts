@@ -41,7 +41,7 @@ import {
 import {
   GiftEditComponent,
   GiftEditContext
-} from '../../shared/gift-edit';
+} from '../gift-edit';
 
 import {
   WishList,

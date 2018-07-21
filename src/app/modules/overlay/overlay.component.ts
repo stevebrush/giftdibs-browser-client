@@ -57,6 +57,9 @@ export class OverlayComponent implements OnDestroy {
     };
     const settings = Object.assign(defaults, config);
 
+    // TODO: Remove instance from providers since it causes scope to bleed?
+    // Reason: The entry component that gets inserted into the overlay
+    // should work outside of an overlay and be unaware that it is an "overlay".
     const overlayInstance = new OverlayInstance<T>();
     const defaultProviders: any[] = [{
       provide: OverlayInstance,

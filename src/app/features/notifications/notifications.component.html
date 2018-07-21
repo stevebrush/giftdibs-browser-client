@@ -1,8 +1,17 @@
-<div class="gd-container-fluid">
-  <h1>
-    Notifications
-  </h1>
+<button
+  aria-label="Toggle notifications"
+  class="gd-button gd-button-link"
+  title="Notifications"
+  type="button"
+  [gdPopover]="content"
+  gdPopoverHorizontalAlignment="right"
+  gdPopoverVerticalAlignment="bottom"
+>
+  <gd-icon icon="bell"></gd-icon>
+  <gd-badge *ngIf="notifications?.length">{{ notifications?.length }}</gd-badge>
+</button>
 
+<ng-template #content>
   <gd-repeater>
     <gd-repeater-item *ngFor="let notification of notifications">
       <time class="gd-text-deemphasized">
@@ -36,4 +45,4 @@
       </gd-repeater-controls>
     </gd-repeater-item>
   </gd-repeater>
-</div>
+</ng-template>

@@ -1,9 +1,5 @@
 @import '../../../styles/mixins';
 
-:host {
-  position: absolute;
-}
-
 .gd-typeahead-results {
   background-color: #fff;
   box-shadow: $gd-box-shadow-lg;
@@ -16,7 +12,7 @@
 .gd-typahead-result-active {
   background-color: $gd-color-neutral-lightest;
 
-  a {
+  button {
     color: $gd-text-color-dark;
   }
 }

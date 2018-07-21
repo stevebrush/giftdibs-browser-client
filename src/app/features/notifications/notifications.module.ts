@@ -7,6 +7,12 @@ import {
 } from '@angular/common';
 
 import {
+  RouterModule
+} from '@angular/router';
+
+import {
+  BadgeModule,
+  GdPopoverModule,
   IconModule,
   RepeaterModule
 } from '../../modules';
@@ -16,19 +22,20 @@ import {
 } from './notification.service';
 
 import {
-  NotificationsRoutingModule
-} from './notifications-routing.module';
-
-import {
   NotificationsComponent
 } from './notifications.component';
 
 @NgModule({
   imports: [
+    BadgeModule,
     CommonModule,
+    GdPopoverModule,
     IconModule,
-    NotificationsRoutingModule,
-    RepeaterModule
+    RepeaterModule,
+    RouterModule
+  ],
+  exports: [
+    NotificationsComponent
   ],
   declarations: [
     NotificationsComponent

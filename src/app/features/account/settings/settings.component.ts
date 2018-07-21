@@ -22,7 +22,7 @@ import {
 
 import {
   SessionService
-} from '../../account/session';
+} from '../session';
 
 import { User } from '../../users/user';
 import { UserService } from '../../users/user.service';

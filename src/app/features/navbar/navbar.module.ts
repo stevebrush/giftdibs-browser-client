@@ -11,20 +11,16 @@ import {
 } from '@angular/router';
 
 import {
-  DropdownMenuModule
-} from '../dropdown-menu';
+  NotificationsModule
+} from '../notifications';
 
 import {
-  IconModule
-} from '../icon';
-
-import {
-  SearchModule
-} from '../search';
-
-import {
+  BadgeModule,
+  DropdownMenuModule,
+  IconModule,
+  SearchModule,
   ThumbnailModule
-} from '../thumbnail';
+} from '../../modules';
 
 import {
   NavbarComponent
@@ -32,10 +28,12 @@ import {
 
 @NgModule({
   imports: [
+    BadgeModule,
     CommonModule,
     DropdownMenuModule,
     IconModule,
     RouterModule,
+    NotificationsModule,
     SearchModule,
     ThumbnailModule
   ],

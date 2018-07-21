@@ -198,8 +198,11 @@ export class DropdownMenuComponent implements OnInit, AfterContentInit, OnDestro
   }
 
   public ngAfterContentInit(): void {
+    this.positionMenu();
+    this.isVisible = true;
+    this.changeDetector.detectChanges();
+
     this.windowRef.nativeWindow.setTimeout(() => {
-      this.positionMenu();
       this.buttons = [].slice.call(this.elementRef.nativeElement.querySelectorAll('.gd-button'));
       this.menuElementRef.nativeElement.focus();
     });
@@ -233,15 +236,12 @@ export class DropdownMenuComponent implements OnInit, AfterContentInit, OnDestro
 
   private positionMenu(): void {
     this.affixService.affixTo(
-      this.elementRef,
+      this.menuElementRef,
       this.context.config.caller,
       {
         horizontalAlignment: this.context.config.horizontalAlignment,
         verticalAlignment: this.context.config.verticalAlignment
       }
     );
-
-    this.isVisible = true;
-    this.changeDetector.detectChanges();
   }
 }

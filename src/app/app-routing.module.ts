@@ -35,16 +35,6 @@ const appRoutes: Routes = [
     canLoad: [AuthGuard]
   },
   {
-    path: 'messages',
-    loadChildren: 'app/features/messages/messages.module#MessagesModule',
-    canLoad: [AuthGuard]
-  },
-  {
-    path: 'notifications',
-    loadChildren: 'app/features/notifications/notifications.module#NotificationsModule',
-    canLoad: [AuthGuard]
-  },
-  {
     path: 'wish-lists',
     loadChildren: 'app/features/wish-lists/wish-lists.module#WishListsModule',
     canLoad: [AuthGuard]

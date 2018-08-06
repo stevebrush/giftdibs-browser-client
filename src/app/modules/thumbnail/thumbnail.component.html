@@ -3,5 +3,11 @@
   class="gd-thumbnail"
   [ngClass]="classNames"
 >
-  <gd-icon [icon]="(type === 'user') ? 'user' : 'image'"></gd-icon>
+  <img *ngIf="imageSource"
+    [src]="imageSource"
+  />
+  <gd-icon
+    *ngIf="!imageSource"
+    [icon]="(type === 'user') ? 'user' : 'image'"
+  ></gd-icon>
 </div>

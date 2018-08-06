@@ -12,11 +12,16 @@ import {
 
 import {
   FormFieldModule,
+  GdImageUploaderModule,
   GridModule,
   HideUntilModule,
   NoticeModule,
   PasswordViewerModule
 } from '../../modules';
+
+import {
+  AssetsModule
+} from '../assets';
 
 import {
   FacebookModule
@@ -35,9 +40,11 @@ import { VerifyAccountComponent } from './verify/verify.component';
 @NgModule({
   imports: [
     AccountRoutingModule,
+    AssetsModule,
     CommonModule,
     FacebookModule,
     FormFieldModule,
+    GdImageUploaderModule,
     GridModule,
     HideUntilModule,
     NoticeModule,

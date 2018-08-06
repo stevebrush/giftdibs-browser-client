@@ -1,12 +1,39 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ImageUploaderComponent } from './image-uploader.component';
+import {
+  NgModule
+} from '@angular/core';
+
+import {
+  CommonModule
+} from '@angular/common';
+
+import {
+  IconModule
+} from '../icon';
+
+import {
+  MediaModule
+} from '../media';
+
+import {
+  ThumbnailModule
+} from '../thumbnail';
+
+import {
+  GdImageUploaderComponent
+} from './image-uploader.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    IconModule,
+    MediaModule,
+    ThumbnailModule
   ],
-  declarations: [ImageUploaderComponent],
-  exports: [ImageUploaderComponent]
+  declarations: [
+    GdImageUploaderComponent
+  ],
+  exports: [
+    GdImageUploaderComponent
+  ]
 })
-export class ImageUploaderModule { }
+export class GdImageUploaderModule { }

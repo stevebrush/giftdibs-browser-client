@@ -2,11 +2,12 @@
 
 .gd-badge {
   display: inline-block;
-  background-color: $gd-color-neutral-dark;
+  background-color: $gd-color-danger;
   color: #fff;
   font-weight: $gd-font-weight-bold;
   font-size: $gd-font-size-smaller;
   padding: $gd-spacing-xs $gd-spacing-sm;
   white-space: nowrap;
   vertical-align: baseline;
+  border-radius: $gd-border-radius-sm;
 }

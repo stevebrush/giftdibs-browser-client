@@ -15,6 +15,9 @@ export class ThumbnailComponent {
   public size: 'xs' | 'sm' | 'md' | 'lg' = 'md';
 
   @Input()
+  public imageSource: string;
+
+  @Input()
   public type: 'default' | 'user' = 'default';
 
   public get classNames(): string {

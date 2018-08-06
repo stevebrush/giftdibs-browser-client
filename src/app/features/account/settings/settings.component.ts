@@ -13,6 +13,7 @@ import {
 } from '@angular/forms';
 
 import {
+  // concatMap,
   finalize
 } from 'rxjs/operators';
 
@@ -21,11 +22,20 @@ import {
 } from '../../../modules';
 
 import {
+  AssetsService
+} from '../../assets';
+
+import {
   SessionService
 } from '../session';
 
-import { User } from '../../users/user';
-import { UserService } from '../../users/user.service';
+import {
+  User
+} from '../../users/user';
+
+import {
+  UserService
+} from '../../users/user.service';
 
 @Component({
   selector: 'gd-settings',
@@ -42,6 +52,7 @@ export class SettingsComponent implements OnInit {
 
   constructor(
     private alertService: AlertService,
+    private assetsService: AssetsService,
     private changeDetector: ChangeDetectorRef,
     private formBuilder: FormBuilder,
     private sessionService: SessionService,
@@ -51,6 +62,44 @@ export class SettingsComponent implements OnInit {
   public ngOnInit(): void {
     this.createForm();
     this.updateForm();
+  }
+
+  public onSelectFile(args: any): void {
+    // this.assetsService.getSignedUrl(args.file)
+    //   .pipe(
+    //     concatMap(
+    //       (result: any) => {
+    //         return this.assetsService.upload(args.file, result.data.signedRequest);
+    //       },
+    //       () => {
+    //         console.log('Success!', result.data.url);
+    //         // TODO: Update user record with profile image URL.
+    //       }
+    //     )
+    //   ).subscribe(() => {
+
+    //   }, (err: any) => {
+
+    //   });
+
+    // Get a signed S3 request from API
+    this.assetsService.getSignedUrl(args.file).subscribe(
+      (result: any) => {
+        this.assetsService.upload(args.file, result.data.signedRequest).subscribe(
+          () => {
+            console.log('Success!', result.data.url);
+            // TODO: Update user record with profile image URL.
+          },
+          (err: any) => {
+            console.log('error:', err);
+          }
+        );
+      },
+      (err: any) => {
+        this.alertService.error(err.error.message);
+      }
+    );
+    // Send signed request to S3 asynchronously
   }
 
   public submit(): void {
@@ -65,8 +114,7 @@ export class SettingsComponent implements OnInit {
 
     const formData = this.settingsForm.value;
 
-    this.userService
-      .update(this.sessionService.user.id, formData)
+    this.userService.update(this.sessionService.user.id, formData)
       .pipe(
         finalize(() => {
           this.isLoading = false;
@@ -90,6 +138,7 @@ export class SettingsComponent implements OnInit {
 
   private createForm(): void {
     this.settingsForm = this.formBuilder.group({
+      avatarUrl: new FormControl(),
       firstName: new FormControl(null, [
         Validators.required
       ]),

@@ -11,6 +11,11 @@
     (ngSubmit)="submit()"
     novalidate
   >
+    <gd-image-uploader
+      formControlName="avatarUrl"
+      (selectFile)="onSelectFile($event)"
+    >
+    </gd-image-uploader>
     <gd-row>
       <gd-column screenSmall="6">
         <gd-form-field [errors]="errors">

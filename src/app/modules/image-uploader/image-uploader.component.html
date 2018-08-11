@@ -3,7 +3,6 @@
     <gd-media-thumbnail>
       <gd-thumbnail
         size="md"
-        type="user"
         [imageSource]="imageSource"
       >
       </gd-thumbnail>
@@ -11,28 +10,29 @@
     <gd-media-content>
       <gd-media-body>
         <div class="gd-button-group">
-          <label
+          <button
             class="gd-button gd-button-default"
-            tabindex="0"
+            type="button"
+            (click)="triggerFileSelect()"
           >
             Select image
-            <input
-              class="gd-screen-reader-only"
-              tabindex="-1"
-              type="file"
-              (change)="onFileSelected($event)"
-            />
-          </label>
+          </button>
           <button
             class="gd-button gd-button-default"
             type="button"
             (click)="clearSelection()"
           >
-            <gd-icon icon="trash"></gd-icon>
             Remove image
           </button>
+          <input
+            aria-label="Avatar URL"
+            class="gd-screen-reader-only"
+            tabindex="-1"
+            type="file"
+            (change)="onFileSelected($event)"
+            #fileInput
+          />
         </div>
-        <input type="text" [value]="value" />
       </gd-media-body>
     </gd-media-content>
   </gd-media>

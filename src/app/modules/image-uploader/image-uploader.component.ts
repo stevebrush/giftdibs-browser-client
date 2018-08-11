@@ -2,10 +2,12 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ElementRef,
   EventEmitter,
   forwardRef,
-  OnInit,
-  Output
+  OnDestroy,
+  Output,
+  ViewChild
 } from '@angular/core';
 
 import {
@@ -25,7 +27,7 @@ import {
     multi: true
   }]
 })
-export class GdImageUploaderComponent implements OnInit, ControlValueAccessor {
+export class GdImageUploaderComponent implements OnDestroy, ControlValueAccessor {
   public get value(): string {
     return this._value;
   }
@@ -38,7 +40,13 @@ export class GdImageUploaderComponent implements OnInit, ControlValueAccessor {
   public imageSource: string;
 
   @Output()
-  public selectFile = new EventEmitter<any>();
+  public selectFile = new EventEmitter<{ file: any }>();
+
+  @Output()
+  public removeFile = new EventEmitter<void>();
+
+  @ViewChild('fileInput')
+  public fileInput: ElementRef;
 
   private _value: string;
 
@@ -46,26 +54,26 @@ export class GdImageUploaderComponent implements OnInit, ControlValueAccessor {
     private changeDetector: ChangeDetectorRef
   ) { }
 
-  public ngOnInit(): void {
+  public ngOnDestroy(): void {
+    this.selectFile.complete();
+    this.removeFile.complete();
+  }
+
+  public triggerFileSelect(): void {
+    const input = this.fileInput.nativeElement;
+    input.value = '';
+    input.click();
   }
 
   public onFileSelected(event: any): void {
     const file = event.target.files[0];
-    // const reader = new FileReader();
-
-    // reader.onload = (fileEvent: any) => {
-    //   this.imageSource = fileEvent.target.result;
-    //   this.changeDetector.markForCheck();
-    // };
-
-    // reader.readAsDataURL(file);
-
     this.selectFile.next({ file });
   }
 
   public writeValue(value: any): void {
-    console.log('writeValue:', value);
+    this.imageSource = value;
     this.value = value;
+    this.changeDetector.markForCheck();
   }
 
   // Angular automatically constructs these methods.
@@ -83,5 +91,9 @@ export class GdImageUploaderComponent implements OnInit, ControlValueAccessor {
   public setDisabledState(disabled: boolean): void {
     this.disabled = disabled;
     this.changeDetector.markForCheck();
+  }
+
+  public clearSelection(): void {
+    this.removeFile.next();
   }
 }

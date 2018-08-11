@@ -2,10 +2,8 @@
   aria-hidden="true"
   class="gd-thumbnail"
   [ngClass]="classNames"
+  [ngStyle]="{'background-image': (imageSource) ? 'url(' + imageSource + ')' : ''}"
 >
-  <img *ngIf="imageSource"
-    [src]="imageSource"
-  />
   <gd-icon
     *ngIf="!imageSource"
     [icon]="(type === 'user') ? 'user' : 'image'"

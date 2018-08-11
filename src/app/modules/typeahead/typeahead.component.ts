@@ -156,11 +156,11 @@ export class TypeaheadComponent implements AfterViewInit, OnDestroy {
     });
 
     // Set the input value to what is selected in the dropdown.
-    this.overlayInstance.componentInstance.selectionChange.subscribe((change: TypeaheadResultsSelectionChange) => {
-      console.log('change?', change);
-      this.searchInput.nativeElement.value = change.label;
-      this.overlayInstance.destroy();
-    });
+    this.overlayInstance.componentInstance.selectionChange
+      .subscribe((change: TypeaheadResultsSelectionChange) => {
+        this.searchInput.nativeElement.value = change.label;
+        this.overlayInstance.destroy();
+      });
 
     this.hasResults = true;
     this.overlayInstance.destroyed.subscribe(() => {

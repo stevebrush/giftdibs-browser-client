@@ -7,10 +7,6 @@ import {
 } from '@angular/common';
 
 import {
-  IconModule
-} from '../icon';
-
-import {
   MediaModule
 } from '../media';
 
@@ -25,7 +21,6 @@ import {
 @NgModule({
   imports: [
     CommonModule,
-    IconModule,
     MediaModule,
     ThumbnailModule
   ],

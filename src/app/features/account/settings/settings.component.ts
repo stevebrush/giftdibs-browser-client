@@ -65,41 +65,25 @@ export class SettingsComponent implements OnInit {
   }
 
   public onSelectFile(args: any): void {
-    // this.assetsService.getSignedUrl(args.file)
-    //   .pipe(
-    //     concatMap(
-    //       (result: any) => {
-    //         return this.assetsService.upload(args.file, result.data.signedRequest);
-    //       },
-    //       () => {
-    //         console.log('Success!', result.data.url);
-    //         // TODO: Update user record with profile image URL.
-    //       }
-    //     )
-    //   ).subscribe(() => {
-
-    //   }, (err: any) => {
-
-    //   });
-
-    // Get a signed S3 request from API
-    this.assetsService.getSignedUrl(args.file).subscribe(
+    this.assetsService.uploadAvatar(args.file).subscribe(
       (result: any) => {
-        this.assetsService.upload(args.file, result.data.signedRequest).subscribe(
-          () => {
-            console.log('Success!', result.data.url);
-            // TODO: Update user record with profile image URL.
-          },
-          (err: any) => {
-            console.log('error:', err);
-          }
-        );
+        this.settingsForm.get('avatarUrl').setValue(result.data.url);
       },
       (err: any) => {
         this.alertService.error(err.error.message);
       }
     );
-    // Send signed request to S3 asynchronously
+  }
+
+  public onRemoveFile(): void {
+    this.assetsService.removeAvatar().subscribe(
+      () => {
+        this.settingsForm.get('avatarUrl').reset();
+      },
+      (err: any) => {
+        this.alertService.error(err.error.message);
+      }
+    );
   }
 
   public submit(): void {
@@ -153,8 +137,7 @@ export class SettingsComponent implements OnInit {
   }
 
   private updateForm(): void {
-    this.userService
-      .getById(this.sessionService.user.id)
+    this.userService.getById(this.sessionService.user.id)
       .pipe(
         finalize(() => {
           this.isLoading = false;

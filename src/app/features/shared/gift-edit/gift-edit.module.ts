@@ -14,10 +14,15 @@ import {
 import {
   CheckboxModule,
   FormFieldModule,
+  GdImageUploaderModule,
   GridModule,
   IconModule,
   ModalModule
 } from '../../../modules';
+
+import {
+  AssetsModule
+} from '../../assets';
 
 import {
   GiftEditComponent
@@ -25,10 +30,12 @@ import {
 
 @NgModule({
   imports: [
+    AssetsModule,
     CheckboxModule,
     CommonModule,
     FormFieldModule,
     FormsModule,
+    GdImageUploaderModule,
     GridModule,
     IconModule,
     ModalModule,

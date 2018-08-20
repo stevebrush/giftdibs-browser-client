@@ -19,6 +19,10 @@ import {
 } from '../../../modules';
 
 import {
+  AssetsService
+} from '../../assets';
+
+import {
   Gift,
   GiftService
 } from '../../gifts';
@@ -47,6 +51,7 @@ export class GiftEditComponent implements OnInit {
 
   constructor(
     private alertService: AlertService,
+    private assetsService: AssetsService,
     private changeDetector: ChangeDetectorRef,
     private formBuilder: FormBuilder,
     private context: GiftEditContext,
@@ -69,6 +74,28 @@ export class GiftEditComponent implements OnInit {
         control.push(this.formBuilder.group(externalUrl));
       });
     }
+  }
+
+  public onSelectFile(args: any): void {
+    this.assetsService.uploadGiftThumbnail(args.file, this.gift.id).subscribe(
+      (result: any) => {
+        this.giftForm.get('imageUrl').setValue(result.data.url);
+      },
+      (err: any) => {
+        this.alertService.error(err.error.message);
+      }
+    );
+  }
+
+  public onRemoveFile(): void {
+    this.assetsService.removeGiftThumbnail(this.gift.id).subscribe(
+      () => {
+        this.giftForm.get('imageUrl').reset();
+      },
+      (err: any) => {
+        this.alertService.error(err.error.message);
+      }
+    );
   }
 
   public submit(): void {
@@ -128,6 +155,7 @@ export class GiftEditComponent implements OnInit {
     this.giftForm = this.formBuilder.group({
       budget: undefined,
       externalUrls: this.formBuilder.array([]) as any,
+      imageUrl: new FormControl(),
       isReceived: new FormControl(false),
       name: new FormControl(null, [
         Validators.required

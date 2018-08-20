@@ -17,7 +17,12 @@
       [formGroup]="giftForm"
       (ngSubmit)="submit()"
     >
-
+      <gd-image-uploader
+        formControlName="imageUrl"
+        (selectFile)="onSelectFile($event)"
+        (removeFile)="onRemoveFile()"
+      >
+      </gd-image-uploader>
       <gd-form-field [errors]="errors">
         <label
           class="gd-control-label"

@@ -1,0 +1,91 @@
+<div *ngIf="!isLoading && wishList" class="gd-wish-list">
+  <div class="gd-wish-list-banner gd-container">
+    <gd-media>
+      <gd-media-content>
+        <h1>{{ wishList.name }}</h1>
+        <p class="gd-text-color-deemphasized">
+          {{ wishList.gifts.length }} items&nbsp;&bull;
+          Privacy:&nbsp;{{ wishList.privacy.type }}&nbsp;&bull;
+          {{ wishList.dateUpdated | date }}
+        </p>
+        <ng-container *ngIf="isSessionUser">
+          <button
+            class="gd-button gd-button-default"
+            type="button"
+            (click)="openWishListEditModal()"
+          >
+            Edit wish list
+          </button>
+        </ng-container>
+      </gd-media-content>
+      <gd-media-thumbnail>
+        <gd-thumbnail
+          type="user"
+          size="sm"
+          title="{{ wishList.user.firstName }} {{ wishList.user.lastName }}"
+          [imageSource]="wishList.user.avatarUrl"
+          [route]="{ commands: ['/users', wishList.user.id] }"
+        >
+        </gd-thumbnail>
+      </gd-media-thumbnail>
+    </gd-media>
+  </div>
+  <div class="gd-wish-list-body gd-container-fluid">
+    <gd-row>
+      <gd-column *ngIf="isSessionUser"
+        [screenSmall]="4"
+      >
+        <button
+          class="gd-button gd-button-primary gd-button-block"
+          type="button"
+          (click)="openGiftCreateModal()"
+        >
+          Add item
+        </button>
+      </gd-column>
+      <gd-column *ngFor="let gift of wishList.gifts"
+        screenSmall="3"
+      >
+        <gd-card
+          [route]="{
+            commands: ['/gifts', gift.id]
+          }"
+        >
+          <gd-card-thumbnail>
+            <gd-thumbnail
+              size="full"
+              [imageSource]="gift.imageUrl"
+            >
+            </gd-thumbnail>
+          </gd-card-thumbnail>
+          <gd-card-header>
+            <gd-card-heading>
+              {{ gift.name }}
+              <ng-template [ngIf]="gift.quantity > 1">
+                ({{ gift.quantity }})
+              </ng-template>
+            </gd-card-heading>
+          </gd-card-header>
+          <gd-card-body>
+            <gd-gift-priority
+              [priority]="gift.priority"
+            >
+            </gd-gift-priority>
+            <div class="gd-text-color-deemphasized">
+              ${{ gift.budget || '--' }}
+              <span *ngIf="gift.quantity > 1">ea.</span>
+            </div>
+            <gd-icon *ngIf="gift.dibs && gift.dibs.length"
+              icon="hand-paper"
+              iconStyle="deemphasized"
+            ></gd-icon>
+            <gd-icon *ngIf="gift.comments && gift.comments.length"
+              icon="comment-dots"
+              iconStyle="deemphasized"
+            ></gd-icon>
+          </gd-card-body>
+        </gd-card>
+      </gd-column>
+    </gd-row>
+  </div>
+</div>

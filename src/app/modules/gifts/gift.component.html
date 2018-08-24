@@ -1,0 +1,86 @@
+<div *ngIf="gift" class="gd-gift">
+  <div class="gd-gift-banner gd-container">
+    <gd-media>
+      <gd-media-content>
+        <h1>
+          {{ gift.name }}
+        </h1>
+        <gd-gift-priority
+          [priority]="gift.priority"
+        >
+        </gd-gift-priority>
+        <div class="gd-text-color-deemphasized">
+          ${{ gift.budget || '--' }}
+          <span *ngIf="gift.quantity > 1">ea.</span>
+        </div>
+        <div class="gd-text-color-deemphasized">
+          {{ gift.dateUpdated | date }}
+        </div>
+      </gd-media-content>
+      <gd-media-thumbnail>
+        <gd-thumbnail
+          type="user"
+          size="sm"
+          [imageSource]="gift.user.avatarUrl"
+          [route]="{ commands: ['/users', gift.user.id] }"
+        >
+        </gd-thumbnail>
+      </gd-media-thumbnail>
+    </gd-media>
+
+    <gd-thumbnail
+      size="full"
+      [imageSource]="gift.imageUrl"
+    ></gd-thumbnail>
+
+    <ng-container *ngIf="isSessionUser">
+      <div class="gd-button-group">
+        <button *ngIf="!gift.isReceived"
+          class="gd-button gd-button-primary"
+          type="button"
+          [disabled]="isLoading"
+          (click)="markReceived()"
+        >
+          <gd-icon icon="check"></gd-icon>
+          Mark as received
+        </button>
+
+        <div *ngIf="gift.isReceived"
+          class="gd-button gd-button-primary gd-button-block gd-button-disabled"
+        >
+          <gd-icon icon="check"></gd-icon>
+          Received!
+        </div>
+
+        <button
+          class="gd-button gd-button-default"
+          type="button"
+          (click)="openGiftEditModal()"
+        >
+          Edit gift
+        </button>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="!isSessionUser">
+      <gd-dib-controls
+        [gift]="gift"
+        (change)="onDibChange($event)"
+      >
+      </gd-dib-controls>
+    </ng-container>
+
+    <gd-comment-list
+      [comments]="gift.comments"
+    >
+    </gd-comment-list>
+
+    <gd-comment-edit
+      [giftId]="gift.id"
+      (saved)="onCommentSaved()"
+    >
+    </gd-comment-edit>
+  </div>
+  <div class="gd-wish-list-body gd-container-fluid">
+  </div>
+</div>

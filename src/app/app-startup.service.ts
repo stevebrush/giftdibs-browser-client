@@ -9,11 +9,11 @@ import {
 
 import {
   environment
-} from '../environments/environment';
+} from '@root/environments/environment';
 
 import {
   SessionService
-} from './features/account/session';
+} from './shared/modules/session';
 
 @Injectable()
 export class AppStartupService {

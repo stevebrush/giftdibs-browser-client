@@ -88,14 +88,14 @@ $gd-border-color-danger: border_color($gd-color-danger) !default;
 $gd-text-color-danger: text_color($gd-color-danger) !default;
 
 // NEUTRAL
-$gd-color-neutral: desaturate(lighten($gd-color-primary, 15%), 55%) !default;
+$gd-color-neutral: desaturate(lighten($gd-color-primary, 15%), 65%) !default;
 $gd-color-neutral-light: lighten($gd-color-neutral, 15%) !default;
 $gd-color-neutral-lighter: lighten($gd-color-neutral, 30%) !default;
 $gd-color-neutral-lightest: lighten($gd-color-neutral, 40%) !default;
 $gd-color-neutral-faint: lighten($gd-color-neutral, 44%) !default;
-$gd-color-neutral-dark: darken($gd-color-neutral, 15%) !default;
-$gd-color-neutral-darker: darken($gd-color-neutral, 20%) !default;
-$gd-color-neutral-darkest: darken($gd-color-neutral, 30%) !default;
+$gd-color-neutral-dark: darken($gd-color-neutral, 20%) !default;
+$gd-color-neutral-darker: darken($gd-color-neutral, 30%) !default;
+$gd-color-neutral-darkest: darken($gd-color-neutral, 40%) !default;
 
 $gd-border-color-neutral: darken($gd-color-neutral, 5%) !default;
 $gd-border-color-neutral-light: darken($gd-color-neutral-light, 5%) !default;

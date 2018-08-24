@@ -1,0 +1,19 @@
+<div class="gd-card">
+  <ng-container *ngIf="!route">
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+  </ng-container>
+  <ng-container *ngIf="route">
+    <a
+      class="gd-card-anchor"
+      tabindex="0"
+      [routerLink]="route.commands"
+      [fragment]="route.extras?.fragment"
+      [queryParams]="route.extras?.queryParams"
+      [queryParamsHandling]="route.extras?.queryParamsHandling"
+    ><ng-container *ngTemplateOutlet="content"></ng-container></a>
+  </ng-container>
+</div>
+
+<ng-template #content>
+  <ng-content></ng-content>
+</ng-template>

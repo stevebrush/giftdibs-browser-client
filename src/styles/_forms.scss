@@ -10,6 +10,7 @@
   display: block;
   width: 100%;
   font-weight: $gd-font-weight-bold;
+  border-color: rgba(0, 0, 0, 0.075);
 
   &:disabled {
     @include gd_disabled();

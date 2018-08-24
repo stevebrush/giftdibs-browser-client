@@ -8,17 +8,17 @@ import {
 } from '@angular/platform-browser';
 
 import {
-  NavbarModule
-} from './features/navbar';
+  AlertModule,
+  VerifyEmailNoticeModule
+} from './ui';
 
 import {
   SessionModule
-} from './features/account/session';
+} from './shared/modules/session';
 
 import {
-  AlertModule,
-  VerifyEmailNoticeModule
-} from './modules';
+  NavbarModule
+} from '@app/shared/modules/navbar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppStartupService } from './app-startup.service';

@@ -1,0 +1,20 @@
+<div class="gd-wish-list-preview">
+  <gd-card
+    [route]="{
+      commands: ['/wish-lists', wishList.id]
+    }"
+  >
+    <gd-card-thumbnail>
+      <gd-thumbnail
+        size="full"
+        [imageSource]="thumbnail"
+      >
+      </gd-thumbnail>
+    </gd-card-thumbnail>
+    <gd-card-header>
+      <gd-card-heading>
+        {{ wishList.name }}
+      </gd-card-heading>
+    </gd-card-header>
+  </gd-card>
+</div>

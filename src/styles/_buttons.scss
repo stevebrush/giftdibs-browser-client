@@ -85,12 +85,10 @@
 //   box-shadow: inset 0 -2px 0px $gd-border-color-warning;
 // }
 
-// .gd-button-danger {
-//   background-color: #fff;
-//   color: $gd-text-color-danger;
-//   border-color: $gd-border-color-danger;
-//   box-shadow: inset 0 -2px 0px $gd-border-color-danger;
-// }
+.gd-button-danger {
+  background-color: $gd-text-color-danger;
+  color: #fff;
+}
 
 // .gd-button-info {
 //   background-color: #fff;

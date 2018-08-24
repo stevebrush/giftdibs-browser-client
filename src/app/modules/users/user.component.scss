@@ -1,0 +1,24 @@
+@import '../../../styles/mixins';
+
+.gd-user {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  top: 64px;
+}
+
+.gd-user-wish-list-create-form {
+  display: none;
+}
+
+.gd-user-wish-list-create-form-active {
+  .gd-user-wish-list-create-button {
+    display: none;
+  }
+
+  .gd-user-wish-list-create-form {
+    display: block;
+  }
+}

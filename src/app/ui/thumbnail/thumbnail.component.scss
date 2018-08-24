@@ -1,0 +1,65 @@
+@import '../../../styles/mixins';
+
+.gd-thumbnail {
+  display: inline-block;
+  box-shadow: 0 0 0 1px #fff;
+  color: $gd-color-neutral-lighter;
+  font-weight: $gd-font-weight-light;
+  vertical-align: top;
+}
+
+.gd-thumbnail-anchor {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.gd-thumbnail-image-container {
+  background-color: $gd-color-neutral-lightest;
+  background-size: cover;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  user-select: none;
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.gd-thumbnail-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.gd-thumbnail-xs {
+  width: 2rem;
+  height: 2rem;
+  font-size: $gd-font-size-small;
+}
+
+.gd-thumbnail-sm {
+  width: 6rem;
+  height: 6rem;
+  font-size: $gd-font-size-xl;
+}
+
+.gd-thumbnail-md {
+  width: 8rem;
+  height: 8rem;
+  font-size: $gd-font-size-xxl;
+}
+
+.gd-thumbnail-lg {
+  width: 10rem;
+  height: 10rem;
+  font-size: $gd-font-size-xxl;
+  letter-spacing: -0.175rem;
+}
+
+.gd-thumbnail-full {
+  width: 100%;
+  height: auto;
+  font-size: $gd-font-size-xxl;
+  letter-spacing: -0.175rem;
+}

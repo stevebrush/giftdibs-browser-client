@@ -1,0 +1,40 @@
+<div
+  aria-hidden="true"
+  class="gd-thumbnail"
+  [attr.title]="title"
+  [ngClass]="'gd-thumbnail-' + size"
+>
+  <ng-container *ngIf="!route">
+    <ng-container *ngTemplateOutlet="image"></ng-container>
+  </ng-container>
+  <ng-container *ngIf="route">
+    <a
+      class="gd-thumbnail-anchor"
+      tabindex="0"
+      [routerLink]="route.commands"
+      [fragment]="route.extras?.fragment"
+      [queryParams]="route.extras?.queryParams"
+      [queryParamsHandling]="route.extras?.queryParamsHandling"
+    ><ng-container *ngTemplateOutlet="image"></ng-container></a>
+  </ng-container>
+</div>
+
+<ng-template #image>
+  <div
+    class="gd-thumbnail-image-container"
+    [ngClass]="{
+      'gd-rounded-corners-circle': (type === 'user')
+    }"
+    [ngStyle]="{
+      'background-image': (imageSource && size !== 'full') ? 'url(' + imageSource + ')' : ''
+    }"
+  >
+    <gd-icon *ngIf="!imageSource"
+      [icon]="(type === 'user') ? 'user' : 'image'"
+    ></gd-icon>
+    <img *ngIf="size === 'full' && imageSource"
+      class="gd-thumbnail-image"
+      [attr.src]="imageSource"
+    />
+  </div>
+</ng-template>

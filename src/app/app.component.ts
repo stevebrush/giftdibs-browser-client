@@ -6,7 +6,7 @@ import {
 
 import {
   WindowRefService
-} from './modules';
+} from '@app/ui';
 
 @Component({
   selector: 'app-root',

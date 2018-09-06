@@ -1,84 +1,93 @@
-<div class="gd-container">
-  <h1>
-    Account settings
-  </h1>
+<div class="gd-canvas">
+  <div class="gd-container">
+    <div class="gd-detail-pane">
+      <h1>
+        Account settings
+      </h1>
 
-  <form
-    aria-label="Account settings"
-    class="gd-form"
-    [formGroup]="settingsForm"
-    [gdHideUntil]="isReady"
-    (ngSubmit)="submit()"
-    novalidate
-  >
-    <gd-image-uploader
-      formControlName="avatarUrl"
-      (selectFile)="onSelectFile($event)"
-      (removeFile)="onRemoveFile()"
-    >
-    </gd-image-uploader>
-    <gd-row>
-      <gd-column screenSmall="6">
-        <gd-form-field [errors]="errors">
-          <label
-            class="gd-control-label"
-            for="gd-settings-first-name"
-          >
-            First name
-          </label>
-          <input
-            type="text"
-            class="gd-form-control"
-            id="gd-settings-first-name"
-            formControlName="firstName"
-            autocomplete="off"
-          />
-        </gd-form-field>
-      </gd-column>
-      <gd-column screenSmall="6">
-        <gd-form-field [errors]="errors">
-          <label
-            class="gd-control-label"
-            for="gd-settings-last-name"
-          >
-            Last name
-          </label>
-          <input
-            type="text"
-            class="gd-form-control"
-            id="gd-settings-last-name"
-            formControlName="lastName"
-            autocomplete="off"
-          />
-        </gd-form-field>
-      </gd-column>
-    </gd-row>
-
-    <gd-form-field [errors]="errors">
-      <label
-        class="gd-control-label"
-        for="gd-settings-email-address"
+      <form
+        aria-label="Account settings"
+        class="gd-form"
+        [formGroup]="settingsForm"
+        [gdHideUntil]="isReady"
+        (ngSubmit)="submit()"
+        novalidate
       >
-        Email
-      </label>
-      <input
-        type="email"
-        class="gd-form-control"
-        id="gd-settings-email-address"
-        formControlName="emailAddress"
-        autocomplete="off"
-      />
-    </gd-form-field>
+        <gd-form-field>
+          <label>
+            Profile image
+          </label>
+          <gd-image-uploader
+            formControlName="avatarUrl"
+            (selectFile)="onSelectFile($event)"
+            (removeFile)="onRemoveFile()"
+          >
+          </gd-image-uploader>
+        </gd-form-field>
+        <gd-row>
+          <gd-column screenSmall="6">
+            <gd-form-field [errors]="errors">
+              <label
+                class="gd-control-label"
+                for="gd-settings-first-name"
+              >
+                First name
+              </label>
+              <input
+                type="text"
+                class="gd-form-control"
+                id="gd-settings-first-name"
+                formControlName="firstName"
+                autocomplete="off"
+              />
+            </gd-form-field>
+          </gd-column>
+          <gd-column screenSmall="6">
+            <gd-form-field [errors]="errors">
+              <label
+                class="gd-control-label"
+                for="gd-settings-last-name"
+              >
+                Last name
+              </label>
+              <input
+                type="text"
+                class="gd-form-control"
+                id="gd-settings-last-name"
+                formControlName="lastName"
+                autocomplete="off"
+              />
+            </gd-form-field>
+          </gd-column>
+        </gd-row>
 
-    <button
-      class="gd-button gd-button-primary"
-      type="submit"
-      [disabled]="settingsForm.disabled"
-    >
-      Save changes
-    </button>
-  </form>
+        <gd-form-field [errors]="errors">
+          <label
+            class="gd-control-label"
+            for="gd-settings-email-address"
+          >
+            Email
+          </label>
+          <input
+            type="email"
+            class="gd-form-control"
+            id="gd-settings-email-address"
+            formControlName="emailAddress"
+            autocomplete="off"
+          />
+        </gd-form-field>
 
-  <p><a routerLink="/account/reset-password">Change password</a></p>
-  <p><a routerLink="/account/delete">Delete account</a></p>
+        <button
+          class="gd-button gd-button-primary"
+          type="submit"
+          [disabled]="settingsForm.disabled"
+        >
+          Save changes
+        </button>
+      </form>
+
+      <p><a routerLink="/account/reset-password">Change password...</a></p>
+      <p><a routerLink="/account/delete">Delete account...</a></p>
+    </div>
+  </div>
 </div>

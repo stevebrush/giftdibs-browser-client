@@ -1,7 +1,8 @@
 @import '../../../styles/mixins';
 
 .gd-dropdown-menu {
-  width: 275px;
+  max-width: 275px;
+  display: inline-block;
   box-shadow: $gd-box-shadow;
   background-color: #fff;
   padding: $gd-spacing-sm 0;

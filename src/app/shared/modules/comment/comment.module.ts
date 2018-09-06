@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommentEditComponent } from '@app/shared/modules/comment/comment-edit.component';
 import { CommentListComponent } from '@app/shared/modules/comment/comment-list.component';
 import { CommentPreviewComponent } from '@app/shared/modules/comment/comment-preview.component';
+import { RouterModule } from '@angular/router';
 // #endregion
 
 @NgModule({
@@ -27,6 +28,7 @@ import { CommentPreviewComponent } from '@app/shared/modules/comment/comment-pre
     MediaModule,
     ReactiveFormsModule,
     RepeaterModule,
+    RouterModule,
     ThumbnailModule
   ],
   providers: [

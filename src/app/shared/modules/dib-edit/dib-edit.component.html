@@ -72,25 +72,26 @@
           Make this dib anonymous
         </gd-checkbox>
       </gd-form-field>
-      <gd-form-field>
-        <gd-checkbox
-          formControlName="isDelivered"
-        >
-          Mark as delivered
-        </gd-checkbox>
-      </gd-form-field>
     </form>
   </gd-modal-body>
-  <gd-modal-footer
-    (cancelClicked)="onCancelClicked()"
-  >
-    <button
-      class="gd-button gd-button-primary"
-      type="button"
-      [disabled]="dibForm.disabled"
-      (click)="submit()"
-    >
-      Save
-    </button>
+  <gd-modal-footer>
+    <div class="gd-button-group">
+      <button
+        class="gd-button gd-button-primary"
+        type="button"
+        [disabled]="dibForm.disabled"
+        (click)="submit()"
+      >
+        Save
+      </button>
+      <button
+        class="gd-button gd-button-default"
+        type="button"
+        [disabled]="dibForm.disabled"
+        (click)="onCancelClicked()"
+      >
+        Cancel
+      </button>
+    </div>
   </gd-modal-footer>
 </gd-modal>

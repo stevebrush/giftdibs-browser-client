@@ -104,7 +104,6 @@ export class DibEditComponent implements OnInit {
     this.dibForm = this.formBuilder.group({
       giftId: new FormControl(this.gift.id),
       isAnonymous: true,
-      isDelivered: undefined,
       notes: undefined,
       pricePaid: undefined,
       quantity: 1

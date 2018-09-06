@@ -41,10 +41,7 @@
       </gd-form-field>
 
       <div formArrayName="externalUrls">
-        <h4>
-          Product URLs:
-        </h4>
-
+        <div>Product URLs:</div>
         <gd-row *ngFor="let externalUrl of externalUrls.controls; let i = index;"
           [formGroup]="externalUrl"
         >
@@ -62,7 +59,7 @@
               class="gd-button gd-button-default gd-button-block"
               title="Remove URL"
               type="button"
-              [disabled]="isLoading"
+              [disabled]="giftForm.disabled"
               (click)="removeUrl(i)"
             >
               Remove
@@ -72,27 +69,12 @@
         <button
           class="gd-button gd-button-default"
           type="button"
+          [disabled]="giftForm.disabled"
           (click)="addExternalUrlField()"
         >
           Add URL
         </button>
       </div>
-
-      <gd-form-field [errors]="errors">
-        <label
-          class="gd-control-label"
-          for="gd-gift-edit-priority"
-        >
-          Priority
-        </label>
-        <input
-          autocomplete="off"
-          class="gd-form-control"
-          formControlName="priority"
-          id="gd-gift-edit-priority"
-          type="number"
-        >
-      </gd-form-field>
 
       <gd-form-field [errors]="errors">
         <label
@@ -112,6 +94,22 @@
           >
           <span class="gd-input-group-append">.00</span>
         </span>
+      </gd-form-field>
+
+      <gd-form-field [errors]="errors">
+        <label
+          class="gd-control-label"
+          for="gd-gift-edit-priority"
+        >
+          Priority
+        </label>
+        <input
+          autocomplete="off"
+          class="gd-form-control"
+          formControlName="priority"
+          id="gd-gift-edit-priority"
+          type="number"
+        >
       </gd-form-field>
 
       <gd-form-field [errors]="errors">
@@ -140,16 +138,38 @@
 
     </form>
   </gd-modal-body>
-  <gd-modal-footer
-    (cancelClicked)="onCancelClicked()"
-  >
-    <button
-      class="gd-button gd-button-primary"
-      type="button"
-      [disabled]="giftForm.disabled"
-      (click)="submit()"
-    >
-      Save
-    </button>
+  <gd-modal-footer>
+    <gd-row>
+      <gd-column screenSmall="9">
+        <div class="gd-button-group">
+          <button
+            class="gd-button gd-button-primary"
+            type="button"
+            [disabled]="giftForm.disabled"
+            (click)="submit()"
+          >
+            Save
+          </button>
+          <button
+            class="gd-button gd-button-default"
+            type="button"
+            [disabled]="giftForm.disabled"
+            (click)="onCancelClicked()"
+          >
+            Cancel
+          </button>
+        </div>
+      </gd-column>
+      <gd-column screenSmall="3">
+        <button *ngIf="gift"
+          class="gd-button gd-button-danger"
+          type="button"
+          [disabled]="giftForm.disabled"
+          (click)="deleteGift()"
+        >
+          Delete
+        </button>
+      </gd-column>
+    </gd-row>
   </gd-modal-footer>
 </gd-modal>

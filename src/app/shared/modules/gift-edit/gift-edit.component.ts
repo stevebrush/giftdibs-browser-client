@@ -19,6 +19,10 @@ import {
 } from '@app/ui';
 
 import {
+  finalize
+} from 'rxjs/operators';
+
+import {
   AssetsService
 } from '../assets';
 
@@ -30,6 +34,8 @@ import {
 import {
   GiftEditContext
 } from './gift-edit-context';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'gd-gift-edit',
@@ -45,8 +51,8 @@ export class GiftEditComponent implements OnInit {
   public errors: any[];
   public gift: Gift;
   public giftForm: FormGroup;
-  public isLoading = false;
 
+  private newImageFile: any;
   private wishListId: string;
 
   constructor(
@@ -56,7 +62,8 @@ export class GiftEditComponent implements OnInit {
     private formBuilder: FormBuilder,
     private context: GiftEditContext,
     private giftService: GiftService,
-    private modal: ModalInstance<any>
+    private modal: ModalInstance<any>,
+    private router: Router
   ) { }
 
   public ngOnInit(): void {
@@ -66,36 +73,41 @@ export class GiftEditComponent implements OnInit {
     this.wishListId = this.context.wishListId;
 
     if (this.gift) {
-      this.giftForm.reset(this.gift);
-      this.giftForm.setControl('externalUrls', this.formBuilder.array([]));
-
-      const control = this.externalUrls;
-      this.gift.externalUrls.forEach((externalUrl: any) => {
-        control.push(this.formBuilder.group(externalUrl));
-      });
+      this.resetForm(this.gift);
     }
   }
 
   public onSelectFile(args: any): void {
-    this.assetsService.uploadGiftThumbnail(args.file, this.gift.id).subscribe(
-      (result: any) => {
-        this.giftForm.get('imageUrl').setValue(result.data.url);
-      },
-      (err: any) => {
-        this.alertService.error(err.error.message);
-      }
-    );
+    const reader = new FileReader();
+
+    reader.onload = (e: any) => {
+      this.giftForm.get('imageUrl').setValue(e.target.result);
+    };
+
+    reader.readAsDataURL(args.file);
+
+    this.newImageFile = args.file;
   }
 
   public onRemoveFile(): void {
-    this.assetsService.removeGiftThumbnail(this.gift.id).subscribe(
-      () => {
-        this.giftForm.get('imageUrl').reset();
-      },
-      (err: any) => {
-        this.alertService.error(err.error.message);
-      }
-    );
+    this.giftForm.disable();
+    this.changeDetector.markForCheck();
+
+    this.assetsService.removeGiftThumbnail(this.gift.id)
+      .pipe(
+        finalize(() => {
+          this.giftForm.enable();
+          this.changeDetector.markForCheck();
+        })
+      )
+      .subscribe(
+        () => {
+          this.giftForm.get('imageUrl').reset();
+        },
+        (err: any) => {
+          this.alertService.error(err.error.message);
+        }
+      );
   }
 
   public submit(): void {
@@ -104,7 +116,6 @@ export class GiftEditComponent implements OnInit {
     }
 
     this.giftForm.disable();
-    this.isLoading = true;
     this.errors = [];
     this.changeDetector.markForCheck();
 
@@ -123,16 +134,56 @@ export class GiftEditComponent implements OnInit {
     obs.subscribe(
       (result: any) => {
         const giftId = (this.gift) ? this.gift.id : result.data.giftId;
-        this.giftService.getById(giftId).subscribe((gift: Gift) => {
-          this.modal.close('save', { gift });
-        });
+
+        if (this.newImageFile) {
+          this.uploadImage(this.newImageFile, giftId).subscribe(
+            () => {
+              this.modal.close('save');
+            },
+            (err: any) => {
+              this.giftService.getById(giftId).subscribe((gift: Gift) => {
+                this.gift = gift;
+                this.resetForm(this.gift);
+                this.giftForm.enable();
+                this.changeDetector.markForCheck();
+                this.alertService.error(err.error.message);
+              });
+            }
+          );
+          return;
+        }
+
+        this.modal.close('save');
       },
       (err: any) => {
         const error = err.error;
         this.alertService.error(error.message);
         this.errors = error.errors;
         this.giftForm.enable();
-        this.isLoading = false;
+        this.changeDetector.markForCheck();
+      }
+    );
+  }
+
+  public deleteGift(): void {
+    if (this.giftForm.disabled) {
+      return;
+    }
+
+    this.giftForm.disable();
+    this.errors = [];
+    this.changeDetector.markForCheck();
+    this.giftService.remove(this.gift.id).subscribe(
+      () => {
+        this.modal.close('save');
+        this.alertService.success('Gift successfully deleted.', true);
+        this.router.navigate(['/users', this.gift.user.id]);
+      },
+      (err: any) => {
+        const error = err.error;
+        this.alertService.error(error.message);
+        this.errors = error.errors;
+        this.giftForm.enable();
         this.changeDetector.markForCheck();
       }
     );
@@ -168,6 +219,23 @@ export class GiftEditComponent implements OnInit {
   private createExternalUrlForm(): FormGroup {
     return this.formBuilder.group({
       url: undefined
+    });
+  }
+
+  private uploadImage(file: any, giftId: string): Observable<any> {
+    this.giftForm.disable();
+    this.changeDetector.markForCheck();
+
+    return this.assetsService.uploadGiftThumbnail(file, giftId);
+  }
+
+  private resetForm(gift: Gift): void {
+    this.giftForm.reset(gift);
+    this.giftForm.setControl('externalUrls', this.formBuilder.array([]));
+
+    const control = this.externalUrls;
+    gift.externalUrls.forEach((externalUrl: any) => {
+      control.push(this.formBuilder.group(externalUrl));
     });
   }
 }

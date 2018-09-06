@@ -20,8 +20,8 @@ import {
 } from '@root/environments/environment';
 
 import {
-  Friendship
-} from './friendship';
+  FriendshipSummary
+} from './friendship-summary';
 
 @Injectable()
 export class FriendshipService {
@@ -32,10 +32,10 @@ export class FriendshipService {
   ) { }
 
   public create(friendId: string): Observable<any> {
-    return this.http.post(`${this.resourceUrl}/users/${friendId}/friendships`, { friendId });
+    return this.http.post(`${this.resourceUrl}/friendships`, { friendId });
   }
 
-  public getAllByUserId(userId: string): Observable<Friendship[]> {
+  public getAllByUserId(userId: string): Observable<FriendshipSummary> {
     return this.http.get(`${this.resourceUrl}/users/${userId}/friendships`)
       .pipe(
         map((result: any) => result.data.friendships),
@@ -43,7 +43,7 @@ export class FriendshipService {
       );
   }
 
-  public remove(friendshipId: string): Observable<any> {
-    return this.http.delete(`${this.resourceUrl}/friendships/${friendshipId}`);
+  public remove(friendId: string): Observable<any> {
+    return this.http.delete(`${this.resourceUrl}/friendships?friendId=${friendId}`);
   }
 }

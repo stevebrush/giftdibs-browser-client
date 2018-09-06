@@ -54,9 +54,10 @@ export class DibControlsComponent implements OnInit, OnChanges, OnDestroy {
   @Output()
   public change = new EventEmitter<void>();
 
-  public dib: Dib;
+  public sessionUserDib: Dib;
   public isSessionUser = false;
   public isLoading = false;
+  public isVisible = false;
 
   constructor(
     private alertService: AlertService,
@@ -86,7 +87,7 @@ export class DibControlsComponent implements OnInit, OnChanges, OnDestroy {
     this.isLoading = true;
     this.changeDetector.markForCheck();
 
-    this.dibService.remove(this.dib.id)
+    this.dibService.remove(this.sessionUserDib.id)
       .pipe(
         finalize(() => {
           this.isLoading = false;
@@ -109,7 +110,7 @@ export class DibControlsComponent implements OnInit, OnChanges, OnDestroy {
     this.changeDetector.markForCheck();
 
     const context = new DibEditContext(
-      this.dib,
+      this.sessionUserDib,
       this.gift
     );
 
@@ -141,9 +142,7 @@ export class DibControlsComponent implements OnInit, OnChanges, OnDestroy {
       message: 'Are you sure? This action cannot be undone.'
     }, (answer: ConfirmAnswer) => {
       if (answer.type === 'okay') {
-        this.dibService.update(this.dib.id, {
-          isDelivered: true
-        })
+        this.dibService.markAsDelivered(this.sessionUserDib.id)
           .pipe(
             finalize(() => {
               this.isLoading = false;
@@ -168,11 +167,22 @@ export class DibControlsComponent implements OnInit, OnChanges, OnDestroy {
 
   private refreshDib(): void {
     if (this.gift.dibs) {
-      this.dib = this.gift.dibs.find((dib) => {
+      this.sessionUserDib = this.gift.dibs.find((dib) => {
         return (dib.user.id === this.sessionService.user.id);
       });
     } else {
-      this.dib = undefined;
+      this.sessionUserDib = undefined;
     }
+
+    // Show the dib controls only if the gift quantity is more than the number of dibs.
+    let numDibbed = 0;
+    if (this.gift.dibs && this.gift.dibs.length) {
+      this.gift.dibs.forEach((dib) => {
+        numDibbed += dib.quantity;
+      });
+    }
+
+    this.isVisible = (!this.sessionUserDib && numDibbed < this.gift.quantity);
+    this.changeDetector.markForCheck();
   }
 }

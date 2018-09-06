@@ -24,15 +24,6 @@
       <ul *ngIf="isLoggedIn()"
         class="gd-navbar-menu"
       >
-        <li>
-          <a
-            class="gd-button gd-button-link"
-            routerLink="/dibs"
-            routerLinkActive="active"
-          >
-            Dibs
-          </a>
-        </li>
         <li class="gd-navbar-menu-user">
           <a
             class="gd-button gd-button-link gd-navbar-user"
@@ -52,6 +43,15 @@
                 {{ sessionUser.firstName }}
               </gd-media-content>
             </gd-media>
+          </a>
+        </li>
+        <li>
+          <a
+            class="gd-button gd-button-link"
+            routerLink="/dibs"
+            routerLinkActive="active"
+          >
+            Dibs
           </a>
         </li>
         <li>

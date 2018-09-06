@@ -42,14 +42,8 @@ import {
 } from '../gift';
 
 import {
-  WishList,
-  WishListBoardService
+  WishList
 } from '../wish-list';
-
-// import {
-//   GiftDetailComponent,
-//   GiftDetailContext
-// } from '../gift-detail';
 
 import {
   GiftEditComponent,
@@ -108,8 +102,7 @@ export class GiftPreviewComponent implements OnInit, OnDestroy {
     private modalService: ModalService,
     // private router: Router,
     private sessionService: SessionService,
-    private windowRef: WindowRefService,
-    private wishListBoardService: WishListBoardService
+    private windowRef: WindowRefService
   ) { }
 
   public ngOnInit(): void {
@@ -196,9 +189,9 @@ export class GiftPreviewComponent implements OnInit, OnDestroy {
       if (args.reason === 'save') {
         // Notify the board service that wish lists have changed:
         if (args.data.wishListIds) {
-          this.wishListBoardService.notifyChange({
-            wishListIds: args.data.wishListIds
-          });
+          // this.wishListBoardService.notifyChange({
+          //   wishListIds: args.data.wishListIds
+          // });
         }
       }
     });

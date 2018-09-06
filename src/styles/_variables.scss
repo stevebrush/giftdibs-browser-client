@@ -18,8 +18,8 @@ $gd-zindex-alert: 999 !default;
 
 $gd-box-shadow: 0 2px 2px rgba(0,0,0,.24), 0 0 2px rgba(0,0,0,.12);
 $gd-box-shadow-lg: 0 0 50px rgba(0, 0, 0, 0.4);
-$gd-border-radius: 0.5rem !default;
-$gd-border-radius-sm: 0.25rem !default;
+$gd-border-radius: 0.75rem !default;
+$gd-border-radius-sm: 0.35rem !default;
 
 $gd-spacing: 1.00rem !default;
 $gd-spacing-xl: 2rem !default;
@@ -29,7 +29,7 @@ $gd-spacing-sm: 0.375rem !default;
 $gd-spacing-xs: 0.250rem !default;
 
 $gd-spacing-padding-squish: $gd-spacing-lg $gd-spacing !default;
-$gd-spacing-padding-squish-compact: $gd-spacing-sm $gd-spacing-lg !default;
+$gd-spacing-padding-squish-compact: $gd-spacing-sm $gd-spacing-md !default;
 
 $gd-screen-sm-min: 768px;
 $gd-screen-md-min: 992px;
@@ -92,7 +92,7 @@ $gd-color-neutral: desaturate(lighten($gd-color-primary, 15%), 65%) !default;
 $gd-color-neutral-light: lighten($gd-color-neutral, 15%) !default;
 $gd-color-neutral-lighter: lighten($gd-color-neutral, 30%) !default;
 $gd-color-neutral-lightest: lighten($gd-color-neutral, 40%) !default;
-$gd-color-neutral-faint: lighten($gd-color-neutral, 44%) !default;
+$gd-color-neutral-faint: lighten($gd-color-neutral, 42%) !default;
 $gd-color-neutral-dark: darken($gd-color-neutral, 20%) !default;
 $gd-color-neutral-darker: darken($gd-color-neutral, 30%) !default;
 $gd-color-neutral-darkest: darken($gd-color-neutral, 40%) !default;

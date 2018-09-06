@@ -7,16 +7,19 @@ import {
 } from '@angular/common';
 
 import { IconComponent } from './icon.component';
+import { IconStackComponent } from '@app/ui/icon/icon-stack.component';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   declarations: [
-    IconComponent
+    IconComponent,
+    IconStackComponent
   ],
   exports: [
-    IconComponent
+    IconComponent,
+    IconStackComponent
   ]
 })
 export class IconModule { }

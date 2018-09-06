@@ -24,7 +24,7 @@ export class WishListPreviewComponent implements OnInit {
   public ngOnInit(): void {
     const gifts = this.wishList.gifts;
     if (gifts && gifts.length) {
-      this.thumbnail = gifts[0].imageUrl;
+      this.thumbnail = gifts[gifts.length - 1].imageUrl;
     }
   }
 }

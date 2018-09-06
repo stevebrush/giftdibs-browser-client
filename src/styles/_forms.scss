@@ -1,5 +1,9 @@
 @import './mixins';
 
+.gd-form {
+  width: 100%;
+}
+
 .gd-control-label {
   display: inline-block;
   margin-bottom: $gd-spacing-xs;
@@ -9,8 +13,7 @@
   @include gd_form_control();
   display: block;
   width: 100%;
-  font-weight: $gd-font-weight-bold;
-  border-color: rgba(0, 0, 0, 0.075);
+  border-color: $gd-color-neutral-lightest;
 
   &:disabled {
     @include gd_disabled();

@@ -13,6 +13,7 @@ import { MediaHeaderComponent } from './media-header.component';
 import { MediaHeadingComponent } from './media-heading.component';
 import { MediaThumbnailComponent } from './media-thumbnail.component';
 import { MediaComponent } from './media.component';
+import { MediaSubheadingComponent } from './media-subheading.component';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { MediaComponent } from './media.component';
     MediaBodyComponent,
     MediaContentComponent,
     MediaControlsComponent,
+    MediaSubheadingComponent,
     MediaThumbnailComponent
   ],
   declarations: [
@@ -34,7 +36,9 @@ import { MediaComponent } from './media.component';
     MediaContentComponent,
     MediaControlsComponent,
     MediaBodyComponent,
-    MediaThumbnailComponent
+    MediaSubheadingComponent,
+    MediaThumbnailComponent,
+    MediaSubheadingComponent
   ]
 })
 export class MediaModule { }

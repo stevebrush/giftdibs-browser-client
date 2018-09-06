@@ -11,14 +11,8 @@ import {
 } from '@angular/router';
 
 import {
-  CardModule,
-  DropdownMenuModule,
-  GridModule,
   HideUntilModule,
-  IconModule,
-  MediaModule,
-  RepeaterModule,
-  ThumbnailModule
+  IconModule
 } from '@app/ui';
 
 import { FollowButtonComponent } from './follow-button.component';
@@ -27,16 +21,10 @@ import { FriendshipsComponent } from './friendships.component';
 
 @NgModule({
   imports: [
-    CardModule,
     CommonModule,
-    DropdownMenuModule,
-    GridModule,
     HideUntilModule,
-    MediaModule,
     IconModule,
-    RepeaterModule,
-    RouterModule,
-    ThumbnailModule
+    RouterModule
   ],
   exports: [
     FriendshipsComponent,

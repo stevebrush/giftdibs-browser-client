@@ -1,8 +1,9 @@
 <ul
   tabindex="0"
   class="gd-dropdown-menu"
-  [@gdAnimationEmerge]="animationState"
-  (@gdAnimationEmerge.done)="onAnimationDone($event)"
+  [ngClass]="{
+    'gd-dropdown-hidden': !isVisible
+  }"
   #menuElementRef
 >
   <ng-template ngFor let-item [ngForOf]="items">
@@ -12,9 +13,11 @@
         class="gd-button gd-dropdown-menu-item-button"
         tabindex="0"
         (click)="handleItemAction(item);"
-        (keydown.enter)="handleItemAction(item);$event.preventDefault();">
+        (keydown.enter)="handleItemAction(item);$event.preventDefault();"
+      >
         <ng-container
-          *ngTemplateOutlet="itemTemplate; context: { item: item }">
+          *ngTemplateOutlet="itemTemplate; context: { item: item }"
+        >
         </ng-container>
       </div>
       <ng-template #routerTemplate>

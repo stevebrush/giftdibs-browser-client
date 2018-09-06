@@ -1,10 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Input
+  Input,
+  OnInit
 } from '@angular/core';
 
-export type IconStyle = 'default' | 'success' | 'deemphasized';
+import { IconSize } from './icon-size';
+import { IconStyle } from './icon-style';
 
 @Component({
   selector: 'gd-icon',
@@ -12,9 +14,12 @@ export type IconStyle = 'default' | 'success' | 'deemphasized';
   styleUrls: ['./icon.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class IconComponent {
+export class IconComponent implements OnInit {
   @Input()
   public icon: string;
+
+  @Input()
+  public iconSize: IconSize = '1x';
 
   @Input()
   public set iconStyle(value: IconStyle) {
@@ -25,5 +30,15 @@ export class IconComponent {
     return this._iconStyle || 'default';
   }
 
+  public classNames: string;
+
   private _iconStyle: IconStyle;
+
+  public ngOnInit(): void {
+    const classNames = [
+      'fa-' + this.icon,
+      'fa-' + this.iconSize
+    ];
+    this.classNames = classNames.join(' ');
+  }
 }

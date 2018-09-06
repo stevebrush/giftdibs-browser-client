@@ -31,17 +31,25 @@
       </gd-form-field>
     </form>
   </gd-modal-body>
-  <gd-modal-footer
-    (cancelClicked)="onCancelClicked()"
-  >
-    <button
-      class="gd-button gd-button-primary"
-      type="button"
-      [disabled]="wishListForm.disabled"
-      (click)="submit()"
-    >
-      Submit
-    </button>
+  <gd-modal-footer>
+    <div class="gd-button-group">
+      <button
+        class="gd-button gd-button-primary"
+        type="button"
+        [disabled]="wishListForm.disabled"
+        (click)="submit()"
+      >
+        Submit
+      </button>
+      <button
+        class="gd-button gd-button-default"
+        type="button"
+        [disabled]="wishListForm.disabled"
+        (click)="onCancelClicked()"
+      >
+        Cancel
+      </button>
+    </div>
   </gd-modal-footer>
 </gd-modal>
 

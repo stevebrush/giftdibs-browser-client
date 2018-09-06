@@ -1,37 +1,4 @@
-<span class="gd-friendships gd-button-group">
-  <button *ngIf="following?.length else followingPlaceholder"
-    class="gd-button gd-button-default"
-    title="Toggle following"
-    type="button"
-    gdDropdownMenuTrigger
-    [menuItems]="followingMenuItems"
-  >
-    <gd-icon icon="user"></gd-icon>
-    {{ following?.length }} Following
-  </button>
-
-  <button *ngIf="followers?.length else followersPlaceholder"
-    class="gd-button gd-button-default"
-    title="Toggle followers"
-    type="button"
-    gdDropdownMenuTrigger
-    [menuItems]="followersMenuItems"
-  >
-    <gd-icon icon="user"></gd-icon>
-    {{ followers?.length }} Followers
-  </button>
-
-  <ng-template #followingPlaceholder>
-    <span class="gd-button gd-button-default gd-button-disabled">
-      <gd-icon icon="user"></gd-icon>
-      0 Following
-    </span>
-  </ng-template>
-
-  <ng-template #followersPlaceholder>
-    <span class="gd-button gd-button-default gd-button-disabled">
-      <gd-icon icon="user"></gd-icon>
-      0 Followers
-    </span>
-  </ng-template>
+<span class="gd-friendships">
+  <a routerLink="followers">{{ followers?.length }} followers</a>&nbsp;&bull;
+  <a routerLink="following">{{ following?.length }} following</a>
 </span>

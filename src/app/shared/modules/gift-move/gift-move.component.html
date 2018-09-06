@@ -35,16 +35,24 @@
 
     </form>
   </gd-modal-body>
-  <gd-modal-footer
-    (cancelClicked)="onCancelClicked()"
-  >
-    <button
-      class="gd-button gd-button-primary"
-      type="button"
-      [disabled]="moveForm.disabled"
-      (click)="submit()"
-    >
-      Save
-    </button>
+  <gd-modal-footer>
+    <div class="gd-button-group">
+      <button
+        class="gd-button gd-button-primary"
+        type="button"
+        [disabled]="moveForm.disabled"
+        (click)="submit()"
+      >
+        Save
+      </button>
+      <button
+        class="gd-button gd-button-default"
+        type="button"
+        [disabled]="moveForm.disabled"
+        (click)="onCancelClicked()"
+      >
+        Cancel
+      </button>
+    </div>
   </gd-modal-footer>
 </gd-modal>

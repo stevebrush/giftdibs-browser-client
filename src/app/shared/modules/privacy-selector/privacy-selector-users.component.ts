@@ -17,8 +17,8 @@ import {
 } from '@app/ui';
 
 import {
-  Friendship,
-  FriendshipService
+  FriendshipService,
+  FriendshipSummary
 } from '../friendship';
 
 import {
@@ -52,16 +52,9 @@ export class PrivacySelectorUsersComponent implements OnInit {
     this.createForm();
     this.usersForm.controls.friends.reset(this.context.selected);
 
-    this.friendshipService
-      .getAllByUserId(this.context.user.id)
-      .subscribe((friendships: Friendship[]) => {
-        const friends: User[] = friendships.map((friendship: Friendship) => {
-          if (friendship.user.id === this.context.user.id) {
-            return friendship.friend;
-          }
-
-          return friendship.user;
-        });
+    this.friendshipService.getAllByUserId(this.context.user.id)
+      .subscribe((friendships: FriendshipSummary) => {
+        const friends = friendships.followers.concat(friendships.following);
 
         const unique: User[] = [];
         friends.forEach(friend => {

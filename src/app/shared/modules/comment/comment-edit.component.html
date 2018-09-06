@@ -1,35 +1,39 @@
-<form
-  class="gd-form"
-  novalidate
-  [attr.aria-label]="(comment) ? 'Edit comment' : 'Add a comment'"
-  [formGroup]="commentForm"
-  (ngSubmit)="submit()"
->
-  <gd-form-field [errors]="errors">
-    <textarea
-      class="gd-form-control"
-      formControlName="body"
-      placeholder="Add a comment"
-    >
-      {{ comment?.body }}
-    </textarea>
-  </gd-form-field>
+<div class="gd-comment-edit">
+  <form
+    class="gd-form"
+    novalidate
+    [attr.aria-label]="(comment) ? 'Edit comment' : 'Add a comment'"
+    [formGroup]="commentForm"
+    (ngSubmit)="submit()"
+  >
+    <gd-form-field [errors]="errors">
+      <textarea
+        class="gd-form-control"
+        formControlName="body"
+        placeholder="Add a comment"
+        (keydown.enter)="submit();$event.preventDefault();"
+        #commentInput
+      >
+        {{ comment?.body }}
+      </textarea>
+    </gd-form-field>
 
-  <div class="gd-button-group">
-    <button
-      class="gd-button gd-button-primary"
-      type="submit"
-      [disabled]="commentForm.disabled"
-    >
-      Submit
-    </button>
-    <button *ngIf="comment"
-      class="gd-button gd-button-default"
-      type="button"
-      [disabled]="commentForm.disabled"
-      (click)="onCancelClick()"
-    >
-      Cancel
-    </button>
-  </div>
-</form>
+    <div class="gd-button-group">
+      <button
+        class="gd-button gd-button-primary"
+        type="submit"
+        [disabled]="commentForm.disabled"
+      >
+        Submit
+      </button>
+      <button *ngIf="comment"
+        class="gd-button gd-button-default"
+        type="button"
+        [disabled]="commentForm.disabled"
+        (click)="onCancelClick()"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

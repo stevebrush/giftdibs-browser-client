@@ -41,9 +41,9 @@ import {
 } from '@app/shared/modules/wish-list';
 
 import {
-  WishListBoardService,
   WishListService
 } from '@app/shared/modules/wish-list';
+
 import { WishListCreateContext } from '@app/shared/modules/wish-list-create/wish-list-create-context';
 import { WishListCreateComponent } from '@app/shared/modules/wish-list-create/wish-list-create.component';
 
@@ -51,22 +51,23 @@ import { WishListCreateComponent } from '@app/shared/modules/wish-list-create/wi
   selector: 'gd-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    WishListBoardService
-  ]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserComponent implements OnInit, OnDestroy {
   public isLoading = true;
   public isSessionUser = false;
   public user: User;
 
-  public get privateWishLists(): { wishLists: WishList[] } {
-    return { wishLists: this._wishLists.filter((wishList: WishList) => wishList.privacy.type !== 'everyone') };
-  }
+  // public get privateWishLists(): { wishLists: WishList[] } {
+  //   return { wishLists: this._wishLists.filter((wishList: WishList) => wishList.privacy.type !== 'everyone') };
+  // }
+
+  // public get wishLists(): { wishLists: WishList[] } {
+  //   return { wishLists: this._wishLists.filter((wishList: WishList) => wishList.privacy.type === 'everyone') };
+  // }
 
   public get wishLists(): { wishLists: WishList[] } {
-    return { wishLists: this._wishLists.filter((wishList: WishList) => wishList.privacy.type === 'everyone') };
+    return { wishLists: this._wishLists };
   }
 
   private ngUnsubscribe = new Subject();

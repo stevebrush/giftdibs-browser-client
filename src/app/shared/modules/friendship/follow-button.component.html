@@ -3,23 +3,19 @@
     class="gd-follow-button-container"
     [gdHideUntil]="!isLoading"
   >
-    <button
-      *ngIf="isFollowing"
+    <button *ngIf="isFollowing"
       type="button"
       class="gd-button gd-button-default gd-follow-button"
       (click)="removeFriendship()"
     >
-      <i class="fa fa-minus" aria-hidden="true"></i>
       Unfollow
     </button>
 
-    <button
-      *ngIf="!isFollowing"
+    <button *ngIf="!isFollowing"
       type="button"
       class="gd-button gd-button-default gd-follow-button"
       (click)="createFriendship()"
     >
-      <i class="fa fa-user-circle" aria-hidden="true"></i>
       Follow
     </button>
   </span>

@@ -2,8 +2,10 @@
   <div class="gd-wish-list-banner gd-container">
     <gd-media>
       <gd-media-content>
-        <h1>{{ wishList.name }}</h1>
-        <p class="gd-text-color-deemphasized">
+        <h1>
+          {{ wishList.name }}
+        </h1>
+        <p class="gd-text-deemphasized">
           {{ wishList.gifts.length }} items&nbsp;&bull;
           Privacy:&nbsp;{{ wishList.privacy.type }}&nbsp;&bull;
           {{ wishList.dateUpdated | date }}
@@ -21,7 +23,7 @@
       <gd-media-thumbnail>
         <gd-thumbnail
           type="user"
-          size="sm"
+          size="md"
           title="{{ wishList.user.firstName }} {{ wishList.user.lastName }}"
           [imageSource]="wishList.user.avatarUrl"
           [route]="{ commands: ['/users', wishList.user.id] }"
@@ -33,15 +35,34 @@
   <div class="gd-wish-list-body gd-container-fluid">
     <gd-row>
       <gd-column *ngIf="isSessionUser"
-        [screenSmall]="4"
+        [screenSmall]="3"
       >
-        <button
-          class="gd-button gd-button-primary gd-button-block"
-          type="button"
-          (click)="openGiftCreateModal()"
+        <gd-card
+          (actionClick)="openGiftCreateModal()"
         >
-          Add item
-        </button>
+          <gd-card-thumbnail>
+            <gd-thumbnail
+              size="fill"
+              icon="none"
+              iconSize="inherit"
+            >
+              <gd-icon-stack>
+                <gd-icon
+                  icon="circle fas fa-stack-2x"
+                  iconStyle="success"
+                ></gd-icon>
+                <gd-icon
+                  icon="plus fas fa-stack-1x fa-inverse"
+                ></gd-icon>
+              </gd-icon-stack>
+            </gd-thumbnail>
+          </gd-card-thumbnail>
+          <gd-card-header>
+            <gd-card-heading>
+              <span class="gd-text-deemphasized">Add item</span>
+            </gd-card-heading>
+          </gd-card-header>
+        </gd-card>
       </gd-column>
       <gd-column *ngFor="let gift of wishList.gifts"
         screenSmall="3"
@@ -52,8 +73,12 @@
           }"
         >
           <gd-card-thumbnail>
+            <gd-dib-ribbon
+              [gift]="gift"
+            >
+            </gd-dib-ribbon>
             <gd-thumbnail
-              size="full"
+              size="static"
               [imageSource]="gift.imageUrl"
             >
             </gd-thumbnail>

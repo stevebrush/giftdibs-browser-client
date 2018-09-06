@@ -7,16 +7,19 @@ import {
 } from '@angular/common';
 
 import { NoticeComponent } from './notice.component';
+import { NoticeHeadingComponent } from './notice-heading.component';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   exports: [
-    NoticeComponent
+    NoticeComponent,
+    NoticeHeadingComponent
   ],
   declarations: [
-    NoticeComponent
+    NoticeComponent,
+    NoticeHeadingComponent
   ]
 })
 export class NoticeModule { }

@@ -6,7 +6,9 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  Output
+  Output,
+  ViewChild,
+  ElementRef
 } from '@angular/core';
 
 import {
@@ -53,6 +55,9 @@ export class CommentEditComponent implements OnInit, OnDestroy {
   public commentForm: FormGroup;
   public isLoading = false;
 
+  @ViewChild('commentInput')
+  private commentInput: ElementRef<any>;
+
   constructor(
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
@@ -64,6 +69,7 @@ export class CommentEditComponent implements OnInit, OnDestroy {
     this.createForm();
     if (this.comment) {
       this.commentForm.reset(this.comment);
+      this.commentInput.nativeElement.focus();
     }
   }
 
@@ -101,7 +107,7 @@ export class CommentEditComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe(
-        (result: any) => {
+        () => {
           this.saved.emit();
           this.saved.complete();
         },

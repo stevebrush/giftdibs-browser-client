@@ -2,7 +2,7 @@
   aria-hidden="true"
   class="gd-thumbnail"
   [attr.title]="title"
-  [ngClass]="'gd-thumbnail-' + size"
+  [ngClass]="classNames"
 >
   <ng-container *ngIf="!route">
     <ng-container *ngTemplateOutlet="image"></ng-container>
@@ -22,19 +22,23 @@
 <ng-template #image>
   <div
     class="gd-thumbnail-image-container"
+    role="img"
     [ngClass]="{
       'gd-rounded-corners-circle': (type === 'user')
     }"
     [ngStyle]="{
-      'background-image': (imageSource && size !== 'full') ? 'url(' + imageSource + ')' : ''
+      'background-image': (imageSource && size !== 'static') ? 'url(' + imageSource + ')' : ''
     }"
   >
     <gd-icon *ngIf="!imageSource"
-      [icon]="(type === 'user') ? 'user' : 'image'"
+      [icon]="icon"
+      [iconSize]="iconSize"
+      [iconStyle]="iconStyle"
     ></gd-icon>
-    <img *ngIf="size === 'full' && imageSource"
+    <img *ngIf="size === 'static' && imageSource"
       class="gd-thumbnail-image"
       [attr.src]="imageSource"
     />
+    <ng-content></ng-content>
   </div>
 </ng-template>

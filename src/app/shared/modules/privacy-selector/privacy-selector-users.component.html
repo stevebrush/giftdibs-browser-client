@@ -18,14 +18,23 @@
       </gd-checklist>
     </form>
   </gd-modal-body>
-  <gd-modal-footer
-    (cancelClicked)="onCancelClicked()">
-    <button
-      type="button"
-      class="gd-button gd-button-primary"
-      [disabled]="usersForm.disabled"
-      (click)="save()">
-      Choose
-    </button>
+  <gd-modal-footer>
+    <div class="gd-button-group">
+      <button
+        type="button"
+        class="gd-button gd-button-primary"
+        [disabled]="usersForm.disabled"
+        (click)="save()">
+        Choose
+      </button>
+      <button
+        class="gd-button gd-button-default"
+        type="button"
+        [disabled]="usersForm.disabled"
+        (click)="onCancelClicked()"
+      >
+        Cancel
+      </button>
+    </div>
   </gd-modal-footer>
 </gd-modal>

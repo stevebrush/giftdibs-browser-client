@@ -9,18 +9,11 @@ import {
   DibService
 } from '@app/shared/modules/dib';
 
-import {
-  WishListBoardService
-} from '@app/shared/modules/wish-list';
-
 @Component({
   selector: 'gd-dibs',
   templateUrl: './dibs.component.html',
   styleUrls: ['./dibs.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    WishListBoardService
-  ]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DibsComponent implements OnInit {
   public recipients: any;

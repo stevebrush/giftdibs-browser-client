@@ -11,11 +11,11 @@
 ::ng-deep {
   .gd-media {
     & > gd-media-thumbnail {
-      padding-right: $gd-spacing-md;
+      padding-right: $gd-spacing;
     }
 
     & > gd-media-content + gd-media-thumbnail {
-      padding-left: $gd-spacing-md;
+      padding-left: $gd-spacing;
       padding-right: 0;
     }
   }

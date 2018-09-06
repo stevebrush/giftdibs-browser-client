@@ -7,7 +7,7 @@ import {
 } from '@angular/common';
 
 import {
-  IconModule, ConfirmModule
+  IconModule, ConfirmModule, NoticeModule
 } from '@app/ui';
 
 import {
@@ -28,7 +28,8 @@ import {
     CommonModule,
     ConfirmModule,
     DibEditModule,
-    IconModule
+    IconModule,
+    NoticeModule
   ],
   declarations: [
     DibControlsComponent

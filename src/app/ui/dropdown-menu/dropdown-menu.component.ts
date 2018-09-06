@@ -11,10 +11,6 @@ import {
 } from '@angular/core';
 
 import {
-  AnimationEvent
-} from '@angular/animations';
-
-import {
   fromEvent,
   Subject
 } from 'rxjs';
@@ -26,10 +22,6 @@ import {
 import {
   AffixService
 } from '../affix';
-
-import {
-  gdAnimationEmerge
-} from '../animation';
 
 import {
   OverlayInstance
@@ -47,18 +39,11 @@ import { DropdownMenuItem } from './dropdown-menu-item';
   templateUrl: './dropdown-menu.component.html',
   styleUrls: ['./dropdown-menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    gdAnimationEmerge
-  ],
   providers: [
     AffixService
   ]
 })
 export class DropdownMenuComponent implements OnInit, AfterContentInit, OnDestroy {
-  public get animationState(): string {
-    return (this.isOpen) ? 'open' : 'closed';
-  }
-
   public set itemTemplate(value: TemplateRef<any>) {
     this._itemTemplate = value;
   }
@@ -67,8 +52,8 @@ export class DropdownMenuComponent implements OnInit, AfterContentInit, OnDestro
     return this._itemTemplate || this.defaultItemTemplate;
   }
 
-  public items: any[];
   public isVisible = false;
+  public items: any[];
 
   @ViewChild('defaultItemTemplate')
   private defaultItemTemplate: TemplateRef<any>;
@@ -90,7 +75,6 @@ export class DropdownMenuComponent implements OnInit, AfterContentInit, OnDestro
   }
 
   private buttons: any[];
-  private isOpen = true;
   private ngUnsubscribe = new Subject();
 
   private _activeIndex = -1;
@@ -199,9 +183,6 @@ export class DropdownMenuComponent implements OnInit, AfterContentInit, OnDestro
 
   public ngAfterContentInit(): void {
     this.positionMenu();
-    this.isVisible = true;
-    this.changeDetector.detectChanges();
-
     this.windowRef.nativeWindow.setTimeout(() => {
       this.buttons = [].slice.call(this.elementRef.nativeElement.querySelectorAll('.gd-button'));
       this.menuElementRef.nativeElement.focus();
@@ -218,15 +199,8 @@ export class DropdownMenuComponent implements OnInit, AfterContentInit, OnDestro
     this.close();
   }
 
-  public onAnimationDone(event: AnimationEvent): void {
-    if (event.toState === 'closed') {
-      this.overlayInstance.destroy();
-    }
-  }
-
   public close(): void {
-    this.isOpen = false;
-    this.changeDetector.markForCheck();
+    this.overlayInstance.destroy();
     this.context.config.caller.nativeElement.focus();
   }
 
@@ -235,13 +209,18 @@ export class DropdownMenuComponent implements OnInit, AfterContentInit, OnDestro
   }
 
   private positionMenu(): void {
-    this.affixService.affixTo(
-      this.menuElementRef,
-      this.context.config.caller,
-      {
-        horizontalAlignment: this.context.config.horizontalAlignment,
-        verticalAlignment: this.context.config.verticalAlignment
-      }
-    );
+    this.windowRef.nativeWindow.setTimeout(() => {
+      this.affixService.affixTo(
+        this.menuElementRef,
+        this.context.config.caller,
+        {
+          horizontalAlignment: this.context.config.horizontalAlignment,
+          verticalAlignment: this.context.config.verticalAlignment
+        }
+      );
+
+      this.isVisible = true;
+      this.changeDetector.markForCheck();
+    });
   }
 }

@@ -96,8 +96,7 @@ export class WishListComponent implements OnInit, OnDestroy {
           this.wishList.gifts = [];
         }
 
-        this.wishList.gifts.push(args.data.gift);
-        this.changeDetector.markForCheck();
+        this.refreshWishList();
       }
     });
   }

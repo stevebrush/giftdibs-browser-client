@@ -1,11 +1,18 @@
 @import '../../../styles/mixins';
 
+:host {
+  display: flex;
+  flex-grow: 1;
+  height: 100%;
+}
+
 .gd-thumbnail {
   display: inline-block;
-  box-shadow: 0 0 0 1px #fff;
   color: $gd-color-neutral-lighter;
   font-weight: $gd-font-weight-light;
   vertical-align: top;
+  border-radius: $gd-border-radius-sm;
+  overflow: hidden;
 }
 
 .gd-thumbnail-anchor {
@@ -17,6 +24,7 @@
 .gd-thumbnail-image-container {
   background-color: $gd-color-neutral-lightest;
   background-size: cover;
+  background-repeat: no-repeat;
   align-items: center;
   justify-content: center;
   white-space: nowrap;
@@ -24,6 +32,13 @@
   display: flex;
   height: 100%;
   width: 100%;
+  position: relative;
+
+  &:before {
+    content: "";
+    display: block;
+    padding-top: 100%; 	/* initial ratio of 1:1*/
+  }
 }
 
 .gd-thumbnail-image {
@@ -35,31 +50,36 @@
 .gd-thumbnail-xs {
   width: 2rem;
   height: 2rem;
-  font-size: $gd-font-size-small;
 }
 
 .gd-thumbnail-sm {
-  width: 6rem;
-  height: 6rem;
-  font-size: $gd-font-size-xl;
+  width: 3rem;
+  height: 3rem;
 }
 
 .gd-thumbnail-md {
-  width: 8rem;
-  height: 8rem;
-  font-size: $gd-font-size-xxl;
+  width: 7rem;
+  height: 7rem;
 }
 
 .gd-thumbnail-lg {
   width: 10rem;
   height: 10rem;
-  font-size: $gd-font-size-xxl;
-  letter-spacing: -0.175rem;
 }
 
-.gd-thumbnail-full {
+.gd-thumbnail-fill {
   width: 100%;
-  height: auto;
-  font-size: $gd-font-size-xxl;
-  letter-spacing: -0.175rem;
+  display: flex;
+  flex-grow: 1;
+}
+
+.gd-thumbnail-static {
+  .gd-thumbnail-image-container {
+    width: 100%;
+    height: auto;
+
+    &:before {
+      display: none;
+    }
+  }
 }

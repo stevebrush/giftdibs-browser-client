@@ -16,6 +16,7 @@ export class GiftComponent implements OnInit, OnDestroy {
   public gift: Gift;
   public isLoading = true;
   public isSessionUser = false;
+  public quantityRemaining: number;
 
   private ngUnsubscribe = new Subject();
 
@@ -46,6 +47,7 @@ export class GiftComponent implements OnInit, OnDestroy {
         (gift: Gift) => {
           this.gift = gift;
           this.isSessionUser = this.sessionService.isSessionUser(this.gift.user.id);
+          this.checkQuantity();
           this.isLoading = false;
           this.changeDetector.markForCheck();
         },
@@ -95,9 +97,7 @@ export class GiftComponent implements OnInit, OnDestroy {
             })
           )
           .subscribe(
-            () => {
-              console.log('success!');
-            },
+            () => {},
             (err: any) => {
               this.gift.isReceived = false;
               this.alertService.error(err.error.message);
@@ -110,6 +110,15 @@ export class GiftComponent implements OnInit, OnDestroy {
     });
   }
 
+  public onCommentSaved(): void {
+    this.refreshGift();
+  }
+
+  public onDibChange(): void {
+    console.log('dib change');
+    this.refreshGift();
+  }
+
   private refreshGift(): void {
     this.isLoading = true;
     this.changeDetector.markForCheck();
@@ -117,7 +126,19 @@ export class GiftComponent implements OnInit, OnDestroy {
       .subscribe((gift: Gift) => {
         this.gift = gift;
         this.isLoading = false;
+        this.checkQuantity();
         this.changeDetector.markForCheck();
       });
+  }
+
+  private checkQuantity(): void {
+    if (this.gift.dibs && this.gift.dibs.length) {
+      let numDibbed = 0;
+      this.gift.dibs.forEach((dib) => {
+        numDibbed += dib.quantity;
+      });
+
+      this.quantityRemaining = this.gift.quantity - numDibbed;
+    }
   }
 }

@@ -9,14 +9,10 @@ import {
 } from '@angular/core';
 
 import {
-  DropdownMenuItem
-} from '@app/ui';
-
-import {
   User
 } from '@app/shared/modules/user';
 
-import { Friendship } from './friendship';
+import { FriendshipSummary } from './friendship-summary';
 import { FriendshipService } from './friendship.service';
 
 @Component({
@@ -29,12 +25,10 @@ export class FriendshipsComponent implements OnInit, OnChanges {
   @Input()
   public user: User;
 
-  public friendships: Friendship[];
+  public friendships: FriendshipSummary;
   public followers: any[];
   public following: any[];
   public isLoading = true;
-  public followersMenuItems: DropdownMenuItem[] = [];
-  public followingMenuItems: DropdownMenuItem[] = [];
 
   constructor(
     private changeDetector: ChangeDetectorRef,
@@ -56,33 +50,11 @@ export class FriendshipsComponent implements OnInit, OnChanges {
   private assignFriendships(): void {
     this.isLoading = true;
     this.changeDetector.markForCheck();
-    this.friendshipService
-      .getAllByUserId(this.user.id)
-      .subscribe((friendships: Friendship[]) => {
+    this.friendshipService.getAllByUserId(this.user.id)
+      .subscribe((friendships: FriendshipSummary) => {
         this.friendships = friendships;
-
-        this.followers = friendships
-          .filter(friendship => friendship.friend.id === this.user.id)
-          .map(friendship => friendship.user);
-
-        this.following = friendships
-          .filter(friendship => friendship.user.id === this.user.id)
-          .map(friendship => friendship.friend);
-
-        this.followingMenuItems = this.following.map((friend) => {
-          return {
-            label: `${friend.firstName} ${friend.lastName}`,
-            route: `/users/${friend.id}`
-          };
-        });
-
-        this.followersMenuItems = this.followers.map((friend) => {
-          return {
-            label: `${friend.firstName} ${friend.lastName}`,
-            route: `/users/${friend.id}`
-          };
-        });
-
+        this.followers = friendships.followers;
+        this.following = friendships.following;
         this.isLoading = false;
         this.changeDetector.markForCheck();
       });

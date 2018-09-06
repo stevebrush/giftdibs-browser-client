@@ -53,13 +53,13 @@
     </button>
   </form>
 
+  <p>
+    <a routerLink="/account/forgotten">Forget your password?</a>
+  </p>
+
   <gd-facebook-login-button
     [disabled]="loginForm.disabled"
     (success)="onFacebookLoginSuccess()"
   >
   </gd-facebook-login-button>
-
-  <p>
-    <a routerLink="/account/forgotten">Forget your password?</a>
-  </p>
 </div>

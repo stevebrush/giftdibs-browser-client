@@ -8,7 +8,7 @@ import {
 } from '@angular/animations';
 // #endregion
 
-const TRANSITION_SPEED = '300ms ease-in-out';
+const TRANSITION_SPEED = '200ms ease-in-out';
 
 export const gdAnimationEmerge = trigger('gdAnimationEmerge', [
   state('open', style({

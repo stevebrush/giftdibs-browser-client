@@ -9,6 +9,8 @@ import {
 
 import { UserComponent } from './user.component';
 import { UsersComponent } from './users.component';
+import { FollowersComponent } from '@app/modules/users/followers.component';
+import { FollowingComponent } from '@app/modules/users/following.component';
 
 const routes: Routes = [
   {
@@ -20,6 +22,14 @@ const routes: Routes = [
     path: ':userId',
     pathMatch: 'full',
     component: UserComponent
+  },
+  {
+    path: ':userId/followers',
+    component: FollowersComponent
+  },
+  {
+    path: ':userId/following',
+    component: FollowingComponent
   }
 ];
 

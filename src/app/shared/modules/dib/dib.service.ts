@@ -46,6 +46,10 @@ export class DibService {
       );
   }
 
+  public markAsDelivered(dibId: string): Observable<any> {
+    return this.http.post(`${this.resourceUrl}/dibs/${dibId}/delivery`, {});
+  }
+
   // public getAllByGiftId(giftId: string): Observable<Dib[]> {
   //   return this.http.get(`${this.resourceUrl}?giftId=${giftId}`)
   //     .pipe(

@@ -1,1 +1,1 @@
-export * from './animation-emerge';
+export * from './emerge';

@@ -11,11 +11,13 @@ import { RouterModule } from '@angular/router';
 import { GiftPriorityModule } from '@app/shared/modules/gift-priority';
 import { WishListEditModule } from '@app/shared/modules/wish-list-edit';
 import { GiftEditModule } from '@app/shared/modules/gift-edit';
+import { DibRibbonModule } from '@app/shared/modules/dib-ribbon/dib-ribbon.module';
 
 @NgModule({
   imports: [
     CardModule,
     CommonModule,
+    DibRibbonModule,
     GiftEditModule,
     GiftPriorityModule,
     GridModule,

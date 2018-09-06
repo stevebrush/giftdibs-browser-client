@@ -11,12 +11,18 @@ import {
   GridModule,
   HideUntilModule,
   MediaModule,
-  ThumbnailModule
+  ThumbnailModule,
+  IconModule,
+  RepeaterModule
 } from '@app/ui';
 
 import {
   FriendshipModule
 } from '@app/shared/modules/friendship';
+
+import {
+  UserModule
+} from '@app/shared/modules/user';
 
 import {
   WishListCreateModule
@@ -33,7 +39,9 @@ import {
 import { UserComponent } from './user.component';
 import { UsersRoutingModule } from './users-routing.module';
 import { UsersComponent } from './users.component';
-import { UserModule } from '../../shared/modules/user';
+import { FollowersComponent } from '@app/modules/users/followers.component';
+import { FollowingComponent } from '@app/modules/users/following.component';
+import { FriendListComponent } from '@app/modules/users/friend-list.component';
 
 @NgModule({
   imports: [
@@ -42,8 +50,10 @@ import { UserModule } from '../../shared/modules/user';
     FriendshipModule,
     GridModule,
     HideUntilModule,
+    IconModule,
     MediaModule,
     UsersRoutingModule,
+    RepeaterModule,
     ThumbnailModule,
     UserModule,
     WishListModule,
@@ -52,7 +62,10 @@ import { UserModule } from '../../shared/modules/user';
   ],
   declarations: [
     UsersComponent,
-    UserComponent
+    UserComponent,
+    FollowersComponent,
+    FollowingComponent,
+    FriendListComponent
   ]
 })
 export class UsersModule { }

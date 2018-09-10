@@ -88,8 +88,7 @@ export class GiftComponent implements OnInit, OnDestroy {
       message: 'Are you sure? This action cannot be undone.'
     }, (answer: ConfirmAnswer) => {
       if (answer.type === 'okay') {
-        this.gift.isReceived = true;
-        this.giftService.update(this.gift.id, this.gift)
+        this.giftService.markAsReceived(this.gift.id)
           .pipe(
             finalize(() => {
               this.isLoading = false;
@@ -97,9 +96,11 @@ export class GiftComponent implements OnInit, OnDestroy {
             })
           )
           .subscribe(
-            () => {},
+            (result: any) => {
+              this.refreshGift();
+              this.alertService.success(result.message);
+            },
             (err: any) => {
-              this.gift.isReceived = false;
               this.alertService.error(err.error.message);
             }
           );
@@ -115,7 +116,6 @@ export class GiftComponent implements OnInit, OnDestroy {
   }
 
   public onDibChange(): void {
-    console.log('dib change');
     this.refreshGift();
   }
 

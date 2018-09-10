@@ -54,13 +54,21 @@ strong {
 }
 
 .gd-container-fluid {
-  padding: $gd-spacing-xl $gd-spacing;
+  padding: 0 $gd-spacing;
 }
 
 .gd-container {
-  padding: $gd-spacing-xl $gd-spacing;
+  padding: 0 $gd-spacing;
   width: 100%;
   max-width: 900px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.gd-container-sm {
+  padding: 0 $gd-spacing;
+  width: 100%;
+  max-width: 700px;
   margin-right: auto;
   margin-left: auto;
 }
@@ -97,6 +105,12 @@ strong {
 
 .gd-text-color-danger {
   color: $gd-text-color-danger;
+}
+
+.gd-subheading {
+  border-bottom: 1px solid $gd-color-neutral-faint;
+  padding-bottom: $gd-spacing;
+  margin-top: $gd-spacing * 2;
 }
 
 .gd-canvas {
@@ -149,7 +163,6 @@ strong {
   margin: $gd-spacing 0;
   background-color: $gd-color-neutral-faint;
   border: 1px solid $gd-color-neutral-lighter;
-  font-size: $gd-font-size-small;
 
   td,
   th {

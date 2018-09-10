@@ -207,10 +207,10 @@ export class GiftEditComponent implements OnInit {
       budget: undefined,
       externalUrls: this.formBuilder.array([]) as any,
       imageUrl: new FormControl(),
-      isReceived: new FormControl(false),
       name: new FormControl(null, [
         Validators.required
       ]),
+      notes: undefined,
       priority: 3,
       quantity: 1
     });

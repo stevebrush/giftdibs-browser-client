@@ -35,7 +35,7 @@
   <div class="gd-wish-list-body gd-container-fluid">
     <gd-row>
       <gd-column *ngIf="isSessionUser"
-        [screenSmall]="3"
+        [screenSmall]="2"
       >
         <gd-card
           (actionClick)="openGiftCreateModal()"
@@ -65,51 +65,12 @@
         </gd-card>
       </gd-column>
       <gd-column *ngFor="let gift of wishList.gifts"
-        screenSmall="3"
+        screenSmall="2"
       >
-        <gd-card
-          [route]="{
-            commands: ['/gifts', gift.id]
-          }"
+        <gd-gift-preview
+          [gift]="gift"
         >
-          <gd-card-thumbnail>
-            <gd-dib-ribbon
-              [gift]="gift"
-            >
-            </gd-dib-ribbon>
-            <gd-thumbnail
-              size="static"
-              [imageSource]="gift.imageUrl"
-            >
-            </gd-thumbnail>
-          </gd-card-thumbnail>
-          <gd-card-header>
-            <gd-card-heading>
-              {{ gift.name }}
-              <ng-template [ngIf]="gift.quantity > 1">
-                ({{ gift.quantity }})
-              </ng-template>
-            </gd-card-heading>
-          </gd-card-header>
-          <gd-card-body>
-            <gd-gift-priority
-              [priority]="gift.priority"
-            >
-            </gd-gift-priority>
-            <div class="gd-text-color-deemphasized">
-              ${{ gift.budget || '--' }}
-              <span *ngIf="gift.quantity > 1">ea.</span>
-            </div>
-            <gd-icon *ngIf="gift.dibs && gift.dibs.length"
-              icon="hand-paper"
-              iconStyle="deemphasized"
-            ></gd-icon>
-            <gd-icon *ngIf="gift.comments && gift.comments.length"
-              icon="comment-dots"
-              iconStyle="deemphasized"
-            ></gd-icon>
-          </gd-card-body>
-        </gd-card>
+        </gd-gift-preview>
       </gd-column>
     </gd-row>
   </div>

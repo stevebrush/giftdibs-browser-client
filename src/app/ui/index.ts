@@ -20,6 +20,7 @@ export * from './overlay';
 export * from './password-viewer';
 export * from './popover';
 export * from './repeater';
+export * from './ribbon';
 export * from './search';
 export * from './thumbnail';
 export * from './typeahead';

@@ -28,6 +28,12 @@
           also commented on <a [routerLink]="['/']">{{ notification.gift.name }}</a>.
           <p>"{{ notification.gift.comment.summary }}"</p>
         </ng-template>
+        <ng-template ngSwitchCase="gift_delivered">
+          gift delivered
+        </ng-template>
+        <ng-template ngSwitchCase="gift_received">
+          gift received
+        </ng-template>
         <ng-template ngSwitchCase="friendship_new">
           friendship new
         </ng-template>

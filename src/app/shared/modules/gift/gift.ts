@@ -18,11 +18,12 @@ export interface Gift {
   id?: string;
   budget?: number;
   comments?: Comment[];
+  dateReceived?: Date;
   dibs?: Dib[];
   externalUrls?: GiftExternalUrl[];
   imageUrl?: string;
-  isReceived?: boolean;
   name?: string;
+  notes?: string;
   priority?: number;
   quantity?: number;
   user?: User;

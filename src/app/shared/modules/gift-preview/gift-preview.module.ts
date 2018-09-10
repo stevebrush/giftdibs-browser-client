@@ -11,51 +11,19 @@ import {
 } from '@angular/router';
 
 import {
-  DropdownMenuModule,
-  IconModule,
-  MediaModule,
-  ThumbnailModule
-} from '@app/ui';
-
-import {
-  GiftModule
-} from '../gift';
-
-// import {
-//   GiftDetailComponent
-//   // GiftDetailModule
-// } from '../gift-detail';
-
-import {
-  GiftEditComponent,
-  GiftEditModule
-} from '../gift-edit';
-
-import {
-  GiftMoveComponent,
-  GiftMoveModule
-} from '../gift-move';
-
-import {
-  GiftPriorityModule
-} from '../gift-priority';
-
-import {
   GiftPreviewComponent
 } from './gift-preview.component';
+import { CardModule, RibbonModule, ThumbnailModule, IconModule } from '@app/ui';
+import { GiftPriorityModule } from '@app/shared/modules/gift-priority';
 
 @NgModule({
   imports: [
+    CardModule,
     CommonModule,
-    DropdownMenuModule,
-    GiftModule,
-    // GiftDetailModule,
-    GiftEditModule,
-    GiftMoveModule,
     GiftPriorityModule,
     IconModule,
+    RibbonModule,
     RouterModule,
-    MediaModule,
     ThumbnailModule
   ],
   declarations: [
@@ -63,11 +31,6 @@ import {
   ],
   exports: [
     GiftPreviewComponent
-  ],
-  entryComponents: [
-    // GiftDetailComponent,
-    GiftEditComponent,
-    GiftMoveComponent
   ]
 })
 export class GiftPreviewModule { }

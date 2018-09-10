@@ -38,6 +38,14 @@ export class GiftService {
     return this.http.post(`${this.resourceUrl}/wish-lists/${wishListId}/gifts`, formData);
   }
 
+  public getAll(): Observable<Gift[]> {
+    return this.http.get(`${this.resourceUrl}/gifts`)
+      .pipe(
+        map((result: any) => result.data.gifts),
+        share()
+      );
+  }
+
   public getById(giftId: string): Observable<Gift> {
     return this.http.get(`${this.resourceUrl}/gifts/${giftId}`)
       .pipe(
@@ -52,5 +60,9 @@ export class GiftService {
 
   public update(giftId: string, formData: Gift): Observable<any> {
     return this.http.patch(`${this.resourceUrl}/gifts/${giftId}`, formData);
+  }
+
+  public markAsReceived(giftId: string): Observable<any> {
+    return this.http.patch(`${this.resourceUrl}/gifts/${giftId}/received`, {});
   }
 }

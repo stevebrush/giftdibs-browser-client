@@ -1,29 +1,20 @@
 @import '../../../../styles/mixins';
 
-.gd-gift-preview {
-  display: block;
+// .gd-gift-preview {
+//   display: block;
 
-  &:focus {
-    @include gd_focus_indicator();
-  }
+//   &:focus {
+//     @include gd_focus_indicator();
+//   }
 
-  &:hover {
-    background-color: $gd-color-neutral-faint;
-    text-decoration: none;
-  }
-
-  // &:focus,
-  // &:hover {
-  //   .gd-button {
-  //     opacity: 1;
-  //   }
-  // }
-}
-
-.gd-gift-preview-received {
-  opacity: 0.5;
-}
-
-// .gd-button {
-//   opacity: 0;
+//   &:hover {
+//     background-color: $gd-color-neutral-faint;
+//     text-decoration: none;
+//   }
 // }
+
+.gd-gift-preview-thumbnail {
+  display: block;
+  overflow: hidden;
+  position: relative;
+}

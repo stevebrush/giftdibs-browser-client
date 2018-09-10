@@ -12,14 +12,17 @@
             </h1>
           </gd-media-header>
           <gd-media-body>
-            <gd-follow-button
-              [friend]="user"
-            >
-            </gd-follow-button>
+            <gd-icon icon="user"></gd-icon>&nbsp;
             <gd-friendships
               [user]="user"
             >
             </gd-friendships>
+            <div>
+              <gd-follow-button
+                [friend]="user"
+              >
+              </gd-follow-button>
+            </div>
           </gd-media-body>
         </gd-media-content>
         <gd-media-thumbnail>
@@ -44,7 +47,7 @@
 
 <ng-template let-wishLists="wishLists" #wishListsTemplate>
   <gd-column *ngIf="isSessionUser"
-    [screenSmall]="3"
+    [screenSmall]="2"
   >
     <gd-card
       (actionClick)="openWishListCreateModal()"
@@ -74,7 +77,7 @@
     </gd-card>
   </gd-column>
   <gd-column *ngFor="let wishList of wishLists"
-    [screenSmall]="3"
+    [screenSmall]="2"
   >
     <gd-wish-list-preview
       [wishList]="wishList"

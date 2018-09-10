@@ -5,7 +5,8 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  Output
+  Output,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 import {
@@ -28,7 +29,8 @@ import {
 @Component({
   selector: 'gd-comment-preview',
   templateUrl: './comment-preview.component.html',
-  styleUrls: ['./comment-preview.component.scss']
+  styleUrls: ['./comment-preview.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CommentPreviewComponent implements OnInit, OnDestroy {
   @Input()

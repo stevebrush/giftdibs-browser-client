@@ -5,20 +5,19 @@ import {
 import {
   CommonModule
 } from '@angular/common';
-
-import { CommunityComponent } from './community/community.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
-import { WelcomeComponent } from './welcome/welcome.component';
+import { WelcomeModule } from '@app/modules/home/welcome';
+import { CommunityModule } from '@app/modules/home/community';
 
 @NgModule({
   imports: [
     CommonModule,
-    HomeRoutingModule
+    CommunityModule,
+    HomeRoutingModule,
+    WelcomeModule
   ],
   declarations: [
-    CommunityComponent,
-    WelcomeComponent,
     HomeComponent
   ]
 })

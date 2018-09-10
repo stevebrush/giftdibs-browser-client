@@ -30,12 +30,27 @@
         >
           Item name
         </label>
-        <textarea
-          autocomplete="off"
+        <input
           class="gd-form-control"
           formControlName="name"
           id="gd-gift-edit-name"
+          type="text"
           (keydown.enter)="submit();$event.preventDefault();"
+        />
+      </gd-form-field>
+
+      <gd-form-field [errors]="errors">
+        <label
+          class="gd-control-label"
+          for="gd-gift-edit-notes"
+        >
+          Notes
+        </label>
+        <textarea
+          class="gd-form-control"
+          formControlName="notes"
+          id="gd-gift-edit-notes"
+          maxlength="2000"
         >
         </textarea>
       </gd-form-field>
@@ -127,15 +142,6 @@
           type="number"
         >
       </gd-form-field>
-
-      <gd-form-field>
-        <gd-checkbox
-          formControlName="isReceived"
-        >
-          Received
-        </gd-checkbox>
-      </gd-form-field>
-
     </form>
   </gd-modal-body>
   <gd-modal-footer>
@@ -160,7 +166,7 @@
           </button>
         </div>
       </gd-column>
-      <gd-column screenSmall="3">
+      <gd-column screenSmall="3" style="text-align:right;">
         <button *ngIf="gift"
           class="gd-button gd-button-danger"
           type="button"

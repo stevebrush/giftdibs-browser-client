@@ -1,4 +1,4 @@
-<div class="gd-swatch gd-color-primary"></div>
+<!-- <div class="gd-swatch gd-color-primary"></div>
 <div class="gd-swatch gd-color-secondary"></div>
 <div class="gd-swatch gd-color-info"></div>
 <div class="gd-swatch gd-color-warning"></div>
@@ -10,11 +10,19 @@
 <div class="gd-swatch gd-color-neutral"></div>
 <div class="gd-swatch gd-color-neutral-light"></div>
 <div class="gd-swatch gd-color-neutral-lighter"></div>
-<div class="gd-swatch gd-color-neutral-lightest"></div>
-<br><br>
+<div class="gd-swatch gd-color-neutral-lightest"></div> -->
+<!-- <br><br> -->
 <h1>
   Welcome back
 </h1>
 
-<a href="">My stuff</a>
-<a href="">Following</a>
+<gd-row>
+  <gd-column *ngFor="let gift of gifts"
+    screenSmall="2"
+  >
+    <gd-gift-preview
+      [gift]="gift"
+    >
+    </gd-gift-preview>
+  </gd-column>
+</gd-row>

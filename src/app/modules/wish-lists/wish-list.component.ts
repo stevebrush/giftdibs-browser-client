@@ -101,27 +101,6 @@ export class WishListComponent implements OnInit, OnDestroy {
     });
   }
 
-
-  // private confirmDelete(): void {
-  //   this.confirmService.confirm({
-  //     message: 'Are you sure?'
-  //   }, (answer: ConfirmAnswer) => {
-  //     if (answer.type === 'okay') {
-  //       this.wishListService
-  //         .remove(this.wishList.id)
-  //         .subscribe(
-  //           (data: any) => {
-  //             this.removed.emit();
-  //             this.removed.complete();
-  //           },
-  //           (err: any) => {
-  //             this.alertService.error(err.error.message);
-  //           }
-  //         );
-  //     }
-  //   });
-  // }
-
   private refreshWishList(): void {
     this.isLoading = true;
     this.changeDetector.markForCheck();

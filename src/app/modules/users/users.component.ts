@@ -5,7 +5,10 @@ import {
   OnInit
 } from '@angular/core';
 
-import { User, UserService } from '@app/shared/modules/user';
+import {
+  User,
+  UserService
+} from '@app/shared/modules/user';
 
 @Component({
   selector: 'gd-users',

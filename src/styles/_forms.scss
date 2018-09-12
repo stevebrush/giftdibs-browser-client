@@ -7,6 +7,7 @@
 .gd-control-label {
   display: inline-block;
   margin-bottom: $gd-spacing-xs;
+  font-weight: $gd-font-weight-bold;
 }
 
 .gd-form-control {
@@ -40,7 +41,7 @@ textarea.gd-form-control {
     position: relative;
     flex: 1 1 auto;
     width: 1%;
-    margin-bottom: 0;
+    border-radius: 0;
   }
 }
 
@@ -53,6 +54,9 @@ textarea.gd-form-control {
   background-color: $gd-color-neutral-lighter;
   color: $gd-text-color-dark;
   border: 1px solid transparent;
+  border-radius: $gd-border-radius-sm;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .gd-input-group-append {
@@ -64,4 +68,7 @@ textarea.gd-form-control {
   background-color: $gd-color-neutral-lighter;
   color: $gd-text-color-dark;
   border: 1px solid transparent;
+  border-radius: $gd-border-radius-sm;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }

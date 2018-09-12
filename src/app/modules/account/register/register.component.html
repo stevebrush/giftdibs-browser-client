@@ -1,4 +1,4 @@
-<div class="gd-container">
+<div class="gd-container gd-spacing-padding-even-large">
   <h1>
     Create a free account
   </h1>
@@ -112,10 +112,11 @@
       Create new account
     </button>
   </form>
-
-  <gd-facebook-login-button
-    [disabled]="registerForm.disabled"
-    (success)="onFacebookLoginSuccess()"
-  >
-  </gd-facebook-login-button>
+  <p>
+    <gd-facebook-login-button
+      [disabled]="registerForm.disabled"
+      (success)="onFacebookLoginSuccess()"
+    >
+    </gd-facebook-login-button>
+  </p>
 </div>

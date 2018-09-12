@@ -1,9 +1,7 @@
 @import '../../../styles/mixins';
 
 .gd-modal-header {
-  display: flex;
-  padding: $gd-spacing-padding-squish;
-  align-items: baseline;
+  padding: $gd-spacing;
 }
 
 .gd-modal-header-button-close {

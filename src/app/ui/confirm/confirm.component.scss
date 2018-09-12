@@ -13,6 +13,7 @@
   max-width: 500px;
   position: relative;
   box-shadow: $gd-box-shadow-lg;
+  border-radius: $gd-border-radius;
 
   &:focus {
     outline: none;

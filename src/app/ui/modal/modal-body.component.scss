@@ -1,7 +1,10 @@
 @import '../../../styles/mixins';
 
-.gd-modal-body {
-  padding: $gd-spacing-padding-squish;
+:host {
+  flex: 1 1 auto;
   overflow: auto;
-  max-height: 65vh;
+}
+
+.gd-modal-body {
+  padding: 0 $gd-spacing;
 }

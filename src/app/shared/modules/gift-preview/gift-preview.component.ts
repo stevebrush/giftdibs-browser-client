@@ -2,9 +2,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
-  OnDestroy,
-  OnInit
+  Input
 } from '@angular/core';
 
 import {
@@ -18,24 +16,11 @@ import {
   styleUrls: ['./gift-preview.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GiftPreviewComponent implements OnInit, OnDestroy {
+export class GiftPreviewComponent {
   @Input()
   public gift: Gift;
 
   public isSessionUser = false;
-
-  // private ngUnsubscribe = new Subject();
-
-  constructor() { }
-
-  public ngOnInit(): void {
-    console.log('gift?', this.gift);
-  }
-
-  public ngOnDestroy(): void {
-    // this.ngUnsubscribe.next();
-    // this.ngUnsubscribe.complete();
-  }
 
   public showDibbedRibbon(gift: Gift): boolean {
     if (gift.dateReceived) {

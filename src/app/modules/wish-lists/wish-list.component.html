@@ -1,5 +1,7 @@
-<div *ngIf="!isLoading && wishList" class="gd-wish-list">
-  <div class="gd-wish-list-banner gd-container">
+<div *ngIf="!isLoading && wishList"
+  class="gd-wish-list"
+>
+  <div class="gd-wish-list-banner gd-container gd-spacing-padding-even-large">
     <gd-media>
       <gd-media-content>
         <h1>
@@ -32,7 +34,8 @@
       </gd-media-thumbnail>
     </gd-media>
   </div>
-  <div class="gd-wish-list-body gd-container-fluid">
+
+  <div class="gd-wish-list-body gd-container-fluid gd-spacing-padding-even-large">
     <gd-row>
       <gd-column *ngIf="isSessionUser"
         [screenSmall]="2"

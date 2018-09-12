@@ -1,11 +1,15 @@
 @import '../../../styles/mixins';
 
 .gd-form-field {
-  margin-bottom: $gd-spacing;
+  margin: $gd-spacing 0;
 
   ::ng-deep {
     .gd-form-field {
       margin-bottom: $gd-spacing-xs;
+    }
+
+    .gd-control-label {
+      display: block;
     }
   }
 }
@@ -15,6 +19,7 @@
 
   ::ng-deep {
     .gd-form-control {
+      background-color: $gd-background-color-danger;
       border-color: $gd-border-color-danger;
     }
   }
@@ -22,4 +27,5 @@
 
 .gd-form-field-subscript {
   font-size: $gd-font-size-small;
+  margin-top: $gd-spacing-xs;
 }

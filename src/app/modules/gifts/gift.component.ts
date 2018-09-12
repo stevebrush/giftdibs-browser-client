@@ -119,6 +119,26 @@ export class GiftComponent implements OnInit, OnDestroy {
     this.refreshGift();
   }
 
+  public getURLName(url: string): string {
+    if (!url) {
+      return '';
+    }
+
+    let formatted = url;
+    let fragments = formatted.split('//');
+
+    if (fragments.length > 1) {
+      formatted = fragments[1];
+    }
+
+    fragments = formatted.split('www.');
+    if (fragments.length > 1) {
+      formatted = fragments[1];
+    }
+
+    return formatted.split('/')[0];
+  }
+
   private refreshGift(): void {
     this.isLoading = true;
     this.changeDetector.markForCheck();

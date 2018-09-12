@@ -3,7 +3,7 @@ import { WishListService, WishList } from '@app/shared/modules/wish-list';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { mergeMap, takeUntil } from 'rxjs/operators';
 import { SessionService } from '@app/shared/modules/session';
-import { AlertService, ModalService, ModalClosedEventArgs } from '@app/ui';
+import { AlertService, ModalService, ModalClosedEventArgs, ModalSize } from '@app/ui';
 import { Subject } from 'rxjs';
 import { WishListEditContext, WishListEditComponent } from '@app/shared/modules/wish-list-edit';
 import { GiftEditContext, GiftEditComponent } from '@app/shared/modules/gift-edit';
@@ -70,7 +70,8 @@ export class WishListComponent implements OnInit, OnDestroy {
       providers: [{
         provide: WishListEditContext,
         useValue: context
-      }]
+      }],
+      size: ModalSize.Small
     });
 
     modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {

@@ -29,7 +29,9 @@ $gd-spacing-sm: 0.375rem !default;
 $gd-spacing-xs: 0.250rem !default;
 
 $gd-spacing-padding-squish: $gd-spacing-lg $gd-spacing !default;
-$gd-spacing-padding-squish-compact: $gd-spacing-sm $gd-spacing-md !default;
+$gd-spacing-padding-squish-compact: $gd-spacing-sm $gd-spacing-lg !default;
+$gd-spacing-padding-squish-large: $gd-spacing $gd-spacing-xl !default;
+$gd-spacing-padding-even-large: $gd-spacing-xl !default;
 
 $gd-screen-sm-min: 768px;
 $gd-screen-md-min: 992px;
@@ -40,7 +42,7 @@ $gd-screen-sm-max: $gd-screen-md-min - 1;
 $gd-screen-md-max: $gd-screen-lg-min - 1;
 
 @function background_color($color) {
-  @return desaturate(lighten($color, 35%), 25%);
+  @return desaturate(lighten($color, 45%), 25%);
 }
 
 @function border_color($color) {
@@ -84,8 +86,8 @@ $gd-text-color-warning: text_color($gd-color-warning) !default;
 // DANGER
 $gd-color-danger: #D4282F !default;
 $gd-background-color-danger: background_color($gd-color-danger) !default;
-$gd-border-color-danger: border_color($gd-color-danger) !default;
-$gd-text-color-danger: text_color($gd-color-danger) !default;
+$gd-border-color-danger: $gd-color-danger !default;
+$gd-text-color-danger: $gd-color-danger !default;
 
 // NEUTRAL
 $gd-color-neutral: desaturate(lighten($gd-color-primary, 15%), 65%) !default;

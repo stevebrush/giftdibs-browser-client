@@ -11,18 +11,21 @@
   </gd-modal-header>
   <gd-modal-body>
     <form
-      [attr.aria-label]="(gift) ? 'Edit item' : 'New item'"
       class="gd-form"
       novalidate
+      [attr.aria-label]="(gift) ? 'Edit item' : 'New item'"
       [formGroup]="giftForm"
       (ngSubmit)="submit()"
     >
-      <gd-image-uploader
-        formControlName="imageUrl"
-        (selectFile)="onSelectFile($event)"
-        (removeFile)="onRemoveFile()"
-      >
-      </gd-image-uploader>
+      <gd-form-field [errors]="errors">
+        <gd-image-uploader
+          formControlName="imageUrl"
+          (selectFile)="onSelectFile($event)"
+          (removeFile)="onRemoveFile()"
+        >
+        </gd-image-uploader>
+      </gd-form-field>
+
       <gd-form-field [errors]="errors">
         <label
           class="gd-control-label"
@@ -55,41 +58,78 @@
         </textarea>
       </gd-form-field>
 
-      <div formArrayName="externalUrls">
-        <div>Product URLs:</div>
-        <gd-row *ngFor="let externalUrl of externalUrls.controls; let i = index;"
-          [formGroup]="externalUrl"
-        >
-          <gd-column screenXSmall="10">
-            <gd-form-field [errors]="errors">
-              <input
-                class="gd-form-control"
-                type="text"
-                formControlName="url"
-              />
-            </gd-form-field>
-          </gd-column>
-          <gd-column screenXSmall="2">
-            <button
-              class="gd-button gd-button-default gd-button-block"
-              title="Remove URL"
-              type="button"
-              [disabled]="giftForm.disabled"
-              (click)="removeUrl(i)"
-            >
-              Remove
-            </button>
-          </gd-column>
-        </gd-row>
-        <button
-          class="gd-button gd-button-default"
-          type="button"
-          [disabled]="giftForm.disabled"
-          (click)="addExternalUrlField()"
-        >
-          Add URL
-        </button>
-      </div>
+      <gd-form-field>
+        <div formArrayName="externalUrls">
+          <gd-row *ngFor="let externalUrl of externalUrls.controls; let i = index;"
+            [formGroup]="externalUrl"
+          >
+            <gd-column screenXSmall="8">
+              <gd-form-field [errors]="errors">
+                <label
+                  class="gd-control-label"
+                  for="gd-gift-edit-external-url-url- + {{ i }}"
+                >
+                  URL
+                </label>
+                <input
+                  class="gd-form-control"
+                  formControlName="url"
+                  id="gd-gift-edit-external-url-url- + {{ i }}"
+                  type="text"
+                />
+              </gd-form-field>
+            </gd-column>
+            <gd-column screenXSmall="2">
+              <gd-form-field [errors]="errors">
+                <label
+                  class="gd-control-label"
+                  for="gd-gift-edit-external-url-price- + {{ i }}"
+                >
+                  Price
+                </label>
+                <input
+                  class="gd-form-control"
+                  formControlName="price"
+                  id="gd-gift-edit-external-url-price- + {{ i }}"
+                  type="number"
+                />
+              </gd-form-field>
+            </gd-column>
+            <gd-column screenXSmall="2">
+              <gd-form-field>
+                <label class="gd-control-label">&nbsp;</label>
+                <div class="gd-button-group">
+                  <button
+                    class="gd-button gd-button-default"
+                    title="Get price from URL"
+                    type="button"
+                    [disabled]="giftForm.disabled"
+                  >
+                    <gd-icon icon="sync-alt"></gd-icon>
+                  </button>
+                  <button
+                    class="gd-button gd-button-default"
+                    title="Remove URL"
+                    type="button"
+                    [disabled]="giftForm.disabled"
+                    (click)="removeUrl(i)"
+                  >
+                    <gd-icon icon="trash"></gd-icon>
+                  </button>
+                </div>
+              </gd-form-field>
+            </gd-column>
+          </gd-row>
+          <button
+            class="gd-button gd-button-default"
+            type="button"
+            [disabled]="giftForm.disabled"
+            (click)="addExternalUrlField()"
+          >
+            Add external URL
+          </button>
+        </div>
+      </gd-form-field>
 
       <gd-form-field [errors]="errors">
         <label
@@ -106,7 +146,7 @@
             formControlName="budget"
             id="gd-gift-edit-budget"
             type="number"
-          >
+          />
           <span class="gd-input-group-append">.00</span>
         </span>
       </gd-form-field>
@@ -124,7 +164,7 @@
           formControlName="priority"
           id="gd-gift-edit-priority"
           type="number"
-        >
+        />
       </gd-form-field>
 
       <gd-form-field [errors]="errors">
@@ -140,13 +180,28 @@
           formControlName="quantity"
           id="gd-gift-edit-quantity"
           type="number"
-        >
+        />
       </gd-form-field>
     </form>
   </gd-modal-body>
   <gd-modal-footer>
     <gd-row>
-      <gd-column screenSmall="9">
+      <gd-column
+        screenSmall="3"
+      >
+        <button *ngIf="gift"
+          class="gd-button gd-button-danger"
+          type="button"
+          [disabled]="giftForm.disabled"
+          (click)="deleteGift()"
+        >
+          Delete
+        </button>
+      </gd-column>
+      <gd-column
+        style="text-align:right;"
+        screenSmall="9"
+      >
         <div class="gd-button-group">
           <button
             class="gd-button gd-button-primary"
@@ -165,16 +220,6 @@
             Cancel
           </button>
         </div>
-      </gd-column>
-      <gd-column screenSmall="3" style="text-align:right;">
-        <button *ngIf="gift"
-          class="gd-button gd-button-danger"
-          type="button"
-          [disabled]="giftForm.disabled"
-          (click)="deleteGift()"
-        >
-          Delete
-        </button>
       </gd-column>
     </gd-row>
   </gd-modal-footer>

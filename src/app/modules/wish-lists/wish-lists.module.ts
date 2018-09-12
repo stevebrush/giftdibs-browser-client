@@ -9,11 +9,13 @@ import { WishListsRoutingModule } from './wish-lists-routing.module';
 import { WishListEditModule } from '@app/shared/modules/wish-list-edit';
 import { MediaModule, ThumbnailModule, GridModule, IconModule, CardModule } from '@app/ui';
 import { GiftPreviewModule } from '@app/shared/modules/gift-preview';
+import { GiftEditModule } from '@app/shared/modules/gift-edit';
 
 @NgModule({
   imports: [
     CardModule,
     CommonModule,
+    GiftEditModule,
     GiftPreviewModule,
     GridModule,
     IconModule,

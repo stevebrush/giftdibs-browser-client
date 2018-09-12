@@ -15,7 +15,8 @@ import {
 import {
   AlertService,
   ModalClosedEventArgs,
-  ModalService
+  ModalService,
+  ModalSize
 } from '@app/ui';
 
 import {
@@ -127,7 +128,8 @@ export class UserComponent implements OnInit, OnDestroy {
       providers: [{
         provide: WishListCreateContext,
         useValue: context
-      }]
+      }],
+      size: ModalSize.Small
     });
 
     modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {

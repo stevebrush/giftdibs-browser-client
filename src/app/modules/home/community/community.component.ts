@@ -26,7 +26,6 @@ export class CommunityComponent implements OnInit {
       .subscribe((gifts: Gift[]) => {
         this.gifts = gifts;
         this.changeDetector.markForCheck();
-        console.log('gifts?', gifts);
       });
   }
 }

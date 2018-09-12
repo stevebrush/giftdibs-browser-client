@@ -7,13 +7,25 @@
   position: absolute;
 }
 
+// .gd-modal-wrapper {
+//   position: relative;
+//   max-height: 95%;
+//   max-width: 95%;
+//   width: 750px;
+//   display: flex;
+// }
 .gd-modal-wrapper {
-  position: relative;
-  max-height: 95%;
   max-width: 95%;
+}
+
+.gd-modal-wrapper-large {
+  width: 950px;
+}
+
+.gd-modal-wrapper-medium {
   width: 750px;
 }
 
 .gd-modal-wrapper-small {
-  width: 300px;
+  width: 340px;
 }

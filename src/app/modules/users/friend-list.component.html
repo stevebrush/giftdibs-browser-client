@@ -3,7 +3,7 @@
   [gdHideUntil]="!isLoading"
 >
   <ng-template [ngIf]="user">
-    <div class="gd-container">
+    <div class="gd-container gd-spacing-padding-even-large">
       <gd-media>
         <gd-media-content>
           <gd-media-header>
@@ -28,7 +28,7 @@
       </gd-media>
     </div>
 
-    <div class="gd-container-fluid">
+    <div class="gd-container-fluid gd-spacing-padding-even-large">
       <gd-repeater>
         <gd-repeater-item *ngFor="let friend of friends">
           <gd-media>

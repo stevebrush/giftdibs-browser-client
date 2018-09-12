@@ -218,6 +218,7 @@ export class GiftEditComponent implements OnInit {
 
   private createExternalUrlForm(): FormGroup {
     return this.formBuilder.group({
+      price: undefined,
       url: undefined
     });
   }
@@ -231,11 +232,22 @@ export class GiftEditComponent implements OnInit {
 
   private resetForm(gift: Gift): void {
     this.giftForm.reset(gift);
-    this.giftForm.setControl('externalUrls', this.formBuilder.array([]));
+
+    this.giftForm.setControl(
+      'externalUrls',
+      this.formBuilder.array([])
+    );
 
     const control = this.externalUrls;
     gift.externalUrls.forEach((externalUrl: any) => {
-      control.push(this.formBuilder.group(externalUrl));
+      control.push(
+        this.formBuilder.group(
+          Object.assign({
+            url: undefined,
+            price: undefined
+          }, externalUrl)
+        )
+      );
     });
   }
 }

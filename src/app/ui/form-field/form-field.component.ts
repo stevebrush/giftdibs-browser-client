@@ -33,6 +33,10 @@ export class FormFieldComponent implements AfterContentInit, OnChanges {
   ) { }
 
   public ngAfterContentInit(): void {
+    if (!this.controlName) {
+      return;
+    }
+
     this.controlName.valueAccessor.registerOnTouched(() => {
       this.errors = [];
       this.controlName.control.markAsTouched();

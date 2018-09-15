@@ -244,13 +244,12 @@ export class GiftEditComponent implements OnInit {
 
     let numComplete = 0;
     externalUrls.controls.forEach((control) => {
-      // control.disable();
       this.urlScraperService.getProduct(control.value.url)
         .subscribe(
           (result: UrlScraperResult) => {
-            control.get('price').setValue(result.price);
-            // control.get('imageUrl').setValue(product.imageUrl);
-            // control.enable();
+            if (result.price) {
+              control.get('price').setValue(result.price);
+            }
             numComplete++;
 
             if (numComplete === externalUrls.length) {
@@ -285,11 +284,13 @@ export class GiftEditComponent implements OnInit {
     });
   }
 
-  private createExternalUrlForm(): FormGroup {
-    return this.formBuilder.group({
+  private createExternalUrlForm(
+    values?: { price: number, url: string }
+  ): FormGroup {
+    return this.formBuilder.group(Object.assign({
       price: undefined,
       url: undefined
-    });
+    }, values));
   }
 
   private uploadImage(file: any, giftId: string): Observable<any> {
@@ -312,7 +313,6 @@ export class GiftEditComponent implements OnInit {
       control.push(
         this.formBuilder.group(
           Object.assign({
-            imageUrl: undefined,
             url: undefined,
             price: undefined
           }, externalUrl)
@@ -334,18 +334,46 @@ export class GiftEditComponent implements OnInit {
 
     modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
       console.log('closed!', args);
+
       if (args.reason === 'save') {
-        // TODO: Convert image URL (or base64 data) into blob and
-        //       upload to server.
+        // https://stackoverflow.com/a/38936042/6178885
+        const dataURLtoFile = (dataUrl: string, filename: string) => {
+          const arr = dataUrl.split(','),
+            mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]);
 
-        // TODO: Save URL and price as a new external URL?
-        // TODO: If name and price doesn't exist, update those fields with the results.
+          let n = bstr.length;
+          const u8arr = new Uint8Array(n);
 
-        // this.gift.externalUrls.push({
-        //   url: args.data.url,
-        //   price: undefined // TODO: Can we get price somehow?
-        // });
-        // this.changeDetector.markForCheck();
+          while (n--) {
+              u8arr[n] = bstr.charCodeAt(n);
+          }
+
+          return new File([u8arr], filename, { type: mime });
+        };
+
+        this.giftForm.get('imageUrl').setValue(args.data.image.data);
+        this.newImageFile = dataURLtoFile(args.data.image.data, 'temp.jpg');
+
+        // Automatically add a new external URL.
+        // TODO: This isn't working!
+        const externalUrls = <FormArray>this.giftForm.controls.externalUrls;
+        externalUrls.push(this.createExternalUrlForm({
+          price: args.data.result.price || undefined,
+          url: args.data.result.url
+        }));
+
+        // Automatically set the name.
+        if (args.data.result.name && !this.giftForm.get('name').value) {
+          this.giftForm.get('name').setValue(args.data.result.name);
+        }
+
+        // Automatically set price.
+        if (args.data.result.price && !this.giftForm.get('budget').value) {
+          this.giftForm.get('budget').setValue(args.data.result.price);
+        }
+
+        this.changeDetector.markForCheck();
       }
     });
   }

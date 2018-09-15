@@ -1,3 +1,3 @@
 export interface UrlScraperResultImage {
-  url: string;
+  data: string;
 }

@@ -127,7 +127,7 @@
                   >
                     <gd-icon icon="external-link-alt"></gd-icon>
                     {{ getURLName(externalUrl.url) }}
-                    ${{ externalUrl.price }}
+                    <ng-container *ngIf="externalUrl.price">${{ externalUrl.price }}</ng-container>
                   </a>
                 </gd-repeater-item>
               </gd-repeater>

@@ -59,26 +59,6 @@
         </textarea>
       </gd-form-field>
 
-      <gd-form-field [errors]="errors">
-        <label
-          class="gd-control-label"
-          for="gd-gift-edit-budget"
-        >
-          Budget
-        </label>
-        <span class="gd-input-group">
-          <span class="gd-input-group-prepend">$</span>
-          <input
-            autocomplete="off"
-            class="gd-form-control"
-            formControlName="budget"
-            id="gd-gift-edit-budget"
-            type="number"
-          />
-          <span class="gd-input-group-append">.00</span>
-        </span>
-      </gd-form-field>
-
       <gd-form-field>
         <div formArrayName="externalUrls">
           <gd-row *ngFor="let externalUrl of externalUrls.controls; let i = index;"
@@ -154,6 +134,26 @@
             </button>
           </div>
         </div>
+      </gd-form-field>
+
+      <gd-form-field [errors]="errors">
+        <label
+          class="gd-control-label"
+          for="gd-gift-edit-budget"
+        >
+          Budget
+        </label>
+        <span class="gd-input-group">
+          <span class="gd-input-group-prepend">$</span>
+          <input
+            autocomplete="off"
+            class="gd-form-control"
+            formControlName="budget"
+            id="gd-gift-edit-budget"
+            type="number"
+          />
+          <span class="gd-input-group-append">.00</span>
+        </span>
       </gd-form-field>
 
       <gd-form-field [errors]="errors">

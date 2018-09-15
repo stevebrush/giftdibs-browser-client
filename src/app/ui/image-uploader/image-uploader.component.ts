@@ -45,6 +45,9 @@ export class GdImageUploaderComponent implements OnDestroy, ControlValueAccessor
   @Output()
   public removeFile = new EventEmitter<void>();
 
+  @Output()
+  public urlButtonClick = new EventEmitter<void>();
+
   @ViewChild('fileInput')
   public fileInput: ElementRef;
 
@@ -57,12 +60,17 @@ export class GdImageUploaderComponent implements OnDestroy, ControlValueAccessor
   public ngOnDestroy(): void {
     this.selectFile.complete();
     this.removeFile.complete();
+    this.urlButtonClick.complete();
   }
 
   public triggerFileSelect(): void {
     const input = this.fileInput.nativeElement;
     input.value = '';
     input.click();
+  }
+
+  public triggerUrlSelect(): void {
+    this.urlButtonClick.next();
   }
 
   public onFileSelected(event: any): void {

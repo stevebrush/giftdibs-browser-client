@@ -14,9 +14,20 @@ import {
 } from '@angular/forms';
 
 import {
+  Router
+} from '@angular/router';
+
+import {
   AlertService,
-  ModalInstance
+  ModalClosedEventArgs,
+  ModalInstance,
+  ModalService,
+  ModalSize
 } from '@app/ui';
+
+import {
+  Observable
+} from 'rxjs';
 
 import {
   finalize
@@ -34,14 +45,22 @@ import {
 import {
   GiftEditContext
 } from './gift-edit-context';
-import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
+
+import {
+  UrlScraperService,
+  UrlScraperResult,
+  UrlImagesLoaderComponent,
+  UrlImagesLoaderContext
+} from '@app/shared/modules/url-scraper';
 
 @Component({
   selector: 'gd-gift-edit',
   templateUrl: './gift-edit.component.html',
   styleUrls: ['./gift-edit.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    UrlScraperService
+  ]
 })
 export class GiftEditComponent implements OnInit {
   public get externalUrls(): FormArray {
@@ -63,7 +82,9 @@ export class GiftEditComponent implements OnInit {
     private context: GiftEditContext,
     private giftService: GiftService,
     private modal: ModalInstance<any>,
-    private router: Router
+    private modalService: ModalService,
+    private router: Router,
+    private urlScraperService: UrlScraperService
   ) { }
 
   public ngOnInit(): void {
@@ -110,6 +131,10 @@ export class GiftEditComponent implements OnInit {
       );
   }
 
+  public onUrlButtonClick(): void {
+    this.openUrlImagesLoaderModal();
+  }
+
   public submit(): void {
     if (this.giftForm.disabled) {
       return;
@@ -123,6 +148,7 @@ export class GiftEditComponent implements OnInit {
 
     // Need to manually retrieve the form data of the nested forms:
     formData.externalUrls = this.externalUrls.value;
+    console.log('submit with:', formData);
 
     let obs: any;
     if (this.gift) {
@@ -198,6 +224,49 @@ export class GiftEditComponent implements OnInit {
     externalUrls.push(this.createExternalUrlForm());
   }
 
+  public refreshUrlDetails(): void {
+    this.giftForm.disable();
+    this.changeDetector.markForCheck();
+
+    const externalUrls: FormArray = <FormArray>this.giftForm.get('externalUrls');
+    // const urls = externalUrls.value.map((externalUrl: any) => externalUrl.url);
+
+    // this.urlScraperService.getProducts(urls)
+    //   .subscribe((products: UrlScraperResult[]) => {
+    //     products.forEach((product) => {
+    //       const formControl = externalUrls.controls.find((control) => {
+    //         return control.value.url === product.url;
+    //       });
+    //       formControl.get('price').setValue(product.price);
+    //       formControl.get('imageUrl').setValue(product.imageUrl);
+    //     });
+    //   });
+
+    let numComplete = 0;
+    externalUrls.controls.forEach((control) => {
+      // control.disable();
+      this.urlScraperService.getProduct(control.value.url)
+        .subscribe(
+          (result: UrlScraperResult) => {
+            control.get('price').setValue(result.price);
+            // control.get('imageUrl').setValue(product.imageUrl);
+            // control.enable();
+            numComplete++;
+
+            if (numComplete === externalUrls.length) {
+              this.giftForm.enable();
+              this.changeDetector.markForCheck();
+            }
+          },
+          (err: any) => {
+            this.giftForm.enable();
+            this.changeDetector.markForCheck();
+            this.alertService.error(err.error.message);
+          }
+        );
+    });
+  }
+
   public removeUrl(index: number): void {
     this.externalUrls.removeAt(index);
   }
@@ -243,11 +312,41 @@ export class GiftEditComponent implements OnInit {
       control.push(
         this.formBuilder.group(
           Object.assign({
+            imageUrl: undefined,
             url: undefined,
             price: undefined
           }, externalUrl)
         )
       );
+    });
+  }
+
+  private openUrlImagesLoaderModal(): void {
+    const context = new UrlImagesLoaderContext();
+
+    const modalInstance = this.modalService.open(UrlImagesLoaderComponent, {
+      providers: [{
+        provide: GiftEditContext,
+        useValue: context
+      }],
+      size: ModalSize.Small
+    });
+
+    modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
+      console.log('closed!', args);
+      if (args.reason === 'save') {
+        // TODO: Convert image URL (or base64 data) into blob and
+        //       upload to server.
+
+        // TODO: Save URL and price as a new external URL?
+        // TODO: If name and price doesn't exist, update those fields with the results.
+
+        // this.gift.externalUrls.push({
+        //   url: args.data.url,
+        //   price: undefined // TODO: Can we get price somehow?
+        // });
+        // this.changeDetector.markForCheck();
+      }
     });
   }
 }

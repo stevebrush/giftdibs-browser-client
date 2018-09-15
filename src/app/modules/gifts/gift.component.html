@@ -12,7 +12,7 @@
       <div class="gd-gift-detail gd-detail-pane">
         <gd-row>
           <gd-column
-            [screenSmall]="7"
+            [screenSmall]="5"
           >
             <gd-thumbnail
               class="gd-gift-thumbnail"
@@ -21,7 +21,7 @@
             ></gd-thumbnail>
           </gd-column>
           <gd-column
-            [screenSmall]="5"
+            [screenSmall]="7"
           >
             <h1>
               {{ gift.name }}
@@ -118,6 +118,7 @@
               <h2 class="gd-subheading">
                 Buy Online
               </h2>
+
               <gd-repeater>
                 <gd-repeater-item *ngFor="let externalUrl of gift.externalUrls">
                   <a

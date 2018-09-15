@@ -17,7 +17,9 @@ import {
   GdImageUploaderModule,
   GridModule,
   IconModule,
-  ModalModule
+  ModalModule,
+  ThumbnailModule,
+  MediaModule
 } from '@app/ui';
 
 import {
@@ -28,6 +30,7 @@ import {
   GiftEditComponent
 } from './gift-edit.component';
 import { GiftModule } from '@app/shared/modules/gift/gift.module';
+import { UrlScraperModule } from '@app/shared/modules/url-scraper';
 
 @NgModule({
   imports: [
@@ -40,8 +43,11 @@ import { GiftModule } from '@app/shared/modules/gift/gift.module';
     GiftModule,
     GridModule,
     IconModule,
+    MediaModule,
     ModalModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ThumbnailModule,
+    UrlScraperModule
   ],
   declarations: [
     GiftEditComponent

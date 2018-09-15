@@ -24,6 +24,7 @@
 .gd-thumbnail-image-container {
   background-color: $gd-color-neutral-lightest;
   background-size: cover;
+  background-position: top center;
   background-repeat: no-repeat;
   align-items: center;
   justify-content: center;
@@ -74,6 +75,8 @@
 }
 
 .gd-thumbnail-static {
+  display: inline-block;
+
   .gd-thumbnail-image-container {
     width: 100%;
     height: auto;

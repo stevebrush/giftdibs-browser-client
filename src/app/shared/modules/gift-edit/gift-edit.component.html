@@ -22,6 +22,7 @@
           formControlName="imageUrl"
           (selectFile)="onSelectFile($event)"
           (removeFile)="onRemoveFile()"
+          (urlButtonClick)="onUrlButtonClick()"
         >
         </gd-image-uploader>
       </gd-form-field>
@@ -56,6 +57,26 @@
           maxlength="2000"
         >
         </textarea>
+      </gd-form-field>
+
+      <gd-form-field [errors]="errors">
+        <label
+          class="gd-control-label"
+          for="gd-gift-edit-budget"
+        >
+          Budget
+        </label>
+        <span class="gd-input-group">
+          <span class="gd-input-group-prepend">$</span>
+          <input
+            autocomplete="off"
+            class="gd-form-control"
+            formControlName="budget"
+            id="gd-gift-edit-budget"
+            type="number"
+          />
+          <span class="gd-input-group-append">.00</span>
+        </span>
       </gd-form-field>
 
       <gd-form-field>
@@ -101,14 +122,6 @@
                 <div class="gd-button-group">
                   <button
                     class="gd-button gd-button-default"
-                    title="Get price from URL"
-                    type="button"
-                    [disabled]="giftForm.disabled"
-                  >
-                    <gd-icon icon="sync-alt"></gd-icon>
-                  </button>
-                  <button
-                    class="gd-button gd-button-default"
                     title="Remove URL"
                     type="button"
                     [disabled]="giftForm.disabled"
@@ -120,35 +133,27 @@
               </gd-form-field>
             </gd-column>
           </gd-row>
-          <button
-            class="gd-button gd-button-default"
-            type="button"
-            [disabled]="giftForm.disabled"
-            (click)="addExternalUrlField()"
-          >
-            Add external URL
-          </button>
-        </div>
-      </gd-form-field>
 
-      <gd-form-field [errors]="errors">
-        <label
-          class="gd-control-label"
-          for="gd-gift-edit-budget"
-        >
-          Budget
-        </label>
-        <span class="gd-input-group">
-          <span class="gd-input-group-prepend">$</span>
-          <input
-            autocomplete="off"
-            class="gd-form-control"
-            formControlName="budget"
-            id="gd-gift-edit-budget"
-            type="number"
-          />
-          <span class="gd-input-group-append">.00</span>
-        </span>
+          <div class="gd-button-group">
+            <button
+              class="gd-button gd-button-primary"
+              type="button"
+              [disabled]="giftForm.disabled"
+              (click)="addExternalUrlField()"
+            >
+              Add external URL
+            </button>
+            <button *ngIf="externalUrls && externalUrls.length"
+              class="gd-button gd-button-default"
+              type="button"
+              [disabled]="giftForm.disabled"
+              (click)="refreshUrlDetails()"
+            >
+              <gd-icon icon="sync-alt"></gd-icon>
+              Refresh prices
+            </button>
+          </div>
+        </div>
       </gd-form-field>
 
       <gd-form-field [errors]="errors">

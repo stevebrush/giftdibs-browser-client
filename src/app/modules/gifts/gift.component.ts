@@ -4,7 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { mergeMap, takeUntil, finalize } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { SessionService } from '@app/shared/modules/session';
-import { AlertService, ModalService, ModalClosedEventArgs, ConfirmService, ConfirmAnswer } from '@app/ui';
+import { AlertService, ModalService, ModalClosedEventArgs, ConfirmService, ConfirmAnswer, ModalSize } from '@app/ui';
 import { GiftEditContext, GiftEditComponent } from '@app/shared/modules/gift-edit';
 
 @Component({
@@ -70,7 +70,8 @@ export class GiftComponent implements OnInit, OnDestroy {
       providers: [{
         provide: GiftEditContext,
         useValue: context
-      }]
+      }],
+      size: ModalSize.Large
     });
 
     modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {

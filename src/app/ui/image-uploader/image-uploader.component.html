@@ -17,6 +17,13 @@
           >
             Select image...
           </button>
+          <button
+            class="gd-button gd-button-default"
+            type="button"
+            (click)="triggerUrlSelect()"
+          >
+            From URL...
+          </button>
           <button *ngIf="imageSource"
             class="gd-button gd-button-default"
             type="button"

@@ -19,6 +19,8 @@ import {
 
 import {
   AlertService,
+  ConfirmAnswer,
+  ConfirmService,
   ModalClosedEventArgs,
   ModalInstance,
   ModalService,
@@ -35,23 +37,27 @@ import {
 
 import {
   AssetsService
-} from '../assets';
+} from '@app/shared/modules/assets';
 
 import {
   Gift,
   GiftService
-} from '../gift';
+} from '@app/shared/modules/gift';
+
+import {
+  GiftExternalUrl
+} from '@app/shared/modules/gift/gift-external-url';
+
+import {
+  UrlImagesLoaderComponent,
+  UrlImagesLoaderContext,
+  UrlScraperResult,
+  UrlScraperService
+} from '@app/shared/modules/url-scraper';
 
 import {
   GiftEditContext
 } from './gift-edit-context';
-
-import {
-  UrlScraperService,
-  UrlScraperResult,
-  UrlImagesLoaderComponent,
-  UrlImagesLoaderContext
-} from '@app/shared/modules/url-scraper';
 
 @Component({
   selector: 'gd-gift-edit',
@@ -79,6 +85,7 @@ export class GiftEditComponent implements OnInit {
     private assetsService: AssetsService,
     private changeDetector: ChangeDetectorRef,
     private formBuilder: FormBuilder,
+    private confirmService: ConfirmService,
     private context: GiftEditContext,
     private giftService: GiftService,
     private modal: ModalInstance<any>,
@@ -146,10 +153,6 @@ export class GiftEditComponent implements OnInit {
 
     const formData: Gift = this.giftForm.value;
 
-    // Need to manually retrieve the form data of the nested forms:
-    formData.externalUrls = this.externalUrls.value;
-    console.log('submit with:', formData);
-
     let obs: any;
     if (this.gift) {
       obs = this.giftService.update(this.gift.id, formData);
@@ -192,58 +195,30 @@ export class GiftEditComponent implements OnInit {
   }
 
   public deleteGift(): void {
-    if (this.giftForm.disabled) {
-      return;
-    }
-
-    this.giftForm.disable();
-    this.errors = [];
-    this.changeDetector.markForCheck();
-    this.giftService.remove(this.gift.id).subscribe(
-      () => {
-        this.modal.close('save');
-        this.alertService.success('Gift successfully deleted.', true);
-        this.router.navigate(['/users', this.gift.user.id]);
-      },
-      (err: any) => {
-        const error = err.error;
-        this.alertService.error(error.message);
-        this.errors = error.errors;
-        this.giftForm.enable();
-        this.changeDetector.markForCheck();
-      }
-    );
+    this.confirmDelete();
   }
 
   public onCancelClicked(): void {
     this.modal.close('cancel');
   }
 
-  public addExternalUrlField(): void {
-    const externalUrls = <FormArray>this.giftForm.controls.externalUrls;
-    externalUrls.push(this.createExternalUrlForm());
+  public addExternalUrlField(values?: GiftExternalUrl): void {
+    this.externalUrls.push(
+      this.formBuilder.group(
+        Object.assign({
+          price: undefined,
+          url: undefined
+        }, values)
+      )
+    );
   }
 
   public refreshUrlDetails(): void {
     this.giftForm.disable();
     this.changeDetector.markForCheck();
 
-    const externalUrls: FormArray = <FormArray>this.giftForm.get('externalUrls');
-    // const urls = externalUrls.value.map((externalUrl: any) => externalUrl.url);
-
-    // this.urlScraperService.getProducts(urls)
-    //   .subscribe((products: UrlScraperResult[]) => {
-    //     products.forEach((product) => {
-    //       const formControl = externalUrls.controls.find((control) => {
-    //         return control.value.url === product.url;
-    //       });
-    //       formControl.get('price').setValue(product.price);
-    //       formControl.get('imageUrl').setValue(product.imageUrl);
-    //     });
-    //   });
-
     let numComplete = 0;
-    externalUrls.controls.forEach((control) => {
+    this.externalUrls.controls.forEach((control) => {
       this.urlScraperService.getProduct(control.value.url)
         .subscribe(
           (result: UrlScraperResult) => {
@@ -252,7 +227,7 @@ export class GiftEditComponent implements OnInit {
             }
             numComplete++;
 
-            if (numComplete === externalUrls.length) {
+            if (numComplete === this.externalUrls.length) {
               this.giftForm.enable();
               this.changeDetector.markForCheck();
             }
@@ -282,15 +257,6 @@ export class GiftEditComponent implements OnInit {
       priority: 3,
       quantity: 1
     });
-  }
-
-  private createExternalUrlForm(
-    values?: { price: number, url: string }
-  ): FormGroup {
-    return this.formBuilder.group(Object.assign({
-      price: undefined,
-      url: undefined
-    }, values));
   }
 
   private uploadImage(file: any, giftId: string): Observable<any> {
@@ -333,48 +299,89 @@ export class GiftEditComponent implements OnInit {
     });
 
     modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
-      console.log('closed!', args);
-
       if (args.reason === 'save') {
-        // https://stackoverflow.com/a/38936042/6178885
-        const dataURLtoFile = (dataUrl: string, filename: string) => {
-          const arr = dataUrl.split(','),
-            mime = arr[0].match(/:(.*?);/)[1],
-            bstr = atob(arr[1]);
+        const imageDataUrl = args.data.image.data;
+        const productDetails: UrlScraperResult = args.data.result;
 
-          let n = bstr.length;
-          const u8arr = new Uint8Array(n);
-
-          while (n--) {
-              u8arr[n] = bstr.charCodeAt(n);
-          }
-
-          return new File([u8arr], filename, { type: mime });
-        };
-
-        this.giftForm.get('imageUrl').setValue(args.data.image.data);
-        this.newImageFile = dataURLtoFile(args.data.image.data, 'temp.jpg');
+        this.giftForm.get('imageUrl').setValue(imageDataUrl);
+        this.newImageFile = this.dataURLtoFile(imageDataUrl, 'temp.jpg');
 
         // Automatically add a new external URL.
-        // TODO: This isn't working!
-        const externalUrls = <FormArray>this.giftForm.controls.externalUrls;
-        externalUrls.push(this.createExternalUrlForm({
-          price: args.data.result.price || undefined,
-          url: args.data.result.url
-        }));
+        const found = this.externalUrls.controls.find((control) => {
+          return (control.get('url').value === productDetails.url);
+        });
+
+        if (!found) {
+          this.addExternalUrlField({
+            price: productDetails.price || undefined,
+            url: productDetails.url
+          });
+        }
 
         // Automatically set the name.
-        if (args.data.result.name && !this.giftForm.get('name').value) {
-          this.giftForm.get('name').setValue(args.data.result.name);
+        if (productDetails.name && !this.giftForm.get('name').value) {
+          this.giftForm.get('name').setValue(productDetails.name);
         }
 
         // Automatically set price.
-        if (args.data.result.price && !this.giftForm.get('budget').value) {
-          this.giftForm.get('budget').setValue(args.data.result.price);
+        if (productDetails.price && !this.giftForm.get('budget').value) {
+          this.giftForm.get('budget').setValue(productDetails.price);
         }
 
         this.changeDetector.markForCheck();
       }
     });
+  }
+
+  private confirmDelete(): void {
+    if (this.giftForm.disabled) {
+      return;
+    }
+
+    this.giftForm.disable();
+    this.errors = [];
+    this.changeDetector.markForCheck();
+
+    this.confirmService.confirm({
+      message: 'Are you sure?'
+    }, (answer: ConfirmAnswer) => {
+      if (answer.type === 'okay') {
+        this.giftService.remove(this.gift.id)
+          .subscribe(
+            () => {
+              this.modal.close('save');
+              this.alertService.success('Gift successfully deleted.', true);
+              this.router.navigate(['/users', this.gift.user.id]);
+            },
+            (err: any) => {
+              const error = err.error;
+              this.alertService.error(error.message);
+              this.errors = error.errors;
+              this.giftForm.enable();
+              this.changeDetector.markForCheck();
+            }
+          );
+      } else {
+        this.giftForm.enable();
+        this.changeDetector.markForCheck();
+      }
+    });
+  }
+
+  // Convert data URL to File.
+  // https://stackoverflow.com/a/38936042/6178885
+  private dataURLtoFile(dataUrl: string, filename: string): File {
+    const arr = dataUrl.split(','),
+      mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]);
+
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    return new File([u8arr], filename, { type: mime });
   }
 }

@@ -13,13 +13,14 @@ import {
 
 import {
   CheckboxModule,
+  ConfirmModule,
   FormFieldModule,
   GdImageUploaderModule,
   GridModule,
   IconModule,
+  MediaModule,
   ModalModule,
-  ThumbnailModule,
-  MediaModule
+  ThumbnailModule
 } from '@app/ui';
 
 import {
@@ -37,6 +38,7 @@ import { UrlScraperModule } from '@app/shared/modules/url-scraper';
     AssetsModule,
     CheckboxModule,
     CommonModule,
+    ConfirmModule,
     FormFieldModule,
     FormsModule,
     GdImageUploaderModule,

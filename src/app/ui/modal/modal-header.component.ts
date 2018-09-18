@@ -1,8 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
-  OnInit
+  Input
 } from '@angular/core';
 
 @Component({
@@ -11,11 +10,7 @@ import {
   styleUrls: ['./modal-header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ModalHeaderComponent implements OnInit {
+export class ModalHeaderComponent {
   @Input()
   public showCloseButton = false;
-
-  constructor() { }
-
-  public ngOnInit(): void { }
 }

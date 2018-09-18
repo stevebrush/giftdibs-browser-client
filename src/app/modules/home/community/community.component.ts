@@ -1,11 +1,14 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
-  OnInit,
-  ChangeDetectorRef
+  OnInit
 } from '@angular/core';
 
-import { Gift, GiftService } from '@app/shared/modules/gift';
+import {
+  Gift,
+  GiftService
+} from '@app/shared/modules/gift';
 
 @Component({
   selector: 'gd-community',

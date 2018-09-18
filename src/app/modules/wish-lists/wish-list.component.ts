@@ -1,12 +1,51 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { WishListService, WishList } from '@app/shared/modules/wish-list';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { mergeMap, takeUntil } from 'rxjs/operators';
-import { SessionService } from '@app/shared/modules/session';
-import { AlertService, ModalService, ModalClosedEventArgs, ModalSize } from '@app/ui';
-import { Subject } from 'rxjs';
-import { WishListEditContext, WishListEditComponent } from '@app/shared/modules/wish-list-edit';
-import { GiftEditContext, GiftEditComponent } from '@app/shared/modules/gift-edit';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit
+} from '@angular/core';
+
+import {
+  ActivatedRoute,
+  Params,
+  Router
+} from '@angular/router';
+
+import {
+  Subject
+} from 'rxjs';
+
+import {
+  mergeMap,
+  takeUntil
+} from 'rxjs/operators';
+
+import {
+  GiftEditComponent,
+  GiftEditContext
+} from '@app/shared/modules/gift-edit';
+
+import {
+  SessionService
+} from '@app/shared/modules/session';
+
+import {
+  WishList,
+  WishListService
+} from '@app/shared/modules/wish-list';
+
+import {
+  WishListEditComponent,
+  WishListEditContext
+} from '@app/shared/modules/wish-list-edit';
+
+import {
+  AlertService,
+  ModalClosedEventArgs,
+  ModalService,
+  ModalSize
+} from '@app/ui';
 
 @Component({
   selector: 'gd-wish-list',

@@ -11,9 +11,9 @@ import { MediaContentComponent } from './media-content.component';
 import { MediaControlsComponent } from './media-controls.component';
 import { MediaHeaderComponent } from './media-header.component';
 import { MediaHeadingComponent } from './media-heading.component';
+import { MediaSubheadingComponent } from './media-subheading.component';
 import { MediaThumbnailComponent } from './media-thumbnail.component';
 import { MediaComponent } from './media.component';
-import { MediaSubheadingComponent } from './media-subheading.component';
 
 @NgModule({
   imports: [

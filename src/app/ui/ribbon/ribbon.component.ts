@@ -1,4 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input
+} from '@angular/core';
 
 import { RibbonType } from './types';
 
@@ -8,13 +12,7 @@ import { RibbonType } from './types';
   styleUrls: ['./ribbon.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RibbonComponent implements OnInit {
+export class RibbonComponent {
   @Input()
   public ribbonType: RibbonType = RibbonType.Info;
-
-  constructor() { }
-
-  public ngOnInit(): void {
-  }
-
 }

@@ -1,6 +1,15 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { GiftComponent } from './gift.component';
+import {
+  NgModule
+} from '@angular/core';
+
+import {
+  RouterModule,
+  Routes
+} from '@angular/router';
+
+import {
+  GiftComponent
+} from './gift.component';
 
 const routes: Routes = [
   {

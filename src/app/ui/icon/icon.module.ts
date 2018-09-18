@@ -6,8 +6,8 @@ import {
   CommonModule
 } from '@angular/common';
 
+import { IconStackComponent } from './icon-stack.component';
 import { IconComponent } from './icon.component';
-import { IconStackComponent } from '@app/ui/icon/icon-stack.component';
 
 @NgModule({
   imports: [

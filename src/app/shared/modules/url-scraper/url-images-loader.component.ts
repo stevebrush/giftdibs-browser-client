@@ -1,12 +1,24 @@
 import {
-  Component, ChangeDetectionStrategy, ViewChild, ElementRef
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  ViewChild
 } from '@angular/core';
-import { ModalInstance, AlertService, ModalService, ModalClosedEventArgs, ModalSize } from '@app/ui';
+
+import {
+  AlertService,
+  ModalClosedEventArgs,
+  ModalInstance,
+  ModalService,
+  ModalSize
+} from '@app/ui';
+
 import { UrlImagesLoaderContext } from './url-images-loader-context';
-import { UrlScraperService } from '@app/shared/modules/url-scraper/url-scraper.service';
-import { UrlImagesSelectorComponent } from '@app/shared/modules/url-scraper/url-images-selector.component';
-import { UrlImagesSelectorContext } from '@app/shared/modules/url-scraper/url-images-selector-context';
-import { UrlScraperResult } from '@app/shared/modules/url-scraper/url-scraper-result';
+import { UrlImagesSelectorContext } from './url-images-selector-context';
+import { UrlImagesSelectorComponent } from './url-images-selector.component';
+
+import { UrlScraperResult } from './url-scraper-result';
+import { UrlScraperService } from './url-scraper.service';
 
 @Component({
   selector: 'gd-url-images-loader',

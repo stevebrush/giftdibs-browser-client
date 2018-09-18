@@ -1,4 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component
+} from '@angular/core';
 
 @Component({
   selector: 'gd-notice-heading',
@@ -6,11 +9,4 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./notice-heading.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NoticeHeadingComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}
+export class NoticeHeadingComponent {}

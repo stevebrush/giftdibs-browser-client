@@ -8,14 +8,38 @@ import {
 } from '@angular/common';
 
 import {
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
+
+import {
+  RouterModule
+} from '@angular/router';
+
+import {
+  DropdownMenuModule,
+  FormFieldModule,
+  IconModule,
+  MediaModule,
+  RepeaterModule,
+  ThumbnailModule
+} from '@app/ui';
+
+import {
+  CommentEditComponent
+} from './comment-edit.component';
+
+import {
+  CommentListComponent
+} from './comment-list.component';
+
+import {
+  CommentPreviewComponent
+} from './comment-preview.component';
+
+import {
   CommentService
 } from './comment.service';
-import { ThumbnailModule, MediaModule, IconModule, DropdownMenuModule, FormFieldModule, RepeaterModule } from '@app/ui';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CommentEditComponent } from '@app/shared/modules/comment/comment-edit.component';
-import { CommentListComponent } from '@app/shared/modules/comment/comment-list.component';
-import { CommentPreviewComponent } from '@app/shared/modules/comment/comment-preview.component';
-import { RouterModule } from '@angular/router';
 // #endregion
 
 @NgModule({

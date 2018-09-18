@@ -13,10 +13,14 @@ import {
 } from '@angular/forms';
 
 import {
+  Router
+} from '@angular/router';
+
+import {
   AlertService,
-  ModalInstance,
+  ConfirmAnswer,
   ConfirmService,
-  ConfirmAnswer
+  ModalInstance
 } from '@app/ui';
 
 import {
@@ -27,7 +31,6 @@ import {
 import {
   WishListEditContext
 } from './wish-list-edit-context';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'gd-wish-list-edit',

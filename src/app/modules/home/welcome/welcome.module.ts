@@ -1,8 +1,12 @@
 import {
   NgModule
 } from '@angular/core';
-import { WelcomeComponent } from '@app/modules/home/welcome/welcome.component';
-import { RouterModule } from '@angular/router';
+
+import {
+  RouterModule
+} from '@angular/router';
+
+import { WelcomeComponent } from './welcome.component';
 
 @NgModule({
   imports: [

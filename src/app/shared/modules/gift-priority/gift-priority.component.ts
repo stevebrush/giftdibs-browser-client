@@ -1,8 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
-  OnInit
+  Input
 } from '@angular/core';
 
 @Component({
@@ -11,11 +10,7 @@ import {
   styleUrls: ['./gift-priority.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GiftPriorityComponent implements OnInit {
+export class GiftPriorityComponent {
   @Input()
   public priority = 1;
-
-  constructor() { }
-
-  public ngOnInit(): void { }
 }

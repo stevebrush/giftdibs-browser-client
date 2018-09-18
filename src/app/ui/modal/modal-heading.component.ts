@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
-  Component,
-  OnInit
+  Component
 } from '@angular/core';
 
 @Component({
@@ -10,8 +9,4 @@ import {
   styleUrls: ['./modal-heading.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ModalHeadingComponent implements OnInit {
-  constructor() { }
-
-  public ngOnInit(): void { }
-}
+export class ModalHeadingComponent { }

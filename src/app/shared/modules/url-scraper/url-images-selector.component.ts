@@ -1,8 +1,13 @@
 import {
-  Component, ChangeDetectionStrategy, ChangeDetectorRef, OnInit
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit
 } from '@angular/core';
 
-import { ModalInstance } from '@app/ui';
+import {
+  ModalInstance
+} from '@app/ui';
 
 import { UrlImagesSelectorContext } from './url-images-selector-context';
 import { UrlScraperResultImage } from './url-scraper-result-image';

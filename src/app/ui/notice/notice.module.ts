@@ -6,8 +6,8 @@ import {
   CommonModule
 } from '@angular/common';
 
-import { NoticeComponent } from './notice.component';
 import { NoticeHeadingComponent } from './notice-heading.component';
+import { NoticeComponent } from './notice.component';
 
 @NgModule({
   imports: [

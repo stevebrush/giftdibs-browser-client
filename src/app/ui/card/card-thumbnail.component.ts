@@ -1,4 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component
+} from '@angular/core';
 
 @Component({
   selector: 'gd-card-thumbnail',
@@ -6,9 +9,4 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./card-thumbnail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CardThumbnailComponent implements OnInit {
-
-  constructor() { }
-
-  public ngOnInit(): void { }
-}
+export class CardThumbnailComponent { }

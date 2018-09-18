@@ -11,10 +11,19 @@ import {
 } from '@angular/router';
 
 import {
+  CardModule,
+  IconModule,
+  RibbonModule,
+  ThumbnailModule
+} from '@app/ui';
+
+import {
+  GiftPriorityModule
+} from '@app/shared/modules/gift-priority';
+
+import {
   GiftPreviewComponent
 } from './gift-preview.component';
-import { CardModule, RibbonModule, ThumbnailModule, IconModule } from '@app/ui';
-import { GiftPriorityModule } from '@app/shared/modules/gift-priority';
 
 @NgModule({
   imports: [

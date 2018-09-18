@@ -7,17 +7,19 @@ import {
 } from '@angular/common';
 
 import {
-  IconModule, ConfirmModule, NoticeModule
+  ConfirmModule,
+  IconModule,
+  NoticeModule
 } from '@app/ui';
 
 import {
   DibService
-} from '../dib';
+} from '@app/shared/modules/dib';
 
 import {
   DibEditComponent,
   DibEditModule
-} from '../dib-edit';
+} from '@app/shared/modules/dib-edit';
 
 import {
   DibControlsComponent

@@ -1,16 +1,55 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { GiftService, Gift } from '@app/shared/modules/gift';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { mergeMap, takeUntil, finalize } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { SessionService } from '@app/shared/modules/session';
-import { AlertService, ModalService, ModalClosedEventArgs, ConfirmService, ConfirmAnswer, ModalSize } from '@app/ui';
-import { GiftEditContext, GiftEditComponent } from '@app/shared/modules/gift-edit';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit
+} from '@angular/core';
+
+import {
+  ActivatedRoute,
+  Params,
+  Router
+} from '@angular/router';
+
+import {
+  Subject
+} from 'rxjs';
+
+import {
+  finalize,
+  mergeMap,
+  takeUntil
+} from 'rxjs/operators';
+
+import {
+  Gift,
+  GiftService
+} from '@app/shared/modules/gift';
+
+import {
+  GiftEditComponent,
+  GiftEditContext
+} from '@app/shared/modules/gift-edit';
+
+import {
+  SessionService
+} from '@app/shared/modules/session';
+
+import {
+  AlertService,
+  ConfirmAnswer,
+  ConfirmService,
+  ModalClosedEventArgs,
+  ModalService,
+  ModalSize
+} from '@app/ui';
 
 @Component({
   selector: 'gd-gift',
   templateUrl: './gift.component.html',
-  styleUrls: ['./gift.component.scss']
+  styleUrls: ['./gift.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GiftComponent implements OnInit, OnDestroy {
   public gift: Gift;

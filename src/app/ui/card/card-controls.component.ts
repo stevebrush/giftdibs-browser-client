@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
-  Component,
-  OnInit
+  Component
 } from '@angular/core';
 
 @Component({
@@ -10,11 +9,4 @@ import {
   styleUrls: ['./card-controls.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CardControlsComponent implements OnInit {
-
-  constructor() { }
-
-  public ngOnInit(): void {
-  }
-
-}
+export class CardControlsComponent { }

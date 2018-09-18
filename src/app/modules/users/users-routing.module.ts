@@ -7,10 +7,10 @@ import {
   Routes
 } from '@angular/router';
 
+import { FollowersComponent } from './followers.component';
+import { FollowingComponent } from './following.component';
 import { UserComponent } from './user.component';
 import { UsersComponent } from './users.component';
-import { FollowersComponent } from '@app/modules/users/followers.component';
-import { FollowingComponent } from '@app/modules/users/following.component';
 
 const routes: Routes = [
   {

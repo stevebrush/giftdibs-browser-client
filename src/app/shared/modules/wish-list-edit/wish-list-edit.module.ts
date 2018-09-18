@@ -12,7 +12,9 @@ import {
 } from '@angular/forms';
 
 import {
-  FormFieldModule, ModalModule, ConfirmModule
+  ConfirmModule,
+  FormFieldModule,
+  ModalModule
 } from '@app/ui';
 
 import {

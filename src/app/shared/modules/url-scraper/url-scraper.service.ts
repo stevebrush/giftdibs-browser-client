@@ -1,13 +1,24 @@
-import { Injectable } from '@angular/core';
+import {
+  Injectable
+} from '@angular/core';
 
-import { UrlScraperResult } from './url-scraper-result';
-import { Observable } from 'rxjs';
+import {
+  HttpBackend,
+  HttpClient
+} from '@angular/common/http';
+
+import {
+  Observable
+} from 'rxjs';
+
 import {
   map,
   share
 } from 'rxjs/operators';
+
 import { environment } from '@root/environments/environment';
-import { HttpClient, HttpBackend } from '@angular/common/http';
+
+import { UrlScraperResult } from './url-scraper-result';
 
 @Injectable()
 export class UrlScraperService {

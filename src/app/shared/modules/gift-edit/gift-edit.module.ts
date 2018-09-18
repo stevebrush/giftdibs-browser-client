@@ -25,13 +25,19 @@ import {
 
 import {
   AssetsModule
-} from '../assets';
+} from '@app/shared/modules/assets';
+
+import {
+  GiftModule
+} from '@app/shared/modules/gift';
+
+import {
+  UrlScraperModule
+} from '@app/shared/modules/url-scraper';
 
 import {
   GiftEditComponent
 } from './gift-edit.component';
-import { GiftModule } from '@app/shared/modules/gift/gift.module';
-import { UrlScraperModule } from '@app/shared/modules/url-scraper';
 
 @NgModule({
   imports: [

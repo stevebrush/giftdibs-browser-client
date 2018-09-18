@@ -3,8 +3,8 @@ import {
   Component,
   EventEmitter,
   Input,
-  Output,
-  OnInit
+  OnInit,
+  Output
 } from '@angular/core';
 
 import {

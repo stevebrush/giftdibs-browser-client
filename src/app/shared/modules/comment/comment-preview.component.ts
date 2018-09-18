@@ -1,12 +1,12 @@
 import {
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
   OnDestroy,
   OnInit,
-  Output,
-  ChangeDetectionStrategy
+  Output
 } from '@angular/core';
 
 import {

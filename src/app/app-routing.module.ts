@@ -8,12 +8,12 @@ import {
 } from '@angular/router';
 
 import {
-  GD_AUTHORIZATION_PROVIDERS
-} from './shared/modules/session';
-
-import {
   AuthGuard
 } from '@app/shared/guards';
+
+import {
+  GD_AUTHORIZATION_PROVIDERS
+} from '@app/shared/modules/session';
 
 const appRoutes: Routes = [
   {

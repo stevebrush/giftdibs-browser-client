@@ -1,0 +1,155 @@
+<div class="gd-canvas">
+  <div class="gd-container">
+    <p>
+      <a routerLink="/wish-lists/{{ gift?.wishListId }}">
+        <gd-icon icon="chevron-left"></gd-icon>
+        Back
+      </a>
+    </p>
+  </div>
+  <div class="gd-container">
+    <div *ngIf="gift" class="gd-gift">
+      <div class="gd-gift-detail gd-detail-pane">
+        <gd-row>
+          <gd-column
+            [screenSmall]="5"
+          >
+            <gd-thumbnail
+              class="gd-gift-thumbnail"
+              size="static"
+              [imageSource]="gift.imageUrl"
+            ></gd-thumbnail>
+          </gd-column>
+          <gd-column
+            [screenSmall]="7"
+          >
+            <h1>
+              {{ gift.name }}
+            </h1>
+
+            <ng-container *ngIf="isSessionUser">
+              <div *ngIf="!gift.dateReceived"
+                class="gd-button-group"
+              >
+                <button
+                  class="gd-button gd-button-primary"
+                  type="button"
+                  [disabled]="isLoading"
+                  (click)="markReceived()"
+                >
+                  <gd-icon icon="check"></gd-icon>
+                  Mark as received
+                </button>
+                <button
+                  class="gd-button gd-button-default"
+                  type="button"
+                  (click)="openGiftEditModal()"
+                >
+                  Edit
+                </button>
+              </div>
+
+              <gd-notice *ngIf="gift.dateReceived"
+                noticeType="info"
+              >
+                <gd-icon icon="check"></gd-icon> You marked this gift as received on {{ gift.dateReceived | date }}.
+              </gd-notice>
+            </ng-container>
+
+            <ng-container *ngIf="!isSessionUser">
+              <gd-dib-controls
+                [gift]="gift"
+                (change)="onDibChange()"
+              >
+              </gd-dib-controls>
+            </ng-container>
+
+            <p *ngIf="gift.notes">
+              {{ gift.notes }}
+            </p>
+
+            <table class="gd-table">
+              <tr>
+                <th>Priority</th>
+                <td>
+                  <gd-gift-priority
+                    [priority]="gift.priority"
+                  >
+                  </gd-gift-priority>
+                </td>
+              </tr>
+              <tr>
+                <th>Budget</th>
+                <td>${{ gift.budget || '--' }} <span *ngIf="gift.quantity > 1">ea.</span></td>
+              </tr>
+              <tr>
+                <th>Quantity</th>
+                <td>
+                  {{ gift.quantity }}
+                  <span *ngIf="quantityRemaining !== undefined">({{ quantityRemaining }} available)</span>
+                </td>
+              </tr>
+              <tr>
+                <th>Updated</th>
+                <td>{{ gift.dateUpdated | date }}</td>
+              </tr>
+            </table>
+
+            <gd-media>
+              <gd-media-thumbnail>
+                <gd-thumbnail
+                  type="user"
+                  size="xs"
+                  title="{{ gift.user.firstName }} {{ gift.user.lastName }}"
+                  [imageSource]="gift.user.avatarUrl"
+                  [route]="{ commands: ['/users', gift.user.id] }"
+                >
+                </gd-thumbnail>
+              </gd-media-thumbnail>
+              <gd-media-content>
+                <a [routerLink]="['/users', gift.user.id]">{{ gift.user.firstName }} {{ gift.user.lastName }}</a>
+                added on {{ gift.dateCreated | date }}.
+              </gd-media-content>
+            </gd-media>
+
+            <div *ngIf="gift.externalUrls && gift.externalUrls.length"
+              class="gd-gift-external-urls"
+            >
+              <h2 class="gd-subheading">
+                Buy Online
+              </h2>
+
+              <gd-repeater>
+                <gd-repeater-item *ngFor="let externalUrl of gift.externalUrls">
+                  <a
+                    class="gd-button gd-button-danger"
+                    [attr.href]="externalUrl.url"
+                  >
+                    <gd-icon icon="external-link-alt"></gd-icon>
+                    {{ getURLName(externalUrl.url) }}
+                    <ng-container *ngIf="externalUrl.price">${{ externalUrl.price }}</ng-container>
+                  </a>
+                </gd-repeater-item>
+              </gd-repeater>
+            </div>
+
+            <h2 class="gd-subheading">
+              Comments
+            </h2>
+
+            <gd-comment-list
+              [comments]="gift.comments"
+            >
+            </gd-comment-list>
+
+            <gd-comment-edit
+              [giftId]="gift.id"
+              (saved)="onCommentSaved()"
+            >
+            </gd-comment-edit>
+          </gd-column>
+        </gd-row>
+      </div>
+    </div>
+  </div>
+</div>

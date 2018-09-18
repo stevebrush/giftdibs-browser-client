@@ -1,0 +1,50 @@
+<gd-modal>
+  <gd-modal-header>
+    <gd-modal-heading>
+      Select an image
+    </gd-modal-heading>
+  </gd-modal-header>
+  <gd-modal-body>
+    <!-- <img *ngFor="let image of images"
+      role="button"
+      tabindex="0"
+      [ngClass]="{
+        'gd-url-images-selector-active': isSelectedImage(image)
+      }"
+      [src]="image.url"
+      (click)="selectImage(image)"
+    /> -->
+
+    <gd-thumbnail *ngFor="let image of images"
+      role="button"
+      tabindex="0"
+      [ngClass]="{
+        'gd-url-images-selector-active': isSelectedImage(image)
+      }"
+      size="static"
+      [imageSource]="image.data"
+      (click)="selectImage(image)"
+    >
+    </gd-thumbnail>
+
+  </gd-modal-body>
+  <gd-modal-footer>
+    <div class="gd-button-group">
+      <button
+        class="gd-button gd-button-primary"
+        type="button"
+        (click)="onSelectClicked()"
+        [disabled]="!selectedImage"
+      >
+        Select
+      </button>
+      <button
+        class="gd-button gd-button-default"
+        type="button"
+        (click)="onCancelClicked()"
+      >
+        Cancel
+      </button>
+    </div>
+  </gd-modal-footer>
+</gd-modal>

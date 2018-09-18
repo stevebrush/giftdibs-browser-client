@@ -1,0 +1,11 @@
+@import '../../../styles/mixins';
+
+.gd-card-footer {
+  padding: $gd-spacing-padding-squish;
+  margin-top: $gd-spacing-lg;
+  margin-left: -$gd-spacing;
+  margin-right: -$gd-spacing;
+  margin-bottom: -$gd-spacing-lg;
+  background-color: $gd-color-neutral-lightest;
+  border-top: 1px solid $gd-border-color-neutral-lightest;
+}

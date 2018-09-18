@@ -1,0 +1,20 @@
+@import '../../../../styles/mixins';
+
+// .gd-gift-preview {
+//   display: block;
+
+//   &:focus {
+//     @include gd_focus_indicator();
+//   }
+
+//   &:hover {
+//     background-color: $gd-color-neutral-faint;
+//     text-decoration: none;
+//   }
+// }
+
+.gd-gift-preview-thumbnail {
+  display: block;
+  overflow: hidden;
+  position: relative;
+}

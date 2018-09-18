@@ -1,0 +1,13 @@
+<div class="gd-container">
+  <h1>
+    Users
+  </h1>
+
+  <ul>
+    <li *ngFor="let user of users">
+      <a [routerLink]="['/users', user.id]">
+        {{ user.firstName }} {{ user.lastName }}
+      </a>
+    </li>
+  </ul>
+</div>

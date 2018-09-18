@@ -1,0 +1,47 @@
+<div class="gd-comment-preview">
+  <gd-comment-edit *ngIf="isEdit else commentEditForm"
+    [comment]="comment"
+    (cancelled)="onCancelled()"
+    (saved)="onSaved()"
+  >
+  </gd-comment-edit>
+  <ng-template #commentEditForm>
+    <gd-media>
+      <gd-media-thumbnail>
+        <a routerLink="/users/{{ comment.user.id }}">
+          <gd-thumbnail
+            size="xs"
+            type="user"
+            [imageSource]="comment.user.avatarUrl"
+          >
+          </gd-thumbnail>
+        </a>
+      </gd-media-thumbnail>
+      <gd-media-content>
+        <gd-media-body>
+          <div class="gd-comment-body">
+            <a routerLink="/users/{{ comment.user.id }}">{{ comment.user.firstName }} {{ comment.user.lastName }}</a>
+            {{ comment.body }}
+          </div>
+          <div class="gd-comment-footer gd-text-small">
+            <time class="gd-text-deemphasized">
+              {{ comment.dateUpdated | date }}
+            </time>
+          </div>
+        </gd-media-body>
+      </gd-media-content>
+      <gd-media-controls *ngIf="isOwner">
+        <button
+          class="gd-button gd-button-link gd-text-deemphasized"
+          title="Toggle comment options"
+          type="button"
+          gdDropdownMenuTrigger
+          [menuItems]="menuItems"
+          (click)="$event.stopPropagation();$event.preventDefault();"
+        >
+          <gd-icon icon="ellipsis-v"></gd-icon>
+        </button>
+      </gd-media-controls>
+    </gd-media>
+  </ng-template>
+</div>

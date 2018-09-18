@@ -1,0 +1,13 @@
+@import '../../../../styles/mixins';
+
+.gd-privacy-selector-item {
+  display: flex;
+  padding: $gd-spacing-padding-squish-compact;
+  font-weight: $gd-font-weight;
+}
+
+.gd-privacy-selector-item-body {
+  flex: 1 1 auto;
+  padding-left: $gd-spacing-lg;
+  padding-right: $gd-spacing-lg;
+}

@@ -1,0 +1,11 @@
+@import '../../../styles/mixins';
+
+.gd-repeater-item {
+  display: flex;
+  align-items: baseline;
+  padding: $gd-spacing-sm 0;
+}
+
+.gd-repeater-item-body {
+  flex: 1 1 auto;
+}

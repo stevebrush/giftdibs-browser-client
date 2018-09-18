@@ -1,0 +1,47 @@
+@import '../../../styles/mixins';
+
+.gd-dropdown-menu {
+  max-width: 275px;
+  display: inline-block;
+  box-shadow: $gd-box-shadow;
+  background-color: #fff;
+  padding: $gd-spacing-sm 0;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.gd-dropdown-hidden {
+  visibility: hidden;
+}
+
+.gd-dropdown-menu-item-button {
+  padding: 0;
+  width: 100%;
+  display: block;
+  text-align: left;
+  background-color: transparent;
+  border-radius: 0;
+  box-shadow: none;
+
+  &:hover {
+    background-color: $gd-color-neutral-lightest;
+    color: $gd-text-color-dark;
+  }
+}
+
+.gd-dropdown-menu-item-container {
+  display: block;
+  width: 100%;
+  font-weight: $gd-font-weight;
+  padding: $gd-spacing-padding-squish-compact;
+
+  gd-icon {
+    margin-right: 5px;
+  }
+}
+
+.gd-dropdown-menu-item-separator {
+  border-bottom: 1px solid $gd-border-color-neutral-lightest;
+}

@@ -1,10 +1,10 @@
-$gd-font-size-default: 17px !default;
+$gd-font-size-default: 100% !default;
 $gd-font-size-small: 85% !default;
 $gd-font-size-smaller: 75% !default;
 $gd-font-size-large: 1.2em !default;
 $gd-font-size-larger: 1.5em !default;
-$gd-font-size-xl: 3em !default;
-$gd-font-size-xxl: 5em !default;
+$gd-font-size-xl: 2em !default;
+$gd-font-size-xxl: 3em !default;
 
 $gd-font-weight-light: 100 !default;
 $gd-font-weight: 400 !default;
@@ -16,23 +16,22 @@ $gd-line-height-reduced: 1.2 !default;
 
 $gd-zindex-alert: 999 !default;
 
-$gd-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.15);
+$gd-box-shadow: 0 2px 2px rgba(0,0,0,.24), 0 0 2px rgba(0,0,0,.12);
 $gd-box-shadow-lg: 0 0 50px rgba(0, 0, 0, 0.4);
-$gd-border-radius: 0.35rem !default;
-$gd-border-radius-sm: 0.175rem !default;
-
-$gd-text-color: #555 !default;
-$gd-text-color-deemphasized: #aaa !default;
-$gd-text-color-dark: #222 !default;
+$gd-border-radius: 0.75rem !default;
+$gd-border-radius-sm: 0.35rem !default;
 
 $gd-spacing: 1.00rem !default;
-$gd-spacing-lg: 1.5rem !default;
-$gd-spacing-md: 0.750rem !default;
+$gd-spacing-xl: 2rem !default;
+$gd-spacing-lg: 0.750rem !default;
+$gd-spacing-md: 0.500rem !default;
 $gd-spacing-sm: 0.375rem !default;
 $gd-spacing-xs: 0.250rem !default;
 
-$gd-spacing-padding-squish: $gd-spacing-md $gd-spacing !default;
-$gd-spacing-padding-squish-compact: $gd-spacing-sm $gd-spacing-md !default;
+$gd-spacing-padding-squish: $gd-spacing-lg $gd-spacing !default;
+$gd-spacing-padding-squish-compact: $gd-spacing-sm $gd-spacing-lg !default;
+$gd-spacing-padding-squish-large: $gd-spacing $gd-spacing-xl !default;
+$gd-spacing-padding-even-large: $gd-spacing-xl !default;
 
 $gd-screen-sm-min: 768px;
 $gd-screen-md-min: 992px;
@@ -43,7 +42,7 @@ $gd-screen-sm-max: $gd-screen-md-min - 1;
 $gd-screen-md-max: $gd-screen-lg-min - 1;
 
 @function background_color($color) {
-  @return desaturate(lighten($color, 35%), 25%);
+  @return desaturate(lighten($color, 45%), 25%);
 }
 
 @function border_color($color) {
@@ -51,7 +50,7 @@ $gd-screen-md-max: $gd-screen-lg-min - 1;
 }
 
 @function text_color($color) {
-  @return darken($color, 20%);
+  @return saturate(darken($color, 15%), 20%);
 }
 
 // PRIMARY
@@ -87,14 +86,25 @@ $gd-text-color-warning: text_color($gd-color-warning) !default;
 // DANGER
 $gd-color-danger: #D4282F !default;
 $gd-background-color-danger: background_color($gd-color-danger) !default;
-$gd-border-color-danger: border_color($gd-color-danger) !default;
-$gd-text-color-danger: text_color($gd-color-danger) !default;
+$gd-border-color-danger: $gd-color-danger !default;
+$gd-text-color-danger: $gd-color-danger !default;
 
-$gd-background-color-neutral: #ccc !default;
-$gd-background-color-neutral-light: #e8e8e8 !default;
-$gd-background-color-neutral-lightest: #f8f8f8 !default;
-$gd-background-color-neutral-dark: #6c757d !default;
+// NEUTRAL
+$gd-color-neutral: desaturate(lighten($gd-color-primary, 15%), 65%) !default;
+$gd-color-neutral-light: lighten($gd-color-neutral, 15%) !default;
+$gd-color-neutral-lighter: lighten($gd-color-neutral, 30%) !default;
+$gd-color-neutral-lightest: lighten($gd-color-neutral, 40%) !default;
+$gd-color-neutral-faint: lighten($gd-color-neutral, 42%) !default;
+$gd-color-neutral-dark: darken($gd-color-neutral, 20%) !default;
+$gd-color-neutral-darker: darken($gd-color-neutral, 30%) !default;
+$gd-color-neutral-darkest: darken($gd-color-neutral, 40%) !default;
 
-$gd-border-color-neutral: darken($gd-background-color-neutral, 15%) !default;
-$gd-border-color-neutral-light: darken($gd-background-color-neutral-light, 15%) !default;
-$gd-border-color-neutral-lightest: darken($gd-background-color-neutral-lightest, 15%) !default;
+$gd-border-color-neutral: darken($gd-color-neutral, 5%) !default;
+$gd-border-color-neutral-light: darken($gd-color-neutral-light, 5%) !default;
+$gd-border-color-neutral-lighter: darken($gd-color-neutral-lighter, 5%) !default;
+$gd-border-color-neutral-lightest: darken($gd-color-neutral-lightest, 5%) !default;
+
+// TEXT COLOR
+$gd-text-color-default: $gd-color-neutral-dark !default;
+$gd-text-color-deemphasized: desaturate($gd-color-neutral-light, 5%) !default;
+$gd-text-color-dark: $gd-color-neutral-darkest !default;

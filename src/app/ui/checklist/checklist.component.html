@@ -1,0 +1,17 @@
+<ul
+  class="gd-checklist"
+  [gdHideUntil]="choices"
+>
+  <li *ngFor="let choice of choices"
+    class="gd-checklist-item"
+  >
+    <gd-checkbox
+      [disabled]="disabled"
+      [value]="choice.value"
+      [ngModel]="isChecked(choice)"
+      (ngModelChange)="onCheckboxChange(choice, $event)"
+    >
+      {{ choice.label }}
+    </gd-checkbox>
+  </li>
+</ul>

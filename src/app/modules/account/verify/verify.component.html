@@ -1,0 +1,54 @@
+<div class="gd-verify-account gd-container gd-spacing-padding-even-large" *ngIf="!isLoading">
+  <h1>
+    Email address verification
+  </h1>
+
+  <ng-template [ngIf]="hasToken">
+    <ng-template [ngIf]="isVerified">
+      <gd-notice noticeType="success">
+        Your email address has been successfully verified. (Thanks for doing that!)
+      </gd-notice>
+      <p>
+        <a class="gd-button gd-button-primary" routerLink="/">Return to home page</a>
+      </p>
+    </ng-template>
+    <ng-template [ngIf]="!isVerified">
+      <gd-notice noticeType="danger">
+        Hm. It appears that the link in your verification email is invalid (or has expired).
+      </gd-notice>
+      <ng-container [ngTemplateOutlet]="resendEmail"></ng-container>
+    </ng-template>
+  </ng-template>
+
+  <ng-template [ngIf]="!hasToken">
+    <ng-template [ngIf]="isVerified">
+      <gd-notice noticeType="success">
+        Thank you! Your email address has already been verified.
+      </gd-notice>
+      <p>
+        <a class="gd-button gd-button-primary" routerLink="/">Return to home page</a>
+      </p>
+    </ng-template>
+    <ng-template [ngIf]="!isVerified">
+      <p>
+        GiftDibs needs to verify your email address before you are allowed to follow someone or dib their gifts (we do this to protect your privacy). You should have received an activation link via email when you registered; however, if you cannot find it&mdash;did you check your spam folder?&mdash;or it has expired, please click the button below to receive a new activation link.
+      </p>
+      <ng-container [ngTemplateOutlet]="resendEmail"></ng-container>
+    </ng-template>
+  </ng-template>
+</div>
+
+<ng-template #resendEmail>
+  <p>
+    <button
+      class="gd-button gd-button-primary"
+      type="button"
+      (click)="sendVerificationEmail()">
+      Resend verification email
+    </button>
+    <a class="gd-button gd-button-default" routerLink="/">Return to home page</a>
+  </p>
+  <p>
+    <a routerLink="/support/faq">Having trouble verifying your email address?</a>
+  </p>
+</ng-template>

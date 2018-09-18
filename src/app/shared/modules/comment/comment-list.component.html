@@ -1,0 +1,13 @@
+<div *ngIf="comments && comments.length"
+  class="gd-comment-list"
+>
+  <gd-repeater>
+    <gd-repeater-item *ngFor="let comment of comments; let i = index;">
+      <gd-comment-preview
+        [comment]="comment"
+        (deleted)="onDeleted(i)"
+      >
+      </gd-comment-preview>
+    </gd-repeater-item>
+  </gd-repeater>
+</div>

@@ -1,0 +1,33 @@
+<div class="gd-card">
+  <ng-container *ngIf="route">
+    <a
+      class="gd-card-anchor gd-animation-tap"
+      tabindex="0"
+      [routerLink]="route.commands"
+      [fragment]="route.extras?.fragment"
+      [queryParams]="route.extras?.queryParams"
+      [queryParamsHandling]="route.extras?.queryParamsHandling"
+    ><ng-container *ngTemplateOutlet="content"></ng-container></a>
+  </ng-container>
+
+  <ng-container *ngIf="!route && hasActionClick">
+    <div
+      class="gd-card-button gd-animation-tap"
+      role="button"
+      tabindex="0"
+      (click)="onClick()"
+    >
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!route && !hasActionClick">
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+  </ng-container>
+</div>
+
+<ng-template #content>
+  <div class="gd-card-wrapper">
+    <ng-content></ng-content>
+  </div>
+</ng-template>

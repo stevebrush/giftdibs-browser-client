@@ -1,0 +1,14 @@
+@import '../../../styles/mixins';
+
+.gd-modal {
+  background-color: #fff;
+  border-radius: $gd-border-radius;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  max-height: 95vh;
+
+  &:focus {
+    outline: none;
+  }
+}

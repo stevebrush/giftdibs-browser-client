@@ -1,0 +1,18 @@
+@import '../../../styles/mixins';
+
+.gd-typeahead-results {
+  background-color: #fff;
+  box-shadow: $gd-box-shadow-lg;
+}
+
+.gd-typeahead-result {
+  padding: $gd-spacing-padding-squish;
+}
+
+.gd-typahead-result-active {
+  background-color: $gd-color-neutral-lightest;
+
+  button {
+    color: $gd-text-color-dark;
+  }
+}

@@ -9,15 +9,16 @@ import {
 
 import {
   NavbarModule
-} from './modules/navbar';
+} from '@app/shared/modules/navbar';
 
 import {
   SessionModule
-} from './modules/session';
+} from '@app/shared/modules/session';
 
 import {
+  AlertModule,
   VerifyEmailNoticeModule
-} from './modules/verify-email-notice';
+} from '@app/ui';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppStartupService } from './app-startup.service';
@@ -32,8 +33,9 @@ export function startupServiceFactory(startupService: AppStartupService): Functi
     AppComponent
   ],
   imports: [
-    BrowserModule,
+    AlertModule,
     AppRoutingModule,
+    BrowserModule,
     NavbarModule,
     SessionModule,
     VerifyEmailNoticeModule

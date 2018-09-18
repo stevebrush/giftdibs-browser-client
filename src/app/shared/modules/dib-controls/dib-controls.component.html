@@ -1,0 +1,66 @@
+<div *ngIf="!isSessionUser"
+  class="gd-dib-controls gd-button-group"
+>
+  <ng-container *ngIf="gift.dibs && gift.dibs.length else notDibbed">
+    <ng-template [ngIf]="sessionUserDib">
+      <div class="gd-button-group">
+        <button *ngIf="!sessionUserDib.dateDelivered"
+          class="gd-button gd-button-primary"
+          type="button"
+          [disabled]="isLoading"
+          (click)="markAsDelivered()"
+        >
+          <gd-icon icon="box"></gd-icon>
+          Mark as delivered
+        </button>
+      </div>
+      <gd-notice *ngIf="sessionUserDib.dateDelivered"
+        noticeType="info"
+      >
+        <gd-icon icon="box-open"></gd-icon>
+        You delivered this gift on {{ sessionUserDib.dateDelivered | date }}.
+      </gd-notice>
+      <div *ngIf="!sessionUserDib.dateDelivered"
+        class="gd-button-group"
+      >
+        <button
+          class="gd-button gd-button-default"
+          type="button"
+          [disabled]="isLoading"
+          (click)="openDibModal()"
+        >
+          Edit dib
+        </button>
+        <button
+          class="gd-button gd-button-default"
+          type="button"
+          [disabled]="isLoading"
+          (click)="removeDib()"
+        >
+          Remove dib
+        </button>
+      </div>
+    </ng-template>
+
+    <ng-template [ngIf]="!sessionUserDib">
+      <gd-notice noticeType="info">
+        This gift has been dibbed by {{ gift.dibs.length }} user(s).
+      </gd-notice>
+      <ng-container *ngIf="isVisible">
+        <ng-container *ngTemplateOutlet="notDibbed"></ng-container>
+      </ng-container>
+    </ng-template>
+  </ng-container>
+</div>
+
+<ng-template #notDibbed>
+  <button
+    class="gd-button gd-button-primary gd-button-block"
+    type="button"
+    [disabled]="isLoading"
+    (click)="openDibModal()"
+  >
+    <gd-icon icon="hand-paper"></gd-icon>
+    Dib this
+  </button>
+</ng-template>

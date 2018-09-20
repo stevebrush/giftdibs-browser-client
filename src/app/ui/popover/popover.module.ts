@@ -7,24 +7,24 @@ import {
 } from '@angular/common';
 
 import {
-  GdPopoverDirective
+  PopoverDirective
 } from './popover.directive';
 
-import { GdPopoverComponent } from './popover.component';
+import { PopoverComponent } from './popover.component';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   declarations: [
-    GdPopoverComponent,
-    GdPopoverDirective
+    PopoverComponent,
+    PopoverDirective
   ],
   exports: [
-    GdPopoverDirective
+    PopoverDirective
   ],
   entryComponents: [
-    GdPopoverComponent
+    PopoverComponent
   ]
 })
-export class GdPopoverModule { }
+export class PopoverModule { }

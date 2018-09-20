@@ -12,43 +12,49 @@
 </button>
 
 <ng-template #content>
-  <gd-repeater>
-    <gd-repeater-item *ngFor="let notification of notifications">
-      <time class="gd-text-deemphasized">
-        {{ notification.dateCreated }}
-      </time>
-      <div [ngSwitch]="notification.type">
-        <ng-template ngSwitchCase="gift_comment">
-          <a [routerLink]="['/']">{{ notification.gift.comment.user.firstName }} {{ notification.gift.comment.user.lastName }}</a>
-          commented on <a [routerLink]="['/']">{{ notification.gift.name }}</a>.
-          <p>"{{ notification.gift.comment.summary }}"</p>
-        </ng-template>
-        <ng-template ngSwitchCase="gift_comment_also">
-          <a [routerLink]="['/']">{{ notification.gift.comment.user.firstName }} {{ notification.gift.comment.user.lastName }}</a>
-          also commented on <a [routerLink]="['/']">{{ notification.gift.name }}</a>.
-          <p>"{{ notification.gift.comment.summary }}"</p>
-        </ng-template>
-        <ng-template ngSwitchCase="gift_delivered">
-          gift delivered
-        </ng-template>
-        <ng-template ngSwitchCase="gift_received">
-          gift received
-        </ng-template>
-        <ng-template ngSwitchCase="friendship_new">
-          friendship new
-        </ng-template>
-      </div>
+  <div class="gd-notifications">
+    <gd-repeater *ngIf="notifications?.length">
+      <gd-repeater-item *ngFor="let notification of notifications">
+        <div [ngSwitch]="notification.type">
+          <ng-template ngSwitchCase="gift_comment">
+            <a routerLink="/users/{{ notification.gift.comment.user.id }}">{{ notification.gift.comment.user.firstName }} {{ notification.gift.comment.user.lastName }}</a>
+            commented on <a routerLink="/gifts/{{ notification.gift.id }}">{{ notification.gift.name }}</a>.<br>
+            <span class="gd-text-deemphasized">"{{ notification.gift.comment.summary }}"</span>
+          </ng-template>
+          <ng-template ngSwitchCase="gift_comment_also">
+            <a routerLink="/users/{{ notification.gift.comment.user.id }}">{{ notification.gift.comment.user.firstName }} {{ notification.gift.comment.user.lastName }}</a>
+            also commented on <a routerLink="/gifts/{{ notification.gift.id }}">{{ notification.gift.name }}</a>.<br>
+            <span class="gd-text-deemphasized">"{{ notification.gift.comment.summary }}"</span>
+          </ng-template>
+          <ng-template ngSwitchCase="gift_delivered">
+            gift delivered<br>
+            {{ notification | json }}
+          </ng-template>
+          <ng-template ngSwitchCase="gift_received">
+            gift received<br>
+            {{ notification | json }}
+          </ng-template>
+          <ng-template ngSwitchCase="friendship_new">
+            <a routerLink="/users/{{ notification.follower.id }}">{{ notification.follower.firstName }} {{ notification.follower.lastName }}</a>
+            has started following you.
+          </ng-template>
+        </div>
 
-      <gd-repeater-controls>
-        <button
-          class="gd-button gd-button-link"
-          title="Delete notification"
-          type="button"
-          (click)="removeNotification(notification)"
-        >
-          <gd-icon icon="trash-alt"></gd-icon>
-        </button>
-      </gd-repeater-controls>
-    </gd-repeater-item>
-  </gd-repeater>
+        <time class="gd-text-deemphasized">
+          {{ notification.dateCreated | date}}
+        </time>
+
+        <gd-repeater-controls>
+          <button
+            class="gd-button gd-button-default"
+            title="Delete notification"
+            type="button"
+            (click)="removeNotification(notification)"
+          >
+            <gd-icon icon="trash-alt"></gd-icon>
+          </button>
+        </gd-repeater-controls>
+      </gd-repeater-item>
+    </gd-repeater>
+  </div>
 </ng-template>

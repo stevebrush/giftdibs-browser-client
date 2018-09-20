@@ -79,8 +79,6 @@ export class UrlImagesLoaderComponent {
     });
 
     instance.closed.subscribe((args: ModalClosedEventArgs) => {
-      console.log('closed', args);
-
       // Pass on the saved image.
       if (args.reason === 'save') {
         this.modal.close('save', {

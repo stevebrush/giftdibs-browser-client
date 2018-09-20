@@ -11,10 +11,6 @@ import {
 } from '@angular/core';
 
 import {
-  AnimationEvent
-} from '@angular/animations';
-
-import {
   fromEvent,
   Observable,
   Subject
@@ -29,10 +25,6 @@ import {
 } from '../affix';
 
 import {
-  gdAnimationEmerge
-} from '../animation';
-
-import {
   GD_FOCUSABLE_SELECTORS
 } from '../shared';
 
@@ -41,7 +33,7 @@ import {
 } from '../window';
 
 import {
-  GdPopoverConfig
+  PopoverConfig
 } from './types';
 
 @Component({
@@ -49,21 +41,16 @@ import {
   templateUrl: './popover.component.html',
   styleUrls: ['./popover.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    gdAnimationEmerge
-  ],
   providers: [
     AffixService
   ]
 })
-export class GdPopoverComponent implements OnDestroy {
+export class PopoverComponent implements OnDestroy {
   public get closed(): Observable<void> {
     return this._closed;
   }
 
-  public get animationState(): string {
-    return (this.isOpen) ? 'open' : 'closed';
-  }
+  public isVisible = false;
 
   @ViewChild('popover')
   private popover: ElementRef;
@@ -71,9 +58,8 @@ export class GdPopoverComponent implements OnDestroy {
   @ViewChild('target', { read: ViewContainerRef })
   private targetRef: ViewContainerRef;
 
-  private config: GdPopoverConfig;
+  private config: PopoverConfig;
   private focusableElements: any[];
-  private isOpen = false;
   private ngUnsubscribe = new Subject();
 
   private _closed = new EventEmitter<void>();
@@ -91,25 +77,69 @@ export class GdPopoverComponent implements OnDestroy {
     this._closed.complete();
   }
 
-  public onAnimationDone(event: AnimationEvent): void {
-    if (event.toState === 'closed') {
-      this._closed.emit();
-      this._closed.complete();
-    }
+  public attach(templateRef: TemplateRef<any>, config?: PopoverConfig): void {
+    this.targetRef.createEmbeddedView(templateRef);
+    this.config = config;
+    this.addEventListeners();
+    this.positionPopover();
+    this.changeDetector.markForCheck();
   }
 
-  public attach(templateRef: TemplateRef<any>, config?: GdPopoverConfig): void {
+  public close(): void {
+    this._closed.next();
+    this._closed.complete();
+    this.changeDetector.markForCheck();
+  }
+
+  public focusHostElement(): void {
+    this.popover.nativeElement.focus();
+  }
+
+  private positionPopover(): void {
+    this.windowRef.nativeWindow.setTimeout(() => {
+      this.affixService.affixTo(
+        this.elementRef,
+        this.config.trigger,
+        this.config.affix
+      );
+
+      this.isVisible = true;
+      this.changeDetector.markForCheck();
+    });
+  }
+
+  private assignFocusableElements(): void {
+    const elements: HTMLElement[] = [].slice.call(
+      this.elementRef.nativeElement.querySelectorAll(GD_FOCUSABLE_SELECTORS)
+    );
+
+    const focusableElements = elements
+      .filter(element => this.isFocusable(element))
+      .filter(element => element.tabIndex !== -1);
+
+    this.focusableElements = focusableElements;
+  }
+
+  private isFocusable(element: HTMLElement): boolean {
+    // Determines if the element is visible and interactable.
+    return !!(
+      element.offsetWidth ||
+      element.offsetHeight ||
+      element.getClientRects().length
+    );
+  }
+
+  private focusTriggerButton(): void {
+    this.config.trigger.nativeElement.focus();
+  }
+
+  private addEventListeners(): void {
     const nativeWindow = this.windowRef.nativeWindow;
     const popoverElement = this.elementRef.nativeElement;
 
     let isLastButtonFocused = false;
 
-    this.targetRef.createEmbeddedView(templateRef);
-    this.config = config;
-    this.positionPopover();
-
     nativeWindow.setTimeout(() => {
-
       // Close the menu after any click event.
       // (Timeout needed so the click is not registered on the caller button.)
       fromEvent(nativeWindow, 'click')
@@ -188,49 +218,5 @@ export class GdPopoverComponent implements OnDestroy {
           this.focusableElements[this.focusableElements.length - 1]
         );
       });
-
-    this.isOpen = true;
-    this.changeDetector.markForCheck();
-  }
-
-  public close(): void {
-    this.isOpen = false;
-    this.changeDetector.markForCheck();
-  }
-
-  public focusHostElement(): void {
-    this.popover.nativeElement.focus();
-  }
-
-  private positionPopover(): void {
-    this.affixService.affixTo(
-      this.elementRef,
-      this.config.trigger,
-      this.config.affix
-    );
-  }
-
-  private assignFocusableElements(): void {
-    const elements: HTMLElement[] = [].slice.call(
-      this.elementRef.nativeElement.querySelectorAll(GD_FOCUSABLE_SELECTORS)
-    );
-
-    const focusableElements = elements
-      .filter(element => this.isVisible(element))
-      .filter(element => element.tabIndex !== -1);
-
-    this.focusableElements = focusableElements;
-  }
-
-  private isVisible(element: HTMLElement): boolean {
-    return !!(
-      element.offsetWidth ||
-      element.offsetHeight ||
-      element.getClientRects().length
-    );
-  }
-
-  private focusTriggerButton(): void {
-    this.config.trigger.nativeElement.focus();
   }
 }

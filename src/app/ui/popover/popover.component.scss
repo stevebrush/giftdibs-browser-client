@@ -1,7 +1,7 @@
 @import '../../../styles/mixins';
 
 :host {
-  width: 275px;
+  width: 375px;
   max-width: 100%;
   display: block;
 }
@@ -10,4 +10,8 @@
   box-shadow: $gd-box-shadow;
   background-color: #fff;
   padding: $gd-spacing-padding-squish;
+}
+
+.gd-popover-hidden {
+  visibility: hidden;
 }

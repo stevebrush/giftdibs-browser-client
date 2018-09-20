@@ -17,13 +17,13 @@ import {
 } from '../overlay';
 
 import {
-  GdPopoverComponent
+  PopoverComponent
 } from './popover.component';
 
 @Directive({
   selector: '[gdPopover]'
 })
-export class GdPopoverDirective {
+export class PopoverDirective {
   @Input()
   public gdPopover: TemplateRef<any>;
 
@@ -33,7 +33,7 @@ export class GdPopoverDirective {
   @Input()
   public gdPopoverVerticalAlignment: AffixVerticalAlignment;
 
-  private overlayInstance: OverlayInstance<GdPopoverComponent>;
+  private overlayInstance: OverlayInstance<PopoverComponent>;
 
   constructor(
     private elementRef: ElementRef,
@@ -42,10 +42,17 @@ export class GdPopoverDirective {
 
   @HostListener('keydown', ['$event'])
   public onKeyDown(event: any): void {
-    const key = event.key.toLowerCase();
-    if (this.overlayInstance && key === 'tab') {
-      this.overlayInstance.componentInstance.focusHostElement();
-      event.preventDefault();
+    if (this.overlayInstance) {
+      const key = event.key.toLowerCase();
+
+      if (key === 'tab') {
+        this.overlayInstance.componentInstance.focusHostElement();
+        event.preventDefault();
+      }
+
+      if (key === 'escape') {
+        this.overlayInstance.componentInstance.close();
+      }
     }
   }
 
@@ -57,7 +64,7 @@ export class GdPopoverDirective {
     }
 
     this.overlayInstance = this.overlayService.attach(
-      GdPopoverComponent
+      PopoverComponent
     );
 
     this.overlayInstance.componentInstance.attach(this.gdPopover, {

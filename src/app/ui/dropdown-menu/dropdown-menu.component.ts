@@ -20,7 +20,10 @@ import {
 } from 'rxjs/operators';
 
 import {
-  AffixService
+  AffixConfig,
+  AffixHorizontalAlignment,
+  AffixService,
+  AffixVerticalAlignment
 } from '../affix';
 
 import {
@@ -93,13 +96,62 @@ export class DropdownMenuComponent implements OnInit, AfterContentInit, OnDestro
   ) { }
 
   public ngOnInit(): void {
+    this.items = this.context.config.items;
+    this.itemTemplate = this.context.config.itemTemplate;
+    this.addEventListeners();
+    this.changeDetector.markForCheck();
+  }
+
+  public ngAfterContentInit(): void {
+    this.positionMenu();
+    this.windowRef.nativeWindow.setTimeout(() => {
+      this.buttons = [].slice.call(this.elementRef.nativeElement.querySelectorAll('.gd-button'));
+      this.menuElementRef.nativeElement.focus();
+    });
+  }
+
+  public ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
+  public handleItemAction(item: DropdownMenuItem): void {
+    item.action();
+    this.close();
+  }
+
+  public close(): void {
+    this.overlayInstance.destroy();
+    this.context.config.caller.nativeElement.focus();
+  }
+
+  private focusActiveButton(): void {
+    this.buttons[this.activeIndex].focus();
+  }
+
+  private positionMenu(): void {
+    const defaultAffixConfig: AffixConfig = {
+      horizontalAlignment: AffixHorizontalAlignment.Left,
+      verticalAlignment: AffixVerticalAlignment.Bottom
+    };
+
+    this.windowRef.nativeWindow.setTimeout(() => {
+      this.affixService.affixTo(
+        this.menuElementRef,
+        this.context.config.caller,
+        Object.assign({}, defaultAffixConfig, this.context.config.affix)
+      );
+
+      this.isVisible = true;
+      this.changeDetector.markForCheck();
+    });
+  }
+
+  private addEventListeners(): void {
     const hostElement = this.elementRef.nativeElement;
     const nativeWindow = this.windowRef.nativeWindow;
 
     let isLastButtonFocused = false;
-
-    this.items = this.context.config.items;
-    this.itemTemplate = this.context.config.itemTemplate;
 
     // Close the menu after any click event.
     // (Timeout needed so the click is not registered on the caller button.)
@@ -177,50 +229,5 @@ export class DropdownMenuComponent implements OnInit, AfterContentInit, OnDestro
       .subscribe(() => {
         this.positionMenu();
       });
-
-    this.changeDetector.markForCheck();
-  }
-
-  public ngAfterContentInit(): void {
-    this.positionMenu();
-    this.windowRef.nativeWindow.setTimeout(() => {
-      this.buttons = [].slice.call(this.elementRef.nativeElement.querySelectorAll('.gd-button'));
-      this.menuElementRef.nativeElement.focus();
-    });
-  }
-
-  public ngOnDestroy(): void {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
-  }
-
-  public handleItemAction(item: DropdownMenuItem): void {
-    item.action();
-    this.close();
-  }
-
-  public close(): void {
-    this.overlayInstance.destroy();
-    this.context.config.caller.nativeElement.focus();
-  }
-
-  private focusActiveButton(): void {
-    this.buttons[this.activeIndex].focus();
-  }
-
-  private positionMenu(): void {
-    this.windowRef.nativeWindow.setTimeout(() => {
-      this.affixService.affixTo(
-        this.menuElementRef,
-        this.context.config.caller,
-        {
-          horizontalAlignment: this.context.config.horizontalAlignment,
-          verticalAlignment: this.context.config.verticalAlignment
-        }
-      );
-
-      this.isVisible = true;
-      this.changeDetector.markForCheck();
-    });
   }
 }

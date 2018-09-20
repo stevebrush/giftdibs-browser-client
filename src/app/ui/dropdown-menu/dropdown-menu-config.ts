@@ -4,8 +4,7 @@ import {
 } from '@angular/core';
 
 import {
-  AffixHorizontalAlignment,
-  AffixVerticalAlignment
+  AffixConfig
 } from '../affix';
 
 import {
@@ -15,7 +14,6 @@ import {
 export interface DropdownMenuConfig {
   caller: ElementRef;
   items: DropdownMenuItem[];
-  horizontalAlignment?: AffixHorizontalAlignment;
-  verticalAlignment?: AffixVerticalAlignment;
+  affix?: AffixConfig;
   itemTemplate?: TemplateRef<any>;
 }

@@ -12,8 +12,8 @@ import {
 
 import {
   BadgeModule,
-  GdPopoverModule,
   IconModule,
+  PopoverModule,
   RepeaterModule
 } from '@app/ui';
 
@@ -29,7 +29,7 @@ import {
   imports: [
     BadgeModule,
     CommonModule,
-    GdPopoverModule,
+    PopoverModule,
     IconModule,
     RepeaterModule,
     RouterModule

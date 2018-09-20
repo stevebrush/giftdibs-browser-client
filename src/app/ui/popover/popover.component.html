@@ -1,8 +1,9 @@
 <div
   class="gd-popover"
   tabIndex="0"
-  [@gdAnimationEmerge]="animationState"
-  (@gdAnimationEmerge.done)="onAnimationDone($event)"
+  [ngClass]="{
+    'gd-popover-hidden': !isVisible
+  }"
   #popover
 >
   <ng-template #target>

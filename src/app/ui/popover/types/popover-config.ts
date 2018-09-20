@@ -4,9 +4,9 @@ import {
 
 import {
   AffixConfig
-} from '../../affix';
+} from '@app/ui/affix';
 
-export interface GdPopoverConfig {
+export interface PopoverConfig {
   trigger: ElementRef;
   affix?: AffixConfig;
 }

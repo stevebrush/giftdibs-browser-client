@@ -55,17 +55,18 @@ export class DropdownMenuTriggerDirective {
     }
 
     const config: DropdownMenuConfig = {
+      affix: {},
       caller: this.elementRef,
       items: this.menuItems,
       itemTemplate: this.menuItemTemplate
     };
 
     if (this.menuHorizontalAlignment) {
-      config.horizontalAlignment = this.menuHorizontalAlignment;
+      config.affix.horizontalAlignment = this.menuHorizontalAlignment;
     }
 
     if (this.menuVerticalAlignment) {
-      config.verticalAlignment = this.menuVerticalAlignment;
+      config.affix.verticalAlignment = this.menuVerticalAlignment;
     }
 
     this.menuInstance = this.dropdownMenuService.open(config);

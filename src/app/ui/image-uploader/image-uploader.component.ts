@@ -5,6 +5,7 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef,
+  Input,
   OnDestroy,
   Output,
   ViewChild
@@ -28,6 +29,9 @@ import {
   }]
 })
 export class GdImageUploaderComponent implements OnDestroy, ControlValueAccessor {
+  @Input()
+  public allowUrl = true;
+
   public get value(): string {
     return this._value;
   }

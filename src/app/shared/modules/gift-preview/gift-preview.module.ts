@@ -11,8 +11,8 @@ import {
 } from '@angular/router';
 
 import {
-  CardModule,
   IconModule,
+  MediaModule,
   RibbonModule,
   ThumbnailModule
 } from '@app/ui';
@@ -27,10 +27,10 @@ import {
 
 @NgModule({
   imports: [
-    CardModule,
     CommonModule,
     GiftPriorityModule,
     IconModule,
+    MediaModule,
     RibbonModule,
     RouterModule,
     ThumbnailModule

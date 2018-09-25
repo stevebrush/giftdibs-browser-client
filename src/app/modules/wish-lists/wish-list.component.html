@@ -36,7 +36,17 @@
   </div>
 
   <div class="gd-wish-list-body gd-container-fluid gd-spacing-padding-even-large">
-    <gd-row>
+
+    <gd-repeater>
+      <gd-repeater-item *ngFor="let gift of wishList.gifts">
+        <gd-gift-preview
+          [gift]="gift"
+        >
+        </gd-gift-preview>
+      </gd-repeater-item>
+    </gd-repeater>
+
+    <!-- <gd-row>
       <gd-column *ngIf="isSessionUser"
         [screenSmall]="2"
       >
@@ -67,14 +77,6 @@
           </gd-card-header>
         </gd-card>
       </gd-column>
-      <gd-column *ngFor="let gift of wishList.gifts"
-        screenSmall="2"
-      >
-        <gd-gift-preview
-          [gift]="gift"
-        >
-        </gd-gift-preview>
-      </gd-column>
-    </gd-row>
+    </gd-row> -->
   </div>
 </div>

@@ -14,11 +14,12 @@
         novalidate
       >
         <gd-form-field>
-          <label>
+          <label class="gd-control-label">
             Profile image
           </label>
           <gd-image-uploader
             formControlName="avatarUrl"
+            [allowUrl]="false"
             (selectFile)="onSelectFile($event)"
             (removeFile)="onRemoveFile()"
           >

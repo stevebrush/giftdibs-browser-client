@@ -13,6 +13,7 @@ import {
 import {
   BadgeModule,
   IconModule,
+  MediaModule,
   PopoverModule,
   RepeaterModule
 } from '@app/ui';
@@ -29,6 +30,7 @@ import {
   imports: [
     BadgeModule,
     CommonModule,
+    MediaModule,
     PopoverModule,
     IconModule,
     RepeaterModule,

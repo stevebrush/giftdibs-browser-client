@@ -10,6 +10,8 @@
   box-shadow: $gd-box-shadow;
   background-color: #fff;
   padding: $gd-spacing-padding-squish;
+  height: 100%;
+  overflow: auto;
 }
 
 .gd-popover-hidden {

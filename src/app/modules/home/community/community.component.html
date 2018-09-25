@@ -16,13 +16,18 @@
   Welcome back
 </h1>
 
-<gd-row>
-  <gd-column *ngFor="let gift of gifts"
+<!-- <gd-row>
+  <gd-column
     screenSmall="2"
   >
+
+  </gd-column>
+</gd-row> -->
+<gd-repeater>
+  <gd-repeater-item *ngFor="let gift of gifts">
     <gd-gift-preview
       [gift]="gift"
     >
     </gd-gift-preview>
-  </gd-column>
-</gd-row>
+  </gd-repeater-item>
+</gd-repeater>

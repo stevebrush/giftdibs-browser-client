@@ -24,9 +24,9 @@ import {
 
 import {
   CardModule,
-  GridModule,
   IconModule,
   MediaModule,
+  RepeaterModule,
   ThumbnailModule
 } from '@app/ui';
 
@@ -39,9 +39,9 @@ import { WishListsRoutingModule } from './wish-lists-routing.module';
     CommonModule,
     GiftEditModule,
     GiftPreviewModule,
-    GridModule,
     IconModule,
     MediaModule,
+    RepeaterModule,
     ThumbnailModule,
     WishListEditModule,
     WishListModule,

@@ -13,7 +13,7 @@ body {
   color: $gd-text-color-default;
   line-height: $gd-line-height;
   background-color: #fff;
-  font-weight: $gd-font-weight;
+  font-weight: $gd-font-weight-normal;
 }
 
 a {
@@ -53,26 +53,6 @@ strong {
   font-weight: $gd-font-weight-bold;
 }
 
-.gd-container-fluid {
-  padding: 0 $gd-spacing;
-}
-
-.gd-container {
-  padding: 0 $gd-spacing;
-  width: 100%;
-  max-width: 900px;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.gd-container-sm {
-  padding: 0 $gd-spacing;
-  width: 100%;
-  max-width: 700px;
-  margin-right: auto;
-  margin-left: auto;
-}
-
 .gd-screen-reader-only {
   position: absolute;
   width: 1px;
@@ -88,6 +68,7 @@ strong {
 
 .gd-text-deemphasized {
   color: $gd-text-color-deemphasized;
+  font-size: $gd-font-size-small;
 }
 
 .gd-text-strikethrough {
@@ -96,6 +77,12 @@ strong {
 
 .gd-text-small {
   font-size: $gd-font-size-small;
+}
+
+.gd-text-price {
+  color: $gd-color-neutral-dark;
+  font-weight: $gd-font-weight-normal;
+  font-size: $gd-font-size-large;
 }
 
 .gd-rounded-corners-circle {
@@ -121,61 +108,6 @@ strong {
   bottom: 0;
   top: 0;
   overflow: auto;
-}
-
-@keyframes gdTapAnimation {
-  0% {
-    opacity: 0;
-    transform: scale(.9);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.gd-animation-tap {
-  position: relative;
-
-  &:after {
-    background: rgba(0, 0, 0, 0.05);
-    border-radius: 8px;
-    content: " " !important;
-    height: 100%;
-    left: 0;
-    opacity: 0;
-    pointer-events: none;
-    position: absolute;
-    top: 0;
-    transform: scale(0.9);
-    width: 100%;
-  }
-
-  &:hover {
-    &:after {
-      animation: gdTapAnimation 0.25s cubic-bezier(0.31, 1, 0.34, 1) forwards;
-    }
-  }
-}
-
-.gd-table {
-  width: 100%;
-  margin: $gd-spacing 0;
-  background-color: $gd-color-neutral-faint;
-  border: 1px solid $gd-color-neutral-lighter;
-
-  td,
-  th {
-    text-align: left;
-    padding: $gd-spacing-padding-squish-compact;
-    border-bottom: 1px solid $gd-color-neutral-lighter;
-  }
-
-  th {
-    width: 1%;
-    white-space: nowrap;
-    font-weight: $gd-font-weight-bold;
-  }
 }
 
 .gd-spacing-padding-even-large {

@@ -57,5 +57,12 @@ export class AffixService {
     this.renderer.setStyle(subject.nativeElement, 'top', `${top}px`);
     this.renderer.setStyle(subject.nativeElement, 'left', `${left}px`);
     this.renderer.setStyle(subject.nativeElement, 'position', 'fixed');
+
+    // If subject's bottom is below viewport, set its height to accommodate.
+    // https://stackoverflow.com/questions/1248081/get-the-browser-viewport-dimensions-with-javascript
+    const viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    if (subjectRect.bottom > viewportHeight) {
+      this.renderer.setStyle(subject.nativeElement, 'height', `${viewportHeight - top}px`);
+    }
   }
 }

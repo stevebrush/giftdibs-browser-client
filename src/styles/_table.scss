@@ -1,0 +1,21 @@
+@import 'variables';
+
+.gd-table {
+  width: 100%;
+  margin: $gd-spacing 0;
+  background-color: $gd-color-neutral-faint;
+  border: 1px solid $gd-color-neutral-lighter;
+
+  td,
+  th {
+    text-align: left;
+    padding: $gd-spacing-padding-squish-compact;
+    border-bottom: 1px solid $gd-color-neutral-lighter;
+  }
+
+  th {
+    width: 1%;
+    white-space: nowrap;
+    font-weight: $gd-font-weight-bold;
+  }
+}

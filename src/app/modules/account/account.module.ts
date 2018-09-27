@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 
 import {
+  DatePickerModule,
   FormFieldModule,
   GdImageUploaderModule,
   GridModule,
@@ -44,6 +45,7 @@ import { VerifyAccountComponent } from './verify/verify.component';
     AccountRoutingModule,
     AssetsModule,
     CommonModule,
+    DatePickerModule,
     FacebookModule,
     FormFieldModule,
     GdImageUploaderModule,

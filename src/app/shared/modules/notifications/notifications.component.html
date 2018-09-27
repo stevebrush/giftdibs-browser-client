@@ -29,6 +29,9 @@
                 <time class="gd-text-deemphasized">
                   {{ notification.dateCreated | date }}
                 </time>
+                <div class="gd-notifications-secondary-controls gd-button-group">
+                  <ng-container *ngTemplateOutlet="controls"></ng-container>
+                </div>
               </gd-media-content>
             </gd-media>
           </ng-template>
@@ -45,6 +48,9 @@
                 <time class="gd-text-deemphasized">
                   {{ notification.dateCreated | date }}
                 </time>
+                <div class="gd-notifications-secondary-controls gd-button-group">
+                  <ng-container *ngTemplateOutlet="controls"></ng-container>
+                </div>
               </gd-media-content>
             </gd-media>
           </ng-template>
@@ -67,10 +73,14 @@
                 <time class="gd-text-deemphasized">
                   {{ notification.dateCreated | date }}
                 </time>
-                <div class="gd-notifications-secondary-controls">
+                <div *ngIf="!isGiftReceived(notification.gift.id)"
+                  class="gd-notifications-secondary-controls gd-button-group"
+                >
+                  <ng-container *ngTemplateOutlet="controls"></ng-container>
                   <button
                     class="gd-button gd-button-primary"
                     type="button"
+                    (click)="markGiftReceived(notification.gift.id)"
                   >
                     Mark gift as received
                   </button>
@@ -92,10 +102,14 @@
                 <time class="gd-text-deemphasized">
                   {{ notification.dateCreated | date }}
                 </time>
-                <div class="gd-notifications-secondary-controls">
+                <div *ngIf="!notification.dib?.dateDelivered"
+                  class="gd-notifications-secondary-controls gd-button-group"
+                >
+                  <ng-container *ngTemplateOutlet="controls"></ng-container>
                   <button
                     class="gd-button gd-button-primary"
                     type="button"
+                    (click)="markDibDelivered(notification.dib.id)"
                   >
                     Complete dib
                   </button>
@@ -115,31 +129,30 @@
                 <time class="gd-text-deemphasized">
                   {{ notification.dateCreated | date }}
                 </time>
-                <div class="gd-notifications-secondary-controls">
-                  <button
-                    class="gd-button gd-button-primary"
-                    type="button"
+                <div class="gd-notifications-secondary-controls gd-button-group">
+                  <ng-container *ngTemplateOutlet="controls"></ng-container>
+                  <gd-follow-button
+                    [friendId]="notification.follower.id"
                   >
-                    Follow {{ notification.follower.firstName }}
-                  </button>
+                  </gd-follow-button>
                 </div>
               </gd-media-content>
             </gd-media>
           </ng-template>
 
         </div>
-
-        <gd-repeater-controls>
-          <button
-            class="gd-button gd-button-default"
-            title="Delete notification"
-            type="button"
-            (click)="removeNotification(notification)"
-          >
-            <gd-icon icon="trash-alt"></gd-icon>
-          </button>
-        </gd-repeater-controls>
       </gd-repeater-item>
     </gd-repeater>
   </div>
+</ng-template>
+
+<ng-template #controls>
+  <button
+    class="gd-button gd-button-default"
+    title="Remove notification"
+    type="button"
+    (click)="removeNotification(notification)"
+  >
+    <gd-icon icon="check"></gd-icon>
+  </button>
 </ng-template>

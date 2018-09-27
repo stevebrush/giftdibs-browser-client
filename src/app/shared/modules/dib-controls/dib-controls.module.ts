@@ -7,8 +7,13 @@ import {
 } from '@angular/common';
 
 import {
+  RouterModule
+} from '@angular/router';
+
+import {
   ConfirmModule,
   IconModule,
+  MediaModule,
   NoticeModule
 } from '@app/ui';
 
@@ -31,7 +36,9 @@ import {
     ConfirmModule,
     DibEditModule,
     IconModule,
-    NoticeModule
+    MediaModule,
+    NoticeModule,
+    RouterModule
   ],
   declarations: [
     DibControlsComponent

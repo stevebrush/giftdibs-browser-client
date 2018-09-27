@@ -84,6 +84,18 @@
       </gd-password-viewer>
     </gd-form-field>
 
+    <gd-form-field [errors]="errors">
+      <label
+        class="gd-control-label"
+      >
+        Birthday
+        <gd-date-picker
+          formControlName="birthday"
+        >
+        </gd-date-picker>
+      </label>
+    </gd-form-field>
+
     <gd-form-field
       aria-hidden="true"
       class="gd-screen-reader-only"

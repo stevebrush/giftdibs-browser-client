@@ -52,7 +52,14 @@
               <gd-notice *ngIf="gift.dateReceived"
                 noticeType="info"
               >
-                <gd-icon icon="check"></gd-icon> You marked this gift as received on {{ gift.dateReceived | date }}.
+                <gd-media>
+                  <gd-media-thumbnail>
+                    <gd-icon icon="check"></gd-icon>
+                  </gd-media-thumbnail>
+                  <gd-media-content>
+                    You marked this gift as <strong>received</strong> on {{ gift.dateReceived | date }}.
+                  </gd-media-content>
+                </gd-media>
               </gd-notice>
             </ng-container>
 
@@ -129,6 +136,32 @@
                     {{ getURLName(externalUrl.url) }}
                     <ng-container *ngIf="externalUrl.price">${{ externalUrl.price }}</ng-container>
                   </a>
+                </gd-repeater-item>
+              </gd-repeater>
+            </div>
+
+            <div *ngIf="gift.dateReceived && gift.dibs && gift.dibs.length">
+              <h2 class="gd-subheading">
+                Delivered by:
+              </h2>
+              <gd-repeater>
+                <gd-repeater-item *ngFor="let dib of gift.dibs">
+                  <gd-media>
+                    <gd-media-thumbnail>
+                      <gd-thumbnail
+                        size="xs"
+                        type="user"
+                        [imageSource]="dib.user.avatarUrl"
+                      >
+                      </gd-thumbnail>
+                    </gd-media-thumbnail>
+                    <gd-media-content>
+                      <strong *ngIf="dib.isAnonymous else notAnonymous">Anonymous</strong>
+                      <ng-template #notAnonymous>
+                        <a routerLink="">{{ dib.user.firstName }} {{ dib.user.lastName }}</a>
+                      </ng-template>
+                    </gd-media-content>
+                  </gd-media>
                 </gd-repeater-item>
               </gd-repeater>
             </div>

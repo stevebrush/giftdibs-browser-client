@@ -54,6 +54,7 @@ export class RegisterComponent {
 
     this.registerForm.disable();
     this.errors = [];
+    this.changeDetector.markForCheck();
 
     this.accountService.register(this.registerForm.value)
       .subscribe(
@@ -90,6 +91,9 @@ export class RegisterComponent {
         Validators.required
       ]),
       password: new FormControl(null, [
+        Validators.required
+      ]),
+      birthday: new FormControl(null, [
         Validators.required
       ])
     });

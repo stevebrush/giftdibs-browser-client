@@ -38,7 +38,7 @@ import {
 })
 export class FollowButtonComponent implements OnInit {
   @Input()
-  public friend: User;
+  public friendId: string;
 
   public isLoading = true;
   public isSessionUser = false;
@@ -55,7 +55,7 @@ export class FollowButtonComponent implements OnInit {
 
   public ngOnInit(): void {
     const sessionUserId = this.sessionService.user.id;
-    const ownerId = this.friend.id;
+    const ownerId = this.friendId;
 
     this.isSessionUser = this.sessionService.isSessionUser(ownerId);
 
@@ -73,7 +73,7 @@ export class FollowButtonComponent implements OnInit {
     this.isLoading = true;
     this.changeDetector.markForCheck();
 
-    this.friendshipService.create(this.friend.id)
+    this.friendshipService.create(this.friendId)
       .pipe(
         finalize(() => {
           this.isLoading = false;

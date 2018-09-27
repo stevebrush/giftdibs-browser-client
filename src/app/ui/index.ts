@@ -6,6 +6,7 @@ export * from './card';
 export * from './checkbox';
 export * from './checklist';
 export * from './confirm';
+export * from './date-picker';
 export * from './dropdown-menu';
 export * from './focus-trap';
 export * from './form-field';

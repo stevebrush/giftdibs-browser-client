@@ -43,6 +43,18 @@
     </ng-template>
 
     <ng-template [ngIf]="!sessionUserDib">
+      <gd-notice *ngIf="gift.dateReceived"
+        noticeType="info"
+      >
+        <gd-media>
+          <gd-media-thumbnail>
+            <gd-icon icon="check"></gd-icon>
+          </gd-media-thumbnail>
+          <gd-media-content>
+            <a routerLink="/users/{{ gift.user.id }}">{{ gift.user.firstName }} {{ gift.user.lastName }}</a> marked this gift as <strong>received</strong> on {{ gift.dateReceived | date }}.
+          </gd-media-content>
+        </gd-media>
+      </gd-notice>
       <gd-notice noticeType="info">
         This gift has been dibbed by {{ gift.dibs.length }} user(s).
       </gd-notice>

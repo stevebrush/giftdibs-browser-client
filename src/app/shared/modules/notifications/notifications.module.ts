@@ -11,6 +11,10 @@ import {
 } from '@angular/router';
 
 import {
+  FriendshipModule
+} from '@app/shared/modules/friendship';
+
+import {
   BadgeModule,
   IconModule,
   MediaModule,
@@ -30,6 +34,7 @@ import {
   imports: [
     BadgeModule,
     CommonModule,
+    FriendshipModule,
     MediaModule,
     PopoverModule,
     IconModule,

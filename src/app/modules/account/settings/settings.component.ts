@@ -129,8 +129,12 @@ export class SettingsComponent implements OnInit {
       ]),
       emailAddress: new FormControl(null, [
         Validators.required
+      ]),
+      birthday: new FormControl(null, [
+        Validators.required
       ])
     });
+
     this.settingsForm.disable();
   }
 
@@ -146,6 +150,7 @@ export class SettingsComponent implements OnInit {
       )
       .subscribe(
         (user: User) => {
+          console.log('user!', user);
           this.settingsForm.reset(user);
         },
         (err: any) => {

@@ -1,6 +1,7 @@
 export interface SessionUser {
-  id: string;
-  emailAddressVerified: boolean;
-  firstName: string;
-  lastName: string;
+  emailAddressVerified?: boolean;
+  facebookId?: string;
+  firstName?: string;
+  id?: string;
+  lastName?: string;
 }

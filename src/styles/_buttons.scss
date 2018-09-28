@@ -94,3 +94,10 @@
   box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.25);
   cursor: default;
 }
+
+.gd-button-facebook {
+  @include gd-button-variant(
+    $gd-color-brand-facebook,
+    #fff
+  );
+}

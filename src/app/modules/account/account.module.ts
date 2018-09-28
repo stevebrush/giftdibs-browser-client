@@ -16,6 +16,7 @@ import {
   GdImageUploaderModule,
   GridModule,
   HideUntilModule,
+  IconModule,
   NoticeModule,
   PasswordViewerModule
 } from '@app/ui';
@@ -51,6 +52,7 @@ import { VerifyAccountComponent } from './verify/verify.component';
     GdImageUploaderModule,
     GridModule,
     HideUntilModule,
+    IconModule,
     NoticeModule,
     PasswordViewerModule,
     ReactiveFormsModule,

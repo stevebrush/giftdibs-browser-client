@@ -54,20 +54,22 @@ export class VerifyEmailNoticeComponent implements OnInit, OnDestroy {
       this.router.events.pipe(
         filter(event => event instanceof NavigationStart)
       )
-    ).pipe(
-      takeUntil(this.ngUnsubscribe)
-    ).subscribe((value: [SessionUser, RouterEvent]) => {
-      const sessionUser: SessionUser = value[0];
-      const event: RouterEvent = value[1];
+    )
+      .pipe(
+        takeUntil(this.ngUnsubscribe)
+      )
+      .subscribe((value: [SessionUser, RouterEvent]) => {
+        const sessionUser: SessionUser = value[0];
+        const event: RouterEvent = value[1];
 
-      if (this.visibleForRoutes.includes(event.url)) {
-        this.isActive = (this.sessionService.isLoggedIn && (sessionUser && !sessionUser.emailAddressVerified));
-      } else {
-        this.isActive = false;
-      }
+        if (this.visibleForRoutes.includes(event.url)) {
+          this.isActive = (this.sessionService.isLoggedIn && (sessionUser && !sessionUser.emailAddressVerified));
+        } else {
+          this.isActive = false;
+        }
 
-      this.changeDetector.markForCheck();
-    });
+        this.changeDetector.markForCheck();
+      });
   }
 
   public ngOnDestroy(): void {

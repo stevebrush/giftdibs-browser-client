@@ -2,7 +2,8 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  OnInit
+  OnInit,
+  OnDestroy
 } from '@angular/core';
 
 import {
@@ -13,7 +14,7 @@ import {
 } from '@angular/forms';
 
 import {
-  finalize
+  finalize, takeUntil
 } from 'rxjs/operators';
 
 import {
@@ -25,7 +26,8 @@ import {
 } from '@app/shared/modules/user';
 
 import {
-  SessionService
+  SessionService,
+  SessionUser
 } from '@app/shared/modules/session';
 
 import {
@@ -35,6 +37,7 @@ import {
 import {
   UserService
 } from '@app/shared/modules/user';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'gd-settings',
@@ -42,11 +45,14 @@ import {
   styleUrls: ['./settings.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent implements OnInit, OnDestroy {
   public isReady = false;
   public isLoading = true;
+  public sessionUser: SessionUser;
   public settingsForm: FormGroup;
   public errors: any[] = [];
+
+  private ngUnsubscribe = new Subject();
 
   constructor(
     private alertService: AlertService,
@@ -60,6 +66,20 @@ export class SettingsComponent implements OnInit {
   public ngOnInit(): void {
     this.createForm();
     this.updateForm();
+
+    this.sessionService.userStream
+      .pipe(
+        takeUntil(this.ngUnsubscribe)
+      )
+      .subscribe((user) => {
+        this.sessionUser = user;
+        this.changeDetector.markForCheck();
+      });
+  }
+
+  public ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   public onSelectFile(args: any): void {
@@ -89,19 +109,14 @@ export class SettingsComponent implements OnInit {
       return;
     }
 
-    this.settingsForm.disable();
-    this.isLoading = true;
-    this.errors = [];
-    this.changeDetector.markForCheck();
+    this.disableForm();
 
     const formData = this.settingsForm.value;
 
     this.userService.update(this.sessionService.user.id, formData)
       .pipe(
         finalize(() => {
-          this.isLoading = false;
-          this.settingsForm.enable();
-          this.changeDetector.markForCheck();
+          this.enableForm();
         })
       )
       .subscribe(
@@ -116,6 +131,60 @@ export class SettingsComponent implements OnInit {
           this.alertService.error(error.message);
         }
       );
+  }
+
+  public unlinkFacebookAccount(): void {
+    if (this.settingsForm.disabled) {
+      return;
+    }
+
+    this.disableForm();
+
+    // Remove facebook id from user
+    // Logout out of facebook?
+    this.userService.update(this.sessionService.user.id, {
+      facebookId: null
+    })
+      .pipe(
+        finalize(() => {
+          this.enableForm();
+        })
+      )
+      .subscribe(
+        () => {
+          this.sessionService.patchUser({
+            facebookId: null
+          });
+          this.alertService.success(
+            'You have successfully unlinked your Facebook account.'
+          );
+        },
+        (err: any) => {
+          const error = err.error;
+          this.errors = error.errors;
+          this.alertService.error(error.message);
+        }
+      );
+  }
+
+  public onFacebookLoginSuccess(result: any): void {
+    this.sessionService.patchUser({
+      facebookId: result.data.authResponse.user.facebookId
+    });
+    this.enableForm();
+  }
+
+  public disableForm(): void {
+    this.settingsForm.disable();
+    this.isLoading = true;
+    this.errors = [];
+    this.changeDetector.markForCheck();
+  }
+
+  public enableForm(): void {
+    this.isLoading = false;
+    this.settingsForm.enable();
+    this.changeDetector.markForCheck();
   }
 
   private createForm(): void {
@@ -135,22 +204,19 @@ export class SettingsComponent implements OnInit {
       ])
     });
 
-    this.settingsForm.disable();
+    this.disableForm();
   }
 
   private updateForm(): void {
     this.userService.getById(this.sessionService.user.id)
       .pipe(
         finalize(() => {
-          this.isLoading = false;
           this.isReady = true;
-          this.settingsForm.enable();
-          this.changeDetector.markForCheck();
+          this.enableForm();
         })
       )
       .subscribe(
         (user: User) => {
-          console.log('user!', user);
           this.settingsForm.reset(user);
         },
         (err: any) => {

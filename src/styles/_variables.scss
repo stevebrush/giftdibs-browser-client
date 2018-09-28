@@ -108,3 +108,6 @@ $gd-border-color-neutral-lightest: darken($gd-color-neutral-lightest, 5%) !defau
 $gd-text-color-default: $gd-color-neutral-dark !default;
 $gd-text-color-deemphasized: desaturate($gd-color-neutral-light, 5%) !default;
 $gd-text-color-dark: $gd-color-neutral-darkest !default;
+
+// BRANDS
+$gd-color-brand-facebook: #3b5998 !default;

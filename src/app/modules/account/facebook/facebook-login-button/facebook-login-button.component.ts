@@ -25,6 +25,7 @@ import {
   FacebookLoginButtonResult
 } from './facebook-login-button-result';
 
+// TODO: Convert this into a directive instead.
 @Component({
   selector: 'gd-facebook-login-button',
   templateUrl: './facebook-login-button.component.html',
@@ -34,6 +35,9 @@ import {
 export class FacebookLoginButtonComponent implements OnDestroy {
   @Input()
   public disabled = false;
+
+  @Input()
+  public buttonText = 'Continue with Facebook';
 
   @Output()
   public success = new EventEmitter<FacebookLoginButtonResult>();

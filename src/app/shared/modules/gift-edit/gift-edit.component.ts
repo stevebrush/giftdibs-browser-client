@@ -118,6 +118,11 @@ export class GiftEditComponent implements OnInit {
   }
 
   public onRemoveFile(): void {
+    if (!this.gift) {
+      this.giftForm.get('imageUrl').reset();
+      return;
+    }
+
     this.giftForm.disable();
     this.changeDetector.markForCheck();
 
@@ -153,6 +158,10 @@ export class GiftEditComponent implements OnInit {
 
     const formData: Gift = this.giftForm.value;
 
+    // Remove the image from the form data since it will be handled
+    // with a different request.
+    delete formData.imageUrl;
+
     let obs: any;
     if (this.gift) {
       obs = this.giftService.update(this.gift.id, formData);
@@ -162,6 +171,8 @@ export class GiftEditComponent implements OnInit {
 
     obs.subscribe(
       (result: any) => {
+        console.log('update/create success!');
+
         const giftId = (this.gift) ? this.gift.id : result.data.giftId;
 
         if (this.newImageFile) {
@@ -175,6 +186,7 @@ export class GiftEditComponent implements OnInit {
                 this.resetForm(this.gift);
                 this.giftForm.enable();
                 this.changeDetector.markForCheck();
+
                 this.alertService.error(err.error.message);
               });
             }

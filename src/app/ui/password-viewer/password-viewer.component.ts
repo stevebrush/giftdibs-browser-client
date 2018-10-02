@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Input
 } from '@angular/core';
@@ -18,6 +19,10 @@ export class PasswordViewerComponent {
   public disabled = false;
   public isVisible = false;
 
+  constructor(
+    private changeDetector: ChangeDetectorRef
+  ) { }
+
   public togglePasswordInputType(): void {
     if (this.inputElement.type === 'text') {
       this.inputElement.type = 'password';
@@ -26,5 +31,9 @@ export class PasswordViewerComponent {
       this.inputElement.type = 'text';
       this.isVisible = true;
     }
+
+    console.log('isVisialbe>?', this.isVisible);
+
+    this.changeDetector.markForCheck();
   }
 }

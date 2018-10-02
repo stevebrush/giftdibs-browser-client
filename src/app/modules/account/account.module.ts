@@ -11,7 +11,6 @@ import {
 } from '@angular/forms';
 
 import {
-  DatePickerModule,
   FormFieldModule,
   GdImageUploaderModule,
   GridModule,
@@ -25,7 +24,9 @@ import {
   AssetsModule
 } from '@app/shared/modules/assets';
 
-import { UserModule } from '@app/shared/modules/user';
+import {
+  UserModule
+} from '@app/shared/modules/user';
 
 import {
   FacebookModule
@@ -46,7 +47,6 @@ import { VerifyAccountComponent } from './verify/verify.component';
     AccountRoutingModule,
     AssetsModule,
     CommonModule,
-    DatePickerModule,
     FacebookModule,
     FormFieldModule,
     GdImageUploaderModule,

@@ -26,6 +26,7 @@ import {
 @Component({
   selector: 'gd-register',
   templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegisterComponent {
@@ -45,6 +46,10 @@ export class RegisterComponent {
   public onFacebookLoginSuccess(): void {
     // TODO: Redirect to profile instead?
     this.router.navigate(['/']);
+  }
+
+  public onFacebookLoginFailure(): void {
+    this.registerForm.enable();
   }
 
   public submit(): void {
@@ -92,10 +97,10 @@ export class RegisterComponent {
       ]),
       password: new FormControl(null, [
         Validators.required
-      ]),
-      birthday: new FormControl(null, [
-        Validators.required
       ])
+      // birthday: new FormControl(null, [
+      //   Validators.required
+      // ])
     });
   }
 }

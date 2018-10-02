@@ -84,6 +84,10 @@ export class LoginComponent implements OnInit {
     this.redirect();
   }
 
+  public onFacebookLoginFailure(): void {
+    this.loginForm.enable();
+  }
+
   private createForm(): void {
     this.loginForm = this.formBuilder.group({
       emailAddress: new FormControl(null, [

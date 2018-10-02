@@ -1,4 +1,4 @@
-<div class="gd-container gd-spacing-padding-even-large">
+<div class="gd-container-sm gd-spacing-padding-even-large">
   <h1>
     Create a free account
   </h1>
@@ -14,7 +14,7 @@
     aria-label="New user registration information"
     novalidate
   >
-    <gd-row>
+    <gd-row class="gd-register-user-name">
       <gd-column screenSmall="6">
         <gd-form-field [errors]="errors">
           <label
@@ -84,7 +84,7 @@
       </gd-password-viewer>
     </gd-form-field>
 
-    <gd-form-field [errors]="errors">
+    <!-- <gd-form-field [errors]="errors">
       <label
         class="gd-control-label"
       >
@@ -94,7 +94,7 @@
         >
         </gd-date-picker>
       </label>
-    </gd-form-field>
+    </gd-form-field> -->
 
     <gd-form-field
       aria-hidden="true"
@@ -127,6 +127,8 @@
   <p>
     <gd-facebook-login-button
       [disabled]="registerForm.disabled"
+      (click)="registerForm.disable()"
+      (failure)="onFacebookLoginFailure()"
       (success)="onFacebookLoginSuccess()"
     >
     </gd-facebook-login-button>

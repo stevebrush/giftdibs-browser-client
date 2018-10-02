@@ -1,6 +1,6 @@
 export interface User {
   avatarUrl?: string;
-  birthday?: string;
+  // birthday?: string;
   facebookId?: string;
   id?: string;
   emailAddress?: string;

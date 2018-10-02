@@ -198,10 +198,10 @@ export class SettingsComponent implements OnInit, OnDestroy {
       ]),
       emailAddress: new FormControl(null, [
         Validators.required
-      ]),
-      birthday: new FormControl(null, [
-        Validators.required
       ])
+      // birthday: new FormControl(null, [
+      //   Validators.required
+      // ])
     });
 
     this.disableForm();

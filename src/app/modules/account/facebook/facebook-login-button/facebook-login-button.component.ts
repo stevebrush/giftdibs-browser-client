@@ -42,6 +42,9 @@ export class FacebookLoginButtonComponent implements OnDestroy {
   @Output()
   public success = new EventEmitter<FacebookLoginButtonResult>();
 
+  @Output()
+  public failure = new EventEmitter<void>();
+
   public isLoading = false;
 
   constructor(
@@ -53,6 +56,7 @@ export class FacebookLoginButtonComponent implements OnDestroy {
 
   public ngOnDestroy(): void {
     this.success.complete();
+    this.failure.complete();
   }
 
   public login(): void {
@@ -68,6 +72,7 @@ export class FacebookLoginButtonComponent implements OnDestroy {
       if (response.status === 'not_authorized') {
         this.isLoading = false;
         this.changeDetector.markForCheck();
+        this.failure.next();
         this.alertService.error(
           'Please provide the necessary permissions to continue with Facebook.'
         );
@@ -78,6 +83,7 @@ export class FacebookLoginButtonComponent implements OnDestroy {
         .pipe(
           finalize(() => {
             this.isLoading = false;
+            this.disabled = false;
             this.changeDetector.markForCheck();
           })
         )
@@ -86,6 +92,10 @@ export class FacebookLoginButtonComponent implements OnDestroy {
             this.success.emit({ data });
           },
           (err: any) => {
+            this.failure.next();
+            // TODO: Facebook failures should be passed through
+            // the failure emitter, so that the consumer can handle
+            // the error messaging.
             this.alertService.error(err.error.message);
           }
         );

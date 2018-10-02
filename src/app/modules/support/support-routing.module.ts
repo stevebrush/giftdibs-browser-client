@@ -17,28 +17,29 @@ import { TermsComponent } from './terms/terms.component';
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
-    component: SupportComponent
-  },
-  {
-    path: 'about',
-    component: AboutComponent
-  },
-  {
-    path: 'faq',
-    component: FaqComponent
-  },
-  {
-    path: 'feedback',
-    component: FeedbackComponent
-  },
-  {
-    path: 'privacy',
-    component: PrivacyComponent
-  },
-  {
-    path: 'terms',
-    component: TermsComponent
+    component: SupportComponent,
+    children: [
+      {
+        path: 'about',
+        component: AboutComponent
+      },
+      {
+        path: 'faq',
+        component: FaqComponent
+      },
+      {
+        path: 'feedback',
+        component: FeedbackComponent
+      },
+      {
+        path: 'privacy',
+        component: PrivacyComponent
+      },
+      {
+        path: 'terms',
+        component: TermsComponent
+      }
+    ]
   }
 ];
 

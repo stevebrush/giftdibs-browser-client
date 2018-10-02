@@ -35,7 +35,15 @@
     </gd-media>
   </div>
 
-  <div class="gd-wish-list-body gd-container-fluid gd-spacing-padding-even-large">
+  <div class="gd-wish-list-body gd-container gd-spacing-padding-even-large">
+
+    <button *ngIf="isSessionUser"
+      class="gd-button gd-button-primary"
+      type="button"
+      (click)="openGiftCreateModal()"
+    >
+      Add item
+    </button>
 
     <gd-repeater>
       <gd-repeater-item *ngFor="let gift of wishList.gifts">

@@ -6,11 +6,18 @@ import {
   CommonModule
 } from '@angular/common';
 
-import { PasswordViewerComponent } from './password-viewer.component';
+import {
+  IconModule
+} from '@app/ui/icon';
+
+import {
+  PasswordViewerComponent
+} from './password-viewer.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    IconModule
   ],
   exports: [
     PasswordViewerComponent

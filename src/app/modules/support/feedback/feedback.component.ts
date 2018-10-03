@@ -11,6 +11,17 @@ import {
   Validators
 } from '@angular/forms';
 
+import {
+  Router
+} from '@angular/router';
+
+import {
+  AlertService
+} from '@app/ui';
+
+import { FeedbackReason } from './feedback-reason';
+import { FeedbackService } from './feedback.service';
+
 @Component({
   selector: 'gd-feedback',
   templateUrl: './feedback.component.html',
@@ -21,9 +32,31 @@ export class FeedbackComponent {
   public feedbackForm: FormGroup;
   public errors: any[] = [];
 
+  public reasons: {name: string; value: FeedbackReason}[] = [
+    {
+      name: 'General inquiry',
+      value: FeedbackReason.GeneralInquiry
+    },
+    {
+      name: 'Problem with my account',
+      value: FeedbackReason.ProblemWithAccount
+    },
+    {
+      name: 'Problem with site',
+      value: FeedbackReason.Bug
+    },
+    {
+      name: 'Report abuse or spam',
+      value: FeedbackReason.Abuse
+    }
+  ];
+
   constructor(
+    private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
-    private formBuilder: FormBuilder
+    private feedbackService: FeedbackService,
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {
     this.createForm();
   }
@@ -40,31 +73,33 @@ export class FeedbackComponent {
     // this.errors = [];
     this.changeDetector.markForCheck();
 
-    // this.accountService.register(this.feedbackForm.value)
-    //   .subscribe(
-    //     () => {
-    //       this.router.navigate(['/account', 'login']);
-    //     },
-    //     (err: any) => {
-    //       const error = err.error;
+    this.feedbackService.create(formData)
+      .subscribe(
+        (result: any) => {
+          this.feedbackForm.enable();
+          this.changeDetector.markForCheck();
+          this.alertService.success(result.message);
+        },
+        (err: any) => {
+          const error = err.error;
 
-    //       // Spam control
-    //       if (error.code === 108) {
-    //         this.router.navigate(['/page-not-found']);
-    //         return;
-    //       }
+          // Spam control
+          if (error.code === 108) {
+            this.router.navigate(['/page-not-found']);
+            return;
+          }
 
-    //       this.alertService.error(error.message);
-    //       this.errors = error.errors;
-    //       this.feedbackForm.enable();
-    //       this.changeDetector.markForCheck();
-    //     }
-    //   );
+          this.alertService.error(error.message);
+          this.errors = error.errors;
+          this.feedbackForm.enable();
+          this.changeDetector.markForCheck();
+        }
+      );
   }
 
   private createForm(): void {
     this.feedbackForm = this.formBuilder.group({
-      reason: new FormControl('general'),
+      reason: new FormControl(FeedbackReason.GeneralInquiry),
       referrer: new FormControl(document.referrer),
       gdNickname: null,
       message: new FormControl(null, [

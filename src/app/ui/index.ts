@@ -3,6 +3,7 @@ export * from './alert';
 export * from './animation';
 export * from './badge';
 export * from './card';
+export * from './character-counter';
 export * from './checkbox';
 export * from './checklist';
 export * from './confirm';

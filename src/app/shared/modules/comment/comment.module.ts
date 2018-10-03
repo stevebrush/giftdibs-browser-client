@@ -17,6 +17,7 @@ import {
 } from '@angular/router';
 
 import {
+  CharacterCounterModule,
   DropdownMenuModule,
   FormFieldModule,
   IconModule,
@@ -44,6 +45,7 @@ import {
 
 @NgModule({
   imports: [
+    CharacterCounterModule,
     CommonModule,
     FormsModule,
     DropdownMenuModule,

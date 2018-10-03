@@ -9,7 +9,6 @@ import {
 
 import { AboutComponent } from './about/about.component';
 import { FaqComponent } from './faq/faq.component';
-import { FeedbackComponent } from './feedback/feedback.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { SupportComponent } from './support.component';
 import { TermsComponent } from './terms/terms.component';
@@ -29,7 +28,7 @@ const routes: Routes = [
       },
       {
         path: 'feedback',
-        component: FeedbackComponent
+        loadChildren: 'app/modules/support/feedback/feedback.module#FeedbackModule'
       },
       {
         path: 'privacy',

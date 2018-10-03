@@ -26,10 +26,11 @@
       id="gd-feedback-reason"
       formControlName="reason"
     >
-      <option value="general">General inquiry</option>
-      <option value="account">Problem with my account</option>
-      <option value="problem">Report a problem</option>
-      <option value="abuse">Report abuse or spam</option>
+      <option *ngFor="let reason of reasons"
+        [value]="reason.value"
+      >
+        {{ reason.name }}
+      </option>
     </select>
   </gd-form-field>
   <gd-form-field [errors]="errors">
@@ -43,7 +44,14 @@
       class="gd-form-control"
       id="gd-feedback-message"
       formControlName="message"
+      maxlength="2000"
+      #messageInput
     ></textarea>
+    <gd-character-counter
+      [inputReference]="messageInput"
+      maxCharacters="2000"
+    >
+    </gd-character-counter>
   </gd-form-field>
 
   <gd-form-field

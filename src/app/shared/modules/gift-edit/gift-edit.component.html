@@ -55,8 +55,14 @@
           formControlName="notes"
           id="gd-gift-edit-notes"
           maxlength="2000"
+          #giftNotes
         >
         </textarea>
+        <gd-character-counter
+          [inputReference]="giftNotes"
+          maxCharacters="2000"
+        >
+        </gd-character-counter>
       </gd-form-field>
 
       <gd-form-field>

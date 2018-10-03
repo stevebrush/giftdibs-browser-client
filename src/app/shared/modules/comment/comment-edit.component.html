@@ -10,12 +10,18 @@
       <textarea
         class="gd-form-control"
         formControlName="body"
+        maxlength="2000"
         placeholder="Add a comment"
         (keydown.enter)="submit();$event.preventDefault();"
         #commentInput
       >
         {{ comment?.body }}
       </textarea>
+      <gd-character-counter
+        [inputReference]="commentInput"
+        maxCharacters="2000"
+      >
+      </gd-character-counter>
     </gd-form-field>
 
     <div class="gd-button-group">

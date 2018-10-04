@@ -66,12 +66,11 @@ export class FeedbackComponent {
       return;
     }
 
-    const formData = this.feedbackForm.value;
-    console.log('Form data:', formData);
-
-    // this.feedbackForm.disable();
-    // this.errors = [];
+    this.feedbackForm.disable();
+    this.errors = [];
     this.changeDetector.markForCheck();
+
+    const formData = this.feedbackForm.value;
 
     this.feedbackService.create(formData)
       .subscribe(

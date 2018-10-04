@@ -32,8 +32,6 @@ export class PasswordViewerComponent {
       this.isVisible = true;
     }
 
-    console.log('isVisialbe>?', this.isVisible);
-
     this.changeDetector.markForCheck();
   }
 }

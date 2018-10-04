@@ -13,7 +13,6 @@ import {
   ModalSize
 } from '@app/ui';
 
-import { UrlImagesLoaderContext } from './url-images-loader-context';
 import { UrlImagesSelectorContext } from './url-images-selector-context';
 import { UrlImagesSelectorComponent } from './url-images-selector.component';
 
@@ -34,13 +33,10 @@ export class UrlImagesLoaderComponent {
 
   constructor(
     private alertService: AlertService,
-    private context: UrlImagesLoaderContext,
     private modal: ModalInstance<any>,
     private modalService: ModalService,
     private urlScraperService: UrlScraperService
-  ) {
-    console.log('context:', this.context);
-  }
+  ) { }
 
   public onCancelClicked(): void {
     this.modal.close('cancel');

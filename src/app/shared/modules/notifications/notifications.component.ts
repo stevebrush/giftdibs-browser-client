@@ -46,16 +46,14 @@ export class NotificationsComponent implements OnInit {
   }
 
   public isGiftReceived(giftId: string): boolean {
-    console.log('is gift received?', giftId);
     return false;
   }
 
   public markDibDelivered(dibId: string): void {
-    console.log('mark dib delivered', dibId);
     this.dibService.markAsDelivered(dibId)
       .subscribe(
         (result: any) => {
-          console.log('Success?', result);
+          this.alertService.success(result.message);
         },
         (err) => {
           this.alertService.error(err.error.message);
@@ -64,11 +62,10 @@ export class NotificationsComponent implements OnInit {
   }
 
   public markGiftReceived(giftId: string): void {
-    console.log('mark gift received:', giftId);
     this.giftService.markAsReceived(giftId)
       .subscribe(
         (result: any) => {
-          console.log('Success?', result);
+          this.alertService.success(result.message);
         },
         (err) => {
           this.alertService.error(err.error.message);

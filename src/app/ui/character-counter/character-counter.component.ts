@@ -62,8 +62,6 @@ export class CharacterCounterComponent implements OnInit, OnDestroy {
       this.remaining = this.maxCharacters;
     }
 
-    console.log('remaining?', this.remaining);
-
     this.changeDetector.markForCheck();
   }
 }

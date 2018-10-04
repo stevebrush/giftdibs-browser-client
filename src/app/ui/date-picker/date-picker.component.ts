@@ -76,13 +76,11 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
   public ngOnInit(): void {}
 
   public writeValue(value: Date): void {
-    console.log('date picker writeValue:', value);
     if (typeof value === 'string') {
       value = new Date(value);
     }
 
     if (value) {
-      console.log('set value:', value);
       this.value = value;
 
       this.yearSelect.nativeElement.value = value.getFullYear();

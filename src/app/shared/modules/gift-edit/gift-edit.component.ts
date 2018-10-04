@@ -171,8 +171,6 @@ export class GiftEditComponent implements OnInit {
 
     obs.subscribe(
       (result: any) => {
-        console.log('update/create success!');
-
         const giftId = (this.gift) ? this.gift.id : result.data.giftId;
 
         if (this.newImageFile) {

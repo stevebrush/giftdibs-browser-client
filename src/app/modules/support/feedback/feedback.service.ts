@@ -22,7 +22,7 @@ import {
 @Injectable()
 export class FeedbackService {
   private http: HttpClient;
-  private resourceUrl = environment.apiUrl + '/auth';
+  private resourceUrl = environment.apiUrl + '/feedback';
 
   constructor(
     private handler: HttpBackend
@@ -31,6 +31,6 @@ export class FeedbackService {
   }
 
   public create(feedback: Feedback): Observable<any> {
-    return this.http.post(`${this.resourceUrl}/feedback`, feedback);
+    return this.http.post(`${this.resourceUrl}`, feedback);
   }
 }

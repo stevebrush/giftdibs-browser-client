@@ -11,6 +11,7 @@ import {
   GridModule,
   MediaModule,
   RepeaterModule,
+  TabsModule,
   ThumbnailModule
 } from '@app/ui';
 
@@ -44,6 +45,7 @@ import {
     GridModule,
     MediaModule,
     RepeaterModule,
+    TabsModule,
     ThumbnailModule
   ],
   declarations: [

@@ -38,8 +38,9 @@ export class DibService {
     return this.http.post(`${this.resourceUrl}/gifts/${giftId}/dibs`, formData);
   }
 
-  public getAllRecipients(): Observable<any> {
-    return this.http.get(`${this.resourceUrl}/dibs/recipients`)
+  public getAllRecipients(isDelivered = false): Observable<any> {
+    const status = (isDelivered) ? '?status=delivered' : '';
+    return this.http.get(`${this.resourceUrl}/dibs/recipients${status}`)
       .pipe(
         map((result: any) => result.data),
         share()
@@ -47,7 +48,7 @@ export class DibService {
   }
 
   public markAsDelivered(dibId: string): Observable<any> {
-    return this.http.post(`${this.resourceUrl}/dibs/${dibId}/delivery`, {});
+    return this.http.post(`${this.resourceUrl}/dibs/${dibId}/delivered`, {});
   }
 
   // public getAllByGiftId(giftId: string): Observable<Dib[]> {

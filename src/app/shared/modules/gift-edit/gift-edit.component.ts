@@ -107,13 +107,10 @@ export class GiftEditComponent implements OnInit {
 
   public onSelectFile(args: any): void {
     const reader = new FileReader();
-
     reader.onload = (e: any) => {
       this.giftForm.get('imageUrl').setValue(e.target.result);
     };
-
     reader.readAsDataURL(args.file);
-
     this.newImageFile = args.file;
   }
 
@@ -144,6 +141,7 @@ export class GiftEditComponent implements OnInit {
   }
 
   public onUrlButtonClick(): void {
+    this.disableForm();
     this.openUrlImagesLoaderModal();
   }
 
@@ -152,9 +150,7 @@ export class GiftEditComponent implements OnInit {
       return;
     }
 
-    this.giftForm.disable();
-    this.errors = [];
-    this.changeDetector.markForCheck();
+    this.disableForm();
 
     const formData: Gift = this.giftForm.value;
 
@@ -348,9 +344,7 @@ export class GiftEditComponent implements OnInit {
       return;
     }
 
-    this.giftForm.disable();
-    this.errors = [];
-    this.changeDetector.markForCheck();
+    this.disableForm();
 
     this.confirmService.confirm({
       message: 'Are you sure?'
@@ -393,5 +387,11 @@ export class GiftEditComponent implements OnInit {
     }
 
     return new File([u8arr], filename, { type: mime });
+  }
+
+  private disableForm(): void {
+    this.giftForm.disable();
+    this.errors = [];
+    this.changeDetector.markForCheck();
   }
 }

@@ -12,6 +12,7 @@ import {
 } from '@angular/forms';
 
 import {
+  CharacterCounterModule,
   CheckboxModule,
   FormFieldModule,
   ModalModule
@@ -23,6 +24,7 @@ import {
 
 @NgModule({
   imports: [
+    CharacterCounterModule,
     CheckboxModule,
     CommonModule,
     FormFieldModule,

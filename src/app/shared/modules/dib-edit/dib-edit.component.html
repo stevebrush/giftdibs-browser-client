@@ -63,8 +63,14 @@
           formControlName="notes"
           id="gd-dib-edit-notes"
           maxlength="2000"
+          #notesInput
         >
         </textarea>
+        <gd-character-counter
+          [inputReference]="notesInput"
+          maxCharacters="2000"
+        >
+        </gd-character-counter>
       </gd-form-field>
       <gd-form-field>
         <gd-checkbox

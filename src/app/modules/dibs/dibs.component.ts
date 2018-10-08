@@ -31,8 +31,16 @@ export class DibsComponent implements OnInit {
     this.fetchRecipients();
   }
 
-  private fetchRecipients(): void {
-    this.dibService.getAllRecipients()
+  public showActive(): void {
+    this.fetchRecipients(false);
+  }
+
+  public showDelivered(): void {
+    this.fetchRecipients(true);
+  }
+
+  private fetchRecipients(isDelivered = false): void {
+    this.dibService.getAllRecipients(isDelivered)
       .subscribe((data: any) => {
         this.recipients = data.recipients;
         this.changeDetector.markForCheck();

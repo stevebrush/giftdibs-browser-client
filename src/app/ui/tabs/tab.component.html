@@ -1,0 +1,11 @@
+<div
+  role="tabpanel"
+  tabindex="0"
+  [attr.aria-labelledby]="ariaLabelledBy"
+  [attr.id]="tabPanelId"
+  [ngClass]="{
+    'gd-tab-hidden': !isVisible
+  }"
+>
+  <ng-content></ng-content>
+</div>

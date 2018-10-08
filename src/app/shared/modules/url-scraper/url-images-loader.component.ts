@@ -2,7 +2,8 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  ViewChild
+  ViewChild,
+  ChangeDetectorRef
 } from '@angular/core';
 
 import {
@@ -18,6 +19,7 @@ import { UrlImagesSelectorComponent } from './url-images-selector.component';
 
 import { UrlScraperResult } from './url-scraper-result';
 import { UrlScraperService } from './url-scraper.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'gd-url-images-loader',
@@ -28,11 +30,14 @@ import { UrlScraperService } from './url-scraper.service';
   ]
 })
 export class UrlImagesLoaderComponent {
+  public disabled = false;
+
   @ViewChild('urlInput')
   private urlInput: ElementRef<any>;
 
   constructor(
     private alertService: AlertService,
+    private changeDetector: ChangeDetectorRef,
     private modal: ModalInstance<any>,
     private modalService: ModalService,
     private urlScraperService: UrlScraperService
@@ -43,11 +48,20 @@ export class UrlImagesLoaderComponent {
   }
 
   public onNextClicked(): void {
+    this.disabled = true;
+    this.changeDetector.markForCheck();
+
     const url = this.urlInput.nativeElement.value;
 
     // TODO: Check if url is actually an image and send it to the upload service.
 
     this.urlScraperService.getProduct(url)
+      .pipe(
+        finalize(() => {
+          this.disabled = false;
+          this.changeDetector.markForCheck();
+        })
+      )
       .subscribe(
         (result: UrlScraperResult) => {
           if (result.images && result.images.length) {

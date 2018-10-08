@@ -10,6 +10,7 @@
       class="gd-form-control"
       placeholder="Enter a product URL..."
       type="text"
+      [disabled]="disabled"
       #urlInput
     />
 
@@ -19,6 +20,7 @@
       <button
         class="gd-button gd-button-primary"
         type="button"
+        [disabled]="disabled"
         (click)="onNextClicked()"
       >
         Next
@@ -26,6 +28,7 @@
       <button
         class="gd-button gd-button-default"
         type="button"
+        [disabled]="disabled"
         (click)="onCancelClicked()"
       >
         Cancel

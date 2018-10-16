@@ -34,6 +34,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DeleteComponent {
+  public isLoading = false;
   public deleteAccountForm: FormGroup;
   public errors: any[] = [];
 
@@ -53,8 +54,10 @@ export class DeleteComponent {
       return;
     }
 
+    this.isLoading = true;
     this.deleteAccountForm.disable();
     this.errors = [];
+    this.changeDetector.markForCheck();
 
     const formData = this.deleteAccountForm.value;
     this.accountService.destroyWithPassword(this.sessionService.user.id, formData.password)
@@ -68,6 +71,7 @@ export class DeleteComponent {
           this.errors = err.error.errors;
           this.alertService.error(err.error.message);
           this.deleteAccountForm.enable();
+          this.isLoading = false;
           this.changeDetector.markForCheck();
         }
       );

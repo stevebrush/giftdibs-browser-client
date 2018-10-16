@@ -39,7 +39,7 @@ export class AppStartupService {
       })
       .catch((err: any) => {
         // Unauthenticated.
-        if (err.status === 401) {
+        if (err.status === 401 || err.status === 400) {
           this.sessionService.clearAll();
           return Promise.resolve();
         }

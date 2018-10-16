@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
   public errors: any[] = [];
   public redirectUrl: string;
+  public isLoading = false;
 
   constructor(
     private accountService: AccountService,
@@ -61,20 +62,22 @@ export class LoginComponent implements OnInit {
       return;
     }
 
+    this.isLoading = true;
     this.loginForm.disable();
     this.errors = [];
+    this.changeDetector.markForCheck();
 
     const formData = this.loginForm.value;
-    this.accountService
-      .login(formData.emailAddress, formData.password)
+    this.accountService.login(formData.emailAddress, formData.password)
       .subscribe(
-        (result: any) => {
+        () => {
           this.redirect();
         },
         (err: any) => {
           this.errors = err.error.errors;
           this.alertService.error(err.error.message);
           this.loginForm.enable();
+          this.isLoading = false;
           this.changeDetector.markForCheck();
         }
       );

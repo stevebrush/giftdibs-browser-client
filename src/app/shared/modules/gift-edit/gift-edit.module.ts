@@ -21,7 +21,8 @@ import {
   IconModule,
   MediaModule,
   ModalModule,
-  ThumbnailModule
+  ThumbnailModule,
+  WaitModule
 } from '@app/ui';
 
 import {
@@ -57,7 +58,8 @@ import {
     ModalModule,
     ReactiveFormsModule,
     ThumbnailModule,
-    UrlScraperModule
+    UrlScraperModule,
+    WaitModule
   ],
   declarations: [
     GiftEditComponent

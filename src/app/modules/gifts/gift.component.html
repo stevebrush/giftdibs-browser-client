@@ -1,3 +1,5 @@
+<gd-wait *ngIf="isLoading"></gd-wait>
+
 <div class="gd-canvas">
   <div class="gd-container">
     <p>
@@ -115,7 +117,7 @@
               </gd-media-thumbnail>
               <gd-media-content>
                 <a [routerLink]="['/users', gift.user.id]">{{ gift.user.firstName }} {{ gift.user.lastName }}</a>
-                added on {{ gift.dateCreated | date }}.
+                updated on {{ gift.dateUpdated | date }}.
               </gd-media-content>
             </gd-media>
 

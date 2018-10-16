@@ -47,6 +47,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
   public resetPasswordForm: FormGroup;
   public errors: any[] = [];
   public hasToken = false;
+  public isLoading = true;
 
   private ngUnsubscribe = new Subject();
 
@@ -65,26 +66,30 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.resetPasswordForm.disable();
 
-    this.route.params.pipe(
-      takeUntil(this.ngUnsubscribe)
-    ).subscribe((params: any) => {
-      if (!params.resetPasswordToken) {
+    this.route.params
+      .pipe(
+        takeUntil(this.ngUnsubscribe)
+      )
+      .subscribe((params: any) => {
+        if (!params.resetPasswordToken) {
 
-        // If the user is logged in, they should be able to access the form.
-        if (this.sessionService.isLoggedIn) {
-          this.resetPasswordForm.enable();
+          // If the user is logged in, they should be able to access the form.
+          if (this.sessionService.isLoggedIn) {
+            this.resetPasswordForm.enable();
+            return;
+          }
+
+          this.alertService.error('A reset password token was not provided.', true);
+          this.router.navigate(['/account/forgotten']);
           return;
         }
 
-        this.alertService.error('A reset password token was not provided.', true);
-        this.router.navigate(['/account/forgotten']);
-        return;
-      }
-
-      this.resetPasswordForm.controls.resetPasswordToken.setValue(params.resetPasswordToken);
-      this.resetPasswordForm.enable();
-      this.hasToken = true;
-    });
+        this.resetPasswordForm.controls.resetPasswordToken.setValue(params.resetPasswordToken);
+        this.resetPasswordForm.enable();
+        this.isLoading = false;
+        this.hasToken = true;
+        this.changeDetector.markForCheck();
+      });
   }
 
   public ngOnDestroy(): void {
@@ -97,12 +102,13 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
       return;
     }
 
+    this.isLoading = true;
     this.resetPasswordForm.disable();
     this.errors = [];
+    this.changeDetector.markForCheck();
 
     const formData = this.resetPasswordForm.value;
-    this.accountService
-      .resetPassword(formData)
+    this.accountService.resetPassword(formData)
       .subscribe(
         (result: any) => {
           if (this.hasToken) {
@@ -112,6 +118,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
             this.alertService.success(result.message);
             this.resetPasswordForm.reset();
             this.resetPasswordForm.enable();
+            this.isLoading = false;
             this.changeDetector.markForCheck();
           }
         },
@@ -119,6 +126,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
           this.errors = err.error.errors;
           this.alertService.error(err.error.message);
           this.resetPasswordForm.enable();
+          this.isLoading = false;
           this.changeDetector.markForCheck();
         }
       );

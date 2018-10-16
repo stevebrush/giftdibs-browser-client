@@ -49,6 +49,15 @@ export class NavbarComponent implements OnInit, OnDestroy {
       addSeparatorAfter: true
     },
     {
+      label: 'Help',
+      route: '/support'
+    },
+    {
+      label: 'Report a problem',
+      route: '/support/feedback',
+      addSeparatorAfter: true
+    },
+    {
       label: 'Log out',
       action: () => {
         this.logout();

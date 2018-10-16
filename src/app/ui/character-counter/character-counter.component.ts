@@ -19,6 +19,7 @@ import {
 @Component({
   selector: 'gd-character-counter',
   templateUrl: './character-counter.component.html',
+  styleUrls: ['./character-counter.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CharacterCounterComponent implements OnInit, OnDestroy {

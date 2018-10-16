@@ -14,9 +14,9 @@ import {
   GiftPreviewModule
 } from '@app/shared/modules/gift-preview';
 
-// import {
-//   GridModule
-// } from '@app/ui';
+import {
+  WaitModule
+} from '@app/ui';
 
 import {
   RepeaterModule
@@ -31,8 +31,8 @@ import {
     CommonModule,
     GiftPreviewModule,
     GiftModule,
-    RepeaterModule
-    // GridModule
+    RepeaterModule,
+    WaitModule
   ],
   declarations: [
     CommunityComponent

@@ -1,3 +1,5 @@
+<gd-wait *ngIf="isLoading"></gd-wait>
+
 <div class="gd-container-sm gd-spacing-padding-even-large">
   <h1>
     Password recovery
@@ -12,8 +14,8 @@
     aria-label="Password recovery"
     [formGroup]="forgottenForm"
     (ngSubmit)="submit()"
-    novalidate>
-
+    novalidate
+  >
     <gd-form-field [errors]="errors">
       <label
         class="gd-control-label"

@@ -36,11 +36,21 @@
           ${{ gift.budget || '--' }}
           <span *ngIf="gift.quantity > 1">ea.</span>
         </div>
+        <time class="gd-text-deemphasized">
+          {{ gift.dateUpdated | date }}&nbsp;&middot;
+        </time>
         <small class="gd-text-deemphasized">
           {{ gift.comments.length }} comments
         </small>
       </gd-media-body>
     </gd-media-content>
+    <gd-media-controls>
+      <gd-dib-controls
+        [gift]="gift"
+        (change)="onDibChange($event)"
+      >
+      </gd-dib-controls>
+    </gd-media-controls>
   </gd-media>
   <!-- <gd-card
     [route]="{

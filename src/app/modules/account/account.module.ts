@@ -17,7 +17,8 @@ import {
   HideUntilModule,
   IconModule,
   NoticeModule,
-  PasswordViewerModule
+  PasswordViewerModule,
+  WaitModule
 } from '@app/ui';
 
 import {
@@ -56,7 +57,8 @@ import { VerifyAccountComponent } from './verify/verify.component';
     NoticeModule,
     PasswordViewerModule,
     ReactiveFormsModule,
-    UserModule
+    UserModule,
+    WaitModule
   ],
   declarations: [
     ForgottenComponent,

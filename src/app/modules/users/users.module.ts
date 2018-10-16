@@ -33,7 +33,8 @@ import {
   IconModule,
   MediaModule,
   RepeaterModule,
-  ThumbnailModule
+  ThumbnailModule,
+  WaitModule
 } from '@app/ui';
 
 import { FollowersComponent } from './followers.component';
@@ -56,6 +57,7 @@ import { UsersComponent } from './users.component';
     RepeaterModule,
     ThumbnailModule,
     UserModule,
+    WaitModule,
     WishListModule,
     WishListCreateModule,
     WishListPreviewModule

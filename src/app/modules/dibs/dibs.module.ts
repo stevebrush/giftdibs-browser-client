@@ -12,7 +12,8 @@ import {
   MediaModule,
   RepeaterModule,
   TabsModule,
-  ThumbnailModule
+  ThumbnailModule,
+  WaitModule
 } from '@app/ui';
 
 import {
@@ -46,7 +47,8 @@ import {
     MediaModule,
     RepeaterModule,
     TabsModule,
-    ThumbnailModule
+    ThumbnailModule,
+    WaitModule
   ],
   declarations: [
     DibsComponent

@@ -18,6 +18,10 @@ import {
 } from '@app/ui';
 
 import {
+  DibControlsModule
+} from '@app/shared/modules/dib-controls';
+
+import {
   GiftPriorityModule
 } from '@app/shared/modules/gift-priority';
 
@@ -28,6 +32,7 @@ import {
 @NgModule({
   imports: [
     CommonModule,
+    DibControlsModule,
     GiftPriorityModule,
     IconModule,
     MediaModule,

@@ -27,7 +27,8 @@ import {
   IconModule,
   MediaModule,
   RepeaterModule,
-  ThumbnailModule
+  ThumbnailModule,
+  WaitModule
 } from '@app/ui';
 
 import { WishListComponent } from './wish-list.component';
@@ -43,6 +44,7 @@ import { WishListsRoutingModule } from './wish-lists-routing.module';
     MediaModule,
     RepeaterModule,
     ThumbnailModule,
+    WaitModule,
     WishListEditModule,
     WishListModule,
     WishListsRoutingModule

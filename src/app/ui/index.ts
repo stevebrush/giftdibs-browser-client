@@ -28,4 +28,5 @@ export * from './tabs';
 export * from './thumbnail';
 export * from './typeahead';
 export * from './verify-email-notice';
+export * from './wait';
 export * from './window';

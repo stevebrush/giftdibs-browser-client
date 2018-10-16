@@ -12,7 +12,9 @@ import {
 } from '@angular/forms';
 
 import {
-  FormFieldModule, ModalModule
+  FormFieldModule,
+  ModalModule,
+  WaitModule
 } from '@app/ui';
 
 import {
@@ -30,7 +32,8 @@ import {
     FormsModule,
     ModalModule,
     PrivacySelectorModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    WaitModule
   ],
   declarations: [
     WishListCreateComponent

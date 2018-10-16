@@ -13,7 +13,8 @@ import {
 
 import {
   CharacterCounterModule,
-  FormFieldModule
+  FormFieldModule,
+  WaitModule
 } from '@app/ui';
 
 import { FeedbackRoutingModule } from './feedback-routing.module';
@@ -30,7 +31,8 @@ import { FeedbackService } from './feedback.service';
     FeedbackRoutingModule,
     FormsModule,
     FormFieldModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    WaitModule
   ],
   exports: [
     FeedbackComponent

@@ -9,6 +9,10 @@ import {
   DibService
 } from '@app/shared/modules/dib';
 
+import {
+  finalize
+} from 'rxjs/operators';
+
 @Component({
   selector: 'gd-dibs',
   templateUrl: './dibs.component.html',
@@ -17,6 +21,7 @@ import {
 })
 export class DibsComponent implements OnInit {
   public recipients: any;
+  public isLoading = true;
 
   constructor(
     private changeDetector: ChangeDetectorRef,
@@ -40,7 +45,16 @@ export class DibsComponent implements OnInit {
   }
 
   private fetchRecipients(isDelivered = false): void {
+    this.isLoading = true;
+    this.changeDetector.markForCheck();
+
     this.dibService.getAllRecipients(isDelivered)
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+          this.changeDetector.markForCheck();
+        })
+      )
       .subscribe((data: any) => {
         this.recipients = data.recipients;
         this.changeDetector.markForCheck();

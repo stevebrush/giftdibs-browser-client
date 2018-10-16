@@ -38,8 +38,9 @@ export class GiftService {
     return this.http.post(`${this.resourceUrl}/wish-lists/${wishListId}/gifts`, formData);
   }
 
-  public getAll(): Observable<Gift[]> {
-    return this.http.get(`${this.resourceUrl}/gifts`)
+  public getAll(startIndex?: number): Observable<Gift[]> {
+    const paginate = (startIndex) ? `?startIndex=${startIndex}` : '';
+    return this.http.get(`${this.resourceUrl}/gifts${paginate}`)
       .pipe(
         map((result: any) => result.data.gifts),
         share()

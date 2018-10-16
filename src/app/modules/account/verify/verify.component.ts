@@ -15,6 +15,7 @@ import {
 } from 'rxjs';
 
 import {
+  finalize,
   takeUntil
 } from 'rxjs/operators';
 
@@ -71,8 +72,7 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
           return;
         }
 
-        this.accountService
-          .verifyEmailAddress(params.emailAddressVerificationToken)
+        this.accountService.verifyEmailAddress(params.emailAddressVerificationToken)
           .subscribe(
             () => {
               this.isLoading = false;
@@ -95,8 +95,16 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
   }
 
   public sendVerificationEmail(): void {
-    this.accountService
-      .resendEmailAddressVerification(this.sessionUser.id)
+    this.isLoading = true;
+    this.changeDetector.markForCheck();
+
+    this.accountService.resendEmailAddressVerification(this.sessionUser.id)
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+          this.changeDetector.markForCheck();
+        })
+      )
       .subscribe(
         (data: any) => {
           this.sessionService.user.emailAddressVerified = true;

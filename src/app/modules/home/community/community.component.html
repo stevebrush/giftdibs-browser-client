@@ -1,28 +1,9 @@
-<!-- <div class="gd-swatch gd-color-primary"></div>
-<div class="gd-swatch gd-color-secondary"></div>
-<div class="gd-swatch gd-color-info"></div>
-<div class="gd-swatch gd-color-warning"></div>
-<div class="gd-swatch gd-color-danger"></div>
-<div class="gd-swatch gd-color-success"></div>
-<div class="gd-swatch gd-color-neutral-darkest"></div>
-<div class="gd-swatch gd-color-neutral-darker"></div>
-<div class="gd-swatch gd-color-neutral-dark"></div>
-<div class="gd-swatch gd-color-neutral"></div>
-<div class="gd-swatch gd-color-neutral-light"></div>
-<div class="gd-swatch gd-color-neutral-lighter"></div>
-<div class="gd-swatch gd-color-neutral-lightest"></div> -->
-<!-- <br><br> -->
+<gd-wait *ngIf="isLoading"></gd-wait>
+
 <h1>
-  Welcome back
+  My Community
 </h1>
 
-<!-- <gd-row>
-  <gd-column
-    screenSmall="2"
-  >
-
-  </gd-column>
-</gd-row> -->
 <gd-repeater>
   <gd-repeater-item *ngFor="let gift of gifts">
     <gd-gift-preview
@@ -31,3 +12,12 @@
     </gd-gift-preview>
   </gd-repeater-item>
 </gd-repeater>
+
+<button *ngIf="hasMore"
+  class="gd-button gd-button-default gd-button-block"
+  type="button"
+  [disabled]="isLoading"
+  (click)="loadMoreResults()"
+>
+  Show more results
+</button>

@@ -30,6 +30,9 @@ export class IconComponent implements OnInit {
     return this._iconStyle || 'default';
   }
 
+  @Input()
+  public enableSpin = false;
+
   public classNames: string;
 
   private _iconStyle: IconStyle;
@@ -39,6 +42,11 @@ export class IconComponent implements OnInit {
       'fa-' + this.icon,
       'fa-' + this.iconSize
     ];
+
+    if (this.enableSpin) {
+      classNames.push('fa-spin');
+    }
+
     this.classNames = classNames.join(' ');
   }
 }

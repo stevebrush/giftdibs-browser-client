@@ -1,3 +1,4 @@
+// #region imports
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -58,6 +59,7 @@ import {
 import {
   GiftEditContext
 } from './gift-edit-context';
+// #endregion
 
 @Component({
   selector: 'gd-gift-edit',
@@ -76,6 +78,7 @@ export class GiftEditComponent implements OnInit {
   public errors: any[];
   public gift: Gift;
   public giftForm: FormGroup;
+  public isLoading = false;
 
   private newImageFile: any;
   private wishListId: string;
@@ -107,9 +110,11 @@ export class GiftEditComponent implements OnInit {
 
   public onSelectFile(args: any): void {
     const reader = new FileReader();
+
     reader.onload = (e: any) => {
       this.giftForm.get('imageUrl').setValue(e.target.result);
     };
+
     reader.readAsDataURL(args.file);
     this.newImageFile = args.file;
   }
@@ -120,14 +125,12 @@ export class GiftEditComponent implements OnInit {
       return;
     }
 
-    this.giftForm.disable();
-    this.changeDetector.markForCheck();
+    this.disableForm();
 
     this.assetsService.removeGiftThumbnail(this.gift.id)
       .pipe(
         finalize(() => {
-          this.giftForm.enable();
-          this.changeDetector.markForCheck();
+          this.enableForm();
         })
       )
       .subscribe(
@@ -141,7 +144,6 @@ export class GiftEditComponent implements OnInit {
   }
 
   public onUrlButtonClick(): void {
-    this.disableForm();
     this.openUrlImagesLoaderModal();
   }
 
@@ -172,14 +174,14 @@ export class GiftEditComponent implements OnInit {
         if (this.newImageFile) {
           this.uploadImage(this.newImageFile, giftId).subscribe(
             () => {
+              this.enableForm();
               this.modal.close('save');
             },
             (err: any) => {
               this.giftService.getById(giftId).subscribe((gift: Gift) => {
                 this.gift = gift;
                 this.resetForm(this.gift);
-                this.giftForm.enable();
-                this.changeDetector.markForCheck();
+                this.enableForm();
 
                 this.alertService.error(err.error.message);
               });
@@ -194,8 +196,7 @@ export class GiftEditComponent implements OnInit {
         const error = err.error;
         this.alertService.error(error.message);
         this.errors = error.errors;
-        this.giftForm.enable();
-        this.changeDetector.markForCheck();
+        this.enableForm();
       }
     );
   }
@@ -220,10 +221,10 @@ export class GiftEditComponent implements OnInit {
   }
 
   public refreshUrlDetails(): void {
-    this.giftForm.disable();
-    this.changeDetector.markForCheck();
+    this.disableForm();
 
     let numComplete = 0;
+
     this.externalUrls.controls.forEach((control) => {
       this.urlScraperService.getProduct(control.value.url)
         .subscribe(
@@ -231,16 +232,15 @@ export class GiftEditComponent implements OnInit {
             if (result.price) {
               control.get('price').setValue(result.price);
             }
+
             numComplete++;
 
             if (numComplete === this.externalUrls.length) {
-              this.giftForm.enable();
-              this.changeDetector.markForCheck();
+              this.enableForm();
             }
           },
           (err: any) => {
-            this.giftForm.enable();
-            this.changeDetector.markForCheck();
+            this.enableForm();
             this.alertService.error(err.error.message);
           }
         );
@@ -266,9 +266,6 @@ export class GiftEditComponent implements OnInit {
   }
 
   private uploadImage(file: any, giftId: string): Observable<any> {
-    this.giftForm.disable();
-    this.changeDetector.markForCheck();
-
     return this.assetsService.uploadGiftThumbnail(file, giftId);
   }
 
@@ -295,6 +292,8 @@ export class GiftEditComponent implements OnInit {
 
   private openUrlImagesLoaderModal(): void {
     const context = new UrlImagesLoaderContext();
+
+    this.giftForm.disable();
 
     const modalInstance = this.modalService.open(UrlImagesLoaderComponent, {
       providers: [{
@@ -333,9 +332,9 @@ export class GiftEditComponent implements OnInit {
         if (productDetails.price && !this.giftForm.get('budget').value) {
           this.giftForm.get('budget').setValue(productDetails.price);
         }
-
-        this.changeDetector.markForCheck();
       }
+
+      this.enableForm();
     });
   }
 
@@ -389,9 +388,16 @@ export class GiftEditComponent implements OnInit {
     return new File([u8arr], filename, { type: mime });
   }
 
+  private enableForm(): void {
+    this.isLoading = false;
+    this.giftForm.enable();
+    this.changeDetector.markForCheck();
+  }
+
   private disableForm(): void {
     this.giftForm.disable();
     this.errors = [];
+    this.isLoading = true;
     this.changeDetector.markForCheck();
   }
 }

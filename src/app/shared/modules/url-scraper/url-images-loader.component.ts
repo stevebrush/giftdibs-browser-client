@@ -1,9 +1,9 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
-  ViewChild,
-  ChangeDetectorRef
+  ViewChild
 } from '@angular/core';
 
 import {
@@ -14,12 +14,15 @@ import {
   ModalSize
 } from '@app/ui';
 
+import {
+  finalize
+} from 'rxjs/operators';
+
 import { UrlImagesSelectorContext } from './url-images-selector-context';
 import { UrlImagesSelectorComponent } from './url-images-selector.component';
 
 import { UrlScraperResult } from './url-scraper-result';
 import { UrlScraperService } from './url-scraper.service';
-import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'gd-url-images-loader',

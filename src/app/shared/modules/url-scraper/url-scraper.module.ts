@@ -8,7 +8,8 @@ import {
 
 import {
   ModalModule,
-  ThumbnailModule
+  ThumbnailModule,
+  WaitModule
 } from '@app/ui';
 
 import { UrlImagesLoaderContext } from './url-images-loader-context';
@@ -24,7 +25,8 @@ import { UrlImagesSelectorComponent } from './url-images-selector.component';
   imports: [
     CommonModule,
     ModalModule,
-    ThumbnailModule
+    ThumbnailModule,
+    WaitModule
   ],
   entryComponents: [
     UrlImagesLoaderComponent,

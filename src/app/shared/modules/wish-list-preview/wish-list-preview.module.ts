@@ -12,6 +12,7 @@ import {
 
 import {
   CardModule,
+  IconModule,
   ThumbnailModule
 } from '@app/ui';
 
@@ -23,6 +24,7 @@ import {
   imports: [
     CardModule,
     CommonModule,
+    IconModule,
     RouterModule,
     ThumbnailModule
   ],

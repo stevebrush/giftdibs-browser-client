@@ -36,4 +36,11 @@ export class GiftPreviewComponent {
       return (numDibbed >= gift.quantity);
     }
   }
+
+  public onDibChange(result: any): void {
+    // TODO: Send a result back with the dib controls.
+    // TODO: Create a showSummary input for the dib-controls
+    // to allow users to hide the summary if they want.
+    console.log('update!', result);
+  }
 }

@@ -14,7 +14,8 @@ import {
 import {
   ConfirmModule,
   FormFieldModule,
-  ModalModule
+  ModalModule,
+  WaitModule
 } from '@app/ui';
 
 import {
@@ -33,7 +34,8 @@ import {
     FormsModule,
     ModalModule,
     PrivacySelectorModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    WaitModule
   ],
   declarations: [
     WishListEditComponent

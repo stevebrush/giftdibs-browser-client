@@ -16,6 +16,10 @@ import {
 } from '@app/ui';
 
 import {
+  finalize
+} from 'rxjs/operators';
+
+import {
   AccountService
 } from '../account.service';
 
@@ -25,6 +29,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ForgottenComponent {
+  public isLoading = false;
   public forgottenForm: FormGroup;
   public errors: any[] = [];
 
@@ -42,24 +47,28 @@ export class ForgottenComponent {
       return;
     }
 
+    this.isLoading = true;
     this.forgottenForm.disable();
     this.errors = [];
+    this.changeDetector.markForCheck();
 
     const formData = this.forgottenForm.value;
-    this.accountService
-      .forgotten(formData.emailAddress)
+    this.accountService.forgotten(formData.emailAddress)
+      .pipe(
+        finalize(() => {
+          this.forgottenForm.enable();
+          this.isLoading = false;
+          this.changeDetector.markForCheck();
+        })
+      )
       .subscribe(
         (result: any) => {
           this.alertService.success(result.message);
           this.forgottenForm.reset();
-          this.forgottenForm.enable();
-          this.changeDetector.markForCheck();
         },
         (err: any) => {
           this.errors = err.error.errors;
           this.alertService.error(err.error.message);
-          this.forgottenForm.enable();
-          this.changeDetector.markForCheck();
         }
       );
   }

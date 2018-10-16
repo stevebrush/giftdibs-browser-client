@@ -18,6 +18,8 @@ import {
 })
 export class CommunityComponent implements OnInit {
   public gifts: Gift[];
+  public isLoading = true;
+  public hasMore = false;
 
   constructor(
     private changeDetector: ChangeDetectorRef,
@@ -28,7 +30,29 @@ export class CommunityComponent implements OnInit {
     this.giftService.getAll()
       .subscribe((gifts: Gift[]) => {
         this.gifts = gifts;
+        this.isLoading = false;
+        this.hasMore = true;
         this.changeDetector.markForCheck();
       });
+  }
+
+  public loadMoreResults(): void {
+    const startIndex = this.gifts.length - 1;
+    this.isLoading = true;
+
+    this.giftService.getAll(startIndex)
+      .subscribe(
+        (gifts: Gift[]) => {
+          if (gifts && gifts.length) {
+            this.gifts = this.gifts.concat(gifts);
+            this.hasMore = true;
+          } else {
+            this.hasMore = false;
+          }
+
+          this.isLoading = false;
+          this.changeDetector.markForCheck();
+        }
+      );
   }
 }

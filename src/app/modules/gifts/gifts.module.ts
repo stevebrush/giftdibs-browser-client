@@ -34,7 +34,8 @@ import {
   ModalModule,
   NoticeModule,
   RepeaterModule,
-  ThumbnailModule
+  ThumbnailModule,
+  WaitModule
 } from '@app/ui';
 
 import { GiftComponent } from './gift.component';
@@ -56,7 +57,8 @@ import { GiftsRoutingModule } from './gifts-routing.module';
     ModalModule,
     NoticeModule,
     RepeaterModule,
-    ThumbnailModule
+    ThumbnailModule,
+    WaitModule
   ],
   declarations: [
     GiftComponent

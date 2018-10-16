@@ -32,6 +32,7 @@ import {
 export class RegisterComponent {
   public registerForm: FormGroup;
   public errors: any[] = [];
+  public isLoading = false;
 
   constructor(
     private accountService: AccountService,
@@ -57,6 +58,7 @@ export class RegisterComponent {
       return;
     }
 
+    this.isLoading = true;
     this.registerForm.disable();
     this.errors = [];
     this.changeDetector.markForCheck();
@@ -78,6 +80,7 @@ export class RegisterComponent {
           this.alertService.error(error.message);
           this.errors = error.errors;
           this.registerForm.enable();
+          this.isLoading = false;
           this.changeDetector.markForCheck();
         }
       );
@@ -98,9 +101,6 @@ export class RegisterComponent {
       password: new FormControl(null, [
         Validators.required
       ])
-      // birthday: new FormControl(null, [
-      //   Validators.required
-      // ])
     });
   }
 }

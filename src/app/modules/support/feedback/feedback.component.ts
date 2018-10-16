@@ -19,6 +19,10 @@ import {
   AlertService
 } from '@app/ui';
 
+import {
+  finalize
+} from 'rxjs/operators';
+
 import { FeedbackReason } from './feedback-reason';
 import { FeedbackService } from './feedback.service';
 
@@ -31,6 +35,7 @@ import { FeedbackService } from './feedback.service';
 export class FeedbackComponent {
   public feedbackForm: FormGroup;
   public errors: any[] = [];
+  public isLoading = false;
 
   public reasons: {name: string; value: FeedbackReason}[] = [
     {
@@ -66,6 +71,7 @@ export class FeedbackComponent {
       return;
     }
 
+    this.isLoading = true;
     this.feedbackForm.disable();
     this.errors = [];
     this.changeDetector.markForCheck();
@@ -73,6 +79,12 @@ export class FeedbackComponent {
     const formData = this.feedbackForm.value;
 
     this.feedbackService.create(formData)
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+          this.changeDetector.markForCheck();
+        })
+      )
       .subscribe(
         (result: any) => {
           this.feedbackForm.enable();

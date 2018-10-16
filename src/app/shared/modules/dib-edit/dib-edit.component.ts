@@ -55,6 +55,7 @@ export class DibEditComponent implements OnInit {
     this.gift = this.context.gift;
     this.dib = this.context.dib;
     this.createForm();
+
     if (this.dib) {
       this.dibForm.reset(this.dib);
     }
@@ -75,6 +76,7 @@ export class DibEditComponent implements OnInit {
     this.changeDetector.markForCheck();
 
     const formData: Dib = this.dibForm.value;
+    console.log('formdata?', formData);
 
     let obs: any;
     if (this.dib) {

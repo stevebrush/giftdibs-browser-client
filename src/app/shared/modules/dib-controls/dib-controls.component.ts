@@ -20,7 +20,8 @@ import {
   ConfirmAnswer,
   ConfirmService,
   ModalClosedEventArgs,
-  ModalService
+  ModalService,
+  ModalSize
 } from '@app/ui';
 
 import {
@@ -120,7 +121,8 @@ export class DibControlsComponent implements OnInit, OnChanges, OnDestroy {
         providers: [{
           provide: DibEditContext,
           useValue: context
-        }]
+        }],
+        size: ModalSize.Small
       }
     );
 

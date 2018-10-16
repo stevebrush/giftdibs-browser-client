@@ -69,6 +69,10 @@ strong {
 .gd-text-deemphasized {
   color: $gd-text-color-deemphasized;
   font-size: $gd-font-size-small;
+
+  a {
+    color: $gd-text-color-deemphasized;
+  }
 }
 
 .gd-text-strikethrough {

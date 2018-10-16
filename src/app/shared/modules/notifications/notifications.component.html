@@ -13,7 +13,7 @@
 
 <ng-template #content>
   <div class="gd-notifications">
-    <gd-repeater *ngIf="notifications?.length">
+    <gd-repeater *ngIf="notifications?.length else notificationsEmpty">
       <gd-repeater-item *ngFor="let notification of notifications">
         <div [ngSwitch]="notification.type">
 
@@ -143,6 +143,9 @@
         </div>
       </gd-repeater-item>
     </gd-repeater>
+    <ng-template #notificationsEmpty>
+      You don't have any notifications.
+    </ng-template>
   </div>
 </ng-template>
 

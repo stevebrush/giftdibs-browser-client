@@ -1,12 +1,14 @@
 // #region imports
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Input
 } from '@angular/core';
 
 import {
-  Gift
+  Gift,
+  GiftService
 } from '../gift';
 // #endregion
 
@@ -20,7 +22,15 @@ export class GiftPreviewComponent {
   @Input()
   public gift: Gift;
 
+  @Input()
+  public showUserInfo = false;
+
   public isSessionUser = false;
+
+  constructor(
+    private changeDetector: ChangeDetectorRef,
+    private giftService: GiftService
+  ) { }
 
   public showDibbedRibbon(gift: Gift): boolean {
     if (gift.dateReceived) {
@@ -38,9 +48,14 @@ export class GiftPreviewComponent {
   }
 
   public onDibChange(result: any): void {
-    // TODO: Send a result back with the dib controls.
-    // TODO: Create a showSummary input for the dib-controls
-    // to allow users to hide the summary if they want.
-    console.log('update!', result);
+    this.updateGift();
+  }
+
+  private updateGift(): void {
+    this.giftService.getById(this.gift.id)
+      .subscribe((gift: Gift) => {
+        this.gift = gift;
+        this.changeDetector.markForCheck();
+      });
   }
 }

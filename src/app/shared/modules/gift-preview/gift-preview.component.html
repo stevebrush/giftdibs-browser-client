@@ -36,12 +36,17 @@
           ${{ gift.budget || '--' }}
           <span *ngIf="gift.quantity > 1">ea.</span>
         </div>
-        <time class="gd-text-deemphasized">
-          {{ gift.dateUpdated | date }}&nbsp;&middot;
-        </time>
-        <small class="gd-text-deemphasized">
-          {{ gift.comments.length }} comments
-        </small>
+        <div class="gd-text-deemphasized gd-gift-preview-user-info">
+          <ng-template [ngIf]="showUserInfo">
+            <a routerLink="/users/{{ gift.user.id }}">{{ gift.user.firstName }} {{ gift.user.lastName }}</a> updated on
+          </ng-template>
+          <time>
+            {{ gift.dateUpdated | date }}<br>
+          </time>
+          <small>
+            {{ gift.comments.length }} comments
+          </small>
+        </div>
       </gd-media-body>
     </gd-media-content>
     <gd-media-controls>

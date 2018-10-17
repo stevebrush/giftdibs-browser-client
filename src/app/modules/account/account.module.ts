@@ -12,10 +12,10 @@ import {
 
 import {
   FormFieldModule,
-  GdImageUploaderModule,
   GridModule,
   HideUntilModule,
   IconModule,
+  ImageUploaderModule,
   NoticeModule,
   PasswordViewerModule,
   WaitModule
@@ -50,7 +50,7 @@ import { VerifyAccountComponent } from './verify/verify.component';
     CommonModule,
     FacebookModule,
     FormFieldModule,
-    GdImageUploaderModule,
+    ImageUploaderModule,
     GridModule,
     HideUntilModule,
     IconModule,

@@ -15,7 +15,7 @@ import {
 } from '../thumbnail';
 
 import {
-  GdImageUploaderComponent
+  ImageUploaderComponent
 } from './image-uploader.component';
 
 @NgModule({
@@ -25,10 +25,10 @@ import {
     ThumbnailModule
   ],
   declarations: [
-    GdImageUploaderComponent
+    ImageUploaderComponent
   ],
   exports: [
-    GdImageUploaderComponent
+    ImageUploaderComponent
   ]
 })
-export class GdImageUploaderModule { }
+export class ImageUploaderModule { }

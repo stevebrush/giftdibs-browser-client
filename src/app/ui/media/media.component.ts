@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
-  Component
+  Component,
+  Input
 } from '@angular/core';
 
 @Component({
@@ -9,4 +10,7 @@ import {
   styleUrls: ['./media.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MediaComponent { }
+export class MediaComponent {
+  @Input()
+  public size: 'xs' | 'md' = 'md';
+}

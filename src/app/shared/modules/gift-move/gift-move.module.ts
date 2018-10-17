@@ -13,8 +13,13 @@ import {
 
 import {
   FormFieldModule,
-  ModalModule
+  ModalModule,
+  WaitModule
 } from '@app/ui';
+
+import {
+  WishListModule
+} from '../wish-list';
 
 import {
   GiftMoveComponent
@@ -26,9 +31,14 @@ import {
     FormFieldModule,
     FormsModule,
     ModalModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    WaitModule,
+    WishListModule
   ],
   declarations: [
+    GiftMoveComponent
+  ],
+  entryComponents: [
     GiftMoveComponent
   ]
 })

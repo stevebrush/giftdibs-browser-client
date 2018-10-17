@@ -37,9 +37,15 @@ import {
 } from '@app/shared/modules/session';
 
 import {
+  GiftMoveComponent,
+  GiftMoveContext
+} from '@app/shared/modules/gift-move';
+
+import {
   AlertService,
   ConfirmAnswer,
   ConfirmService,
+  DropdownMenuItem,
   ModalClosedEventArgs,
   ModalService,
   ModalSize
@@ -56,6 +62,22 @@ export class GiftComponent implements OnInit, OnDestroy {
   public isLoading = true;
   public isSessionUser = false;
   public quantityRemaining: number;
+
+  public menuItems: DropdownMenuItem[] = [
+    {
+      label: 'Edit',
+      action: () => this.openGiftEditModal()
+    },
+    {
+      label: 'Move',
+      action: () => this.openGiftMoveModal(),
+      addSeparatorAfter: true
+    },
+    {
+      label: 'Delete',
+      action: () => this.confirmDelete()
+    }
+  ];
 
   private ngUnsubscribe = new Subject();
 
@@ -100,24 +122,6 @@ export class GiftComponent implements OnInit, OnDestroy {
   public ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
-  }
-
-  public openGiftEditModal(): void {
-    const context = new GiftEditContext(this.gift, this.gift.wishListId);
-
-    const modalInstance = this.modalService.open(GiftEditComponent, {
-      providers: [{
-        provide: GiftEditContext,
-        useValue: context
-      }],
-      size: ModalSize.Large
-    });
-
-    modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
-      if (args.reason === 'save') {
-        this.refreshGift();
-      }
-    });
   }
 
   public markReceived(): void {
@@ -200,5 +204,62 @@ export class GiftComponent implements OnInit, OnDestroy {
 
       this.quantityRemaining = this.gift.quantity - numDibbed;
     }
+  }
+
+  private openGiftEditModal(): void {
+    const context = new GiftEditContext(this.gift, this.gift.wishList.id);
+
+    const modalInstance = this.modalService.open(GiftEditComponent, {
+      providers: [{
+        provide: GiftEditContext,
+        useValue: context
+      }],
+      size: ModalSize.Large
+    });
+
+    modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
+      if (args.reason === 'save') {
+        this.refreshGift();
+      }
+    });
+  }
+
+  private openGiftMoveModal(): void {
+    const context = new GiftMoveContext(this.gift, this.gift.wishList.id);
+
+    const modalInstance = this.modalService.open(GiftMoveComponent, {
+      providers: [{
+        provide: GiftMoveContext,
+        useValue: context
+      }],
+      size: ModalSize.Small
+    });
+
+    modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
+      if (args.reason === 'save') {
+        this.refreshGift();
+      }
+    });
+  }
+
+  private confirmDelete(): void {
+    this.confirmService.confirm({
+      message: 'Are you sure you wish to delete this gift?'
+    }, (answer: ConfirmAnswer) => {
+      if (answer.type === 'okay') {
+        this.giftService.remove(this.gift.id)
+          .subscribe(
+            () => {
+              this.alertService.success('Gift successfully deleted.', true);
+              this.router.navigate(['/users', this.gift.user.id]);
+            },
+            (err: any) => {
+              const error = err.error;
+              this.alertService.error(error.message);
+              this.changeDetector.markForCheck();
+            }
+          );
+      }
+    });
   }
 }

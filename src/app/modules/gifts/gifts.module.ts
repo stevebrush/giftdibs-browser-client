@@ -23,11 +23,16 @@ import {
 } from '@app/shared/modules/gift-edit';
 
 import {
+  GiftMoveModule
+} from '@app/shared/modules/gift-move';
+
+import {
   GiftPriorityModule
 } from '@app/shared/modules/gift-priority';
 
 import {
   ConfirmModule,
+  DropdownMenuModule,
   GridModule,
   IconModule,
   MediaModule,
@@ -45,9 +50,11 @@ import { GiftsRoutingModule } from './gifts-routing.module';
   imports: [
     CommonModule,
     GiftModule,
+    GiftMoveModule,
     CommentModule,
     ConfirmModule,
     DibControlsModule,
+    DropdownMenuModule,
     GiftEditModule,
     GiftPriorityModule,
     GiftsRoutingModule,

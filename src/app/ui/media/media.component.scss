@@ -9,13 +9,24 @@
 }
 
 ::ng-deep {
-  .gd-media {
+  .gd-media-md {
     & > gd-media-thumbnail {
       padding-right: $gd-spacing;
     }
 
     & > gd-media-content + gd-media-thumbnail {
       padding-left: $gd-spacing;
+      padding-right: 0;
+    }
+  }
+
+  .gd-media-xs {
+    & > gd-media-thumbnail {
+      padding-right: $gd-spacing-xs;
+    }
+
+    & > gd-media-content + gd-media-thumbnail {
+      padding-left: $gd-spacing-xs;
       padding-right: 0;
     }
   }

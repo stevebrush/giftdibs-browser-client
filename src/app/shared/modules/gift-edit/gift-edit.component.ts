@@ -15,13 +15,7 @@ import {
 } from '@angular/forms';
 
 import {
-  Router
-} from '@angular/router';
-
-import {
   AlertService,
-  ConfirmAnswer,
-  ConfirmService,
   ModalClosedEventArgs,
   ModalInstance,
   ModalService,
@@ -88,12 +82,10 @@ export class GiftEditComponent implements OnInit {
     private assetsService: AssetsService,
     private changeDetector: ChangeDetectorRef,
     private formBuilder: FormBuilder,
-    private confirmService: ConfirmService,
     private context: GiftEditContext,
     private giftService: GiftService,
     private modal: ModalInstance<any>,
     private modalService: ModalService,
-    private router: Router,
     private urlScraperService: UrlScraperService
   ) { }
 
@@ -156,6 +148,9 @@ export class GiftEditComponent implements OnInit {
 
     const formData: Gift = this.giftForm.value;
 
+    const priority = formData.priority + '';
+    formData.priority = parseInt(priority, 10);
+
     // Remove the image from the form data since it will be handled
     // with a different request.
     delete formData.imageUrl;
@@ -199,10 +194,6 @@ export class GiftEditComponent implements OnInit {
         this.enableForm();
       }
     );
-  }
-
-  public deleteGift(): void {
-    this.confirmDelete();
   }
 
   public onCancelClicked(): void {
@@ -335,39 +326,6 @@ export class GiftEditComponent implements OnInit {
       }
 
       this.enableForm();
-    });
-  }
-
-  private confirmDelete(): void {
-    if (this.giftForm.disabled) {
-      return;
-    }
-
-    this.disableForm();
-
-    this.confirmService.confirm({
-      message: 'Are you sure?'
-    }, (answer: ConfirmAnswer) => {
-      if (answer.type === 'okay') {
-        this.giftService.remove(this.gift.id)
-          .subscribe(
-            () => {
-              this.modal.close('save');
-              this.alertService.success('Gift successfully deleted.', true);
-              this.router.navigate(['/users', this.gift.user.id]);
-            },
-            (err: any) => {
-              const error = err.error;
-              this.alertService.error(error.message);
-              this.errors = error.errors;
-              this.giftForm.enable();
-              this.changeDetector.markForCheck();
-            }
-          );
-      } else {
-        this.giftForm.enable();
-        this.changeDetector.markForCheck();
-      }
     });
   }
 

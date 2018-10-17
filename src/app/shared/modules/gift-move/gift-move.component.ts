@@ -12,10 +12,6 @@ import {
 } from '@angular/forms';
 
 import {
-  Observable
-} from 'rxjs';
-
-import {
   AlertService,
   ModalInstance
 } from '@app/ui';
@@ -42,16 +38,15 @@ import {
 @Component({
   selector: 'gd-gift-edit',
   templateUrl: './gift-move.component.html',
+  styleUrls: ['./gift-move.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GiftMoveComponent implements OnInit {
   public errors: any[];
   public gift: Gift;
   public moveForm: FormGroup;
-  public isLoading = false;
-  public wishLists: Observable<WishList[]>;
-
-  private wishList: WishList;
+  public isLoading = true;
+  public wishLists: WishList[];
 
   constructor(
     private alertService: AlertService,
@@ -67,11 +62,17 @@ export class GiftMoveComponent implements OnInit {
   public ngOnInit(): void {
     this.createForm();
     this.gift = this.context.gift;
-    this.wishList = this.context.wishList;
+
     this.moveForm.reset({
-      wishListId: this.wishList.id
+      wishListId: this.context.wishListId
     });
-    this.wishLists = this.wishListService.getAllByUserId(this.sessionService.user.id);
+
+    this.wishListService.getAllByUserId(this.sessionService.user.id)
+      .subscribe((wishLists) => {
+        this.wishLists = wishLists;
+        this.isLoading = false;
+        this.changeDetector.markForCheck();
+      });
   }
 
   public submit(): void {
@@ -85,8 +86,11 @@ export class GiftMoveComponent implements OnInit {
     this.changeDetector.markForCheck();
 
     const wishListId = this.moveForm.value.wishListId;
+    const formData = {
+      wishList: { id: wishListId }
+    };
 
-    this.giftService.update(this.gift.id, { wishListId })
+    this.giftService.update(this.gift.id, formData)
       .subscribe(
         (result: any) => {
           this.modal.close('save', result.data);

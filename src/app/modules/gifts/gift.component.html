@@ -2,10 +2,10 @@
 
 <div class="gd-canvas">
   <div class="gd-container">
-    <p>
-      <a routerLink="/wish-lists/{{ gift?.wishListId }}">
+    <p *ngIf="gift">
+      <a routerLink="/wish-lists/{{ gift.wishList.id }}">
         <gd-icon icon="chevron-left"></gd-icon>
-        Back
+        {{ gift.wishList.name }}
       </a>
     </p>
   </div>
@@ -44,10 +44,15 @@
                 </button>
                 <button
                   class="gd-button gd-button-default"
+                  title="Toggle gift options"
                   type="button"
-                  (click)="openGiftEditModal()"
+                  gdDropdownMenuTrigger
+                  [menuItems]="menuItems"
                 >
-                  Edit
+                  <gd-icon
+                    icon="ellipsis-h"
+                  >
+                  </gd-icon>
                 </button>
               </div>
 
@@ -73,7 +78,9 @@
               </gd-dib-controls>
             </ng-container>
 
-            <p *ngIf="gift.notes">
+            <p *ngIf="gift.notes"
+              class="gd-gift-detail-notes"
+            >
               {{ gift.notes }}
             </p>
 
@@ -97,10 +104,6 @@
                   {{ gift.quantity }}
                   <span *ngIf="quantityRemaining !== undefined">({{ quantityRemaining }} available)</span>
                 </td>
-              </tr>
-              <tr>
-                <th>Updated</th>
-                <td>{{ gift.dateUpdated | date }}</td>
               </tr>
             </table>
 

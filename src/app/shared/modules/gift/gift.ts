@@ -27,5 +27,8 @@ export interface Gift {
   priority?: number;
   quantity?: number;
   user?: User;
-  wishListId?: string;
+  wishList?: {
+    id?: string;
+    name?: string;
+  };
 }

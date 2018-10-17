@@ -32,30 +32,24 @@
           [priority]="gift.priority"
         >
         </gd-gift-priority>
+        <div *ngIf="showUserInfo"
+          class="gd-text-deemphasized gd-gift-preview-user-info"
+        >
+          <a routerLink="/users/{{ gift.user.id }}">{{ gift.user.firstName }} {{ gift.user.lastName }}</a>
+        </div>
         <div class="gd-text-price">
           ${{ gift.budget || '--' }}
           <span *ngIf="gift.quantity > 1">ea.</span>
         </div>
-        <div class="gd-text-deemphasized gd-gift-preview-user-info">
-          <ng-template [ngIf]="showUserInfo">
-            <a routerLink="/users/{{ gift.user.id }}">{{ gift.user.firstName }} {{ gift.user.lastName }}</a> updated on
-          </ng-template>
-          <time>
-            {{ gift.dateUpdated | date }}<br>
-          </time>
-          <small>
-            {{ gift.comments.length }} comments
-          </small>
-        </div>
       </gd-media-body>
     </gd-media-content>
-    <gd-media-controls>
+    <!-- <gd-media-controls>
       <gd-dib-controls
         [gift]="gift"
         (change)="onDibChange($event)"
       >
       </gd-dib-controls>
-    </gd-media-controls>
+    </gd-media-controls> -->
   </gd-media>
   <!-- <gd-card
     [route]="{

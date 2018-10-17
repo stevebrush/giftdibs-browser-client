@@ -170,13 +170,17 @@
         >
           Priority
         </label>
-        <input
-          autocomplete="off"
+        <select
           class="gd-form-control"
           formControlName="priority"
           id="gd-gift-edit-priority"
-          type="number"
-        />
+        >
+          <option value="5">Very high</option>
+          <option value="4">High</option>
+          <option value="3">Medium</option>
+          <option value="2">Low</option>
+          <option value="1">Very low</option>
+        </select>
       </gd-form-field>
 
       <gd-form-field [errors]="errors">
@@ -197,42 +201,23 @@
     </form>
   </gd-modal-body>
   <gd-modal-footer>
-    <gd-row>
-      <gd-column
-        screenSmall="3"
+    <div class="gd-button-group">
+      <button
+        class="gd-button gd-button-primary"
+        type="button"
+        [disabled]="giftForm.disabled"
+        (click)="submit()"
       >
-        <button *ngIf="gift"
-          class="gd-button gd-button-danger"
-          type="button"
-          [disabled]="giftForm.disabled"
-          (click)="deleteGift()"
-        >
-          Delete
-        </button>
-      </gd-column>
-      <gd-column
-        style="text-align:right;"
-        screenSmall="9"
+        Save
+      </button>
+      <button
+        class="gd-button gd-button-default"
+        type="button"
+        [disabled]="giftForm.disabled"
+        (click)="onCancelClicked()"
       >
-        <div class="gd-button-group">
-          <button
-            class="gd-button gd-button-primary"
-            type="button"
-            [disabled]="giftForm.disabled"
-            (click)="submit()"
-          >
-            Save
-          </button>
-          <button
-            class="gd-button gd-button-default"
-            type="button"
-            [disabled]="giftForm.disabled"
-            (click)="onCancelClicked()"
-          >
-            Cancel
-          </button>
-        </div>
-      </gd-column>
-    </gd-row>
+        Cancel
+      </button>
+    </div>
   </gd-modal-footer>
 </gd-modal>

@@ -24,11 +24,11 @@ import {
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     /* tslint:disable-next-line:no-forward-ref */
-    useExisting: forwardRef(() => GdImageUploaderComponent),
+    useExisting: forwardRef(() => ImageUploaderComponent),
     multi: true
   }]
 })
-export class GdImageUploaderComponent implements OnDestroy, ControlValueAccessor {
+export class ImageUploaderComponent implements OnDestroy, ControlValueAccessor {
   @Input()
   public allowUrl = true;
 

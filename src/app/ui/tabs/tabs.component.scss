@@ -5,19 +5,3 @@
     margin-bottom: $gd-spacing;
   }
 }
-
-.gd-button {
-  background-color: transparent;
-  color: $gd-text-color-deemphasized;
-
-  &:hover,
-  &:focus {
-    text-decoration: underline;
-    color: $gd-text-color-dark;
-  }
-}
-
-.gd-tab-selected {
-  background-color: $gd-color-neutral-lighter;
-  color: $gd-text-color-dark;
-}

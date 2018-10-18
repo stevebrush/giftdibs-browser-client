@@ -11,10 +11,6 @@ import {
   TabComponent
 } from './tab.component';
 
-import {
-  TabsOutletComponent
-} from './tabs-outlet.component';
-
 let nextId = 0;
 
 @Component({
@@ -36,9 +32,6 @@ export class TabsComponent implements AfterContentInit {
 
   @ContentChildren(TabComponent)
   private tabComponents: QueryList<TabComponent>;
-
-  @Input()
-  private tabsOutlet: TabsOutletComponent;
 
   public ngAfterContentInit(): void {
     this.tabButtons = this.tabComponents.map((tabComponent, i) => {
@@ -65,14 +58,6 @@ export class TabsComponent implements AfterContentInit {
 
       if (isSelected) {
         tabComponent.tabClick.emit();
-
-        if (this.tabsOutlet) {
-          // TODO: This overwrites the content of the tab outlet.
-          // Perhaps we should add all tab contents and hide the ones that arent' active?
-          this.tabsOutlet.attach(tabComponent.tabContent);
-          this.tabsOutlet.ariaLabelledBy = tabComponent.ariaLabelledBy;
-          this.tabsOutlet.tabPanelId = tabComponent.tabPanelId;
-        }
       }
     });
   }

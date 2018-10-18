@@ -51,6 +51,14 @@ export class WishListService {
       );
   }
 
+  public getArchivedByUserId(userId: string): Observable<WishList[]> {
+    return this.http.get(`${this.resourceUrl}/users/${userId}/wish-lists/archived`)
+      .pipe(
+        map((result: any) => result.data.wishLists),
+        share()
+      );
+  }
+
   public remove(wishListId: string): Observable<any> {
     return this.http.delete(`${this.resourceUrl}/wish-lists/${wishListId}`);
   }

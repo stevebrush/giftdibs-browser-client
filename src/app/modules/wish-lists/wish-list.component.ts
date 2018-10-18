@@ -60,22 +60,7 @@ export class WishListComponent implements OnInit, OnDestroy {
   public isLoading = true;
   public isSessionUser = false;
   public wishList: WishList;
-
-  public menuItems: DropdownMenuItem[] = [
-    {
-      label: 'Edit',
-      action: () => this.openWishListEditModal()
-    },
-    {
-      label: 'Archive',
-      action: () => this.archiveWishList(),
-      addSeparatorAfter: true
-    },
-    {
-      label: 'Delete',
-      action: () => this.confirmDelete()
-    }
-  ];
+  public menuItems: DropdownMenuItem[];
 
   private ngUnsubscribe = new Subject();
 
@@ -106,6 +91,29 @@ export class WishListComponent implements OnInit, OnDestroy {
         (wishList: WishList) => {
           this.wishList = wishList;
           this.isSessionUser = this.sessionService.isSessionUser(this.wishList.user.id);
+
+          this.menuItems = [
+            {
+              label: 'Edit',
+              action: () => this.openWishListEditModal()
+            },
+            {
+              label: (this.wishList.isArchived) ? 'Unarchive' : 'Archive',
+              action: () => {
+                if (this.wishList.isArchived) {
+                  this.unarchiveWishList();
+                } else {
+                  this.archiveWishList();
+                }
+              },
+              addSeparatorAfter: true
+            },
+            {
+              label: 'Delete',
+              action: () => this.confirmDelete()
+            }
+          ];
+
           this.isLoading = false;
           this.changeDetector.markForCheck();
         },
@@ -190,6 +198,23 @@ export class WishListComponent implements OnInit, OnDestroy {
         () => {
           this.alertService.success('Wish list successfully archived.', true);
           this.router.navigate(['/', 'users', this.wishList.user.id]);
+        },
+        (err: any) => {
+          this.alertService.error(err.error.message);
+        }
+      );
+  }
+
+  private unarchiveWishList(): void {
+    const formData: WishList = {
+      isArchived: false
+    };
+
+    this.wishListService.update(this.wishList.id, formData)
+      .subscribe(
+        () => {
+          this.alertService.success('Wish list successfully unarchived.', true);
+          this.refreshWishList();
         },
         (err: any) => {
           this.alertService.error(err.error.message);

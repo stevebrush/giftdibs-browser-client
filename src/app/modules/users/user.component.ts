@@ -57,6 +57,7 @@ import { WishListCreateComponent } from '@app/shared/modules/wish-list-create/wi
 export class UserComponent implements OnInit, OnDestroy {
   public isLoading = true;
   public isSessionUser = false;
+  public isArchivedViewActive = false;
   public user: User;
 
   // public get privateWishLists(): { wishLists: WishList[] } {
@@ -123,6 +124,7 @@ export class UserComponent implements OnInit, OnDestroy {
 
   public showActive(): void {
     this.isLoading = true;
+    this.isArchivedViewActive = false;
     this.changeDetector.markForCheck();
 
     this.wishListService.getAllByUserId(this.user.id)
@@ -135,9 +137,10 @@ export class UserComponent implements OnInit, OnDestroy {
 
   public showArchived(): void {
     this.isLoading = true;
+    this.isArchivedViewActive = true;
     this.changeDetector.markForCheck();
 
-    this.wishListService.getAllByUserId(this.user.id)
+    this.wishListService.getArchivedByUserId(this.user.id)
       .subscribe((wishLists: WishList[]) => {
         this._wishLists = wishLists;
         this.isLoading = false;

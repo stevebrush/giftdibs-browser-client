@@ -36,29 +36,33 @@
         </gd-media-thumbnail>
       </gd-media>
 
-      <gd-tabs
-        ariaLabel="Wish lists status"
-        [tabsOutlet]="tabsOutlet"
-      >
-        <gd-tab
-          tabHeading="Wish lists"
-          (tabClick)="showActive()"
+      <div class="gd-button-group">
+        <button
+          class="gd-button gd-button-tab"
+          type="button"
+          [ngClass]="{
+            'gd-button-tab-selected': !isArchivedViewActive
+          }"
+          (click)="showActive()"
         >
-          <ng-container *ngTemplateOutlet="wishListsTemplate;context:wishLists">
-          </ng-container>
-        </gd-tab>
-        <gd-tab
-          tabHeading="Archived"
-          (tabClick)="showArchived()"
+          Wish lists
+        </button>
+        <button
+          class="gd-button gd-button-tab"
+          type="button"
+          [ngClass]="{
+            'gd-button-tab-selected': isArchivedViewActive
+          }"
+          (click)="showArchived()"
         >
-          <ng-container *ngTemplateOutlet="wishListsTemplate;context:wishLists">
-          </ng-container>
-        </gd-tab>
-      </gd-tabs>
+          Archived
+        </button>
+      </div>
     </div>
 
     <div class="gd-container-fluid gd-spacing-padding-even-large">
-      <gd-tabs-outlet #tabsOutlet></gd-tabs-outlet>
+      <ng-container *ngTemplateOutlet="wishListsTemplate;context:wishLists">
+      </ng-container>
     </div>
   </ng-template>
 </div>

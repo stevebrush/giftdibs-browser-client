@@ -1,7 +1,8 @@
 <gd-wait *ngIf="isLoading"></gd-wait>
+
 <div
   class="gd-user"
-  [gdHideUntil]="!isLoading"
+  [gdHideUntil]="user"
 >
   <ng-template [ngIf]="user">
     <div class="gd-user-header gd-container gd-spacing-padding-even-large">
@@ -34,55 +35,74 @@
           </gd-thumbnail>
         </gd-media-thumbnail>
       </gd-media>
+
+      <gd-tabs
+        ariaLabel="Wish lists status"
+        [tabsOutlet]="tabsOutlet"
+      >
+        <gd-tab
+          tabHeading="Wish lists"
+          (tabClick)="showActive()"
+        >
+          <ng-container *ngTemplateOutlet="wishListsTemplate;context:wishLists">
+          </ng-container>
+        </gd-tab>
+        <gd-tab
+          tabHeading="Archived"
+          (tabClick)="showArchived()"
+        >
+          <ng-container *ngTemplateOutlet="wishListsTemplate;context:wishLists">
+          </ng-container>
+        </gd-tab>
+      </gd-tabs>
     </div>
 
     <div class="gd-container-fluid gd-spacing-padding-even-large">
-      <gd-row>
-        <ng-container *ngTemplateOutlet="wishListsTemplate;context:wishLists">
-        </ng-container>
-      </gd-row>
+      <gd-tabs-outlet #tabsOutlet></gd-tabs-outlet>
     </div>
   </ng-template>
 </div>
 
 <ng-template let-wishLists="wishLists" #wishListsTemplate>
-  <gd-column *ngIf="isSessionUser"
-    [screenSmall]="2"
-  >
-    <gd-card
-      (actionClick)="openWishListCreateModal()"
+  <gd-row>
+    <gd-column *ngIf="isSessionUser"
+      [screenSmall]="2"
     >
-      <gd-card-thumbnail>
-        <gd-thumbnail
-          size="fill"
-          icon="none"
-          iconSize="inherit"
-        >
-          <gd-icon-stack>
-            <gd-icon
-              icon="circle fas fa-stack-2x"
-              iconStyle="success"
-            ></gd-icon>
-            <gd-icon
-              icon="plus fas fa-stack-1x fa-inverse"
-            ></gd-icon>
-          </gd-icon-stack>
-        </gd-thumbnail>
-      </gd-card-thumbnail>
-      <gd-card-header>
-        <gd-card-heading>
-          <span class="gd-text-deemphasized">New wish list</span>
-        </gd-card-heading>
-      </gd-card-header>
-    </gd-card>
-  </gd-column>
-  <gd-column *ngFor="let wishList of wishLists"
-    [screenSmall]="2"
-  >
-    <gd-wish-list-preview
-      [wishList]="wishList"
-      (removed)="onWishListRemoved(wishList.id)"
+      <gd-card
+        (actionClick)="openWishListCreateModal()"
+      >
+        <gd-card-thumbnail>
+          <gd-thumbnail
+            size="fill"
+            icon="none"
+            iconSize="inherit"
+          >
+            <gd-icon-stack>
+              <gd-icon
+                icon="circle fas fa-stack-2x"
+                iconStyle="success"
+              ></gd-icon>
+              <gd-icon
+                icon="plus fas fa-stack-1x fa-inverse"
+              ></gd-icon>
+            </gd-icon-stack>
+          </gd-thumbnail>
+        </gd-card-thumbnail>
+        <gd-card-header>
+          <gd-card-heading>
+            <span class="gd-text-deemphasized">New wish list</span>
+          </gd-card-heading>
+        </gd-card-header>
+      </gd-card>
+    </gd-column>
+    <gd-column *ngFor="let wishList of wishLists"
+      [screenSmall]="2"
     >
-    </gd-wish-list-preview>
-  </gd-column>
+      <gd-wish-list-preview
+        [wishList]="wishList"
+        (removed)="onWishListRemoved(wishList.id)"
+      >
+      </gd-wish-list-preview>
+    </gd-column>
+  </gd-row>
 </ng-template>

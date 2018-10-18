@@ -6,7 +6,9 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  Output
+  Output,
+  TemplateRef,
+  ViewChild
 } from '@angular/core';
 
 let nextId = 0;
@@ -23,6 +25,9 @@ export class TabComponent implements OnInit, OnDestroy {
 
   @Output()
   public tabClick = new EventEmitter();
+
+  @ViewChild('tabContent', { read: TemplateRef })
+  public tabContent: TemplateRef<any>;
 
   public get isVisible(): boolean {
     return this._isVisible;

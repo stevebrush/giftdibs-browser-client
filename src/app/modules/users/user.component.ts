@@ -121,6 +121,30 @@ export class UserComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
+  public showActive(): void {
+    this.isLoading = true;
+    this.changeDetector.markForCheck();
+
+    this.wishListService.getAllByUserId(this.user.id)
+      .subscribe((wishLists: WishList[]) => {
+        this._wishLists = wishLists;
+        this.isLoading = false;
+        this.changeDetector.markForCheck();
+      });
+  }
+
+  public showArchived(): void {
+    this.isLoading = true;
+    this.changeDetector.markForCheck();
+
+    this.wishListService.getAllByUserId(this.user.id)
+      .subscribe((wishLists: WishList[]) => {
+        this._wishLists = wishLists;
+        this.isLoading = false;
+        this.changeDetector.markForCheck();
+      });
+  }
+
   public openWishListCreateModal(): void {
     const context = new WishListCreateContext();
 

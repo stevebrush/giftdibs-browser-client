@@ -105,6 +105,14 @@
                   <span *ngIf="quantityRemaining !== undefined">({{ quantityRemaining }} available)</span>
                 </td>
               </tr>
+              <tr>
+                <th>Wish list</th>
+                <td>
+                  <a routerLink="/wish-lists/{{ gift.wishList.id }}">
+                    {{ gift.wishList.name }}
+                  </a>
+                </td>
+              </tr>
             </table>
 
             <gd-media>

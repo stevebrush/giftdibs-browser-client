@@ -6,7 +6,10 @@
       Dibs
     </h1>
 
-    <gd-tabs ariaLabel="Dib status">
+    <gd-tabs
+      ariaLabel="Dib status"
+      [tabsOutlet]="tabsOutlet"
+    >
       <gd-tab
         tabHeading="Active"
         (tabClick)="showActive()"
@@ -22,6 +25,8 @@
         </ng-container>
       </gd-tab>
     </gd-tabs>
+
+    <gd-tabs-outlet #tabsOutlet></gd-tabs-outlet>
   </div>
 </div>
 

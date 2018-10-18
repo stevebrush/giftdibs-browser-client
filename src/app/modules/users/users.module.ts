@@ -33,6 +33,7 @@ import {
   IconModule,
   MediaModule,
   RepeaterModule,
+  TabsModule,
   ThumbnailModule,
   WaitModule
 } from '@app/ui';
@@ -55,6 +56,7 @@ import { UsersComponent } from './users.component';
     MediaModule,
     UsersRoutingModule,
     RepeaterModule,
+    TabsModule,
     ThumbnailModule,
     UserModule,
     WaitModule,

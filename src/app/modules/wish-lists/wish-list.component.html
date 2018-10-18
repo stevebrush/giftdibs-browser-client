@@ -9,19 +9,51 @@
         <h1>
           {{ wishList.name }}
         </h1>
+
         <p class="gd-text-deemphasized">
           {{ wishList.gifts.length }} items&nbsp;&bull;
           Privacy:&nbsp;{{ wishList.privacy.type }}&nbsp;&bull;
           {{ wishList.dateUpdated | date }}
         </p>
+
+        <gd-notice *ngIf="wishList.isArchived"
+          noticeType="info"
+        >
+          <gd-notice-heading>
+            This wish list is archived
+          </gd-notice-heading>
+          Archived wish lists are not viewable by anyone but you.
+        </gd-notice>
+
         <ng-container *ngIf="isSessionUser">
-          <button
+          <div class="gd-button-group">
+            <button *ngIf="isSessionUser"
+              class="gd-button gd-button-primary"
+              type="button"
+              (click)="openGiftCreateModal()"
+            >
+              Add item
+            </button>
+            <button
+              class="gd-button gd-button-default"
+              title="Toggle wish list options"
+              type="button"
+              gdDropdownMenuTrigger
+              [menuItems]="menuItems"
+            >
+              <gd-icon
+                icon="ellipsis-h"
+              >
+              </gd-icon>
+            </button>
+          </div>
+          <!-- <button
             class="gd-button gd-button-default"
             type="button"
             (click)="openWishListEditModal()"
           >
             Edit wish list
-          </button>
+          </button> -->
         </ng-container>
       </gd-media-content>
       <gd-media-thumbnail>
@@ -39,13 +71,13 @@
 
   <div class="gd-wish-list-body gd-container gd-spacing-padding-even-large">
 
-    <button *ngIf="isSessionUser"
+    <!-- <button *ngIf="isSessionUser"
       class="gd-button gd-button-primary"
       type="button"
       (click)="openGiftCreateModal()"
     >
       Add item
-    </button>
+    </button> -->
 
     <gd-repeater>
       <gd-repeater-item *ngFor="let gift of wishList.gifts">

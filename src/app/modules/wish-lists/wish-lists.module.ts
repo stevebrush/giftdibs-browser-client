@@ -24,8 +24,11 @@ import {
 
 import {
   CardModule,
+  ConfirmModule,
+  DropdownMenuModule,
   IconModule,
   MediaModule,
+  NoticeModule,
   RepeaterModule,
   ThumbnailModule,
   WaitModule
@@ -38,10 +41,13 @@ import { WishListsRoutingModule } from './wish-lists-routing.module';
   imports: [
     CardModule,
     CommonModule,
+    ConfirmModule,
+    DropdownMenuModule,
     GiftEditModule,
     GiftPreviewModule,
     IconModule,
     MediaModule,
+    NoticeModule,
     RepeaterModule,
     ThumbnailModule,
     WaitModule,

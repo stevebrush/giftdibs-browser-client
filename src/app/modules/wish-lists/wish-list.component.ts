@@ -42,6 +42,9 @@ import {
 
 import {
   AlertService,
+  ConfirmAnswer,
+  ConfirmService,
+  DropdownMenuItem,
   ModalClosedEventArgs,
   ModalService,
   ModalSize
@@ -58,12 +61,29 @@ export class WishListComponent implements OnInit, OnDestroy {
   public isSessionUser = false;
   public wishList: WishList;
 
+  public menuItems: DropdownMenuItem[] = [
+    {
+      label: 'Edit',
+      action: () => this.openWishListEditModal()
+    },
+    {
+      label: 'Archive',
+      action: () => this.archiveWishList(),
+      addSeparatorAfter: true
+    },
+    {
+      label: 'Delete',
+      action: () => this.confirmDelete()
+    }
+  ];
+
   private ngUnsubscribe = new Subject();
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
+    private confirmService: ConfirmService,
     private modalService: ModalService,
     private router: Router,
     private sessionService: SessionService,
@@ -101,25 +121,6 @@ export class WishListComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
-  public openWishListEditModal(): void {
-    const context = new WishListEditContext();
-    context.wishList = this.wishList;
-
-    const modalInstance = this.modalService.open(WishListEditComponent, {
-      providers: [{
-        provide: WishListEditContext,
-        useValue: context
-      }],
-      size: ModalSize.Small
-    });
-
-    modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
-      if (args.reason === 'save') {
-        this.refreshWishList();
-      }
-    });
-  }
-
   public openGiftCreateModal(): void {
     const context = new GiftEditContext(undefined, this.wishList.id);
 
@@ -139,6 +140,61 @@ export class WishListComponent implements OnInit, OnDestroy {
         this.refreshWishList();
       }
     });
+  }
+
+  private openWishListEditModal(): void {
+    const context = new WishListEditContext();
+    context.wishList = this.wishList;
+
+    const modalInstance = this.modalService.open(WishListEditComponent, {
+      providers: [{
+        provide: WishListEditContext,
+        useValue: context
+      }],
+      size: ModalSize.Small
+    });
+
+    modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
+      if (args.reason === 'save') {
+        this.refreshWishList();
+      }
+    });
+  }
+
+  private confirmDelete(): void {
+    this.confirmService.confirm({
+      message: 'Are you sure you want to delete this wish list?'
+    }, (answer: ConfirmAnswer) => {
+      if (answer.type === 'okay') {
+        this.wishListService.remove(this.wishList.id)
+          .subscribe(
+            () => {
+              this.alertService.success('Wish list successfully deleted.', true);
+              this.router.navigate(['/', 'users', this.wishList.user.id]);
+            },
+            (err: any) => {
+              this.alertService.error(err.error.message);
+            }
+          );
+      }
+    });
+  }
+
+  private archiveWishList(): void {
+    const formData: WishList = {
+      isArchived: true
+    };
+
+    this.wishListService.update(this.wishList.id, formData)
+      .subscribe(
+        () => {
+          this.alertService.success('Wish list successfully archived.', true);
+          this.router.navigate(['/', 'users', this.wishList.user.id]);
+        },
+        (err: any) => {
+          this.alertService.error(err.error.message);
+        }
+      );
   }
 
   private refreshWishList(): void {

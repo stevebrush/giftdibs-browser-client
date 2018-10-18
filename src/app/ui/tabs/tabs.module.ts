@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { TabComponent } from './tab.component';
+import { TabsOutletComponent } from './tabs-outlet.component';
 import { TabsComponent } from './tabs.component';
 
 @NgModule({
@@ -10,10 +11,12 @@ import { TabsComponent } from './tabs.component';
     CommonModule
   ],
   exports: [
+    TabsOutletComponent,
     TabsComponent,
     TabComponent
   ],
   declarations: [
+    TabsOutletComponent,
     TabsComponent,
     TabComponent
   ]

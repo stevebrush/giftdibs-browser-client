@@ -1,14 +1,11 @@
-<!-- TODO: move this to tabs-outlet? -->
 <div
+  class="gd-tabs-outlet"
   role="tabpanel"
   tabindex="0"
   [attr.aria-labelledby]="ariaLabelledBy"
   [attr.id]="tabPanelId"
-  [ngClass]="{
-    'gd-tab-hidden': !isVisible
-  }"
 >
-  <ng-template #tabContent>
+  <ng-container #target>
     <ng-content></ng-content>
-  </ng-template>
+  </ng-container>
 </div>

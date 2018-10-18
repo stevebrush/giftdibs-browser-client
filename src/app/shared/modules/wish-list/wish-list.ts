@@ -11,9 +11,10 @@ import {
 } from './wish-list-privacy';
 
 export interface WishList {
-  id?: string;
   gifts?: Gift[];
-  name: string;
+  id?: string;
+  isArchived?: boolean;
+  name?: string;
   privacy?: WishListPrivacy;
-  user: User;
+  user?: User;
 }

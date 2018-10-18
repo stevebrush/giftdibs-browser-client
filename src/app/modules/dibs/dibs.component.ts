@@ -22,6 +22,7 @@ import {
 export class DibsComponent implements OnInit {
   public recipients: any;
   public isLoading = true;
+  public isDeliveredViewActive = false;
 
   constructor(
     private changeDetector: ChangeDetectorRef,
@@ -46,6 +47,7 @@ export class DibsComponent implements OnInit {
 
   private fetchRecipients(isDelivered = false): void {
     this.isLoading = true;
+    this.isDeliveredViewActive = isDelivered;
     this.changeDetector.markForCheck();
 
     this.dibService.getAllRecipients(isDelivered)

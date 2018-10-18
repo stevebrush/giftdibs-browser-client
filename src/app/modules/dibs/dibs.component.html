@@ -6,24 +6,31 @@
       Dibs
     </h1>
 
-    <gd-tabs
-      ariaLabel="Dib status"
-    >
-      <gd-tab
-        tabHeading="Active"
-        (tabClick)="showActive()"
+    <div class="gd-button-group gd-button-group-tabs">
+      <button
+        class="gd-button gd-button-tab"
+        type="button"
+        [ngClass]="{
+          'gd-button-tab-selected': !isDeliveredViewActive
+        }"
+        (click)="showActive()"
       >
-        <ng-container *ngTemplateOutlet="recipientsTemplate;context:{recipients:recipients}">
-        </ng-container>
-      </gd-tab>
-      <gd-tab
-        tabHeading="Delivered"
-        (tabClick)="showDelivered()"
+        Active
+      </button>
+      <button
+        class="gd-button gd-button-tab"
+        type="button"
+        [ngClass]="{
+          'gd-button-tab-selected': isDeliveredViewActive
+        }"
+        (click)="showDelivered()"
       >
-        <ng-container *ngTemplateOutlet="recipientsTemplate;context:{recipients:recipients}">
-        </ng-container>
-      </gd-tab>
-    </gd-tabs>
+        Archived
+      </button>
+    </div>
+
+    <ng-container *ngTemplateOutlet="recipientsTemplate;context:{recipients:recipients}">
+    </ng-container>
 
   </div>
 </div>

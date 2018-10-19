@@ -1,0 +1,26 @@
+@import '../../../styles/mixins';
+
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.gd-confirm {
+  background-color: #fff;
+  padding: $gd-spacing-padding-squish;
+  max-width: 500px;
+  position: relative;
+  box-shadow: $gd-box-shadow-lg;
+  border-radius: $gd-border-radius;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.gd-confirm-message {
+  font-weight: $gd-font-weight-bold;
+  margin: 0 0 $gd-spacing;
+}

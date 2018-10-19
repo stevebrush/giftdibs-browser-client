@@ -1,0 +1,24 @@
+<gd-wait *ngIf="isLoading"></gd-wait>
+
+<h1>
+  My Community
+</h1>
+
+<gd-repeater>
+  <gd-repeater-item *ngFor="let gift of gifts">
+    <gd-gift-preview
+      [gift]="gift"
+      [showUserInfo]="true"
+    >
+    </gd-gift-preview>
+  </gd-repeater-item>
+</gd-repeater>
+
+<button *ngIf="hasMore"
+  class="gd-button gd-button-default gd-button-block"
+  type="button"
+  [disabled]="isLoading"
+  (click)="loadMoreResults()"
+>
+  Show more results
+</button>

@@ -1,0 +1,12 @@
+@import '../../../styles/mixins';
+
+.gd-modal-header {
+  padding: $gd-spacing;
+  border-bottom: 1px solid $gd-color-neutral-lightest;
+}
+
+.gd-modal-header-button-close {
+  margin-top: -$gd-spacing-lg;
+  margin-bottom: -$gd-spacing-lg;
+  margin-right: -$gd-spacing-lg;
+}

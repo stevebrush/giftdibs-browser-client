@@ -1,0 +1,128 @@
+<gd-wait *ngIf="isLoading"></gd-wait>
+
+<div class="gd-canvas">
+  <div class="gd-container-sm gd-spacing-padding-even-large">
+    <div class="gd-detail-pane">
+      <h1>
+        Account settings
+      </h1>
+
+      <form
+        aria-label="Account settings"
+        class="gd-form"
+        [formGroup]="settingsForm"
+        [gdHideUntil]="isReady"
+        (ngSubmit)="submit()"
+        novalidate
+      >
+        <gd-form-field>
+          <label class="gd-control-label">
+            Profile image
+          </label>
+          <gd-image-uploader
+            formControlName="avatarUrl"
+            [allowUrl]="false"
+            (selectFile)="onSelectFile($event)"
+            (removeFile)="onRemoveFile()"
+          >
+          </gd-image-uploader>
+        </gd-form-field>
+        <gd-row>
+          <gd-column screenSmall="6">
+            <gd-form-field [errors]="errors">
+              <label
+                class="gd-control-label"
+                for="gd-settings-first-name"
+              >
+                First name
+              </label>
+              <input
+                type="text"
+                class="gd-form-control"
+                id="gd-settings-first-name"
+                formControlName="firstName"
+                autocomplete="off"
+              />
+            </gd-form-field>
+          </gd-column>
+          <gd-column screenSmall="6">
+            <gd-form-field [errors]="errors">
+              <label
+                class="gd-control-label"
+                for="gd-settings-last-name"
+              >
+                Last name
+              </label>
+              <input
+                type="text"
+                class="gd-form-control"
+                id="gd-settings-last-name"
+                formControlName="lastName"
+                autocomplete="off"
+              />
+            </gd-form-field>
+          </gd-column>
+        </gd-row>
+
+        <gd-form-field [errors]="errors">
+          <label
+            class="gd-control-label"
+            for="gd-settings-email-address"
+          >
+            Email
+          </label>
+          <input
+            type="email"
+            class="gd-form-control"
+            id="gd-settings-email-address"
+            formControlName="emailAddress"
+            autocomplete="off"
+          />
+        </gd-form-field>
+
+        <!-- <gd-form-field [errors]="errors">
+          <label
+            class="gd-control-label"
+          >
+            Birthday
+            <gd-date-picker
+              formControlName="birthday"
+            >
+            </gd-date-picker>
+          </label>
+        </gd-form-field> -->
+
+        <button
+          class="gd-button gd-button-primary"
+          type="submit"
+          [disabled]="settingsForm.disabled"
+        >
+          Save changes
+        </button>
+      </form>
+
+      <p>
+        <button *ngIf="sessionUser.facebookId"
+          class="gd-button gd-button-default gd-button-unlink-facebook"
+          type="button"
+          [disabled]="settingsForm.disabled"
+          (click)="unlinkFacebookAccount()"
+        >
+          <gd-icon icon="facebook-square fab"></gd-icon>
+          Unlink Facebook account
+        </button>
+
+        <gd-facebook-login-button *ngIf="!sessionUser.facebookId"
+          buttonText="Link Facebook account"
+          [disabled]="settingsForm.disabled"
+          (click)="disableForm()"
+          (success)="onFacebookLoginSuccess($event)"
+        >
+        </gd-facebook-login-button>
+      </p>
+
+      <p><a routerLink="/account/reset-password">Change password...</a></p>
+      <p><a routerLink="/account/delete">Delete account...</a></p>
+    </div>
+  </div>
+</div>

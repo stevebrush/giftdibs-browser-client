@@ -1,0 +1,46 @@
+<div class="gd-image-uploader">
+  <gd-media>
+    <gd-media-thumbnail>
+      <gd-thumbnail
+        size="md"
+        [imageSource]="imageSource"
+      >
+      </gd-thumbnail>
+    </gd-media-thumbnail>
+    <gd-media-content>
+      <gd-media-body>
+        <div class="gd-button-group">
+          <button
+            class="gd-button gd-button-default"
+            type="button"
+            (click)="triggerFileSelect()"
+          >
+            Select image...
+          </button>
+          <button *ngIf="allowUrl"
+            class="gd-button gd-button-default"
+            type="button"
+            (click)="triggerUrlSelect()"
+          >
+            From URL...
+          </button>
+          <button *ngIf="imageSource"
+            class="gd-button gd-button-default"
+            type="button"
+            (click)="clearSelection()"
+          >
+            Remove
+          </button>
+          <input
+            aria-label="Avatar URL"
+            class="gd-screen-reader-only"
+            tabindex="-1"
+            type="file"
+            (change)="onFileSelected($event)"
+            #fileInput
+          />
+        </div>
+      </gd-media-body>
+    </gd-media-content>
+  </gd-media>
+</div>

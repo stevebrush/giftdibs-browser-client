@@ -1,0 +1,124 @@
+<gd-wait *ngIf="isLoading"></gd-wait>
+
+<div *ngIf="!isLoading && wishList"
+  class="gd-wish-list"
+>
+  <div class="gd-wish-list-banner gd-container gd-spacing-padding-even-large">
+    <gd-media>
+      <gd-media-content>
+        <h1>
+          {{ wishList.name }}
+        </h1>
+
+        <p class="gd-text-deemphasized">
+          {{ wishList.gifts.length }} items&nbsp;&bull;
+          Privacy:&nbsp;{{ wishList.privacy.type }}&nbsp;&bull;
+          {{ wishList.dateUpdated | date }}
+        </p>
+
+        <gd-notice *ngIf="wishList.isArchived"
+          noticeType="info"
+        >
+          <gd-notice-heading>
+            This wish list is archived
+          </gd-notice-heading>
+          While archived wish lists still exist, they do not appear on the home page or on your profile.
+        </gd-notice>
+
+        <ng-container *ngIf="isSessionUser">
+          <div class="gd-button-group">
+            <button *ngIf="isSessionUser"
+              class="gd-button gd-button-primary"
+              type="button"
+              (click)="openGiftCreateModal()"
+            >
+              Add item
+            </button>
+            <button
+              class="gd-button gd-button-default"
+              title="Toggle wish list options"
+              type="button"
+              gdDropdownMenuTrigger
+              [menuItems]="menuItems"
+            >
+              <gd-icon
+                icon="ellipsis-h"
+              >
+              </gd-icon>
+            </button>
+          </div>
+          <!-- <button
+            class="gd-button gd-button-default"
+            type="button"
+            (click)="openWishListEditModal()"
+          >
+            Edit wish list
+          </button> -->
+        </ng-container>
+      </gd-media-content>
+      <gd-media-thumbnail>
+        <gd-thumbnail
+          type="user"
+          size="md"
+          title="{{ wishList.user.firstName }} {{ wishList.user.lastName }}"
+          [imageSource]="wishList.user.avatarUrl"
+          [route]="{ commands: ['/users', wishList.user.id] }"
+        >
+        </gd-thumbnail>
+      </gd-media-thumbnail>
+    </gd-media>
+  </div>
+
+  <div class="gd-wish-list-body gd-container gd-spacing-padding-even-large">
+
+    <!-- <button *ngIf="isSessionUser"
+      class="gd-button gd-button-primary"
+      type="button"
+      (click)="openGiftCreateModal()"
+    >
+      Add item
+    </button> -->
+
+    <gd-repeater>
+      <gd-repeater-item *ngFor="let gift of wishList.gifts">
+        <gd-gift-preview
+          [gift]="gift"
+        >
+        </gd-gift-preview>
+      </gd-repeater-item>
+    </gd-repeater>
+
+    <!-- <gd-row>
+      <gd-column *ngIf="isSessionUser"
+        [screenSmall]="2"
+      >
+        <gd-card
+          (actionClick)="openGiftCreateModal()"
+        >
+          <gd-card-thumbnail>
+            <gd-thumbnail
+              size="fill"
+              icon="none"
+              iconSize="inherit"
+            >
+              <gd-icon-stack>
+                <gd-icon
+                  icon="circle fas fa-stack-2x"
+                  iconStyle="success"
+                ></gd-icon>
+                <gd-icon
+                  icon="plus fas fa-stack-1x fa-inverse"
+                ></gd-icon>
+              </gd-icon-stack>
+            </gd-thumbnail>
+          </gd-card-thumbnail>
+          <gd-card-header>
+            <gd-card-heading>
+              <span class="gd-text-deemphasized">Add item</span>
+            </gd-card-heading>
+          </gd-card-header>
+        </gd-card>
+      </gd-column>
+    </gd-row> -->
+  </div>
+</div>

@@ -1,0 +1,90 @@
+@import '../../../styles/mixins';
+
+:host {
+  display: flex;
+  flex-grow: 1;
+  height: 100%;
+}
+
+.gd-thumbnail {
+  display: inline-block;
+  color: $gd-color-neutral-lighter;
+  font-weight: $gd-font-weight-light;
+  vertical-align: top;
+  border-radius: $gd-border-radius-sm;
+  overflow: hidden;
+  font-size: $gd-font-size-default;
+}
+
+.gd-thumbnail-anchor {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  color: $gd-color-neutral-lighter;
+}
+
+.gd-thumbnail-image-container {
+  background-color: $gd-color-neutral-lightest;
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  user-select: none;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  position: relative;
+
+  &:before {
+    content: "";
+    display: block;
+    padding-top: 100%; 	/* initial ratio of 1:1*/
+  }
+}
+
+.gd-thumbnail-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.gd-thumbnail-xs {
+  width: 2rem;
+  height: 2rem;
+}
+
+.gd-thumbnail-sm {
+  width: 3rem;
+  height: 3rem;
+}
+
+.gd-thumbnail-md {
+  width: 7rem;
+  height: 7rem;
+}
+
+.gd-thumbnail-lg {
+  width: 10rem;
+  height: 10rem;
+}
+
+.gd-thumbnail-fill {
+  width: 100%;
+  display: flex;
+  flex-grow: 1;
+}
+
+.gd-thumbnail-static {
+  display: inline-block;
+
+  .gd-thumbnail-image-container {
+    width: 100%;
+    height: auto;
+
+    &:before {
+      display: none;
+    }
+  }
+}

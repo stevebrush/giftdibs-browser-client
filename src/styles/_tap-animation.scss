@@ -1,0 +1,36 @@
+@import './variables';
+
+@keyframes gdTapAnimation {
+  0% {
+    opacity: 0;
+    transform: scale(.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.gd-animation-tap {
+  position: relative;
+
+  &:after {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    content: " " !important;
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    transform: scale(0.9);
+    width: 100%;
+  }
+
+  &:hover {
+    &:after {
+      animation: gdTapAnimation 0.25s cubic-bezier(0.31, 1, 0.34, 1) forwards;
+    }
+  }
+}

@@ -1,0 +1,59 @@
+<gd-modal>
+  <gd-modal-header>
+    <gd-modal-heading>
+      Move gift
+    </gd-modal-heading>
+  </gd-modal-header>
+  <gd-modal-body>
+    <form
+      aria-label="Move item"
+      class="gd-form gd-gift-move-form"
+      novalidate
+      [formGroup]="moveForm"
+      (ngSubmit)="submit()"
+    >
+      <gd-wait *ngIf="isLoading"></gd-wait>
+      <gd-form-field [errors]="errors">
+        <label
+          class="gd-control-label"
+          for="gd-gift-move-wish-lists"
+        >
+          Select wish list:
+        </label>
+        <select
+          class="gd-form-control"
+          id="gd-gift-move-wish-lists"
+          name="wishListId"
+          formControlName="wishListId"
+        >
+          <option *ngFor="let wishList of wishLists"
+            [ngValue]="wishList.id"
+          >
+            {{ wishList.name }}
+          </option>
+        </select>
+      </gd-form-field>
+
+    </form>
+  </gd-modal-body>
+  <gd-modal-footer>
+    <div class="gd-button-group">
+      <button
+        class="gd-button gd-button-primary"
+        type="button"
+        [disabled]="moveForm.disabled"
+        (click)="submit()"
+      >
+        Save
+      </button>
+      <button
+        class="gd-button gd-button-default"
+        type="button"
+        [disabled]="moveForm.disabled"
+        (click)="onCancelClicked()"
+      >
+        Cancel
+      </button>
+    </div>
+  </gd-modal-footer>
+</gd-modal>

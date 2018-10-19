@@ -1,0 +1,9 @@
+@import '../../../../styles/mixins';
+
+.gd-button-unlink-facebook {
+  ::ng-deep {
+    .gd-icon {
+      color: $gd-color-brand-facebook;
+    }
+  }
+}

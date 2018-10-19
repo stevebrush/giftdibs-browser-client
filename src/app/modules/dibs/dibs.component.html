@@ -1,0 +1,125 @@
+<gd-wait *ngIf="isLoading"></gd-wait>
+
+<div class="gd-canvas">
+  <div class="gd-container gd-spacing-padding-even-large">
+    <h1>
+      Dibs
+    </h1>
+
+    <div class="gd-button-group gd-button-group-tabs">
+      <button
+        class="gd-button gd-button-tab"
+        type="button"
+        [ngClass]="{
+          'gd-button-tab-selected': !isDeliveredViewActive
+        }"
+        (click)="showActive()"
+      >
+        Active
+      </button>
+      <button
+        class="gd-button gd-button-tab"
+        type="button"
+        [ngClass]="{
+          'gd-button-tab-selected': isDeliveredViewActive
+        }"
+        (click)="showDelivered()"
+      >
+        Delivered
+      </button>
+    </div>
+
+    <ng-container *ngTemplateOutlet="recipientsTemplate;context:{recipients:recipients}">
+    </ng-container>
+
+  </div>
+</div>
+
+<ng-template
+  let-recipients="recipients"
+  #recipientsTemplate
+>
+  <div *ngIf="recipients"
+    class="gd-dibs-recipients"
+  >
+    <div *ngFor="let recipient of recipients"
+      class="gd-dibs-recipient"
+    >
+      <div class="gd-dibs-recipient-gift">
+        <div class="gd-dibs-recipient-gift-header">
+          <gd-media>
+            <gd-media-thumbnail>
+              <a routerLink="/users/{{ recipient.id }}">
+                <gd-thumbnail
+                  size="xs"
+                  type="user"
+                  [imageSource]="recipient.avatarUrl"
+                >
+                </gd-thumbnail>
+              </a>
+            </gd-media-thumbnail>
+            <gd-media-content>
+              <gd-media-header>
+                For <a routerLink="/users/{{ recipient.id }}">{{ recipient.firstName }} {{ recipient.lastName }}</a>
+              </gd-media-header>
+            </gd-media-content>
+          </gd-media>
+        </div>
+        <div class="gd-dibs-recipient-gift-body">
+          <gd-repeater>
+            <ng-container *ngFor="let wishList of recipient.wishLists">
+              <gd-repeater-item *ngFor="let gift of wishList.gifts">
+                <gd-media>
+                  <gd-media-thumbnail>
+                    <a routerLink="/gifts/{{ gift.id }}">
+                      <gd-thumbnail
+                        size="md"
+                        [imageSource]="gift.imageUrl"
+                      >
+                      </gd-thumbnail>
+                    </a>
+                  </gd-media-thumbnail>
+                  <gd-media-content>
+                    <gd-media-header>
+                      <gd-media-heading>
+                        <a routerLink="/gifts/{{ gift.id }}">{{ gift.name }}</a>
+                      </gd-media-heading>
+                    </gd-media-header>
+                    <gd-media-body>
+                      <table class="gd-table">
+                        <tr>
+                          <th>Quantity</th>
+                          <td>{{ gift.dibs[0].quantity }}</td>
+                        </tr>
+                        <tr>
+                          <th>Price paid</th>
+                          <td>${{ gift.dibs[0].pricePaid || '--' }}</td>
+                        </tr>
+                        <tr>
+                          <th>Anonymous?</th>
+                          <td>{{ (gift.dibs[0].isAnonymous === true) ? 'yes' : 'no' }}</td>
+                        </tr>
+                        <tr>
+                          <th>Notes</th>
+                          <td>{{ gift.dibs[0].notes }}</td>
+                        </tr>
+                      </table>
+                      <gd-dib-controls
+                        [gift]="gift"
+                        (change)="onDibChange()"
+                      >
+                      </gd-dib-controls>
+                    </gd-media-body>
+                  </gd-media-content>
+                </gd-media>
+              </gd-repeater-item>
+            </ng-container>
+          </gd-repeater>
+        </div>
+        <div class="gd-dibs-recipient-gift-footer">
+          Totals for {{ recipient.firstName }}: ${{ recipient.budget || '--' }}
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

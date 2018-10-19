@@ -1,0 +1,13 @@
+@import '../../../../styles/mixins';
+
+.gd-gift-preview-thumbnail {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  padding-top: 1px;
+  padding-left: 1px;
+}
+
+.gd-gift-preview-user-info {
+  margin-top: 4px;
+}

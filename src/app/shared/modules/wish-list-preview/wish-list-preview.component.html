@@ -1,0 +1,43 @@
+<div class="gd-wish-list-preview">
+  <gd-card
+    [route]="{
+      commands: ['/wish-lists', wishList.id]
+    }"
+  >
+    <gd-card-thumbnail>
+      <div class="gd-wish-list-preview-thumbnail-group">
+        <ng-container *ngFor="let i of [0,1,2,3]">
+          <gd-thumbnail *ngIf="wishList.gifts[i] else blankThumbnail"
+            class="gd-wish-list-preview-thumbnail"
+            size="fill"
+            [imageSource]="wishList.gifts[i].imageUrl"
+          >
+          </gd-thumbnail>
+          <ng-template #blankThumbnail>
+            <gd-thumbnail
+              class="gd-wish-list-preview-thumbnail"
+              size="fill"
+            >
+            </gd-thumbnail>
+          </ng-template>
+        </ng-container>
+      </div>
+    </gd-card-thumbnail>
+    <gd-card-header>
+      <gd-card-heading>
+        {{ wishList.name }}
+      </gd-card-heading>
+    </gd-card-header>
+    <gd-card-body>
+      <div *ngIf="wishList.privacy.type === 'me'"
+        class="gd-text-deemphasized"
+        title="This wish list is private"
+      >
+        <gd-icon
+          icon="eye-slash"
+        >
+        </gd-icon> Private
+      </div>
+    </gd-card-body>
+  </gd-card>
+</div>

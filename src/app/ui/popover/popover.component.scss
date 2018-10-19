@@ -1,0 +1,19 @@
+@import '../../../styles/mixins';
+
+:host {
+  width: 400px;
+  max-width: 100%;
+  display: block;
+}
+
+.gd-popover {
+  box-shadow: $gd-box-shadow;
+  background-color: #fff;
+  padding: $gd-spacing-padding-squish;
+  height: 100%;
+  overflow: auto;
+}
+
+.gd-popover-hidden {
+  visibility: hidden;
+}

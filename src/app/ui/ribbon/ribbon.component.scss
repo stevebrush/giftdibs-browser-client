@@ -1,0 +1,24 @@
+@import '../../../styles/mixins';
+
+.gd-ribbon {
+  color: #fff;
+  transform: rotate(-45deg);
+  position: absolute;
+  z-index: 1;
+  top: 22px;
+  left: -34px;
+  width: 150px;
+  padding: $gd-spacing-padding-squish-compact;
+  text-align: center;
+  box-shadow: 0 2px 2px rgba(0,0,0,0.25);
+  text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+  font-weight: $gd-font-weight-bold;
+}
+
+.gd-ribbon-info {
+  background-color: $gd-color-info;
+}
+
+.gd-ribbon-success {
+  background-color: $gd-color-primary;
+}

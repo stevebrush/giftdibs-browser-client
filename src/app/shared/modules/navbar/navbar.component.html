@@ -1,0 +1,93 @@
+<div class="gd-navbar">
+  <div class="gd-navbar-primary">
+    <nav aria-label="Primay site navigation">
+      <ul class="gd-navbar-menu">
+        <li *ngFor="let route of routes">
+          <a
+            class="gd-button gd-button-link"
+            [routerLink]="route.path"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            {{ route.name }}
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="gd-navbar-search">
+    <gd-search *ngIf="isLoggedIn()">
+    </gd-search>
+  </div>
+  <div class="gd-navbar-secondary">
+    <nav aria-label="User navigation">
+      <ul *ngIf="isLoggedIn()"
+        class="gd-navbar-menu"
+      >
+        <li class="gd-navbar-menu-user">
+          <a
+            class="gd-button gd-button-link gd-navbar-user"
+            routerLinkActive="active"
+            title="{{ sessionUser.firstName }} {{ sessionUser.lastName }}"
+            [routerLink]="['/users', sessionUser.id]"
+          >
+            <gd-thumbnail
+              size="xs"
+              type="user"
+              [imageSource]="sessionUser.avatarUrl"
+            >
+            </gd-thumbnail>
+          </a>
+        </li>
+        <li>
+          <a
+            class="gd-button gd-button-link"
+            routerLink="/dibs"
+            routerLinkActive="active"
+          >
+            Dibs
+          </a>
+        </li>
+        <li>
+          <gd-notifications>
+          </gd-notifications>
+        </li>
+        <li>
+          <button
+            style="display:block"
+            type="button"
+            class="gd-button gd-button-link gd-text-deemphasized"
+            title="Open user menu"
+            gdDropdownMenuTrigger
+            menuHorizontalAlignment="right"
+            [menuItems]="menuItems"
+          >
+            <gd-icon icon="ellipsis-v"></gd-icon>
+          </button>
+        </li>
+      </ul>
+      <ul *ngIf="!isLoggedIn()"
+        class="gd-navbar-menu"
+      >
+        <li>
+          <a
+            class="gd-button gd-button-link gd-text-deemphasized"
+            routerLink="/account/register"
+            routerLinkActive="active"
+          >
+            Sign up
+          </a>
+        </li>
+        <li>
+          <a
+            class="gd-button gd-button-link gd-text-deemphasized"
+            routerLink="/account/login"
+            routerLinkActive="active"
+          >
+            Log in
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

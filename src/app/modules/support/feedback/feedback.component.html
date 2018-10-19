@@ -1,0 +1,86 @@
+<gd-wait *ngIf="isLoading"></gd-wait>
+
+<h1>
+  Feedback
+</h1>
+
+<form
+  class="gd-form"
+  [formGroup]="feedbackForm"
+  (ngSubmit)="submit()"
+  aria-label="Feedback form"
+  novalidate
+>
+  <input
+    formControlName="referrer"
+    type="hidden"
+  />
+
+  <gd-form-field [errors]="errors">
+    <label
+      class="gd-control-label"
+      for="gd-feedback-reason"
+    >
+      Reason for contact
+    </label>
+    <select
+      class="gd-form-control"
+      id="gd-feedback-reason"
+      formControlName="reason"
+    >
+      <option *ngFor="let reason of reasons"
+        [value]="reason.value"
+      >
+        {{ reason.name }}
+      </option>
+    </select>
+  </gd-form-field>
+  <gd-form-field [errors]="errors">
+    <label
+      class="gd-control-label"
+      for="gd-feedback-message"
+    >
+      Message
+    </label>
+    <textarea
+      class="gd-form-control"
+      id="gd-feedback-message"
+      formControlName="message"
+      maxlength="2000"
+      #messageInput
+    ></textarea>
+    <gd-character-counter
+      [inputReference]="messageInput"
+      maxCharacters="2000"
+    >
+    </gd-character-counter>
+  </gd-form-field>
+
+  <gd-form-field
+    aria-hidden="true"
+    class="gd-screen-reader-only"
+    [errors]="errors"
+  >
+    <label
+      class="gd-control-label"
+      for="gd-feedback-nickname"
+    >
+      Nickname
+    </label>
+    <input
+      type="text"
+      class="gd-form-control"
+      id="gd-feedback-nickname"
+      formControlName="gdNickname"
+      autocomplete="off"
+    />
+  </gd-form-field>
+
+  <button
+    class="gd-button gd-button-primary"
+    type="submit"
+    [disabled]="feedbackForm.disabled"
+  >
+    Submit
+  </button>
+</form>

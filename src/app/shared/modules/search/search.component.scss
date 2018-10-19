@@ -1,0 +1,10 @@
+@import '../../../../styles/mixins';
+
+.gd-search {
+  ::ng-deep {
+    input.gd-form-control {
+      background-color: $gd-color-neutral-faint;
+      border-color: transparent;
+    }
+  }
+}

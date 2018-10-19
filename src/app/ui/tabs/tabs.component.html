@@ -1,0 +1,23 @@
+<div class="gd-tabs">
+  <div
+    class="gd-button-group gd-button-group-tabs"
+    role="tablist"
+    [attr.aria-label]="ariaLabel"
+  >
+    <button *ngFor="let button of tabButtons; let i = index;"
+      class="gd-button gd-button-tab"
+      role="tab"
+      type="button"
+      [attr.aria-controls]="button.ariaControls"
+      [attr.aria-selected]="button.ariaSelected"
+      [attr.id]="button.id"
+      [ngClass]="{
+        'gd-button-tab-selected': button.ariaSelected
+      }"
+      (click)="activateTab(i)"
+    >
+      {{ button.heading }}
+    </button>
+  </div>
+  <ng-content></ng-content>
+</div>

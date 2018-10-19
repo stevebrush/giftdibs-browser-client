@@ -1,0 +1,69 @@
+<gd-wait *ngIf="isLoading"></gd-wait>
+
+<div class="gd-container-sm gd-spacing-padding-even-large">
+  <h1>
+    Log in
+  </h1>
+
+  <p>
+    Or <a routerLink="/account/register">create a new account</a>
+  </p>
+
+  <form
+    class="gd-form"
+    aria-label="Log in to GiftDibs"
+    [formGroup]="loginForm"
+    (ngSubmit)="submit()"
+    novalidate
+  >
+    <gd-form-field [errors]="errors">
+      <label
+        class="gd-control-label"
+        for="gd-login-email-address">
+        Email
+      </label>
+      <input
+        type="email"
+        class="gd-form-control"
+        id="gd-login-email-address"
+        formControlName="emailAddress">
+    </gd-form-field>
+
+    <gd-form-field [errors]="errors">
+      <label
+        class="gd-control-label"
+        for="gd-login-password">
+        Password
+      </label>
+      <gd-password-viewer
+        [disabled]="loginForm.disabled"
+        [inputElement]="passwordInput">
+        <input
+          type="password"
+          class="gd-form-control"
+          id="gd-login-password"
+          formControlName="password"
+          #passwordInput>
+      </gd-password-viewer>
+    </gd-form-field>
+
+    <button
+      class="gd-button gd-button-primary"
+      type="submit"
+      [disabled]="loginForm.disabled">
+      Log in
+    </button>
+  </form>
+
+  <p>
+    <a routerLink="/account/forgotten">Forget your password?</a>
+  </p>
+
+  <gd-facebook-login-button
+    [disabled]="loginForm.disabled"
+    (click)="loginForm.disable()"
+    (failure)="onFacebookLoginFailure()"
+    (success)="onFacebookLoginSuccess()"
+  >
+  </gd-facebook-login-button>
+</div>

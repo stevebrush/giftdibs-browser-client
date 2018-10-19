@@ -1,0 +1,37 @@
+<div
+  class="gd-privacy-selector">
+  <button
+    type="button"
+    class="gd-button gd-button-default"
+    gdDropdownMenuTrigger
+    [menuItemTemplate]="menuItemTemplate"
+    [menuItems]="menuItems"
+    #privacyButton>
+    Privacy: {{ valueLabel }}
+  </button>
+</div>
+
+<ng-template
+  let-item="item"
+  #menuItemTemplate>
+  <div
+    class="gd-privacy-selector-item">
+    <gd-icon
+      [icon]="item.icon">
+    </gd-icon>
+    <span
+      class="gd-privacy-selector-item-body">
+      {{ item.label }}
+    </span>
+    <gd-icon
+      *ngIf="item.data.type === value.type"
+      icon="check-circle"
+      iconStyle="success">
+    </gd-icon>
+    <gd-icon
+      *ngIf="item.data.type !== value.type"
+      icon="circle"
+      iconStyle="deemphasized">
+    </gd-icon>
+  </div>
+</ng-template>

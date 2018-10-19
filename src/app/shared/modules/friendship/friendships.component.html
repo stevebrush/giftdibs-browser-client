@@ -1,0 +1,8 @@
+<div
+  class="gd-friendships"
+  [gdHideUntil]="!isLoading"
+>
+  <gd-icon icon="user"></gd-icon>&nbsp;
+  <a routerLink="followers">{{ followers?.length }} followers</a>&nbsp;&bull;
+  <a routerLink="following">{{ following?.length }} following</a>
+</div>

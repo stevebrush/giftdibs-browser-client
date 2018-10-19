@@ -1,0 +1,13 @@
+@import '../../../styles/mixins';
+
+.gd-gift-detail {
+  ::ng-deep {
+    gd-thumbnail {
+      height: auto;
+    }
+  }
+}
+
+.gd-gift-detail-notes {
+  word-wrap: break-word;
+}

@@ -1,0 +1,64 @@
+<gd-wait *ngIf="isLoading"></gd-wait>
+
+<gd-modal>
+  <gd-modal-header>
+    <gd-modal-heading>
+      New wish list
+    </gd-modal-heading>
+  </gd-modal-header>
+  <gd-modal-body>
+    <form
+      class="gd-form"
+      aria-label="Create a new wish list"
+      [formGroup]="wishListForm"
+      (ngSubmit)="submit()"
+      novalidate
+    >
+      <gd-form-field [errors]="errors">
+        <input
+          type="text"
+          class="gd-form-control"
+          formControlName="name"
+          placeholder="Wish list name"
+          autocomplete="off"
+          #nameInput
+        />
+      </gd-form-field>
+
+      <gd-form-field [errors]="errors">
+        <gd-privacy-selector
+          formControlName="privacy"
+        >
+        </gd-privacy-selector>
+      </gd-form-field>
+    </form>
+  </gd-modal-body>
+  <gd-modal-footer>
+    <div
+      class="gd-button-group"
+      style="text-align:right;"
+    >
+      <button
+        class="gd-button gd-button-primary"
+        type="button"
+        [disabled]="wishListForm.disabled"
+        (click)="submit()"
+      >
+        Submit
+      </button>
+      <button
+        class="gd-button gd-button-default"
+        type="button"
+        [disabled]="wishListForm.disabled"
+        (click)="onCancelClicked()"
+      >
+        Cancel
+      </button>
+    </div>
+  </gd-modal-footer>
+</gd-modal>
+
+
+<div class="gd-wish-list-create">
+
+</div>

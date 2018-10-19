@@ -1,0 +1,104 @@
+<gd-modal>
+  <gd-modal-header>
+    <gd-modal-heading>
+      <ng-template [ngIf]="!dib">
+        Dib this gift
+      </ng-template>
+      <ng-template [ngIf]="dib">
+        Edit dib
+      </ng-template>
+    </gd-modal-heading>
+  </gd-modal-header>
+  <gd-modal-body>
+    <form
+      class="gd-form"
+      novalidate
+      [attr.aria-label]="(dib) ? 'Edit dib' : 'Dib this gift'"
+      [formGroup]="dibForm"
+      (ngSubmit)="submit()"
+    >
+      <gd-form-field [errors]="errors">
+        <label
+          class="gd-control-label"
+          for="gd-dib-edit-quantity"
+        >
+          Quantity
+        </label>
+        <input
+          autocomplete="off"
+          class="gd-form-control"
+          formControlName="quantity"
+          id="gd-dib-edit-quantity"
+          type="number"
+        >
+      </gd-form-field>
+      <gd-form-field *ngIf="dib" [errors]="errors">
+        <label
+          class="gd-control-label"
+          for="gd-dib-edit-price-paid"
+        >
+          Price paid
+        </label>
+        <span class="gd-input-group">
+          <span class="gd-input-group-prepend">$</span>
+          <input
+            autocomplete="off"
+            class="gd-form-control"
+            formControlName="pricePaid"
+            id="gd-dib-edit-price-paid"
+            type="number"
+          >
+          <span class="gd-input-group-append">.00</span>
+        </span>
+      </gd-form-field>
+      <gd-form-field *ngIf="dib" [errors]="errors">
+        <label
+          class="gd-control-label"
+          for="gd-dib-edit-notes"
+        >
+          Notes
+        </label>
+        <textarea
+          class="gd-form-control"
+          formControlName="notes"
+          id="gd-dib-edit-notes"
+          maxlength="2000"
+          #notesInput
+        >
+        </textarea>
+        <gd-character-counter
+          [inputReference]="notesInput"
+          maxCharacters="2000"
+        >
+        </gd-character-counter>
+      </gd-form-field>
+      <gd-form-field>
+        <gd-checkbox
+          formControlName="isAnonymous"
+        >
+          Make this dib anonymous
+        </gd-checkbox>
+      </gd-form-field>
+    </form>
+  </gd-modal-body>
+  <gd-modal-footer>
+    <div class="gd-button-group">
+      <button
+        class="gd-button gd-button-primary"
+        type="button"
+        [disabled]="dibForm.disabled"
+        (click)="submit()"
+      >
+        Save
+      </button>
+      <button
+        class="gd-button gd-button-default"
+        type="button"
+        [disabled]="dibForm.disabled"
+        (click)="onCancelClicked()"
+      >
+        Cancel
+      </button>
+    </div>
+  </gd-modal-footer>
+</gd-modal>

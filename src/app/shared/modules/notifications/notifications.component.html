@@ -1,0 +1,161 @@
+<button
+  aria-label="Toggle notifications"
+  class="gd-button gd-button-link"
+  title="Notifications"
+  type="button"
+  [gdPopover]="content"
+  gdPopoverHorizontalAlignment="right"
+  gdPopoverVerticalAlignment="bottom"
+>
+  <gd-icon icon="bell"></gd-icon>
+  <gd-badge *ngIf="notifications?.length">{{ notifications?.length }}</gd-badge>
+</button>
+
+<ng-template #content>
+  <div class="gd-notifications">
+    <gd-repeater *ngIf="notifications?.length else notificationsEmpty">
+      <gd-repeater-item *ngFor="let notification of notifications">
+        <div [ngSwitch]="notification.type">
+
+          <ng-template ngSwitchCase="gift_comment">
+            <gd-media>
+              <gd-media-thumbnail>
+                <gd-icon icon="comment"></gd-icon>
+              </gd-media-thumbnail>
+              <gd-media-content>
+                <a routerLink="/users/{{ notification.gift.comment.user.id }}">{{ notification.gift.comment.user.firstName }} {{ notification.gift.comment.user.lastName }}</a>
+                commented on <a routerLink="/gifts/{{ notification.gift.id }}">{{ notification.gift.name }}</a>.<br>
+                <span class="gd-text-deemphasized">"{{ notification.gift.comment.summary }}"</span>
+                <time class="gd-text-deemphasized">
+                  {{ notification.dateCreated | date }}
+                </time>
+                <div class="gd-notifications-secondary-controls gd-button-group">
+                  <ng-container *ngTemplateOutlet="controls"></ng-container>
+                </div>
+              </gd-media-content>
+            </gd-media>
+          </ng-template>
+
+          <ng-template ngSwitchCase="gift_comment_also">
+            <gd-media>
+              <gd-media-thumbnail>
+                <gd-icon icon="comment"></gd-icon>
+              </gd-media-thumbnail>
+              <gd-media-content>
+                <a routerLink="/users/{{ notification.gift.comment.user.id }}">{{ notification.gift.comment.user.firstName }} {{ notification.gift.comment.user.lastName }}</a>
+                also commented on <a routerLink="/gifts/{{ notification.gift.id }}">{{ notification.gift.name }}</a>.<br>
+                <span class="gd-text-deemphasized">"{{ notification.gift.comment.summary }}"</span>
+                <time class="gd-text-deemphasized">
+                  {{ notification.dateCreated | date }}
+                </time>
+                <div class="gd-notifications-secondary-controls gd-button-group">
+                  <ng-container *ngTemplateOutlet="controls"></ng-container>
+                </div>
+              </gd-media-content>
+            </gd-media>
+          </ng-template>
+
+          <ng-template ngSwitchCase="gift_delivered">
+            <gd-media>
+              <gd-media-thumbnail>
+                <gd-icon icon="box"></gd-icon>
+              </gd-media-thumbnail>
+              <gd-media-content>
+                <ng-container *ngFor="let dib of notification.gift.dibs; let i = index;">
+                  <span *ngIf="i !== 0 && i === notification.gift.dibs.length - 1 else separator">and</span>
+                  <ng-template #separator>
+                    <ng-container *ngIf="i > 0">,</ng-container>
+                  </ng-template>
+                  <strong *ngIf="dib.isAnonymous else notAnonymous">Anonymous</strong>
+                  <ng-template #notAnonymous><a routerLink="/users/{{ dib.user.id }}">{{ dib.user.firstName }} {{ dib.user.lastName }}</a></ng-template>
+                </ng-container>
+                delivered your gift <a routerLink="/gifts/{{ notification.gift.id }}">{{ notification.gift.name }}</a>.<br>
+                <time class="gd-text-deemphasized">
+                  {{ notification.dateCreated | date }}
+                </time>
+                <div *ngIf="!isGiftReceived(notification.gift.id)"
+                  class="gd-notifications-secondary-controls gd-button-group"
+                >
+                  <ng-container *ngTemplateOutlet="controls"></ng-container>
+                  <button
+                    class="gd-button gd-button-primary"
+                    type="button"
+                    (click)="markGiftReceived(notification.gift.id)"
+                  >
+                    Mark gift as received
+                  </button>
+                </div>
+              </gd-media-content>
+            </gd-media>
+          </ng-template>
+
+          <ng-template ngSwitchCase="gift_received">
+            <gd-media>
+              <gd-media-thumbnail>
+                <gd-icon icon="box-open"></gd-icon>
+              </gd-media-thumbnail>
+              <gd-media-content>
+                <a routerLink="/users/{{ notification.gift.user.id }}">{{ notification.gift.user.firstName }} {{ notification.gift.user.lastName }}</a>
+                marked their gift
+                <a routerLink="/gifts/{{ notification.gift.id }}">{{ notification.gift.name }}</a>
+                as received.<br>
+                <time class="gd-text-deemphasized">
+                  {{ notification.dateCreated | date }}
+                </time>
+                <div *ngIf="!notification.dib?.dateDelivered"
+                  class="gd-notifications-secondary-controls gd-button-group"
+                >
+                  <ng-container *ngTemplateOutlet="controls"></ng-container>
+                  <button
+                    class="gd-button gd-button-primary"
+                    type="button"
+                    (click)="markDibDelivered(notification.dib.id)"
+                  >
+                    Complete dib
+                  </button>
+                </div>
+              </gd-media-content>
+            </gd-media>
+          </ng-template>
+
+          <ng-template ngSwitchCase="friendship_new">
+            <gd-media>
+              <gd-media-thumbnail>
+                <gd-icon icon="user-plus"></gd-icon>
+              </gd-media-thumbnail>
+              <gd-media-content>
+                <a routerLink="/users/{{ notification.follower.id }}">{{ notification.follower.firstName }} {{ notification.follower.lastName }}</a>
+                has started following you.<br>
+                <time class="gd-text-deemphasized">
+                  {{ notification.dateCreated | date }}
+                </time>
+                <div class="gd-notifications-secondary-controls gd-button-group">
+                  <ng-container *ngTemplateOutlet="controls"></ng-container>
+                  <gd-follow-button
+                    [friendId]="notification.follower.id"
+                  >
+                  </gd-follow-button>
+                </div>
+              </gd-media-content>
+            </gd-media>
+          </ng-template>
+
+        </div>
+      </gd-repeater-item>
+    </gd-repeater>
+    <ng-template #notificationsEmpty>
+      You don't have any notifications.
+    </ng-template>
+  </div>
+</ng-template>
+
+<ng-template #controls>
+  <button
+    class="gd-button gd-button-default"
+    title="Remove notification"
+    type="button"
+    (click)="removeNotification(notification)"
+  >
+    <gd-icon icon="check"></gd-icon>
+  </button>
+</ng-template>

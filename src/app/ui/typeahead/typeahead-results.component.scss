@@ -1,0 +1,31 @@
+@import '../../../styles/mixins';
+
+.gd-typeahead-results {
+  background-color: #fff;
+  box-shadow: $gd-box-shadow-lg;
+  max-height: 90vh;
+  overflow: auto;
+}
+
+.gd-typeahead-result {
+  padding: $gd-spacing-padding-squish;
+}
+
+.gd-typahead-result-active {
+  background-color: $gd-color-neutral-lightest;
+}
+
+.gd-typeahead-result-button {
+  background: transparent;
+  font-size: $gd-font-size-default;
+  line-height: $gd-line-height;
+  border: 0;
+  vertical-align: baseline;
+  font-weight: $gd-font-weight-normal;
+  padding: 0;
+  color: $gd-text-color-dark;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

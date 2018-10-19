@@ -1,0 +1,37 @@
+<div class="gd-date-picker">
+  <select
+    name="year"
+    [disabled]="disabled"
+    (change)="onSelection()"
+    #yearSelect
+  >
+    <option value="">Year</option>
+    <option *ngFor="let year of years"
+      [value]="year"
+    >{{ year }}</option>
+  </select>
+
+  <select
+    name="month"
+    [disabled]="disabled"
+    (change)="onSelection()"
+    #monthSelect
+  >
+    <option value="">Month</option>
+    <option *ngFor="let month of months"
+      [value]="month.value"
+    >{{ month.name }}</option>
+  </select>
+
+  <select
+    name="day"
+    [disabled]="disabled"
+    (change)="onSelection()"
+    #daySelect
+  >
+    <option value="">Day</option>
+    <option *ngFor="let day of days"
+      [value]="day"
+    >{{ day }}</option>
+  </select>
+</div>

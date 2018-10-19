@@ -1,0 +1,29 @@
+@import '../../../styles/mixins';
+
+.gd-dibs-recipients {
+}
+
+.gd-dibs-recipient-gift {
+  margin-bottom: $gd-spacing * 2;
+  background-color: #fff;
+  border-radius: $gd-border-radius;
+  border: 1px solid $gd-color-neutral-lighter;
+}
+
+.gd-dibs-recipient-gift-header {
+  padding: $gd-spacing-padding-squish;
+}
+
+.gd-dibs-recipient-gift-body {
+  padding: $gd-spacing-padding-squish;
+  padding-left: 1.5rem;
+  border-radius: $gd-border-radius-sm;
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+  background-color: #fff;
+  border: 1px solid $gd-color-neutral-lighter;
+}
+
+.gd-dibs-recipient-gift-footer {
+  padding: $gd-spacing-padding-squish;
+}

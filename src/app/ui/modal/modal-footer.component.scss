@@ -1,0 +1,6 @@
+@import '../../../styles/mixins';
+
+.gd-modal-footer {
+  padding: $gd-spacing;
+  border-top: 1px solid $gd-color-neutral-lightest;
+}

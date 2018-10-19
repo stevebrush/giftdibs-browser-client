@@ -1,0 +1,40 @@
+@import '../../../../styles/mixins';
+
+.gd-wish-list-preview-thumbnail-group {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border-radius: $gd-border-radius-sm;
+  overflow: hidden;
+  width: 100%;
+}
+
+.gd-wish-list-preview-thumbnail {
+  width: 49%;
+  height: 50%;
+
+  &:nth-of-type(1) {
+    margin-right: 1%;
+  }
+
+  &:nth-of-type(2) {}
+
+  &:nth-of-type(3) {
+    margin-right: 1%;
+    align-self: flex-end;
+    height: 49%;
+  }
+
+  &:nth-of-type(4) {
+    align-self: flex-end;
+    height: 49%;
+  }
+
+  ::ng-deep .gd-thumbnail {
+    border-radius: 0;
+  }
+
+  // ::ng-deep .gd-thumbnail-image-container {
+  //   box-shadow: inset -1px -1px 0px 0px #fff;
+  // }
+}

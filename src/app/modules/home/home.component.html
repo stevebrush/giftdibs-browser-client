@@ -1,0 +1,9 @@
+<div class="gd-container gd-spacing-padding-even-large">
+  <ng-template [ngIf]="isLoggedIn">
+    <gd-community></gd-community>
+  </ng-template>
+
+  <ng-template [ngIf]="!isLoggedIn">
+    <gd-welcome></gd-welcome>
+  </ng-template>
+</div>

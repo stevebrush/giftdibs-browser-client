@@ -29,6 +29,7 @@ export class CharacterCounterComponent implements OnInit, OnDestroy {
   @Input()
   public inputReference: any;
 
+  public isVisible = false;
   public remaining = 0;
 
   private ngUnsubscribe = new Subject();
@@ -61,6 +62,10 @@ export class CharacterCounterComponent implements OnInit, OnDestroy {
       this.remaining = remaining;
     } else {
       this.remaining = this.maxCharacters;
+    }
+
+    if (this.remaining <= 50) {
+      this.isVisible = true;
     }
 
     this.changeDetector.markForCheck();

@@ -10,13 +10,15 @@ import {
   RouterModule
 } from '@angular/router';
 
+import {
+  SearchModule
+} from '@app/shared/modules/search';
 
 import {
   BadgeModule,
   DropdownMenuModule,
   IconModule,
   MediaModule,
-  SearchModule,
   ThumbnailModule
 } from '@app/ui';
 

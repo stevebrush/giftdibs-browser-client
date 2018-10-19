@@ -44,16 +44,21 @@
       }
 
       &.active {
-        cursor: default;
-        color: $gd-text-color-default;
+        color: $gd-color-neutral-darkest;
       }
     }
   }
 }
 
 .gd-navbar-user {
-  margin-top: -11px;
+  margin-top: -6px;
   display: inline-flex;
   vertical-align: top;
   margin-bottom: -5px;
+  margin-left: $gd-spacing-lg;
+  padding: 0 !important;
+
+  &:hover {
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1)
+  }
 }

@@ -123,6 +123,7 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   public showActive(): void {
+    this._wishLists = [];
     this.isLoading = true;
     this.isArchivedViewActive = false;
     this.changeDetector.markForCheck();
@@ -136,6 +137,7 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   public showArchived(): void {
+    this._wishLists = [];
     this.isLoading = true;
     this.isArchivedViewActive = true;
     this.changeDetector.markForCheck();

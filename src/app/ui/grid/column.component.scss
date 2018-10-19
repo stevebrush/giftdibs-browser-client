@@ -17,7 +17,11 @@ $num-columns: 12;
   min-height: 1px;
 }
 
-@include create_columns(xs);
+@include create_columns(xxs);
+
+@media (min-width: $gd-screen-xs-min) {
+  @include create_columns(xs);
+}
 
 @media (min-width: $gd-screen-sm-min) {
   @include create_columns(sm);

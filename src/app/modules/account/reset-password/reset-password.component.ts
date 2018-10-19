@@ -71,6 +71,9 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
         takeUntil(this.ngUnsubscribe)
       )
       .subscribe((params: any) => {
+        this.isLoading = false;
+        this.changeDetector.markForCheck();
+
         if (!params.resetPasswordToken) {
 
           // If the user is logged in, they should be able to access the form.
@@ -86,7 +89,6 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
 
         this.resetPasswordForm.controls.resetPasswordToken.setValue(params.resetPasswordToken);
         this.resetPasswordForm.enable();
-        this.isLoading = false;
         this.hasToken = true;
         this.changeDetector.markForCheck();
       });

@@ -115,7 +115,7 @@
               </tr>
             </table>
 
-            <gd-media>
+            <gd-media size="xs">
               <gd-media-thumbnail>
                 <gd-thumbnail
                   type="user"
@@ -142,13 +142,12 @@
               <gd-repeater>
                 <gd-repeater-item *ngFor="let externalUrl of gift.externalUrls">
                   <a
-                    class="gd-button gd-button-danger"
                     [attr.href]="externalUrl.url"
                   >
                     <gd-icon icon="external-link-alt"></gd-icon>
                     {{ getURLName(externalUrl.url) }}
-                    <ng-container *ngIf="externalUrl.price">${{ externalUrl.price }}</ng-container>
                   </a>
+                  <span *ngIf="externalUrl.price" style="float:right">${{ externalUrl.price }}</span>
                 </gd-repeater-item>
               </gd-repeater>
             </div>
@@ -171,7 +170,7 @@
                     <gd-media-content>
                       <strong *ngIf="dib.isAnonymous else notAnonymous">Anonymous</strong>
                       <ng-template #notAnonymous>
-                        <a routerLink="">{{ dib.user.firstName }} {{ dib.user.lastName }}</a>
+                        <a routerLink="/users/{{ dib.user.id }}">{{ dib.user.firstName }} {{ dib.user.lastName }}</a>
                       </ng-template>
                     </gd-media-content>
                   </gd-media>

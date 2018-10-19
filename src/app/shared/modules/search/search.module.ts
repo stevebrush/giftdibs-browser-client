@@ -15,16 +15,10 @@ import {
 } from '@angular/router';
 
 import {
-  MediaModule
-} from '../media';
-
-import {
+  MediaModule,
+  ThumbnailModule,
   TypeaheadModule
-} from '../typeahead';
-
-import {
-  ThumbnailModule
-} from '../thumbnail';
+} from '@app/ui';
 
 import { SearchComponent } from './search.component';
 

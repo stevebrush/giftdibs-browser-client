@@ -46,7 +46,7 @@
 .gd-button-block {
   width: 100%;
   display: block;
-  text-align: left;
+  text-align: center;
 }
 
 @mixin gd-button-variant($bg-color, $text-color) {
@@ -114,10 +114,11 @@
 }
 
 .gd-button-tab-selected {
-  background-color: $gd-color-neutral-lighter;
+  background-color: $gd-color-neutral-lightest;
   color: $gd-text-color-dark;
 }
 
 .gd-button-group-tabs {
   margin-bottom: $gd-spacing;
+  margin-left: -$gd-spacing-lg; // Offset button padding.
 }

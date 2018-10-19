@@ -94,7 +94,7 @@ export class WishListComponent implements OnInit, OnDestroy {
 
           this.menuItems = [
             {
-              label: 'Edit',
+              label: 'Edit wish list',
               action: () => this.openWishListEditModal()
             },
             {

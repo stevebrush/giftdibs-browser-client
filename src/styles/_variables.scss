@@ -33,6 +33,7 @@ $gd-spacing-padding-squish-compact: $gd-spacing-sm $gd-spacing-lg !default;
 $gd-spacing-padding-squish-large: $gd-spacing $gd-spacing-xl !default;
 $gd-spacing-padding-even-large: $gd-spacing-xl !default;
 
+$gd-screen-xs-min: 500px;
 $gd-screen-sm-min: 768px;
 $gd-screen-md-min: 992px;
 $gd-screen-lg-min: 1200px;
@@ -97,7 +98,7 @@ $gd-color-neutral-lightest: lighten($gd-color-neutral, 40%) !default;
 $gd-color-neutral-faint: lighten($gd-color-neutral, 42%) !default;
 $gd-color-neutral-dark: darken($gd-color-neutral, 20%) !default;
 $gd-color-neutral-darker: darken($gd-color-neutral, 30%) !default;
-$gd-color-neutral-darkest: darken($gd-color-neutral, 40%) !default;
+$gd-color-neutral-darkest: #000 !default;
 
 $gd-border-color-neutral: darken($gd-color-neutral, 5%) !default;
 $gd-border-color-neutral-light: darken($gd-color-neutral-light, 5%) !default;
@@ -105,8 +106,8 @@ $gd-border-color-neutral-lighter: darken($gd-color-neutral-lighter, 5%) !default
 $gd-border-color-neutral-lightest: darken($gd-color-neutral-lightest, 5%) !default;
 
 // TEXT COLOR
-$gd-text-color-default: $gd-color-neutral-dark !default;
-$gd-text-color-deemphasized: desaturate($gd-color-neutral-light, 5%) !default;
+$gd-text-color-default: $gd-color-neutral-darker !default;
+$gd-text-color-deemphasized: desaturate($gd-color-neutral, 5%) !default;
 $gd-text-color-dark: $gd-color-neutral-darkest !default;
 
 // BRANDS

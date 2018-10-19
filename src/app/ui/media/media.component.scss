@@ -22,11 +22,11 @@
 
   .gd-media-xs {
     & > gd-media-thumbnail {
-      padding-right: $gd-spacing-xs;
+      padding-right: $gd-spacing-sm;
     }
 
     & > gd-media-content + gd-media-thumbnail {
-      padding-left: $gd-spacing-xs;
+      padding-left: $gd-spacing-sm;
       padding-right: 0;
     }
   }

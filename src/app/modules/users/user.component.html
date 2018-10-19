@@ -5,37 +5,42 @@
   [gdHideUntil]="user"
 >
   <ng-template [ngIf]="user">
-    <div class="gd-user-header gd-container gd-spacing-padding-even-large">
-      <gd-media>
-        <gd-media-content>
-          <gd-media-header>
-            <h1>
-              {{ user.firstName }} {{ user.lastName }}
-            </h1>
-          </gd-media-header>
-          <gd-media-body>
-            <gd-friendships
-              [user]="user"
-            >
-            </gd-friendships>
-            <div>
+    <div class="gd-user-header gd-spacing-padding-even-large">
+      <div class="gd-container-sm">
+        <gd-media>
+          <gd-media-content>
+            <div style="float:right;">
               <gd-follow-button
                 [friendId]="user.id"
               >
               </gd-follow-button>
             </div>
-          </gd-media-body>
-        </gd-media-content>
-        <gd-media-thumbnail>
-          <gd-thumbnail
-            size="md"
-            type="user"
-            [imageSource]="user.avatarUrl"
-          >
-          </gd-thumbnail>
-        </gd-media-thumbnail>
-      </gd-media>
+            <gd-media-header>
+              <h1>
+                {{ user.firstName }} {{ user.lastName }}
+              </h1>
+            </gd-media-header>
+            <gd-media-body>
 
+              <gd-friendships
+                [user]="user"
+              >
+              </gd-friendships>
+            </gd-media-body>
+          </gd-media-content>
+          <gd-media-thumbnail>
+            <gd-thumbnail
+              size="md"
+              type="user"
+              [imageSource]="user.avatarUrl"
+            >
+            </gd-thumbnail>
+          </gd-media-thumbnail>
+        </gd-media>
+      </div>
+    </div>
+
+    <div class="gd-container-sm">
       <div class="gd-button-group gd-button-group-tabs">
         <button
           class="gd-button gd-button-tab"
@@ -69,8 +74,11 @@
 
 <ng-template let-wishLists="wishLists" #wishListsTemplate>
   <gd-row>
-    <gd-column *ngIf="isSessionUser"
-      [screenSmall]="2"
+    <gd-column *ngIf="isSessionUser && !isArchivedViewActive"
+      [screenXSmall]="6"
+      [screenSmall]="4"
+      [screenMedium]="3"
+      [screenLarge]="2"
     >
       <gd-card
         (actionClick)="openWishListCreateModal()"
@@ -100,7 +108,10 @@
       </gd-card>
     </gd-column>
     <gd-column *ngFor="let wishList of wishLists"
-      [screenSmall]="2"
+      [screenXSmall]="6"
+      [screenSmall]="4"
+      [screenMedium]="3"
+      [screenLarge]="2"
     >
       <gd-wish-list-preview
         [wishList]="wishList"

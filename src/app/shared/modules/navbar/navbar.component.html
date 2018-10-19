@@ -27,22 +27,16 @@
         <li class="gd-navbar-menu-user">
           <a
             class="gd-button gd-button-link gd-navbar-user"
-            [routerLink]="['/users', sessionUser.id]"
             routerLinkActive="active"
+            title="{{ sessionUser.firstName }} {{ sessionUser.lastName }}"
+            [routerLink]="['/users', sessionUser.id]"
           >
-            <gd-media>
-              <gd-media-thumbnail>
-                <gd-thumbnail
-                  size="xs"
-                  type="user"
-                  [imageSource]="sessionUser.avatarUrl"
-                >
-                </gd-thumbnail>
-              </gd-media-thumbnail>
-              <gd-media-content>
-                {{ sessionUser.firstName }}
-              </gd-media-content>
-            </gd-media>
+            <gd-thumbnail
+              size="xs"
+              type="user"
+              [imageSource]="sessionUser.avatarUrl"
+            >
+            </gd-thumbnail>
           </a>
         </li>
         <li>

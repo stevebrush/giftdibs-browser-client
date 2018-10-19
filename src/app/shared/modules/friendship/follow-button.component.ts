@@ -62,7 +62,15 @@ export class FollowButtonComponent implements OnInit {
     if (!this.isSessionUser) {
       this.friendshipService.getAllByUserId(sessionUserId)
         .subscribe((friendships: FriendshipSummary) => {
-          this.isFollowing = !!friendships.following.find((f: User) => f.id === ownerId);
+          const found = friendships.following.find((f: User) => {
+            return (f.id === ownerId);
+          });
+
+          if (found) {
+            this.isFollowing = true;
+            this.friendshipId = found.id;
+          }
+
           this.isLoading = false;
           this.changeDetector.markForCheck();
         });

@@ -14,6 +14,9 @@ import {
 })
 export class ColumnComponent implements OnInit {
   @Input()
+  public screenXXSmall: number;
+
+  @Input()
   public screenXSmall: number;
 
   @Input()

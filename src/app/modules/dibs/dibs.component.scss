@@ -7,6 +7,7 @@
   margin-bottom: $gd-spacing * 2;
   background-color: #fff;
   border-radius: $gd-border-radius;
+  border: 1px solid $gd-color-neutral-lighter;
 }
 
 .gd-dibs-recipient-gift-header {
@@ -20,7 +21,7 @@
   margin-left: -0.5rem;
   margin-right: -0.5rem;
   background-color: #fff;
-  box-shadow: 0 0 15px rgba(0,0,0,0.15);
+  border: 1px solid $gd-color-neutral-lighter;
 }
 
 .gd-dibs-recipient-gift-footer {

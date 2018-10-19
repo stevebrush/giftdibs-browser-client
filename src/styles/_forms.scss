@@ -7,14 +7,15 @@
 .gd-control-label {
   display: inline-block;
   margin-bottom: $gd-spacing-xs;
-  font-weight: $gd-font-weight-bold;
+  font-weight: $gd-font-weight-normal;
 }
 
 .gd-form-control {
   @include gd_form_control();
   display: block;
   width: 100%;
-  border-color: $gd-color-neutral-lightest;
+  border-color: $gd-color-neutral-dark;
+  background-color: #fff;
 
   &:disabled {
     @include gd_disabled();
@@ -27,6 +28,14 @@
 
 textarea.gd-form-control {
   resize: vertical;
+}
+
+select.gd-form-control {
+  height: 38px;
+}
+
+.gd-form-fieldset {
+
 }
 
 .gd-input-group {
@@ -51,8 +60,8 @@ textarea.gd-form-control {
   text-align: center;
   align-items: center;
   padding: $gd-spacing-padding-squish-compact;
-  background-color: $gd-color-neutral-lighter;
-  color: $gd-text-color-dark;
+  background-color: $gd-color-neutral-dark;
+  color: #fff;
   border: 1px solid transparent;
   border-radius: $gd-border-radius-sm;
   border-top-right-radius: 0;
@@ -65,8 +74,8 @@ textarea.gd-form-control {
   text-align: center;
   align-items: center;
   padding: $gd-spacing-padding-squish-compact;
-  background-color: $gd-color-neutral-lighter;
-  color: $gd-text-color-dark;
+  background-color: $gd-color-neutral-dark;
+  color: #fff;
   border: 1px solid transparent;
   border-radius: $gd-border-radius-sm;
   border-top-left-radius: 0;

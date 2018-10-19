@@ -44,6 +44,15 @@ import {
 } from '@app/shared/modules/gift/gift-external-url';
 
 import {
+  ProductService
+} from '@app/shared/modules/product';
+
+import {
+  TypeaheadSearchFunction,
+  TypeaheadSearchResultAction
+} from '@app/ui/typeahead';
+
+import {
   UrlImagesLoaderComponent,
   UrlImagesLoaderContext,
   UrlScraperResult,
@@ -53,6 +62,7 @@ import {
 import {
   GiftEditContext
 } from './gift-edit-context';
+
 // #endregion
 
 @Component({
@@ -86,6 +96,7 @@ export class GiftEditComponent implements OnInit {
     private giftService: GiftService,
     private modal: ModalInstance<any>,
     private modalService: ModalService,
+    private productService: ProductService,
     private urlScraperService: UrlScraperService
   ) { }
 
@@ -98,6 +109,10 @@ export class GiftEditComponent implements OnInit {
     if (this.gift) {
       this.resetForm(this.gift);
     }
+
+    // this.giftForm.get('name').valueChanges.subscribe((value: any) => {
+    //   console.log('value changes:', value);
+    // });
   }
 
   public onSelectFile(args: any): void {
@@ -220,6 +235,8 @@ export class GiftEditComponent implements OnInit {
       this.urlScraperService.getProduct(control.value.url)
         .subscribe(
           (result: UrlScraperResult) => {
+            console.log('result?', result);
+
             if (result.price) {
               control.get('price').setValue(result.price);
             }
@@ -240,6 +257,31 @@ export class GiftEditComponent implements OnInit {
 
   public removeUrl(index: number): void {
     this.externalUrls.removeAt(index);
+  }
+
+  public findProductFunction: TypeaheadSearchFunction<any> = (searchText: string) => {
+    return this.productService.searchByKeyword(searchText);
+  }
+
+  public searchResultAction: TypeaheadSearchResultAction<any> = (result: any) => {
+    // this.router.navigate(['/users', searchResult.id]);
+    console.log('result selected:', result);
+
+    this.toDataUrl(result.imageUrl)
+      .then((imageDataUrl: any) => {
+        this.giftForm.get('imageUrl').setValue(imageDataUrl);
+        this.newImageFile = this.dataURLtoFile(imageDataUrl, 'temp.jpg');
+      });
+
+    this.addExternalUrlIfNew({
+      url: result.url,
+      price: result.price
+    });
+
+    this.giftForm.get('name').setValue(result.name);
+    this.updateIfEmpty('budget', result.price);
+
+    return result.name;
   }
 
   private createForm(): void {
@@ -302,30 +344,67 @@ export class GiftEditComponent implements OnInit {
         this.giftForm.get('imageUrl').setValue(imageDataUrl);
         this.newImageFile = this.dataURLtoFile(imageDataUrl, 'temp.jpg');
 
-        // Automatically add a new external URL.
-        const found = this.externalUrls.controls.find((control) => {
-          return (control.get('url').value === productDetails.url);
+        this.addExternalUrlIfNew({
+          url: productDetails.url,
+          price: productDetails.price
         });
 
-        if (!found) {
-          this.addExternalUrlField({
-            price: productDetails.price || undefined,
-            url: productDetails.url
-          });
-        }
-
-        // Automatically set the name.
-        if (productDetails.name && !this.giftForm.get('name').value) {
-          this.giftForm.get('name').setValue(productDetails.name);
-        }
-
-        // Automatically set price.
-        if (productDetails.price && !this.giftForm.get('budget').value) {
-          this.giftForm.get('budget').setValue(productDetails.price);
-        }
+        this.updateIfEmpty('name', productDetails.name);
+        this.updateIfEmpty('budget', productDetails.price);
       }
 
       this.enableForm();
+    });
+  }
+
+  private enableForm(): void {
+    this.isLoading = false;
+    this.giftForm.enable();
+    this.changeDetector.markForCheck();
+  }
+
+  private disableForm(): void {
+    this.giftForm.disable();
+    this.errors = [];
+    this.isLoading = true;
+    this.changeDetector.markForCheck();
+  }
+
+  private updateIfEmpty(controlName: string, value: any): void {
+    const control = this.giftForm.get(controlName);
+    if (value !== undefined && !control.value) {
+      control.setValue(value);
+    }
+  }
+
+  private addExternalUrlIfNew(externalUrl: GiftExternalUrl): void {
+    const found = this.externalUrls.controls.find((control) => {
+      return (control.get('url').value === externalUrl.url);
+    });
+
+    if (!found) {
+      this.addExternalUrlField({
+        price: externalUrl.price || undefined,
+        url: externalUrl.url
+      });
+    }
+  }
+
+  // Convert URls to data URLS.
+  // https://stackoverflow.com/a/20285053/6178885
+  private toDataUrl(url: string): Promise<string | ArrayBuffer> {
+    return new Promise((resolve) => {
+      const xhr = new XMLHttpRequest();
+      xhr.onload = () => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          resolve(reader.result);
+        };
+        reader.readAsDataURL(xhr.response);
+      };
+      xhr.open('GET', url);
+      xhr.responseType = 'blob';
+      xhr.send();
     });
   }
 
@@ -344,18 +423,5 @@ export class GiftEditComponent implements OnInit {
     }
 
     return new File([u8arr], filename, { type: mime });
-  }
-
-  private enableForm(): void {
-    this.isLoading = false;
-    this.giftForm.enable();
-    this.changeDetector.markForCheck();
-  }
-
-  private disableForm(): void {
-    this.giftForm.disable();
-    this.errors = [];
-    this.isLoading = true;
-    this.changeDetector.markForCheck();
   }
 }

@@ -6,7 +6,7 @@
   >
   </gd-comment-edit>
   <ng-template #commentEditForm>
-    <gd-media>
+    <gd-media size="xs">
       <gd-media-thumbnail>
         <a routerLink="/users/{{ comment.user.id }}">
           <gd-thumbnail
@@ -36,6 +36,7 @@
           title="Toggle comment options"
           type="button"
           gdDropdownMenuTrigger
+          menuHorizontalAlignment="right"
           [menuItems]="menuItems"
           (click)="$event.stopPropagation();$event.preventDefault();"
         >

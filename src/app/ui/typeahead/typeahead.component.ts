@@ -4,11 +4,17 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  forwardRef,
   Input,
   OnDestroy,
   TemplateRef,
   ViewChild
 } from '@angular/core';
+
+import {
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR
+} from '@angular/forms';
 
 import {
   fromEvent,
@@ -40,6 +46,8 @@ import { TypeaheadResultsComponent } from './typeahead-results.component';
 import { TypeaheadSearchFunction } from './typeahead-search-function';
 import { TypeaheadSearchResultAction } from './typeahead-search-result-action';
 
+const KEYUP_DEBOUNCE_TIME = 400;
+
 @Component({
   selector: 'gd-typeahead',
   templateUrl: './typeahead.component.html',
@@ -47,15 +55,23 @@ import { TypeaheadSearchResultAction } from './typeahead-search-result-action';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     AffixService,
-    TypeaheadDomAdapterService
+    TypeaheadDomAdapterService,
+    {
+      provide: NG_VALUE_ACCESSOR,
+      /* tslint:disable-next-line:no-forward-ref */
+      useExisting: forwardRef(() => TypeaheadComponent),
+      multi: true
+    }
   ]
 })
-export class TypeaheadComponent implements AfterViewInit, OnDestroy {
+export class TypeaheadComponent
+  implements AfterViewInit, OnDestroy, ControlValueAccessor {
+
   @Input()
   public ariaDescribedBy: string;
 
   @Input()
-  public placeholder = 'Search';
+  public placeholder: string;
 
   @Input()
   public searchFunction: TypeaheadSearchFunction<any>;
@@ -66,9 +82,23 @@ export class TypeaheadComponent implements AfterViewInit, OnDestroy {
   @Input()
   public searchResultAction: TypeaheadSearchResultAction<any>;
 
+  @Input()
+  public set value(value: any) {
+    this._value = value;
+    this.onChange(value);
+    this.onTouched();
+  }
+
+  public get value(): any {
+    return this._value;
+  }
+
+  public disabled = false;
+
   @ViewChild('searchInput')
   private searchInput: ElementRef;
 
+  private _value: string;
   private hasResults = false;
   private ngUnsubscribe = new Subject();
   private overlayInstance: OverlayInstance<TypeaheadResultsComponent>;
@@ -86,7 +116,7 @@ export class TypeaheadComponent implements AfterViewInit, OnDestroy {
     fromEvent(input, 'keyup')
       .pipe(
         takeUntil(this.ngUnsubscribe),
-        debounceTime(300),
+        debounceTime(KEYUP_DEBOUNCE_TIME),
         distinctUntilChanged()
       )
       .subscribe((event: any) => {
@@ -102,7 +132,13 @@ export class TypeaheadComponent implements AfterViewInit, OnDestroy {
           break;
 
           default:
-          this.search(event.target.value);
+          const keywords = event.target.value;
+
+          if (keywords !== this.value) {
+            this.search(event.target.value);
+            this.value = event.target.value;
+          }
+
           break;
         }
       });
@@ -122,13 +158,37 @@ export class TypeaheadComponent implements AfterViewInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
+  public writeValue(value: string): void {
+    if (value) {
+      this.searchInput.nativeElement.value = value;
+      this._value = value;
+    }
+  }
+
+  // Angular automatically constructs these methods.
+  public onChange = (value: any) => {};
+  public onTouched = () => {};
+
+  public registerOnChange(fn: (value: any) => void): void {
+    this.onChange = fn;
+  }
+
+  public registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  public setDisabledState(disabled: boolean): void {
+    this.disabled = disabled;
+    this.changeDetector.markForCheck();
+  }
+
   private search(searchText: string): void {
     this.searchFunction.call({}, searchText)
       .pipe(
         takeUntil(this.ngUnsubscribe)
       )
       .subscribe((results: any[]) => {
-        if (results.length === 0) {
+        if (!results || results.length === 0) {
           this.removeResults();
           return;
         }
@@ -158,7 +218,10 @@ export class TypeaheadComponent implements AfterViewInit, OnDestroy {
     // Set the input value to what is selected in the dropdown.
     this.overlayInstance.componentInstance.selectionChange
       .subscribe((change: TypeaheadResultsSelectionChange) => {
-        this.searchInput.nativeElement.value = change.label;
+        if (change.label !== undefined) {
+          this.searchInput.nativeElement.value = change.label;
+        }
+
         this.overlayInstance.destroy();
       });
 

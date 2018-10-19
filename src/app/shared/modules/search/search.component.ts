@@ -7,10 +7,14 @@ import {
   Router
 } from '@angular/router';
 
-import { User } from '@app/shared/modules/user';
+import {
+  TypeaheadSearchFunction,
+  TypeaheadSearchResultAction
+} from '@app/ui';
 
-import { TypeaheadSearchFunction } from '../typeahead/typeahead-search-function';
-import { TypeaheadSearchResultAction } from '../typeahead/typeahead-search-result-action';
+import {
+  User
+} from '@app/shared/modules/user';
 
 import { SearchService } from './search.service';
 

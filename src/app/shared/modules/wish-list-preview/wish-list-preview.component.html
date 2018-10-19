@@ -26,21 +26,18 @@
     <gd-card-header>
       <gd-card-heading>
         {{ wishList.name }}
-        <span *ngIf="wishList.privacy.type === 'me'"
-          class="gd-text-deemphasized"
-          title="This wish list is private"
-        >
-          <gd-icon
-            icon="eye-slash"
-          >
-          </gd-icon>
-        </span>
       </gd-card-heading>
-      <time
-        class="gd-text-deemphasized"
-      >
-        {{ wishList.dateUpdated | date }}
-      </time>
     </gd-card-header>
+    <gd-card-body>
+      <div *ngIf="wishList.privacy.type === 'me'"
+        class="gd-text-deemphasized"
+        title="This wish list is private"
+      >
+        <gd-icon
+          icon="eye-slash"
+        >
+        </gd-icon> Private
+      </div>
+    </gd-card-body>
   </gd-card>
 </div>

@@ -21,6 +21,7 @@ import {
   MediaModule,
   ModalModule,
   ThumbnailModule,
+  TypeaheadModule,
   WaitModule
 } from '@app/ui';
 
@@ -31,6 +32,10 @@ import {
 import {
   GiftModule
 } from '@app/shared/modules/gift';
+
+import {
+  ProductModule
+} from '@app/shared/modules/product';
 
 import {
   UrlScraperModule
@@ -54,8 +59,10 @@ import {
     IconModule,
     MediaModule,
     ModalModule,
+    ProductModule,
     ReactiveFormsModule,
     ThumbnailModule,
+    TypeaheadModule,
     UrlScraperModule,
     WaitModule
   ],

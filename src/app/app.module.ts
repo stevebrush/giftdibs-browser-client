@@ -1,5 +1,4 @@
 import {
-  APP_INITIALIZER,
   NgModule
 } from '@angular/core';
 
@@ -20,13 +19,12 @@ import {
   VerifyEmailNoticeModule
 } from '@app/ui';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppStartupService } from './app-startup.service';
-import { AppComponent } from './app.component';
+import {
+  environment
+} from '../environments/environment';
 
-export function startupServiceFactory(startupService: AppStartupService): Function {
-  return () => startupService.load();
-}
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
@@ -37,17 +35,8 @@ export function startupServiceFactory(startupService: AppStartupService): Functi
     AppRoutingModule,
     BrowserModule,
     NavbarModule,
-    SessionModule,
+    SessionModule.forRoot(environment.apiUrl),
     VerifyEmailNoticeModule
-  ],
-  providers: [
-    AppStartupService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: startupServiceFactory,
-      deps: [AppStartupService],
-      multi: true
-    }
   ],
   bootstrap: [
     AppComponent

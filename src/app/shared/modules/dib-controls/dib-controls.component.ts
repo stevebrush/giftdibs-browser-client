@@ -26,7 +26,7 @@ import {
 
 import {
   SessionService
-} from '@app/shared/modules/session';
+} from '@giftdibs/session';
 
 import {
   Gift

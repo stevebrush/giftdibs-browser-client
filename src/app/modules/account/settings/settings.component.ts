@@ -28,7 +28,7 @@ import {
 import {
   SessionService,
   SessionUser
-} from '@app/shared/modules/session';
+} from '@giftdibs/session';
 
 import {
   AssetsService

@@ -13,7 +13,7 @@ import {
 
 import {
   SessionModule
-} from '@app/shared/modules/session';
+} from '@giftdibs/session';
 
 import {
   AlertModule,

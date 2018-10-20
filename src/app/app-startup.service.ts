@@ -13,7 +13,7 @@ import {
 
 import {
   SessionService
-} from './shared/modules/session';
+} from '@giftdibs/session';
 
 @Injectable()
 export class AppStartupService {

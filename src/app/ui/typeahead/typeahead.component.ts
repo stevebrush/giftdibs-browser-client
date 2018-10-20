@@ -18,11 +18,14 @@ import {
 
 import {
   AffixService,
-  AffixVerticalAlignment,
+  AffixVerticalAlignment
+} from '@app/ui/affix';
+
+import {
   OverlayConfig,
   OverlayInstance,
   OverlayService
-} from '@app/ui';
+} from '@app/ui/overlay';
 
 import {
   fromEvent,

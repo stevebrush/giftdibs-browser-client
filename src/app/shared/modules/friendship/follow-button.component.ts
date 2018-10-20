@@ -7,6 +7,10 @@ import {
 } from '@angular/core';
 
 import {
+  SessionService
+} from '@giftdibs/session';
+
+import {
   finalize
 } from 'rxjs/operators';
 
@@ -17,10 +21,6 @@ import {
 import {
   FriendshipSummary
 } from '../friendship';
-
-import {
-  SessionService
-} from '../session';
 
 import {
   User

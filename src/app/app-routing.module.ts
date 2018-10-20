@@ -13,7 +13,7 @@ import {
 
 import {
   GD_AUTHORIZATION_PROVIDERS
-} from '@app/shared/modules/session';
+} from '@giftdibs/session';
 
 const appRoutes: Routes = [
   {

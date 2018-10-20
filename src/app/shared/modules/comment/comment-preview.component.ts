@@ -16,7 +16,7 @@ import {
 
 import {
   SessionService
-} from '../session';
+} from '@giftdibs/session';
 
 import {
   Comment

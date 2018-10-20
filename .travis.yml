@@ -7,7 +7,7 @@ branches:
 git:
   depth: 5
 
-before_script:
+before_install:
   - npm install -g @angular/cli
 
 script:

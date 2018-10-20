@@ -26,6 +26,12 @@ export class AffixService {
       verticalAlignment: AffixVerticalAlignment.Top
     };
 
+    // Reset the height.
+    this.renderer.removeStyle(
+      subject.nativeElement,
+      'height'
+    );
+
     const settings = Object.assign({}, defaults, config);
     const subjectRect = subject.nativeElement.getBoundingClientRect();
     const targetRect = target.nativeElement.getBoundingClientRect();
@@ -61,8 +67,12 @@ export class AffixService {
     // If subject's bottom is below viewport, set its height to accommodate.
     // https://stackoverflow.com/questions/1248081/get-the-browser-viewport-dimensions-with-javascript
     const viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    if (subjectRect.bottom > viewportHeight) {
-      this.renderer.setStyle(subject.nativeElement, 'height', `${viewportHeight - top}px`);
+    if (subjectRect.bottom >= viewportHeight) {
+      this.renderer.setStyle(
+        subject.nativeElement,
+        'height',
+        `${viewportHeight - top}px`
+      );
     }
   }
 }

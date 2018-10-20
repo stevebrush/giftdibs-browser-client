@@ -2,15 +2,14 @@
   <div class="gd-navbar-primary">
     <nav aria-label="Primay site navigation">
       <ul class="gd-navbar-menu">
-        <li *ngFor="let route of routes">
-          <a
-            class="gd-button gd-button-link"
-            [routerLink]="route.path"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }"
+        <li class="gd-navbar-image-link">
+          <gd-thumbnail
+            imageSource="assets/gd-logo.png"
+            size="xs"
+            type="user"
+            [route]="{ commands: ['/'] }"
           >
-            {{ route.name }}
-          </a>
+          </gd-thumbnail>
         </li>
       </ul>
     </nav>
@@ -24,20 +23,15 @@
       <ul *ngIf="isLoggedIn()"
         class="gd-navbar-menu"
       >
-        <li class="gd-navbar-menu-user">
-          <a
-            class="gd-button gd-button-link gd-navbar-user"
-            routerLinkActive="active"
+        <li class="gd-navbar-menu-user gd-navbar-image-link">
+          <gd-thumbnail
+            size="xs"
+            type="user"
+            [imageSource]="sessionUser.avatarUrl"
+            [route]="{ commands: ['/users', sessionUser.id] }"
             title="{{ sessionUser.firstName }} {{ sessionUser.lastName }}"
-            [routerLink]="['/users', sessionUser.id]"
           >
-            <gd-thumbnail
-              size="xs"
-              type="user"
-              [imageSource]="sessionUser.avatarUrl"
-            >
-            </gd-thumbnail>
-          </a>
+          </gd-thumbnail>
         </li>
         <li>
           <a
@@ -54,9 +48,8 @@
         </li>
         <li>
           <button
-            style="display:block"
             type="button"
-            class="gd-button gd-button-link gd-text-deemphasized"
+            class="gd-button gd-button-link gd-text-deemphasized gd-navbar-icon-link"
             title="Open user menu"
             gdDropdownMenuTrigger
             menuHorizontalAlignment="right"

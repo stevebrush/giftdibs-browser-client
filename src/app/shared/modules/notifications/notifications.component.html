@@ -1,6 +1,6 @@
 <button
   aria-label="Toggle notifications"
-  class="gd-button gd-button-link"
+  class="gd-button gd-button-link gd-notifications-trigger-button"
   title="Notifications"
   type="button"
   [gdPopover]="content"
@@ -25,8 +25,8 @@
               <gd-media-content>
                 <a routerLink="/users/{{ notification.gift.comment.user.id }}">{{ notification.gift.comment.user.firstName }} {{ notification.gift.comment.user.lastName }}</a>
                 commented on <a routerLink="/gifts/{{ notification.gift.id }}">{{ notification.gift.name }}</a>.<br>
-                <span class="gd-text-deemphasized">"{{ notification.gift.comment.summary }}"</span>
-                <time class="gd-text-deemphasized">
+                <span class="gd-text-deemphasized gd-text-small">"{{ notification.gift.comment.summary }}"</span>
+                <time class="gd-text-deemphasized gd-text-small">
                   {{ notification.dateCreated | date }}
                 </time>
                 <div class="gd-notifications-secondary-controls gd-button-group">
@@ -44,8 +44,8 @@
               <gd-media-content>
                 <a routerLink="/users/{{ notification.gift.comment.user.id }}">{{ notification.gift.comment.user.firstName }} {{ notification.gift.comment.user.lastName }}</a>
                 also commented on <a routerLink="/gifts/{{ notification.gift.id }}">{{ notification.gift.name }}</a>.<br>
-                <span class="gd-text-deemphasized">"{{ notification.gift.comment.summary }}"</span>
-                <time class="gd-text-deemphasized">
+                <span class="gd-text-deemphasized gd-text-small">"{{ notification.gift.comment.summary }}"</span>
+                <time class="gd-text-deemphasized gd-text-small">
                   {{ notification.dateCreated | date }}
                 </time>
                 <div class="gd-notifications-secondary-controls gd-button-group">
@@ -70,7 +70,7 @@
                   <ng-template #notAnonymous><a routerLink="/users/{{ dib.user.id }}">{{ dib.user.firstName }} {{ dib.user.lastName }}</a></ng-template>
                 </ng-container>
                 delivered your gift <a routerLink="/gifts/{{ notification.gift.id }}">{{ notification.gift.name }}</a>.<br>
-                <time class="gd-text-deemphasized">
+                <time class="gd-text-deemphasized gd-text-small">
                   {{ notification.dateCreated | date }}
                 </time>
                 <div *ngIf="!isGiftReceived(notification.gift.id)"
@@ -99,7 +99,7 @@
                 marked their gift
                 <a routerLink="/gifts/{{ notification.gift.id }}">{{ notification.gift.name }}</a>
                 as received.<br>
-                <time class="gd-text-deemphasized">
+                <time class="gd-text-deemphasized gd-text-small">
                   {{ notification.dateCreated | date }}
                 </time>
                 <div *ngIf="!notification.dib?.dateDelivered"
@@ -126,7 +126,7 @@
               <gd-media-content>
                 <a routerLink="/users/{{ notification.follower.id }}">{{ notification.follower.firstName }} {{ notification.follower.lastName }}</a>
                 has started following you.<br>
-                <time class="gd-text-deemphasized">
+                <time class="gd-text-deemphasized gd-text-small">
                   {{ notification.dateCreated | date }}
                 </time>
                 <div class="gd-notifications-secondary-controls gd-button-group">

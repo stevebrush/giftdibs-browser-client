@@ -17,6 +17,14 @@ import {
 } from '@angular/forms';
 
 import {
+  AffixService,
+  AffixVerticalAlignment,
+  OverlayConfig,
+  OverlayInstance,
+  OverlayService
+} from '@app/ui';
+
+import {
   fromEvent,
   merge,
   Subject
@@ -28,16 +36,6 @@ import {
   takeUntil,
   takeWhile
 } from 'rxjs/operators';
-
-import {
-  AffixService,
-  AffixVerticalAlignment
-} from '../affix';
-
-import {
-  OverlayInstance,
-  OverlayService
-} from '../overlay';
 
 import { TypeaheadDomAdapterService } from './typeahead-dom-adapter.service';
 import { TypeaheadResultsContext } from './typeahead-results-context';
@@ -195,6 +193,7 @@ export class TypeaheadComponent
 
         if (this.hasResults) {
           this.overlayInstance.componentInstance.results = results;
+          this.positionResults();
           return;
         }
 
@@ -208,12 +207,17 @@ export class TypeaheadComponent
     resultsContext.templateRef = this.searchResultTemplate;
     resultsContext.resultSelectedAction = this.searchResultAction;
 
-    this.overlayInstance = this.overlayService.attach(TypeaheadResultsComponent, {
+    const overlayConfig: OverlayConfig = {
       providers: [{
         provide: TypeaheadResultsContext,
         useValue: resultsContext
       }]
-    });
+    };
+
+    this.overlayInstance = this.overlayService.attach(
+      TypeaheadResultsComponent,
+      overlayConfig
+    );
 
     // Set the input value to what is selected in the dropdown.
     this.overlayInstance.componentInstance.selectionChange
@@ -246,20 +250,26 @@ export class TypeaheadComponent
   }
 
   private positionResults(): void {
+    console.log('positionResults()');
+    this.overlayInstance.componentInstance.hideResults();
     const resultsRef = this.overlayInstance.componentInstance.elementRef;
 
-    this.affixService.affixTo(
-      resultsRef,
-      this.searchInput,
-      {
-        verticalAlignment: AffixVerticalAlignment.Bottom
-      }
-    );
+    setTimeout(() => {
+      this.affixService.affixTo(
+        resultsRef,
+        this.searchInput,
+        {
+          verticalAlignment: AffixVerticalAlignment.Bottom
+        }
+      );
 
-    this.domAdapter.matchWidth(
-      resultsRef,
-      this.searchInput
-    );
+      this.domAdapter.matchWidth(
+        resultsRef,
+        this.searchInput
+      );
+
+      this.overlayInstance.componentInstance.showResults();
+    });
   }
 
   private addEventListeners(): void {

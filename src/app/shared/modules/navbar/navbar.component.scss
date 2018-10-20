@@ -7,6 +7,7 @@
   padding-left: $gd-spacing-lg;
   padding-right: $gd-spacing-lg;
   display: flex;
+  align-items: center;
 }
 
 .gd-navbar-primary,
@@ -27,10 +28,11 @@
 .gd-navbar-menu {
   flex: 1 0 auto;
   display: inline-flex;
-  align-items: baseline;
 
   > li {
-    padding: 0 0.175rem;
+    padding: 0 $gd-spacing-xs;
+    display: flex;
+    align-items: center;
 
     > a,
     ::ng-deep .gd-button-link {
@@ -50,15 +52,16 @@
   }
 }
 
-.gd-navbar-user {
-  margin-top: -6px;
-  display: inline-flex;
-  vertical-align: top;
-  margin-bottom: -5px;
-  margin-left: $gd-spacing-lg;
-  padding: 0 !important;
+.gd-navbar-image-link {
+  padding: 0 $gd-spacing-md !important;
 
-  &:hover {
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1)
+  ::ng-deep a {
+    &:hover {
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1)
+    }
   }
+}
+
+.gd-navbar-icon-link {
+  font-size: 150%;
 }

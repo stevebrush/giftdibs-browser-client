@@ -53,6 +53,7 @@ export class TypeaheadResultsComponent implements OnInit, OnDestroy {
     this.changeDetector.markForCheck();
   }
 
+  public isVisible = false;
   public templateRef: TemplateRef<any>;
   public selectionChange = new Subject<TypeaheadResultsSelectionChange>();
 
@@ -77,6 +78,16 @@ export class TypeaheadResultsComponent implements OnInit, OnDestroy {
   public onResultClick(result: any): void {
     const label = this.context.resultSelectedAction.call({}, result);
     this.selectionChange.next({ result, label });
+  }
+
+  public hideResults(): void {
+    this.isVisible = false;
+    this.changeDetector.markForCheck();
+  }
+
+  public showResults(): void {
+    this.isVisible = true;
+    this.changeDetector.markForCheck();
   }
 
   public triggerActiveResultAction(): void {

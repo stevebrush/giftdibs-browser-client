@@ -1,14 +1,21 @@
 @import '../../../styles/mixins';
 
-.gd-typeahead-results {
+:host {
   background-color: #fff;
   box-shadow: $gd-box-shadow-lg;
-  max-height: 90vh;
+}
+
+.gd-typeahead-results {
   overflow: auto;
+  height: 100%;
 }
 
 .gd-typeahead-result {
   padding: $gd-spacing-padding-squish;
+}
+
+.gd-typeahead-results-hidden {
+  visibility: hidden;
 }
 
 .gd-typahead-result-active {

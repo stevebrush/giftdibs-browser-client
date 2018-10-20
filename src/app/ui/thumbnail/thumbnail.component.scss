@@ -1,9 +1,7 @@
 @import '../../../styles/mixins';
 
 :host {
-  display: flex;
   flex-grow: 1;
-  height: 100%;
 }
 
 .gd-thumbnail {
@@ -51,8 +49,8 @@
 }
 
 .gd-thumbnail-xs {
-  width: 2rem;
-  height: 2rem;
+  width: 32px;
+  height: 32px;
 }
 
 .gd-thumbnail-sm {

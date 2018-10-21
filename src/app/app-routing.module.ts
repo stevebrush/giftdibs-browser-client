@@ -11,10 +11,6 @@ import {
   AuthGuard
 } from '@app/shared/guards';
 
-import {
-  GD_AUTHORIZATION_PROVIDERS
-} from '@giftdibs/session';
-
 const appRoutes: Routes = [
   {
     path: '',
@@ -63,8 +59,7 @@ const appRoutes: Routes = [
     RouterModule
   ],
   providers: [
-    AuthGuard,
-    GD_AUTHORIZATION_PROVIDERS
+    AuthGuard
   ]
 })
 export class AppRoutingModule { }

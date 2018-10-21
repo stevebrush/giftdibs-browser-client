@@ -15,10 +15,11 @@
             'gd-url-images-selector-active': isSelectedImage(image)
           }"
           size="fill"
-          [imageSource]="image.data"
+          [imageSource]="image.dataUrl"
           (click)="selectImage(image)"
         >
         </gd-thumbnail>
+        {{ image.width }} x {{ image.height }}
       </gd-column>
     </gd-row>
 

@@ -338,7 +338,7 @@ export class GiftEditComponent implements OnInit {
 
     modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
       if (args.reason === 'save') {
-        const imageDataUrl = args.data.image.data;
+        const imageDataUrl = args.data.image.dataUrl;
         const productDetails: UrlScraperResult = args.data.result;
 
         this.giftForm.get('imageUrl').setValue(imageDataUrl);

@@ -1,6 +1,6 @@
 <gd-wait *ngIf="isLoading"></gd-wait>
 
-<div class="gd-container-sm gd-spacing-padding-even-large">
+<div class="gd-container gd-container-xs gd-spacing-padding-even-large">
   <h1>
     Create a free account
   </h1>
@@ -19,70 +19,55 @@
     <gd-row class="gd-register-user-name">
       <gd-column screenSmall="6">
         <gd-form-field [errors]="errors">
-          <label
-            class="gd-control-label"
-            for="gd-register-first-name"
-          >
-            First name
-          </label>
           <input
+            autocomplete="off"
             type="text"
             class="gd-form-control"
-            id="gd-register-first-name"
             formControlName="firstName"
-            autocomplete="off"
+            placeholder="First name"
           />
         </gd-form-field>
       </gd-column>
       <gd-column screenSmall="6">
         <gd-form-field [errors]="errors">
-          <label
-            class="gd-control-label"
-            for="gd-register-last-name"
-          >
-            Last name
-          </label>
           <input
+            autocomplete="off"
             type="text"
             class="gd-form-control"
-            id="gd-register-last-name"
             formControlName="lastName"
-            autocomplete="off"
+            placeholder="Last name"
           />
         </gd-form-field>
       </gd-column>
     </gd-row>
 
-    <gd-form-field [errors]="errors">
-      <label
-        class="gd-control-label"
-        for="gd-register-email-address">
-        Email
-      </label>
+    <gd-form-field
+      [errors]="errors"
+    >
       <input
+        autocomplete="off"
         type="email"
         class="gd-form-control"
-        id="gd-register-email-address"
         formControlName="emailAddress"
-        autocomplete="off">
+        placeholder="Email address"
+      />
     </gd-form-field>
 
     <gd-form-field [errors]="errors">
-      <label
-        class="gd-control-label"
-        for="gd-register-new-password">
-        New password
-      </label>
       <gd-password-viewer
         [disabled]="registerForm.disabled"
-        [inputElement]="passwordInput">
+        [inputElement]="passwordInput"
+      >
         <input
+          autocorrect="off"
+          autocapitalize="none"
+          autocomplete="off"
           type="password"
           class="gd-form-control"
-          id="gd-register-new-password"
           formControlName="password"
-          autocomplete="off"
-          #passwordInput>
+          placeholder="New password"
+          #passwordInput
+        />
       </gd-password-viewer>
     </gd-form-field>
 

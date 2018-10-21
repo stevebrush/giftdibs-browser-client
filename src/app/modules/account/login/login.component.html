@@ -1,6 +1,6 @@
 <gd-wait *ngIf="isLoading"></gd-wait>
 
-<div class="gd-container-sm gd-spacing-padding-even-large">
+<div class="gd-container gd-container-xs gd-spacing-padding-even-large">
   <h1>
     Log in
   </h1>
@@ -17,33 +17,28 @@
     novalidate
   >
     <gd-form-field [errors]="errors">
-      <label
-        class="gd-control-label"
-        for="gd-login-email-address">
-        Email
-      </label>
       <input
         type="email"
         class="gd-form-control"
         id="gd-login-email-address"
-        formControlName="emailAddress">
+        formControlName="emailAddress"
+        placeholder="Email address"
+      />
     </gd-form-field>
 
     <gd-form-field [errors]="errors">
-      <label
-        class="gd-control-label"
-        for="gd-login-password">
-        Password
-      </label>
       <gd-password-viewer
         [disabled]="loginForm.disabled"
         [inputElement]="passwordInput">
         <input
+          autocorrect="off"
+          autocapitalize="none"
           type="password"
           class="gd-form-control"
-          id="gd-login-password"
           formControlName="password"
-          #passwordInput>
+          placeholder="Password"
+          #passwordInput
+        />
       </gd-password-viewer>
     </gd-form-field>
 

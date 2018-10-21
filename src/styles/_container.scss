@@ -1,21 +1,24 @@
 @import 'variables';
 
-.gd-container-fluid {
+.gd-container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
   padding: 0 $gd-spacing;
 }
 
-.gd-container {
-  padding: 0 $gd-spacing;
-  width: 100%;
-  max-width: 900px;
-  margin-right: auto;
-  margin-left: auto;
+.gd-container-lg {
+  max-width: $gd-screen-lg-min;
+}
+
+.gd-container-md {
+  max-width: $gd-screen-md-min;
 }
 
 .gd-container-sm {
-  padding: 0 $gd-spacing;
-  width: 100%;
-  max-width: 700px;
-  margin-right: auto;
-  margin-left: auto;
+  max-width: $gd-screen-sm-min;
+}
+
+.gd-container-xs {
+  max-width: $gd-screen-xs-min;
 }

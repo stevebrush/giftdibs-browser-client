@@ -1,6 +1,6 @@
 <gd-wait *ngIf="isLoading"></gd-wait>
 
-<div class="gd-container-sm gd-spacing-padding-even-large">
+<div class="gd-container gd-container-sm gd-spacing-padding-even-large">
   <h1>
     Delete your account
   </h1>
@@ -29,6 +29,8 @@
         [inputElement]="passwordInput"
       >
         <input
+          autocorrect="off"
+          autocapitalize="none"
           type="password"
           class="gd-form-control"
           id="gd-delete-account-password"

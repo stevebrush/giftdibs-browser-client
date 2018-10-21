@@ -6,7 +6,7 @@
 >
   <ng-template [ngIf]="user">
     <div class="gd-user-header gd-spacing-padding-even-large">
-      <div class="gd-container-sm">
+      <div class="gd-container gd-container-sm">
         <gd-media>
           <gd-media-content>
             <div style="float:right;">
@@ -40,7 +40,7 @@
       </div>
     </div>
 
-    <div class="gd-container-sm">
+    <div class="gd-container gd-container-sm">
       <div class="gd-button-group gd-button-group-tabs">
         <button
           class="gd-button gd-button-tab"
@@ -65,7 +65,7 @@
       </div>
     </div>
 
-    <div class="gd-container-fluid gd-spacing-padding-even-large">
+    <div class="gd-container gd-spacing-padding-even-large">
       <ng-container *ngTemplateOutlet="wishListsTemplate;context:wishLists">
       </ng-container>
     </div>

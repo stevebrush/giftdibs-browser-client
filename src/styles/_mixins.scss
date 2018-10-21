@@ -1,6 +1,11 @@
 @import './variables';
 
 @mixin gd_form_control() {
+  // See: https://stackoverflow.com/questions/23211656/remove-ios-input-shadow
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
   font-size: $gd-font-size-default;
   line-height: $gd-line-height;
   border: 1px solid transparent;

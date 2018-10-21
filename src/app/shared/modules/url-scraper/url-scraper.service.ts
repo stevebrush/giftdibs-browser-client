@@ -41,27 +41,4 @@ export class UrlScraperService {
         share()
       );
   }
-
-  // public getProducts(urls: string[]): Observable<UrlScraperResult[]> {
-  //   return this.http.post(`${this.resourceUrl}/products`, {
-  //     urls: JSON.stringify(urls)
-  //   })
-  //     .pipe(
-  //       map((result: any) => result.products),
-  //       share()
-  //     );
-  // }
-
-  // public getImages(url: string): Observable<UrlScraperResult> {
-  //   const encoded = encodeURIComponent(url);
-  //   return this.http.get(`${this.resourceUrl}/images?url=${encoded}`)
-  //     .pipe(
-  //       map((result: any) => {
-  //         return {
-  //           images: result.images
-  //         };
-  //       }),
-  //       share()
-  //     );
-  // }
 }

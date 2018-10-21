@@ -1,7 +1,7 @@
 @import '../../../styles/mixins';
 
 .gd-modal-header {
-  padding: $gd-spacing;
+  padding: $gd-spacing-padding-squish;
   border-bottom: 1px solid $gd-color-neutral-lightest;
 }
 

@@ -36,6 +36,7 @@ export class UrlImagesSelectorComponent implements OnInit {
     }
 
     this.images = product.images;
+    this.selectedImage = this.images[0];
     this.changeDetector.markForCheck();
   }
 

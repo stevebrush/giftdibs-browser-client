@@ -21,10 +21,14 @@
   color: $gd-color-neutral-lighter;
 }
 
+.gd-thumbnail-empty {
+  background-color: $gd-color-neutral-lightest !important;
+}
+
 .gd-thumbnail-image-container {
-  background-color: $gd-color-neutral-lightest;
-  background-size: cover;
-  background-position: top center;
+  background-color: #fff;
+  background-size: contain;
+  background-position: center;
   background-repeat: no-repeat;
   align-items: center;
   justify-content: center;
@@ -40,6 +44,11 @@
     display: block;
     padding-top: 100%; 	/* initial ratio of 1:1*/
   }
+}
+
+.gd-rounded-corners-circle {
+  background-position: top center;
+  background-size: cover;
 }
 
 .gd-thumbnail-image {

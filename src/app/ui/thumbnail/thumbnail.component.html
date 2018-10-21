@@ -24,7 +24,8 @@
     class="gd-thumbnail-image-container"
     role="img"
     [ngClass]="{
-      'gd-rounded-corners-circle': (type === 'user')
+      'gd-rounded-corners-circle': (type === 'user'),
+      'gd-thumbnail-empty': !imageSource
     }"
     [ngStyle]="{
       'background-image': (imageSource && size !== 'static') ? 'url(' + imageSource + ')' : ''

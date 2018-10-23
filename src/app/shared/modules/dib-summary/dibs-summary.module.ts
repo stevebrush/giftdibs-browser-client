@@ -7,9 +7,12 @@ import {
 } from '@angular/common';
 
 import {
-  IconModule,
   RepeaterModule
-} from '@app/ui';
+} from '@giftdibs/ux';
+
+import {
+  IconModule
+} from '@giftdibs/ux';
 
 import {
   DibsSummaryComponent

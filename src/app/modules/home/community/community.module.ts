@@ -16,11 +16,11 @@ import {
 
 import {
   WaitModule
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import {
   RepeaterModule
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import {
   CommunityComponent

@@ -15,7 +15,10 @@ import {
 } from '@giftdibs/session';
 
 import {
-  AlertModule,
+  AlertModule
+} from '@giftdibs/ux';
+
+import {
   VerifyEmailNoticeModule
 } from '@app/ui';
 

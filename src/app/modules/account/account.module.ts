@@ -14,12 +14,11 @@ import {
   FormFieldModule,
   GridModule,
   HideUntilModule,
-  IconModule,
   ImageUploaderModule,
   NoticeModule,
   PasswordViewerModule,
   WaitModule
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import {
   AssetsModule
@@ -28,6 +27,10 @@ import {
 import {
   UserModule
 } from '@app/shared/modules/user';
+
+import {
+  IconModule
+} from '@giftdibs/ux';
 
 import {
   FacebookModule

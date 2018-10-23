@@ -11,16 +11,19 @@ import {
 } from '@angular/router';
 
 import {
+  IconModule
+} from '@giftdibs/ux';
+
+import {
   FriendshipModule
 } from '@app/shared/modules/friendship';
 
 import {
   BadgeModule,
-  IconModule,
   MediaModule,
   PopoverModule,
   RepeaterModule
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import {
   NotificationService

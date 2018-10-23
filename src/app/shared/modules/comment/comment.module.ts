@@ -20,11 +20,14 @@ import {
   CharacterCounterModule,
   DropdownMenuModule,
   FormFieldModule,
-  IconModule,
   MediaModule,
   RepeaterModule,
   ThumbnailModule
-} from '@app/ui';
+} from '@giftdibs/ux';
+
+import {
+  IconModule
+} from '@giftdibs/ux';
 
 import {
   CommentEditComponent

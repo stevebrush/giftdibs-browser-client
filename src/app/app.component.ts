@@ -6,7 +6,7 @@ import {
 
 import {
   WindowRefService
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 @Component({
   selector: 'app-root',

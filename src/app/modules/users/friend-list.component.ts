@@ -15,7 +15,7 @@ import {
 
 import {
   AlertService
-} from '@app/ui/alert';
+} from '@giftdibs/ux';
 
 import {
   Subject

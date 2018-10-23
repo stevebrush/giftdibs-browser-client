@@ -41,14 +41,17 @@ import {
 } from '@app/shared/modules/wish-list-edit';
 
 import {
-  AlertService,
+  AlertService
+} from '@giftdibs/ux';
+
+import {
   ConfirmAnswer,
   ConfirmService,
   DropdownMenuItem,
   ModalClosedEventArgs,
   ModalService,
   ModalSize
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 @Component({
   selector: 'gd-wish-list',

@@ -10,7 +10,7 @@ import {
 import {
   TypeaheadSearchFunction,
   TypeaheadSearchResultAction
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import {
   User

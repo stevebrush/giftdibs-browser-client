@@ -14,7 +14,7 @@ import {
 import {
   ChecklistChoice,
   ModalInstance
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import {
   FriendshipService,
@@ -50,6 +50,7 @@ export class PrivacySelectorUsersComponent implements OnInit {
 
   public ngOnInit(): void {
     this.createForm();
+    console.log('context:', this.context);
     this.usersForm.controls.friends.reset(this.context.selected);
 
     this.friendshipService.getAllByUserId(this.context.user.id)

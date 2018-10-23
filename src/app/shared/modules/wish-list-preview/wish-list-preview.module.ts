@@ -11,10 +11,13 @@ import {
 } from '@angular/router';
 
 import {
+  IconModule
+} from '@giftdibs/ux';
+
+import {
   CardModule,
-  IconModule,
   ThumbnailModule
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import {
   WishListPreviewComponent

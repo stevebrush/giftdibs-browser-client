@@ -15,8 +15,12 @@ import {
 } from '@angular/forms';
 
 import {
-  AlertService, ModalInstance
-} from '@app/ui';
+  AlertService
+} from '@giftdibs/ux';
+
+import {
+  ModalInstance
+} from '@giftdibs/ux';
 
 import {
   WishList,

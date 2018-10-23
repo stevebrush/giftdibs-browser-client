@@ -19,7 +19,7 @@ import {
 
 import {
   DropdownMenuItem
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import {
   Subject

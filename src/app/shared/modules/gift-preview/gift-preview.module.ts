@@ -11,11 +11,14 @@ import {
 } from '@angular/router';
 
 import {
-  IconModule,
+  IconModule
+} from '@giftdibs/ux';
+
+import {
   MediaModule,
   RibbonModule,
   ThumbnailModule
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import {
   GiftPriorityModule

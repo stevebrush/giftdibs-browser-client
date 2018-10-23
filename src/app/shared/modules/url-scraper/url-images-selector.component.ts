@@ -7,7 +7,7 @@ import {
 
 import {
   ModalInstance
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import { UrlImagesSelectorContext } from './url-images-selector-context';
 import { UrlScraperResultImage } from './url-scraper-result-image';

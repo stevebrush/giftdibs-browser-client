@@ -16,14 +16,13 @@ import {
   CheckboxModule,
   FormFieldModule,
   GridModule,
-  IconModule,
   ImageUploaderModule,
   MediaModule,
   ModalModule,
   ThumbnailModule,
   TypeaheadModule,
   WaitModule
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import {
   AssetsModule
@@ -40,6 +39,10 @@ import {
 import {
   UrlScraperModule
 } from '@app/shared/modules/url-scraper';
+
+import {
+  IconModule
+} from '@giftdibs/ux';
 
 import {
   GiftEditComponent

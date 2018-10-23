@@ -16,7 +16,7 @@ import {
   CheckboxModule,
   FormFieldModule,
   ModalModule
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import {
   DibEditComponent

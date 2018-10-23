@@ -11,9 +11,12 @@ import {
 } from '@angular/router';
 
 import {
-  HideUntilModule,
+  HideUntilModule
+} from '@giftdibs/ux';
+
+import {
   IconModule
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import { FollowButtonComponent } from './follow-button.component';
 import { FriendshipService } from './friendship.service';

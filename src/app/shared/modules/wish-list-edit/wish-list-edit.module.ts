@@ -16,7 +16,7 @@ import {
   FormFieldModule,
   ModalModule,
   WaitModule
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import {
   PrivacySelectorModule

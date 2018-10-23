@@ -19,7 +19,7 @@ import {
 
 import {
   AlertService
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import {
   SessionService
@@ -89,6 +89,8 @@ export class LoginComponent implements OnInit {
 
   public onFacebookLoginFailure(): void {
     this.loginForm.enable();
+    this.isLoading = false;
+    this.changeDetector.detectChanges();
   }
 
   private createForm(): void {

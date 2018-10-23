@@ -15,12 +15,15 @@ import {
 } from '@angular/forms';
 
 import {
-  AlertService,
+  AlertService
+} from '@giftdibs/ux';
+
+import {
   ModalClosedEventArgs,
   ModalInstance,
   ModalService,
   ModalSize
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import {
   Observable
@@ -50,7 +53,7 @@ import {
 import {
   TypeaheadSearchFunction,
   TypeaheadSearchResultAction
-} from '@app/ui/typeahead';
+} from '@giftdibs/ux';
 
 import {
   UrlImagesLoaderComponent,

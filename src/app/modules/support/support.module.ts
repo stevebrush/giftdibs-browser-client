@@ -8,7 +8,7 @@ import {
 
 import {
   GridModule
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import { AboutComponent } from './about/about.component';
 import { FaqComponent } from './faq/faq.component';

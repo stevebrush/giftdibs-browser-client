@@ -13,11 +13,14 @@ import {
 } from '@angular/router';
 
 import {
-  AlertService,
+  AlertService
+} from '@giftdibs/ux';
+
+import {
   ModalClosedEventArgs,
   ModalService,
   ModalSize
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import {
   Subject

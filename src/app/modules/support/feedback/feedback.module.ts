@@ -15,7 +15,7 @@ import {
   CharacterCounterModule,
   FormFieldModule,
   WaitModule
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import { FeedbackRoutingModule } from './feedback-routing.module';
 import { FeedbackComponent } from './feedback.component';

@@ -14,7 +14,7 @@ import { GiftService } from '@app/shared/modules/gift';
 
 import {
   AlertService
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import { Notification } from './notification';
 import { NotificationService } from './notification.service';

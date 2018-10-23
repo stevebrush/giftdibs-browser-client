@@ -10,9 +10,12 @@ import {
 } from '@angular/core';
 
 import {
-  AlertService,
+  AlertService
+} from '@giftdibs/ux';
+
+import {
   DropdownMenuItem
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import {
   SessionService

@@ -14,7 +14,7 @@ import {
 import {
   AlertService,
   WindowRefService
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import {
   SessionService

@@ -26,13 +26,16 @@ import {
   CardModule,
   ConfirmModule,
   DropdownMenuModule,
-  IconModule,
   MediaModule,
   NoticeModule,
   RepeaterModule,
   ThumbnailModule,
   WaitModule
-} from '@app/ui';
+} from '@giftdibs/ux';
+
+import {
+  IconModule
+} from '@giftdibs/ux';
 
 import { WishListComponent } from './wish-list.component';
 import { WishListsRoutingModule } from './wish-lists-routing.module';

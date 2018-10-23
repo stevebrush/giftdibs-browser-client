@@ -15,7 +15,7 @@ import {
 import {
   AlertService,
   WindowRefService
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import {
   AccountService
@@ -71,11 +71,21 @@ export class FacebookLoginButtonComponent implements OnDestroy {
     FB.login((response: any) => {
       if (response.status === 'not_authorized') {
         this.isLoading = false;
-        this.changeDetector.markForCheck();
+        this.disabled = false;
+        this.changeDetector.detectChanges();
         this.failure.next();
         this.alertService.error(
           'Please provide the necessary permissions to continue with Facebook.'
         );
+        return;
+      }
+
+      // User cancelled Facebook modal.
+      if (!response.authResponse) {
+        this.isLoading = false;
+        this.disabled = false;
+        this.changeDetector.detectChanges();
+        this.failure.next();
         return;
       }
 

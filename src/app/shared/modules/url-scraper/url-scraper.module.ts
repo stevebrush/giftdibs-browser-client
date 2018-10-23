@@ -11,7 +11,7 @@ import {
   ModalModule,
   ThumbnailModule,
   WaitModule
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import { UrlImagesLoaderContext } from './url-images-loader-context';
 import { UrlImagesLoaderComponent } from './url-images-loader.component';

@@ -18,7 +18,7 @@ import {
   MediaModule,
   ThumbnailModule,
   TypeaheadModule
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import { SearchComponent } from './search.component';
 

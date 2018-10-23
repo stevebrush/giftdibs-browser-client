@@ -12,10 +12,13 @@ import {
 
 import {
   ConfirmModule,
-  IconModule,
   MediaModule,
   NoticeModule
-} from '@app/ui';
+} from '@giftdibs/ux';
+
+import {
+  IconModule
+} from '@giftdibs/ux';
 
 import {
   DibService

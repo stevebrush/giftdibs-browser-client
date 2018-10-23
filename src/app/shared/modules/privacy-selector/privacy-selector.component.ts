@@ -17,7 +17,7 @@ import {
   DropdownMenuItem,
   ModalClosedEventArgs,
   ModalService
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import {
   SessionService
@@ -112,6 +112,7 @@ export class PrivacySelectorComponent
         action: () => {
           const context = new PrivacySelectorUsersContext();
           context.user = this.user;
+          console.log('value?', this.value);
           context.selected = this.value.allowedUserIds;
 
           const instance = this.modalService.open(

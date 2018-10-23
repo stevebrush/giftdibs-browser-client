@@ -30,12 +30,15 @@ import {
   CardModule,
   GridModule,
   HideUntilModule,
-  IconModule,
   MediaModule,
   RepeaterModule,
   ThumbnailModule,
   WaitModule
-} from '@app/ui';
+} from '@giftdibs/ux';
+
+import {
+  IconModule
+} from '@giftdibs/ux';
 
 import { FollowersComponent } from './followers.component';
 import { FollowingComponent } from './following.component';

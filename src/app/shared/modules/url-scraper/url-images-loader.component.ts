@@ -7,12 +7,15 @@ import {
 } from '@angular/core';
 
 import {
-  AlertService,
+  AlertService
+} from '@giftdibs/ux';
+
+import {
   ModalClosedEventArgs,
   ModalInstance,
   ModalService,
   ModalSize
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import {
   finalize

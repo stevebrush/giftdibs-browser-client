@@ -17,10 +17,13 @@ import {
 import {
   BadgeModule,
   DropdownMenuModule,
-  IconModule,
   MediaModule,
   ThumbnailModule
-} from '@app/ui';
+} from '@giftdibs/ux';
+
+import {
+  IconModule
+} from '@giftdibs/ux';
 
 import {
   NotificationsModule

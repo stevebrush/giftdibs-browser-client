@@ -12,7 +12,7 @@ import {
 
 import {
   NoticeModule
-} from '../notice';
+} from '@giftdibs/ux';
 
 import {
   VerifyEmailNoticeComponent

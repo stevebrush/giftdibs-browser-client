@@ -13,7 +13,7 @@ import {
   RepeaterModule,
   ThumbnailModule,
   WaitModule
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import {
   DibControlsModule

@@ -10,14 +10,17 @@ import {
 } from '@angular/core';
 
 import {
+  AlertService
+} from '@giftdibs/ux';
+
+import {
   finalize
 } from 'rxjs/operators';
 
 import {
-  AlertService,
   ModalClosedEventArgs,
   ModalService
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import {
   SessionService

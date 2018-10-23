@@ -19,7 +19,7 @@ import {
 
 import {
   AlertService
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import {
   User

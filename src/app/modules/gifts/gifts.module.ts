@@ -34,14 +34,17 @@ import {
   ConfirmModule,
   DropdownMenuModule,
   GridModule,
-  IconModule,
   MediaModule,
   ModalModule,
   NoticeModule,
   RepeaterModule,
   ThumbnailModule,
   WaitModule
-} from '@app/ui';
+} from '@giftdibs/ux';
+
+import {
+  IconModule
+} from '@giftdibs/ux';
 
 import { GiftComponent } from './gift.component';
 import { GiftsRoutingModule } from './gifts-routing.module';

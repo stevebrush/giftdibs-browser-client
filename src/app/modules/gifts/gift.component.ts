@@ -37,19 +37,22 @@ import {
 } from '@giftdibs/session';
 
 import {
+  AlertService
+} from '@giftdibs/ux';
+
+import {
   GiftMoveComponent,
   GiftMoveContext
 } from '@app/shared/modules/gift-move';
 
 import {
-  AlertService,
   ConfirmAnswer,
   ConfirmService,
   DropdownMenuItem,
   ModalClosedEventArgs,
   ModalService,
   ModalSize
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 @Component({
   selector: 'gd-gift',

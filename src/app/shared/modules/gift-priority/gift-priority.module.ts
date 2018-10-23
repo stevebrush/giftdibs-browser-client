@@ -8,7 +8,7 @@ import {
 
 import {
   IconModule
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import {
   GiftPriorityComponent

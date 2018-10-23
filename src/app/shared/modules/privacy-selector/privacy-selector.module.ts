@@ -12,11 +12,14 @@ import {
 } from '@angular/forms';
 
 import {
+  IconModule
+} from '@giftdibs/ux';
+
+import {
   ChecklistModule,
   DropdownMenuModule,
-  IconModule,
   ModalModule
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import {
   PrivacySelectorComponent

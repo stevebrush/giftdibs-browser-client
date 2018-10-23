@@ -16,13 +16,16 @@ import {
 } from 'rxjs/operators';
 
 import {
-  AlertService,
+  AlertService
+} from '@giftdibs/ux';
+
+import {
   ConfirmAnswer,
   ConfirmService,
   ModalClosedEventArgs,
   ModalService,
   ModalSize
-} from '@app/ui';
+} from '@giftdibs/ux';
 
 import {
   SessionService

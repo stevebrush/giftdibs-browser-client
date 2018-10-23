@@ -78,6 +78,31 @@
               </gd-dib-controls>
             </ng-container>
 
+            <div *ngIf="gift.externalUrls && gift.externalUrls.length"
+              class="gd-gift-external-urls"
+            >
+              <gd-repeater>
+                <gd-repeater-item *ngFor="let externalUrl of gift.externalUrls">
+                  <gd-media>
+                    <gd-media-thumbnail>
+                      <gd-thumbnail
+                        size="sm"
+                        [imageSource]="gift.imageUrl"
+                      ></gd-thumbnail>
+                    </gd-media-thumbnail>
+                    <gd-media-content>
+                      <a
+                        [attr.href]="externalUrl.url"
+                      >
+                        {{ getURLName(externalUrl.url) }}
+                      </a>
+                      <div *ngIf="externalUrl.price" class="gd-text-price">${{ externalUrl.price }}</div>
+                    </gd-media-content>
+                  </gd-media>
+                </gd-repeater-item>
+              </gd-repeater>
+            </div>
+
             <p *ngIf="gift.notes"
               class="gd-gift-detail-notes"
             >
@@ -131,26 +156,6 @@
                 updated on {{ gift.dateUpdated | date }}.
               </gd-media-content>
             </gd-media>
-
-            <div *ngIf="gift.externalUrls && gift.externalUrls.length"
-              class="gd-gift-external-urls"
-            >
-              <h2 class="gd-subheading">
-                Buy it now
-              </h2>
-
-              <gd-repeater>
-                <gd-repeater-item *ngFor="let externalUrl of gift.externalUrls">
-                  <a
-                    [attr.href]="externalUrl.url"
-                  >
-                    <gd-icon icon="external-link-alt"></gd-icon>
-                    {{ getURLName(externalUrl.url) }}
-                  </a>
-                  <span *ngIf="externalUrl.price" style="float:right">${{ externalUrl.price }}</span>
-                </gd-repeater-item>
-              </gd-repeater>
-            </div>
 
             <div *ngIf="gift.dateReceived && gift.dibs && gift.dibs.length">
               <h2 class="gd-subheading">

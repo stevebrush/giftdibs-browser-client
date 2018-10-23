@@ -109,10 +109,6 @@ export class GiftEditComponent implements OnInit {
     if (this.gift) {
       this.resetForm(this.gift);
     }
-
-    // this.giftForm.get('name').valueChanges.subscribe((value: any) => {
-    //   console.log('value changes:', value);
-    // });
   }
 
   public onSelectFile(args: any): void {

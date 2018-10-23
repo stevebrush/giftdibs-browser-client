@@ -180,7 +180,9 @@ export class GiftComponent implements OnInit, OnDestroy {
       formatted = fragments[1];
     }
 
-    return formatted.split('/')[0];
+    formatted = formatted.split('/')[0];
+
+    return formatted.charAt(0).toUpperCase() + formatted.substr(1);
   }
 
   private refreshGift(): void {

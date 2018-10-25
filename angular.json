@@ -21,7 +21,8 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "src/styles/app.scss"
+              "src/styles/app.scss",
+              "./node_modules/@giftdibs/ux/css/giftdibs.css"
             ],
             "scripts": []
           },

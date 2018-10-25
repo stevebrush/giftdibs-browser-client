@@ -31,7 +31,11 @@ export class CommunityComponent implements OnInit {
       .subscribe((gifts: Gift[]) => {
         this.gifts = gifts;
         this.isLoading = false;
-        this.hasMore = true;
+
+        if (gifts && gifts.length) {
+          this.hasMore = true;
+        }
+
         this.changeDetector.markForCheck();
       });
   }

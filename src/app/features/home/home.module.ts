@@ -8,11 +8,11 @@ import {
 
 import {
   CommunityModule
-} from '@app/modules/home/community';
+} from '@app/features/home/community';
 
 import {
   WelcomeModule
-} from '@app/modules/home/welcome';
+} from '@app/features/home/welcome';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';

@@ -14,40 +14,40 @@ import {
 const appRoutes: Routes = [
   {
     path: '',
-    loadChildren: 'app/modules/home/home.module#HomeModule',
+    loadChildren: 'app/features/home/home.module#HomeModule',
     pathMatch: 'full'
   },
   {
     path: 'account',
-    loadChildren: 'app/modules/account/account.module#AccountModule'
+    loadChildren: 'app/features/account/account.module#AccountModule'
   },
   {
     path: 'support',
-    loadChildren: 'app/modules/support/support.module#SupportModule'
+    loadChildren: 'app/features/support/support.module#SupportModule'
   },
   {
     path: 'users',
-    loadChildren: 'app/modules/users/users.module#UsersModule',
+    loadChildren: 'app/features/users/users.module#UsersModule',
     canLoad: [AuthGuard]
   },
   {
     path: 'wish-lists',
-    loadChildren: 'app/modules/wish-lists/wish-lists.module#WishListsModule',
+    loadChildren: 'app/features/wish-lists/wish-lists.module#WishListsModule',
     canLoad: [AuthGuard]
   },
   {
     path: 'gifts',
-    loadChildren: 'app/modules/gifts/gifts.module#GiftsModule',
+    loadChildren: 'app/features/gifts/gifts.module#GiftsModule',
     canLoad: [AuthGuard]
   },
   {
     path: 'dibs',
-    loadChildren: 'app/modules/dibs/dibs.module#DibsModule',
+    loadChildren: 'app/features/dibs/dibs.module#DibsModule',
     canLoad: [AuthGuard]
   },
   {
     path: '**',
-    loadChildren: 'app/modules/page-not-found/page-not-found.module#PageNotFoundModule'
+    loadChildren: 'app/features/page-not-found/page-not-found.module#PageNotFoundModule'
   }
 ];
 

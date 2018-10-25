@@ -3,7 +3,6 @@
 .gd-navbar {
   background-color: #fff;
   border-bottom: 1px solid $gd-border-color-neutral-lightest;
-  padding: $gd-spacing-padding-squish;
   padding-left: $gd-spacing-lg;
   padding-right: $gd-spacing-lg;
   display: flex;
@@ -37,7 +36,7 @@
     > a,
     ::ng-deep .gd-button-link {
       color: $gd-text-color-deemphasized;
-      padding: $gd-spacing-padding-squish-compact;
+      padding: $gd-spacing-sm $gd-spacing-lg;
 
       &:focus,
       &:hover {

@@ -1,9 +1,7 @@
 @import '../../../../styles/mixins';
 
 .gd-comment-body {
-  border-radius: $gd-border-radius;
   background-color: $gd-color-neutral-faint;
-  padding: $gd-spacing-padding-squish-compact;
   line-height: $gd-line-height-reduced;
   display: inline-block;
   margin-bottom: $gd-spacing-xs;

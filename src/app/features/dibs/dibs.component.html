@@ -45,8 +45,8 @@
     <div *ngFor="let recipient of recipients"
       class="gd-dibs-recipient"
     >
-      <div class="gd-dibs-recipient-gift">
-        <div class="gd-dibs-recipient-gift-header">
+      <div class="gd-dibs-recipient-gift gd-rounded-corners">
+        <div class="gd-dibs-recipient-gift-header gd-spacing-padding-squish">
           <gd-media>
             <gd-media-thumbnail>
               <a routerLink="/users/{{ recipient.id }}">
@@ -65,7 +65,7 @@
             </gd-media-content>
           </gd-media>
         </div>
-        <div class="gd-dibs-recipient-gift-body">
+        <div class="gd-dibs-recipient-gift-body gd-rounded-corners-subtle gd-spacing-padding-squish">
           <gd-repeater>
             <ng-container *ngFor="let wishList of recipient.wishLists">
               <gd-repeater-item *ngFor="let gift of wishList.gifts">
@@ -116,7 +116,7 @@
             </ng-container>
           </gd-repeater>
         </div>
-        <div class="gd-dibs-recipient-gift-footer">
+        <div class="gd-dibs-recipient-gift-footer gd-spacing-padding-squish">
           Totals for {{ recipient.firstName }}: ${{ recipient.budget || '--' }}
         </div>
       </div>

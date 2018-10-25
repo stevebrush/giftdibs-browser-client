@@ -28,7 +28,7 @@ const routes: Routes = [
       },
       {
         path: 'feedback',
-        loadChildren: 'app/modules/support/feedback/feedback.module#FeedbackModule'
+        loadChildren: 'app/features/support/feedback/feedback.module#FeedbackModule'
       },
       {
         path: 'privacy',

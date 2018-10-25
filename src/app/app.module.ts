@@ -11,16 +11,16 @@ import {
 } from '@app/shared/modules/navbar';
 
 import {
+  VerifyEmailNoticeModule
+} from '@app/shared/modules/verify-email-notice';
+
+import {
   SessionModule
 } from '@giftdibs/session';
 
 import {
   AlertModule
 } from '@giftdibs/ux';
-
-import {
-  VerifyEmailNoticeModule
-} from '@app/ui';
 
 import {
   environment

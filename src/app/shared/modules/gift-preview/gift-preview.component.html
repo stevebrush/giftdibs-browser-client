@@ -1,5 +1,5 @@
 <div class="gd-gift-preview">
-  <gd-media>
+  <gd-media size="lg">
     <gd-media-thumbnail class="gd-gift-preview-thumbnail">
       <gd-ribbon *ngIf="showDibbedRibbon(gift)"
         ribbonType="success"
@@ -12,7 +12,7 @@
         Received!
       </gd-ribbon>
       <gd-thumbnail
-        size="lg"
+        size="fill"
         [imageSource]="gift.imageUrl"
         [route]="{ commands: ['/gifts', gift.id] }"
       >
@@ -43,57 +43,5 @@
         </div>
       </gd-media-body>
     </gd-media-content>
-    <!-- <gd-media-controls>
-      <gd-dib-controls
-        [gift]="gift"
-        (change)="onDibChange($event)"
-      >
-      </gd-dib-controls>
-    </gd-media-controls> -->
   </gd-media>
-  <!-- <gd-card
-    [route]="{
-      commands: ['/gifts', gift.id]
-    }"
-  >
-    <gd-card-thumbnail class="gd-gift-preview-thumbnail">
-      <gd-ribbon *ngIf="showDibbedRibbon(gift)"
-        ribbonType="success"
-      >
-        Dibbed!
-      </gd-ribbon>
-      <gd-ribbon *ngIf="gift.dateReceived"
-        ribbonType="info"
-      >
-        Received!
-      </gd-ribbon>
-      <gd-thumbnail
-        size="static"
-        [imageSource]="gift.imageUrl"
-      >
-      </gd-thumbnail>
-    </gd-card-thumbnail>
-    <gd-card-header>
-      <gd-card-heading>
-        {{ gift.name }}
-        <ng-template [ngIf]="gift.quantity > 1">
-          ({{ gift.quantity }})
-        </ng-template>
-      </gd-card-heading>
-    </gd-card-header>
-    <gd-card-body>
-      <gd-gift-priority
-        [priority]="gift.priority"
-      >
-      </gd-gift-priority>
-      <div class="gd-text-color-deemphasized">
-        ${{ gift.budget || '--' }}
-        <span *ngIf="gift.quantity > 1">ea.</span>
-      </div>
-      <gd-icon *ngIf="gift.comments && gift.comments.length"
-        icon="comment-dots"
-        iconStyle="deemphasized"
-      ></gd-icon>
-    </gd-card-body>
-  </gd-card> -->
 </div>

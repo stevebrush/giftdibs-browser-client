@@ -4,22 +4,19 @@
 >
   <ng-template [ngIf]="user">
     <div class="gd-container gd-container-sm gd-spacing-padding-even-large">
-      <gd-media>
+      <gd-media size="md">
         <gd-media-content>
           <gd-media-header>
             <h1>
               {{ friends.length }} {{ type }}
             </h1>
           </gd-media-header>
-          <gd-media-body>
-
-          </gd-media-body>
         </gd-media-content>
         <gd-media-thumbnail>
           <a routerLink="/users/{{ user.id }}">
             <gd-thumbnail
-              size="md"
-              type="user"
+              shape="circle"
+              size="fill"
               [imageSource]="user.avatarUrl"
             >
             </gd-thumbnail>
@@ -31,12 +28,12 @@
     <div class="gd-container gd-spacing-padding-even-large">
       <gd-repeater>
         <gd-repeater-item *ngFor="let friend of friends">
-          <gd-media>
+          <gd-media size="sm">
             <gd-media-thumbnail>
               <a routerLink="/users/{{ friend.id }}">
                 <gd-thumbnail
-                  size="sm"
-                  type="user"
+                  size="fill"
+                  shape="circle"
                   [imageSource]="friend.avatarUrl"
                 >
                 </gd-thumbnail>

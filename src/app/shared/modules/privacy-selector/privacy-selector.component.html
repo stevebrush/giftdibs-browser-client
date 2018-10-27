@@ -13,25 +13,28 @@
 
 <ng-template
   let-item="item"
-  #menuItemTemplate>
+  #menuItemTemplate
+>
   <div
-    class="gd-privacy-selector-item gd-spacing-padding-squish-compact">
+    class="gd-privacy-selector-item gd-spacing-padding-squish-compact"
+  >
     <gd-icon
-      [icon]="item.icon">
+      [icon]="item.icon"
+    >
     </gd-icon>
     <span
       class="gd-privacy-selector-item-body">
       {{ item.label }}
     </span>
-    <gd-icon
-      *ngIf="item.data.type === value.type"
+    <gd-icon *ngIf="item.data.type === value.type"
       icon="check-circle"
-      iconStyle="success">
+      iconStyle="success"
+    >
     </gd-icon>
-    <gd-icon
-      *ngIf="item.data.type !== value.type"
+    <gd-icon *ngIf="item.data.type !== value.type"
       icon="circle"
-      iconStyle="deemphasized">
+      iconStyle="deemphasized"
+    >
     </gd-icon>
   </div>
 </ng-template>

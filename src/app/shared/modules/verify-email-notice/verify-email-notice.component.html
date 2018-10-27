@@ -1,13 +1,14 @@
 <ng-template [ngIf]="isActive">
-  <div class="gd-container">
+  <div class="gd-verify-email-notice">
     <gd-notice noticeType="info">
-      <p>
-        You need to verify your email address before you can follow someone or dib their gifts.
-      </p>
-      <p>
+      <p class="gd-verify-email-notice-content">
+        <span>
+          Welcome! Please verify your email address.
+        </span>
         <a
-          class="gd-button gd-button-info"
-          routerLink="/account/verify">
+          class="gd-button gd-button-info gd-verify-email-button"
+          routerLink="/account/verify"
+        >
           Learn more
         </a>
       </p>

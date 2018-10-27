@@ -18,11 +18,11 @@
 </div>
 
 <ng-template let-result="result" #searchResultTemplate>
-  <gd-media>
+  <gd-media size="xs">
     <gd-media-thumbnail>
       <gd-thumbnail
-        size="xs"
-        type="user"
+        size="fill"
+        shape="circle"
         [imageSource]="result.avatarUrl"
       >
       </gd-thumbnail>

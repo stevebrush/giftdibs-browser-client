@@ -28,18 +28,13 @@
         <gd-typeahead
           ariaDescribedBy="gd-gift-edit-name"
           formControlName="name"
+          searchButtonText="Find"
           [searchFunction]="findProductFunction"
+          [searchOnKeyUp]="false"
           [searchResultTemplate]="searchResultTemplate"
           [searchResultAction]="searchResultAction"
         >
         </gd-typeahead>
-        <!-- <input
-          class="gd-form-control"
-          formControlName="name"
-          id="gd-gift-edit-name"
-          type="text"
-          (keydown.enter)="submit();$event.preventDefault();"
-        /> -->
       </gd-form-field>
 
       <gd-form-field [errors]="errors">
@@ -232,12 +227,10 @@
 </gd-modal>
 
 <ng-template let-result="result" #searchResultTemplate>
-  <!-- {{result|json}} -->
-
-  <gd-media>
+  <gd-media size="md">
     <gd-media-thumbnail>
       <gd-thumbnail
-        size="md"
+        size="fill"
         [imageSource]="result.imageUrl"
       >
       </gd-thumbnail>
@@ -248,9 +241,11 @@
           {{ result.name }}
         </gd-media-heading>
       </gd-media-header>
-      <div class="gd-text-price">
-        ${{ result.price }}
-      </div>
+      <gd-media-body>
+        <div class="gd-text-price">
+          ${{ result.price }}
+        </div>
+      </gd-media-body>
     </gd-media-content>
     <gd-media-controls>
       <a

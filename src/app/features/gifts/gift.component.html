@@ -83,10 +83,10 @@
             >
               <gd-repeater>
                 <gd-repeater-item *ngFor="let externalUrl of gift.externalUrls">
-                  <gd-media>
+                  <gd-media size="sm">
                     <gd-media-thumbnail>
                       <gd-thumbnail
-                        size="sm"
+                        size="fill"
                         [imageSource]="gift.imageUrl"
                       ></gd-thumbnail>
                     </gd-media-thumbnail>
@@ -143,9 +143,9 @@
             <gd-media size="xs">
               <gd-media-thumbnail>
                 <gd-thumbnail
-                  type="user"
-                  size="xs"
-                  title="{{ gift.user.firstName }} {{ gift.user.lastName }}"
+                  altText="{{ gift.user.firstName }} {{ gift.user.lastName }}"
+                  shape="circle"
+                  size="fill"
                   [imageSource]="gift.user.avatarUrl"
                   [route]="{ commands: ['/users', gift.user.id] }"
                 >
@@ -163,11 +163,11 @@
               </h2>
               <gd-repeater>
                 <gd-repeater-item *ngFor="let dib of gift.dibs">
-                  <gd-media>
+                  <gd-media size="xs">
                     <gd-media-thumbnail>
                       <gd-thumbnail
-                        size="xs"
-                        type="user"
+                        shape="circle"
+                        size="fill"
                         [imageSource]="dib.user.avatarUrl"
                       >
                       </gd-thumbnail>

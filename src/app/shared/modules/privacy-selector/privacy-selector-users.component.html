@@ -5,8 +5,7 @@
     </gd-modal-heading>
   </gd-modal-header>
   <gd-modal-body>
-    <form
-      *ngIf="choices"
+    <form *ngIf="choices && choices.length else noFriends"
       class="gd-form"
       aria-label="Select users"
       [formGroup]="usersForm"
@@ -17,10 +16,13 @@
         formControlName="friends">
       </gd-checklist>
     </form>
+    <ng-template #noFriends>
+      You need to follow someone in order to use this feature.
+    </ng-template>
   </gd-modal-body>
   <gd-modal-footer>
     <div class="gd-button-group">
-      <button
+      <button *ngIf="choices && choices.length"
         type="button"
         class="gd-button gd-button-primary"
         [disabled]="usersForm.disabled"

@@ -4,7 +4,7 @@
   class="gd-wish-list"
 >
   <div class="gd-wish-list-banner gd-container gd-container-sm gd-spacing-padding-even-large">
-    <gd-media>
+    <gd-media size="md">
       <gd-media-content>
         <h1>
           {{ wishList.name }}
@@ -51,8 +51,8 @@
       </gd-media-content>
       <gd-media-thumbnail>
         <gd-thumbnail
-          type="user"
-          size="md"
+          shape="circle"
+          size="fill"
           title="{{ wishList.user.firstName }} {{ wishList.user.lastName }}"
           [imageSource]="wishList.user.avatarUrl"
           [route]="{ commands: ['/users', wishList.user.id] }"

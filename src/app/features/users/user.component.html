@@ -7,7 +7,7 @@
   <ng-template [ngIf]="user">
     <div class="gd-user-header gd-spacing-padding-even-large">
       <div class="gd-container gd-container-sm">
-        <gd-media>
+        <gd-media size="md">
           <gd-media-content>
             <div style="float:right;">
               <gd-follow-button
@@ -30,8 +30,8 @@
           </gd-media-content>
           <gd-media-thumbnail>
             <gd-thumbnail
-              size="md"
-              type="user"
+              shape="circle"
+              size="fill"
               [imageSource]="user.avatarUrl"
             >
             </gd-thumbnail>

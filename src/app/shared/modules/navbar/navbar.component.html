@@ -6,7 +6,7 @@
           <gd-thumbnail
             imageSource="assets/gd-logo.png"
             size="xs"
-            type="user"
+            shape="circle"
             [route]="{ commands: ['/'] }"
           >
           </gd-thumbnail>
@@ -26,10 +26,10 @@
         <li class="gd-navbar-menu-user gd-navbar-image-link">
           <gd-thumbnail
             size="xs"
-            type="user"
+            shape="circle"
             [imageSource]="sessionUser.avatarUrl"
             [route]="{ commands: ['/users', sessionUser.id] }"
-            title="{{ sessionUser.firstName }} {{ sessionUser.lastName }}"
+            altText="{{ sessionUser.firstName }} {{ sessionUser.lastName }}"
           >
           </gd-thumbnail>
         </li>

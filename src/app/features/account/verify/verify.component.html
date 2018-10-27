@@ -41,16 +41,17 @@
 </div>
 
 <ng-template #resendEmail>
-  <p>
+  <div class="gd-button-group">
     <button
       class="gd-button gd-button-primary"
       type="button"
-      (click)="sendVerificationEmail()">
+      (click)="sendVerificationEmail()"
+    >
       Resend verification email
     </button>
     <a class="gd-button gd-button-default" routerLink="/">Return to home page</a>
-  </p>
+  </div>
   <p>
-    <a routerLink="/support/faq">Having trouble verifying your email address?</a>
+    <a routerLink="/support/feedback">Having trouble verifying your email address?</a>
   </p>
 </ng-template>

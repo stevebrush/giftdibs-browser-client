@@ -79,7 +79,6 @@ export class DibEditComponent implements OnInit {
     this.changeDetector.markForCheck();
 
     const formData: Dib = this.dibForm.value;
-    console.log('formdata?', formData);
 
     let obs: any;
     if (this.dib) {

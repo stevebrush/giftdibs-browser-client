@@ -234,8 +234,6 @@ export class GiftEditComponent implements OnInit {
       this.urlScraperService.getProduct(control.value.url)
         .subscribe(
           (result: UrlScraperResult) => {
-            console.log('result?', result);
-
             if (result.price) {
               control.get('price').setValue(result.price);
             }
@@ -263,9 +261,6 @@ export class GiftEditComponent implements OnInit {
   }
 
   public searchResultAction: TypeaheadSearchResultAction<any> = (result: any) => {
-    // this.router.navigate(['/users', searchResult.id]);
-    console.log('result selected:', result);
-
     this.toDataUrl(result.imageUrl)
       .then((imageDataUrl: any) => {
         this.giftForm.get('imageUrl').setValue(imageDataUrl);

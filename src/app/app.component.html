@@ -3,12 +3,15 @@
   </gd-navbar>
 
   <main class="app-main">
-    <gd-verify-email-notice
-      [visibleForRoutes]="[
-        '/',
-        '/account/settings'
-      ]">
-    </gd-verify-email-notice>
+    <div class="gd-container gd-container-sm">
+      <gd-verify-email-notice
+        [visibleForRoutes]="[
+          '/',
+          '/account/settings'
+        ]">
+      </gd-verify-email-notice>
+    </div>
+
     <router-outlet>
     </router-outlet>
   </main>

@@ -47,12 +47,12 @@
     >
       <div class="gd-dibs-recipient-gift gd-rounded-corners">
         <div class="gd-dibs-recipient-gift-header gd-spacing-padding-squish">
-          <gd-media>
+          <gd-media size="xs">
             <gd-media-thumbnail>
               <a routerLink="/users/{{ recipient.id }}">
                 <gd-thumbnail
-                  size="xs"
-                  type="user"
+                  shape="circle"
+                  size="fill"
                   [imageSource]="recipient.avatarUrl"
                 >
                 </gd-thumbnail>
@@ -69,11 +69,11 @@
           <gd-repeater>
             <ng-container *ngFor="let wishList of recipient.wishLists">
               <gd-repeater-item *ngFor="let gift of wishList.gifts">
-                <gd-media>
+                <gd-media size="md">
                   <gd-media-thumbnail>
                     <a routerLink="/gifts/{{ gift.id }}">
                       <gd-thumbnail
-                        size="md"
+                        size="fill"
                         [imageSource]="gift.imageUrl"
                       >
                       </gd-thumbnail>

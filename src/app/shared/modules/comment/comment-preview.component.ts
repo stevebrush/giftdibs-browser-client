@@ -63,7 +63,7 @@ export class CommentPreviewComponent implements OnInit, OnDestroy {
               this.deleted.complete();
             },
             (err: any) => {
-              this.alertService.error(err.errors.message);
+              this.alertService.error(err.error.message);
             }
           );
       }

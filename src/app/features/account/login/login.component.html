@@ -5,6 +5,10 @@
     Log in
   </h1>
 
+  <p>
+    Or <a routerLink="/account/register">create a new account</a>
+  </p>
+
   <form
     class="gd-form"
     aria-label="Log in to GiftDibs"
@@ -47,18 +51,16 @@
   </form>
 
   <p>
-    <a routerLink="/account/forgotten">Forget your password?</a>
+    <gd-facebook-login-button
+      [disabled]="loginForm.disabled"
+      (click)="loginForm.disable()"
+      (failure)="onFacebookLoginFailure()"
+      (success)="onFacebookLoginSuccess()"
+    >
+    </gd-facebook-login-button>
   </p>
 
   <p>
-    <a routerLink="/account/register">Create a new account...</a>
+    <a routerLink="/account/forgotten">Forget your password?</a>
   </p>
-
-  <gd-facebook-login-button
-    [disabled]="loginForm.disabled"
-    (click)="loginForm.disable()"
-    (failure)="onFacebookLoginFailure()"
-    (success)="onFacebookLoginSuccess()"
-  >
-  </gd-facebook-login-button>
 </div>

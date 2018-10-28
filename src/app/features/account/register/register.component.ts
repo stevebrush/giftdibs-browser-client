@@ -65,8 +65,8 @@ export class RegisterComponent {
 
     this.accountService.register(this.registerForm.value)
       .subscribe(
-        () => {
-          this.router.navigate(['/account', 'login']);
+        (result: any) => {
+          this.router.navigate(['/users', result.data.userId]);
         },
         (err: any) => {
           const error = err.error;

@@ -59,7 +59,7 @@
               <gd-notice *ngIf="gift.dateReceived"
                 noticeType="info"
               >
-                <gd-media>
+                <gd-media size="xs">
                   <gd-media-thumbnail>
                     <gd-icon icon="check"></gd-icon>
                   </gd-media-thumbnail>
@@ -94,7 +94,8 @@
                       <a
                         [attr.href]="externalUrl.url"
                       >
-                        {{ getURLName(externalUrl.url) }}
+                        Buy at {{ getURLName(externalUrl.url) }}
+                        <gd-icon icon="external-link-alt"></gd-icon>
                       </a>
                       <div *ngIf="externalUrl.price" class="gd-text-price">${{ externalUrl.price }}</div>
                     </gd-media-content>

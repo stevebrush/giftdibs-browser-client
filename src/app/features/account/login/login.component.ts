@@ -18,7 +18,7 @@ import {
 } from '@angular/forms';
 
 import {
-  AlertService
+  AlertService, ModalService
 } from '@giftdibs/ux';
 
 import {
@@ -28,6 +28,14 @@ import {
 import {
   AccountService
 } from '../account.service';
+
+import {
+  LoginHelpComponent
+} from './login-help.component';
+
+import {
+  LoginHelpContext
+} from './login-help-context';
 
 @Component({
   selector: 'gd-login',
@@ -45,6 +53,7 @@ export class LoginComponent implements OnInit {
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
     private formBuilder: FormBuilder,
+    private modalService: ModalService,
     private route: ActivatedRoute,
     private router: Router,
     private sessionService: SessionService
@@ -75,7 +84,13 @@ export class LoginComponent implements OnInit {
         },
         (err: any) => {
           this.errors = err.error.errors;
-          this.alertService.error(err.error.message);
+
+          if (err.error.code === 112) {
+            this.openLoginHelpModal(formData.emailAddress);
+          } else {
+            this.alertService.error(err.error.message);
+          }
+
           this.loginForm.enable();
           this.isLoading = false;
           this.changeDetector.markForCheck();
@@ -113,5 +128,20 @@ export class LoginComponent implements OnInit {
     }
 
     this.router.navigate(redirect);
+  }
+
+  private openLoginHelpModal(emailAddress: string): void {
+    const modal = this.modalService.open(LoginHelpComponent, {
+      providers: [{
+        provide: LoginHelpContext,
+        useValue: {
+          emailAddress
+        }
+      }]
+    });
+
+    modal.closed.subscribe(() => {
+      console.log('closed');
+    });
   }
 }

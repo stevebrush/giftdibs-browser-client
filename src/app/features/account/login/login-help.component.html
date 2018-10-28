@@ -1,0 +1,81 @@
+<gd-modal>
+  <gd-modal-header>
+    <gd-modal-heading>
+      Welcome back!
+    </gd-modal-heading>
+  </gd-modal-header>
+  <gd-modal-body>
+    <gd-notice>
+      <gd-notice-heading>
+          Your account doesn't have a password on record.
+      </gd-notice-heading>
+    </gd-notice>
+
+    <p>
+      <strong>This can occur when...</strong>
+    </p>
+
+    <ul class="gd-unordered-list">
+      <li>You registered with GiftDibs using your Facebook account</li>
+      <li>Or, you have not visited GiftDibs in several months</li>
+    </ul>
+
+    <p>
+      <strong>Possible solutions:</strong>
+    </p>
+
+    <ul class="gd-unordered-list">
+      <li>Log in using the Facebook button, below.</li>
+      <li>Create a new password by submitting the form below.</li>
+    </ul>
+
+    <form
+      class="gd-form"
+      aria-label="Password recovery"
+      [formGroup]="forgottenForm"
+      (ngSubmit)="submit()"
+      novalidate
+    >
+      <gd-form-field [errors]="errors">
+        <div class="gd-input-group-inline">
+          <input
+            type="email"
+            class="gd-form-control"
+            formControlName="emailAddress"
+            placeholder="Email address"
+            autocomplete="off"
+            autofocus
+          />
+          <button
+            class="gd-button gd-button-primary"
+            type="submit"
+            [disabled]="forgottenForm.disabled"
+          >
+            Send reset password request
+          </button>
+        </div>
+      </gd-form-field>
+    </form>
+
+    <p>
+      If you continue having trouble logging in, please <a routerLink="/support/feedback">contact us</a>.
+    </p>
+
+  </gd-modal-body>
+  <gd-modal-footer>
+    <div class="gd-button-group">
+      <gd-facebook-login-button
+        class="app-login-help-facebook-button"
+        (success)="onFacebookLoginSuccess()"
+      >
+      </gd-facebook-login-button>
+      <button
+        class="gd-button gd-button-default"
+        type="button"
+        (click)="onCancelClicked()"
+      >
+        Cancel
+      </button>
+    </div>
+  </gd-modal-footer>
+</gd-modal>

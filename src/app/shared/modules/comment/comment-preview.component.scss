@@ -1,8 +1,20 @@
 @import '../../../../styles/mixins';
 
+.gd-comment-preview {
+  ::ng-deep {
+    .gd-media {
+      align-items: flex-start;
+    }
+  }
+}
+
 .gd-comment-body {
   background-color: $gd-color-neutral-faint;
   line-height: $gd-line-height-reduced;
   display: inline-block;
   margin-bottom: $gd-spacing-xs;
+}
+
+.gd-comment-footer {
+  padding-left: 16px;
 }

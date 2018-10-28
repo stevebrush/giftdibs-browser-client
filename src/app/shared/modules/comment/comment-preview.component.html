@@ -8,14 +8,13 @@
   <ng-template #commentEditForm>
     <gd-media size="xs">
       <gd-media-thumbnail>
-        <a routerLink="/users/{{ comment.user.id }}">
-          <gd-thumbnail
-            size="fill"
-            shape="circle"
-            [imageSource]="comment.user.avatarUrl"
-          >
-          </gd-thumbnail>
-        </a>
+        <gd-thumbnail
+          size="fill"
+          shape="circle"
+          [imageSource]="comment.user.avatarUrl"
+          [route]="{ commands: ['/users', comment.user.id] }"
+        >
+        </gd-thumbnail>
       </gd-media-thumbnail>
       <gd-media-content>
         <gd-media-body>

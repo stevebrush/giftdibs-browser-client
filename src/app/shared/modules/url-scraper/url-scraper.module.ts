@@ -7,6 +7,7 @@ import {
 } from '@angular/common';
 
 import {
+  CardModule,
   GridModule,
   ModalModule,
   ThumbnailModule,
@@ -24,6 +25,7 @@ import { UrlImagesSelectorComponent } from './url-images-selector.component';
     UrlImagesSelectorComponent
   ],
   imports: [
+    CardModule,
     CommonModule,
     GridModule,
     ModalModule,

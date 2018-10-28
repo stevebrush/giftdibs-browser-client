@@ -7,19 +7,25 @@
   <gd-modal-body>
 
     <gd-row>
-      <gd-column *ngFor="let image of images" screenSmall="4">
-        <gd-thumbnail
-          role="button"
-          tabindex="0"
-          [ngClass]="{
-            'gd-url-images-selector-active': isSelectedImage(image)
-          }"
-          size="fill"
-          [imageSource]="image.dataUrl"
-          (click)="selectImage(image)"
-        >
-        </gd-thumbnail>
-        {{ image.width }} x {{ image.height }}
+      <gd-column *ngFor="let image of images" screenSmall="3">
+        <gd-card>
+          <gd-card-thumbnail>
+            <gd-thumbnail
+              role="button"
+              tabindex="0"
+              [ngClass]="{
+                'gd-url-images-selector-active': isSelectedImage(image)
+              }"
+              size="fill"
+              [imageSource]="image.dataUrl"
+              (click)="selectImage(image)"
+            >
+            </gd-thumbnail>
+          </gd-card-thumbnail>
+          <gd-card-body>
+            {{ image.width }} x {{ image.height }}
+          </gd-card-body>
+        </gd-card>
       </gd-column>
     </gd-row>
 

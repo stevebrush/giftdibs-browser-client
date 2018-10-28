@@ -261,11 +261,13 @@ export class GiftEditComponent implements OnInit {
   }
 
   public searchResultAction: TypeaheadSearchResultAction<any> = (result: any) => {
-    this.toDataUrl(result.imageUrl)
-      .then((imageDataUrl: any) => {
-        this.giftForm.get('imageUrl').setValue(imageDataUrl);
-        this.newImageFile = this.dataURLtoFile(imageDataUrl, 'temp.jpg');
-      });
+    if (!this.giftForm.get('imageUrl').value) {
+      this.toDataUrl(result.imageUrl)
+        .then((imageDataUrl: any) => {
+          this.giftForm.get('imageUrl').setValue(imageDataUrl);
+          this.newImageFile = this.dataURLtoFile(imageDataUrl, 'temp.jpg');
+        });
+    }
 
     this.addExternalUrlIfNew({
       url: result.url,

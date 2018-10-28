@@ -13,31 +13,29 @@
           </gd-media-header>
         </gd-media-content>
         <gd-media-thumbnail>
-          <a routerLink="/users/{{ user.id }}">
-            <gd-thumbnail
-              shape="circle"
-              size="fill"
-              [imageSource]="user.avatarUrl"
-            >
-            </gd-thumbnail>
-          </a>
+          <gd-thumbnail
+            shape="circle"
+            size="fill"
+            [imageSource]="user.avatarUrl"
+            [route]="{ commands: ['/users', user.id] }"
+          >
+          </gd-thumbnail>
         </gd-media-thumbnail>
       </gd-media>
     </div>
 
-    <div class="gd-container gd-spacing-padding-even-large">
+    <div class="gd-container gd-container-md gd-spacing-padding-even-large">
       <gd-repeater>
         <gd-repeater-item *ngFor="let friend of friends">
           <gd-media size="sm">
             <gd-media-thumbnail>
-              <a routerLink="/users/{{ friend.id }}">
-                <gd-thumbnail
-                  size="fill"
-                  shape="circle"
-                  [imageSource]="friend.avatarUrl"
-                >
-                </gd-thumbnail>
-              </a>
+              <gd-thumbnail
+                size="fill"
+                shape="circle"
+                [imageSource]="friend.avatarUrl"
+                [route]="{ commands: ['/users', friend.id] }"
+              >
+              </gd-thumbnail>
             </gd-media-thumbnail>
             <gd-media-content>
               <gd-media-header>

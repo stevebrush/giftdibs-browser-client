@@ -88,6 +88,7 @@ export class FeedbackComponent {
       .subscribe(
         (result: any) => {
           this.feedbackForm.enable();
+          this.feedbackForm.reset();
           this.changeDetector.markForCheck();
           this.alertService.success(result.message);
         },

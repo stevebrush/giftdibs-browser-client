@@ -1,41 +1,44 @@
 <gd-wait *ngIf="isLoading"></gd-wait>
+<div class="gd-canvas">
+  <div class="gd-container gd-container-xs gd-spacing-padding-even-large">
+    <div class="gd-detail-pane">
+      <h1>
+        Password recovery
+      </h1>
 
-<div class="gd-container gd-container-sm gd-spacing-padding-even-large">
-  <h1>
-    Password recovery
-  </h1>
+      <p>
+        Enter the email address you used to register. We will send you a link to reset your password.
+      </p>
 
-  <p>
-    Enter the email address you used to register. We will send you a link to reset your password.
-  </p>
+      <form
+        class="gd-form"
+        aria-label="Password recovery"
+        [formGroup]="forgottenForm"
+        (ngSubmit)="submit()"
+        novalidate
+      >
+        <gd-form-field [errors]="errors">
+          <label
+            class="gd-control-label"
+            for="gd-forgotten-email-address">
+            Account email address
+          </label>
+          <input
+            type="email"
+            class="gd-form-control"
+            id="gd-forgotten-email-address"
+            formControlName="emailAddress"
+            autocomplete="off"
+            autofocus>
+        </gd-form-field>
 
-  <form
-    class="gd-form"
-    aria-label="Password recovery"
-    [formGroup]="forgottenForm"
-    (ngSubmit)="submit()"
-    novalidate
-  >
-    <gd-form-field [errors]="errors">
-      <label
-        class="gd-control-label"
-        for="gd-forgotten-email-address">
-        Account email address
-      </label>
-      <input
-        type="email"
-        class="gd-form-control"
-        id="gd-forgotten-email-address"
-        formControlName="emailAddress"
-        autocomplete="off"
-        autofocus>
-    </gd-form-field>
-
-    <button
-      class="gd-button gd-button-primary"
-      type="submit"
-      [disabled]="forgottenForm.disabled">
-      Send request
-    </button>
-  </form>
+        <button
+          class="gd-button gd-button-primary"
+          type="submit"
+          [disabled]="forgottenForm.disabled">
+          Send request
+        </button>
+      </form>
+    </div>
+  </div>
 </div>

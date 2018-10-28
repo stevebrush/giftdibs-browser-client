@@ -60,6 +60,12 @@ export class GiftService {
   }
 
   public update(giftId: string, formData: Gift): Observable<any> {
+    // The endpoint needs the wish list's ID to be
+    // sent as `wishListId`.
+    if (formData.wishList && formData.wishList.id) {
+      (formData as any).wishListId = formData.wishList.id;
+    }
+
     return this.http.patch(`${this.resourceUrl}/gifts/${giftId}`, formData);
   }
 

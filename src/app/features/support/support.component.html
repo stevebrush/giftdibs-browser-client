@@ -1,26 +1,36 @@
-<div class="gd-container gd-spacing-padding-even-large">
-  <gd-row>
-    <gd-column screenSmall="3">
-      <ul>
-        <li>
-          <a routerLink="/support/about">About</a>
-        </li>
-        <li>
-          <a routerLink="/support/faq">FAQ</a>
-        </li>
-        <li>
-          <a routerLink="/support/privacy">Privacy</a>
-        </li>
-        <li>
-          <a routerLink="/support/terms">Terms of Use</a>
-        </li>
-        <li>
-          <a routerLink="/support/feedback">Feedback</a>
-        </li>
-      </ul>
-    </gd-column>
-    <gd-column screenSmall="9">
-      <router-outlet></router-outlet>
-    </gd-column>
-  </gd-row>
+<div class="gd-canvas">
+  <div class="gd-container gd-container-md gd-spacing-padding-even-large">
+    <gd-row>
+      <gd-column
+        screenSmall="3"
+        screenMedium="2"
+      >
+        <ul>
+          <li>
+            <a routerLink="/support/about">About</a>
+          </li>
+          <li>
+            <a routerLink="/support/faq">FAQ</a>
+          </li>
+          <li>
+            <a routerLink="/support/privacy">Privacy</a>
+          </li>
+          <li>
+            <a routerLink="/support/terms">Terms of Use</a>
+          </li>
+          <li>
+            <a routerLink="/support/feedback">Feedback</a>
+          </li>
+        </ul>
+      </gd-column>
+      <gd-column
+        screenSmall="9"
+        screenMedium="10"
+      >
+        <div class="gd-detail-pane">
+          <router-outlet></router-outlet>
+        </div>
+      </gd-column>
+    </gd-row>
+  </div>
 </div>

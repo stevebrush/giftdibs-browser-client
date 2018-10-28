@@ -1,7 +1,7 @@
 <gd-wait *ngIf="isLoading"></gd-wait>
 
 <div class="gd-canvas">
-  <div class="gd-container">
+  <div class="gd-container gd-container-md">
     <p *ngIf="gift">
       <a routerLink="/wish-lists/{{ gift.wishList.id }}">
         <gd-icon icon="chevron-left"></gd-icon>
@@ -9,7 +9,7 @@
       </a>
     </p>
   </div>
-  <div class="gd-container">
+  <div class="gd-container gd-container-md">
     <div *ngIf="gift" class="gd-gift">
       <div class="gd-gift-detail gd-detail-pane">
         <gd-row>

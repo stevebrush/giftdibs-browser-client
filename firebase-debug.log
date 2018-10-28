@@ -1,0 +1,27 @@
+[debug] [2018-10-28T01:20:28.735Z] ----------------------------------------------------------------------
+[debug] [2018-10-28T01:20:28.738Z] Command:       /Users/stevebr/.nvm/versions/node/v8.12.0/bin/node /Users/stevebr/.nvm/versions/node/v8.12.0/bin/firebase deploy
+[debug] [2018-10-28T01:20:28.738Z] CLI Version:   6.0.0
+[debug] [2018-10-28T01:20:28.738Z] Platform:      darwin
+[debug] [2018-10-28T01:20:28.738Z] Node Version:  v8.12.0
+[debug] [2018-10-28T01:20:28.739Z] Time:          Sat Oct 27 2018 21:20:28 GMT-0400 (EDT)
+[debug] [2018-10-28T01:20:28.739Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-10-28T01:20:28.755Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-10-28T01:20:28.755Z] > authorizing via signed-in user
+[debug] [2018-10-28T01:20:28.755Z] [iam] checking project giftdibs-browser for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2018-10-28T01:20:28.757Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-10-28T01:20:28.757Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2018-10-28T01:20:29.006Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-28T01:20:29.027Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/giftdibs-browser:testIamPermissions  
+
+[debug] [2018-10-28T01:20:29.317Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-28T01:20:29.319Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/giftdibs-browser  
+ 
+[debug] [2018-10-28T01:20:29.623Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'giftdibs-browser'...
+[info] 
+[info] i  deploying hosting
+[debug] [2018-10-28T01:20:29.627Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/giftdibs-browser/versions  
+

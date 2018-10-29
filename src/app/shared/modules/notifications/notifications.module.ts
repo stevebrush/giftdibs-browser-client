@@ -20,7 +20,6 @@ import {
 
 import {
   BadgeModule,
-  MediaModule,
   PopoverModule,
   RepeaterModule
 } from '@giftdibs/ux';
@@ -38,7 +37,6 @@ import {
     BadgeModule,
     CommonModule,
     FriendshipModule,
-    MediaModule,
     PopoverModule,
     IconModule,
     RepeaterModule,

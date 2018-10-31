@@ -1,35 +1,59 @@
 <div class="gd-navbar gd-spacing-padding-squish">
   <div class="gd-navbar-primary">
-    <nav aria-label="Primay site navigation">
-      <ul class="gd-navbar-menu">
-        <li class="gd-navbar-image-link">
-          <gd-thumbnail
-            imageSource="assets/gd-logo.png"
-            size="xs"
-            shape="circle"
-            [route]="{ commands: ['/'] }"
-          >
-          </gd-thumbnail>
-        </li>
-      </ul>
-    </nav>
-  </div>
-  <div class="gd-navbar-search">
-    <gd-search *ngIf="isLoggedIn()">
-    </gd-search>
-  </div>
-  <div class="gd-navbar-secondary">
-    <nav aria-label="User navigation">
-      <ul *ngIf="isLoggedIn()"
-        class="gd-navbar-menu"
+    <span class="gd-navbar-brand gd-navbar-image-link">
+      <gd-thumbnail
+        imageSource="assets/gd-logo.png"
+        size="xs"
+        shape="circle"
+        [route]="{ commands: ['/'] }"
       >
+      </gd-thumbnail>
+    </span>
+  </div>
+
+  <div class="gd-navbar-search">
+    <ng-container *ngIf="isLoggedIn()">
+      <!-- DESKTOP SEARCH -->
+      <div class="gd-navbar-desktop">
+        <gd-search>
+        </gd-search>
+      </div>
+
+      <!-- MOBILE SEARCH -->
+      <div
+        class="gd-navbar-mobile gd-navbar-search-mobile"
+        [ngClass]="{
+          'gd-navbar-search-visible': showSearch
+        }"
+      >
+        <gd-search class="gd-navbar-mobile-search">
+        </gd-search>
+        <button
+          class="gd-button gd-button-default"
+          type="button"
+          (click)="showSearch = false;$event.preventDefault();"
+        >
+          <gd-icon icon="times"></gd-icon>
+        </button>
+      </div>
+    </ng-container>
+  </div>
+
+  <nav
+    aria-label="User navigation"
+    class="gd-navbar-secondary"
+  >
+    <ng-container *ngIf="isLoggedIn() else notLoggedInMenu">
+      <!-- DESKTOP USER NAV -->
+      <ul class="gd-navbar-menu gd-navbar-desktop">
         <li class="gd-navbar-menu-user gd-navbar-image-link">
           <gd-thumbnail
+            altText="{{ sessionUser.firstName }} {{ sessionUser.lastName }}"
+            iconSize="sm"
             size="xs"
             shape="circle"
             [imageSource]="sessionUser.avatarUrl"
             [route]="{ commands: ['/users', sessionUser.id] }"
-            altText="{{ sessionUser.firstName }} {{ sessionUser.lastName }}"
           >
           </gd-thumbnail>
         </li>
@@ -59,28 +83,53 @@
           </button>
         </li>
       </ul>
-      <ul *ngIf="!isLoggedIn()"
-        class="gd-navbar-menu"
-      >
-        <li>
-          <a
-            class="gd-button gd-button-link gd-text-deemphasized"
-            routerLink="/account/register"
-            routerLinkActive="active"
-          >
-            Sign up
-          </a>
-        </li>
-        <li>
-          <a
-            class="gd-button gd-button-link gd-text-deemphasized"
-            routerLink="/account/login"
-            routerLinkActive="active"
-          >
-            Log in
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
+
+      <!-- MOBILE USER NAV -->
+      <div class="gd-navbar-mobile">
+        <button
+          class="gd-button gd-button-link"
+          title="Open search"
+          type="button"
+          (click)="showSearch = true;$event.preventDefault();"
+        >
+          <gd-icon icon="search"></gd-icon>
+        </button>
+        <gd-notifications>
+        </gd-notifications>
+        <button
+          class="gd-button gd-button-link"
+          title="Open user menu"
+          type="button"
+          gdDropdownMenuTrigger
+          menuHorizontalAlignment="right"
+          [menuItems]="menuItemsMobile"
+        >
+          <gd-icon icon="ellipsis-v"></gd-icon>
+        </button>
+      </div>
+    </ng-container>
+  </nav>
 </div>
+
+<ng-template #notLoggedInMenu>
+  <ul class="gd-navbar-menu">
+    <li>
+      <a
+        class="gd-button gd-button-link gd-text-deemphasized"
+        routerLink="/account/register"
+        routerLinkActive="active"
+      >
+        Sign up
+      </a>
+    </li>
+    <li>
+      <a
+        class="gd-button gd-button-link gd-text-deemphasized"
+        routerLink="/account/login"
+        routerLinkActive="active"
+      >
+        Log in
+      </a>
+    </li>
+  </ul>
+</ng-template>

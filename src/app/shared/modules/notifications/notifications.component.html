@@ -8,7 +8,9 @@
   gdPopoverVerticalAlignment="bottom"
 >
   <gd-icon icon="bell"></gd-icon>
-  <gd-badge *ngIf="notifications?.length">{{ notifications?.length }}</gd-badge>
+  <gd-badge *ngIf="notifications?.length"
+    class="gd-notifications-badge"
+  >{{ notifications?.length }}</gd-badge>
 </button>
 
 <ng-template #content>
@@ -116,8 +118,8 @@
 
 <ng-template let-notification="notification" #controls>
   <button
-    class="gd-button gd-button-default"
-    title="Remove notification"
+    class="gd-button gd-button-primary"
+    title="Clear notification"
     type="button"
     (click)="removeNotification(notification)"
   >

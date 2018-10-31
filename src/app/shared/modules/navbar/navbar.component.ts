@@ -37,6 +37,7 @@ import {
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   public sessionUser: SessionUser;
+  public showSearch = false;
   public routes: {
     path: string[];
     name: string;
@@ -65,6 +66,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }
   ];
 
+  public menuItemsMobile: DropdownMenuItem[] = [];
+
   @ViewChild('button')
   public buttonRef: ElementRef;
 
@@ -82,8 +85,27 @@ export class NavbarComponent implements OnInit, OnDestroy {
         takeUntil(this.ngUnsubscribe)
       )
       .subscribe((sessionUser: SessionUser) => {
-        this.sessionUser = sessionUser;
-        this.changeDetector.markForCheck();
+        if (sessionUser) {
+          this.sessionUser = sessionUser;
+          this.menuItemsMobile = [
+            {
+              label: 'Profile',
+              route: `/users/${sessionUser.id}`
+            },
+            {
+              label: 'Dibs',
+              route: '/dibs',
+              addSeparatorAfter: true
+            }
+          ];
+
+          // Add the default menu items to the mobile menu:
+          this.menuItems.forEach((menuItem) => {
+            this.menuItemsMobile.push(menuItem);
+          });
+
+          this.changeDetector.markForCheck();
+        }
       });
 
     this.routes = [

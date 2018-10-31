@@ -1,9 +1,24 @@
 @import '../../../../styles/mixins';
 
+.gd-notifications {
+  ::ng-deep {
+    .gd-repeater {
+      margin: 0 !important;
+    }
+  }
+}
+
 .gd-notifications-secondary-controls {
   padding-top: $gd-spacing-sm;
 }
 
 .gd-notifications-trigger-button {
   font-size: 120%;
+  position: relative;
+}
+
+.gd-notifications-badge {
+  position: absolute;
+  top: 0;
+  right: 10px;
 }

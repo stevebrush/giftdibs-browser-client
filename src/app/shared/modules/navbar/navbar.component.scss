@@ -7,21 +7,62 @@
   padding-right: $gd-spacing-lg;
   display: flex;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
-.gd-navbar-primary,
-.gd-navbar-secondary {
+.gd-navbar-primary {
   flex: 0 0 auto;
 }
 
 .gd-navbar-secondary {
-  justify-content: flex-end;
+  text-align: right;
+
+  @media (max-width: $gd-screen-xs-max) {
+    flex: 1 1 auto;
+  }
+
+  @media (min-width: $gd-screen-sm-min) {
+    flex: 0 0 auto;
+    justify-content: flex-end;
+  }
 }
 
 .gd-navbar-search {
-  flex: 1 1 auto;
-  padding-left: $gd-spacing-lg;
-  padding-right: $gd-spacing-lg;
+  @media (min-width: $gd-screen-sm-min) {
+    flex: 1 1 auto;
+    padding-left: $gd-spacing-lg;
+    padding-right: $gd-spacing-lg;
+  }
+}
+
+.gd-navbar-search-mobile {
+  @media (max-width: $gd-screen-xs-max) {
+    display: none;
+
+    &.gd-navbar-search-visible {
+      display: flex;
+      clear: both;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #fff;
+      padding: 16px;
+      z-index: 1;
+
+      .gd-navbar-mobile-search {
+        flex: 1 1 auto;
+      }
+
+      .gd-button {
+        flex: 0 0 auto;
+        margin-left: $gd-spacing-sm;
+      }
+    }
+  }
 }
 
 .gd-navbar-menu {
@@ -51,12 +92,28 @@
   }
 }
 
-.gd-navbar-image-link {
-  padding: 0 $gd-spacing-md !important;
+// .gd-navbar-image-link {
+//   padding: 0 $gd-spacing-md !important;
 
-  ::ng-deep a {
-    &:hover {
-      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1)
-    }
+//   ::ng-deep a {
+//     &:hover {
+//       box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1)
+//     }
+//   }
+// }
+
+// .gd-navbar-hidden {
+//   display: none;
+// }
+
+@media (max-width: $gd-screen-xs-max) {
+  .gd-navbar-desktop {
+    display: none;
+  }
+}
+
+@media (min-width: $gd-screen-sm-min) {
+  .gd-navbar-mobile {
+    display: none;
   }
 }

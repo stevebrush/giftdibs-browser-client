@@ -7,21 +7,20 @@
   <ng-template [ngIf]="user">
     <div class="gd-user-header gd-spacing-padding-even-large">
       <div class="gd-container gd-container-sm">
+        <div class="gd-user-header-controls">
+          <gd-follow-button
+            [friendId]="user.id"
+          >
+          </gd-follow-button>
+        </div>
         <gd-media size="md">
           <gd-media-content>
-            <div style="float:right;">
-              <gd-follow-button
-                [friendId]="user.id"
-              >
-              </gd-follow-button>
-            </div>
             <gd-media-header>
-              <h1>
+              <h1 class="gd-user-header-heading">
                 {{ user.firstName }} {{ user.lastName }}
               </h1>
             </gd-media-header>
             <gd-media-body>
-
               <gd-friendships
                 [user]="user"
               >
@@ -30,6 +29,7 @@
           </gd-media-content>
           <gd-media-thumbnail>
             <gd-thumbnail
+              iconSize="2x"
               shape="circle"
               size="fill"
               [imageSource]="user.avatarUrl"
@@ -37,31 +37,28 @@
             </gd-thumbnail>
           </gd-media-thumbnail>
         </gd-media>
-      </div>
-    </div>
-
-    <div class="gd-container gd-container-sm">
-      <div class="gd-button-group gd-button-group-tabs">
-        <button
-          class="gd-button gd-button-tab"
-          type="button"
-          [ngClass]="{
-            'gd-button-tab-selected': !isArchivedViewActive
-          }"
-          (click)="showActive()"
-        >
-          Wish lists
-        </button>
-        <button
-          class="gd-button gd-button-tab"
-          type="button"
-          [ngClass]="{
-            'gd-button-tab-selected': isArchivedViewActive
-          }"
-          (click)="showArchived()"
-        >
-          Archived
-        </button>
+        <div class="gd-user-header-tabs gd-button-group gd-button-group-tabs">
+          <button
+            class="gd-button gd-button-tab"
+            type="button"
+            [ngClass]="{
+              'gd-button-tab-selected': !isArchivedViewActive
+            }"
+            (click)="showActive()"
+          >
+            Wish lists
+          </button>
+          <button
+            class="gd-button gd-button-tab"
+            type="button"
+            [ngClass]="{
+              'gd-button-tab-selected': isArchivedViewActive
+            }"
+            (click)="showArchived()"
+          >
+            Archived
+          </button>
+        </div>
       </div>
     </div>
 
@@ -75,7 +72,7 @@
 <ng-template let-wishLists="wishLists" #wishListsTemplate>
   <gd-row>
     <gd-column *ngIf="isSessionUser && !isArchivedViewActive"
-      [screenXSmall]="6"
+      [screenXXSmall]="6"
       [screenSmall]="4"
       [screenMedium]="3"
       [screenLarge]="2"
@@ -107,8 +104,9 @@
         </gd-card-header>
       </gd-card>
     </gd-column>
+
     <gd-column *ngFor="let wishList of wishLists"
-      [screenXSmall]="6"
+      [screenXXSmall]="6"
       [screenSmall]="4"
       [screenMedium]="3"
       [screenLarge]="2"

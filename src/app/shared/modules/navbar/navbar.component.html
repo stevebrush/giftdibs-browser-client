@@ -28,13 +28,15 @@
       >
         <gd-search class="gd-navbar-mobile-search">
         </gd-search>
-        <button
-          class="gd-button gd-button-default"
-          type="button"
-          (click)="showSearch = false;$event.preventDefault();"
-        >
-          <gd-icon icon="times"></gd-icon>
-        </button>
+        <div class="gd-navbar-mobile-search-button">
+          <button
+            class="gd-button gd-button-default"
+            type="button"
+            (click)="showSearch = false;$event.preventDefault();"
+          >
+            <gd-icon icon="times"></gd-icon>
+          </button>
+        </div>
       </div>
     </ng-container>
   </div>
@@ -49,7 +51,7 @@
         <li class="gd-navbar-menu-user gd-navbar-image-link">
           <gd-thumbnail
             altText="{{ sessionUser.firstName }} {{ sessionUser.lastName }}"
-            iconSize="sm"
+            iconSize="1x"
             size="xs"
             shape="circle"
             [imageSource]="sessionUser.avatarUrl"

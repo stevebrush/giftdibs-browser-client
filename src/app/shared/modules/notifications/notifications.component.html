@@ -78,16 +78,14 @@
             <time class="gd-text-deemphasized gd-text-small">
               {{ notification.dateCreated | date }}
             </time>
-            <div *ngIf="!notification.dib?.dateDelivered"
-              class="gd-notifications-secondary-controls gd-button-group"
-            >
+            <div class="gd-notifications-secondary-controls gd-button-group">
               <ng-container *ngTemplateOutlet="controls;context:{notification:notification}"></ng-container>
-              <button
-                class="gd-button gd-button-primary"
+              <button *ngIf="!notification.dib?.dateDelivered"
+                class="gd-button gd-button-default"
                 type="button"
                 (click)="markDibDelivered(notification.dib.id)"
               >
-                Complete dib
+                Mark gift as delivered
               </button>
             </div>
           </ng-template>

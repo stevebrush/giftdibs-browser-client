@@ -3,8 +3,6 @@
 .gd-navbar {
   background-color: #fff;
   border-bottom: 1px solid $gd-border-color-neutral-lightest;
-  padding-left: $gd-spacing-lg;
-  padding-right: $gd-spacing-lg;
   display: flex;
   align-items: center;
   position: relative;
@@ -57,7 +55,7 @@
         flex: 1 1 auto;
       }
 
-      .gd-button {
+      .gd-navbar-mobile-search-button {
         flex: 0 0 auto;
         margin-left: $gd-spacing-sm;
       }

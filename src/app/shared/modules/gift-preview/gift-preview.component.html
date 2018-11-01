@@ -1,21 +1,21 @@
 <div class="gd-gift-preview">
   <gd-media size="lg">
     <gd-media-thumbnail class="gd-gift-preview-thumbnail">
-      <gd-ribbon *ngIf="showDibbedRibbon(gift)"
-        ribbonType="success"
-      >
-        Dibbed!
-      </gd-ribbon>
-      <gd-ribbon *ngIf="gift.dateReceived"
-        ribbonType="info"
-      >
-        Received!
-      </gd-ribbon>
       <gd-thumbnail
         size="fill"
         [imageSource]="gift.imageUrl"
         [route]="{ commands: ['/gifts', gift.id] }"
       >
+        <gd-ribbon *ngIf="showDibbedRibbon(gift)"
+          ribbonType="success"
+        >
+          Dibbed!
+        </gd-ribbon>
+        <gd-ribbon *ngIf="gift.dateReceived"
+          ribbonType="info"
+        >
+          Received!
+        </gd-ribbon>
       </gd-thumbnail>
     </gd-media-thumbnail>
     <gd-media-content>

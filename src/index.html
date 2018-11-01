@@ -17,9 +17,18 @@
   <meta name="msapplication-TileColor" content="#329b22">
   <meta name="msapplication-config" content="assets/browserconfig.xml">
   <meta name="theme-color" content="#329b22">
+  <style>
+    .app-loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-size: 24px;
+    }
+  </style>
 </head>
 <body>
   <script id="facebook-jssdk" src="https://connect.facebook.net/en_US/sdk.js"></script>
-  <app-root>Loading...</app-root>
+  <app-root><div class="app-loading"><div><strong>Welcome to GiftDibs!</strong><br>One minute please...</div></div></app-root>
 </body>
 </html>

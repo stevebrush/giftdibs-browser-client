@@ -9,12 +9,14 @@
         <ng-container *ngFor="let i of [0,1,2,3]">
           <gd-thumbnail *ngIf="wishList.gifts[i] else blankThumbnail"
             class="gd-wish-list-preview-thumbnail"
+            iconSize="2x"
             size="fill"
             [imageSource]="wishList.gifts[i].imageUrl"
           >
           </gd-thumbnail>
           <ng-template #blankThumbnail>
             <gd-thumbnail
+              iconSize="2x"
               class="gd-wish-list-preview-thumbnail"
               size="fill"
             >
@@ -27,6 +29,9 @@
       <gd-card-heading>
         {{ wishList.name }}
       </gd-card-heading>
+      <time class="gd-text-deemphasized gd-text-small">
+        {{ wishList.dateUpdated | date }}
+      </time>
     </gd-card-header>
     <gd-card-body>
       <div *ngIf="wishList.privacy.type === 'me'"

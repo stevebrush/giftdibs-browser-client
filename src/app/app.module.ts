@@ -7,6 +7,10 @@ import {
 } from '@angular/platform-browser';
 
 import {
+  BrowserAnimationsModule
+} from '@angular/platform-browser/animations';
+
+import {
   NavbarModule
 } from '@app/shared/modules/navbar';
 
@@ -36,6 +40,7 @@ import { AppComponent } from './app.component';
   imports: [
     AlertModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     BrowserModule,
     NavbarModule,
     SessionModule.forRoot(environment.apiUrl),

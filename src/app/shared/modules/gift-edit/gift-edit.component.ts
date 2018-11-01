@@ -112,6 +112,10 @@ export class GiftEditComponent implements OnInit {
     if (this.gift) {
       this.resetForm(this.gift);
     }
+
+    this.giftForm.get('name').valueChanges.subscribe((value: string) => {
+      console.log('value?', value);
+    });
   }
 
   public onSelectFile(args: any): void {
@@ -161,6 +165,8 @@ export class GiftEditComponent implements OnInit {
     this.disableForm();
 
     const formData: Gift = this.giftForm.value;
+
+    console.log('formData?', formData);
 
     const priority = formData.priority + '';
     formData.priority = parseInt(priority, 10);

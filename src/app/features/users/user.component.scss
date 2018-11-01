@@ -4,3 +4,19 @@
   padding: 0;
   background-color: transparent;
 }
+
+.gd-user-header-heading {
+  margin-bottom: $gd-spacing-sm;
+}
+
+.gd-user-header-controls {
+  text-align: right;
+  margin-bottom: $gd-spacing-lg
+  // @media (min-width: $gd-screen-sm-min) {
+  //   float: right;
+  // }
+}
+
+.gd-user-header-tabs {
+  margin-top: $gd-spacing;
+}

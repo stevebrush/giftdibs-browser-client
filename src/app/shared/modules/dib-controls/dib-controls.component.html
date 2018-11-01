@@ -3,7 +3,7 @@
 >
   <ng-container *ngIf="gift.dibs && gift.dibs.length else notDibbed">
     <ng-template [ngIf]="sessionUserDib">
-      <div class="gd-button-group">
+      <div class="gd-button-group gd-dib-controls-delivered-button">
         <button *ngIf="!sessionUserDib.dateDelivered"
           class="gd-button gd-button-primary"
           type="button"

@@ -49,14 +49,14 @@
         <div class="gd-dibs-recipient-gift-header gd-spacing-padding-squish">
           <gd-media size="xs">
             <gd-media-thumbnail>
-              <a routerLink="/users/{{ recipient.id }}">
-                <gd-thumbnail
-                  shape="circle"
-                  size="fill"
-                  [imageSource]="recipient.avatarUrl"
-                >
-                </gd-thumbnail>
-              </a>
+              <gd-thumbnail
+                iconSize="1x"
+                shape="circle"
+                size="fill"
+                [imageSource]="recipient.avatarUrl"
+                [route]="{commands:['/users', recipient.id]}"
+              >
+              </gd-thumbnail>
             </gd-media-thumbnail>
             <gd-media-content>
               <gd-media-header>
@@ -71,13 +71,12 @@
               <gd-repeater-item *ngFor="let gift of wishList.gifts">
                 <gd-media size="md">
                   <gd-media-thumbnail>
-                    <a routerLink="/gifts/{{ gift.id }}">
-                      <gd-thumbnail
-                        size="fill"
-                        [imageSource]="gift.imageUrl"
-                      >
-                      </gd-thumbnail>
-                    </a>
+                    <gd-thumbnail
+                      size="fill"
+                      [imageSource]="gift.imageUrl"
+                      [route]="{commands:['/gifts', gift.id]}"
+                    >
+                    </gd-thumbnail>
                   </gd-media-thumbnail>
                   <gd-media-content>
                     <gd-media-header>

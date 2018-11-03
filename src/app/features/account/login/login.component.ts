@@ -131,17 +131,13 @@ export class LoginComponent implements OnInit {
   }
 
   private openLoginHelpModal(emailAddress: string): void {
-    const modal = this.modalService.open(LoginHelpComponent, {
+    this.modalService.open(LoginHelpComponent, {
       providers: [{
         provide: LoginHelpContext,
         useValue: {
           emailAddress
         }
       }]
-    });
-
-    modal.closed.subscribe(() => {
-      console.log('closed');
     });
   }
 }

@@ -11,6 +11,7 @@ import {
 } from './wish-list-privacy';
 
 export interface WishList {
+  dateUpdated?: Date;
   gifts?: Gift[];
   id?: string;
   isArchived?: boolean;

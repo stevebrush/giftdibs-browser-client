@@ -49,11 +49,12 @@ export class NotificationsComponent implements OnInit {
     return false;
   }
 
-  public markDibDelivered(dibId: string): void {
+  public markDibDelivered(dibId: string, notification: Notification): void {
     this.dibService.markAsDelivered(dibId)
       .subscribe(
         (result: any) => {
           this.alertService.success(result.message);
+          this.removeNotification(notification);
         },
         (err) => {
           this.alertService.error(err.error.message);
@@ -61,11 +62,12 @@ export class NotificationsComponent implements OnInit {
       );
   }
 
-  public markGiftReceived(giftId: string): void {
+  public markGiftReceived(giftId: string, notification: Notification): void {
     this.giftService.markAsReceived(giftId)
       .subscribe(
         (result: any) => {
           this.alertService.success(result.message);
+          this.removeNotification(notification);
         },
         (err) => {
           this.alertService.error(err.error.message);

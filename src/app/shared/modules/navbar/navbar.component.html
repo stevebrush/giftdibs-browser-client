@@ -11,7 +11,9 @@
     </span>
   </div>
 
-  <div class="gd-navbar-search">
+  <div *ngIf="!isLoading"
+    class="gd-navbar-search"
+  >
     <ng-container *ngIf="isLoggedIn()">
       <!-- DESKTOP SEARCH -->
       <div class="gd-navbar-desktop">
@@ -41,7 +43,7 @@
     </ng-container>
   </div>
 
-  <nav
+  <nav *ngIf="!isLoading"
     aria-label="User navigation"
     class="gd-navbar-secondary"
   >

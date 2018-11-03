@@ -41,7 +41,7 @@ export class CommunityComponent implements OnInit {
   }
 
   public loadMoreResults(): void {
-    const startIndex = this.gifts.length - 1;
+    const startIndex = this.gifts.length;
 
     if (startIndex <= 0) {
       this.hasMore = false;

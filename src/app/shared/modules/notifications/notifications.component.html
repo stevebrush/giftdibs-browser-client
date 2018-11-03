@@ -61,9 +61,9 @@
             >
               <ng-container *ngTemplateOutlet="controls;context:{notification:notification}"></ng-container>
               <button
-                class="gd-button gd-button-primary"
+                class="gd-button gd-button-default"
                 type="button"
-                (click)="markGiftReceived(notification.gift.id)"
+                (click)="markGiftReceived(notification.gift.id, notification)"
               >
                 Mark gift as received
               </button>
@@ -83,7 +83,7 @@
               <button *ngIf="!notification.dib?.dateDelivered"
                 class="gd-button gd-button-default"
                 type="button"
-                (click)="markDibDelivered(notification.dib.id)"
+                (click)="markDibDelivered(notification.dib.id, notification)"
               >
                 Mark gift as delivered
               </button>

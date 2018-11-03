@@ -71,6 +71,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   @ViewChild('button')
   public buttonRef: ElementRef;
 
+  public isLoading = true;
+
   private ngUnsubscribe = new Subject();
 
   constructor(
@@ -104,6 +106,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
             this.menuItemsMobile.push(menuItem);
           });
 
+          this.isLoading = false;
           this.changeDetector.markForCheck();
         }
       });

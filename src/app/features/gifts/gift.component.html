@@ -16,10 +16,14 @@
           <gd-column
             [screenSmall]="5"
           >
-            <gd-thumbnail
+            <gd-thumbnail *ngIf="gift.imageUrl"
               class="gd-gift-thumbnail"
               size="static"
               [imageSource]="gift.imageUrl"
+            ></gd-thumbnail>
+            <gd-thumbnail *ngIf="!gift.imageUrl"
+              class="gd-gift-thumbnail"
+              size="fill"
             ></gd-thumbnail>
           </gd-column>
           <gd-column
@@ -86,7 +90,7 @@
                   <gd-media size="sm">
                     <gd-media-thumbnail>
                       <gd-thumbnail
-                        iconSize="1x"
+                        iconSize="2x"
                         size="fill"
                         [externalLink]="externalUrl.url"
                         [imageSource]="gift.imageUrl"

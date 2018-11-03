@@ -3,8 +3,13 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  Input
+  Input,
+  OnInit
 } from '@angular/core';
+
+import {
+  SessionService
+} from '@giftdibs/session';
 
 import {
   Gift,
@@ -18,7 +23,7 @@ import {
   styleUrls: ['./gift-preview.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GiftPreviewComponent {
+export class GiftPreviewComponent implements OnInit {
   @Input()
   public gift: Gift;
 
@@ -26,36 +31,75 @@ export class GiftPreviewComponent {
   public showUserInfo = false;
 
   public isSessionUser = false;
+  public showDeliveredRibbon = false;
+  public showDibbedRibbon = false;
+  public showReceivedRibbon = false;
 
   constructor(
     private changeDetector: ChangeDetectorRef,
-    private giftService: GiftService
+    private giftService: GiftService,
+    private sessionService: SessionService
   ) { }
 
-  public showDibbedRibbon(gift: Gift): boolean {
-    if (gift.dateReceived) {
-      return false;
-    }
-
-    if (gift.dibs && gift.dibs.length) {
-      let numDibbed = 0;
-      gift.dibs.forEach((dib) => {
-        numDibbed += dib.quantity;
-      });
-
-      return (numDibbed >= gift.quantity);
-    }
+  public ngOnInit(): void {
+    this.isSessionUser = this.sessionService.isSessionUser(this.gift.user.id);
+    this.showRibbon();
   }
 
-  public onDibChange(result: any): void {
+  public onDibChange(): void {
     this.updateGift();
+  }
+
+  private showRibbon(): void {
+    // Reset to default:
+    this.showDeliveredRibbon = false;
+    this.showDibbedRibbon = false;
+    this.showReceivedRibbon = false;
+
+    if (this.gift.dateReceived) {
+      this.showReceivedRibbon = true;
+    }
+
+    // Don't show the other ribbons if current user owns the gift.
+    if (this.isSessionUser) {
+      this.changeDetector.markForCheck();
+      return;
+    }
+
+    const gift = this.gift;
+
+    let numDelivered = 0;
+    let allDelivered = false;
+
+    let numDibbed = 0;
+    let allDibbed = false;
+
+    if (gift.dibs && gift.dibs.length) {
+      gift.dibs.forEach((dib) => {
+        numDibbed += dib.quantity;
+        if (dib.dateDelivered) {
+          numDelivered++;
+        }
+      });
+
+      allDibbed = (numDibbed >= gift.quantity);
+      allDelivered = (numDelivered === gift.dibs.length);
+    }
+
+    if (allDelivered) {
+      this.showDeliveredRibbon = true;
+    } else if (allDibbed) {
+      this.showDibbedRibbon = true;
+    }
+
+    this.changeDetector.markForCheck();
   }
 
   private updateGift(): void {
     this.giftService.getById(this.gift.id)
       .subscribe((gift: Gift) => {
         this.gift = gift;
-        this.changeDetector.markForCheck();
+        this.showRibbon();
       });
   }
 }

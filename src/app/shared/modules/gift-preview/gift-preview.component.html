@@ -6,12 +6,19 @@
         [imageSource]="gift.imageUrl"
         [route]="{ commands: ['/gifts', gift.id] }"
       >
-        <gd-ribbon *ngIf="showDibbedRibbon(gift)"
+        <gd-ribbon *ngIf="showDeliveredRibbon"
+          ribbonType="info"
+        >
+          Delivered!
+        </gd-ribbon>
+
+        <gd-ribbon *ngIf="showDibbedRibbon"
           ribbonType="success"
         >
           Dibbed!
         </gd-ribbon>
-        <gd-ribbon *ngIf="gift.dateReceived"
+
+        <gd-ribbon *ngIf="showReceivedRibbon"
           ribbonType="info"
         >
           Received!

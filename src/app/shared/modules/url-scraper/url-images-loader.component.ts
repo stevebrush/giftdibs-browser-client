@@ -3,6 +3,7 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  OnInit,
   ViewChild
 } from '@angular/core';
 
@@ -21,6 +22,7 @@ import {
   finalize
 } from 'rxjs/operators';
 
+import { UrlImagesLoaderContext } from './url-images-loader-context';
 import { UrlImagesSelectorContext } from './url-images-selector-context';
 import { UrlImagesSelectorComponent } from './url-images-selector.component';
 
@@ -35,7 +37,7 @@ import { UrlScraperService } from './url-scraper.service';
     UrlScraperService
   ]
 })
-export class UrlImagesLoaderComponent {
+export class UrlImagesLoaderComponent implements OnInit {
   public disabled = false;
 
   @ViewChild('urlInput')
@@ -46,8 +48,16 @@ export class UrlImagesLoaderComponent {
     private changeDetector: ChangeDetectorRef,
     private modal: ModalInstance<any>,
     private modalService: ModalService,
-    private urlScraperService: UrlScraperService
+    private urlScraperService: UrlScraperService,
+    private context: UrlImagesLoaderContext
   ) { }
+
+  public ngOnInit(): void {
+    if (this.context.url) {
+      this.urlInput.nativeElement.value = this.context.url;
+      this.onNextClicked();
+    }
+  }
 
   public onCancelClicked(): void {
     this.modal.close('cancel');
@@ -77,7 +87,9 @@ export class UrlImagesLoaderComponent {
           }
         },
         (err: any) => {
-          this.alertService.error(err.error.message);
+          const message = err.error.message ||
+            `We couldn't reach that URL. Please try again later.`;
+          this.alertService.error(message);
         }
       );
   }

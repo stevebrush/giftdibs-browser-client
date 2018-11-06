@@ -99,12 +99,14 @@ export class GiftEditComponent implements OnInit {
     private giftService: GiftService,
     private modal: ModalInstance<any>,
     private modalService: ModalService,
-    private productService: ProductService,
-    private urlScraperService: UrlScraperService
+    private productService: ProductService
   ) { }
 
   public ngOnInit(): void {
     this.createForm();
+    this.addExternalUrlField({
+      url: ''
+    });
 
     this.gift = this.context.gift;
     this.wishListId = this.context.wishListId;
@@ -147,10 +149,6 @@ export class GiftEditComponent implements OnInit {
           this.alertService.error(err.error.message);
         }
       );
-  }
-
-  public onUrlButtonClick(): void {
-    this.openUrlImagesLoaderModal();
   }
 
   public submit(): void {
@@ -225,35 +223,13 @@ export class GiftEditComponent implements OnInit {
     );
   }
 
-  public refreshUrlDetails(): void {
-    this.disableForm();
-
-    let numComplete = 0;
-
-    this.externalUrls.controls.forEach((control) => {
-      this.urlScraperService.getProduct(control.value.url)
-        .subscribe(
-          (result: UrlScraperResult) => {
-            if (result.price) {
-              control.get('price').setValue(result.price);
-            }
-
-            numComplete++;
-
-            if (numComplete === this.externalUrls.length) {
-              this.enableForm();
-            }
-          },
-          (err: any) => {
-            this.enableForm();
-            this.alertService.error(err.error.message);
-          }
-        );
-    });
-  }
-
   public removeUrl(index: number): void {
     this.externalUrls.removeAt(index);
+  }
+
+  public findImageFromUrl(index: number): void {
+    const url = this.externalUrls.at(index).value.url;
+    this.openUrlImagesLoaderModal(url);
   }
 
   public findProductFunction: TypeaheadSearchFunction<any> = (searchText: string) => {
@@ -270,8 +246,7 @@ export class GiftEditComponent implements OnInit {
     }
 
     this.addExternalUrlIfNew({
-      url: result.url,
-      price: result.price
+      url: result.url
     });
 
     this.giftForm.get('name').setValue(result.name);
@@ -319,17 +294,18 @@ export class GiftEditComponent implements OnInit {
     });
   }
 
-  private openUrlImagesLoaderModal(): void {
+  private openUrlImagesLoaderModal(url: string): void {
     const context = new UrlImagesLoaderContext();
+    context.url = url;
 
     this.giftForm.disable();
 
     const modalInstance = this.modalService.open(UrlImagesLoaderComponent, {
       providers: [{
-        provide: GiftEditContext,
+        provide: UrlImagesLoaderContext,
         useValue: context
       }],
-      size: ModalSize.Small
+      size: ModalSize.Medium
     });
 
     modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
@@ -339,11 +315,6 @@ export class GiftEditComponent implements OnInit {
 
         this.giftForm.get('imageUrl').setValue(imageDataUrl);
         this.newImageFile = this.dataURLtoFile(imageDataUrl, 'temp.jpg');
-
-        this.addExternalUrlIfNew({
-          url: productDetails.url,
-          price: productDetails.price
-        });
 
         this.updateIfEmpty('name', productDetails.name);
         this.updateIfEmpty('budget', productDetails.price);
@@ -380,7 +351,6 @@ export class GiftEditComponent implements OnInit {
 
     if (!found) {
       this.addExternalUrlField({
-        price: externalUrl.price || undefined,
         url: externalUrl.url
       });
     }

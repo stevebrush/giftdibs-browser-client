@@ -28,13 +28,68 @@
         <gd-typeahead
           ariaDescribedBy="gd-gift-edit-name"
           formControlName="name"
-          searchButtonText="Find"
+          searchButtonText="Find online"
           [searchFunction]="findProductFunction"
           [searchOnKeyUp]="false"
           [searchResultTemplate]="searchResultTemplate"
           [searchResultAction]="searchResultAction"
         >
         </gd-typeahead>
+      </gd-form-field>
+
+      <gd-form-field>
+        <label
+          class="gd-control-label"
+        >
+          External links
+        </label>
+        <div formArrayName="externalUrls">
+          <div *ngFor="let externalUrl of externalUrls.controls; let i = index;"
+            [formGroup]="externalUrl"
+          >
+            <gd-form-field [errors]="errors">
+              <div class="gd-input-group-inline">
+                <input
+                  class="gd-form-control"
+                  formControlName="url"
+                  placeholder="https://"
+                  title="Enter link to a product"
+                  type="text"
+                />
+                <button
+                  class="gd-button gd-button-default"
+                  type="button"
+                  [disabled]="giftForm.disabled"
+                  (click)="findImageFromUrl(i)"
+                >
+                  Find image
+                </button>
+                <button
+                  class="gd-button gd-button-default"
+                  title="Remove external link"
+                  type="button"
+                  [disabled]="giftForm.disabled"
+                  (click)="removeUrl(i)"
+                >
+                  <gd-icon icon="trash"></gd-icon>
+                </button>
+              </div>
+
+            </gd-form-field>
+          </div>
+
+          <div class="gd-button-group">
+            <button
+              class="gd-button gd-button-primary"
+              type="button"
+              [disabled]="giftForm.disabled"
+              (click)="addExternalUrlField()"
+            >
+              <gd-icon icon="plus"></gd-icon>
+              Add external link
+            </button>
+          </div>
+        </div>
       </gd-form-field>
 
       <gd-form-field [errors]="errors">
@@ -45,83 +100,11 @@
         </label>
         <gd-image-uploader
           formControlName="imageUrl"
+          [allowUrl]="false"
           (selectFile)="onSelectFile($event)"
           (removeFile)="onRemoveFile()"
-          (urlButtonClick)="onUrlButtonClick()"
         >
         </gd-image-uploader>
-      </gd-form-field>
-
-      <gd-form-field>
-        <label
-          class="gd-control-label"
-        >
-          External URLs
-        </label>
-        <div formArrayName="externalUrls">
-          <gd-row *ngFor="let externalUrl of externalUrls.controls; let i = index;"
-            [formGroup]="externalUrl"
-          >
-            <gd-column screenXSmall="8">
-              <gd-form-field [errors]="errors">
-                <input
-                  class="gd-form-control"
-                  formControlName="url"
-                  placeholder="https://"
-                  title="Enter a product URL"
-                  type="text"
-                />
-              </gd-form-field>
-            </gd-column>
-            <gd-column screenXSmall="2">
-              <gd-form-field [errors]="errors">
-                <input
-                  class="gd-form-control"
-                  formControlName="price"
-                  placeholder="Price"
-                  title="Enter a price"
-                  type="number"
-                />
-              </gd-form-field>
-            </gd-column>
-            <gd-column screenXSmall="2">
-              <gd-form-field>
-                <div class="gd-button-group">
-                  <button
-                    class="gd-button gd-button-default"
-                    title="Remove URL"
-                    type="button"
-                    [disabled]="giftForm.disabled"
-                    (click)="removeUrl(i)"
-                  >
-                    <gd-icon icon="trash"></gd-icon>
-                  </button>
-                </div>
-              </gd-form-field>
-            </gd-column>
-          </gd-row>
-
-          <div class="gd-button-group">
-            <button
-              class="gd-button gd-button-primary"
-              type="button"
-              [disabled]="giftForm.disabled"
-              (click)="addExternalUrlField()"
-            >
-              <gd-icon icon="plus"></gd-icon>
-              Add external URL
-            </button>
-            <button *ngIf="externalUrls && externalUrls.length"
-              class="gd-button gd-button-default"
-              type="button"
-              [disabled]="giftForm.disabled"
-              (click)="refreshUrlDetails()"
-            >
-              <gd-icon icon="sync-alt"></gd-icon>
-              Refresh prices
-            </button>
-          </div>
-        </div>
       </gd-form-field>
 
       <gd-form-field [errors]="errors">

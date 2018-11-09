@@ -1,5 +1,9 @@
 @import '../../../../styles/mixins';
 
+.gd-wish-list-preview {
+  margin-bottom: $gd-spacing;
+}
+
 .gd-wish-list-preview-thumbnail-group {
   display: flex;
   justify-content: space-between;

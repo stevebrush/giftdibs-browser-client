@@ -1,24 +1,27 @@
 <gd-wait *ngIf="isLoading"></gd-wait>
 
-<h1>
-  My Community
-</h1>
-
-<gd-repeater>
-  <gd-repeater-item *ngFor="let gift of gifts">
-    <gd-gift-preview
-      [gift]="gift"
-      [showUserInfo]="true"
+<div class="gd-container gd-container-lg gd-spacing-padding-even-large">
+  <gd-row>
+    <gd-column *ngFor="let gift of gifts"
+      screenXSmall="6"
+      screenSmall="4"
+      screenMedium="4"
+      screenLarge="3"
     >
-    </gd-gift-preview>
-  </gd-repeater-item>
-</gd-repeater>
+      <gd-gift-preview
+        [gift]="gift"
+        [showUserInfo]="true"
+      >
+      </gd-gift-preview>
+    </gd-column>
+  </gd-row>
 
-<button *ngIf="hasMore"
-  class="gd-button gd-button-default gd-button-block"
-  type="button"
-  [disabled]="isLoading"
-  (click)="loadMoreResults()"
->
-  Show more results
-</button>
+  <button *ngIf="hasMore"
+    class="gd-button gd-button-default gd-button-block"
+    type="button"
+    [disabled]="isLoading"
+    (click)="loadMoreResults()"
+  >
+    Show more results
+  </button>
+</div>

@@ -1,6 +1,6 @@
 <button
   aria-label="Toggle notifications"
-  class="gd-button gd-button-link gd-notifications-trigger-button"
+  class="gd-button gd-button-link app-notifications-trigger-button"
   title="Notifications"
   type="button"
   [gdPopover]="content"
@@ -9,15 +9,15 @@
 >
   <gd-icon icon="bell"></gd-icon>
   <gd-badge *ngIf="notifications?.length"
-    class="gd-notifications-badge"
+    class="app-notifications-badge"
   >{{ notifications?.length }}</gd-badge>
 </button>
 
 <ng-template #content>
-  <div class="gd-notifications">
+  <div class="app-notifications">
     <gd-repeater *ngIf="notifications?.length else notificationsEmpty">
       <gd-repeater-item *ngFor="let notification of notifications">
-        <div [ngSwitch]="notification.type">
+        <div class="app-notification" [ngSwitch]="notification.type">
 
           <ng-template ngSwitchCase="gift_comment">
             <a routerLink="/users/{{ notification.gift.comment.user.id }}">{{ notification.gift.comment.user.firstName }} {{ notification.gift.comment.user.lastName }}</a>
@@ -26,7 +26,7 @@
             <time class="gd-text-deemphasized gd-text-small">
               {{ notification.dateCreated | date }}
             </time>
-            <div class="gd-notifications-secondary-controls gd-button-group">
+            <div class="app-notifications-secondary-controls gd-button-group">
               <ng-container *ngTemplateOutlet="controls;context:{notification:notification}"></ng-container>
             </div>
           </ng-template>
@@ -38,7 +38,7 @@
             <time class="gd-text-deemphasized gd-text-small">
               {{ notification.dateCreated | date }}
             </time>
-            <div class="gd-notifications-secondary-controls gd-button-group">
+            <div class="app-notifications-secondary-controls gd-button-group">
               <ng-container *ngTemplateOutlet="controls;context:{notification:notification}"></ng-container>
             </div>
           </ng-template>
@@ -57,7 +57,7 @@
               {{ notification.dateCreated | date }}
             </time>
             <div *ngIf="!isGiftReceived(notification.gift.id)"
-              class="gd-notifications-secondary-controls gd-button-group"
+              class="app-notifications-secondary-controls gd-button-group"
             >
               <ng-container *ngTemplateOutlet="controls;context:{notification:notification}"></ng-container>
               <button
@@ -78,7 +78,7 @@
             <time class="gd-text-deemphasized gd-text-small">
               {{ notification.dateCreated | date }}
             </time>
-            <div class="gd-notifications-secondary-controls gd-button-group">
+            <div class="app-notifications-secondary-controls gd-button-group">
               <ng-container *ngTemplateOutlet="controls;context:{notification:notification}"></ng-container>
               <button *ngIf="!notification.dib?.dateDelivered"
                 class="gd-button gd-button-default"
@@ -96,7 +96,7 @@
             <time class="gd-text-deemphasized gd-text-small">
               {{ notification.dateCreated | date }}
             </time>
-            <div class="gd-notifications-secondary-controls gd-button-group">
+            <div class="app-notifications-secondary-controls gd-button-group">
               <ng-container *ngTemplateOutlet="controls;context:{notification:notification}"></ng-container>
               <gd-follow-button
                 [friendId]="notification.follower.id"

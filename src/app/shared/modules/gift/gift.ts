@@ -19,6 +19,7 @@ export interface Gift {
   budget?: number;
   comments?: Comment[];
   dateReceived?: Date;
+  dateUpdated?: Date;
   dibs?: Dib[];
   externalUrls?: GiftExternalUrl[];
   imageUrl?: string;

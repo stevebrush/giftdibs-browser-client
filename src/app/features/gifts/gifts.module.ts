@@ -32,8 +32,10 @@ import {
 
 import {
   ConfirmModule,
+  DateTimeModule,
   DropdownMenuModule,
   GridModule,
+  IconModule,
   MediaModule,
   ModalModule,
   NoticeModule,
@@ -42,16 +44,13 @@ import {
   WaitModule
 } from '@giftdibs/ux';
 
-import {
-  IconModule
-} from '@giftdibs/ux';
-
 import { GiftComponent } from './gift.component';
 import { GiftsRoutingModule } from './gifts-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
+    DateTimeModule,
     GiftModule,
     GiftMoveModule,
     CommentModule,

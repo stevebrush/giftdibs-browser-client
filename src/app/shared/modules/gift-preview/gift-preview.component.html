@@ -1,6 +1,26 @@
 <div class="gd-gift-preview">
-  <gd-media size="lg">
-    <gd-media-thumbnail class="gd-gift-preview-thumbnail">
+  <gd-card>
+    <gd-card-header>
+      <gd-media size="xs">
+        <gd-media-thumbnail>
+          <gd-thumbnail
+            iconSize="1x"
+            size="fill"
+            shape="circle"
+            [imageSource]="gift.user.avatarUrl"
+            [route]="{ commands: ['/users', gift.user.id] }"
+          ></gd-thumbnail>
+        </gd-media-thumbnail>
+        <gd-media-content>
+          <gd-media-body>
+            <gd-media-heading [multiline]="false">
+              <a routerLink="/users/{{ gift.user.id }}" title="{{ gift.user.firstName }} {{ gift.user.lastName }}">{{ gift.user.firstName }} {{ gift.user.lastName }}</a>
+            </gd-media-heading>
+          </gd-media-body>
+        </gd-media-content>
+      </gd-media>
+    </gd-card-header>
+    <gd-card-thumbnail>
       <gd-thumbnail
         size="fill"
         [imageSource]="gift.imageUrl"
@@ -24,31 +44,25 @@
           Received!
         </gd-ribbon>
       </gd-thumbnail>
-    </gd-media-thumbnail>
-    <gd-media-content>
-      <gd-media-header>
-        <gd-media-heading>
-          <a routerLink="/gifts/{{ gift.id }}">{{ gift.name }}
+    </gd-card-thumbnail>
+    <gd-card-body>
+      <gd-card-heading [multiline]="false">
+        <a routerLink="/gifts/{{ gift.id }}" [attr.title]="gift.name">{{ gift.name }}
           <ng-container *ngIf="gift.quantity > 1">
             ({{ gift.quantity }})
           </ng-container></a>
-        </gd-media-heading>
-      </gd-media-header>
-      <gd-media-body>
-        <gd-gift-priority
-          [priority]="gift.priority"
-        >
-        </gd-gift-priority>
-        <div *ngIf="showUserInfo"
-          class="gd-text-deemphasized gd-text-small gd-gift-preview-user-info"
-        >
-          <a routerLink="/users/{{ gift.user.id }}">{{ gift.user.firstName }} {{ gift.user.lastName }}</a>
-        </div>
-        <div class="gd-text-price">
-          ${{ gift.budget || '--' }}
-          <span *ngIf="gift.quantity > 1">ea.</span>
-        </div>
-      </gd-media-body>
-    </gd-media-content>
-  </gd-media>
+      </gd-card-heading>
+      <gd-gift-priority
+        [priority]="gift.priority"
+      >
+      </gd-gift-priority>
+      <div class="gd-text-price">
+        ${{ gift.budget || '--' }}
+        <span *ngIf="gift.quantity > 1">ea.</span>
+      </div>
+      <time class="gd-date">
+        {{ gift.dateUpdated | gdFriendlyDate }}
+      </time>
+    </gd-card-body>
+  </gd-card>
 </div>

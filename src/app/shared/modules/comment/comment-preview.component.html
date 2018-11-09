@@ -24,8 +24,8 @@
             {{ comment.body }}
           </div>
           <div class="gd-comment-footer gd-text-small">
-            <time class="gd-text-deemphasized">
-              {{ comment.dateUpdated | date }}
+            <time class="gd-date">
+              {{ comment.dateUpdated | gdFriendlyDate }}
             </time>
           </div>
         </gd-media-body>

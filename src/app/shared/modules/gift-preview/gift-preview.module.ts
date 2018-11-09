@@ -11,10 +11,9 @@ import {
 } from '@angular/router';
 
 import {
-  IconModule
-} from '@giftdibs/ux';
-
-import {
+  CardModule,
+  DateTimeModule,
+  IconModule,
   MediaModule,
   RibbonModule,
   ThumbnailModule
@@ -30,7 +29,9 @@ import {
 
 @NgModule({
   imports: [
+    CardModule,
     CommonModule,
+    DateTimeModule,
     GiftPriorityModule,
     IconModule,
     MediaModule,

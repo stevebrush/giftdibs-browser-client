@@ -1,66 +1,68 @@
 <gd-wait *ngIf="isLoading"></gd-wait>
 
 <div class="gd-container gd-container-xxs gd-spacing-padding-even-large">
-  <h1>
-    Log in
-  </h1>
+  <div class="gd-detail-pane">
+      <h1>
+          Log in
+        </h1>
 
-  <p>
-    Or <a routerLink="/account/register">create a new account</a>
-  </p>
+        <p>
+          Or <a routerLink="/account/register">create a new account</a>
+        </p>
 
-  <form
-    class="gd-form"
-    aria-label="Log in to GiftDibs"
-    [formGroup]="loginForm"
-    (ngSubmit)="submit()"
-    novalidate
-  >
-    <gd-form-field [errors]="errors">
-      <input
-        type="email"
-        class="gd-form-control"
-        id="gd-login-email-address"
-        formControlName="emailAddress"
-        placeholder="Email address"
-      />
-    </gd-form-field>
+        <form
+          class="gd-form"
+          aria-label="Log in to GiftDibs"
+          [formGroup]="loginForm"
+          (ngSubmit)="submit()"
+          novalidate
+        >
+          <gd-form-field [errors]="errors">
+            <input
+              type="email"
+              class="gd-form-control"
+              id="gd-login-email-address"
+              formControlName="emailAddress"
+              placeholder="Email address"
+            />
+          </gd-form-field>
 
-    <gd-form-field [errors]="errors">
-      <gd-password-viewer
-        [disabled]="loginForm.disabled"
-        [inputElement]="passwordInput">
-        <input
-          autocorrect="off"
-          autocapitalize="none"
-          type="password"
-          class="gd-form-control"
-          formControlName="password"
-          placeholder="Password"
-          #passwordInput
-        />
-      </gd-password-viewer>
-    </gd-form-field>
+          <gd-form-field [errors]="errors">
+            <gd-password-viewer
+              [disabled]="loginForm.disabled"
+              [inputElement]="passwordInput">
+              <input
+                autocorrect="off"
+                autocapitalize="none"
+                type="password"
+                class="gd-form-control"
+                formControlName="password"
+                placeholder="Password"
+                #passwordInput
+              />
+            </gd-password-viewer>
+          </gd-form-field>
 
-    <button
-      class="gd-button gd-button-primary"
-      type="submit"
-      [disabled]="loginForm.disabled">
-      Log in
-    </button>
-  </form>
+          <button
+            class="gd-button gd-button-primary"
+            type="submit"
+            [disabled]="loginForm.disabled">
+            Log in
+          </button>
+        </form>
 
-  <p>
-    <gd-facebook-login-button
-      [disabled]="loginForm.disabled"
-      (click)="loginForm.disable()"
-      (failure)="onFacebookLoginFailure()"
-      (success)="onFacebookLoginSuccess()"
-    >
-    </gd-facebook-login-button>
-  </p>
+        <p>
+          <gd-facebook-login-button
+            [disabled]="loginForm.disabled"
+            (click)="loginForm.disable()"
+            (failure)="onFacebookLoginFailure()"
+            (success)="onFacebookLoginSuccess()"
+          >
+          </gd-facebook-login-button>
+        </p>
 
-  <p>
-    <a routerLink="/account/forgotten">Forget your password?</a>
-  </p>
+        <p>
+          <a routerLink="/account/forgotten">Forget your password?</a>
+        </p>
+  </div>
 </div>

@@ -19,7 +19,12 @@ import {
 } from '@giftdibs/ux';
 
 import {
-  finalize
+  Subject
+} from 'rxjs';
+
+import {
+  finalize,
+  takeUntil
 } from 'rxjs/operators';
 
 import { UrlImagesLoaderContext } from './url-images-loader-context';
@@ -43,6 +48,8 @@ export class UrlImagesLoaderComponent implements OnInit {
   @ViewChild('urlInput')
   private urlInput: ElementRef<any>;
 
+  private cancelled = new Subject<void>();
+
   constructor(
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
@@ -61,6 +68,8 @@ export class UrlImagesLoaderComponent implements OnInit {
 
   public onCancelClicked(): void {
     this.modal.close('cancel');
+    this.cancelled.next();
+    this.cancelled.complete();
   }
 
   public onNextClicked(): void {
@@ -73,6 +82,7 @@ export class UrlImagesLoaderComponent implements OnInit {
 
     this.urlScraperService.getProduct(url)
       .pipe(
+        takeUntil(this.cancelled),
         finalize(() => {
           this.disabled = false;
           this.changeDetector.markForCheck();

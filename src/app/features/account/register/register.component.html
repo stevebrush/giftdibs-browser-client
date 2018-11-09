@@ -1,123 +1,125 @@
 <gd-wait *ngIf="isLoading"></gd-wait>
 
-<div class="gd-container gd-container-xs gd-spacing-padding-even-large">
-  <h1>
-    Create a free account
-  </h1>
-
-  <p>
-    Or <a routerLink="/account/login">log in to your account</a>
-  </p>
-
-  <form
-    class="gd-form"
-    [formGroup]="registerForm"
-    (ngSubmit)="submit()"
-    aria-label="New user registration information"
-    novalidate
-  >
-    <gd-row class="gd-register-user-name">
-      <gd-column screenSmall="6">
-        <gd-form-field [errors]="errors">
-          <input
-            autocomplete="off"
-            type="text"
-            class="gd-form-control"
-            formControlName="firstName"
-            placeholder="First name"
-          />
-        </gd-form-field>
-      </gd-column>
-      <gd-column screenSmall="6">
-        <gd-form-field [errors]="errors">
-          <input
-            autocomplete="off"
-            type="text"
-            class="gd-form-control"
-            formControlName="lastName"
-            placeholder="Last name"
-          />
-        </gd-form-field>
-      </gd-column>
-    </gd-row>
-
-    <gd-form-field
-      [errors]="errors"
-    >
-      <input
-        autocomplete="off"
-        type="email"
-        class="gd-form-control"
-        formControlName="emailAddress"
-        placeholder="Email address"
-      />
-    </gd-form-field>
-
-    <gd-form-field [errors]="errors">
-      <gd-password-viewer
-        [disabled]="registerForm.disabled"
-        [inputElement]="passwordInput"
-      >
-        <input
-          autocorrect="off"
-          autocapitalize="none"
-          autocomplete="off"
-          type="password"
-          class="gd-form-control"
-          formControlName="password"
-          placeholder="New password"
-          #passwordInput
-        />
-      </gd-password-viewer>
-    </gd-form-field>
-
-    <!-- <gd-form-field [errors]="errors">
-      <label
-        class="gd-control-label"
-      >
-        Birthday
-        <gd-date-picker
-          formControlName="birthday"
-        >
-        </gd-date-picker>
-      </label>
-    </gd-form-field> -->
-
-    <gd-form-field
-      aria-hidden="true"
-      class="gd-screen-reader-only"
-      [errors]="errors">
-      <label
-        class="gd-control-label"
-        for="gd-register-nickname">
-        Nickname
-      </label>
-      <input
-        type="text"
-        class="gd-form-control"
-        id="gd-register-nickname"
-        formControlName="gdNickname"
-        autocomplete="off">
-    </gd-form-field>
+<div class="gd-container gd-container-xxs gd-spacing-padding-even-large">
+  <div class="gd-detail-pane">
+    <h1>
+      Create a free account
+    </h1>
 
     <p>
-      By creating an account, you agree to our <a routerLink="/support/terms">Terms of Service</a> and <a routerLink="/support/privacy">Privacy Policy</a>.
+      Or <a routerLink="/account/login">log in to your account</a>
     </p>
 
-    <button
-      class="gd-button gd-button-primary"
-      type="submit"
-      [disabled]="registerForm.disabled">
-      Create new account
-    </button>
-  </form>
-  <p>
-    <gd-facebook-login-button
-      [disabled]="registerForm.disabled"
-      (click)="registerForm.disable()"
-      (failure)="onFacebookLoginFailure()"
-      (success)="onFacebookLoginSuccess()"
+    <form
+      class="gd-form"
+      [formGroup]="registerForm"
+      (ngSubmit)="submit()"
+      aria-label="New user registration information"
+      novalidate
     >
-    </gd-facebook-login-button>
-  </p>
+      <gd-row class="gd-register-user-name">
+        <gd-column screenSmall="6">
+          <gd-form-field [errors]="errors">
+            <input
+              autocomplete="off"
+              type="text"
+              class="gd-form-control"
+              formControlName="firstName"
+              placeholder="First name"
+            />
+          </gd-form-field>
+        </gd-column>
+        <gd-column screenSmall="6">
+          <gd-form-field [errors]="errors">
+            <input
+              autocomplete="off"
+              type="text"
+              class="gd-form-control"
+              formControlName="lastName"
+              placeholder="Last name"
+            />
+          </gd-form-field>
+        </gd-column>
+      </gd-row>
+
+      <gd-form-field
+        [errors]="errors"
+      >
+        <input
+          autocomplete="off"
+          type="email"
+          class="gd-form-control"
+          formControlName="emailAddress"
+          placeholder="Email address"
+        />
+      </gd-form-field>
+
+      <gd-form-field [errors]="errors">
+        <gd-password-viewer
+          [disabled]="registerForm.disabled"
+          [inputElement]="passwordInput"
+        >
+          <input
+            autocorrect="off"
+            autocapitalize="none"
+            autocomplete="off"
+            type="password"
+            class="gd-form-control"
+            formControlName="password"
+            placeholder="New password"
+            #passwordInput
+          />
+        </gd-password-viewer>
+      </gd-form-field>
+
+      <!-- <gd-form-field [errors]="errors">
+        <label
+          class="gd-control-label"
+        >
+          Birthday
+          <gd-date-picker
+            formControlName="birthday"
+          >
+          </gd-date-picker>
+        </label>
+      </gd-form-field> -->
+
+      <gd-form-field
+        aria-hidden="true"
+        class="gd-screen-reader-only"
+        [errors]="errors">
+        <label
+          class="gd-control-label"
+          for="gd-register-nickname">
+          Nickname
+        </label>
+        <input
+          type="text"
+          class="gd-form-control"
+          id="gd-register-nickname"
+          formControlName="gdNickname"
+          autocomplete="off">
+      </gd-form-field>
+
+      <p>
+        By creating an account, you agree to our <a routerLink="/support/terms">Terms of Service</a> and <a routerLink="/support/privacy">Privacy Policy</a>.
+      </p>
+
+      <button
+        class="gd-button gd-button-primary"
+        type="submit"
+        [disabled]="registerForm.disabled">
+        Create new account
+      </button>
+    </form>
+    <p>
+      <gd-facebook-login-button
+        [disabled]="registerForm.disabled"
+        (click)="registerForm.disable()"
+        (failure)="onFacebookLoginFailure()"
+        (success)="onFacebookLoginSuccess()"
+      >
+      </gd-facebook-login-button>
+    </p>
+  </div>
 </div>

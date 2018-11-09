@@ -63,13 +63,18 @@
   </div>
 
   <div class="gd-wish-list-body gd-container gd-container-lg gd-spacing-padding-even-large">
-    <gd-repeater>
-      <gd-repeater-item *ngFor="let gift of wishList.gifts">
+    <gd-row>
+      <gd-column *ngFor="let gift of wishList.gifts"
+        screenXSmall="6"
+        screenSmall="4"
+        screenMedium="4"
+        screenLarge="3"
+      >
         <gd-gift-preview
           [gift]="gift"
         >
         </gd-gift-preview>
-      </gd-repeater-item>
-    </gd-repeater>
+      </gd-column>
+    </gd-row>
   </div>
 </div>

@@ -25,15 +25,13 @@
         </ng-container>
       </div>
     </gd-card-thumbnail>
-    <gd-card-header>
+    <gd-card-body>
       <gd-card-heading>
         {{ wishList.name }}
       </gd-card-heading>
-      <time class="gd-text-deemphasized gd-text-small">
-        {{ wishList.dateUpdated | date }}
+      <time class="gd-date">
+        {{ wishList.dateUpdated | gdFriendlyDate }}
       </time>
-    </gd-card-header>
-    <gd-card-body>
       <div *ngIf="wishList.privacy.type === 'me'"
         class="gd-text-deemphasized gd-text-small"
         title="This wish list is private"

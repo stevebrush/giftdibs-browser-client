@@ -18,15 +18,13 @@ import {
 
 import {
   CharacterCounterModule,
+  DateTimeModule,
   DropdownMenuModule,
   FormFieldModule,
+  IconModule,
   MediaModule,
   RepeaterModule,
   ThumbnailModule
-} from '@giftdibs/ux';
-
-import {
-  IconModule
 } from '@giftdibs/ux';
 
 import {
@@ -51,6 +49,7 @@ import {
     CharacterCounterModule,
     CommonModule,
     FormsModule,
+    DateTimeModule,
     DropdownMenuModule,
     FormFieldModule,
     IconModule,

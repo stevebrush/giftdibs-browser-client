@@ -19,7 +19,7 @@ import {
 } from '@giftdibs/ux';
 
 import {
-  RepeaterModule
+  GridModule
 } from '@giftdibs/ux';
 
 import {
@@ -31,7 +31,7 @@ import {
     CommonModule,
     GiftPreviewModule,
     GiftModule,
-    RepeaterModule,
+    GridModule,
     WaitModule
   ],
   declarations: [

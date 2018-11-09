@@ -1,6 +1,6 @@
 @import '../../../../styles/mixins';
 
-.gd-notifications {
+.app-notifications {
   ::ng-deep {
     .gd-repeater {
       margin: 0 !important;
@@ -8,16 +8,20 @@
   }
 }
 
-.gd-notifications-secondary-controls {
+.app-notification {
+  line-height: $gd-line-height-reduced;
+}
+
+.app-notifications-secondary-controls {
   padding-top: $gd-spacing-sm;
 }
 
-.gd-notifications-trigger-button {
+.app-notifications-trigger-button {
   font-size: 120%;
   position: relative;
 }
 
-.gd-notifications-badge {
+.app-notifications-badge {
   position: absolute;
   top: 0;
   right: 10px;

@@ -51,6 +51,8 @@ import {
 } from '@app/shared/modules/product';
 
 import {
+  dataUrlToFile,
+  toDataUrl,
   TypeaheadSearchFunction,
   TypeaheadSearchResultAction
 } from '@giftdibs/ux';
@@ -65,7 +67,6 @@ import {
 import {
   GiftEditContext
 } from './gift-edit-context';
-
 // #endregion
 
 @Component({
@@ -238,10 +239,10 @@ export class GiftEditComponent implements OnInit {
 
   public searchResultAction: TypeaheadSearchResultAction<any> = (result: any) => {
     if (!this.giftForm.get('imageUrl').value) {
-      this.toDataUrl(result.imageUrl)
+      toDataUrl(result.imageUrl)
         .then((imageDataUrl: any) => {
           this.giftForm.get('imageUrl').setValue(imageDataUrl);
-          this.newImageFile = this.dataURLtoFile(imageDataUrl, 'temp.jpg');
+          this.newImageFile = dataUrlToFile(imageDataUrl);
         });
     }
 
@@ -305,16 +306,16 @@ export class GiftEditComponent implements OnInit {
         provide: UrlImagesLoaderContext,
         useValue: context
       }],
-      size: ModalSize.Medium
+      size: ModalSize.Small
     });
 
     modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
       if (args.reason === 'save') {
-        const imageDataUrl = args.data.image.dataUrl;
         const productDetails: UrlScraperResult = args.data.result;
 
+        const imageDataUrl = args.data.image.dataUrl;
         this.giftForm.get('imageUrl').setValue(imageDataUrl);
-        this.newImageFile = this.dataURLtoFile(imageDataUrl, 'temp.jpg');
+        this.newImageFile = dataUrlToFile(imageDataUrl);
 
         this.updateIfEmpty('name', productDetails.name);
         this.updateIfEmpty('budget', productDetails.price);
@@ -354,48 +355,5 @@ export class GiftEditComponent implements OnInit {
         url: externalUrl.url
       });
     }
-  }
-
-  // Convert URls to data URLS.
-  // https://stackoverflow.com/a/20285053/6178885
-  private toDataUrl(url: string): Promise<string | ArrayBuffer> {
-    return new Promise((resolve) => {
-      const xhr = new XMLHttpRequest();
-      xhr.onload = () => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          resolve(reader.result);
-        };
-        reader.readAsDataURL(xhr.response);
-      };
-      xhr.open('GET', url);
-      xhr.responseType = 'blob';
-      xhr.send();
-    });
-  }
-
-  // Convert data URL to Blob, to be uploaded as a File.
-  // https://stackoverflow.com/a/5100158
-  private dataURLtoFile(dataUrl: string, filename: string): Blob {
-    // Convert base64/URLEncoded data component to raw binary data held in a string.
-    let byteString;
-    if (dataUrl.split(',')[0].indexOf('base64') >= 0) {
-      byteString = atob(dataUrl.split(',')[1]);
-    } else {
-      byteString = unescape(dataUrl.split(',')[1]);
-    }
-
-    // Separate the mime component.
-    const mimeString = dataUrl.split(',')[0].split(':')[1].split(';')[0];
-
-    // Write the bytes of the string to a typed array.
-    const ia = new Uint8Array(byteString.length);
-    for (let i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i);
-    }
-
-    const blob = new Blob([ia], { type: mimeString });
-
-    return blob;
   }
 }

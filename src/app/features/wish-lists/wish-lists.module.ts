@@ -26,9 +26,9 @@ import {
   CardModule,
   ConfirmModule,
   DropdownMenuModule,
+  GridModule,
   MediaModule,
   NoticeModule,
-  RepeaterModule,
   ThumbnailModule,
   WaitModule
 } from '@giftdibs/ux';
@@ -48,10 +48,10 @@ import { WishListsRoutingModule } from './wish-lists-routing.module';
     DropdownMenuModule,
     GiftEditModule,
     GiftPreviewModule,
+    GridModule,
     IconModule,
     MediaModule,
     NoticeModule,
-    RepeaterModule,
     ThumbnailModule,
     WaitModule,
     WishListEditModule,

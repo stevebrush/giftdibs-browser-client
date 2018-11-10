@@ -17,7 +17,6 @@
       <gd-notice *ngIf="sessionUserDib.dateDelivered"
         noticeType="info"
       >
-        <gd-icon icon="box-open"></gd-icon>
         You delivered this gift on {{ sessionUserDib.dateDelivered | date }}.
       </gd-notice>
       <div *ngIf="!sessionUserDib.dateDelivered"

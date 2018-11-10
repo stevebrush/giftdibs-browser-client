@@ -62,7 +62,7 @@
       </div>
     </div>
 
-    <div class="gd-container gd-spacing-padding-even-large">
+    <div class="gd-container">
       <ng-container *ngTemplateOutlet="wishListsTemplate;context:wishLists">
       </ng-container>
     </div>
@@ -77,32 +77,34 @@
       [screenMedium]="4"
       [screenLarge]="3"
     >
-      <gd-card
-        (actionClick)="openWishListCreateModal()"
-      >
-        <gd-card-thumbnail>
-          <gd-thumbnail
-            size="fill"
-            icon="none"
-            iconSize="inherit"
-          >
-            <gd-icon-stack>
-              <gd-icon
-                icon="circle fas fa-stack-2x"
-                iconStyle="success"
-              ></gd-icon>
-              <gd-icon
-                icon="plus fas fa-stack-1x fa-inverse"
-              ></gd-icon>
-            </gd-icon-stack>
-          </gd-thumbnail>
-        </gd-card-thumbnail>
-        <gd-card-body>
-          <gd-card-heading>
-            <span class="gd-text-deemphasized">New wish list</span>
-          </gd-card-heading>
-        </gd-card-body>
-      </gd-card>
+      <div class="app-user-wish-list-create-button">
+        <gd-card
+          (actionClick)="openWishListCreateModal()"
+        >
+          <gd-card-thumbnail class="app-user-wish-list-create-button-thumbnail">
+            <gd-thumbnail
+              size="fill"
+              icon="none"
+              iconSize="inherit"
+            >
+              <gd-icon-stack>
+                <gd-icon
+                  icon="circle fas fa-stack-2x"
+                  iconStyle="success"
+                ></gd-icon>
+                <gd-icon
+                  icon="plus fas fa-stack-1x fa-inverse"
+                ></gd-icon>
+              </gd-icon-stack>
+            </gd-thumbnail>
+          </gd-card-thumbnail>
+          <gd-card-body>
+            <gd-card-heading>
+              <span class="gd-text-deemphasized">New wish list</span>
+            </gd-card-heading>
+          </gd-card-body>
+        </gd-card>
+      </div>
     </gd-column>
 
     <gd-column *ngFor="let wishList of wishLists"

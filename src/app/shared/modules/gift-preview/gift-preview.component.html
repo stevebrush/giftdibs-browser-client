@@ -1,5 +1,9 @@
 <div class="gd-gift-preview">
-  <gd-card>
+  <gd-card
+    [route]="{
+      commands: ['/gifts', gift.id]
+    }"
+  >
     <gd-card-header>
       <gd-media size="xs">
         <gd-media-thumbnail>
@@ -24,7 +28,6 @@
       <gd-thumbnail
         size="fill"
         [imageSource]="gift.imageUrl"
-        [route]="{ commands: ['/gifts', gift.id] }"
       >
         <gd-ribbon *ngIf="showDeliveredRibbon"
           ribbonType="info"
@@ -46,11 +49,11 @@
       </gd-thumbnail>
     </gd-card-thumbnail>
     <gd-card-body>
-      <gd-card-heading [multiline]="false">
-        <a routerLink="/gifts/{{ gift.id }}" [attr.title]="gift.name">{{ gift.name }}
-          <ng-container *ngIf="gift.quantity > 1">
-            ({{ gift.quantity }})
-          </ng-container></a>
+      <gd-card-heading [multiline]="false" [attr.title]="gift.name">
+        {{ gift.name }}
+        <ng-container *ngIf="gift.quantity > 1">
+          ({{ gift.quantity }})
+        </ng-container>
       </gd-card-heading>
       <gd-gift-priority
         [priority]="gift.priority"

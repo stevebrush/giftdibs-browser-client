@@ -33,13 +33,13 @@ import {
 import {
   ConfirmModule,
   DateTimeModule,
+  DisclosureModule,
   DropdownMenuModule,
   GridModule,
   IconModule,
   MediaModule,
   ModalModule,
   NoticeModule,
-  RepeaterModule,
   ThumbnailModule,
   WaitModule
 } from '@giftdibs/ux';
@@ -55,6 +55,7 @@ import { GiftsRoutingModule } from './gifts-routing.module';
   imports: [
     CommonModule,
     DateTimeModule,
+    DisclosureModule,
     GiftModule,
     GiftMoveModule,
     CommentModule,
@@ -70,7 +71,6 @@ import { GiftsRoutingModule } from './gifts-routing.module';
     ModalModule,
     NoticeModule,
     ProductPreviewModule,
-    RepeaterModule,
     ThumbnailModule,
     WaitModule
   ],

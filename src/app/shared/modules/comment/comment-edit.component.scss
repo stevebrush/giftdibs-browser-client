@@ -1,1 +1,10 @@
 @import '../../../../styles/mixins';
+
+.gd-button-group {
+  text-align: right;
+  margin-top: -6px;
+
+  .gd-button {
+    margin-right: 0;
+  }
+}

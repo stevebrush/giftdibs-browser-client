@@ -6,7 +6,7 @@
   >
     <gd-card-thumbnail>
       <div class="gd-wish-list-preview-thumbnail-group gd-rounded-corners-subtle">
-        <ng-container *ngFor="let i of [0,1,2,3]">
+        <ng-container *ngFor="let i of [0,1,2,3,4]">
           <gd-thumbnail *ngIf="wishList.gifts[i] else blankThumbnail"
             class="gd-wish-list-preview-thumbnail"
             iconSize="2x"
@@ -27,20 +27,12 @@
     </gd-card-thumbnail>
     <gd-card-body>
       <gd-card-heading>
+        <gd-icon *ngIf="wishList.privacy.type === 'me'"
+          icon="eye-slash"
+          title="This wish list is private"
+        ></gd-icon>
         {{ wishList.name }}
       </gd-card-heading>
-      <time class="gd-date">
-        {{ wishList.dateUpdated | gdFriendlyDate }}
-      </time>
-      <div *ngIf="wishList.privacy.type === 'me'"
-        class="gd-text-deemphasized gd-text-small"
-        title="This wish list is private"
-      >
-        <gd-icon
-          icon="eye-slash"
-        >
-        </gd-icon> Private
-      </div>
     </gd-card-body>
   </gd-card>
 </div>

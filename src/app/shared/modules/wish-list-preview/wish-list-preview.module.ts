@@ -12,7 +12,6 @@ import {
 
 import {
   CardModule,
-  DateTimeModule,
   IconModule,
   ThumbnailModule
 } from '@giftdibs/ux';
@@ -25,7 +24,6 @@ import {
   imports: [
     CardModule,
     CommonModule,
-    DateTimeModule,
     IconModule,
     RouterModule,
     ThumbnailModule

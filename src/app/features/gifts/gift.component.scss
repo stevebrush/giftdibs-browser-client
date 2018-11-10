@@ -8,6 +8,19 @@
   }
 }
 
+.app-gift-detail-external-urls {
+  ::ng-deep {
+    .gd-thumbnail-image-container {
+      background-size: cover;
+    }
+    // .gd-icon {
+    //   color: $gd-color-neutral-light;
+    //   font-weight: normal;
+    //   font-size: 85%;
+    // }
+  }
+}
+
 .app-gift-detail-notes {
   word-wrap: break-word;
 }
@@ -17,10 +30,10 @@
 }
 
 .gd-heading {
-  margin-bottom: $gd-spacing;
+  margin-bottom: $gd-spacing-md;
 }
 
 .app-gift-detail-priority {
   font-size: 18px;
-  margin-bottom: $gd-spacing;
+  margin-bottom: $gd-spacing-md;
 }

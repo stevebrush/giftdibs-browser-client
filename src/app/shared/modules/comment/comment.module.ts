@@ -23,7 +23,6 @@ import {
   FormFieldModule,
   IconModule,
   MediaModule,
-  RepeaterModule,
   ThumbnailModule
 } from '@giftdibs/ux';
 
@@ -55,7 +54,6 @@ import {
     IconModule,
     MediaModule,
     ReactiveFormsModule,
-    RepeaterModule,
     RouterModule,
     ThumbnailModule
   ],

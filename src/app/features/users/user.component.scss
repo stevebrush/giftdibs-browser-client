@@ -1,8 +1,13 @@
 @import '../../../styles/mixins';
 
-.gd-user-wish-list-create-button {
-  padding: 0;
-  background-color: transparent;
+.app-user-wish-list-create-button {
+  margin-bottom: $gd-spacing;
+}
+
+.app-user-wish-list-create-button-thumbnail {
+  height: 140px;
+  display: block;
+  margin-bottom: $gd-spacing;
 }
 
 .gd-user-header-heading {
@@ -11,10 +16,6 @@
 
 .gd-user-header-controls {
   text-align: right;
-  margin-bottom: $gd-spacing-lg
-  // @media (min-width: $gd-screen-sm-min) {
-  //   float: right;
-  // }
 }
 
 .gd-user-header-tabs {

@@ -25,6 +25,7 @@ import {
 import {
   CardModule,
   ConfirmModule,
+  DateTimeModule,
   DropdownMenuModule,
   GridModule,
   MediaModule,
@@ -45,6 +46,7 @@ import { WishListsRoutingModule } from './wish-lists-routing.module';
     CardModule,
     CommonModule,
     ConfirmModule,
+    DateTimeModule,
     DropdownMenuModule,
     GiftEditModule,
     GiftPreviewModule,

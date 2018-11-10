@@ -159,7 +159,7 @@ export class GiftComponent implements OnInit, OnDestroy {
           );
       } else {
         this.isLoading = false;
-        this.changeDetector.markForCheck();
+        this.changeDetector.detectChanges();
       }
     });
   }
@@ -190,8 +190,9 @@ export class GiftComponent implements OnInit, OnDestroy {
     }
 
     formatted = formatted.split('/')[0];
+    // formatted = formatted.charAt(0).toUpperCase() + formatted.substr(1);
 
-    return formatted.charAt(0).toUpperCase() + formatted.substr(1);
+    return formatted;
   }
 
   private refreshGift(): void {
@@ -316,6 +317,8 @@ export class GiftComponent implements OnInit, OnDestroy {
       } else {
         this.findSimilarByKeywords();
       }
+    } else {
+      this.findSimilarByKeywords();
     }
   }
 

@@ -30,7 +30,7 @@ import {
 } from 'rxjs/operators';
 
 @Component({
-  selector: 'gd-navbar',
+  selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

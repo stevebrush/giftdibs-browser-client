@@ -11,7 +11,10 @@
     </gd-card-thumbnail>
     <gd-card-body>
       <gd-card-heading [multiline]="false">
-        <a [attr.href]="product.url">{{ product.name }}</a>
+        <a
+          [attr.href]="product.url"
+          [attr.title]="product.name"
+        >{{ product.name }}</a>
       </gd-card-heading>
       <div class="gd-text-price">
         ${{ product.price }}

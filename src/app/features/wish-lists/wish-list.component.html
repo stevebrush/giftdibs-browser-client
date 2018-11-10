@@ -7,13 +7,17 @@
     <gd-media size="md">
       <gd-media-content>
         <h1>
+          <gd-icon *ngIf="wishList.privacy.type === 'me'"
+            icon="eye-slash"
+            title="This wish list is private"
+          ></gd-icon>
           {{ wishList.name }}
         </h1>
 
         <p class="gd-text-small gd-text-deemphasized">
           {{ wishList.gifts.length }} items&nbsp;&bull;
           Privacy:&nbsp;{{ wishList.privacy.type }}&nbsp;&bull;
-          {{ wishList.dateUpdated | date }}
+          <time>{{ wishList.dateUpdated | gdFriendlyDate }}</time>
         </p>
 
         <gd-notice *ngIf="wishList.isArchived"

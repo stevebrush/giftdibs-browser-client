@@ -1,7 +1,7 @@
 <gd-modal>
   <gd-modal-header>
     <gd-modal-heading>
-      Move gift
+      {{ modalTitle }}
     </gd-modal-heading>
   </gd-modal-header>
   <gd-modal-body>
@@ -13,6 +13,7 @@
       (ngSubmit)="submit()"
     >
       <gd-wait *ngIf="isLoading"></gd-wait>
+
       <gd-form-field [errors]="errors">
         <label
           class="gd-control-label"
@@ -31,8 +32,23 @@
           >
             {{ wishList.name }}
           </option>
+          <option value="new">
+            Create new...
+          </option>
         </select>
       </gd-form-field>
+
+      <ng-container *ngIf="wishListId === 'new'">
+        <gd-form-field [errors]="errors">
+          <input
+            autofocus
+            class="gd-form-control"
+            formControlName="name"
+            placeholder="New wish list name"
+            type="text"
+          >
+        </gd-form-field>
+      </ng-container>
 
     </form>
   </gd-modal-body>

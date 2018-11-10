@@ -49,7 +49,12 @@ export class GiftMoveComponent implements OnInit {
   public gift: Gift;
   public moveForm: FormGroup;
   public isLoading = true;
+  public modalTitle: string;
   public wishLists: WishList[];
+
+  public get wishListId(): string {
+    return this.moveForm.get('wishListId').value;
+  }
 
   constructor(
     private alertService: AlertService,
@@ -65,6 +70,7 @@ export class GiftMoveComponent implements OnInit {
   public ngOnInit(): void {
     this.createForm();
     this.gift = this.context.gift;
+    this.modalTitle = this.context.title;
 
     this.moveForm.reset({
       wishListId: this.context.wishListId
@@ -73,6 +79,11 @@ export class GiftMoveComponent implements OnInit {
     this.wishListService.getAllByUserId(this.sessionService.user.id)
       .subscribe((wishLists) => {
         this.wishLists = wishLists;
+
+        if (!this.context.wishListId && wishLists.length) {
+          this.moveForm.get('wishListId').setValue(wishLists[0].id);
+        }
+
         this.isLoading = false;
         this.changeDetector.markForCheck();
       });
@@ -88,25 +99,22 @@ export class GiftMoveComponent implements OnInit {
     this.errors = [];
     this.changeDetector.markForCheck();
 
-    const wishListId = this.moveForm.value.wishListId;
-    const formData = {
-      wishList: { id: wishListId }
-    };
-
-    this.giftService.update(this.gift.id, formData)
-      .subscribe(
+    // Create a new wish list.
+    if (this.wishListId === 'new') {
+      this.wishListService.create({
+        name: this.moveForm.get('name').value
+      }).subscribe(
         (result: any) => {
-          this.modal.close('save', result.data);
+          this.moveForm.get('wishListId').setValue(result.data.wishListId);
+          this.moveGiftToWishList();
         },
-        (err) => {
-          const error = err.error;
-          this.alertService.error(error.message);
-          this.errors = error.errors;
-          this.moveForm.enable();
-          this.isLoading = false;
-          this.changeDetector.markForCheck();
+        (err: any) => {
+          this.handleError(err);
         }
       );
+    } else {
+      this.moveGiftToWishList();
+    }
   }
 
   public onCancelClicked(): void {
@@ -115,7 +123,50 @@ export class GiftMoveComponent implements OnInit {
 
   private createForm(): void {
     this.moveForm = this.formBuilder.group({
+      name: undefined,
       wishListId: undefined
     });
+  }
+
+  private moveGiftToWishList(): void {
+    // Update existing gift.
+    if (this.gift.id) {
+      const formData = {
+        wishList: { id: this.wishListId }
+      };
+
+      this.giftService.update(this.gift.id, formData)
+        .subscribe(
+          (result: any) => {
+            this.modal.close('save', result.data);
+          },
+          (err) => {
+            this.handleError(err);
+          }
+        );
+
+    // Create a new gift.
+    } else {
+      this.giftService.create(this.wishListId, this.gift)
+        .subscribe(
+          (result: any) => {
+            this.modal.close('save', result.data);
+          },
+          (err) => {
+            this.handleError(err);
+          }
+        );
+    }
+
+
+  }
+
+  private handleError(err: any): void {
+    const error = err.error;
+    this.alertService.error(error.message);
+    this.errors = error.errors;
+    this.moveForm.enable();
+    this.isLoading = false;
+    this.changeDetector.markForCheck();
   }
 }

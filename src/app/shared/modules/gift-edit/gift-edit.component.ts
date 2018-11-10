@@ -19,10 +19,14 @@ import {
 } from '@giftdibs/ux';
 
 import {
+  dataUrlToFile,
   ModalClosedEventArgs,
   ModalInstance,
   ModalService,
-  ModalSize
+  ModalSize,
+  toDataUrl,
+  TypeaheadSearchFunction,
+  TypeaheadSearchResultAction
 } from '@giftdibs/ux';
 
 import {
@@ -49,13 +53,6 @@ import {
 import {
   ProductService
 } from '@app/shared/modules/product';
-
-import {
-  dataUrlToFile,
-  toDataUrl,
-  TypeaheadSearchFunction,
-  TypeaheadSearchResultAction
-} from '@giftdibs/ux';
 
 import {
   UrlImagesLoaderComponent,

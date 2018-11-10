@@ -44,6 +44,10 @@ import {
   WaitModule
 } from '@giftdibs/ux';
 
+import {
+  ProductPreviewModule
+} from '@app/shared/modules/product-preview';
+
 import { GiftComponent } from './gift.component';
 import { GiftsRoutingModule } from './gifts-routing.module';
 
@@ -65,6 +69,7 @@ import { GiftsRoutingModule } from './gifts-routing.module';
     MediaModule,
     ModalModule,
     NoticeModule,
+    ProductPreviewModule,
     RepeaterModule,
     ThumbnailModule,
     WaitModule

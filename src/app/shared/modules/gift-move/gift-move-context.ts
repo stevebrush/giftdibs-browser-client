@@ -3,8 +3,7 @@ import {
 } from '../gift';
 
 export class GiftMoveContext {
-  constructor(
-    public gift: Gift,
-    public wishListId: string
-  ) { }
+  public gift: Gift;
+  public title: string;
+  public wishListId: string;
 }

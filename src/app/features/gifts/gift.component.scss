@@ -1,6 +1,6 @@
 @import '../../../styles/mixins';
 
-.gd-gift-detail {
+.app-gift-detail {
   ::ng-deep {
     gd-thumbnail {
       height: auto;
@@ -8,10 +8,19 @@
   }
 }
 
-.gd-gift-detail-notes {
+.app-gift-detail-notes {
   word-wrap: break-word;
 }
 
 .app-gift-detail-thumbnail {
+  margin-bottom: $gd-spacing;
+}
+
+.gd-heading {
+  margin-bottom: $gd-spacing;
+}
+
+.app-gift-detail-priority {
+  font-size: 18px;
   margin-bottom: $gd-spacing;
 }

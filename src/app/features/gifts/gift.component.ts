@@ -37,7 +37,14 @@ import {
 } from '@giftdibs/session';
 
 import {
-  AlertService
+  AlertService,
+  ConfirmAnswer,
+  ConfirmService,
+  DropdownMenuItem,
+  ModalClosedEventArgs,
+  ModalInstance,
+  ModalService,
+  ModalSize
 } from '@giftdibs/ux';
 
 import {
@@ -46,13 +53,8 @@ import {
 } from '@app/shared/modules/gift-move';
 
 import {
-  ConfirmAnswer,
-  ConfirmService,
-  DropdownMenuItem,
-  ModalClosedEventArgs,
-  ModalService,
-  ModalSize
-} from '@giftdibs/ux';
+  ProductService
+} from '@app/shared/modules/product';
 
 @Component({
   selector: 'gd-gift',
@@ -65,6 +67,7 @@ export class GiftComponent implements OnInit, OnDestroy {
   public isLoading = true;
   public isSessionUser = false;
   public quantityRemaining: number;
+  public similarProducts: any[];
 
   public menuItems: DropdownMenuItem[] = [
     {
@@ -72,8 +75,8 @@ export class GiftComponent implements OnInit, OnDestroy {
       action: () => this.openGiftEditModal()
     },
     {
-      label: 'Move',
-      action: () => this.openGiftMoveModal(),
+      label: 'Move...',
+      action: () => this.openGiftMoveModal(this.gift),
       addSeparatorAfter: true
     },
     {
@@ -91,6 +94,7 @@ export class GiftComponent implements OnInit, OnDestroy {
     private confirmService: ConfirmService,
     private giftService: GiftService,
     private modalService: ModalService,
+    private productService: ProductService,
     private router: Router,
     private sessionService: SessionService
   ) { }
@@ -114,6 +118,8 @@ export class GiftComponent implements OnInit, OnDestroy {
           this.checkQuantity();
           this.isLoading = false;
           this.changeDetector.markForCheck();
+
+          this.fetchSimilarProducts();
         },
         () => {
           this.alertService.error('Gift not found.', true);
@@ -229,13 +235,17 @@ export class GiftComponent implements OnInit, OnDestroy {
     });
   }
 
-  private openGiftMoveModal(): void {
-    const context = new GiftMoveContext(this.gift, this.gift.wishList.id);
+  private openGiftMoveModal(gift: Gift): ModalInstance<GiftMoveComponent> {
+    const wishListId = gift.wishList && gift.wishList.id;
 
     const modalInstance = this.modalService.open(GiftMoveComponent, {
       providers: [{
         provide: GiftMoveContext,
-        useValue: context
+        useValue: {
+          gift,
+          title: 'Move item to wish list',
+          wishListId
+        }
       }],
       size: ModalSize.Small
     });
@@ -245,6 +255,8 @@ export class GiftComponent implements OnInit, OnDestroy {
         this.refreshGift();
       }
     });
+
+    return modalInstance;
   }
 
   private confirmDelete(): void {
@@ -265,6 +277,55 @@ export class GiftComponent implements OnInit, OnDestroy {
             }
           );
       }
+    });
+  }
+
+  private fetchSimilarProducts(): void {
+    const externalUrls = this.gift.externalUrls;
+
+    if (externalUrls && externalUrls.length) {
+      const asins: string[] = [];
+
+      externalUrls.forEach((externalUrl) => {
+        const url = externalUrl.url;
+
+        if (url && url.indexOf('amazon.com') > -1) {
+          let asin = url.split('amazon.com/gp/product/')[1];
+
+          if (!asin) {
+            asin = url.split('/dp/')[1];
+          }
+
+          if (asin) {
+            asin = asin.split('/')[0].split('?')[0];
+            asins.push(asin);
+          }
+        }
+      });
+
+      if (asins.length) {
+        this.productService.findSimilarByAsin(asins[0]).subscribe((results) => {
+          if (!results || !results.length) {
+            this.findSimilarByKeywords();
+            return;
+          }
+
+          this.similarProducts = results;
+          this.changeDetector.markForCheck();
+        });
+      } else {
+        this.findSimilarByKeywords();
+      }
+    }
+  }
+
+  private findSimilarByKeywords(): void {
+    const keywords = this.gift.name
+      .replace(/[^a-zA-Z ]/g, '') // remove special characters
+      .replace(/\s\s+/g, ' '); // remove duplicate spaces
+    this.productService.searchByKeyword(keywords).subscribe((results) => {
+      this.similarProducts = results;
+      this.changeDetector.markForCheck();
     });
   }
 }

@@ -1,7 +1,7 @@
 <gd-wait *ngIf="isLoading"></gd-wait>
 
 <div class="gd-canvas">
-  <div class="gd-container gd-container-md">
+  <div class="gd-container gd-container-sm">
     <p *ngIf="gift">
       <a routerLink="/wish-lists/{{ gift.wishList.id }}">
         <gd-icon icon="chevron-left"></gd-icon>
@@ -9,12 +9,12 @@
       </a>
     </p>
   </div>
-  <div class="gd-container gd-container-md">
-    <div *ngIf="gift" class="gd-gift">
-      <div class="gd-gift-detail gd-detail-pane">
+  <div class="gd-container gd-container-sm">
+    <div *ngIf="gift" class="app-gift">
+      <div class="app-gift-detail gd-detail-pane">
         <gd-row>
           <gd-column
-            [screenSmall]="5"
+            [screenSmall]="6"
           >
             <div class="app-gift-detail-thumbnail">
               <gd-thumbnail *ngIf="gift.imageUrl"
@@ -29,11 +29,18 @@
             </div>
           </gd-column>
           <gd-column
-            [screenSmall]="7"
+            [screenSmall]="6"
           >
-            <h1>
+            <h1 class="gd-heading">
               {{ gift.name }}
             </h1>
+
+            <div class="app-gift-detail-priority">
+              <gd-gift-priority
+                [priority]="gift.priority"
+              >
+              </gd-gift-priority>
+            </div>
 
             <ng-container *ngIf="isSessionUser">
               <div *ngIf="!gift.dateReceived"
@@ -108,21 +115,12 @@
             </gd-media-list>
 
             <p *ngIf="gift.notes"
-              class="gd-gift-detail-notes"
+              class="app-gift-detail-notes"
             >
               {{ gift.notes }}
             </p>
 
             <table class="gd-table">
-              <tr>
-                <th>Priority</th>
-                <td>
-                  <gd-gift-priority
-                    [priority]="gift.priority"
-                  >
-                  </gd-gift-priority>
-                </td>
-              </tr>
               <tr>
                 <th>Budget</th>
                 <td>${{ gift.budget || '--' }} <span *ngIf="gift.quantity > 1">ea.</span></td>
@@ -132,14 +130,6 @@
                 <td>
                   {{ gift.quantity }}
                   <span *ngIf="quantityRemaining !== undefined">({{ quantityRemaining }} available)</span>
-                </td>
-              </tr>
-              <tr>
-                <th>Wish list</th>
-                <td>
-                  <a routerLink="/wish-lists/{{ gift.wishList.id }}">
-                    {{ gift.wishList.name }}
-                  </a>
                 </td>
               </tr>
             </table>
@@ -158,7 +148,10 @@
               </gd-media-thumbnail>
               <gd-media-content>
                 <a [routerLink]="['/users', gift.user.id]">{{ gift.user.firstName }} {{ gift.user.lastName }}</a>
-                updated {{ gift.dateUpdated | gdFriendlyDate }}.
+                added to <a routerLink="/wish-lists/{{ gift.wishList.id }}">
+                  {{ gift.wishList.name }}
+                </a><br>
+                <time class="gd-date">{{ gift.dateUpdated | gdFriendlyDate }}</time>
               </gd-media-content>
             </gd-media>
 
@@ -203,5 +196,20 @@
         </gd-row>
       </div>
     </div>
+  </div>
+  <div *ngIf="similarProducts && similarProducts.length" class="gd-container gd-container-lg">
+    <h2 class="gd-subheading">
+      More gift ideas
+    </h2>
+    <gd-row>
+      <gd-column *ngFor="let product of similarProducts"
+        screenSmall="3"
+      >
+        <app-product-preview
+          [product]="product"
+        >
+        </app-product-preview>
+      </gd-column>
+    </gd-row>
   </div>
 </div>

@@ -22,7 +22,8 @@ import {
 
 import {
   WishList,
-  WishListService
+  WishListService,
+  WishListType
 } from '../wish-list';
 
 import {
@@ -39,8 +40,7 @@ export class WishListEditComponent implements OnInit {
   public wishListForm: FormGroup;
   public errors: any[];
   public isLoading = false;
-
-  private wishList: WishList;
+  public wishList: WishList;
 
   constructor(
     private alertService: AlertService,
@@ -54,7 +54,15 @@ export class WishListEditComponent implements OnInit {
   public ngOnInit(): void {
     this.createForm();
     this.wishList = this.context.wishList;
-    this.wishListForm.reset(this.wishList);
+
+    if (this.wishList) {
+      // Set missing defaults.
+      if (!this.wishList.type) {
+        this.wishList.type = WishListType.WishList;
+      }
+
+      this.wishListForm.reset(this.wishList);
+    }
   }
 
   public onCancelClicked(): void {
@@ -70,19 +78,25 @@ export class WishListEditComponent implements OnInit {
     this.disableView();
 
     const formData: WishList = this.wishListForm.value;
-    this.wishListService
-      .update(this.wishList.id, formData)
-      .subscribe(
-        () => {
-          this.modal.close('save');
-        },
-        (err: any) => {
-          const error = err.error;
-          this.alertService.error(error.message);
-          this.errors = error.errors;
-          this.enableView();
-        }
-      );
+
+    let obs: any;
+    if (this.wishList) {
+      obs = this.wishListService.update(this.wishList.id, formData);
+    } else {
+      obs = this.wishListService.create(formData);
+    }
+
+    obs.subscribe(
+      () => {
+        this.modal.close('save');
+      },
+      (err: any) => {
+        const error = err.error;
+        this.alertService.error(error.message);
+        this.errors = error.errors;
+        this.enableView();
+      }
+    );
   }
 
   private createForm(): void {
@@ -90,7 +104,8 @@ export class WishListEditComponent implements OnInit {
       name: new FormControl(null, [
         Validators.required
       ]),
-      privacy: new FormControl(null, [])
+      privacy: new FormControl(null, []),
+      type: new FormControl(WishListType.WishList)
     });
   }
 

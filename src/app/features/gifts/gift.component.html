@@ -168,9 +168,9 @@
                   <time *ngIf="gift.dateUpdated" class="gd-date">Updated {{ gift.dateUpdated | gdFriendlyDate }}</time>
                 </gd-media-content>
               </gd-media>
-              <ng-container *ngIf="gift.dateReceived && gift.dibs && gift.dibs.length">
+              <ng-container *ngIf="gift.dibs && gift.dibs.length">
                 <ng-container *ngFor="let dib of gift.dibs">
-                  <gd-media *ngIf="dib.dateDelivered"
+                  <gd-media
                     size="xs"
                   >
                     <gd-media-thumbnail>
@@ -190,10 +190,18 @@
                       <ng-template #notAnonymous>
                         <a routerLink="/users/{{ dib.user.id }}">{{ dib.user.firstName }} {{ dib.user.lastName }}</a>
                       </ng-template>
-                      delivered ({{ dib.quantity }}).<br>
-                      <time class="gd-date">
-                        {{ dib.dateDelivered | gdFriendlyDate }}
-                      </time>
+                      <ng-template [ngIf]="dib.dateDelivered">
+                        delivered ({{ dib.quantity }}).<br>
+                        <time class="gd-date">
+                          {{ dib.dateDelivered | gdFriendlyDate }}
+                        </time>
+                      </ng-template>
+                      <ng-template [ngIf]="!dib.dateDelivered">
+                        dibbed ({{ dib.quantity }}).<br>
+                        <time class="gd-date">
+                          {{ dib.dateUpdated | gdFriendlyDate }}
+                        </time>
+                      </ng-template>
                     </gd-media-content>
                   </gd-media>
                 </ng-container>
@@ -205,19 +213,25 @@
     </div>
   </div>
 
-  <div *ngIf="similarProducts && similarProducts.length" class="gd-container gd-container-lg">
-    <h2 class="gd-subheading">
-      More gift ideas
-    </h2>
-    <gd-row>
-      <gd-column *ngFor="let product of similarProducts"
-        screenSmall="3"
-      >
-        <app-product-preview
-          [product]="product"
+  <div class="app-gift-detail-similar-products">
+    <gd-wait *ngIf="isLoadingSimilarProducts"
+      [showBackdrop]="false"
+    ></gd-wait>
+
+    <div *ngIf="similarProducts && similarProducts.length" class="gd-container gd-container-lg">
+      <h2 class="gd-subheading">
+        More gift ideas
+      </h2>
+      <gd-row>
+        <gd-column *ngFor="let product of similarProducts"
+          screenSmall="3"
         >
-        </app-product-preview>
-      </gd-column>
-    </gd-row>
+          <app-product-preview
+            [product]="product"
+          >
+          </app-product-preview>
+        </gd-column>
+      </gd-row>
+    </div>
   </div>
 </div>

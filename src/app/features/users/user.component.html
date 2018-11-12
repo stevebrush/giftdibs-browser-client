@@ -5,18 +5,12 @@
   [gdHideUntil]="user"
 >
   <ng-template [ngIf]="user">
-    <div class="gd-user-header gd-spacing-padding-even-large">
+    <div class="app-user-header gd-spacing-padding-even-large">
       <div class="gd-container gd-container-sm">
-        <div class="gd-user-header-controls">
-          <gd-follow-button
-            [friendId]="user.id"
-          >
-          </gd-follow-button>
-        </div>
         <gd-media size="md">
           <gd-media-content>
             <gd-media-header>
-              <h1 class="gd-user-header-heading">
+              <h1 class="app-user-header-heading">
                 {{ user.firstName }} {{ user.lastName }}
               </h1>
             </gd-media-header>
@@ -37,7 +31,13 @@
             </gd-thumbnail>
           </gd-media-thumbnail>
         </gd-media>
-        <div class="gd-user-header-tabs gd-button-group gd-button-group-tabs">
+        <div class="app-user-header-controls">
+          <gd-follow-button
+            [friendId]="user.id"
+          >
+          </gd-follow-button>
+        </div>
+        <div class="app-user-header-tabs gd-button-group gd-button-group-tabs">
           <button
             class="gd-button gd-button-tab"
             type="button"
@@ -79,7 +79,7 @@
     >
       <div class="app-user-wish-list-create-button">
         <gd-card
-          (actionClick)="openWishListCreateModal()"
+          (actionClick)="openWishListEditModal()"
         >
           <gd-card-thumbnail class="app-user-wish-list-create-button-thumbnail">
             <gd-thumbnail

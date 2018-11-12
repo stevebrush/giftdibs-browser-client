@@ -12,7 +12,6 @@ import {
 
 import {
   ConfirmModule,
-  MediaModule,
   NoticeModule
 } from '@giftdibs/ux';
 
@@ -39,7 +38,6 @@ import {
     ConfirmModule,
     DibEditModule,
     IconModule,
-    MediaModule,
     NoticeModule,
     RouterModule
   ],

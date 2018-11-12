@@ -48,8 +48,10 @@ import {
   WishListService
 } from '@app/shared/modules/wish-list';
 
-import { WishListCreateContext } from '@app/shared/modules/wish-list-create/wish-list-create-context';
-import { WishListCreateComponent } from '@app/shared/modules/wish-list-create/wish-list-create.component';
+import {
+  WishListEditComponent,
+  WishListEditContext
+} from '@app/shared/modules/wish-list-edit';
 
 @Component({
   selector: 'gd-user',
@@ -153,12 +155,12 @@ export class UserComponent implements OnInit, OnDestroy {
       });
   }
 
-  public openWishListCreateModal(): void {
-    const context = new WishListCreateContext();
+  public openWishListEditModal(): void {
+    const context = new WishListEditContext();
 
-    const modalInstance = this.modalService.open(WishListCreateComponent, {
+    const modalInstance = this.modalService.open(WishListEditComponent, {
       providers: [{
-        provide: WishListCreateContext,
+        provide: WishListEditContext,
         useValue: context
       }],
       size: ModalSize.Small

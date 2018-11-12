@@ -60,12 +60,6 @@ export class GiftPreviewComponent implements OnInit {
       this.showReceivedRibbon = true;
     }
 
-    // Don't show the other ribbons if current user owns the gift.
-    if (this.isSessionUser) {
-      this.changeDetector.markForCheck();
-      return;
-    }
-
     const gift = this.gift;
 
     let numDelivered = 0;

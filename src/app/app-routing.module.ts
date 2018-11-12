@@ -11,11 +11,14 @@ import {
   AuthGuard
 } from '@app/shared/guards';
 
+import { HomeComponent } from './features/home/home.component';
+import { HomeModule } from './features/home/home.module';
+
 const appRoutes: Routes = [
   {
     path: '',
-    loadChildren: 'app/features/home/home.module#HomeModule',
-    pathMatch: 'full'
+    pathMatch: 'full',
+    component: HomeComponent
   },
   {
     path: 'account',
@@ -53,6 +56,7 @@ const appRoutes: Routes = [
 
 @NgModule({
   imports: [
+    HomeModule,
     RouterModule.forRoot(appRoutes)
   ],
   exports: [

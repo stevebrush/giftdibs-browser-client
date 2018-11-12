@@ -10,6 +10,7 @@ import {
   CardModule,
   GridModule,
   MediaModule,
+  NoticeModule,
   RepeaterModule,
   ThumbnailModule,
   WaitModule
@@ -44,6 +45,7 @@ import {
     GiftPreviewModule,
     GridModule,
     MediaModule,
+    NoticeModule,
     RepeaterModule,
     ThumbnailModule,
     WaitModule

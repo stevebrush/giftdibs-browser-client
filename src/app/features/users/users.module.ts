@@ -19,8 +19,8 @@ import {
 } from '@app/shared/modules/wish-list';
 
 import {
-  WishListCreateModule
-} from '@app/shared/modules/wish-list-create';
+  WishListEditModule
+} from '@app/shared/modules/wish-list-edit';
 
 import {
   WishListPreviewModule
@@ -61,8 +61,8 @@ import { UsersComponent } from './users.component';
     ThumbnailModule,
     UserModule,
     WaitModule,
+    WishListEditModule,
     WishListModule,
-    WishListCreateModule,
     WishListPreviewModule
   ],
   declarations: [

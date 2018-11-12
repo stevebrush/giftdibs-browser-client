@@ -13,11 +13,14 @@
     .gd-thumbnail-image-container {
       background-size: cover;
     }
-    // .gd-icon {
-    //   color: $gd-color-neutral-light;
-    //   font-weight: normal;
-    //   font-size: 85%;
-    // }
+  }
+}
+
+.app-gift-detail-similar-products {
+  ::ng-deep {
+    .gd-wait {
+      position: static;
+    }
   }
 }
 

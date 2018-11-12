@@ -10,14 +10,15 @@
   margin-bottom: $gd-spacing;
 }
 
-.gd-user-header-heading {
+.app-user-header-heading {
   margin-bottom: $gd-spacing-sm;
 }
 
-.gd-user-header-controls {
+.app-user-header-controls {
   text-align: right;
+  margin-top: $gd-spacing-md;
 }
 
-.gd-user-header-tabs {
+.app-user-header-tabs {
   margin-top: $gd-spacing;
 }

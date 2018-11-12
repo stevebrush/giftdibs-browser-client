@@ -45,6 +45,21 @@ export class DibsComponent implements OnInit {
     this.fetchRecipients(true);
   }
 
+  public getTotalForRecipient(recipient: any): string {
+    const subtotal = recipient.totalBudgeted;
+    const actual = recipient.totalPricePaid;
+
+    if (actual) {
+      return `$${actual}`;
+    }
+
+    if (subtotal) {
+      return `$${subtotal}`;
+    }
+
+    return '$--';
+  }
+
   private fetchRecipients(isDelivered = false): void {
     this.isLoading = true;
     this.isDeliveredViewActive = isDelivered;

@@ -1,45 +1,42 @@
 <gd-wait *ngIf="isLoading"></gd-wait>
 
-<div class="gd-canvas">
-  <div class="gd-container gd-spacing-padding-even-large">
-    <h1>
-      Dibs
-    </h1>
+<div class="gd-container gd-spacing-padding-even-large">
+  <h1>
+    Dibs
+  </h1>
 
-    <div class="gd-button-group gd-button-group-tabs">
-      <button
-        class="gd-button gd-button-tab"
-        type="button"
-        [ngClass]="{
-          'gd-button-tab-selected': !isDeliveredViewActive
-        }"
-        (click)="showActive()"
-      >
-        Active
-      </button>
-      <button
-        class="gd-button gd-button-tab"
-        type="button"
-        [ngClass]="{
-          'gd-button-tab-selected': isDeliveredViewActive
-        }"
-        (click)="showDelivered()"
-      >
-        Delivered
-      </button>
-    </div>
-
-    <ng-container *ngTemplateOutlet="recipientsTemplate;context:{recipients:recipients}">
-    </ng-container>
-
+  <div class="gd-button-group gd-button-group-tabs">
+    <button
+      class="gd-button gd-button-tab"
+      type="button"
+      [ngClass]="{
+        'gd-button-tab-selected': !isDeliveredViewActive
+      }"
+      (click)="showActive()"
+    >
+      Active
+    </button>
+    <button
+      class="gd-button gd-button-tab"
+      type="button"
+      [ngClass]="{
+        'gd-button-tab-selected': isDeliveredViewActive
+      }"
+      (click)="showDelivered()"
+    >
+      Delivered
+    </button>
   </div>
+
+  <ng-container *ngTemplateOutlet="recipientsTemplate;context:{recipients:recipients}">
+  </ng-container>
 </div>
 
 <ng-template
   let-recipients="recipients"
   #recipientsTemplate
 >
-  <div *ngIf="recipients"
+  <div *ngIf="(recipients && recipients.length) else noRecipients"
     class="gd-dibs-recipients"
   >
     <div *ngFor="let recipient of recipients"
@@ -69,56 +66,69 @@
           <gd-repeater>
             <ng-container *ngFor="let wishList of recipient.wishLists">
               <gd-repeater-item *ngFor="let gift of wishList.gifts">
-                <gd-media size="md">
-                  <gd-media-thumbnail>
-                    <gd-thumbnail
-                      size="fill"
-                      [imageSource]="gift.imageUrl"
-                      [route]="{commands:['/gifts', gift.id]}"
-                    >
-                    </gd-thumbnail>
-                  </gd-media-thumbnail>
-                  <gd-media-content>
-                    <gd-media-header>
-                      <gd-media-heading>
-                        <a routerLink="/gifts/{{ gift.id }}">{{ gift.name }}</a>
-                      </gd-media-heading>
-                    </gd-media-header>
-                    <gd-media-body>
-                      <table class="gd-table">
-                        <tr>
-                          <th>Quantity</th>
-                          <td>{{ gift.dibs[0].quantity }}</td>
-                        </tr>
-                        <tr>
-                          <th>Price paid</th>
-                          <td>${{ gift.dibs[0].pricePaid || '--' }}</td>
-                        </tr>
-                        <tr>
-                          <th>Anonymous?</th>
-                          <td>{{ (gift.dibs[0].isAnonymous === true) ? 'yes' : 'no' }}</td>
-                        </tr>
-                        <tr>
-                          <th>Notes</th>
-                          <td>{{ gift.dibs[0].notes }}</td>
-                        </tr>
-                      </table>
-                      <gd-dib-controls
-                        [gift]="gift"
-                        (change)="onDibChange()"
+                <gd-row>
+                  <gd-column
+                    screenXXSmall="12"
+                    screenXSmall="3"
+                    screenSmall="2"
+                  >
+                    <div class="app-dibs-recipient-gift-thumbnail">
+                      <gd-thumbnail
+                        size="static"
+                        [imageSource]="gift.imageUrl"
+                        [route]="{commands:['/gifts', gift.id]}"
                       >
-                      </gd-dib-controls>
-                    </gd-media-body>
-                  </gd-media-content>
-                </gd-media>
+                      </gd-thumbnail>
+                    </div>
+                  </gd-column>
+                  <gd-column
+                    screenXXSmall="12"
+                    screenXSmall="9"
+                    screenSmall="10"
+                  >
+                    <a role="heading" routerLink="/gifts/{{ gift.id }}">{{ gift.name }}</a><br>
+                    <div class="gd-text-price">
+                      ${{ gift.budget || '--' }}
+                    </div>
+                    <table class="gd-table gd-table-condensed">
+                      <tr>
+                        <th>Quantity</th>
+                        <td>{{ gift.dibs[0].quantity }}</td>
+                      </tr>
+                      <tr>
+                        <th>Price paid</th>
+                        <td>${{ gift.dibs[0].pricePaid || '--' }}</td>
+                      </tr>
+                      <tr>
+                        <th>Anonymous?</th>
+                        <td>{{ (gift.dibs[0].isAnonymous === true) ? 'yes' : 'no' }}</td>
+                      </tr>
+                      <tr>
+                        <th>My notes</th>
+                        <td>{{ gift.dibs[0].notes }}</td>
+                      </tr>
+                    </table>
+                    <gd-dib-controls
+                      [gift]="gift"
+                      (change)="onDibChange()"
+                    >
+                    </gd-dib-controls>
+                  </gd-column>
+                </gd-row>
               </gd-repeater-item>
             </ng-container>
           </gd-repeater>
         </div>
         <div class="gd-dibs-recipient-gift-footer gd-spacing-padding-squish">
-          Totals for {{ recipient.firstName }}: ${{ recipient.budget || '--' }}
+          Totals for {{ recipient.firstName }}: {{ getTotalForRecipient(recipient) }}
         </div>
       </div>
     </div>
   </div>
+
+  <ng-template #noRecipients>
+    <gd-notice>
+      No dibs found.
+    </gd-notice>
+  </ng-template>
 </ng-template>

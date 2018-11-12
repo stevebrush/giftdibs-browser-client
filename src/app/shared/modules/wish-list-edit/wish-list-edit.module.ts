@@ -15,6 +15,7 @@ import {
   ConfirmModule,
   FormFieldModule,
   ModalModule,
+  NoticeModule,
   WaitModule
 } from '@giftdibs/ux';
 
@@ -33,6 +34,7 @@ import {
     FormFieldModule,
     FormsModule,
     ModalModule,
+    NoticeModule,
     PrivacySelectorModule,
     ReactiveFormsModule,
     WaitModule

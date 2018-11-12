@@ -64,6 +64,8 @@ export class WishListComponent implements OnInit, OnDestroy {
   public isSessionUser = false;
   public wishList: WishList;
   public menuItems: DropdownMenuItem[];
+  public wishListType: string;
+  public privacyType: string;
 
   private ngUnsubscribe = new Subject();
 
@@ -92,7 +94,8 @@ export class WishListComponent implements OnInit, OnDestroy {
       )
       .subscribe(
         (wishList: WishList) => {
-          this.wishList = wishList;
+          this.setupWishList(wishList);
+
           this.isSessionUser = this.sessionService.isSessionUser(this.wishList.user.id);
 
           this.menuItems = [
@@ -230,9 +233,26 @@ export class WishListComponent implements OnInit, OnDestroy {
     this.changeDetector.markForCheck();
     this.wishListService.getById(this.wishList.id)
       .subscribe((wishList: WishList) => {
-        this.wishList = wishList;
+        this.setupWishList(wishList);
         this.isLoading = false;
         this.changeDetector.markForCheck();
       });
+  }
+
+  private setupWishList(wishList: WishList): void {
+    this.wishList = wishList;
+    this.wishListType = (wishList.type === 'registry') ? 'Registry' : 'Wish list';
+
+    switch (this.wishList.privacy.type) {
+      case 'custom':
+      this.privacyType = 'Specific friends';
+      break;
+      case 'everyone':
+      this.privacyType = 'Community';
+      break;
+      case 'me':
+      this.privacyType = 'Just me';
+      break;
+    }
   }
 }

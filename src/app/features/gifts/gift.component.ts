@@ -65,6 +65,7 @@ import {
 export class GiftComponent implements OnInit, OnDestroy {
   public gift: Gift;
   public isLoading = true;
+  public isLoadingSimilarProducts = false;
   public isSessionUser = false;
   public quantityRemaining: number;
   public similarProducts: any[];
@@ -283,6 +284,8 @@ export class GiftComponent implements OnInit, OnDestroy {
 
   private fetchSimilarProducts(): void {
     const externalUrls = this.gift.externalUrls;
+    this.isLoadingSimilarProducts = true;
+    this.changeDetector.markForCheck();
 
     if (externalUrls && externalUrls.length) {
       const asins: string[] = [];
@@ -312,6 +315,7 @@ export class GiftComponent implements OnInit, OnDestroy {
           }
 
           this.similarProducts = results;
+          this.isLoadingSimilarProducts = false;
           this.changeDetector.markForCheck();
         });
       } else {
@@ -328,6 +332,7 @@ export class GiftComponent implements OnInit, OnDestroy {
       .replace(/\s\s+/g, ' '); // remove duplicate spaces
     this.productService.searchByKeyword(keywords).subscribe((results) => {
       this.similarProducts = results;
+      this.isLoadingSimilarProducts = false;
       this.changeDetector.markForCheck();
     });
   }

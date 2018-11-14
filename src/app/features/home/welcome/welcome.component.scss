@@ -1,0 +1,20 @@
+@import '../../../../styles/mixins';
+
+.app-welcome-banner {
+  padding: 60px 0;
+  text-align: center;
+  background-color: #fff;
+  border-bottom: 1px solid $gd-color-neutral-lightest;
+
+  .gd-button {
+    margin-top: 10px;
+  }
+}
+
+.app-welcome-heading {
+  margin-bottom: 10px;
+}
+
+.app-welcome-motto {
+  font-size: 125%;
+}

@@ -19,6 +19,10 @@ const routes: Routes = [
     component: SupportComponent,
     children: [
       {
+        path: '',
+        component: AboutComponent
+      },
+      {
         path: 'about',
         component: AboutComponent
       },

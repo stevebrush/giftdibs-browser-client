@@ -27,7 +27,6 @@ import {
 } from 'rxjs';
 
 import {
-  mergeMap,
   takeUntil
 } from 'rxjs/operators';
 
@@ -65,14 +64,6 @@ export class UserComponent implements OnInit, OnDestroy {
   public isArchivedViewActive = false;
   public user: User;
 
-  // public get privateWishLists(): { wishLists: WishList[] } {
-  //   return { wishLists: this._wishLists.filter((wishList: WishList) => wishList.privacy.type !== 'everyone') };
-  // }
-
-  // public get wishLists(): { wishLists: WishList[] } {
-  //   return { wishLists: this._wishLists.filter((wishList: WishList) => wishList.privacy.type === 'everyone') };
-  // }
-
   public get wishLists(): { wishLists: WishList[] } {
     return { wishLists: this._wishLists };
   }
@@ -95,31 +86,46 @@ export class UserComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.activatedRoute.params
       .pipe(
-        mergeMap((params: Params) => {
-          this.isLoading = true;
-          this.user = undefined;
-          this.isSessionUser = false;
-          this.changeDetector.markForCheck();
-          return this.userService.getById(params.userId);
-        }),
-        mergeMap((user: User) => {
-          this.user = user;
-          this.isSessionUser = this.sessionService.isSessionUser(this.user.id);
-          return this.wishListService.getAllByUserId(user.id);
-        }),
         takeUntil(this.ngUnsubscribe)
       )
-      .subscribe(
-        (wishLists: WishList[]) => {
-          this._wishLists = wishLists;
-          this.isLoading = false;
-          this.changeDetector.markForCheck();
-        },
-        () => {
-          this.alertService.error('User not found.', true);
-          this.router.navigate(['/users']);
+      .subscribe((params: Params) => {
+        // Reset the view.
+        this.isLoading = true;
+        this.user = undefined;
+        this.isSessionUser = false;
+        this.changeDetector.markForCheck();
+
+        if (params.userId) {
+          this.userService.getById(params.userId)
+            .pipe(
+              takeUntil(this.ngUnsubscribe)
+            )
+            .subscribe((user) => {
+              this.user = user;
+              this.isSessionUser = this.sessionService.isSessionUser(this.user.id);
+              this.wishListService.getAllByUserId(user.id)
+                .pipe(
+                  takeUntil(this.ngUnsubscribe)
+                )
+                .subscribe((wishLists) => {
+                  this._wishLists = wishLists;
+                  this.isLoading = false;
+                  this.changeDetector.markForCheck();
+                }, (err: any) => {
+                  this.isLoading = false;
+                  this.changeDetector.markForCheck();
+                });
+            }, (err: any) => {
+              this.alertService.error('User not found.', true);
+              this.router.navigate(['/']);
+            });
+        } else {
+          this.router.navigate([
+            '/users',
+            this.sessionService.user.id
+          ]);
         }
-      );
+      });
   }
 
   public ngOnDestroy(): void {

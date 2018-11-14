@@ -45,7 +45,6 @@ import { FollowingComponent } from './following.component';
 import { FriendListComponent } from './friend-list.component';
 import { UserComponent } from './user.component';
 import { UsersRoutingModule } from './users-routing.module';
-import { UsersComponent } from './users.component';
 
 @NgModule({
   imports: [
@@ -66,7 +65,6 @@ import { UsersComponent } from './users.component';
     WishListPreviewModule
   ],
   declarations: [
-    UsersComponent,
     UserComponent,
     FollowersComponent,
     FollowingComponent,

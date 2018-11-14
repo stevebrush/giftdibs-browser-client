@@ -10,13 +10,12 @@ import {
 import { FollowersComponent } from './followers.component';
 import { FollowingComponent } from './following.component';
 import { UserComponent } from './user.component';
-import { UsersComponent } from './users.component';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: UsersComponent
+    component: UserComponent
   },
   {
     path: ':userId',

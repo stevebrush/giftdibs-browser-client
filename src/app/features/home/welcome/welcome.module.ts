@@ -6,11 +6,18 @@ import {
   RouterModule
 } from '@angular/router';
 
+import {
+  GridModule,
+  ThumbnailModule
+} from '@giftdibs/ux';
+
 import { WelcomeComponent } from './welcome.component';
 
 @NgModule({
   imports: [
-    RouterModule
+    GridModule,
+    RouterModule,
+    ThumbnailModule
   ],
   declarations: [
     WelcomeComponent

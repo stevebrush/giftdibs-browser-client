@@ -1,13 +1,17 @@
 @import '../../../../styles/mixins';
 
 .app-welcome-banner {
-  padding: 60px 0;
-  text-align: center;
-  background-color: #fff;
+  padding-top: 20px;
+  background-color: $gd-color-primary;
   border-bottom: 1px solid $gd-color-neutral-lightest;
+
+  @media (min-width: $gd-screen-sm-min) {
+    padding-top: 60px;
+  }
 
   .gd-button {
     margin-top: 10px;
+    background-color: #fff;
   }
 }
 
@@ -17,4 +21,23 @@
 
 .app-welcome-motto {
   font-size: 125%;
+}
+
+.app-welcome-content {
+  padding-top: 40px;
+}
+
+.app-welcome-banner-thumbnail {
+  // display: none;
+
+  @media (min-width: $gd-screen-sm-min) {
+    // display: block;
+    margin-top: -40px;
+  }
+
+  ::ng-deep {
+    .gd-thumbnail-image-container {
+      background-color: transparent;
+    }
+  }
 }

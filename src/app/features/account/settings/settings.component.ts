@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  OnDestroy,
   OnInit
 } from '@angular/core';
 
@@ -14,16 +13,8 @@ import {
 } from '@angular/forms';
 
 import {
-  finalize, takeUntil
+  finalize
 } from 'rxjs/operators';
-
-import {
-  AlertService
-} from '@giftdibs/ux';
-
-import {
-  User
-} from '@app/shared/modules/user';
 
 import {
   SessionService,
@@ -31,13 +22,25 @@ import {
 } from '@giftdibs/session';
 
 import {
+  AlertService,
+  ChecklistChoice
+} from '@giftdibs/ux';
+
+import {
+  User
+} from '@app/shared/modules/user';
+
+import {
   AssetsService
 } from '@app/shared/modules/assets';
 
 import {
+  NotificationType
+} from '@app/shared/modules/notifications';
+
+import {
   UserService
 } from '@app/shared/modules/user';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'gd-settings',
@@ -45,14 +48,14 @@ import { Subject } from 'rxjs';
   styleUrls: ['./settings.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SettingsComponent implements OnInit, OnDestroy {
+export class SettingsComponent implements OnInit {
+  public notificationChoices: ChecklistChoice[];
+
   public isReady = false;
   public isLoading = true;
   public sessionUser: SessionUser;
   public settingsForm: FormGroup;
   public errors: any[] = [];
-
-  private ngUnsubscribe = new Subject();
 
   constructor(
     private alertService: AlertService,
@@ -66,20 +69,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.createForm();
     this.updateForm();
-
-    this.sessionService.userStream
-      .pipe(
-        takeUntil(this.ngUnsubscribe)
-      )
-      .subscribe((user) => {
-        this.sessionUser = user;
-        this.changeDetector.markForCheck();
-      });
-  }
-
-  public ngOnDestroy(): void {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
   }
 
   public onSelectFile(args: any): void {
@@ -110,8 +99,20 @@ export class SettingsComponent implements OnInit, OnDestroy {
     }
 
     this.disableForm();
-
     const formData = this.settingsForm.value;
+    const currentSettings = this.sessionUser.notificationSettings;
+
+    // Parse form data into something the API can use.
+    const emailNotify: NotificationType[] = [];
+    Object.keys(currentSettings).forEach((key: NotificationType) => {
+      const allowEmail = (formData.emailSettings.indexOf(key) > -1);
+      if (allowEmail) {
+        emailNotify.push(key);
+      }
+    });
+
+    formData.emailNotify = emailNotify;
+    delete formData.emailSettings;
 
     this.userService.update(this.sessionService.user.id, formData)
       .pipe(
@@ -181,7 +182,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     this.changeDetector.markForCheck();
   }
 
-  public enableForm(): void {
+  private enableForm(): void {
     this.isLoading = false;
     this.settingsForm.enable();
     this.changeDetector.markForCheck();
@@ -198,10 +199,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
       ]),
       emailAddress: new FormControl(null, [
         Validators.required
-      ])
-      // birthday: new FormControl(null, [
-      //   Validators.required
-      // ])
+      ]),
+      emailSettings: new FormControl([])
     });
 
     this.disableForm();
@@ -217,11 +216,64 @@ export class SettingsComponent implements OnInit, OnDestroy {
       )
       .subscribe(
         (user: User) => {
-          this.settingsForm.reset(user);
+          this.sessionUser = user;
+
+          // Parse the response into something the form can use.
+          const notificationSettings = user.notificationSettings;
+          this.notificationChoices = Object.keys(notificationSettings)
+            .map((key: NotificationType) => {
+              const description = this.getNotificationDescription(key);
+              return {
+                value: key,
+                label: description
+              };
+            })
+            .filter((choice: any) => {
+              return (choice.label);
+            });
+
+          const formData: any = {
+            avatarUrl: user.avatarUrl,
+            facebookId: user.facebookId,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            emailAddress: user.emailAddress
+          };
+
+          formData.emailSettings = Object.keys(notificationSettings)
+            .filter((key) => {
+              return (notificationSettings[key].allowEmail === true);
+            });
+
+          this.settingsForm.reset(formData);
         },
         (err: any) => {
           this.alertService.error(err.error.message);
         }
       );
+  }
+
+  private getNotificationDescription(key: NotificationType): string {
+    let description: string;
+
+    switch (key) {
+      case NotificationType.GiftComment:
+      description = 'Someone comments on an item in your wish list';
+      break;
+      case NotificationType.GiftCommentAlso:
+      description = 'Someone comments on a gift that you also commented';
+      break;
+      case NotificationType.GiftDelivered:
+      description = 'Someone marks an item in your wish list as delivered';
+      break;
+      case NotificationType.GiftReceived:
+      description = 'Someone marks a gift you dibbed as received';
+      break;
+      case NotificationType.FriendshipNew:
+      description = 'Someone follows you';
+      break;
+    }
+
+    return description;
   }
 }

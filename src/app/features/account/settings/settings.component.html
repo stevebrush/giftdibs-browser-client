@@ -1,6 +1,6 @@
 <gd-wait *ngIf="isLoading"></gd-wait>
 
-<div class="gd-canvas">
+<div *ngIf="sessionUser">
   <div class="gd-container gd-container-sm gd-spacing-padding-even-large">
     <div class="gd-detail-pane">
       <h1>
@@ -80,17 +80,16 @@
           />
         </gd-form-field>
 
-        <!-- <gd-form-field [errors]="errors">
-          <label
-            class="gd-control-label"
+        <label class="gd-control-label">
+          Send me an email when...
+        </label>
+        <gd-form-field>
+          <gd-checklist
+            formControlName="emailSettings"
+            [choices]="notificationChoices"
           >
-            Birthday
-            <gd-date-picker
-              formControlName="birthday"
-            >
-            </gd-date-picker>
-          </label>
-        </gd-form-field> -->
+          </gd-checklist>
+        </gd-form-field>
 
         <button
           class="gd-button gd-button-primary"

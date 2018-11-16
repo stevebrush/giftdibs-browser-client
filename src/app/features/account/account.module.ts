@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 
 import {
+  ChecklistModule,
   FormFieldModule,
   GridModule,
   HideUntilModule,
@@ -49,6 +50,7 @@ import { VerifyAccountComponent } from './verify/verify.component';
   imports: [
     AccountRoutingModule,
     AssetsModule,
+    ChecklistModule,
     CommonModule,
     FacebookModule,
     FormFieldModule,

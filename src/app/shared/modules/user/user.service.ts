@@ -7,6 +7,10 @@ import {
 } from '@angular/common/http';
 
 import {
+  SessionUser
+} from '@giftdibs/session';
+
+import {
   Observable
 } from 'rxjs';
 
@@ -45,7 +49,7 @@ export class UserService {
       );
   }
 
-  public update(id: string, formData: User): Observable<any> {
+  public update(id: string, formData: SessionUser): Observable<any> {
     return this.http.patch(`${this.resourceUrl}/${id}`, formData);
   }
 }

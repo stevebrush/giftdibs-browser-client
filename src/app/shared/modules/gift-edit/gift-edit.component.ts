@@ -102,15 +102,18 @@ export class GiftEditComponent implements OnInit {
 
   public ngOnInit(): void {
     this.createForm();
-    this.addExternalUrlField({
-      url: ''
-    });
 
     this.gift = this.context.gift;
     this.wishListId = this.context.wishListId;
 
     if (this.gift) {
       this.resetForm(this.gift);
+    }
+
+    if (!this.externalUrls.length) {
+      this.addExternalUrlField({
+        url: ''
+      });
     }
   }
 
@@ -223,6 +226,13 @@ export class GiftEditComponent implements OnInit {
 
   public removeUrl(index: number): void {
     this.externalUrls.removeAt(index);
+
+    // Always make sure there's at least one blank external URL.
+    if (!this.externalUrls.length) {
+      this.addExternalUrlField({
+        url: ''
+      });
+    }
   }
 
   public findImageFromUrl(index: number): void {

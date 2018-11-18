@@ -81,7 +81,7 @@ export class GiftComponent implements OnInit, OnDestroy {
       addSeparatorAfter: true
     },
     {
-      label: 'Delete',
+      label: 'Delete...',
       action: () => this.confirmDelete()
     }
   ];
@@ -227,7 +227,7 @@ export class GiftComponent implements OnInit, OnDestroy {
         provide: GiftEditContext,
         useValue: context
       }],
-      size: ModalSize.Large
+      size: ModalSize.Medium
     });
 
     modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {

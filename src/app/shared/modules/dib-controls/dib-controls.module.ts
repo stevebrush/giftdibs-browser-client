@@ -12,11 +12,9 @@ import {
 
 import {
   ConfirmModule,
+  DropdownMenuModule,
+  IconModule,
   NoticeModule
-} from '@giftdibs/ux';
-
-import {
-  IconModule
 } from '@giftdibs/ux';
 
 import {
@@ -37,6 +35,7 @@ import {
     CommonModule,
     ConfirmModule,
     DibEditModule,
+    DropdownMenuModule,
     IconModule,
     NoticeModule,
     RouterModule

@@ -64,9 +64,20 @@ export class WishListComponent implements OnInit, OnDestroy {
   public isSessionUser = false;
   public wishList: WishList;
   public menuItems: DropdownMenuItem[];
+  public sortMenuItems: DropdownMenuItem[];
   public wishListType: string;
   public privacyType: string;
 
+  public get sortBy(): string {
+    return this._sortBy;
+  }
+
+  public set sortBy(value: string) {
+    this._sortBy = value;
+    this.refreshWishList();
+  }
+
+  private _sortBy = 'recent';
   private ngUnsubscribe = new Subject();
 
   constructor(
@@ -88,7 +99,7 @@ export class WishListComponent implements OnInit, OnDestroy {
           this.wishList = undefined;
           this.isSessionUser = false;
           this.changeDetector.markForCheck();
-          return this.wishListService.getById(params.wishListId);
+          return this.wishListService.getById(params.wishListId, this.sortBy);
         }),
         takeUntil(this.ngUnsubscribe)
       )
@@ -115,8 +126,23 @@ export class WishListComponent implements OnInit, OnDestroy {
               addSeparatorAfter: true
             },
             {
-              label: 'Delete',
+              label: 'Delete...',
               action: () => this.confirmDelete()
+            }
+          ];
+
+          this.sortMenuItems = [
+            {
+              label: 'Recent',
+              action: () => {
+                this.sortBy = 'recent';
+              }
+            },
+            {
+              label: 'Priority',
+              action: () => {
+                this.sortBy = 'priority';
+              }
             }
           ];
 
@@ -231,7 +257,7 @@ export class WishListComponent implements OnInit, OnDestroy {
   private refreshWishList(): void {
     this.isLoading = true;
     this.changeDetector.markForCheck();
-    this.wishListService.getById(this.wishList.id)
+    this.wishListService.getById(this.wishList.id, this.sortBy)
       .subscribe((wishList: WishList) => {
         this.setupWishList(wishList);
         this.isLoading = false;

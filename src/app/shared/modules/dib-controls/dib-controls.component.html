@@ -1,47 +1,39 @@
 <div *ngIf="!isSessionUser"
   class="gd-dib-controls gd-button-group"
 >
-  <ng-container *ngIf="gift.dibs && gift.dibs.length else notDibbed">
-    <ng-template [ngIf]="sessionUserDib">
-      <div class="gd-button-group gd-dib-controls-delivered-button">
-        <button *ngIf="!sessionUserDib.dateDelivered"
-          class="gd-button gd-button-primary"
-          type="button"
-          [disabled]="isLoading"
-          (click)="markAsDelivered()"
-        >
-          <gd-icon icon="box"></gd-icon>
-          Mark as delivered
-        </button>
-      </div>
-      <gd-notice *ngIf="sessionUserDib.dateDelivered"
-        noticeType="info"
-      >
-        You delivered this gift on {{ sessionUserDib.dateDelivered | date }}.
-      </gd-notice>
-      <div *ngIf="!sessionUserDib.dateDelivered"
-        class="gd-button-group"
-      >
-        <button
-          class="gd-button gd-button-default"
-          type="button"
-          [disabled]="isLoading"
-          (click)="openDibModal()"
-        >
-          Edit dib
-        </button>
-        <button
-          class="gd-button gd-button-default"
-          type="button"
-          [disabled]="isLoading"
-          (click)="removeDib()"
-        >
-          Remove dib
-        </button>
-      </div>
-    </ng-template>
+  <ng-container *ngIf="(gift.dibs && gift.dibs.length) else dibButton">
+    <ng-container *ngIf="sessionUserDib else visitorDidNotDib">
+      <ng-container *ngIf="sessionUserDib.dateDelivered else visitorDibbedNotDelivered">
+        <gd-notice noticeType="info">
+          You delivered this gift on {{ sessionUserDib.dateDelivered | date }}.
+        </gd-notice>
+      </ng-container>
 
-    <ng-template [ngIf]="!sessionUserDib">
+      <ng-template #visitorDibbedNotDelivered>
+        <div class="gd-button-group gd-dib-controls-delivered-button">
+          <button
+            class="gd-button gd-button-primary"
+            type="button"
+            [disabled]="isLoading"
+            (click)="markAsDelivered()"
+          >
+            <gd-icon icon="box"></gd-icon>
+            Mark as delivered
+          </button>
+          <button
+            class="gd-button gd-button-default"
+            type="button"
+            gdDropdownMenuTrigger
+            [disabled]="isLoading"
+            [menuItems]="menuItems"
+          >
+            <gd-icon icon="ellipsis-v"></gd-icon>
+          </button>
+        </div>
+      </ng-template>
+    </ng-container>
+
+    <ng-template #visitorDidNotDib>
       <gd-notice *ngIf="gift.dateReceived"
         noticeType="info"
       >
@@ -59,7 +51,7 @@
   </ng-container>
 </div>
 
-<ng-template #notDibbed>
+<ng-template #dibButton>
   <button *ngIf="!gift.dateReceived"
     class="gd-button gd-button-primary"
     type="button"

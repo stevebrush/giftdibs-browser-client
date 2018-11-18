@@ -7,10 +7,6 @@
     <gd-media size="md">
       <gd-media-content>
         <h1>
-          <gd-icon *ngIf="wishList.privacy.type === 'me'"
-            icon="eye-slash"
-            title="This wish list is private"
-          ></gd-icon>
           {{ wishList.name }}
         </h1>
 
@@ -30,15 +26,17 @@
           While archived wish lists still exist, they do not appear on the home page or on your profile.
         </gd-notice>
 
-        <ng-container *ngIf="isSessionUser">
-          <div class="gd-button-group">
+        <div class="gd-button-group">
+          <ng-container *ngIf="isSessionUser else visitorButtons">
             <button *ngIf="isSessionUser"
               class="gd-button gd-button-primary"
               type="button"
               (click)="openGiftCreateModal()"
             >
+              <gd-icon icon="plus"></gd-icon>
               Add item
             </button>
+            <ng-container *ngTemplateOutlet="visitorButtons"></ng-container>
             <button
               class="gd-button gd-button-default"
               title="Toggle wish list options"
@@ -47,12 +45,24 @@
               [menuItems]="menuItems"
             >
               <gd-icon
-                icon="ellipsis-h"
+                icon="ellipsis-v"
               >
               </gd-icon>
             </button>
-          </div>
-        </ng-container>
+          </ng-container>
+
+          <ng-template #visitorButtons>
+            <button
+              class="gd-button gd-button-default"
+              type="button"
+              gdDropdownMenuTrigger
+              [menuItems]="sortMenuItems"
+            >
+              Sort
+              <gd-icon icon="angle-down"></gd-icon>
+            </button>
+          </ng-template>
+        </div>
       </gd-media-content>
       <gd-media-thumbnail>
         <gd-thumbnail

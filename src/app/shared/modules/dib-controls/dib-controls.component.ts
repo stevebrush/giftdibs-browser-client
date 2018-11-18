@@ -16,24 +16,18 @@ import {
 } from 'rxjs/operators';
 
 import {
-  AlertService
-} from '@giftdibs/ux';
-
-import {
-  ConfirmAnswer,
-  ConfirmService,
-  ModalClosedEventArgs,
-  ModalService,
-  ModalSize
-} from '@giftdibs/ux';
-
-import {
   SessionService
 } from '@giftdibs/session';
 
 import {
-  Gift
-} from '../gift';
+  AlertService,
+  ConfirmAnswer,
+  ConfirmService,
+  DropdownMenuItem,
+  ModalClosedEventArgs,
+  ModalService,
+  ModalSize
+} from '@giftdibs/ux';
 
 import {
   DibEditComponent,
@@ -44,6 +38,10 @@ import {
   Dib,
   DibService
 } from '../dib';
+
+import {
+  Gift
+} from '../gift';
 
 @Component({
   selector: 'gd-dib-controls',
@@ -62,6 +60,21 @@ export class DibControlsComponent implements OnInit, OnChanges, OnDestroy {
   public isSessionUser = false;
   public isLoading = false;
   public isVisible = false;
+
+  public menuItems: DropdownMenuItem[] = [
+    {
+      label: 'Edit dib',
+      action: () => {
+        this.openDibModal();
+      }
+    },
+    {
+      label: 'Delete...',
+      action: () => {
+        this.removeDib();
+      }
+    }
+  ];
 
   constructor(
     private alertService: AlertService,
@@ -87,29 +100,38 @@ export class DibControlsComponent implements OnInit, OnChanges, OnDestroy {
     this.change.complete();
   }
 
-  public removeDib(): void {
+  public markAsDelivered(): void {
     this.isLoading = true;
     this.changeDetector.markForCheck();
 
-    this.dibService.remove(this.sessionUserDib.id)
-      .pipe(
-        finalize(() => {
-          this.isLoading = false;
-          this.changeDetector.markForCheck();
-        })
-      )
-      .subscribe(
-        () => {
-          this.refreshDib();
-          this.change.emit();
-        },
-        (err: any) => {
-          this.alertService.error(err.error.message);
-        }
-      );
+    this.confirmService.confirm({
+      message: 'Are you sure? This action cannot be undone.'
+    }, (answer: ConfirmAnswer) => {
+      if (answer.type === 'okay') {
+        this.dibService.markAsDelivered(this.sessionUserDib.id)
+          .pipe(
+            finalize(() => {
+              this.isLoading = false;
+              this.changeDetector.detectChanges();
+            })
+          )
+          .subscribe(
+            () => {
+              this.refreshDib();
+              this.change.emit();
+            },
+            (err: any) => {
+              this.alertService.error(err.error.message);
+            }
+          );
+      } else {
+        this.isLoading = false;
+        this.changeDetector.detectChanges();
+      }
+    });
   }
 
-  public openDibModal(): void {
+  private openDibModal(): void {
     this.isLoading = true;
     this.changeDetector.markForCheck();
 
@@ -139,37 +161,6 @@ export class DibControlsComponent implements OnInit, OnChanges, OnDestroy {
     });
   }
 
-  public markAsDelivered(): void {
-    this.isLoading = true;
-    this.changeDetector.markForCheck();
-
-    this.confirmService.confirm({
-      message: 'Are you sure? This action cannot be undone.'
-    }, (answer: ConfirmAnswer) => {
-      if (answer.type === 'okay') {
-        this.dibService.markAsDelivered(this.sessionUserDib.id)
-          .pipe(
-            finalize(() => {
-              this.isLoading = false;
-              this.changeDetector.markForCheck();
-            })
-          )
-          .subscribe(
-            () => {
-              this.refreshDib();
-              this.change.emit();
-            },
-            (err: any) => {
-              this.alertService.error(err.error.message);
-            }
-          );
-      } else {
-        this.isLoading = false;
-        this.changeDetector.markForCheck();
-      }
-    });
-  }
-
   private refreshDib(): void {
     if (this.gift.dibs) {
       this.sessionUserDib = this.gift.dibs.find((dib) => {
@@ -189,5 +180,36 @@ export class DibControlsComponent implements OnInit, OnChanges, OnDestroy {
 
     this.isVisible = (!this.sessionUserDib && numDibbed < this.gift.quantity);
     this.changeDetector.markForCheck();
+  }
+
+  private removeDib(): void {
+    this.isLoading = true;
+    this.changeDetector.markForCheck();
+
+    this.confirmService.confirm({
+      message: 'Are you sure you want to remove this dib?'
+    }, (answer: ConfirmAnswer) => {
+      if (answer.type === 'okay') {
+        this.dibService.remove(this.sessionUserDib.id)
+          .pipe(
+            finalize(() => {
+              this.isLoading = false;
+              this.changeDetector.markForCheck();
+            })
+          )
+          .subscribe(
+            () => {
+              this.refreshDib();
+              this.change.emit();
+            },
+            (err: any) => {
+              this.alertService.error(err.error.message);
+            }
+          );
+      } else {
+        this.isLoading = false;
+        this.changeDetector.detectChanges();
+      }
+    });
   }
 }

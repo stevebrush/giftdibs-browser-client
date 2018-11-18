@@ -35,8 +35,8 @@ export class WishListService {
     return this.http.post(`${this.resourceUrl}/wish-lists`, formData);
   }
 
-  public getById(wishListId: string): Observable<WishList> {
-    return this.http.get(`${this.resourceUrl}/wish-lists/${wishListId}`)
+  public getById(wishListId: string, sortBy?: string): Observable<WishList> {
+    return this.http.get(`${this.resourceUrl}/wish-lists/${wishListId}?sortBy=${sortBy}`)
       .pipe(
         map((result: any) => result.data.wishList),
         share()

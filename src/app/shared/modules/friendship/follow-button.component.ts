@@ -11,24 +11,20 @@ import {
 } from '@giftdibs/session';
 
 import {
-  finalize
-} from 'rxjs/operators';
-
-import {
   AlertService
 } from '@giftdibs/ux';
 
 import {
-  FriendshipSummary
-} from '../friendship';
-
-import {
-  User
-} from '../user';
+  finalize
+} from 'rxjs/operators';
 
 import {
   FriendshipService
 } from './friendship.service';
+
+import {
+  Friendship
+} from './friendship';
 
 @Component({
   selector: 'gd-follow-button',
@@ -60,10 +56,10 @@ export class FollowButtonComponent implements OnInit {
     this.isSessionUser = this.sessionService.isSessionUser(ownerId);
 
     if (!this.isSessionUser) {
-      this.friendshipService.getAllByUserId(sessionUserId)
-        .subscribe((friendships: FriendshipSummary) => {
-          const found = friendships.following.find((f: User) => {
-            return (f.id === ownerId);
+      this.friendshipService.getFollowingByUserId(sessionUserId)
+        .subscribe((friendships: any) => {
+          const found = friendships.find((friendship: Friendship) => {
+            return (friendship.friendId === ownerId);
           });
 
           if (found) {
@@ -111,7 +107,7 @@ export class FollowButtonComponent implements OnInit {
         })
       )
       .subscribe(
-        (data: any) => {
+        () => {
           this.isFollowing = false;
         },
         (err: any) => {

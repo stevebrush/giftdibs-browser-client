@@ -158,6 +158,7 @@ export class GiftEditComponent implements OnInit {
     }
 
     this.disableForm();
+    this.removeEmptyExternalUrls();
 
     const formData: Gift = this.giftForm.value;
     const priority = formData.priority + '';
@@ -252,6 +253,8 @@ export class GiftEditComponent implements OnInit {
           this.newImageFile = dataUrlToFile(imageDataUrl);
         });
     }
+
+    this.removeEmptyExternalUrls();
 
     this.addExternalUrlIfNew({
       url: result.url
@@ -361,6 +364,15 @@ export class GiftEditComponent implements OnInit {
       this.addExternalUrlField({
         url: externalUrl.url
       });
+    }
+  }
+
+  private removeEmptyExternalUrls(): void {
+    for (let i = 0, len = this.externalUrls.length; i < len; i++) {
+      const control = this.externalUrls.controls[i];
+      if (!control.get('url').value) {
+        this.externalUrls.removeAt(i);
+      }
     }
   }
 }

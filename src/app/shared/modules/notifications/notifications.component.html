@@ -4,6 +4,7 @@
   title="Notifications"
   type="button"
   [gdPopover]="content"
+  [gdPopoverMessageStream]="messageStream"
   gdPopoverHorizontalAlignment="right"
   gdPopoverVerticalAlignment="bottom"
 >
@@ -56,11 +57,10 @@
             <time class="gd-text-deemphasized gd-text-small">
               {{ notification.dateCreated | date }}
             </time>
-            <div *ngIf="!isGiftReceived(notification.gift.id)"
-              class="app-notifications-secondary-controls gd-button-group"
-            >
-              <ng-container *ngTemplateOutlet="controls;context:{notification:notification}"></ng-container>
-              <button
+            <div class="app-notifications-secondary-controls gd-button-group">
+              <ng-container *ngTemplateOutlet="controls;context:{notification:notification}">
+              </ng-container>
+              <button *ngIf="!notification.gift.dateReceived"
                 class="gd-button gd-button-default"
                 type="button"
                 (click)="markGiftReceived(notification.gift.id, notification)"

@@ -6,6 +6,10 @@ import {
 } from '@angular/core';
 
 import {
+  Subject
+} from 'rxjs';
+
+import {
   finalize
 } from 'rxjs/operators';
 
@@ -13,7 +17,9 @@ import { DibService } from '@app/shared/modules/dib';
 import { GiftService } from '@app/shared/modules/gift';
 
 import {
-  AlertService
+  AlertService,
+  PopoverMessage,
+  PopoverMessageType
 } from '@giftdibs/ux';
 
 import { Notification } from './notification';
@@ -31,6 +37,7 @@ import { NotificationService } from './notification.service';
 })
 export class NotificationsComponent implements OnInit {
   public isLoading = true;
+  public messageStream = new Subject<PopoverMessage>();
   public notifications: Notification[];
 
   constructor(
@@ -43,10 +50,6 @@ export class NotificationsComponent implements OnInit {
 
   public ngOnInit(): void {
     this.fetchNotifications();
-  }
-
-  public isGiftReceived(giftId: string): boolean {
-    return false;
   }
 
   public markDibDelivered(dibId: string, notification: Notification): void {
@@ -89,6 +92,11 @@ export class NotificationsComponent implements OnInit {
       .subscribe(
         () => {
           this.notifications.splice(this.notifications.indexOf(notification), 1);
+          if (this.notifications.length === 0) {
+            this.closePopover();
+          } else {
+            this.positionPopover();
+          }
         },
         (err: any) => {
           this.alertService.error(err.error.message);
@@ -116,5 +124,17 @@ export class NotificationsComponent implements OnInit {
           this.alertService.error(err.error.message);
         }
       );
+  }
+
+  private closePopover(): void {
+    this.messageStream.next({
+      type: PopoverMessageType.Close
+    });
+  }
+
+  private positionPopover(): void {
+    this.messageStream.next({
+      type: PopoverMessageType.Reposition
+    });
   }
 }

@@ -94,29 +94,3 @@
     }
   }
 }
-
-// .app-navbar-image-link {
-//   padding: 0 $gd-spacing-md !important;
-
-//   ::ng-deep a {
-//     &:hover {
-//       box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1)
-//     }
-//   }
-// }
-
-// .app-navbar-hidden {
-//   display: none;
-// }
-
-@media (max-width: $gd-screen-xs-max) {
-  .app-navbar-desktop {
-    display: none;
-  }
-}
-
-@media (min-width: $gd-screen-sm-min) {
-  .app-navbar-mobile {
-    display: none;
-  }
-}

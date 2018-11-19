@@ -18,6 +18,7 @@ import {
   BadgeModule,
   DropdownMenuModule,
   MediaModule,
+  MediaQueryModule,
   ThumbnailModule
 } from '@giftdibs/ux';
 
@@ -40,6 +41,7 @@ import {
     DropdownMenuModule,
     IconModule,
     MediaModule,
+    MediaQueryModule,
     RouterModule,
     NotificationsModule,
     SearchModule,

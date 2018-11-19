@@ -1,6 +1,6 @@
 <div class="app-navbar gd-spacing-padding-squish">
   <div class="app-navbar-primary">
-    <span class="app-navbar-brand app-navbar-image-link">
+    <span class="app-navbar-brand">
       <gd-thumbnail
         imageSource="assets/gd-logo.png"
         size="xs"
@@ -12,16 +12,16 @@
   </div>
 
   <div class="app-navbar-search">
-    <ng-container *ngIf="isLoggedIn()">
+    <ng-container *ngIf="isLoggedIn">
       <!-- DESKTOP SEARCH -->
-      <div class="app-navbar-desktop">
+      <div *ngIf="!isMobile">
         <gd-search>
         </gd-search>
       </div>
 
       <!-- MOBILE SEARCH -->
-      <div
-        class="app-navbar-mobile app-navbar-search-mobile"
+      <div *ngIf="isMobile"
+        class="app-navbar-search-mobile"
         [ngClass]="{
           'app-navbar-search-visible': showSearch
         }"
@@ -45,19 +45,11 @@
     aria-label="User navigation"
     class="app-navbar-secondary"
   >
-    <ng-container *ngIf="isLoggedIn() else notLoggedInMenu">
+    <ng-container *ngIf="isLoggedIn else notLoggedInMenu">
       <!-- DESKTOP USER NAV -->
-      <ul class="app-navbar-menu app-navbar-desktop">
-        <li class="app-navbar-menu-user app-navbar-image-link">
-          <gd-thumbnail
-            altText="{{ sessionUser.firstName }} {{ sessionUser.lastName }}"
-            iconSize="1x"
-            size="xs"
-            shape="circle"
-            [imageSource]="sessionUser.avatarUrl"
-            [route]="{ commands: ['/users', sessionUser.id] }"
-          >
-          </gd-thumbnail>
+      <ul *ngIf="!isMobile" class="app-navbar-menu">
+        <li>
+          <ng-container *ngTemplateOutlet="userIcon"></ng-container>
         </li>
         <li>
           <a
@@ -87,7 +79,7 @@
       </ul>
 
       <!-- MOBILE USER NAV -->
-      <div class="app-navbar-mobile">
+      <div *ngIf="isMobile">
         <button
           class="gd-button gd-button-link"
           title="Open search"
@@ -134,4 +126,16 @@
       </a>
     </li>
   </ul>
+</ng-template>
+
+<ng-template #userIcon>
+  <gd-thumbnail
+    altText="{{ sessionUser.firstName }} {{ sessionUser.lastName }}"
+    iconSize="1x"
+    size="xs"
+    shape="circle"
+    [imageSource]="sessionUser.avatarUrl"
+    [route]="{ commands: ['/users', sessionUser.id] }"
+  >
+  </gd-thumbnail>
 </ng-template>

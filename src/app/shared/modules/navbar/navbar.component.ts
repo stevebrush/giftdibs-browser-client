@@ -2,10 +2,8 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ElementRef,
   OnDestroy,
-  OnInit,
-  ViewChild
+  OnInit
 } from '@angular/core';
 
 import {
@@ -18,7 +16,9 @@ import {
 } from '@giftdibs/session';
 
 import {
-  DropdownMenuItem
+  DropdownMenuItem,
+  MediaQueryBreakpoint,
+  MediaQueryService
 } from '@giftdibs/ux';
 
 import {
@@ -37,6 +37,8 @@ import {
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   public sessionUser: SessionUser;
+  public isLoggedIn = false;
+  public isMobile = false;
   public showSearch = false;
   public routes: {
     path: string[];
@@ -68,13 +70,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   public menuItemsMobile: DropdownMenuItem[] = [];
 
-  @ViewChild('button')
-  public buttonRef: ElementRef;
-
   private ngUnsubscribe = new Subject();
 
   constructor(
     private changeDetector: ChangeDetectorRef,
+    private mediaQueryService: MediaQueryService,
     private router: Router,
     private sessionService: SessionService
   ) { }
@@ -87,6 +87,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
       .subscribe((sessionUser: SessionUser) => {
         if (sessionUser) {
           this.sessionUser = sessionUser;
+          this.isLoggedIn = this.sessionService.isLoggedIn;
+
           this.menuItemsMobile = [
             {
               label: 'Profile',
@@ -108,6 +110,16 @@ export class NavbarComponent implements OnInit, OnDestroy {
         }
       });
 
+    this.mediaQueryService.breakpointChange
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((breakpoint: MediaQueryBreakpoint) => {
+        this.isMobile = (
+          breakpoint === MediaQueryBreakpoint.XXSmall ||
+          breakpoint === MediaQueryBreakpoint.XSmall
+        );
+        this.changeDetector.markForCheck();
+      });
+
     this.routes = [
       {
         name: 'GiftDibs',
@@ -121,12 +133,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
-  public isLoggedIn(): boolean {
-    return this.sessionService.isLoggedIn;
-  }
-
   private logout(): void {
     this.sessionService.clearAll();
+    this.isLoggedIn = false;
     this.changeDetector.detectChanges();
     this.router.navigate(['/account', 'login']);
   }

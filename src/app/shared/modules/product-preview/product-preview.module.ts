@@ -8,15 +8,22 @@ import {
 
 import {
   CardModule,
+  ModalModule,
   ThumbnailModule
 } from '@giftdibs/ux';
+
+import {
+  AssetsModule
+} from '../assets';
 
 import { ProductPreviewComponent } from './product-preview.component';
 
 @NgModule({
   imports: [
+    AssetsModule,
     CardModule,
     CommonModule,
+    ModalModule,
     ThumbnailModule
   ],
   exports: [

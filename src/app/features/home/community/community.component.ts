@@ -32,7 +32,7 @@ export class CommunityComponent implements OnInit {
         this.gifts = gifts;
         this.isLoading = false;
 
-        if (gifts && gifts.length) {
+        if (gifts && gifts.length && gifts.length > 11) {
           this.hasMore = true;
         }
 

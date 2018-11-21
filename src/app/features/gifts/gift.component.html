@@ -90,7 +90,7 @@
                       iconSize="2x"
                       size="fill"
                       [externalLink]="externalUrl.url"
-                      [imageSource]="gift.imageUrl"
+                      [imageSource]="gift.imageUrl || defaultImageUrl"
                     ></gd-thumbnail>
                   </gd-media-thumbnail>
                   <gd-media-content>
@@ -105,13 +105,11 @@
               </gd-media-list>
             </div>
 
-            <p *ngIf="gift.notes"
-              class="app-gift-detail-notes"
-            >
-              {{ gift.notes }}
-            </p>
-
             <table class="gd-table gd-table-condensed">
+              <tr *ngIf="gift.notes">
+                <th>Notes</th>
+                <td>{{ gift.notes }}</td>
+              </tr>
               <tr>
                 <th>Budget</th>
                 <td>${{ gift.budget || '--' }} <span *ngIf="gift.quantity > 1">ea.</span></td>

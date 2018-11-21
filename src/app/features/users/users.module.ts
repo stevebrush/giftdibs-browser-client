@@ -30,14 +30,12 @@ import {
   CardModule,
   GridModule,
   HideUntilModule,
+  IconModule,
   MediaModule,
+  NoticeModule,
   RepeaterModule,
   ThumbnailModule,
   WaitModule
-} from '@giftdibs/ux';
-
-import {
-  IconModule
 } from '@giftdibs/ux';
 
 import { FollowersComponent } from './followers.component';
@@ -55,6 +53,7 @@ import { UsersRoutingModule } from './users-routing.module';
     HideUntilModule,
     IconModule,
     MediaModule,
+    NoticeModule,
     UsersRoutingModule,
     RepeaterModule,
     ThumbnailModule,

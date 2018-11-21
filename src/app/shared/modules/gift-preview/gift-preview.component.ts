@@ -30,6 +30,7 @@ export class GiftPreviewComponent implements OnInit {
   @Input()
   public showUserInfo = false;
 
+  public defaultImageUrl = '/assets/gd-default-gift.png';
   public isSessionUser = false;
   public showDeliveredRibbon = false;
   public showDibbedRibbon = false;

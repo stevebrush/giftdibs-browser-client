@@ -1,6 +1,12 @@
 <gd-wait *ngIf="isLoading"></gd-wait>
 
 <div class="gd-container gd-container-lg gd-spacing-padding-even-large">
+  <ng-container *ngIf="!gifts || !gifts.length">
+    <gd-notice>
+      <strong>Your community hasn't created any gifts yet.</strong><br>
+      <a routerLink="/profile">Create gift</a>
+    </gd-notice>
+  </ng-container>
   <gd-row>
     <gd-column *ngFor="let gift of gifts"
       screenXSmall="6"

@@ -27,7 +27,7 @@
     <gd-card-thumbnail>
       <gd-thumbnail
         size="fill"
-        [imageSource]="gift.imageUrl"
+        [imageSource]="gift.imageUrl || defaultImageUrl"
       >
         <gd-ribbon *ngIf="showDeliveredRibbon"
           ribbonType="info"

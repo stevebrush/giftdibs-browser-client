@@ -70,6 +70,18 @@
 </div>
 
 <ng-template let-wishLists="wishLists" #wishListsTemplate>
+  <ng-container *ngIf="!isSessionUser && !isArchivedViewActive && !wishLists.length">
+    <gd-notice>
+      No wish lists found.
+    </gd-notice>
+  </ng-container>
+
+  <ng-container *ngIf="isArchivedViewActive && !wishLists.length">
+    <gd-notice>
+      No archived wish lists found.
+    </gd-notice>
+  </ng-container>
+
   <gd-row>
     <gd-column *ngIf="isSessionUser && !isArchivedViewActive"
       [screenXXSmall]="12"

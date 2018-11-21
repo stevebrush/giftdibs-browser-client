@@ -41,10 +41,7 @@ import {
 } from '@app/shared/modules/wish-list-edit';
 
 import {
-  AlertService
-} from '@giftdibs/ux';
-
-import {
+  AlertService,
   ConfirmAnswer,
   ConfirmService,
   DropdownMenuItem,
@@ -204,7 +201,8 @@ export class WishListComponent implements OnInit, OnDestroy {
 
   private confirmDelete(): void {
     this.confirmService.confirm({
-      message: 'Are you sure you want to delete this wish list?'
+      message: 'Are you sure you want to delete this wish list?',
+      supplemental: 'Any gifts associated with this wish list will also be permanently deleted.'
     }, (answer: ConfirmAnswer) => {
       if (answer.type === 'okay') {
         this.wishListService.remove(this.wishList.id)

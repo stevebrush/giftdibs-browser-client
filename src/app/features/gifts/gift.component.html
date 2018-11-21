@@ -14,14 +14,10 @@
             [screenSmall]="6"
           >
             <div class="app-gift-detail-thumbnail">
-              <gd-thumbnail *ngIf="gift.imageUrl"
+              <gd-thumbnail
                 class="gd-gift-thumbnail"
                 size="static"
-                [imageSource]="gift.imageUrl"
-              ></gd-thumbnail>
-              <gd-thumbnail *ngIf="!gift.imageUrl"
-                class="gd-gift-thumbnail"
-                size="fill"
+                [imageSource]="gift.imageUrl || defaultImageUrl"
               ></gd-thumbnail>
             </div>
           </gd-column>
@@ -59,12 +55,21 @@
                 </button>
               </div>
 
-              <gd-notice *ngIf="gift.dateReceived"
-                noticeType="info"
-              >
-                You marked this gift as <strong>received</strong> on<br>
-                {{ gift.dateReceived | date }}.
-              </gd-notice>
+              <ng-container *ngIf="gift.dateReceived">
+                <gd-notice noticeType="info">
+                  You marked this gift as <strong>received</strong> on<br>
+                  {{ gift.dateReceived | date }}.
+                </gd-notice>
+                <button
+                  class="gd-button gd-button-default"
+                  type="button"
+                  [disabled]="isLoading"
+                  (click)="confirmDelete()"
+                >
+                  <gd-icon icon="trash"></gd-icon>
+                  Delete
+                </button>
+              </ng-container>
             </ng-container>
 
             <ng-container *ngIf="!isSessionUser">
@@ -91,10 +96,10 @@
                   <gd-media-content>
                     <a
                       [attr.href]="externalUrl.url"
-                    >
-                      <gd-icon icon="external-link-alt"></gd-icon>
-                      {{ getURLName(externalUrl.url) }}
-                    </a>
+                      target="_blank"
+                      title="Open this URL in a new window"
+                    >{{ getURLName(externalUrl.url) }}</a>&nbsp;
+                    <gd-icon icon="external-link-alt"></gd-icon>
                   </gd-media-content>
                 </gd-media>
               </gd-media-list>
@@ -139,7 +144,6 @@
                   [comments]="gift.comments"
                 >
                 </gd-comment-list>
-
                 <gd-comment-edit
                   [giftId]="gift.id"
                   (saved)="onCommentSaved()"
@@ -149,6 +153,7 @@
             </gd-disclosure>
 
             <gd-media-list>
+
               <gd-media size="xs">
                 <gd-media-thumbnail>
                   <gd-thumbnail
@@ -168,6 +173,7 @@
                   <time class="gd-date">{{ gift.dateUpdated | gdFriendlyDate }}</time>
                 </gd-media-content>
               </gd-media>
+
               <gd-media *ngIf="gift.dateReceived" size="xs">
                 <gd-media-thumbnail>
                   <gd-thumbnail
@@ -186,6 +192,7 @@
                   <time class="gd-date">{{ gift.dateReceived | gdFriendlyDate }}</time>
                 </gd-media-content>
               </gd-media>
+
               <ng-container *ngIf="gift.dibs && gift.dibs.length">
                 <ng-container *ngFor="let dib of gift.dibs">
                   <gd-media

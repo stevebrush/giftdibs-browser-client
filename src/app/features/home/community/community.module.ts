@@ -7,6 +7,10 @@ import {
 } from '@angular/common';
 
 import {
+  RouterModule
+} from '@angular/router';
+
+import {
   GiftModule
 } from '@app/shared/modules/gift';
 
@@ -15,11 +19,9 @@ import {
 } from '@app/shared/modules/gift-preview';
 
 import {
+  GridModule,
+  NoticeModule,
   WaitModule
-} from '@giftdibs/ux';
-
-import {
-  GridModule
 } from '@giftdibs/ux';
 
 import {
@@ -32,6 +34,8 @@ import {
     GiftPreviewModule,
     GiftModule,
     GridModule,
+    NoticeModule,
+    RouterModule,
     WaitModule
   ],
   declarations: [

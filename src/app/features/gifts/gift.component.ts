@@ -63,6 +63,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GiftComponent implements OnInit, OnDestroy {
+  public defaultImageUrl = '/assets/gd-default-gift.png';
   public gift: Gift;
   public isLoading = true;
   public isLoadingSimilarProducts = false;
@@ -197,6 +198,28 @@ export class GiftComponent implements OnInit, OnDestroy {
     return formatted;
   }
 
+  public confirmDelete(): void {
+    this.confirmService.confirm({
+      message: 'Are you sure you wish to delete this gift?',
+      supplemental: 'Any dibs or comments associated with this gift will also be permanently deleted.'
+    }, (answer: ConfirmAnswer) => {
+      if (answer.type === 'okay') {
+        this.giftService.remove(this.gift.id)
+          .subscribe(
+            () => {
+              this.alertService.success('Gift successfully deleted.', true);
+              this.router.navigate(['/wish-lists', this.gift.wishList.id]);
+            },
+            (err: any) => {
+              const error = err.error;
+              this.alertService.error(error.message);
+              this.changeDetector.markForCheck();
+            }
+          );
+      }
+    });
+  }
+
   private refreshGift(): void {
     this.isLoading = true;
     this.changeDetector.markForCheck();
@@ -260,27 +283,6 @@ export class GiftComponent implements OnInit, OnDestroy {
     });
 
     return modalInstance;
-  }
-
-  private confirmDelete(): void {
-    this.confirmService.confirm({
-      message: 'Are you sure you wish to delete this gift?'
-    }, (answer: ConfirmAnswer) => {
-      if (answer.type === 'okay') {
-        this.giftService.remove(this.gift.id)
-          .subscribe(
-            () => {
-              this.alertService.success('Gift successfully deleted.', true);
-              this.router.navigate(['/users', this.gift.user.id]);
-            },
-            (err: any) => {
-              const error = err.error;
-              this.alertService.error(error.message);
-              this.changeDetector.markForCheck();
-            }
-          );
-      }
-    });
   }
 
   private fetchSimilarProducts(): void {

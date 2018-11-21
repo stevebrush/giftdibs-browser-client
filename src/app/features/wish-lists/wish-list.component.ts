@@ -99,6 +99,7 @@ export class WishListComponent implements OnInit, OnDestroy {
           this.wishList = undefined;
           this.isSessionUser = false;
           this.changeDetector.markForCheck();
+
           return this.wishListService.getById(params.wishListId, this.sortBy);
         }),
         takeUntil(this.ngUnsubscribe)

@@ -1,11 +1,11 @@
 <div class="gd-comment-preview">
-  <gd-comment-edit *ngIf="isEdit else commentEditForm"
+  <gd-comment-edit *ngIf="isEdit else commentPreview"
     [comment]="comment"
     (cancelled)="onCancelled()"
     (saved)="onSaved()"
   >
   </gd-comment-edit>
-  <ng-template #commentEditForm>
+  <ng-template #commentPreview>
     <gd-media size="xs">
       <gd-media-thumbnail>
         <gd-thumbnail

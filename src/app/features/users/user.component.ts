@@ -111,7 +111,7 @@ export class UserComponent implements OnInit, OnDestroy {
                   this._wishLists = wishLists;
                   this.isLoading = false;
                   this.changeDetector.markForCheck();
-                }, (err: any) => {
+                }, () => {
                   this.isLoading = false;
                   this.changeDetector.markForCheck();
                 });

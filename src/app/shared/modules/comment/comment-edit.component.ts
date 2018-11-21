@@ -109,7 +109,6 @@ export class CommentEditComponent implements OnInit, OnDestroy {
       .subscribe(
         () => {
           this.saved.emit();
-          this.saved.complete();
         },
         (err: any) => {
           const error = err.error;

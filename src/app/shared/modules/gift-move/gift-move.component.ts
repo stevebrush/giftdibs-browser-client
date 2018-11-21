@@ -157,8 +157,6 @@ export class GiftMoveComponent implements OnInit {
           }
         );
     }
-
-
   }
 
   private handleError(err: any): void {

@@ -108,6 +108,7 @@ export class GiftComponent implements OnInit, OnDestroy {
           this.gift = undefined;
           this.isSessionUser = false;
           this.changeDetector.markForCheck();
+
           return this.giftService.getById(params.giftId);
         }),
         takeUntil(this.ngUnsubscribe)

@@ -60,13 +60,13 @@
             <div class="app-notifications-secondary-controls gd-button-group">
               <ng-container *ngTemplateOutlet="controls;context:{notification:notification}">
               </ng-container>
-              <button *ngIf="!notification.gift.dateReceived"
+              <!-- <button *ngIf="!notification.gift.dateReceived"
                 class="gd-button gd-button-default"
                 type="button"
                 (click)="markGiftReceived(notification.gift.id, notification)"
               >
                 Mark gift as received
-              </button>
+              </button> -->
             </div>
           </ng-template>
 
@@ -80,13 +80,13 @@
             </time>
             <div class="app-notifications-secondary-controls gd-button-group">
               <ng-container *ngTemplateOutlet="controls;context:{notification:notification}"></ng-container>
-              <button *ngIf="!notification.dib?.dateDelivered"
+              <!-- <button *ngIf="!notification.dib?.dateDelivered"
                 class="gd-button gd-button-default"
                 type="button"
                 (click)="markDibDelivered(notification.dib.id, notification)"
               >
                 Mark gift as delivered
-              </button>
+              </button> -->
             </div>
           </ng-template>
 

@@ -265,10 +265,9 @@ export class WishListComponent implements OnInit, OnDestroy {
   }
 
   private setupWishList(wishList: WishList): void {
-    this.wishList = wishList;
     this.wishListType = (wishList.type === 'registry') ? 'Registry' : 'Wish list';
 
-    switch (this.wishList.privacy.type) {
+    switch (wishList.privacy.type) {
       case 'custom':
       this.privacyType = 'Specific friends';
       break;
@@ -279,5 +278,12 @@ export class WishListComponent implements OnInit, OnDestroy {
       this.privacyType = 'Just me';
       break;
     }
+
+    // Move received gifts to the bottom of the list.
+    const unReceivedGifts = wishList.gifts.filter((g) => !g.dateReceived);
+    const receivedGifts = wishList.gifts.filter((g) => g.dateReceived);
+    wishList.gifts = unReceivedGifts.concat(receivedGifts);
+
+    this.wishList = wishList;
   }
 }

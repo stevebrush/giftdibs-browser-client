@@ -13,12 +13,17 @@
             shape="circle"
             [imageSource]="gift.user.avatarUrl"
             [route]="{ commands: ['/users', gift.user.id] }"
+            (click)="$event.stopPropagation();"
           ></gd-thumbnail>
         </gd-media-thumbnail>
         <gd-media-content>
           <gd-media-body>
             <gd-media-heading [multiline]="false">
-              <a routerLink="/users/{{ gift.user.id }}" title="{{ gift.user.firstName }} {{ gift.user.lastName }}">{{ gift.user.firstName }} {{ gift.user.lastName }}</a>
+              <a
+                routerLink="/users/{{ gift.user.id }}"
+                title="{{ gift.user.firstName }} {{ gift.user.lastName }}"
+                (click)="$event.stopPropagation();"
+              >{{ gift.user.firstName }} {{ gift.user.lastName }}</a>
             </gd-media-heading>
           </gd-media-body>
         </gd-media-content>

@@ -62,7 +62,7 @@ export class VerifyEmailNoticeComponent implements OnInit, OnDestroy {
         const sessionUser: SessionUser = value[0];
         const event: RouterEvent = value[1];
 
-        if (this.visibleForRoutes.includes(event.url)) {
+        if (this.visibleForRoutes.indexOf(event.url) > -1) {
           this.isActive = (this.sessionService.isLoggedIn && (sessionUser && !sessionUser.emailAddressVerified));
         } else {
           this.isActive = false;

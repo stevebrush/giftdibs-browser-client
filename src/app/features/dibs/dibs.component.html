@@ -120,7 +120,8 @@
           </gd-repeater>
         </div>
         <div class="gd-dibs-recipient-gift-footer gd-spacing-padding-squish">
-          Totals for {{ recipient.firstName }}: {{ getTotalForRecipient(recipient) }}
+          Totals for {{ recipient.firstName }}: ${{ recipient.totalBudgeted || '--' }}<br>
+          <strong class="gd-text-small">(You paid: ${{ recipient.totalPricePaid || '--' }})</strong>
         </div>
       </div>
     </div>

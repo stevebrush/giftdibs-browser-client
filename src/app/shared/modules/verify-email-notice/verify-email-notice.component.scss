@@ -2,12 +2,13 @@
   display: flex;
   width: 100%;
   align-items: center;
+  margin: 0;
 
   span {
     flex: 1 1 auto;
   }
 }
 
-.gd-verify-email-button {
+.gd-button-group {
   flex: 0 0 auto;
 }

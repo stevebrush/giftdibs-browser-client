@@ -42,8 +42,8 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
   public hasToken = false;
   public isLoading = true;
   public isVerified = false;
+  public sessionUser: SessionUser;
 
-  private sessionUser: SessionUser;
   private ngUnsubscribe = new Subject();
 
   constructor(
@@ -107,7 +107,6 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
       )
       .subscribe(
         (data: any) => {
-          this.sessionService.user.emailAddressVerified = true;
           this.alertService.success(data.message);
         },
         (err: any) => {

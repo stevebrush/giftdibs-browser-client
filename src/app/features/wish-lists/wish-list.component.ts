@@ -13,6 +13,20 @@ import {
 } from '@angular/router';
 
 import {
+  SessionService
+} from '@giftdibs/session';
+
+import {
+  AlertService,
+  ConfirmAnswer,
+  ConfirmService,
+  DropdownMenuItem,
+  ModalClosedEventArgs,
+  ModalService,
+  ModalSize
+} from '@giftdibs/ux';
+
+import {
   Subject
 } from 'rxjs';
 
@@ -27,8 +41,8 @@ import {
 } from '@app/shared/modules/gift-edit';
 
 import {
-  SessionService
-} from '@giftdibs/session';
+  Gift
+} from '@app/shared/modules/gift';
 
 import {
   WishList,
@@ -39,16 +53,6 @@ import {
   WishListEditComponent,
   WishListEditContext
 } from '@app/shared/modules/wish-list-edit';
-
-import {
-  AlertService,
-  ConfirmAnswer,
-  ConfirmService,
-  DropdownMenuItem,
-  ModalClosedEventArgs,
-  ModalService,
-  ModalSize
-} from '@giftdibs/ux';
 
 @Component({
   selector: 'gd-wish-list',
@@ -71,7 +75,7 @@ export class WishListComponent implements OnInit, OnDestroy {
 
   public set sortBy(value: string) {
     this._sortBy = value;
-    this.refreshWishList();
+    this.sortWishList();
   }
 
   private _sortBy = 'recent';
@@ -285,5 +289,34 @@ export class WishListComponent implements OnInit, OnDestroy {
     wishList.gifts = unReceivedGifts.concat(receivedGifts);
 
     this.wishList = wishList;
+  }
+
+  private sortWishList(): void {
+    this.wishList.gifts.sort((a: Gift, b: Gift) => {
+      let keyA: any;
+      let keyB: any;
+
+      if (this.sortBy === 'recent') {
+        keyA = a.dateUpdated;
+        keyB = b.dateUpdated;
+      }
+
+      if (this.sortBy === 'priority') {
+        keyA = a.priority;
+        keyB = b.priority;
+      }
+
+      if (keyA < keyB) {
+        return 1;
+      }
+
+      if (keyA > keyB) {
+        return -1;
+      }
+
+      return 0;
+    });
+
+    this.changeDetector.markForCheck();
   }
 }

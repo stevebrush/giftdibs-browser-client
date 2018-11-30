@@ -1,17 +1,28 @@
 <ng-template [ngIf]="isActive">
   <div class="gd-verify-email-notice">
     <gd-notice noticeType="info">
-      <p class="gd-verify-email-notice-content">
+      <div class="gd-verify-email-notice-content">
         <span>
-          Welcome! Please verify your email address.
+          Please verify your email address.
         </span>
-        <a
-          class="gd-button gd-button-info gd-verify-email-button"
-          routerLink="/account/verify"
-        >
-          Learn more
-        </a>
-      </p>
+        <div class="gd-button-group">
+          <a
+            class="gd-button gd-button-link"
+            routerLink="/account/verify"
+          >
+            Learn more
+          </a>
+          <button
+            class="gd-button gd-button-info"
+            title="Send an email that will allow you to verify your account."
+            type="button"
+            [disabled]="isLoading"
+            (click)="sendVerificationEmail()"
+          >
+            Resend verification
+          </button>
+        </div>
+      </div>
     </gd-notice>
   </div>
 </ng-template>

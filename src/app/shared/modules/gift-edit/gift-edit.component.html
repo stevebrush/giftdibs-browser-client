@@ -241,18 +241,16 @@
         </gd-media-heading>
       </gd-media-header>
       <gd-media-body>
+        <a
+          class="gd-text-small"
+          target="_blank"
+          title="Open this product in another browser window."
+          [attr.href]="result.url"
+        ><gd-icon icon="external-link-alt"></gd-icon>&nbsp;View at amazon.com</a>
         <div class="gd-text-price">
           ${{ result.price }}
         </div>
       </gd-media-body>
     </gd-media-content>
-    <gd-media-controls>
-      <a
-        class="gd-text-small"
-        target="_blank"
-        title="Open this product in another browser window."
-        [attr.href]="result.url"
-      ><gd-icon icon="external-link-alt"></gd-icon>&nbsp;Amazon.com</a>
-    </gd-media-controls>
   </gd-media>
 </ng-template>

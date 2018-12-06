@@ -136,10 +136,13 @@ export class UserComponent implements OnInit, OnDestroy {
               this.router.navigate(['/']);
             });
         } else {
+          // Redirect to session user's profile if invalid route.
           this.router.navigate([
             '/users',
             this.sessionService.user.id
-          ]);
+          ], {
+            queryParamsHandling: 'merge'
+          });
         }
       });
   }

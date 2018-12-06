@@ -23,6 +23,7 @@ import {
 } from '@giftdibs/ux';
 
 import {
+  combineLatest,
   Subject
 } from 'rxjs';
 
@@ -84,11 +85,17 @@ export class UserComponent implements OnInit, OnDestroy {
   ) { }
 
   public ngOnInit(): void {
-    this.activatedRoute.params
+    combineLatest(
+      this.activatedRoute.params,
+      this.activatedRoute.queryParams
+    )
       .pipe(
         takeUntil(this.ngUnsubscribe)
       )
-      .subscribe((params: Params) => {
+      .subscribe((result: Params[]) => {
+        const params = result[0];
+        const queryParams = result[1];
+
         // Reset the view.
         this.isLoading = true;
         this.user = undefined;
@@ -109,13 +116,22 @@ export class UserComponent implements OnInit, OnDestroy {
                 )
                 .subscribe((wishLists) => {
                   this._wishLists = wishLists;
+
+                  // Automatically open the new wish list modal?
+                  if (
+                    this.isSessionUser &&
+                    queryParams.action === 'new_wish_list'
+                  ) {
+                    this.openWishListEditModal();
+                  }
+
                   this.isLoading = false;
                   this.changeDetector.markForCheck();
                 }, () => {
                   this.isLoading = false;
                   this.changeDetector.markForCheck();
                 });
-            }, (err: any) => {
+            }, () => {
               this.alertService.error('User not found.', true);
               this.router.navigate(['/']);
             });

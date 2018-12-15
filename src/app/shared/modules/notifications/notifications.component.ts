@@ -6,6 +6,12 @@ import {
 } from '@angular/core';
 
 import {
+  AlertService,
+  PopoverMessage,
+  PopoverMessageType
+} from '@giftdibs/ux';
+
+import {
   Subject
 } from 'rxjs';
 
@@ -15,12 +21,6 @@ import {
 
 import { DibService } from '@app/shared/modules/dib';
 import { GiftService } from '@app/shared/modules/gift';
-
-import {
-  AlertService,
-  PopoverMessage,
-  PopoverMessageType
-} from '@giftdibs/ux';
 
 import { Notification } from './notification';
 import { NotificationService } from './notification.service';
@@ -54,28 +54,18 @@ export class NotificationsComponent implements OnInit {
 
   public markDibDelivered(dibId: string, notification: Notification): void {
     this.dibService.markAsDelivered(dibId)
-      .subscribe(
-        (result: any) => {
-          this.alertService.success(result.message);
-          this.removeNotification(notification);
-        },
-        (err) => {
-          this.alertService.error(err.error.message);
-        }
-      );
+      .subscribe((result: any) => {
+        this.alertService.success(result.message);
+        this.removeNotification(notification);
+      });
   }
 
   public markGiftReceived(giftId: string, notification: Notification): void {
     this.giftService.markAsReceived(giftId)
-      .subscribe(
-        (result: any) => {
-          this.alertService.success(result.message);
-          this.removeNotification(notification);
-        },
-        (err) => {
-          this.alertService.error(err.error.message);
-        }
-      );
+      .subscribe((result: any) => {
+        this.alertService.success(result.message);
+        this.removeNotification(notification);
+      });
   }
 
   public removeNotification(notification: Notification): void {
@@ -89,19 +79,14 @@ export class NotificationsComponent implements OnInit {
           this.changeDetector.markForCheck();
         })
       )
-      .subscribe(
-        () => {
-          this.notifications.splice(this.notifications.indexOf(notification), 1);
-          if (this.notifications.length === 0) {
-            this.closePopover();
-          } else {
-            this.positionPopover();
-          }
-        },
-        (err: any) => {
-          this.alertService.error(err.error.message);
+      .subscribe(() => {
+        this.notifications.splice(this.notifications.indexOf(notification), 1);
+        if (this.notifications.length === 0) {
+          this.closePopover();
+        } else {
+          this.positionPopover();
         }
-      );
+      });
   }
 
   private fetchNotifications(): void {
@@ -115,15 +100,10 @@ export class NotificationsComponent implements OnInit {
           this.changeDetector.markForCheck();
         })
       )
-      .subscribe(
-        (notifications: Notification[]) => {
-          this.notifications = notifications;
-          this.changeDetector.markForCheck();
-        },
-        (err: any) => {
-          this.alertService.error(err.error.message);
-        }
-      );
+      .subscribe((notifications: Notification[]) => {
+        this.notifications = notifications;
+        this.changeDetector.markForCheck();
+      });
   }
 
   private closePopover(): void {

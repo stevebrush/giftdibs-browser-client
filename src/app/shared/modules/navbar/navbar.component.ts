@@ -52,6 +52,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
       addSeparatorAfter: true
     },
     {
+      label: 'Get the Chrome button',
+      url: 'https://chrome.google.com/webstore/detail/giftdibscom-chrome-button/jbbghbhmbjbohgglbbcpicnpjmldenpc'
+    },
+    {
       label: 'Help',
       route: '/support'
     },

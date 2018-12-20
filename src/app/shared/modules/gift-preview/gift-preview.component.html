@@ -4,73 +4,73 @@
       commands: ['/gifts', gift.id]
     }"
   >
-    <gd-card-header>
-      <gd-media size="xs">
-        <gd-media-thumbnail>
-          <gd-thumbnail
-            iconSize="1x"
-            size="fill"
-            shape="circle"
-            [imageSource]="gift.user.avatarUrl"
-            [route]="{ commands: ['/users', gift.user.id] }"
-            (click)="$event.stopPropagation();"
-          ></gd-thumbnail>
-        </gd-media-thumbnail>
-        <gd-media-content>
-          <gd-media-body>
-            <gd-media-heading [multiline]="false">
-              <a
-                routerLink="/users/{{ gift.user.id }}"
-                title="{{ gift.user.firstName }} {{ gift.user.lastName }}"
-                (click)="$event.stopPropagation();"
-              >{{ gift.user.firstName }} {{ gift.user.lastName }}</a>
-            </gd-media-heading>
-          </gd-media-body>
-        </gd-media-content>
-      </gd-media>
-    </gd-card-header>
+    <gd-ribbon *ngIf="showDeliveredRibbon"
+      ribbonType="info"
+      title="This gift has been delivered."
+    >
+      <gd-icon icon="box-opened"></gd-icon>
+    </gd-ribbon>
+
+    <gd-ribbon *ngIf="showDibbedRibbon"
+      ribbonType="success"
+      title="This gift has been dibbed."
+    >
+      <gd-icon icon="heart"></gd-icon>
+    </gd-ribbon>
+
+    <gd-ribbon *ngIf="showReceivedRibbon"
+      ribbonType="info"
+      title="This gift has been received."
+    >
+      <gd-icon icon="check"></gd-icon>
+    </gd-ribbon>
     <gd-card-thumbnail>
       <gd-thumbnail
         size="fill"
-        [imageSource]="gift.imageUrl || defaultImageUrl"
+        [imageSource]="gift.imageUrl"
       >
-        <gd-ribbon *ngIf="showDeliveredRibbon"
-          ribbonType="info"
-        >
-          Delivered!
-        </gd-ribbon>
-
-        <gd-ribbon *ngIf="showDibbedRibbon"
-          ribbonType="danger"
-        >
-          Dibbed!
-        </gd-ribbon>
-
-        <gd-ribbon *ngIf="showReceivedRibbon"
-          ribbonType="info"
-        >
-          Received!
-        </gd-ribbon>
       </gd-thumbnail>
     </gd-card-thumbnail>
     <gd-card-body>
-      <gd-card-heading [multiline]="false" [attr.title]="gift.name">
+      <gd-card-heading
+        [multiline]="false"
+        [attr.title]="gift.name"
+      >
         {{ gift.name }}
         <ng-container *ngIf="gift.quantity > 1">
           ({{ gift.quantity }})
         </ng-container>
       </gd-card-heading>
-      <gd-gift-priority
-        [priority]="gift.priority"
-      >
-      </gd-gift-priority>
       <div class="gd-text-price">
         ${{ gift.budget || '--' }}
         <span *ngIf="gift.quantity > 1">ea.</span>
       </div>
-      <time class="gd-date">
-        {{ gift.dateUpdated | gdFriendlyDate }}
-      </time>
+
+      <div class="app-gift-preview-user">
+        <gd-media
+          size="xs"
+        >
+          <gd-media-content>
+            <gd-gift-priority
+              [priority]="gift.priority"
+            >
+            </gd-gift-priority>
+            <time class="gd-date">
+              {{ gift.dateUpdated | gdFriendlyDate }}
+            </time>
+          </gd-media-content>
+          <gd-media-thumbnail>
+            <gd-thumbnail
+              iconSize="1x"
+              size="fill"
+              shape="circle"
+              [imageSource]="gift.user.avatarUrl"
+              [route]="{ commands: ['/users', gift.user.id] }"
+              (click)="$event.stopPropagation();"
+            ></gd-thumbnail>
+          </gd-media-thumbnail>
+        </gd-media>
+      </div>
     </gd-card-body>
   </gd-card>
 </div>

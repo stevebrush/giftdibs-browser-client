@@ -1,6 +1,7 @@
 <div class="gd-gift-priority">
   <gd-icon *ngFor="let rating of [1, 2, 3, 4, 5]"
     icon="heart"
-    [iconStyle]="(priority >= rating) ? 'success' : 'deemphasized'"
+    iconStyle="success"
+    [style.opacity]="(priority >= rating) ? 1.0 : 0.3"
   ></gd-icon>
 </div>

@@ -1,6 +1,6 @@
 <gd-wait *ngIf="isLoading"></gd-wait>
 
-<div class="gd-container gd-spacing-padding-even-large">
+<div class="gd-container gd-container-lg gd-spacing-padding-even-large">
   <ng-container *ngIf="!isLoading && !gifts.length">
     <gd-notice>
       <strong>Your community hasn't created any gifts yet.</strong><br>
@@ -11,8 +11,8 @@
     <gd-column *ngFor="let gift of gifts"
       screenXSmall="6"
       screenSmall="4"
-      screenMedium="3"
-      screenLarge="2"
+      screenMedium="4"
+      screenLarge="3"
     >
       <gd-gift-preview
         [gift]="gift"

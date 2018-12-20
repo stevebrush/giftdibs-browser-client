@@ -1,7 +1,22 @@
 @import '../../../../styles/mixins';
 
 .gd-gift-preview {
-  margin-bottom: 20px;
+  margin-bottom: $gd-spacing * 3;
+
+  ::ng-deep {
+    .gd-gift-priority {
+      font-size: 14px;
+    }
+
+    .gd-card-wrapper {
+      overflow: hidden;
+      position: relative;
+    }
+  }
+}
+
+.app-gift-preview-user {
+  margin-top: $gd-spacing;
 }
 
 .gd-gift-preview-thumbnail {

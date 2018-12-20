@@ -16,6 +16,14 @@
   }
 }
 
+.app-gift-detail-user-activity {
+  ::ng-deep {
+    .gd-media {
+      align-items: flex-start;
+    }
+  }
+}
+
 .app-gift-detail-similar-products {
   ::ng-deep {
     .gd-wait {

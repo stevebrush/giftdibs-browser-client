@@ -1,8 +1,8 @@
 @import '../../../../styles/mixins';
 
 .app-navbar {
-  background-color: #fff;
-  border-bottom: 1px solid $gd-color-neutral-lightest;
+  background: $gd-color-secondary;
+  background: linear-gradient(45deg, $gd-color-primary 0%, #742182 100%);
   display: flex;
   align-items: center;
   position: fixed;
@@ -12,6 +12,13 @@
   right: 0;
   top: 0;
   height: 63px;
+  color: #fff;
+}
+
+.app-navbar-brand {
+  color: #fff;
+  font-family: $gd-font-family-serif;
+  font-size: 120%;
 }
 
 .app-navbar-primary {
@@ -79,17 +86,17 @@
 
     > a,
     ::ng-deep .gd-button-link {
-      color: $gd-text-color-deemphasized;
+      color: #fff;
       padding: $gd-spacing-sm $gd-spacing-lg;
 
       &:focus,
       &:hover {
-        color: $gd-text-color-default;
+        color: #fff;
         text-decoration: none;
       }
 
       &.active {
-        color: $gd-color-neutral-darkest;
+        color: #fff;
       }
     }
   }

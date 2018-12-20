@@ -132,7 +132,11 @@
             <gd-disclosure>
               <gd-disclosure-heading>
                 Comments
-                <ng-template [ngIf]="gift.comments && gift.comments.length"> ({{ gift.comments.length }})</ng-template>
+                <ng-template
+                  [ngIf]="gift.comments && gift.comments.length"
+                >
+                  ({{ gift.comments.length }})
+                </ng-template>
               </gd-disclosure-heading>
               <gd-disclosure-body>
                 <gd-comment-list
@@ -147,86 +151,85 @@
               </gd-disclosure-body>
             </gd-disclosure>
 
-            <gd-media-list>
+            <div class="app-gift-detail-user-activity">
+              <gd-media-list>
+                <gd-media size="xs">
+                  <gd-media-thumbnail>
+                    <gd-thumbnail
+                      altText="{{ gift.user.firstName }} {{ gift.user.lastName }}"
+                      iconSize="1x"
+                      shape="circle"
+                      size="fill"
+                      [imageSource]="gift.user.avatarUrl"
+                      [route]="{ commands: ['/users', gift.user.id] }"
+                    >
+                    </gd-thumbnail>
+                  </gd-media-thumbnail>
+                  <gd-media-content>
+                    <a [routerLink]="['/users', gift.user.id]">{{ gift.user.firstName }} {{ gift.user.lastName }}</a>
+                    added to
+                    <a routerLink="/wish-lists/{{ gift.wishList.id }}">{{ gift.wishList.name }}.</a><br>
+                    <time class="gd-date">{{ gift.dateUpdated | gdFriendlyDate }}</time>
+                  </gd-media-content>
+                </gd-media>
 
-              <gd-media size="xs">
-                <gd-media-thumbnail>
-                  <gd-thumbnail
-                    altText="{{ gift.user.firstName }} {{ gift.user.lastName }}"
-                    iconSize="1x"
-                    shape="circle"
-                    size="fill"
-                    [imageSource]="gift.user.avatarUrl"
-                    [route]="{ commands: ['/users', gift.user.id] }"
-                  >
-                  </gd-thumbnail>
-                </gd-media-thumbnail>
-                <gd-media-content>
-                  <a [routerLink]="['/users', gift.user.id]">{{ gift.user.firstName }} {{ gift.user.lastName }}</a>
-                  added to
-                  <a routerLink="/wish-lists/{{ gift.wishList.id }}">{{ gift.wishList.name }}.</a><br>
-                  <time class="gd-date">{{ gift.dateUpdated | gdFriendlyDate }}</time>
-                </gd-media-content>
-              </gd-media>
+                <gd-media *ngIf="gift.dateReceived" size="xs">
+                  <gd-media-thumbnail>
+                    <gd-thumbnail
+                      altText="{{ gift.user.firstName }} {{ gift.user.lastName }}"
+                      iconSize="1x"
+                      shape="circle"
+                      size="fill"
+                      [imageSource]="gift.user.avatarUrl"
+                      [route]="{ commands: ['/users', gift.user.id] }"
+                    >
+                    </gd-thumbnail>
+                  </gd-media-thumbnail>
+                  <gd-media-content>
+                    <a [routerLink]="['/users', gift.user.id]">{{ gift.user.firstName }} {{ gift.user.lastName }}</a>
+                    marked as received.<br>
+                    <time class="gd-date">{{ gift.dateReceived | gdFriendlyDate }}</time>
+                  </gd-media-content>
+                </gd-media>
 
-              <gd-media *ngIf="gift.dateReceived" size="xs">
-                <gd-media-thumbnail>
-                  <gd-thumbnail
-                    altText="{{ gift.user.firstName }} {{ gift.user.lastName }}"
-                    iconSize="1x"
-                    shape="circle"
-                    size="fill"
-                    [imageSource]="gift.user.avatarUrl"
-                    [route]="{ commands: ['/users', gift.user.id] }"
-                  >
-                  </gd-thumbnail>
-                </gd-media-thumbnail>
-                <gd-media-content>
-                  <a [routerLink]="['/users', gift.user.id]">{{ gift.user.firstName }} {{ gift.user.lastName }}</a>
-                  marked as received.<br>
-                  <time class="gd-date">{{ gift.dateReceived | gdFriendlyDate }}</time>
-                </gd-media-content>
-              </gd-media>
-
-              <ng-container *ngIf="gift.dibs && gift.dibs.length">
-                <ng-container *ngFor="let dib of gift.dibs">
-                  <gd-media
-                    size="xs"
-                  >
-                    <gd-media-thumbnail>
-                      <gd-thumbnail
-                        iconSize="1x"
-                        shape="circle"
-                        size="fill"
-                        [imageSource]="dib.user.avatarUrl"
-                        [route]="(dib.isAnonymous) ? null : {
-                          commands: ['/users', dib.user.id]
-                        }"
-                      >
-                      </gd-thumbnail>
-                    </gd-media-thumbnail>
-                    <gd-media-content>
-                      <strong *ngIf="dib.isAnonymous else notAnonymous">Anonymous</strong>
-                      <ng-template #notAnonymous>
-                        <a routerLink="/users/{{ dib.user.id }}">{{ dib.user.firstName }} {{ dib.user.lastName }}</a>
-                      </ng-template>
-                      <ng-template [ngIf]="dib.dateDelivered">
-                        delivered ({{ dib.quantity }}).<br>
-                        <time class="gd-date">
-                          {{ dib.dateDelivered | gdFriendlyDate }}
-                        </time>
-                      </ng-template>
-                      <ng-template [ngIf]="!dib.dateDelivered">
-                        dibbed ({{ dib.quantity }}).<br>
-                        <time class="gd-date">
-                          {{ dib.dateUpdated | gdFriendlyDate }}
-                        </time>
-                      </ng-template>
-                    </gd-media-content>
-                  </gd-media>
+                <ng-container *ngIf="gift.dibs && gift.dibs.length">
+                  <ng-container *ngFor="let dib of gift.dibs">
+                    <gd-media size="xs">
+                      <gd-media-thumbnail>
+                        <gd-thumbnail
+                          iconSize="1x"
+                          shape="circle"
+                          size="fill"
+                          [imageSource]="dib.user.avatarUrl"
+                          [route]="(dib.isAnonymous) ? null : {
+                            commands: ['/users', dib.user.id]
+                          }"
+                        >
+                        </gd-thumbnail>
+                      </gd-media-thumbnail>
+                      <gd-media-content>
+                        <strong *ngIf="dib.isAnonymous else notAnonymous">Anonymous</strong>
+                        <ng-template #notAnonymous>
+                          <a routerLink="/users/{{ dib.user.id }}">{{ dib.user.firstName }} {{ dib.user.lastName }}</a>
+                        </ng-template>
+                        <ng-template [ngIf]="dib.dateDelivered">
+                          delivered ({{ dib.quantity }}).<br>
+                          <time class="gd-date">
+                            {{ dib.dateDelivered | gdFriendlyDate }}
+                          </time>
+                        </ng-template>
+                        <ng-template [ngIf]="!dib.dateDelivered">
+                          dibbed ({{ dib.quantity }}).<br>
+                          <time class="gd-date">
+                            {{ dib.dateUpdated | gdFriendlyDate }}
+                          </time>
+                        </ng-template>
+                      </gd-media-content>
+                    </gd-media>
+                  </ng-container>
                 </ng-container>
-              </ng-container>
-            </gd-media-list>
+              </gd-media-list>
+            </div>
           </gd-column>
         </gd-row>
       </div>

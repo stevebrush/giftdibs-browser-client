@@ -17,7 +17,7 @@
               <gd-thumbnail
                 class="gd-gift-thumbnail"
                 size="static"
-                [imageSource]="gift.imageUrl || defaultImageUrl"
+                [imageSource]="gift.imageUrl"
               ></gd-thumbnail>
             </div>
           </gd-column>
@@ -87,7 +87,7 @@
                       iconSize="2x"
                       size="fill"
                       [externalLink]="externalUrl.url"
-                      [imageSource]="gift.imageUrl || defaultImageUrl"
+                      [imageSource]="gift.imageUrl"
                     ></gd-thumbnail>
                   </gd-media-thumbnail>
                   <gd-media-content>

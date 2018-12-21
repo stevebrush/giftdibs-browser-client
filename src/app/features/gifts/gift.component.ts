@@ -63,7 +63,6 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GiftComponent implements OnInit, OnDestroy {
-  public defaultImageUrl = '/assets/gd-default-gift.png';
   public gift: Gift;
   public isLoading = true;
   public isLoadingSimilarProducts = false;

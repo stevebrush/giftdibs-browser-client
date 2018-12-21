@@ -3,3 +3,13 @@
 body {
   padding-top: 63px !important; // navbar height
 }
+
+// Class is added in the welcome component.
+.app-page-welcome {
+  padding-top: 0px !important;
+
+  .app-navbar {
+    background: transparent !important;
+    position: absolute !important;
+  }
+}

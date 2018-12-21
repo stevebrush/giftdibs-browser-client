@@ -1,7 +1,11 @@
 @import '../../../../styles/mixins';
 
 .gd-gift-preview {
-  margin-bottom: $gd-spacing * 3;
+  margin-bottom: $gd-spacing;
+
+  @media (min-width: $gd-screen-sm-min) {
+    margin-bottom: $gd-spacing * 3;
+  }
 
   ::ng-deep {
     .gd-gift-priority {

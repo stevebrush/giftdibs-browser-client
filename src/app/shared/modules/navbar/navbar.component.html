@@ -76,7 +76,7 @@
       </ul>
 
       <!-- MOBILE USER NAV -->
-      <div *ngIf="isMobile">
+      <ng-container *ngIf="isMobile">
         <button
           class="gd-button gd-button-link"
           title="Open search"
@@ -97,7 +97,7 @@
         >
           <gd-icon icon="ellipsis-v"></gd-icon>
         </button>
-      </div>
+      </ng-container>
     </ng-container>
   </nav>
 </div>

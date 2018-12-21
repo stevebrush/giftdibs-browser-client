@@ -4,25 +4,25 @@
       commands: ['/gifts', gift.id]
     }"
   >
-    <gd-ribbon *ngIf="showDeliveredRibbon"
-      ribbonType="info"
-      title="This gift has been delivered."
-    >
-      <gd-icon icon="box-opened"></gd-icon>
-    </gd-ribbon>
-
     <gd-ribbon *ngIf="showDibbedRibbon"
       ribbonType="success"
       title="This gift has been dibbed."
     >
-      <gd-icon icon="heart"></gd-icon>
+      <gd-icon icon="check"></gd-icon>
+    </gd-ribbon>
+
+    <gd-ribbon *ngIf="showDeliveredRibbon"
+      ribbonType="info"
+      title="This gift has been delivered."
+    >
+      <gd-icon icon="box"></gd-icon>
     </gd-ribbon>
 
     <gd-ribbon *ngIf="showReceivedRibbon"
       ribbonType="info"
       title="This gift has been received."
     >
-      <gd-icon icon="check"></gd-icon>
+      <gd-icon icon="box-open"></gd-icon>
     </gd-ribbon>
     <gd-card-thumbnail>
       <gd-thumbnail

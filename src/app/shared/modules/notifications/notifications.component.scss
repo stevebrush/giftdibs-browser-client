@@ -19,6 +19,11 @@
 .app-notifications-trigger-button {
   font-size: 120%;
   position: relative;
+  color: #fff;
+
+  &:hover {
+    color: #fff !important;
+  }
 }
 
 .app-notifications-badge {

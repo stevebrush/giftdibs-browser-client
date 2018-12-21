@@ -1,8 +1,10 @@
 @import '../../../../styles/mixins';
 
+$app-navbar-gradient: linear-gradient(45deg, $gd-color-primary 0%, #742182 100%);
+
 .app-navbar {
   background: $gd-color-secondary;
-  background: linear-gradient(45deg, $gd-color-primary 0%, #742182 100%);
+  background: $app-navbar-gradient;
   display: flex;
   align-items: center;
   position: fixed;
@@ -36,6 +38,10 @@
     flex: 0 0 auto;
     justify-content: flex-end;
   }
+
+  > .gd-button {
+    color: #fff;
+  }
 }
 
 .app-navbar-search {
@@ -59,8 +65,8 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: #fff;
-      padding: 16px;
+      background: $app-navbar-gradient;
+      padding: 12px $gd-spacing;
       z-index: 1;
 
       .app-navbar-mobile-search {

@@ -2,18 +2,18 @@
   <div class="gd-verify-email-notice">
     <gd-notice noticeType="info">
       <div class="gd-verify-email-notice-content">
-        <span>
+        <p>
           Please verify your email address.
-        </span>
+        </p>
         <div class="gd-button-group">
           <a
-            class="gd-button gd-button-link"
+            class="gd-button gd-button-primary"
             routerLink="/account/verify"
           >
             Learn more
           </a>
           <button
-            class="gd-button gd-button-info"
+            class="gd-button gd-button-default"
             title="Send an email that will allow you to verify your account."
             type="button"
             [disabled]="isLoading"

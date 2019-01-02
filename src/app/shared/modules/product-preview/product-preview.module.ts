@@ -8,6 +8,7 @@ import {
 
 import {
   CardModule,
+  IconModule,
   ModalModule,
   ThumbnailModule
 } from '@giftdibs/ux';
@@ -23,6 +24,7 @@ import { ProductPreviewComponent } from './product-preview.component';
     AssetsModule,
     CardModule,
     CommonModule,
+    IconModule,
     ModalModule,
     ThumbnailModule
   ],

@@ -113,7 +113,7 @@ export class WishListComponent implements OnInit, OnDestroy {
 
           this.menuItems = [
             {
-              label: 'Edit wish list',
+              label: `Edit ${this.wishListType.toLowerCase()}`,
               action: () => this.openWishListEditModal()
             },
             {
@@ -205,14 +205,14 @@ export class WishListComponent implements OnInit, OnDestroy {
 
   private confirmDelete(): void {
     this.confirmService.confirm({
-      message: 'Are you sure you want to delete this wish list?',
-      supplemental: 'Any gifts associated with this wish list will also be permanently deleted.'
+      message: `Are you sure you want to delete this ${this.wishListType.toLowerCase()}?`,
+      supplemental: `Any items associated with this ${this.wishListType.toLowerCase()} will also be permanently deleted.`
     }, (answer: ConfirmAnswer) => {
       if (answer.type === 'okay') {
         this.wishListService.remove(this.wishList.id)
           .subscribe(
             () => {
-              this.alertService.success('Wish list successfully deleted.', true);
+              this.alertService.success(`${this.wishListType} successfully deleted.`, true);
               this.router.navigate(['/', 'users', this.wishList.user.id]);
             },
             (err: any) => {
@@ -231,7 +231,7 @@ export class WishListComponent implements OnInit, OnDestroy {
     this.wishListService.update(this.wishList.id, formData)
       .subscribe(
         () => {
-          this.alertService.success('Wish list successfully archived.', true);
+          this.alertService.success(`${this.wishListType} successfully archived.`, true);
           this.router.navigate(['/', 'users', this.wishList.user.id]);
         },
         (err: any) => {
@@ -248,7 +248,7 @@ export class WishListComponent implements OnInit, OnDestroy {
     this.wishListService.update(this.wishList.id, formData)
       .subscribe(
         () => {
-          this.alertService.success('Wish list successfully unarchived.', true);
+          this.alertService.success(`${this.wishListType} successfully unarchived.`, true);
           this.refreshWishList();
         },
         (err: any) => {

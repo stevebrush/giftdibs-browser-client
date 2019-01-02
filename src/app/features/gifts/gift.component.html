@@ -54,7 +54,9 @@
 
               <ng-container *ngIf="gift.dateReceived">
                 <gd-notice noticeType="info">
-                  You marked this gift as <strong>received</strong> on<br>
+                  <gd-notice-heading>
+                    You marked this gift as received.
+                  </gd-notice-heading>
                   {{ gift.dateReceived | date }}.
                 </gd-notice>
                 <button

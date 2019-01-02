@@ -15,7 +15,7 @@ app.get('*', function (req, res) {
   res.sendFile(index);
 });
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 4200;
 app.listen(port, function () {
   console.log('Listening on port %d', port);
 });

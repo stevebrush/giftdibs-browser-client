@@ -1,11 +1,14 @@
 <div class="app-navbar gd-spacing-padding-squish">
   <div class="app-navbar-primary">
-    <a
-      class="app-navbar-brand"
-      routerLink="/"
-    >
-      giftdibs
-    </a>
+    <span class="app-navbar-brand">
+      <gd-thumbnail
+        size="xs"
+        shape="circle"
+        imageSource="assets/gd-logo-transparent.png"
+        [route]="{ commands: ['/'] }"
+      >
+      </gd-thumbnail>
+    </span>
   </div>
 
   <div class="app-navbar-search">

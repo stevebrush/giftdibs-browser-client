@@ -3,7 +3,7 @@
 <gd-modal>
   <gd-modal-header>
     <gd-modal-heading>
-      Edit wish list
+      Edit {{ wishList.type }} details
     </gd-modal-heading>
   </gd-modal-header>
   <gd-modal-body>
@@ -19,7 +19,7 @@
           class="gd-control-label"
           for="gd-wish-list-edit-name"
         >
-          Wish list name
+          List name
         </label>
         <input
           autocomplete="off"
@@ -50,11 +50,11 @@
       <gd-notice *ngIf="wishListForm.value.type === 'registry' else wishListDescription"
         noticeType="warning"
       >
-        Gifts that are dibbed in a <strong>registry</strong> will be visible to you! Select "Wish list" if you'd rather not know when gifts are claimed.
+        Gifts that are dibbed in a registry will be visible to you! Select "Wish list" if you'd rather not know when gifts are claimed.
       </gd-notice>
       <ng-template #wishListDescription>
         <gd-notice>
-          Gifts that are dibbed in a <strong>wish list</strong> will remain a secret.
+          Gifts that are dibbed in a wish list will remain a secret.
         </gd-notice>
       </ng-template>
 

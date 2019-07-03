@@ -52,9 +52,9 @@ import {
   GiftMoveContext
 } from '@app/shared/modules/gift-move';
 
-import {
-  ProductService
-} from '@app/shared/modules/product';
+// import {
+//   ProductService
+// } from '@app/shared/modules/product';
 
 @Component({
   selector: 'gd-gift',
@@ -95,7 +95,7 @@ export class GiftComponent implements OnInit, OnDestroy {
     private confirmService: ConfirmService,
     private giftService: GiftService,
     private modalService: ModalService,
-    private productService: ProductService,
+    // private productService: ProductService,
     private router: Router,
     private sessionService: SessionService
   ) { }
@@ -121,7 +121,8 @@ export class GiftComponent implements OnInit, OnDestroy {
           this.isLoading = false;
           this.changeDetector.markForCheck();
 
-          this.fetchSimilarProducts();
+          // TODO: Find a replacement.
+          // this.fetchSimilarProducts();
         },
         () => {
           this.alertService.error('Gift not found.', true);
@@ -284,58 +285,58 @@ export class GiftComponent implements OnInit, OnDestroy {
     return modalInstance;
   }
 
-  private fetchSimilarProducts(): void {
-    const externalUrls = this.gift.externalUrls;
-    this.isLoadingSimilarProducts = true;
-    this.changeDetector.markForCheck();
+  // private fetchSimilarProducts(): void {
+  //   const externalUrls = this.gift.externalUrls;
+  //   this.isLoadingSimilarProducts = true;
+  //   this.changeDetector.markForCheck();
 
-    if (externalUrls && externalUrls.length) {
-      const asins: string[] = [];
+  //   if (externalUrls && externalUrls.length) {
+  //     const asins: string[] = [];
 
-      externalUrls.forEach((externalUrl) => {
-        const url = externalUrl.url;
+  //     externalUrls.forEach((externalUrl) => {
+  //       const url = externalUrl.url;
 
-        if (url && url.indexOf('amazon.com') > -1) {
-          let asin = url.split('amazon.com/gp/product/')[1];
+  //       if (url && url.indexOf('amazon.com') > -1) {
+  //         let asin = url.split('amazon.com/gp/product/')[1];
 
-          if (!asin) {
-            asin = url.split('/dp/')[1];
-          }
+  //         if (!asin) {
+  //           asin = url.split('/dp/')[1];
+  //         }
 
-          if (asin) {
-            asin = asin.split('/')[0].split('?')[0];
-            asins.push(asin);
-          }
-        }
-      });
+  //         if (asin) {
+  //           asin = asin.split('/')[0].split('?')[0];
+  //           asins.push(asin);
+  //         }
+  //       }
+  //     });
 
-      if (asins.length) {
-        this.productService.findSimilarByAsin(asins[0]).subscribe((results) => {
-          if (!results || !results.length) {
-            this.findSimilarByKeywords();
-            return;
-          }
+  //     if (asins.length) {
+  //       this.productService.findSimilarByAsin(asins[0]).subscribe((results) => {
+  //         if (!results || !results.length) {
+  //           this.findSimilarByKeywords();
+  //           return;
+  //         }
 
-          this.similarProducts = results;
-          this.isLoadingSimilarProducts = false;
-          this.changeDetector.markForCheck();
-        });
-      } else {
-        this.findSimilarByKeywords();
-      }
-    } else {
-      this.findSimilarByKeywords();
-    }
-  }
+  //         this.similarProducts = results;
+  //         this.isLoadingSimilarProducts = false;
+  //         this.changeDetector.markForCheck();
+  //       });
+  //     } else {
+  //       this.findSimilarByKeywords();
+  //     }
+  //   } else {
+  //     this.findSimilarByKeywords();
+  //   }
+  // }
 
-  private findSimilarByKeywords(): void {
-    const keywords = this.gift.name
-      .replace(/[^a-zA-Z ]/g, '') // remove special characters
-      .replace(/\s\s+/g, ' '); // remove duplicate spaces
-    this.productService.searchByKeyword(keywords).subscribe((results) => {
-      this.similarProducts = results;
-      this.isLoadingSimilarProducts = false;
-      this.changeDetector.markForCheck();
-    });
-  }
+  // private findSimilarByKeywords(): void {
+  //   const keywords = this.gift.name
+  //     .replace(/[^a-zA-Z ]/g, '') // remove special characters
+  //     .replace(/\s\s+/g, ' '); // remove duplicate spaces
+  //   this.productService.searchByKeyword(keywords).subscribe((results) => {
+  //     this.similarProducts = results;
+  //     this.isLoadingSimilarProducts = false;
+  //     this.changeDetector.markForCheck();
+  //   });
+  // }
 }

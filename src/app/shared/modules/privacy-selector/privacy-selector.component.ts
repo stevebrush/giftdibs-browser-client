@@ -76,7 +76,7 @@ export class PrivacySelectorComponent
     return found.label;
   }
 
-  @ViewChild('privacyButton')
+  @ViewChild('privacyButton', { static: true })
   private privacyButton: ElementRef;
 
   private user: User;

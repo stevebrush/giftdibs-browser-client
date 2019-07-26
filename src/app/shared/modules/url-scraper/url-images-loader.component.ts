@@ -45,7 +45,7 @@ import { UrlScraperService } from './url-scraper.service';
 export class UrlImagesLoaderComponent implements OnInit {
   public disabled = false;
 
-  @ViewChild('urlInput')
+  @ViewChild('urlInput', { static: true })
   private urlInput: ElementRef<any>;
 
   private cancelled = new Subject<void>();

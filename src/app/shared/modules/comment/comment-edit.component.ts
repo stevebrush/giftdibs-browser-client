@@ -55,7 +55,7 @@ export class CommentEditComponent implements OnInit, OnDestroy {
   public commentForm: FormGroup;
   public isLoading = false;
 
-  @ViewChild('commentInput')
+  @ViewChild('commentInput', { static: true })
   private commentInput: ElementRef<any>;
 
   constructor(

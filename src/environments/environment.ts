@@ -6,5 +6,5 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:8080/v1',
-  scraperUrl: 'http://localhost:8888/v1'
+  scraperUrl: 'http://localhost:5000/v1'
 };

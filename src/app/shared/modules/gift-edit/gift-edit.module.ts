@@ -20,7 +20,6 @@ import {
   MediaModule,
   ModalModule,
   ThumbnailModule,
-  TypeaheadModule,
   WaitModule
 } from '@giftdibs/ux';
 
@@ -65,7 +64,6 @@ import {
     ProductModule,
     ReactiveFormsModule,
     ThumbnailModule,
-    TypeaheadModule,
     UrlScraperModule,
     WaitModule
   ],

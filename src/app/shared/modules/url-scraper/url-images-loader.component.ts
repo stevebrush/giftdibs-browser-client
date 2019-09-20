@@ -45,7 +45,10 @@ import { UrlScraperService } from './url-scraper.service';
 export class UrlImagesLoaderComponent implements OnInit {
   public disabled = false;
 
-  @ViewChild('urlInput', { static: true })
+  public url: string;
+  public allowUrlEdit = true;
+
+  @ViewChild('urlInput', { static: false })
   private urlInput: ElementRef<any>;
 
   private cancelled = new Subject<void>();
@@ -60,10 +63,25 @@ export class UrlImagesLoaderComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    if (this.context.url) {
-      this.urlInput.nativeElement.value = this.context.url;
+    if (this.context.allowUrlEdit === false) {
+      this.allowUrlEdit = false;
+    }
+
+    this.url = this.context.url;
+
+    if (this.url && this.allowUrlEdit) {
+      setTimeout(() => {
+        this.urlInput.nativeElement.value = this.context.url;
+      });
+    }
+
+    if (this.url) {
       this.onNextClicked();
     }
+  }
+
+  public onInputChange(event: any): void {
+    this.url = event.target.value;
   }
 
   public onCancelClicked(): void {
@@ -76,11 +94,9 @@ export class UrlImagesLoaderComponent implements OnInit {
     this.disabled = true;
     this.changeDetector.markForCheck();
 
-    const url = this.urlInput.nativeElement.value;
-
     // TODO: Check if url is actually an image and send it to the upload service.
 
-    this.urlScraperService.getProduct(url)
+    this.urlScraperService.getProduct(this.url)
       .pipe(
         takeUntil(this.cancelled),
         finalize(() => {
@@ -93,7 +109,13 @@ export class UrlImagesLoaderComponent implements OnInit {
           if (result.images && result.images.length) {
             this.openUrlImagesSelector(result);
           } else {
-            this.alertService.info('No images found.');
+            if (this.allowUrlEdit) {
+              this.alertService.info('No images found.');
+            } else {
+              this.modal.close('save', {
+                result
+              });
+            }
           }
         },
         (err: any) => {
@@ -123,6 +145,10 @@ export class UrlImagesLoaderComponent implements OnInit {
           image: args.data.selectedImage,
           result
         });
+      } else {
+        if (!this.allowUrlEdit) {
+          this.modal.close('cancel');
+        }
       }
     });
   }

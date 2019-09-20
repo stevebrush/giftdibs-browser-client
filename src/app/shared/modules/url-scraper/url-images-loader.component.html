@@ -1,27 +1,36 @@
 <gd-modal>
-  <gd-modal-header>
+  <gd-modal-header *ngIf="allowUrlEdit">
     <gd-modal-heading>
       Find images from external link
     </gd-modal-heading>
   </gd-modal-header>
   <gd-modal-body style="position:relative;">
-    <ng-container *ngIf="disabled">
-      Looking for images. This might take a few moments...
-    </ng-container>
+
     <gd-wait *ngIf="disabled"></gd-wait>
 
-    <input
-      class="gd-form-control"
-      placeholder="Enter external product link..."
-      type="text"
-      [disabled]="disabled"
-      #urlInput
-    />
+    <ng-container *ngIf="!allowUrlEdit">
+      Fetching product information. This might take a few moments.
+    </ng-container>
+
+    <ng-container *ngIf="allowUrlEdit">
+      <ng-container *ngIf="disabled">
+        Looking for images. This might take a few moments...
+      </ng-container>
+
+      <input
+        class="gd-form-control"
+        placeholder="Enter external product link..."
+        type="text"
+        [disabled]="disabled"
+        (change)="onInputChange($event)"
+        #urlInput
+      />
+    </ng-container>
 
   </gd-modal-body>
   <gd-modal-footer>
     <div class="gd-button-group">
-      <button
+      <button *ngIf="allowUrlEdit"
         class="gd-button gd-button-primary"
         type="button"
         [disabled]="disabled"

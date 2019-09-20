@@ -1,9 +1,10 @@
 <gd-wait *ngIf="isLoading"></gd-wait>
+
 <gd-modal>
   <gd-modal-header>
     <gd-modal-heading>
       <ng-template [ngIf]="!gift">
-        New item
+        Add item
       </ng-template>
       <ng-template [ngIf]="gift">
         Edit item
@@ -11,7 +12,29 @@
     </gd-modal-heading>
   </gd-modal-header>
   <gd-modal-body>
-    <form
+
+    <form *ngIf="showUrlPicker"
+      class="gd-form"
+      novalidate
+      [formGroup]="urlPickerForm"
+    >
+      <gd-form-field [errors]="errors">
+        <label
+          class="gd-control-label"
+          for="gd-gift-edit-url"
+        >
+          Paste a link from anywhere on the web
+        </label>
+        <input
+          class="gd-form-control"
+          formControlName="productUrl"
+          id="gd-gift-edit-url"
+          type="text"
+        />
+      </gd-form-field>
+    </form>
+
+    <form *ngIf="!showUrlPicker"
       class="gd-form"
       novalidate
       [attr.aria-label]="(gift) ? 'Edit item' : 'New item'"
@@ -23,20 +46,16 @@
           <gd-form-field [errors]="errors">
             <label
               class="gd-control-label"
-              id="gd-gift-edit-name"
+              for="gd-gift-edit-name"
             >
               Item name
             </label>
-            <gd-typeahead
-              ariaDescribedBy="gd-gift-edit-name"
+            <input
+              class="gd-form-control"
               formControlName="name"
-              searchButtonText="Find online"
-              [searchFunction]="findProductFunction"
-              [searchOnKeyUp]="false"
-              [searchResultTemplate]="searchResultTemplate"
-              [searchResultAction]="searchResultAction"
-            >
-            </gd-typeahead>
+              id="gd-gift-edit-name"
+              type="text"
+            />
           </gd-form-field>
 
           <gd-form-field>
@@ -64,7 +83,7 @@
                       [disabled]="giftForm.disabled"
                       (click)="findImageFromUrl(i)"
                     >
-                      Find images
+                      Find image...
                     </button>
                     <button
                       class="gd-button gd-button-default"
@@ -204,53 +223,49 @@
   </gd-modal-body>
   <gd-modal-footer>
     <div class="gd-button-group">
-      <button
-        class="gd-button gd-button-primary"
-        type="button"
-        [disabled]="giftForm.disabled"
-        (click)="submit()"
-      >
-        Save
-      </button>
-      <button
-        class="gd-button gd-button-default"
-        type="button"
-        [disabled]="giftForm.disabled"
-        (click)="onCancelClicked()"
-      >
-        Cancel
-      </button>
+      <ng-container *ngIf="showUrlPicker">
+        <button
+          class="gd-button gd-button-primary"
+          type="button"
+          [disabled]="urlPickerForm.disabled"
+          (click)="findProductInfoFromUrl(urlPickerProductUrl.value)"
+        >
+          Next
+        </button>
+        <button
+          class="gd-button gd-button-default"
+          type="button"
+          [disabled]="urlPickerForm.disabled"
+          (click)="skipUrlPicker()"
+        >
+          Add info manually
+        </button>
+        <button
+          class="gd-button"
+          type="button"
+          (click)="onCancelClicked()"
+        >
+          Cancel
+        </button>
+      </ng-container>
+
+      <ng-container *ngIf="!showUrlPicker">
+        <button
+          class="gd-button gd-button-primary"
+          type="button"
+          [disabled]="giftForm.disabled"
+          (click)="submit()"
+        >
+          Save
+        </button>
+        <button
+          class="gd-button"
+          type="button"
+          (click)="onCancelClicked()"
+        >
+          Cancel
+        </button>
+      </ng-container>
     </div>
   </gd-modal-footer>
 </gd-modal>
-
-<ng-template let-result="result" #searchResultTemplate>
-  <gd-media size="sm">
-    <gd-media-thumbnail>
-      <gd-thumbnail
-        iconSize="1x"
-        size="fill"
-        [imageSource]="result.imageUrl"
-      >
-      </gd-thumbnail>
-    </gd-media-thumbnail>
-    <gd-media-content>
-      <gd-media-header>
-        <gd-media-heading>
-          {{ result.name }}
-        </gd-media-heading>
-      </gd-media-header>
-      <gd-media-body>
-        <a
-          class="gd-text-small"
-          target="_blank"
-          title="Open this product in another browser window."
-          [attr.href]="result.url"
-        ><gd-icon icon="external-link-alt"></gd-icon>&nbsp;View at amazon.com</a>
-        <div class="gd-text-price">
-          ${{ result.price }}
-        </div>
-      </gd-media-body>
-    </gd-media-content>
-  </gd-media>
-</ng-template>

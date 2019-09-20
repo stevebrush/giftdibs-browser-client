@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 
 import {
+  AbstractControl,
   FormArray,
   FormBuilder,
   FormControl,
@@ -80,9 +81,18 @@ export class GiftEditComponent implements OnInit {
     return <FormArray>this.giftForm.get('externalUrls');
   }
 
+  public get urlPickerProductUrl(): AbstractControl {
+    return this.urlPickerForm.get('productUrl');
+  }
+
+  public get showUrlPicker(): boolean {
+    return (this.gift === undefined && this.urlPickerForm !== undefined);
+  }
+
   public errors: any[];
   public gift: Gift;
   public giftForm: FormGroup;
+  public urlPickerForm: FormGroup;
   public isLoading = false;
 
   private newImageFile: any;
@@ -101,19 +111,13 @@ export class GiftEditComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    this.createForm();
-
     this.gift = this.context.gift;
     this.wishListId = this.context.wishListId;
 
     if (this.gift) {
-      this.resetForm(this.gift);
-    }
-
-    if (!this.externalUrls.length) {
-      this.addExternalUrlField({
-        url: ''
-      });
+      this.createForm();
+    } else {
+      this.createUrlPickerForm();
     }
   }
 
@@ -241,6 +245,56 @@ export class GiftEditComponent implements OnInit {
     this.openUrlImagesLoaderModal(url);
   }
 
+  public skipUrlPicker(): void {
+    delete this.urlPickerForm;
+    this.createForm();
+  }
+
+  public findProductInfoFromUrl(url: string): void {
+    if (!url) {
+      return;
+    }
+
+    this.isLoading = true;
+    this.changeDetector.markForCheck();
+
+    const context = new UrlImagesLoaderContext();
+    context.url = url;
+    context.allowUrlEdit = false;
+
+    const modalInstance = this.modalService.open(UrlImagesLoaderComponent, {
+      providers: [{
+        provide: UrlImagesLoaderContext,
+        useValue: context
+      }],
+      size: ModalSize.Small
+    });
+
+    modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
+      if (args.reason === 'save') {
+        this.urlPickerForm = undefined;
+        this.gift = undefined;
+
+        this.createForm();
+
+        const productDetails: UrlScraperResult = args.data.result;
+
+        const imageDataUrl = args.data.image.dataUrl;
+        this.giftForm.get('imageUrl').setValue(imageDataUrl);
+        this.newImageFile = dataUrlToFile(imageDataUrl);
+
+        this.updateIfEmpty('name', productDetails.name);
+        this.updateIfEmpty('budget', productDetails.price);
+        this.addExternalUrlIfNew({
+          url: productDetails.url
+        });
+      }
+
+      this.isLoading = false;
+      this.changeDetector.markForCheck();
+    });
+  }
+
   public findProductFunction: TypeaheadSearchFunction<any> = (searchText: string) => {
     return this.productService.searchByKeyword(searchText);
   }
@@ -277,6 +331,22 @@ export class GiftEditComponent implements OnInit {
       notes: undefined,
       priority: 3,
       quantity: 1
+    });
+
+    if (this.gift) {
+      this.resetForm(this.gift);
+    }
+
+    if (!this.externalUrls.length) {
+      this.addExternalUrlField({
+        url: ''
+      });
+    }
+  }
+
+  private createUrlPickerForm(): void {
+    this.urlPickerForm = this.formBuilder.group({
+      productUrl: new FormControl()
     });
   }
 
@@ -364,13 +434,15 @@ export class GiftEditComponent implements OnInit {
       this.addExternalUrlField({
         url: externalUrl.url
       });
+
+      this.removeEmptyExternalUrls();
     }
   }
 
   private removeEmptyExternalUrls(): void {
     for (let i = 0, len = this.externalUrls.length; i < len; i++) {
       const control = this.externalUrls.controls[i];
-      if (!control.get('url').value) {
+      if (!control || !control.get('url').value) {
         this.externalUrls.removeAt(i);
       }
     }

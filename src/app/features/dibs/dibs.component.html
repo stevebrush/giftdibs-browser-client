@@ -76,7 +76,12 @@
                       <gd-thumbnail
                         size="static"
                         [imageSource]="gift.imageUrl"
-                        [route]="{commands:['/gifts', gift.id]}"
+                        [route]="{
+                          commands: [],
+                          extras: {
+                            queryParams: { giftId: gift.id }
+                          }
+                        }"
                       >
                       </gd-thumbnail>
                     </div>
@@ -86,7 +91,7 @@
                     screenXSmall="9"
                     screenSmall="10"
                   >
-                    <a role="heading" routerLink="/gifts/{{ gift.id }}">{{ gift.name }}</a><br>
+                    <a role="heading" [routerLink]="[]" [queryParams]="{ giftId: gift.id }">{{ gift.name }}</a><br>
                     <div class="gd-text-price">
                       ${{ gift.budget || '--' }}
                     </div>

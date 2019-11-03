@@ -7,6 +7,10 @@ import {
 } from '@angular/common';
 
 import {
+  RouterModule
+} from '@angular/router';
+
+import {
   CommentModule
 } from '@app/shared/modules/comment';
 
@@ -48,8 +52,7 @@ import {
   ProductPreviewModule
 } from '@app/shared/modules/product-preview';
 
-import { GiftComponent } from './gift.component';
-import { GiftsRoutingModule } from './gifts-routing.module';
+import { GiftDetailComponent } from './gift-detail.component';
 
 @NgModule({
   imports: [
@@ -64,18 +67,21 @@ import { GiftsRoutingModule } from './gifts-routing.module';
     DropdownMenuModule,
     GiftEditModule,
     GiftPriorityModule,
-    GiftsRoutingModule,
     GridModule,
     IconModule,
     MediaModule,
     ModalModule,
     NoticeModule,
     ProductPreviewModule,
+    RouterModule,
     ThumbnailModule,
     WaitModule
   ],
   declarations: [
-    GiftComponent
+    GiftDetailComponent
+  ],
+  entryComponents: [
+    GiftDetailComponent
   ]
 })
-export class GiftsModule { }
+export class GiftDetailModule { }

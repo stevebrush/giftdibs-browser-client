@@ -7,8 +7,6 @@ import {
 } from '@angular/core';
 
 import {
-  ActivatedRoute,
-  Params,
   Router
 } from '@angular/router';
 
@@ -18,7 +16,6 @@ import {
 
 import {
   finalize,
-  mergeMap,
   takeUntil
 } from 'rxjs/operators';
 
@@ -52,17 +49,15 @@ import {
   GiftMoveContext
 } from '@app/shared/modules/gift-move';
 
-// import {
-//   ProductService
-// } from '@app/shared/modules/product';
+import { GiftDetailContext } from './gift-detail-context';
 
 @Component({
-  selector: 'gd-gift',
-  templateUrl: './gift.component.html',
-  styleUrls: ['./gift.component.scss'],
+  selector: 'gd-gift-detail',
+  templateUrl: './gift-detail.component.html',
+  styleUrls: ['./gift-detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GiftComponent implements OnInit, OnDestroy {
+export class GiftDetailComponent implements OnInit, OnDestroy {
   public gift: Gift;
   public isLoading = true;
   public isLoadingSimilarProducts = false;
@@ -87,30 +82,28 @@ export class GiftComponent implements OnInit, OnDestroy {
   ];
 
   private ngUnsubscribe = new Subject();
+  private hasBeenModified = false;
 
   constructor(
-    private activatedRoute: ActivatedRoute,
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
     private confirmService: ConfirmService,
     private giftService: GiftService,
+    private modal: ModalInstance<any>,
     private modalService: ModalService,
-    // private productService: ProductService,
     private router: Router,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private context: GiftDetailContext
   ) { }
 
   public ngOnInit(): void {
-    this.activatedRoute.params
-      .pipe(
-        mergeMap((params: Params) => {
-          this.isLoading = true;
-          this.gift = undefined;
-          this.isSessionUser = false;
-          this.changeDetector.markForCheck();
+    this.isLoading = true;
+    this.gift = undefined;
+    this.isSessionUser = false;
+    this.changeDetector.markForCheck();
 
-          return this.giftService.getById(params.giftId);
-        }),
+    this.giftService.getById(this.context.giftId)
+      .pipe(
         takeUntil(this.ngUnsubscribe)
       )
       .subscribe(
@@ -120,9 +113,6 @@ export class GiftComponent implements OnInit, OnDestroy {
           this.checkQuantity();
           this.isLoading = false;
           this.changeDetector.markForCheck();
-
-          // TODO: Find a replacement.
-          // this.fetchSimilarProducts();
         },
         () => {
           this.alertService.error('Gift not found.', true);
@@ -175,6 +165,15 @@ export class GiftComponent implements OnInit, OnDestroy {
     this.refreshGift();
   }
 
+  public onCloseClicked(): void {
+    if (this.hasBeenModified) {
+      this.modal.close('save');
+      return;
+    }
+
+    this.modal.close();
+  }
+
   public getURLName(url: string): string {
     if (!url) {
       return '';
@@ -193,7 +192,6 @@ export class GiftComponent implements OnInit, OnDestroy {
     }
 
     formatted = formatted.split('/')[0];
-    // formatted = formatted.charAt(0).toUpperCase() + formatted.substr(1);
 
     return formatted;
   }
@@ -208,7 +206,7 @@ export class GiftComponent implements OnInit, OnDestroy {
           .subscribe(
             () => {
               this.alertService.success('Gift successfully deleted.', true);
-              this.router.navigate(['/wish-lists', this.gift.wishList.id]);
+              this.modal.close('save');
             },
             (err: any) => {
               const error = err.error;
@@ -256,6 +254,7 @@ export class GiftComponent implements OnInit, OnDestroy {
 
     modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
       if (args.reason === 'save') {
+        this.hasBeenModified = true;
         this.refreshGift();
       }
     });
@@ -269,7 +268,7 @@ export class GiftComponent implements OnInit, OnDestroy {
         provide: GiftMoveContext,
         useValue: {
           gift,
-          title: 'Move item to wish list',
+          title: 'Move item...',
           wishListId
         }
       }],
@@ -284,59 +283,4 @@ export class GiftComponent implements OnInit, OnDestroy {
 
     return modalInstance;
   }
-
-  // private fetchSimilarProducts(): void {
-  //   const externalUrls = this.gift.externalUrls;
-  //   this.isLoadingSimilarProducts = true;
-  //   this.changeDetector.markForCheck();
-
-  //   if (externalUrls && externalUrls.length) {
-  //     const asins: string[] = [];
-
-  //     externalUrls.forEach((externalUrl) => {
-  //       const url = externalUrl.url;
-
-  //       if (url && url.indexOf('amazon.com') > -1) {
-  //         let asin = url.split('amazon.com/gp/product/')[1];
-
-  //         if (!asin) {
-  //           asin = url.split('/dp/')[1];
-  //         }
-
-  //         if (asin) {
-  //           asin = asin.split('/')[0].split('?')[0];
-  //           asins.push(asin);
-  //         }
-  //       }
-  //     });
-
-  //     if (asins.length) {
-  //       this.productService.findSimilarByAsin(asins[0]).subscribe((results) => {
-  //         if (!results || !results.length) {
-  //           this.findSimilarByKeywords();
-  //           return;
-  //         }
-
-  //         this.similarProducts = results;
-  //         this.isLoadingSimilarProducts = false;
-  //         this.changeDetector.markForCheck();
-  //       });
-  //     } else {
-  //       this.findSimilarByKeywords();
-  //     }
-  //   } else {
-  //     this.findSimilarByKeywords();
-  //   }
-  // }
-
-  // private findSimilarByKeywords(): void {
-  //   const keywords = this.gift.name
-  //     .replace(/[^a-zA-Z ]/g, '') // remove special characters
-  //     .replace(/\s\s+/g, ' '); // remove duplicate spaces
-  //   this.productService.searchByKeyword(keywords).subscribe((results) => {
-  //     this.similarProducts = results;
-  //     this.isLoadingSimilarProducts = false;
-  //     this.changeDetector.markForCheck();
-  //   });
-  // }
 }

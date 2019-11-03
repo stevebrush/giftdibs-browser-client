@@ -22,7 +22,7 @@
 
           <ng-template ngSwitchCase="gift_comment">
             <a routerLink="/users/{{ notification.gift.comment.user.id }}">{{ notification.gift.comment.user.firstName }} {{ notification.gift.comment.user.lastName }}</a>
-            commented on <a routerLink="/gifts/{{ notification.gift.id }}">{{ notification.gift.name }}</a>.<br>
+            commented on <a [routerLink]="[]" [queryParams]="{ giftId: notification.gift.id }">{{ notification.gift.name }}</a>.<br>
             <span class="gd-text-deemphasized gd-text-small">"{{ notification.gift.comment.summary }}"</span>
             <time class="gd-text-deemphasized gd-text-small">
               {{ notification.dateCreated | date }}
@@ -34,7 +34,7 @@
 
           <ng-template ngSwitchCase="gift_comment_also">
             <a routerLink="/users/{{ notification.gift.comment.user.id }}">{{ notification.gift.comment.user.firstName }} {{ notification.gift.comment.user.lastName }}</a>
-            also commented on <a routerLink="/gifts/{{ notification.gift.id }}">{{ notification.gift.name }}</a>.<br>
+            also commented on <a [routerLink]="[]" [queryParams]="{ giftId: notification.gift.id }">{{ notification.gift.name }}</a>.<br>
             <span class="gd-text-deemphasized gd-text-small">"{{ notification.gift.comment.summary }}"</span>
             <time class="gd-text-deemphasized gd-text-small">
               {{ notification.dateCreated | date }}
@@ -53,7 +53,7 @@
               <strong *ngIf="dib.isAnonymous else notAnonymous">Anonymous</strong>
               <ng-template #notAnonymous><a routerLink="/users/{{ dib.user.id }}">{{ dib.user.firstName }} {{ dib.user.lastName }}</a></ng-template>
             </ng-container>
-            delivered your gift <a routerLink="/gifts/{{ notification.gift.id }}">{{ notification.gift.name }}</a>.<br>
+            delivered your gift <a [routerLink]="[]" [queryParams]="{ giftId: notification.gift.id }">{{ notification.gift.name }}</a>.<br>
             <time class="gd-text-deemphasized gd-text-small">
               {{ notification.dateCreated | date }}
             </time>
@@ -73,7 +73,7 @@
           <ng-template ngSwitchCase="gift_received">
             <a routerLink="/users/{{ notification.gift.user.id }}">{{ notification.gift.user.firstName }} {{ notification.gift.user.lastName }}</a>
             marked their gift
-            <a routerLink="/gifts/{{ notification.gift.id }}">{{ notification.gift.name }}</a>
+            <a [routerLink]="[]" [queryParams]="{ giftId: notification.gift.id }">{{ notification.gift.name }}</a>
             as received.<br>
             <time class="gd-text-deemphasized gd-text-small">
               {{ notification.dateCreated | date }}

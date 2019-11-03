@@ -25,7 +25,7 @@ import {
 
 @Injectable()
 export class CommentService {
-  private resourceUrl = environment.apiUrl + '/gifts';
+  private resourceUrl = `${environment.apiUrl}/gifts`;
 
   constructor(
     private http: HttpClient

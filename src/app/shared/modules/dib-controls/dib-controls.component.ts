@@ -69,7 +69,7 @@ export class DibControlsComponent implements OnInit, OnChanges, OnDestroy {
       }
     },
     {
-      label: 'Delete...',
+      label: 'Remove dib...',
       action: () => {
         this.removeDib();
       }

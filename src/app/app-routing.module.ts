@@ -44,11 +44,6 @@ const appRoutes: Routes = [
     canLoad: [AuthGuard]
   },
   {
-    path: 'gifts',
-    loadChildren: 'app/features/gifts/gifts.module#GiftsModule',
-    canLoad: [AuthGuard]
-  },
-  {
     path: 'dibs',
     loadChildren: 'app/features/dibs/dibs.module#DibsModule',
     canLoad: [AuthGuard]

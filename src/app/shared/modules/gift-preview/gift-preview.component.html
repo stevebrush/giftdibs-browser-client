@@ -1,7 +1,10 @@
 <div class="gd-gift-preview">
   <gd-card
     [route]="{
-      commands: ['/gifts', gift.id]
+      commands: [],
+      extras: {
+        queryParams: { giftId: gift.id }
+      }
     }"
   >
     <gd-ribbon *ngIf="showDibbedRibbon"

@@ -31,7 +31,10 @@ import {
 } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
+
+import { GiftDetailModule } from './shared/modules/gift-detail';
 
 @NgModule({
   declarations: [
@@ -42,13 +45,13 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
+    GiftDetailModule,
     NavbarModule,
     SessionModule.forRoot(environment.apiUrl),
     VerifyEmailNoticeModule
   ],
   bootstrap: [
     AppComponent
-  ],
-  entryComponents: []
+  ]
 })
 export class AppModule { }

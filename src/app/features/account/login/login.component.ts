@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
 
   public ngOnInit(): void {
     this.sessionService.clearAll();
-    this.redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/';
+    this.redirectUrl = decodeURIComponent(this.route.snapshot.queryParams['redirectUrl'] || '/');
   }
 
   public submit(): void {
@@ -120,14 +120,25 @@ export class LoginComponent implements OnInit {
   }
 
   private redirect(): void {
-    let redirect;
-    if (this.redirectUrl === '/') {
-      redirect = ['/'];
-    } else {
-      redirect = this.redirectUrl.split('/');
+    const urlParts = this.redirectUrl.split('?');
+    const routeParts = urlParts[0] === '/' ? ['/'] : urlParts[0].split('/');
+
+    let params: string[];
+    if (urlParts.length > 1) {
+      params = urlParts[1].split('&');
     }
 
-    this.router.navigate(redirect);
+    const queryParams: {[_: string]: string} = {};
+    if (params && params.length > 0) {
+      params.forEach((param) => {
+        const paramParts = param.split('=');
+        queryParams[paramParts[0]] = paramParts[1];
+      });
+    }
+
+    this.router.navigate(routeParts, {
+      queryParams
+    });
   }
 
   private openLoginHelpModal(emailAddress: string): void {

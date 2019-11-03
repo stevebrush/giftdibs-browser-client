@@ -230,23 +230,25 @@
           [disabled]="urlPickerForm.disabled"
           (click)="findProductInfoFromUrl(urlPickerProductUrl.value)"
         >
-          Next
+          Submit
         </button>
-        <button
-          class="gd-button gd-button-default"
-          type="button"
-          [disabled]="urlPickerForm.disabled"
-          (click)="skipUrlPicker()"
-        >
-          Add info manually
-        </button>
-        <button
-          class="gd-button"
-          type="button"
-          (click)="onCancelClicked()"
-        >
-          Cancel
-        </button>
+        <div class="gd-gift-edit-url-picker-buttons-secondary">
+          <button
+            class="gd-button gd-button-default"
+            type="button"
+            [disabled]="urlPickerForm.disabled"
+            (click)="skipUrlPicker()"
+          >
+            I don't have a link
+          </button>
+          <button
+            class="gd-button"
+            type="button"
+            (click)="onCancelClicked()"
+          >
+            Cancel
+          </button>
+        </div>
       </ng-container>
 
       <ng-container *ngIf="!showUrlPicker">

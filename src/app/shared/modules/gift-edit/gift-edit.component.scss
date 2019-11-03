@@ -1,0 +1,8 @@
+@import '../../../../styles/mixins';
+
+.gd-gift-edit-url-picker-buttons-secondary {
+  display: inline-block;
+  @media (min-width: $gd-screen-sm-min) {
+    float: right;
+  }
+}

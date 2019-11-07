@@ -107,6 +107,14 @@ export class UrlImagesLoaderComponent implements OnInit {
       .subscribe(
         (result: UrlScraperResult) => {
           if (result.images && result.images.length) {
+            // Automatically select the first image if there's only one.
+            if (result.images.length === 1) {
+              this.modal.close('save', {
+                image: result.images[0],
+                result
+              });
+              return;
+            }
             this.openUrlImagesSelector(result);
           } else {
             if (this.allowUrlEdit) {

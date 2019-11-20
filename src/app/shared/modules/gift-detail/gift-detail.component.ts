@@ -191,7 +191,7 @@ export class GiftDetailComponent implements OnInit, OnDestroy {
       formatted = fragments[1];
     }
 
-    formatted = formatted.split('/')[0];
+    formatted = formatted.split('/')[0].split('?')[0];
 
     return formatted;
   }
@@ -277,6 +277,7 @@ export class GiftDetailComponent implements OnInit, OnDestroy {
 
     modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
       if (args.reason === 'save') {
+        this.hasBeenModified = true;
         this.refreshGift();
       }
     });

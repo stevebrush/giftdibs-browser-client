@@ -42,7 +42,9 @@ export class GiftService {
     const paginate = (startIndex) ? `?startIndex=${startIndex}` : '';
     return this.http.get(`${this.resourceUrl}/gifts${paginate}`)
       .pipe(
-        map((result: any) => result.data.gifts),
+        map((result: any) => {
+          return result.data.gifts.map((g: Gift) => this.prepare(g));
+        }),
         share()
       );
   }
@@ -50,7 +52,7 @@ export class GiftService {
   public getById(giftId: string): Observable<Gift> {
     return this.http.get(`${this.resourceUrl}/gifts/${giftId}`)
       .pipe(
-        map((result: any) => result.data.gift),
+        map((result: any) => this.prepare(result.data.gift)),
         share()
       );
   }
@@ -71,5 +73,25 @@ export class GiftService {
 
   public markAsReceived(giftId: string): Observable<any> {
     return this.http.patch(`${this.resourceUrl}/gifts/${giftId}/received`, {});
+  }
+
+  private prepare(gift: Gift): Gift {
+    const associatesTag = 'giftdibs-20';
+
+    if (!gift.externalUrls) {
+      return gift;
+    }
+
+    gift.externalUrls.forEach((externalUrl) => {
+      if (externalUrl.url.indexOf('amazon.com') > -1) {
+        if (externalUrl.url.indexOf('?') > -1) {
+          externalUrl.url += `&tag=${associatesTag}`;
+        } else {
+          externalUrl.url += `?tag=${associatesTag}`;
+        }
+      }
+    });
+
+    return gift;
   }
 }

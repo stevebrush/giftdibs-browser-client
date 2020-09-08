@@ -22,35 +22,35 @@ const appRoutes: Routes = [
   },
   {
     path: 'account',
-    loadChildren: 'app/features/account/account.module#AccountModule'
+    loadChildren: () => import('app/features/account/account.module').then(m => m.AccountModule)
   },
   {
     path: 'support',
-    loadChildren: 'app/features/support/support.module#SupportModule'
+    loadChildren: () => import('app/features/support/support.module').then(m => m.SupportModule)
   },
   {
     path: 'users',
-    loadChildren: 'app/features/users/users.module#UsersModule',
+    loadChildren: () => import('app/features/users/users.module').then(m => m.UsersModule),
     canLoad: [AuthGuard]
   },
   {
     path: 'profile',
-    loadChildren: 'app/features/users/users.module#UsersModule',
+    loadChildren: () => import('app/features/users/users.module').then(m => m.UsersModule),
     canLoad: [AuthGuard]
   },
   {
     path: 'wish-lists',
-    loadChildren: 'app/features/wish-lists/wish-lists.module#WishListsModule',
+    loadChildren: () => import('app/features/wish-lists/wish-lists.module').then(m => m.WishListsModule),
     canLoad: [AuthGuard]
   },
   {
     path: 'dibs',
-    loadChildren: 'app/features/dibs/dibs.module#DibsModule',
+    loadChildren: () => import('app/features/dibs/dibs.module').then(m => m.DibsModule),
     canLoad: [AuthGuard]
   },
   {
     path: '**',
-    loadChildren: 'app/features/page-not-found/page-not-found.module#PageNotFoundModule'
+    loadChildren: () => import('app/features/page-not-found/page-not-found.module').then(m => m.PageNotFoundModule)
   }
 ];
 

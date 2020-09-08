@@ -32,7 +32,7 @@ const routes: Routes = [
       },
       {
         path: 'feedback',
-        loadChildren: 'app/features/support/feedback/feedback.module#FeedbackModule'
+        loadChildren: () => import('app/features/support/feedback/feedback.module').then(m => m.FeedbackModule)
       },
       {
         path: 'privacy',

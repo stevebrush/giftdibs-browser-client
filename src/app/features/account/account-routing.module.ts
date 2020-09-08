@@ -21,7 +21,7 @@ import { VerifyAccountComponent } from './verify/verify.component';
 const routes: Routes = [
   {
     path: 'login',
-    loadChildren: './login/login.module#LoginModule'
+    loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
   },
   {
     path: 'forgotten',

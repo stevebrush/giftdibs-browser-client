@@ -48,7 +48,7 @@ export class UrlImagesLoaderComponent implements OnInit {
   public url: string;
   public allowUrlEdit = true;
 
-  @ViewChild('urlInput', { static: false })
+  @ViewChild('urlInput')
   private urlInput: ElementRef<any>;
 
   private cancelled = new Subject<void>();

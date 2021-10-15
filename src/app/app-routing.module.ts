@@ -59,7 +59,6 @@ const appRoutes: Routes = [
   imports: [
     HomeModule,
     RouterModule.forRoot(appRoutes, {
-    preloadingStrategy: PreloadAllModules,
     relativeLinkResolution: 'legacy'
 })
   ],

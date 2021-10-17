@@ -24,7 +24,7 @@
     "@angular/platform-browser": "12.2.10",
     "@angular/platform-browser-dynamic": "12.2.10",
     "@angular/router": "12.2.10",
-    "@giftdibs/session": "2.0.0-rc.2",
+    "@giftdibs/session": "2.0.0",
     "@giftdibs/ux": "2.0.1",
     "core-js": "2.6.5",
     "express": "4.17.1",

@@ -279,9 +279,11 @@ export class GiftEditComponent implements OnInit {
 
         const productDetails: UrlScraperResult = args.data.result;
 
-        const imageDataUrl = args.data.image.dataUrl;
-        this.giftForm.get('imageUrl').setValue(imageDataUrl);
-        this.newImageFile = dataUrlToFile(imageDataUrl);
+        const imageDataUrl = args.data.image?.dataUrl;
+        if (imageDataUrl) {
+          this.giftForm.get('imageUrl').setValue(imageDataUrl);
+          this.newImageFile = dataUrlToFile(imageDataUrl);
+        }
 
         this.updateIfEmpty('name', productDetails.name);
         this.updateIfEmpty('budget', productDetails.price);

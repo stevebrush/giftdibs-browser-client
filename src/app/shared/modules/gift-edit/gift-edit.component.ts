@@ -299,7 +299,7 @@ export class GiftEditComponent implements OnInit {
     return this.productService.searchByKeyword(searchText);
   }
 
-  public searchResultAction: TypeaheadSearchResultAction<any> = (result: any) => {
+  public searchResultAction: TypeaheadSearchResultAction = (result: any) => {
     if (!this.giftForm.get('imageUrl').value) {
       toDataUrl(result.imageUrl)
         .then((imageDataUrl: any) => {

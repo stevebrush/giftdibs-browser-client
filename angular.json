@@ -38,7 +38,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -56,7 +55,9 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "giftdibs:build"
+            "browserTarget": "giftdibs:build",
+            "ssl": true,
+            "open": true
           },
           "configurations": {
             "production": {

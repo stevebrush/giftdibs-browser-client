@@ -44,12 +44,12 @@ export class SearchComponent {
     return this.searchService.searchUsers(searchText);
   }
 
-  public searchResultAction: TypeaheadSearchResultAction<User> = (searchResult: any) => {
+  public searchResultAction: TypeaheadSearchResultAction = (searchResult: any) => {
     // Let the user name be returned to the typeahead input before navigating.
     setTimeout(() => {
       this.router.navigate(['/users', searchResult.id]);
     });
 
-    return `${searchResult.name}`;
+    return { resolvedSearchTerms: `${searchResult.name}` };
   }
 }

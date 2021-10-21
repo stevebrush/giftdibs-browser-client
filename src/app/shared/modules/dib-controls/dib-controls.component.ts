@@ -8,17 +8,9 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core';
-
-import {
-  finalize
-} from 'rxjs/operators';
-
-import {
-  SessionService
-} from '@giftdibs/session';
-
+import { SessionService } from '@giftdibs/session';
 import {
   AlertService,
   ConfirmAnswer,
@@ -26,28 +18,20 @@ import {
   DropdownMenuItem,
   ModalClosedEventArgs,
   ModalService,
-  ModalSize
+  ModalSize,
 } from '@giftdibs/ux';
 
-import {
-  DibEditComponent,
-  DibEditContext
-} from '../dib-edit';
+import { finalize } from 'rxjs/operators';
 
-import {
-  Dib,
-  DibService
-} from '../dib';
-
-import {
-  Gift
-} from '../gift';
+import { Dib, DibService } from '../dib';
+import { DibEditComponent, DibEditContext } from '../dib-edit';
+import { Gift } from '../gift';
 
 @Component({
   selector: 'gd-dib-controls',
   templateUrl: './dib-controls.component.html',
   styleUrls: ['./dib-controls.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DibControlsComponent implements OnInit, OnChanges, OnDestroy {
   @Input()
@@ -66,14 +50,14 @@ export class DibControlsComponent implements OnInit, OnChanges, OnDestroy {
       label: 'Edit dib',
       action: () => {
         this.openDibModal();
-      }
+      },
     },
     {
       label: 'Remove dib...',
       action: () => {
         this.removeDib();
-      }
-    }
+      },
+    },
   ];
 
   constructor(
@@ -82,8 +66,8 @@ export class DibControlsComponent implements OnInit, OnChanges, OnDestroy {
     private confirmService: ConfirmService,
     private dibService: DibService,
     private modalService: ModalService,
-    private sessionService: SessionService
-  ) { }
+    private sessionService: SessionService,
+  ) {}
 
   public ngOnInit(): void {
     this.isSessionUser = this.sessionService.isSessionUser(this.gift.user.id);
@@ -104,52 +88,52 @@ export class DibControlsComponent implements OnInit, OnChanges, OnDestroy {
     this.isLoading = true;
     this.changeDetector.markForCheck();
 
-    this.confirmService.confirm({
-      message: 'Are you sure? This action cannot be undone.'
-    }, (answer: ConfirmAnswer) => {
-      if (answer.type === 'okay') {
-        this.dibService.markAsDelivered(this.sessionUserDib.id)
-          .pipe(
-            finalize(() => {
-              this.isLoading = false;
-              this.changeDetector.detectChanges();
-            })
-          )
-          .subscribe(
-            () => {
-              this.refreshDib();
-              this.change.emit();
-            },
-            (err: any) => {
-              this.alertService.error(err.error.message);
-            }
-          );
-      } else {
-        this.isLoading = false;
-        this.changeDetector.detectChanges();
-      }
-    });
+    this.confirmService.confirm(
+      {
+        message: 'Are you sure? This action cannot be undone.',
+      },
+      (answer: ConfirmAnswer) => {
+        if (answer.type === 'okay') {
+          this.dibService
+            .markAsDelivered(this.sessionUserDib.id)
+            .pipe(
+              finalize(() => {
+                this.isLoading = false;
+                this.changeDetector.detectChanges();
+              }),
+            )
+            .subscribe(
+              () => {
+                this.refreshDib();
+                this.change.emit();
+              },
+              (err: any) => {
+                this.alertService.error(err.error.message);
+              },
+            );
+        } else {
+          this.isLoading = false;
+          this.changeDetector.detectChanges();
+        }
+      },
+    );
   }
 
   private openDibModal(): void {
     this.isLoading = true;
     this.changeDetector.markForCheck();
 
-    const context = new DibEditContext(
-      this.sessionUserDib,
-      this.gift
-    );
+    const context = new DibEditContext(this.sessionUserDib, this.gift);
 
-    const modalInstance = this.modalService.open(
-      DibEditComponent,
-      {
-        providers: [{
+    const modalInstance = this.modalService.open(DibEditComponent, {
+      providers: [
+        {
           provide: DibEditContext,
-          useValue: context
-        }],
-        size: ModalSize.Small
-      }
-    );
+          useValue: context,
+        },
+      ],
+      size: ModalSize.Small,
+    });
 
     modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
       if (args.reason === 'save') {
@@ -164,7 +148,7 @@ export class DibControlsComponent implements OnInit, OnChanges, OnDestroy {
   private refreshDib(): void {
     if (this.gift.dibs) {
       this.sessionUserDib = this.gift.dibs.find((dib) => {
-        return (dib.user.id === this.sessionService.user.id);
+        return dib.user.id === this.sessionService.user.id;
       });
     } else {
       this.sessionUserDib = undefined;
@@ -178,7 +162,7 @@ export class DibControlsComponent implements OnInit, OnChanges, OnDestroy {
       });
     }
 
-    this.isVisible = (!this.sessionUserDib && numDibbed < this.gift.quantity);
+    this.isVisible = !this.sessionUserDib && numDibbed < this.gift.quantity;
     this.changeDetector.markForCheck();
   }
 
@@ -186,30 +170,34 @@ export class DibControlsComponent implements OnInit, OnChanges, OnDestroy {
     this.isLoading = true;
     this.changeDetector.markForCheck();
 
-    this.confirmService.confirm({
-      message: 'Are you sure you want to remove this dib?'
-    }, (answer: ConfirmAnswer) => {
-      if (answer.type === 'okay') {
-        this.dibService.remove(this.sessionUserDib.id)
-          .pipe(
-            finalize(() => {
-              this.isLoading = false;
-              this.changeDetector.markForCheck();
-            })
-          )
-          .subscribe(
-            () => {
-              this.refreshDib();
-              this.change.emit();
-            },
-            (err: any) => {
-              this.alertService.error(err.error.message);
-            }
-          );
-      } else {
-        this.isLoading = false;
-        this.changeDetector.detectChanges();
-      }
-    });
+    this.confirmService.confirm(
+      {
+        message: 'Are you sure you want to remove this dib?',
+      },
+      (answer: ConfirmAnswer) => {
+        if (answer.type === 'okay') {
+          this.dibService
+            .remove(this.sessionUserDib.id)
+            .pipe(
+              finalize(() => {
+                this.isLoading = false;
+                this.changeDetector.markForCheck();
+              }),
+            )
+            .subscribe(
+              () => {
+                this.refreshDib();
+                this.change.emit();
+              },
+              (err: any) => {
+                this.alertService.error(err.error.message);
+              },
+            );
+        } else {
+          this.isLoading = false;
+          this.changeDetector.detectChanges();
+        }
+      },
+    );
   }
 }

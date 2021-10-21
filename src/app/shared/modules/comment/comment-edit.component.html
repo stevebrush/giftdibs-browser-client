@@ -2,7 +2,7 @@
   <form
     class="gd-form"
     novalidate
-    [attr.aria-label]="(comment) ? 'Edit comment' : 'Add a comment'"
+    [attr.aria-label]="comment ? 'Edit comment' : 'Add a comment'"
     [formGroup]="commentForm"
     (ngSubmit)="submit()"
   >
@@ -12,7 +12,7 @@
         formControlName="body"
         maxlength="2000"
         placeholder="Add a comment"
-        (keydown.enter)="submit();$event.preventDefault();"
+        (keydown.enter)="submit(); $event.preventDefault()"
         #commentInput
       >
         {{ comment?.body }}
@@ -32,7 +32,8 @@
       >
         Submit
       </button>
-      <button *ngIf="comment"
+      <button
+        *ngIf="comment"
         class="gd-button gd-button-default"
         type="button"
         [disabled]="commentForm.disabled"

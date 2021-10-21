@@ -6,48 +6,24 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  Output
+  Output,
 } from '@angular/core';
+import { SessionService } from '@giftdibs/session';
+import { AlertService } from '@giftdibs/ux';
+import { ModalClosedEventArgs, ModalService } from '@giftdibs/ux';
 
-import {
-  AlertService
-} from '@giftdibs/ux';
+import { finalize } from 'rxjs/operators';
 
-import {
-  finalize
-} from 'rxjs/operators';
-
-import {
-  ModalClosedEventArgs,
-  ModalService
-} from '@giftdibs/ux';
-
-import {
-  SessionService
-} from '@giftdibs/session';
-
-import {
-  Gift
-} from '../gift';
-
-import {
-  DibEditComponent
-} from '../dib-edit/dib-edit.component';
-
-import {
-  DibEditContext
-} from '../dib-edit/dib-edit-context';
-
-import {
-  Dib,
-  DibService
-} from '../dib';
+import { Dib, DibService } from '../dib';
+import { DibEditContext } from '../dib-edit/dib-edit-context';
+import { DibEditComponent } from '../dib-edit/dib-edit.component';
+import { Gift } from '../gift';
 
 @Component({
   selector: 'gd-dibs-summary',
   templateUrl: './dibs-summary.component.html',
   styleUrls: ['./dibs-summary.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DibsSummaryComponent implements OnInit, OnDestroy {
   @Input()
@@ -57,9 +33,12 @@ export class DibsSummaryComponent implements OnInit, OnDestroy {
   public change = new EventEmitter<void>();
 
   public get isDibbedBySessionUser(): boolean {
-    return this.gift.dibs && !!this.gift.dibs.find((dib: Dib) => {
-      return this.isDibOwnedBySessionUser(dib);
-    });
+    return (
+      this.gift.dibs &&
+      !!this.gift.dibs.find((dib: Dib) => {
+        return this.isDibOwnedBySessionUser(dib);
+      })
+    );
   }
 
   public get numRemaining(): number {
@@ -82,8 +61,8 @@ export class DibsSummaryComponent implements OnInit, OnDestroy {
     private changeDetector: ChangeDetectorRef,
     private dibService: DibService,
     private modalService: ModalService,
-    private sessionService: SessionService
-  ) { }
+    private sessionService: SessionService,
+  ) {}
 
   public ngOnInit(): void {
     this.isSessionUser = this.sessionService.isSessionUser(this.gift.user.id);
@@ -97,12 +76,13 @@ export class DibsSummaryComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.changeDetector.markForCheck();
 
-    this.dibService.remove(dib.id)
+    this.dibService
+      .remove(dib.id)
       .pipe(
         finalize(() => {
           this.isLoading = false;
           this.changeDetector.markForCheck();
-        })
+        }),
       )
       .subscribe(
         (data: any) => {
@@ -111,7 +91,7 @@ export class DibsSummaryComponent implements OnInit, OnDestroy {
         },
         (err: any) => {
           this.alertService.error(err.error.message);
-        }
+        },
       );
   }
 
@@ -121,15 +101,14 @@ export class DibsSummaryComponent implements OnInit, OnDestroy {
 
     const context = new DibEditContext(dib, this.gift);
 
-    const modalInstance = this.modalService.open(
-      DibEditComponent,
-      {
-        providers: [{
+    const modalInstance = this.modalService.open(DibEditComponent, {
+      providers: [
+        {
           provide: DibEditContext,
-          useValue: context
-        }]
-      }
-    );
+          useValue: context,
+        },
+      ],
+    });
 
     modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
       if (args.reason === 'save') {
@@ -142,6 +121,6 @@ export class DibsSummaryComponent implements OnInit, OnDestroy {
   }
 
   public isDibOwnedBySessionUser(dib: Dib): boolean {
-    return (this.sessionService.isSessionUser(dib.user.id));
+    return this.sessionService.isSessionUser(dib.user.id);
   }
 }

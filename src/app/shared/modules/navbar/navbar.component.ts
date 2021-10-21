@@ -3,37 +3,24 @@ import {
   ChangeDetectorRef,
   Component,
   OnDestroy,
-  OnInit
+  OnInit,
 } from '@angular/core';
-
-import {
-  Router
-} from '@angular/router';
-
-import {
-  SessionService,
-  SessionUser
-} from '@giftdibs/session';
-
+import { Router } from '@angular/router';
+import { SessionService, SessionUser } from '@giftdibs/session';
 import {
   DropdownMenuItem,
   MediaQueryBreakpoint,
-  MediaQueryService
+  MediaQueryService,
 } from '@giftdibs/ux';
 
-import {
-  Subject
-} from 'rxjs';
-
-import {
-  takeUntil
-} from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   public sessionUser: SessionUser;
@@ -49,27 +36,27 @@ export class NavbarComponent implements OnInit, OnDestroy {
     {
       label: 'Settings',
       route: '/account/settings',
-      addSeparatorAfter: true
+      addSeparatorAfter: true,
     },
     {
       label: 'Get the Chrome button',
-      url: 'https://chrome.google.com/webstore/detail/giftdibscom-chrome-button/jbbghbhmbjbohgglbbcpicnpjmldenpc'
+      url: 'https://chrome.google.com/webstore/detail/giftdibscom-chrome-button/jbbghbhmbjbohgglbbcpicnpjmldenpc',
     },
     {
       label: 'Help',
-      route: '/support'
+      route: '/support',
     },
     {
       label: 'Report a problem',
       route: '/support/feedback',
-      addSeparatorAfter: true
+      addSeparatorAfter: true,
     },
     {
       label: 'Log out',
       action: () => {
         this.logout();
-      }
-    }
+      },
+    },
   ];
 
   public menuItemsMobile: DropdownMenuItem[] = [];
@@ -80,14 +67,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private changeDetector: ChangeDetectorRef,
     private mediaQueryService: MediaQueryService,
     private router: Router,
-    private sessionService: SessionService
-  ) { }
+    private sessionService: SessionService,
+  ) {}
 
   public ngOnInit(): void {
     this.sessionService.userStream
-      .pipe(
-        takeUntil(this.ngUnsubscribe)
-      )
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((sessionUser: SessionUser) => {
         if (sessionUser) {
           this.sessionUser = sessionUser;
@@ -96,13 +81,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
           this.menuItemsMobile = [
             {
               label: 'My wish lists',
-              route: `/users/${sessionUser.id}`
+              route: `/users/${sessionUser.id}`,
             },
             {
               label: 'My dibs',
               route: '/dibs',
-              addSeparatorAfter: true
-            }
+              addSeparatorAfter: true,
+            },
           ];
 
           // Add the default menu items to the mobile menu:
@@ -117,18 +102,17 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.mediaQueryService.breakpointChange
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((breakpoint: MediaQueryBreakpoint) => {
-        this.isMobile = (
+        this.isMobile =
           breakpoint === MediaQueryBreakpoint.XXSmall ||
-          breakpoint === MediaQueryBreakpoint.XSmall
-        );
+          breakpoint === MediaQueryBreakpoint.XSmall;
         this.changeDetector.markForCheck();
       });
 
     this.routes = [
       {
         name: 'GiftDibs',
-        path: ['/']
-      }
+        path: ['/'],
+      },
     ];
   }
 

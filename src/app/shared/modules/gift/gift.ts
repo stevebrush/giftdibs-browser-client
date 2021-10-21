@@ -1,18 +1,8 @@
-import {
-  Comment
-} from '../comment';
+import { Comment } from '../comment';
+import { Dib } from '../dib';
+import { User } from '../user';
 
-import {
-  Dib
-} from '../dib';
-
-import {
-  User
-} from '../user';
-
-import {
-  GiftExternalUrl
-} from './gift-external-url';
+import { GiftExternalUrl } from './gift-external-url';
 
 export interface Gift {
   id?: string;

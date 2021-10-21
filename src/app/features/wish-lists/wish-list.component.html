@@ -1,33 +1,44 @@
 <gd-wait *ngIf="isLoading"></gd-wait>
 
-<div *ngIf="!isLoading && wishList"
-  class="gd-wish-list"
->
-  <div class="gd-wish-list-banner gd-container gd-container-sm gd-spacing-padding-even-large">
+<div *ngIf="!isLoading && wishList" class="gd-wish-list">
+  <div
+    class="
+      gd-wish-list-banner
+      gd-container
+      gd-container-sm
+      gd-spacing-padding-even-large
+    "
+  >
     <gd-media size="md">
       <gd-media-content>
         <h1 class="app-wish-list-banner-heading">
           {{ wishList.name }}
         </h1>
 
-        <p class="app-wish-list-banner-details gd-text-small gd-text-deemphasized">
-          Privacy:&nbsp;{{ privacyType }}&nbsp;&bull;
-          Type:&nbsp;{{ wishListType }}&nbsp;&bull;
+        <p
+          class="
+            app-wish-list-banner-details
+            gd-text-small gd-text-deemphasized
+          "
+        >
+          Privacy:&nbsp;{{ privacyType }}&nbsp;&bull; Type:&nbsp;{{
+            wishListType
+          }}&nbsp;&bull;
           <time>{{ wishList.dateUpdated | gdFriendlyDate }}</time>
         </p>
 
-        <gd-notice *ngIf="wishList.isArchived"
-          noticeType="info"
-        >
+        <gd-notice *ngIf="wishList.isArchived" noticeType="info">
           <gd-notice-heading>
             This {{ this.wishListType.toLowerCase() }} is archived
           </gd-notice-heading>
-          While archived lists still exist, they do not appear on the home page or on your profile.
+          While archived lists still exist, they do not appear on the home page
+          or on your profile.
         </gd-notice>
 
         <div class="gd-button-group">
-          <ng-container *ngIf="isSessionUser else visitorButtons">
-            <button *ngIf="isSessionUser"
+          <ng-container *ngIf="isSessionUser; else visitorButtons">
+            <button
+              *ngIf="isSessionUser"
               class="gd-button gd-button-primary"
               type="button"
               (click)="openGiftCreateModal()"
@@ -73,18 +84,23 @@
     </gd-media>
   </div>
 
-  <div class="gd-wish-list-body gd-container gd-container-lg gd-spacing-padding-even-large">
+  <div
+    class="
+      gd-wish-list-body
+      gd-container
+      gd-container-lg
+      gd-spacing-padding-even-large
+    "
+  >
     <gd-row>
-      <gd-column *ngFor="let gift of wishList.gifts"
+      <gd-column
+        *ngFor="let gift of wishList.gifts"
         screenXSmall="6"
         screenSmall="4"
         screenMedium="3"
         screenLarge="3"
       >
-        <gd-gift-preview
-          [gift]="gift"
-        >
-        </gd-gift-preview>
+        <gd-gift-preview [gift]="gift"> </gd-gift-preview>
       </gd-column>
     </gd-row>
   </div>

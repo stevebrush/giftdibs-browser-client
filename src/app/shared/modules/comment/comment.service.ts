@@ -1,40 +1,19 @@
-import {
-  Injectable
-} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { environment } from '@root/environments/environment';
 
-import {
-  HttpClient
-} from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map, share } from 'rxjs/operators';
 
-import {
-  Observable
-} from 'rxjs';
-
-import {
-  map,
-  share
-} from 'rxjs/operators';
-
-import {
-  environment
-} from '@root/environments/environment';
-
-import {
-  Comment
-} from './comment';
+import { Comment } from './comment';
 
 @Injectable()
 export class CommentService {
   private resourceUrl = `${environment.apiUrl}/gifts`;
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 
-  public create(
-    giftId: string,
-    formData: Comment
-  ): Observable<any> {
+  public create(giftId: string, formData: Comment): Observable<any> {
     return this.http.post(`${this.resourceUrl}/${giftId}/comments`, formData);
   }
 
@@ -47,11 +26,10 @@ export class CommentService {
   // }
 
   public getById(commentId: string): Observable<Comment> {
-    return this.http.get(`${this.resourceUrl}/comments/${commentId}`)
-      .pipe(
-        map((result: any) => result.data.comment),
-        share()
-      );
+    return this.http.get(`${this.resourceUrl}/comments/${commentId}`).pipe(
+      map((result: any) => result.data.comment),
+      share(),
+    );
   }
 
   public remove(commentId: string): Observable<any> {
@@ -59,6 +37,9 @@ export class CommentService {
   }
 
   public update(commentId: string, formData: Comment): Observable<any> {
-    return this.http.patch(`${this.resourceUrl}/comments/${commentId}`, formData);
+    return this.http.patch(
+      `${this.resourceUrl}/comments/${commentId}`,
+      formData,
+    );
   }
 }

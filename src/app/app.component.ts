@@ -1,51 +1,33 @@
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit
-} from '@angular/core';
-
-import {
-  ActivatedRoute,
-  NavigationExtras,
-  Router
-} from '@angular/router';
-
+  GiftDetailComponent,
+  GiftDetailContext,
+} from '@app/shared/modules/gift-detail';
 import {
   ModalClosedEventArgs,
   ModalService,
-  WindowRefService
+  WindowRefService,
 } from '@giftdibs/ux';
 
-import {
-  Subject
-} from 'rxjs';
-
-import {
-  distinctUntilChanged,
-  takeUntil
-} from 'rxjs/operators';
-
-import {
-  GiftDetailComponent,
-  GiftDetailContext
-} from '@app/shared/modules/gift-detail';
+import { Subject } from 'rxjs';
+import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
-
   private ngUnsubscribe = new Subject<void>();
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private modalService: ModalService,
     private router: Router,
-    private windowService: WindowRefService
-  ) { }
+    private windowService: WindowRefService,
+  ) {}
 
   public ngOnInit(): void {
     const FB = (this.windowService.nativeWindow as any).FB;
@@ -53,17 +35,16 @@ export class AppComponent implements OnInit {
     FB.init({
       appId: '529193240473948',
       xfbml: false,
-      version: 'v2.10'
+      version: 'v2.10',
     });
 
-    this.activatedRoute.queryParams.pipe(
-      distinctUntilChanged(),
-      takeUntil(this.ngUnsubscribe)
-    ).subscribe((params) => {
-      if (params.giftId) {
-        this.openGiftDetailModal(params.giftId);
-      }
-    });
+    this.activatedRoute.queryParams
+      .pipe(distinctUntilChanged(), takeUntil(this.ngUnsubscribe))
+      .subscribe((params) => {
+        if (params.giftId) {
+          this.openGiftDetailModal(params.giftId);
+        }
+      });
   }
 
   private openGiftDetailModal(giftId: string): void {
@@ -73,10 +54,10 @@ export class AppComponent implements OnInit {
         {
           provide: GiftDetailContext,
           useValue: {
-            giftId
-          }
-        }
-      ]
+            giftId,
+          },
+        },
+      ],
     });
 
     const currentRoute = this.router.url.split('?')[0].split('/');
@@ -84,9 +65,9 @@ export class AppComponent implements OnInit {
     modal.closed.subscribe((args: ModalClosedEventArgs) => {
       const navigationExtras: NavigationExtras = {
         queryParams: {
-          giftId: null
+          giftId: null,
         },
-        queryParamsHandling: 'merge'
+        queryParamsHandling: 'merge',
       };
 
       if (args.reason === 'cancel') {
@@ -102,9 +83,11 @@ export class AppComponent implements OnInit {
 
       // Trigger a route reload.
       // See: https://stackoverflow.com/a/53003923/6178885
-      this.router.navigateByUrl('/', {
-        skipLocationChange: true
-      }).then(() => this.router.navigate(currentRoute, navigationExtras));
+      this.router
+        .navigateByUrl('/', {
+          skipLocationChange: true,
+        })
+        .then(() => this.router.navigate(currentRoute, navigationExtras));
     });
   }
 }

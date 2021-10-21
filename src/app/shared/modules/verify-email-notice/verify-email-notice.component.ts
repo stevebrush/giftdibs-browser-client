@@ -4,47 +4,22 @@ import {
   Component,
   Input,
   OnDestroy,
-  OnInit
+  OnInit,
 } from '@angular/core';
+import { NavigationStart, Router, RouterEvent } from '@angular/router';
+import { AccountService } from '@app/features/account/account.service';
+import { SessionService, SessionUser } from '@giftdibs/session';
+import { AlertService } from '@giftdibs/ux';
 
-import {
-  NavigationStart,
-  Router,
-  RouterEvent
-} from '@angular/router';
-
-import {
-  SessionService,
-  SessionUser
-} from '@giftdibs/session';
-
-import {
-  AlertService
-} from '@giftdibs/ux';
-
-import {
-  combineLatest,
-  Subject
-} from 'rxjs';
-
-import {
-  filter,
-  finalize,
-  takeUntil
-} from 'rxjs/operators';
-
-import {
-  AccountService
-} from '@app/features/account/account.service';
+import { combineLatest, Subject } from 'rxjs';
+import { filter, finalize, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'gd-verify-email-notice',
   templateUrl: './verify-email-notice.component.html',
   styleUrls: ['./verify-email-notice.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    AccountService
-  ]
+  providers: [AccountService],
 })
 export class VerifyEmailNoticeComponent implements OnInit, OnDestroy {
   @Input()
@@ -61,28 +36,26 @@ export class VerifyEmailNoticeComponent implements OnInit, OnDestroy {
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
     private router: Router,
-    private sessionService: SessionService
-  ) { }
+    private sessionService: SessionService,
+  ) {}
 
   public ngOnInit(): void {
     combineLatest(
       this.sessionService.userStream,
       this.router.events.pipe(
-        filter(event => event instanceof NavigationStart)
-      )
+        filter((event) => event instanceof NavigationStart),
+      ),
     )
-      .pipe(
-        takeUntil(this.ngUnsubscribe)
-      )
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((value: [SessionUser, RouterEvent]) => {
         this.sessionUser = value[0];
         const event: RouterEvent = value[1];
 
         if (this.visibleForRoutes.indexOf(event.url) > -1) {
-          this.isActive = (
+          this.isActive =
             this.sessionService.isLoggedIn &&
-            (this.sessionUser && !this.sessionUser.emailAddressVerified)
-          );
+            this.sessionUser &&
+            !this.sessionUser.emailAddressVerified;
         } else {
           this.isActive = false;
         }
@@ -100,12 +73,13 @@ export class VerifyEmailNoticeComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.changeDetector.markForCheck();
 
-    this.accountService.resendEmailAddressVerification(this.sessionUser.id)
+    this.accountService
+      .resendEmailAddressVerification(this.sessionUser.id)
       .pipe(
         finalize(() => {
           this.isLoading = false;
           this.changeDetector.markForCheck();
-        })
+        }),
       )
       .subscribe(
         (data: any) => {
@@ -113,7 +87,7 @@ export class VerifyEmailNoticeComponent implements OnInit, OnDestroy {
         },
         (err: any) => {
           this.alertService.error(err.error.message);
-        }
+        },
       );
   }
 }

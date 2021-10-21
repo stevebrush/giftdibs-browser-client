@@ -1,26 +1,13 @@
-import {
-  NgModule
-} from '@angular/core';
-
-import {
-  CommonModule
-} from '@angular/common';
-
-import {
-  FormsModule,
-  ReactiveFormsModule
-} from '@angular/forms';
-
-import {
-  RouterModule
-} from '@angular/router';
-
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import {
   FormFieldModule,
   ModalModule,
   NoticeModule,
   PasswordViewerModule,
-  WaitModule
+  WaitModule,
 } from '@giftdibs/ux';
 
 import { FacebookModule } from '../facebook';
@@ -30,10 +17,7 @@ import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 
 @NgModule({
-  declarations: [
-    LoginComponent,
-    LoginHelpComponent
-  ],
+  declarations: [LoginComponent, LoginHelpComponent],
   imports: [
     CommonModule,
     FacebookModule,
@@ -45,10 +29,8 @@ import { LoginComponent } from './login.component';
     ReactiveFormsModule,
     RouterModule,
     ModalModule,
-    WaitModule
+    WaitModule,
   ],
-  entryComponents: [
-    LoginHelpComponent
-  ]
+  entryComponents: [LoginHelpComponent],
 })
-export class LoginModule { }
+export class LoginModule {}

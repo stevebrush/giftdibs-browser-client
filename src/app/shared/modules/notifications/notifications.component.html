@@ -9,56 +9,109 @@
   gdPopoverVerticalAlignment="bottom"
 >
   <gd-icon icon="bell"></gd-icon>
-  <gd-badge *ngIf="notifications?.length"
-    class="app-notifications-badge"
-  >{{ notifications?.length }}</gd-badge>
+  <gd-badge *ngIf="notifications?.length" class="app-notifications-badge">{{
+    notifications?.length
+  }}</gd-badge>
 </button>
 
 <ng-template #content>
   <div class="app-notifications">
-    <gd-repeater *ngIf="notifications?.length else notificationsEmpty">
+    <gd-repeater *ngIf="notifications?.length; else notificationsEmpty">
       <gd-repeater-item *ngFor="let notification of notifications">
         <div class="app-notification" [ngSwitch]="notification.type">
-
           <ng-template ngSwitchCase="gift_comment">
-            <a routerLink="/users/{{ notification.gift.comment.user.id }}">{{ notification.gift.comment.user.firstName }} {{ notification.gift.comment.user.lastName }}</a>
-            commented on <a [routerLink]="[]" [queryParams]="{ giftId: notification.gift.id }">{{ notification.gift.name }}</a>.<br>
-            <span class="gd-text-deemphasized gd-text-small">"{{ notification.gift.comment.summary }}"</span>
+            <a routerLink="/users/{{ notification.gift.comment.user.id }}"
+              >{{ notification.gift.comment.user.firstName }}
+              {{ notification.gift.comment.user.lastName }}</a
+            >
+            commented on
+            <a
+              [routerLink]="[]"
+              [queryParams]="{ giftId: notification.gift.id }"
+              >{{ notification.gift.name }}</a
+            >.<br />
+            <span class="gd-text-deemphasized gd-text-small"
+              >"{{ notification.gift.comment.summary }}"</span
+            >
             <time class="gd-text-deemphasized gd-text-small">
               {{ notification.dateCreated | date }}
             </time>
             <div class="app-notifications-secondary-controls gd-button-group">
-              <ng-container *ngTemplateOutlet="controls;context:{notification:notification}"></ng-container>
+              <ng-container
+                *ngTemplateOutlet="
+                  controls;
+                  context: { notification: notification }
+                "
+              ></ng-container>
             </div>
           </ng-template>
 
           <ng-template ngSwitchCase="gift_comment_also">
-            <a routerLink="/users/{{ notification.gift.comment.user.id }}">{{ notification.gift.comment.user.firstName }} {{ notification.gift.comment.user.lastName }}</a>
-            also commented on <a [routerLink]="[]" [queryParams]="{ giftId: notification.gift.id }">{{ notification.gift.name }}</a>.<br>
-            <span class="gd-text-deemphasized gd-text-small">"{{ notification.gift.comment.summary }}"</span>
+            <a routerLink="/users/{{ notification.gift.comment.user.id }}"
+              >{{ notification.gift.comment.user.firstName }}
+              {{ notification.gift.comment.user.lastName }}</a
+            >
+            also commented on
+            <a
+              [routerLink]="[]"
+              [queryParams]="{ giftId: notification.gift.id }"
+              >{{ notification.gift.name }}</a
+            >.<br />
+            <span class="gd-text-deemphasized gd-text-small"
+              >"{{ notification.gift.comment.summary }}"</span
+            >
             <time class="gd-text-deemphasized gd-text-small">
               {{ notification.dateCreated | date }}
             </time>
             <div class="app-notifications-secondary-controls gd-button-group">
-              <ng-container *ngTemplateOutlet="controls;context:{notification:notification}"></ng-container>
+              <ng-container
+                *ngTemplateOutlet="
+                  controls;
+                  context: { notification: notification }
+                "
+              ></ng-container>
             </div>
           </ng-template>
 
           <ng-template ngSwitchCase="gift_delivered">
-            <ng-container *ngFor="let dib of notification.gift.dibs; let i = index;">
-              <span *ngIf="i !== 0 && i === notification.gift.dibs.length - 1 else separator">and</span>
+            <ng-container
+              *ngFor="let dib of notification.gift.dibs; let i = index"
+            >
+              <span
+                *ngIf="
+                  i !== 0 && i === notification.gift.dibs.length - 1;
+                  else separator
+                "
+                >and</span
+              >
               <ng-template #separator>
                 <ng-container *ngIf="i > 0">,</ng-container>
               </ng-template>
-              <strong *ngIf="dib.isAnonymous else notAnonymous">Anonymous</strong>
-              <ng-template #notAnonymous><a routerLink="/users/{{ dib.user.id }}">{{ dib.user.firstName }} {{ dib.user.lastName }}</a></ng-template>
+              <strong *ngIf="dib.isAnonymous; else notAnonymous"
+                >Anonymous</strong
+              >
+              <ng-template #notAnonymous
+                ><a routerLink="/users/{{ dib.user.id }}"
+                  >{{ dib.user.firstName }} {{ dib.user.lastName }}</a
+                ></ng-template
+              >
             </ng-container>
-            delivered your gift <a [routerLink]="[]" [queryParams]="{ giftId: notification.gift.id }">{{ notification.gift.name }}</a>.<br>
+            delivered your gift
+            <a
+              [routerLink]="[]"
+              [queryParams]="{ giftId: notification.gift.id }"
+              >{{ notification.gift.name }}</a
+            >.<br />
             <time class="gd-text-deemphasized gd-text-small">
               {{ notification.dateCreated | date }}
             </time>
             <div class="app-notifications-secondary-controls gd-button-group">
-              <ng-container *ngTemplateOutlet="controls;context:{notification:notification}">
+              <ng-container
+                *ngTemplateOutlet="
+                  controls;
+                  context: { notification: notification }
+                "
+              >
               </ng-container>
               <!-- <button *ngIf="!notification.gift.dateReceived"
                 class="gd-button gd-button-default"
@@ -71,15 +124,27 @@
           </ng-template>
 
           <ng-template ngSwitchCase="gift_received">
-            <a routerLink="/users/{{ notification.gift.user.id }}">{{ notification.gift.user.firstName }} {{ notification.gift.user.lastName }}</a>
+            <a routerLink="/users/{{ notification.gift.user.id }}"
+              >{{ notification.gift.user.firstName }}
+              {{ notification.gift.user.lastName }}</a
+            >
             marked their gift
-            <a [routerLink]="[]" [queryParams]="{ giftId: notification.gift.id }">{{ notification.gift.name }}</a>
-            as received.<br>
+            <a
+              [routerLink]="[]"
+              [queryParams]="{ giftId: notification.gift.id }"
+              >{{ notification.gift.name }}</a
+            >
+            as received.<br />
             <time class="gd-text-deemphasized gd-text-small">
               {{ notification.dateCreated | date }}
             </time>
             <div class="app-notifications-secondary-controls gd-button-group">
-              <ng-container *ngTemplateOutlet="controls;context:{notification:notification}"></ng-container>
+              <ng-container
+                *ngTemplateOutlet="
+                  controls;
+                  context: { notification: notification }
+                "
+              ></ng-container>
               <!-- <button *ngIf="!notification.dib?.dateDelivered"
                 class="gd-button gd-button-default"
                 type="button"
@@ -91,20 +156,25 @@
           </ng-template>
 
           <ng-template ngSwitchCase="friendship_new">
-            <a routerLink="/users/{{ notification.follower.id }}">{{ notification.follower.firstName }} {{ notification.follower.lastName }}</a>
-            has started following you.<br>
+            <a routerLink="/users/{{ notification.follower.id }}"
+              >{{ notification.follower.firstName }}
+              {{ notification.follower.lastName }}</a
+            >
+            has started following you.<br />
             <time class="gd-text-deemphasized gd-text-small">
               {{ notification.dateCreated | date }}
             </time>
             <div class="app-notifications-secondary-controls gd-button-group">
-              <ng-container *ngTemplateOutlet="controls;context:{notification:notification}"></ng-container>
-              <gd-follow-button
-                [friendId]="notification.follower.id"
-              >
+              <ng-container
+                *ngTemplateOutlet="
+                  controls;
+                  context: { notification: notification }
+                "
+              ></ng-container>
+              <gd-follow-button [friendId]="notification.follower.id">
               </gd-follow-button>
             </div>
           </ng-template>
-
         </div>
       </gd-repeater-item>
     </gd-repeater>

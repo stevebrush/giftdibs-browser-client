@@ -1,36 +1,12 @@
-import {
-  NgModule
-} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { FriendshipModule } from '@app/shared/modules/friendship';
+import { IconModule } from '@giftdibs/ux';
+import { BadgeModule, PopoverModule, RepeaterModule } from '@giftdibs/ux';
 
-import {
-  CommonModule
-} from '@angular/common';
-
-import {
-  RouterModule
-} from '@angular/router';
-
-import {
-  IconModule
-} from '@giftdibs/ux';
-
-import {
-  FriendshipModule
-} from '@app/shared/modules/friendship';
-
-import {
-  BadgeModule,
-  PopoverModule,
-  RepeaterModule
-} from '@giftdibs/ux';
-
-import {
-  NotificationService
-} from './notification.service';
-
-import {
-  NotificationsComponent
-} from './notifications.component';
+import { NotificationService } from './notification.service';
+import { NotificationsComponent } from './notifications.component';
 
 @NgModule({
   imports: [
@@ -40,16 +16,10 @@ import {
     PopoverModule,
     IconModule,
     RepeaterModule,
-    RouterModule
+    RouterModule,
   ],
-  exports: [
-    NotificationsComponent
-  ],
-  declarations: [
-    NotificationsComponent
-  ],
-  providers: [
-    NotificationService
-  ]
+  exports: [NotificationsComponent],
+  declarations: [NotificationsComponent],
+  providers: [NotificationService],
 })
-export class NotificationsModule { }
+export class NotificationsModule {}

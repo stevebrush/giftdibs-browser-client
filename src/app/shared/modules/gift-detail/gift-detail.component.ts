@@ -3,36 +3,19 @@ import {
   ChangeDetectorRef,
   Component,
   OnDestroy,
-  OnInit
+  OnInit,
 } from '@angular/core';
-
-import {
-  Router
-} from '@angular/router';
-
-import {
-  Subject
-} from 'rxjs';
-
-import {
-  finalize,
-  takeUntil
-} from 'rxjs/operators';
-
-import {
-  Gift,
-  GiftService
-} from '@app/shared/modules/gift';
-
+import { Router } from '@angular/router';
+import { Gift, GiftService } from '@app/shared/modules/gift';
 import {
   GiftEditComponent,
-  GiftEditContext
+  GiftEditContext,
 } from '@app/shared/modules/gift-edit';
-
 import {
-  SessionService
-} from '@giftdibs/session';
-
+  GiftMoveComponent,
+  GiftMoveContext,
+} from '@app/shared/modules/gift-move';
+import { SessionService } from '@giftdibs/session';
 import {
   AlertService,
   ConfirmAnswer,
@@ -41,13 +24,11 @@ import {
   ModalClosedEventArgs,
   ModalInstance,
   ModalService,
-  ModalSize
+  ModalSize,
 } from '@giftdibs/ux';
 
-import {
-  GiftMoveComponent,
-  GiftMoveContext
-} from '@app/shared/modules/gift-move';
+import { Subject } from 'rxjs';
+import { finalize, takeUntil } from 'rxjs/operators';
 
 import { GiftDetailContext } from './gift-detail-context';
 
@@ -55,7 +36,7 @@ import { GiftDetailContext } from './gift-detail-context';
   selector: 'gd-gift-detail',
   templateUrl: './gift-detail.component.html',
   styleUrls: ['./gift-detail.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GiftDetailComponent implements OnInit, OnDestroy {
   public gift: Gift;
@@ -68,17 +49,17 @@ export class GiftDetailComponent implements OnInit, OnDestroy {
   public menuItems: DropdownMenuItem[] = [
     {
       label: 'Edit',
-      action: () => this.openGiftEditModal()
+      action: () => this.openGiftEditModal(),
     },
     {
       label: 'Move...',
       action: () => this.openGiftMoveModal(this.gift),
-      addSeparatorAfter: true
+      addSeparatorAfter: true,
     },
     {
       label: 'Delete...',
-      action: () => this.confirmDelete()
-    }
+      action: () => this.confirmDelete(),
+    },
   ];
 
   private ngUnsubscribe = new Subject();
@@ -93,8 +74,8 @@ export class GiftDetailComponent implements OnInit, OnDestroy {
     private modalService: ModalService,
     private router: Router,
     private sessionService: SessionService,
-    private context: GiftDetailContext
-  ) { }
+    private context: GiftDetailContext,
+  ) {}
 
   public ngOnInit(): void {
     this.isLoading = true;
@@ -102,14 +83,15 @@ export class GiftDetailComponent implements OnInit, OnDestroy {
     this.isSessionUser = false;
     this.changeDetector.markForCheck();
 
-    this.giftService.getById(this.context.giftId)
-      .pipe(
-        takeUntil(this.ngUnsubscribe)
-      )
+    this.giftService
+      .getById(this.context.giftId)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
         (gift: Gift) => {
           this.gift = gift;
-          this.isSessionUser = this.sessionService.isSessionUser(this.gift.user.id);
+          this.isSessionUser = this.sessionService.isSessionUser(
+            this.gift.user.id,
+          );
           this.checkQuantity();
           this.isLoading = false;
           this.changeDetector.markForCheck();
@@ -117,7 +99,7 @@ export class GiftDetailComponent implements OnInit, OnDestroy {
         () => {
           this.alertService.error('Gift not found.', true);
           this.router.navigate(['/']);
-        }
+        },
       );
   }
 
@@ -130,31 +112,35 @@ export class GiftDetailComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.changeDetector.markForCheck();
 
-    this.confirmService.confirm({
-      message: 'Are you sure? This action cannot be undone.'
-    }, (answer: ConfirmAnswer) => {
-      if (answer.type === 'okay') {
-        this.giftService.markAsReceived(this.gift.id)
-          .pipe(
-            finalize(() => {
-              this.isLoading = false;
-              this.changeDetector.markForCheck();
-            })
-          )
-          .subscribe(
-            (result: any) => {
-              this.refreshGift();
-              this.alertService.success(result.message);
-            },
-            (err: any) => {
-              this.alertService.error(err.error.message);
-            }
-          );
-      } else {
-        this.isLoading = false;
-        this.changeDetector.detectChanges();
-      }
-    });
+    this.confirmService.confirm(
+      {
+        message: 'Are you sure? This action cannot be undone.',
+      },
+      (answer: ConfirmAnswer) => {
+        if (answer.type === 'okay') {
+          this.giftService
+            .markAsReceived(this.gift.id)
+            .pipe(
+              finalize(() => {
+                this.isLoading = false;
+                this.changeDetector.markForCheck();
+              }),
+            )
+            .subscribe(
+              (result: any) => {
+                this.refreshGift();
+                this.alertService.success(result.message);
+              },
+              (err: any) => {
+                this.alertService.error(err.error.message);
+              },
+            );
+        } else {
+          this.isLoading = false;
+          this.changeDetector.detectChanges();
+        }
+      },
+    );
   }
 
   public onCommentSaved(): void {
@@ -197,13 +183,15 @@ export class GiftDetailComponent implements OnInit, OnDestroy {
   }
 
   public confirmDelete(): void {
-    this.confirmService.confirm({
-      message: 'Are you sure you wish to delete this gift?',
-      supplemental: 'Any dibs or comments associated with this gift will also be permanently deleted.'
-    }, (answer: ConfirmAnswer) => {
-      if (answer.type === 'okay') {
-        this.giftService.remove(this.gift.id)
-          .subscribe(
+    this.confirmService.confirm(
+      {
+        message: 'Are you sure you wish to delete this gift?',
+        supplemental:
+          'Any dibs or comments associated with this gift will also be permanently deleted.',
+      },
+      (answer: ConfirmAnswer) => {
+        if (answer.type === 'okay') {
+          this.giftService.remove(this.gift.id).subscribe(
             () => {
               this.alertService.success('Gift successfully deleted.', true);
               this.modal.close('save');
@@ -212,22 +200,22 @@ export class GiftDetailComponent implements OnInit, OnDestroy {
               const error = err.error;
               this.alertService.error(error.message);
               this.changeDetector.markForCheck();
-            }
+            },
           );
-      }
-    });
+        }
+      },
+    );
   }
 
   private refreshGift(): void {
     this.isLoading = true;
     this.changeDetector.markForCheck();
-    this.giftService.getById(this.gift.id)
-      .subscribe((gift: Gift) => {
-        this.gift = gift;
-        this.isLoading = false;
-        this.checkQuantity();
-        this.changeDetector.markForCheck();
-      });
+    this.giftService.getById(this.gift.id).subscribe((gift: Gift) => {
+      this.gift = gift;
+      this.isLoading = false;
+      this.checkQuantity();
+      this.changeDetector.markForCheck();
+    });
   }
 
   private checkQuantity(): void {
@@ -245,11 +233,13 @@ export class GiftDetailComponent implements OnInit, OnDestroy {
     const context = new GiftEditContext(this.gift, this.gift.wishList.id);
 
     const modalInstance = this.modalService.open(GiftEditComponent, {
-      providers: [{
-        provide: GiftEditContext,
-        useValue: context
-      }],
-      size: ModalSize.Medium
+      providers: [
+        {
+          provide: GiftEditContext,
+          useValue: context,
+        },
+      ],
+      size: ModalSize.Medium,
     });
 
     modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
@@ -264,15 +254,17 @@ export class GiftDetailComponent implements OnInit, OnDestroy {
     const wishListId = gift.wishList && gift.wishList.id;
 
     const modalInstance = this.modalService.open(GiftMoveComponent, {
-      providers: [{
-        provide: GiftMoveContext,
-        useValue: {
-          gift,
-          title: 'Move item...',
-          wishListId
-        }
-      }],
-      size: ModalSize.Small
+      providers: [
+        {
+          provide: GiftMoveContext,
+          useValue: {
+            gift,
+            title: 'Move item...',
+            wishListId,
+          },
+        },
+      ],
+      size: ModalSize.Small,
     });
 
     modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {

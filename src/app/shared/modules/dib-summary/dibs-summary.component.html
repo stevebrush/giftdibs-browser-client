@@ -1,14 +1,10 @@
-<div *ngIf="!isSessionUser"
-  class="gd-dibs-summary"
->
-  <p *ngIf="gift.dateReceived else controlsTemplate">
+<div *ngIf="!isSessionUser" class="gd-dibs-summary">
+  <p *ngIf="gift.dateReceived; else controlsTemplate">
     This gift was delivered by...
   </p>
 
   <ng-template #controlsTemplate>
-    <p>
-      {{ numRemaining }} available
-    </p>
+    <p>{{ numRemaining }} available</p>
     <gd-repeater>
       <ng-template ngFor let-dib [ngForOf]="gift.dibs">
         <gd-repeater-item *ngIf="isDibOwnedBySessionUser(dib)">
@@ -17,7 +13,8 @@
             delivered ({{ dib.quantity }}) on {{ dib.dateDelivered | date }}
           </span>
           <span *ngIf="!dib.dateDelivered">
-            dibbed ({{ dib.quantity }}) at ${{ dib.pricePaid }} ea. on {{ dib.dateUpdated | date }}
+            dibbed ({{ dib.quantity }}) at ${{ dib.pricePaid }} ea. on
+            {{ dib.dateUpdated | date }}
           </span>
           <gd-repeater-controls>
             <button

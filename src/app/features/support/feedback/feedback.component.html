@@ -1,8 +1,6 @@
 <gd-wait *ngIf="isLoading"></gd-wait>
 
-<h1>
-  Feedback
-</h1>
+<h1>Feedback</h1>
 
 <form
   class="gd-form"
@@ -11,16 +9,10 @@
   aria-label="Feedback form"
   novalidate
 >
-  <input
-    formControlName="referrer"
-    type="hidden"
-  />
+  <input formControlName="referrer" type="hidden" />
 
   <gd-form-field [errors]="errors">
-    <label
-      class="gd-control-label"
-      for="gd-feedback-reason"
-    >
+    <label class="gd-control-label" for="gd-feedback-reason">
       Reason for contact
     </label>
     <select
@@ -28,20 +20,13 @@
       id="gd-feedback-reason"
       formControlName="reason"
     >
-      <option *ngFor="let reason of reasons"
-        [value]="reason.value"
-      >
+      <option *ngFor="let reason of reasons" [value]="reason.value">
         {{ reason.name }}
       </option>
     </select>
   </gd-form-field>
   <gd-form-field [errors]="errors">
-    <label
-      class="gd-control-label"
-      for="gd-feedback-message"
-    >
-      Message
-    </label>
+    <label class="gd-control-label" for="gd-feedback-message"> Message </label>
     <textarea
       class="gd-form-control"
       id="gd-feedback-message"
@@ -49,10 +34,7 @@
       maxlength="2000"
       #messageInput
     ></textarea>
-    <gd-character-counter
-      [inputReference]="messageInput"
-      maxCharacters="2000"
-    >
+    <gd-character-counter [inputReference]="messageInput" maxCharacters="2000">
     </gd-character-counter>
   </gd-form-field>
 
@@ -61,10 +43,7 @@
     class="gd-screen-reader-only"
     [errors]="errors"
   >
-    <label
-      class="gd-control-label"
-      for="gd-feedback-nickname"
-    >
+    <label class="gd-control-label" for="gd-feedback-nickname">
       Nickname
     </label>
     <input

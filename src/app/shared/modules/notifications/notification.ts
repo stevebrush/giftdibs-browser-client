@@ -1,10 +1,6 @@
-import {
-  User
-} from '../user';
+import { User } from '../user';
 
-import {
-  NotificationType
-} from './notification-type';
+import { NotificationType } from './notification-type';
 
 export interface Notification {
   body?: string;

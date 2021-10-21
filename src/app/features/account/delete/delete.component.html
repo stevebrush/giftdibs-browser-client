@@ -1,12 +1,10 @@
 <gd-wait *ngIf="isLoading"></gd-wait>
 
 <div class="gd-container gd-container-sm gd-spacing-padding-even-large">
-  <h1>
-    Delete your account
-  </h1>
+  <h1>Delete your account</h1>
 
   <gd-notice noticeType="danger">
-    Are you sure you want to delete your account?<br>
+    Are you sure you want to delete your account?<br />
     <strong>This action cannot be undone!</strong>
   </gd-notice>
 
@@ -18,10 +16,7 @@
     novalidate
   >
     <gd-form-field [errors]="errors">
-      <label
-        class="gd-control-label"
-        for="gd-delete-account-password"
-      >
+      <label class="gd-control-label" for="gd-delete-account-password">
         Enter your password
       </label>
       <gd-password-viewer
@@ -42,10 +37,7 @@
     </gd-form-field>
 
     <div class="gd-button-group">
-      <a
-        class="gd-button gd-button-primary"
-        routerLink="/account/settings"
-      >
+      <a class="gd-button gd-button-primary" routerLink="/account/settings">
         Cancel
       </a>
       <button

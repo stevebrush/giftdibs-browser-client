@@ -1,14 +1,6 @@
-import {
-  Gift
-} from '../gift';
-
-import {
-  Dib
-} from '../dib';
+import { Dib } from '../dib';
+import { Gift } from '../gift';
 
 export class DibEditContext {
-  constructor(
-    public dib: Dib,
-    public gift: Gift
-  ) { }
+  constructor(public dib: Dib, public gift: Gift) {}
 }

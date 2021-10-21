@@ -1,20 +1,10 @@
-import {
-  NgModule
-} from '@angular/core';
-
-import {
-  CommonModule
-} from '@angular/common';
-
-import {
-  FormsModule,
-  ReactiveFormsModule
-} from '@angular/forms';
-
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   CharacterCounterModule,
   FormFieldModule,
-  WaitModule
+  WaitModule,
 } from '@giftdibs/ux';
 
 import { FeedbackRoutingModule } from './feedback-routing.module';
@@ -22,9 +12,7 @@ import { FeedbackComponent } from './feedback.component';
 import { FeedbackService } from './feedback.service';
 
 @NgModule({
-  declarations: [
-    FeedbackComponent
-  ],
+  declarations: [FeedbackComponent],
   imports: [
     CommonModule,
     CharacterCounterModule,
@@ -32,13 +20,9 @@ import { FeedbackService } from './feedback.service';
     FormsModule,
     FormFieldModule,
     ReactiveFormsModule,
-    WaitModule
+    WaitModule,
   ],
-  exports: [
-    FeedbackComponent
-  ],
-  providers: [
-    FeedbackService
-  ]
+  exports: [FeedbackComponent],
+  providers: [FeedbackService],
 })
-export class FeedbackModule { }
+export class FeedbackModule {}

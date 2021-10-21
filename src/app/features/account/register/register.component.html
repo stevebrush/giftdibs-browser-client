@@ -2,13 +2,9 @@
 
 <div class="gd-container gd-container-xxs gd-spacing-padding-even-large">
   <div class="gd-detail-pane">
-    <h1>
-      Create a free account
-    </h1>
+    <h1>Create a free account</h1>
 
-    <p>
-      Or <a routerLink="/account/login">log in to your account</a>
-    </p>
+    <p>Or <a routerLink="/account/login">log in to your account</a></p>
 
     <form
       class="gd-form"
@@ -42,9 +38,7 @@
         </gd-column>
       </gd-row>
 
-      <gd-form-field
-        [errors]="errors"
-      >
+      <gd-form-field [errors]="errors">
         <input
           autocomplete="off"
           type="email"
@@ -87,10 +81,9 @@
       <gd-form-field
         aria-hidden="true"
         class="gd-screen-reader-only"
-        [errors]="errors">
-        <label
-          class="gd-control-label"
-          for="gd-register-nickname">
+        [errors]="errors"
+      >
+        <label class="gd-control-label" for="gd-register-nickname">
           Nickname
         </label>
         <input
@@ -98,17 +91,21 @@
           class="gd-form-control"
           id="gd-register-nickname"
           formControlName="gdNickname"
-          autocomplete="off">
+          autocomplete="off"
+        />
       </gd-form-field>
 
       <p>
-        By creating an account, you agree to our <a routerLink="/support/terms">Terms of Service</a> and <a routerLink="/support/privacy">Privacy Policy</a>.
+        By creating an account, you agree to our
+        <a routerLink="/support/terms">Terms of Service</a> and
+        <a routerLink="/support/privacy">Privacy Policy</a>.
       </p>
 
       <button
         class="gd-button gd-button-primary"
         type="submit"
-        [disabled]="registerForm.disabled">
+        [disabled]="registerForm.disabled"
+      >
         Create new account
       </button>
     </form>
@@ -123,7 +120,7 @@
     </p>
   </div>
 
-  <p class="gd-text-deemphasized gd-text-small" style="text-align:center;">
+  <p class="gd-text-deemphasized gd-text-small" style="text-align: center">
     GiftDibs, LLC &copy; 2018
   </p>
 </div>

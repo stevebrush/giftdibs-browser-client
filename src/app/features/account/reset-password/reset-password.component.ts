@@ -3,45 +3,27 @@ import {
   ChangeDetectorRef,
   Component,
   OnDestroy,
-  OnInit
+  OnInit,
 } from '@angular/core';
-
-import {
-  ActivatedRoute,
-  Router
-} from '@angular/router';
-
 import {
   FormBuilder,
   FormControl,
   FormGroup,
-  Validators
+  Validators,
 } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SessionService } from '@giftdibs/session';
+import { AlertService } from '@giftdibs/ux';
 
-import {
-  Subject
-} from 'rxjs';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
-import {
-  takeUntil
-} from 'rxjs/operators';
-
-import {
-  AlertService
-} from '@giftdibs/ux';
-
-import {
-  SessionService
-} from '@giftdibs/session';
-
-import {
-  AccountService
-} from '../account.service';
+import { AccountService } from '../account.service';
 
 @Component({
   selector: 'gd-reset-password',
   templateUrl: './reset-password.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResetPasswordComponent implements OnInit, OnDestroy {
   public resetPasswordForm: FormGroup;
@@ -58,7 +40,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private sessionService: SessionService
+    private sessionService: SessionService,
   ) {
     this.createForm();
   }
@@ -67,27 +49,29 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     this.resetPasswordForm.disable();
 
     this.route.params
-      .pipe(
-        takeUntil(this.ngUnsubscribe)
-      )
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((params: any) => {
         this.isLoading = false;
         this.changeDetector.markForCheck();
 
         if (!params.resetPasswordToken) {
-
           // If the user is logged in, they should be able to access the form.
           if (this.sessionService.isLoggedIn) {
             this.resetPasswordForm.enable();
             return;
           }
 
-          this.alertService.error('A reset password token was not provided.', true);
+          this.alertService.error(
+            'A reset password token was not provided.',
+            true,
+          );
           this.router.navigate(['/account/forgotten']);
           return;
         }
 
-        this.resetPasswordForm.controls.resetPasswordToken.setValue(params.resetPasswordToken);
+        this.resetPasswordForm.controls.resetPasswordToken.setValue(
+          params.resetPasswordToken,
+        );
         this.resetPasswordForm.enable();
         this.hasToken = true;
         this.changeDetector.markForCheck();
@@ -110,42 +94,35 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     this.changeDetector.markForCheck();
 
     const formData = this.resetPasswordForm.value;
-    this.accountService.resetPassword(formData)
-      .subscribe(
-        (result: any) => {
-          if (this.hasToken) {
-            this.alertService.success(result.message, true);
-            this.router.navigate(['/account', 'login']);
-          } else {
-            this.alertService.success(result.message);
-            this.resetPasswordForm.reset();
-            this.resetPasswordForm.enable();
-            this.isLoading = false;
-            this.changeDetector.markForCheck();
-          }
-        },
-        (err: any) => {
-          this.errors = err.error.errors;
-          this.alertService.error(err.error.message);
+    this.accountService.resetPassword(formData).subscribe(
+      (result: any) => {
+        if (this.hasToken) {
+          this.alertService.success(result.message, true);
+          this.router.navigate(['/account', 'login']);
+        } else {
+          this.alertService.success(result.message);
+          this.resetPasswordForm.reset();
           this.resetPasswordForm.enable();
           this.isLoading = false;
           this.changeDetector.markForCheck();
         }
-      );
+      },
+      (err: any) => {
+        this.errors = err.error.errors;
+        this.alertService.error(err.error.message);
+        this.resetPasswordForm.enable();
+        this.isLoading = false;
+        this.changeDetector.markForCheck();
+      },
+    );
   }
 
   private createForm(): void {
     this.resetPasswordForm = this.formBuilder.group({
-      currentPassword: new FormControl(undefined, [
-        Validators.required
-      ]),
-      password: new FormControl(undefined, [
-        Validators.required
-      ]),
-      passwordAgain: new FormControl(undefined, [
-        Validators.required
-      ]),
-      resetPasswordToken: new FormControl(undefined, [])
+      currentPassword: new FormControl(undefined, [Validators.required]),
+      password: new FormControl(undefined, [Validators.required]),
+      passwordAgain: new FormControl(undefined, [Validators.required]),
+      resetPasswordToken: new FormControl(undefined, []),
     });
   }
 }

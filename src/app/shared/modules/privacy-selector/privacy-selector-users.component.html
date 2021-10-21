@@ -1,19 +1,17 @@
 <gd-modal>
   <gd-modal-header>
-    <gd-modal-heading>
-      Who can view this list?
-    </gd-modal-heading>
+    <gd-modal-heading> Who can view this list? </gd-modal-heading>
   </gd-modal-header>
   <gd-modal-body>
-    <form *ngIf="choices && choices.length else noFriends"
+    <form
+      *ngIf="choices && choices.length; else noFriends"
       class="gd-form"
       aria-label="Select users"
       [formGroup]="usersForm"
       (ngSubmit)="save()"
-      novalidate>
-      <gd-checklist
-        [choices]="choices"
-        formControlName="friends">
+      novalidate
+    >
+      <gd-checklist [choices]="choices" formControlName="friends">
       </gd-checklist>
     </form>
     <ng-template #noFriends>
@@ -22,11 +20,13 @@
   </gd-modal-body>
   <gd-modal-footer>
     <div class="gd-button-group">
-      <button *ngIf="choices && choices.length"
+      <button
+        *ngIf="choices && choices.length"
         type="button"
         class="gd-button gd-button-primary"
         [disabled]="usersForm.disabled"
-        (click)="save()">
+        (click)="save()"
+      >
         Choose
       </button>
       <button

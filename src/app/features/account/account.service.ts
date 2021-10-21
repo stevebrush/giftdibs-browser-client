@@ -1,33 +1,26 @@
-import {
-  Injectable
-} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { environment } from '@root/environments/environment';
 
-import {
-  HttpClient
-} from '@angular/common/http';
-
-import {
-  Observable
-} from 'rxjs';
-
-import {
-  environment
-} from '@root/environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class AccountService {
   private resourceUrl = environment.apiUrl + '/auth';
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 
   public login(emailAddress: string, password: string): Observable<any> {
-    return this.http.post(`${this.resourceUrl}/login`, { emailAddress, password });
+    return this.http.post(`${this.resourceUrl}/login`, {
+      emailAddress,
+      password,
+    });
   }
 
   public loginUsingFacebook(facebookUserAccessToken: string): Observable<any> {
-    return this.http.post(`${this.resourceUrl}/login-facebook`, { facebookUserAccessToken });
+    return this.http.post(`${this.resourceUrl}/login-facebook`, {
+      facebookUserAccessToken,
+    });
   }
 
   public forgotten(emailAddress: string): Observable<any> {
@@ -43,17 +36,26 @@ export class AccountService {
   }
 
   public resendEmailAddressVerification(id: string): Observable<any> {
-    return this.http.post(`${this.resourceUrl}/resend-email-verification`, { id });
+    return this.http.post(`${this.resourceUrl}/resend-email-verification`, {
+      id,
+    });
   }
 
-  public verifyEmailAddress(emailAddressVerificationToken: string): Observable<any> {
-    return this.http.post(`${this.resourceUrl}/verify-email`, { emailAddressVerificationToken });
+  public verifyEmailAddress(
+    emailAddressVerificationToken: string,
+  ): Observable<any> {
+    return this.http.post(`${this.resourceUrl}/verify-email`, {
+      emailAddressVerificationToken,
+    });
   }
 
-  public destroyWithPassword(userId: string, password: string): Observable<any> {
+  public destroyWithPassword(
+    userId: string,
+    password: string,
+  ): Observable<any> {
     return this.http.post(`${this.resourceUrl}/delete-account`, {
       password,
-      userId
+      userId,
     });
   }
 }

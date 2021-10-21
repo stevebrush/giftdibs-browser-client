@@ -9,6 +9,6 @@ export interface User {
   notificationSettings?: {
     [settingName: string]: {
       allowEmail?: boolean;
-    }
+    };
   };
 }

@@ -1,27 +1,14 @@
-import {
-  Injectable
-} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { environment } from '@root/environments/environment';
 
-import {
-  HttpClient
-} from '@angular/common/http';
-
-import {
-  Observable,
-  Observer
-} from 'rxjs';
-
-import {
-  environment
-} from '@root/environments/environment';
+import { Observable, Observer } from 'rxjs';
 
 @Injectable()
 export class AssetsService {
   private resourceUrl = environment.apiUrl;
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 
   public uploadAvatar(file: any): Observable<any> {
     return this.uploadFile(file, `${this.resourceUrl}/avatars`);
@@ -32,7 +19,10 @@ export class AssetsService {
   }
 
   public uploadGiftThumbnail(file: any, giftId: string): Observable<any> {
-    return this.uploadFile(file, `${this.resourceUrl}/gifts/${giftId}/thumbnails`);
+    return this.uploadFile(
+      file,
+      `${this.resourceUrl}/gifts/${giftId}/thumbnails`,
+    );
   }
 
   public removeGiftThumbnail(giftId: string): Observable<any> {
@@ -44,10 +34,7 @@ export class AssetsService {
       const data = new FormData();
       data.append('file', file);
 
-      this.http.post(
-        url,
-        data
-      ).subscribe(
+      this.http.post(url, data).subscribe(
         (result: any) => {
           observer.next(result);
           observer.complete();
@@ -55,7 +42,7 @@ export class AssetsService {
         (err: any) => {
           observer.error(err);
           observer.complete();
-        }
+        },
       );
     });
   }

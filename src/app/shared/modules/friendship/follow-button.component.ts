@@ -3,34 +3,21 @@ import {
   ChangeDetectorRef,
   Component,
   Input,
-  OnInit
+  OnInit,
 } from '@angular/core';
+import { SessionService } from '@giftdibs/session';
+import { AlertService } from '@giftdibs/ux';
 
-import {
-  SessionService
-} from '@giftdibs/session';
+import { finalize } from 'rxjs/operators';
 
-import {
-  AlertService
-} from '@giftdibs/ux';
-
-import {
-  finalize
-} from 'rxjs/operators';
-
-import {
-  FriendshipService
-} from './friendship.service';
-
-import {
-  Friendship
-} from './friendship';
+import { Friendship } from './friendship';
+import { FriendshipService } from './friendship.service';
 
 @Component({
   selector: 'gd-follow-button',
   templateUrl: './follow-button.component.html',
   styleUrls: ['./follow-button.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FollowButtonComponent implements OnInit {
   @Input()
@@ -46,8 +33,8 @@ export class FollowButtonComponent implements OnInit {
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
     private friendshipService: FriendshipService,
-    private sessionService: SessionService
-  ) { }
+    private sessionService: SessionService,
+  ) {}
 
   public ngOnInit(): void {
     const sessionUserId = this.sessionService.user.id;
@@ -56,10 +43,11 @@ export class FollowButtonComponent implements OnInit {
     this.isSessionUser = this.sessionService.isSessionUser(ownerId);
 
     if (!this.isSessionUser) {
-      this.friendshipService.getFollowingByUserId(sessionUserId)
+      this.friendshipService
+        .getFollowingByUserId(sessionUserId)
         .subscribe((friendships: any) => {
           const found = friendships.find((friendship: Friendship) => {
-            return (friendship.friendId === ownerId);
+            return friendship.friendId === ownerId;
           });
 
           if (found) {
@@ -77,12 +65,13 @@ export class FollowButtonComponent implements OnInit {
     this.isLoading = true;
     this.changeDetector.markForCheck();
 
-    this.friendshipService.create(this.friendId)
+    this.friendshipService
+      .create(this.friendId)
       .pipe(
         finalize(() => {
           this.isLoading = false;
           this.changeDetector.markForCheck();
-        })
+        }),
       )
       .subscribe(
         (result: any) => {
@@ -91,7 +80,7 @@ export class FollowButtonComponent implements OnInit {
         },
         (err: any) => {
           this.alertService.error(err.error.message);
-        }
+        },
       );
   }
 
@@ -99,12 +88,13 @@ export class FollowButtonComponent implements OnInit {
     this.isLoading = true;
     this.changeDetector.markForCheck();
 
-    this.friendshipService.remove(this.friendshipId)
+    this.friendshipService
+      .remove(this.friendshipId)
       .pipe(
         finalize(() => {
           this.isLoading = false;
           this.changeDetector.markForCheck();
-        })
+        }),
       )
       .subscribe(
         () => {
@@ -112,7 +102,7 @@ export class FollowButtonComponent implements OnInit {
         },
         (err: any) => {
           this.alertService.error(err.error.message);
-        }
+        },
       );
   }
 }

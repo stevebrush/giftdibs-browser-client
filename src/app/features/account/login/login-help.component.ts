@@ -1,42 +1,28 @@
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Component
+  Component,
 } from '@angular/core';
-
 import {
   FormBuilder,
   FormControl,
   FormGroup,
-  Validators
+  Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AlertService, ModalInstance } from '@giftdibs/ux';
 
-import {
-  Router
-} from '@angular/router';
+import { finalize } from 'rxjs/operators';
 
-import {
-  AlertService,
-  ModalInstance
-} from '@giftdibs/ux';
+import { AccountService } from '../account.service';
 
-import {
-  finalize
-} from 'rxjs/operators';
-
-import {
-  AccountService
-} from '../account.service';
-
-import {
-  LoginHelpContext
-} from './login-help-context';
+import { LoginHelpContext } from './login-help-context';
 
 @Component({
   selector: 'gd-login-help',
   templateUrl: './login-help.component.html',
   styleUrls: ['./login-help.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginHelpComponent {
   public forgottenForm: FormGroup;
@@ -49,7 +35,7 @@ export class LoginHelpComponent {
     private context: LoginHelpContext,
     private formBuilder: FormBuilder,
     private modal: ModalInstance<any>,
-    private router: Router
+    private router: Router,
   ) {
     this.createForm();
   }
@@ -72,12 +58,13 @@ export class LoginHelpComponent {
     this.changeDetector.markForCheck();
 
     const formData = this.forgottenForm.value;
-    this.accountService.forgotten(formData.emailAddress)
+    this.accountService
+      .forgotten(formData.emailAddress)
       .pipe(
         finalize(() => {
           this.forgottenForm.enable();
           this.changeDetector.markForCheck();
-        })
+        }),
       )
       .subscribe(
         (result: any) => {
@@ -87,15 +74,15 @@ export class LoginHelpComponent {
         (err: any) => {
           this.errors = err.error.errors;
           this.alertService.error(err.error.message);
-        }
+        },
       );
   }
 
   private createForm(): void {
     this.forgottenForm = this.formBuilder.group({
       emailAddress: new FormControl(this.context.emailAddress, [
-        Validators.required
-      ])
+        Validators.required,
+      ]),
     });
   }
 }

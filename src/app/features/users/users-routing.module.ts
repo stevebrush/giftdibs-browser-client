@@ -1,11 +1,5 @@
-import {
-  NgModule
-} from '@angular/core';
-
-import {
-  RouterModule,
-  Routes
-} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 import { FollowersComponent } from './followers.component';
 import { FollowingComponent } from './following.component';
@@ -15,25 +9,25 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: UserComponent
+    component: UserComponent,
   },
   {
     path: ':userId',
     pathMatch: 'full',
-    component: UserComponent
+    component: UserComponent,
   },
   {
     path: ':userId/followers',
-    component: FollowersComponent
+    component: FollowersComponent,
   },
   {
     path: ':userId/following',
-    component: FollowingComponent
-  }
+    component: FollowingComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class UsersRoutingModule { }
+export class UsersRoutingModule {}

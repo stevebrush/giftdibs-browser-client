@@ -2,41 +2,22 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  OnInit
+  OnInit,
 } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AlertService } from '@giftdibs/ux';
+import { ModalInstance } from '@giftdibs/ux';
 
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup
-} from '@angular/forms';
+import { Dib, DibService } from '../dib';
+import { Gift } from '../gift';
 
-import {
-  AlertService
-} from '@giftdibs/ux';
-
-import {
-  ModalInstance
-} from '@giftdibs/ux';
-
-import {
-  Dib,
-  DibService
-} from '../dib';
-
-import {
-  Gift
-} from '../gift';
-
-import {
-  DibEditContext
-} from './dib-edit-context';
+import { DibEditContext } from './dib-edit-context';
 
 @Component({
   selector: 'gd-dib-edit',
   templateUrl: './dib-edit.component.html',
   styleUrls: ['./dib-edit.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DibEditComponent implements OnInit {
   public dib: Dib;
@@ -51,8 +32,8 @@ export class DibEditComponent implements OnInit {
     private context: DibEditContext,
     private dibService: DibService,
     private formBuilder: FormBuilder,
-    private modal: ModalInstance<any>
-  ) { }
+    private modal: ModalInstance<any>,
+  ) {}
 
   public ngOnInit(): void {
     this.gift = this.context.gift;
@@ -90,7 +71,7 @@ export class DibEditComponent implements OnInit {
     obs.subscribe(
       (result: any) => {
         this.modal.close('save', {
-          dibId: result.data.dibId
+          dibId: result.data.dibId,
         });
       },
       (err: any) => {
@@ -100,7 +81,7 @@ export class DibEditComponent implements OnInit {
         this.dibForm.enable();
         this.isLoading = false;
         this.changeDetector.markForCheck();
-      }
+      },
     );
   }
 
@@ -110,7 +91,7 @@ export class DibEditComponent implements OnInit {
       isAnonymous: false,
       notes: undefined,
       pricePaid: undefined,
-      quantity: 1
+      quantity: 1,
     });
   }
 }

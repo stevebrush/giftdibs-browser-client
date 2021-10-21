@@ -1,14 +1,6 @@
-import {
-  NgModule
-} from '@angular/core';
-
-import {
-  CommonModule
-} from '@angular/common';
-
-import {
-  GridModule
-} from '@giftdibs/ux';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { GridModule } from '@giftdibs/ux';
 
 import { AboutComponent } from './about/about.component';
 import { FaqComponent } from './faq/faq.component';
@@ -18,17 +10,13 @@ import { SupportComponent } from './support.component';
 import { TermsComponent } from './terms/terms.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    GridModule,
-    SupportRoutingModule
-  ],
+  imports: [CommonModule, GridModule, SupportRoutingModule],
   declarations: [
     AboutComponent,
     FaqComponent,
     PrivacyComponent,
     TermsComponent,
-    SupportComponent
-  ]
+    SupportComponent,
+  ],
 })
-export class SupportModule { }
+export class SupportModule {}

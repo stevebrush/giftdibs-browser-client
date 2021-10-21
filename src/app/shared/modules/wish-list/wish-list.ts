@@ -1,18 +1,8 @@
-import {
-  Gift
-} from '../gift';
+import { Gift } from '../gift';
+import { User } from '../user';
 
-import {
-  User
-} from '../user';
-
-import {
-  WishListPrivacy
-} from './wish-list-privacy';
-
-import {
-  WishListType
-} from './wish-list-type';
+import { WishListPrivacy } from './wish-list-privacy';
+import { WishListType } from './wish-list-type';
 
 export interface WishList {
   dateUpdated?: Date;

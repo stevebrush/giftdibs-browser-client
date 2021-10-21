@@ -1,33 +1,11 @@
-import {
-  NgModule
-} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { IconModule } from '@giftdibs/ux';
+import { ChecklistModule, DropdownMenuModule, ModalModule } from '@giftdibs/ux';
 
-import {
-  CommonModule
-} from '@angular/common';
-
-import {
-  FormsModule,
-  ReactiveFormsModule
-} from '@angular/forms';
-
-import {
-  IconModule
-} from '@giftdibs/ux';
-
-import {
-  ChecklistModule,
-  DropdownMenuModule,
-  ModalModule
-} from '@giftdibs/ux';
-
-import {
-  PrivacySelectorComponent
-} from './privacy-selector.component';
-
-import {
-  PrivacySelectorUsersComponent
-} from './privacy-selector-users.component';
+import { PrivacySelectorUsersComponent } from './privacy-selector-users.component';
+import { PrivacySelectorComponent } from './privacy-selector.component';
 
 @NgModule({
   imports: [
@@ -37,17 +15,10 @@ import {
     FormsModule,
     IconModule,
     ModalModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  declarations: [
-    PrivacySelectorComponent,
-    PrivacySelectorUsersComponent
-  ],
-  exports: [
-    PrivacySelectorComponent
-  ],
-  entryComponents: [
-    PrivacySelectorUsersComponent
-  ]
+  declarations: [PrivacySelectorComponent, PrivacySelectorUsersComponent],
+  exports: [PrivacySelectorComponent],
+  entryComponents: [PrivacySelectorUsersComponent],
 })
 export class PrivacySelectorModule {}

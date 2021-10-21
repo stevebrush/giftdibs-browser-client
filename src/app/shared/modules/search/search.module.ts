@@ -1,24 +1,8 @@
-import {
-  NgModule
-} from '@angular/core';
-
-import {
-  CommonModule
-} from '@angular/common';
-
-import {
-  HttpClientModule
-} from '@angular/common/http';
-
-import {
-  RouterModule
-} from '@angular/router';
-
-import {
-  MediaModule,
-  ThumbnailModule,
-  TypeaheadModule
-} from '@giftdibs/ux';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { MediaModule, ThumbnailModule, TypeaheadModule } from '@giftdibs/ux';
 
 import { SearchComponent } from './search.component';
 
@@ -29,13 +13,9 @@ import { SearchComponent } from './search.component';
     MediaModule,
     RouterModule,
     TypeaheadModule,
-    ThumbnailModule
+    ThumbnailModule,
   ],
-  exports: [
-    SearchComponent
-  ],
-  declarations: [
-    SearchComponent
-  ]
+  exports: [SearchComponent],
+  declarations: [SearchComponent],
 })
-export class SearchModule { }
+export class SearchModule {}

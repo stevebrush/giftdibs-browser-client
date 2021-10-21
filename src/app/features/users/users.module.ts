@@ -1,31 +1,10 @@
-import {
-  NgModule
-} from '@angular/core';
-
-import {
-  CommonModule
-} from '@angular/common';
-
-import {
-  FriendshipModule
-} from '@app/shared/modules/friendship';
-
-import {
-  UserModule
-} from '@app/shared/modules/user';
-
-import {
-  WishListModule
-} from '@app/shared/modules/wish-list';
-
-import {
-  WishListEditModule
-} from '@app/shared/modules/wish-list-edit';
-
-import {
-  WishListPreviewModule
-} from '@app/shared/modules/wish-list-preview';
-
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FriendshipModule } from '@app/shared/modules/friendship';
+import { UserModule } from '@app/shared/modules/user';
+import { WishListModule } from '@app/shared/modules/wish-list';
+import { WishListEditModule } from '@app/shared/modules/wish-list-edit';
+import { WishListPreviewModule } from '@app/shared/modules/wish-list-preview';
 import {
   CardModule,
   GridModule,
@@ -35,7 +14,7 @@ import {
   NoticeModule,
   RepeaterModule,
   ThumbnailModule,
-  WaitModule
+  WaitModule,
 } from '@giftdibs/ux';
 
 import { FollowersComponent } from './followers.component';
@@ -61,13 +40,13 @@ import { UsersRoutingModule } from './users-routing.module';
     WaitModule,
     WishListEditModule,
     WishListModule,
-    WishListPreviewModule
+    WishListPreviewModule,
   ],
   declarations: [
     UserComponent,
     FollowersComponent,
     FollowingComponent,
-    FriendListComponent
-  ]
+    FriendListComponent,
+  ],
 })
-export class UsersModule { }
+export class UsersModule {}

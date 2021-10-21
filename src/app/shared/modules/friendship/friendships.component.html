@@ -1,7 +1,5 @@
-<div
-  class="gd-friendships"
-  [gdHideUntil]="!isLoading"
->
-  <a routerLink="followers">{{ followers?.length }}&nbsp;followers</a>&nbsp;&bull;
+<div class="gd-friendships" [gdHideUntil]="!isLoading">
+  <a routerLink="followers">{{ followers?.length }}&nbsp;followers</a
+  >&nbsp;&bull;
   <a routerLink="following">{{ following?.length }}&nbsp;following</a>
 </div>

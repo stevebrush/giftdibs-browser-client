@@ -1,39 +1,13 @@
-import {
-  NgModule
-} from '@angular/core';
-
-import {
-  CommonModule
-} from '@angular/common';
-
-import {
-  RouterModule
-} from '@angular/router';
-
-import {
-  CommentModule
-} from '@app/shared/modules/comment';
-
-import {
-  DibControlsModule
-} from '@app/shared/modules/dib-controls';
-
-import {
-  GiftModule
-} from '@app/shared/modules/gift';
-
-import {
-  GiftEditModule
-} from '@app/shared/modules/gift-edit';
-
-import {
-  GiftMoveModule
-} from '@app/shared/modules/gift-move';
-
-import {
-  GiftPriorityModule
-} from '@app/shared/modules/gift-priority';
-
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { CommentModule } from '@app/shared/modules/comment';
+import { DibControlsModule } from '@app/shared/modules/dib-controls';
+import { GiftModule } from '@app/shared/modules/gift';
+import { GiftEditModule } from '@app/shared/modules/gift-edit';
+import { GiftMoveModule } from '@app/shared/modules/gift-move';
+import { GiftPriorityModule } from '@app/shared/modules/gift-priority';
+import { ProductPreviewModule } from '@app/shared/modules/product-preview';
 import {
   ConfirmModule,
   DateTimeModule,
@@ -45,12 +19,8 @@ import {
   ModalModule,
   NoticeModule,
   ThumbnailModule,
-  WaitModule
+  WaitModule,
 } from '@giftdibs/ux';
-
-import {
-  ProductPreviewModule
-} from '@app/shared/modules/product-preview';
 
 import { GiftDetailComponent } from './gift-detail.component';
 
@@ -75,13 +45,9 @@ import { GiftDetailComponent } from './gift-detail.component';
     ProductPreviewModule,
     RouterModule,
     ThumbnailModule,
-    WaitModule
+    WaitModule,
   ],
-  declarations: [
-    GiftDetailComponent
-  ],
-  entryComponents: [
-    GiftDetailComponent
-  ]
+  declarations: [GiftDetailComponent],
+  entryComponents: [GiftDetailComponent],
 })
-export class GiftDetailModule { }
+export class GiftDetailModule {}

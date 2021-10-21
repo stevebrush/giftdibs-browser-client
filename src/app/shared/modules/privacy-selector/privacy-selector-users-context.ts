@@ -1,6 +1,4 @@
-import {
-  User
-} from '../user';
+import { User } from '../user';
 
 export class PrivacySelectorUsersContext {
   public user: User;

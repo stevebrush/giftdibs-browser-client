@@ -1,27 +1,9 @@
-import {
-  NgModule
-} from '@angular/core';
-
-import {
-  CommonModule
-} from '@angular/common';
-
-import {
-  GiftEditModule
-} from '@app/shared/modules/gift-edit';
-
-import {
-  GiftPreviewModule
-} from '@app/shared/modules/gift-preview';
-
-import {
-  WishListModule
-} from '@app/shared/modules/wish-list';
-
-import {
-  WishListEditModule
-} from '@app/shared/modules/wish-list-edit';
-
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { GiftEditModule } from '@app/shared/modules/gift-edit';
+import { GiftPreviewModule } from '@app/shared/modules/gift-preview';
+import { WishListModule } from '@app/shared/modules/wish-list';
+import { WishListEditModule } from '@app/shared/modules/wish-list-edit';
 import {
   CardModule,
   ConfirmModule,
@@ -31,12 +13,9 @@ import {
   MediaModule,
   NoticeModule,
   ThumbnailModule,
-  WaitModule
+  WaitModule,
 } from '@giftdibs/ux';
-
-import {
-  IconModule
-} from '@giftdibs/ux';
+import { IconModule } from '@giftdibs/ux';
 
 import { WishListComponent } from './wish-list.component';
 import { WishListsRoutingModule } from './wish-lists-routing.module';
@@ -58,10 +37,8 @@ import { WishListsRoutingModule } from './wish-lists-routing.module';
     WaitModule,
     WishListEditModule,
     WishListModule,
-    WishListsRoutingModule
+    WishListsRoutingModule,
   ],
-  declarations: [
-    WishListComponent
-  ]
+  declarations: [WishListComponent],
 })
-export class WishListsModule { }
+export class WishListsModule {}

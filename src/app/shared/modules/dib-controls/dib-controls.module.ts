@@ -1,34 +1,16 @@
-import {
-  NgModule
-} from '@angular/core';
-
-import {
-  CommonModule
-} from '@angular/common';
-
-import {
-  RouterModule
-} from '@angular/router';
-
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { DibService } from '@app/shared/modules/dib';
+import { DibEditComponent, DibEditModule } from '@app/shared/modules/dib-edit';
 import {
   ConfirmModule,
   DropdownMenuModule,
   IconModule,
-  NoticeModule
+  NoticeModule,
 } from '@giftdibs/ux';
 
-import {
-  DibService
-} from '@app/shared/modules/dib';
-
-import {
-  DibEditComponent,
-  DibEditModule
-} from '@app/shared/modules/dib-edit';
-
-import {
-  DibControlsComponent
-} from './dib-controls.component';
+import { DibControlsComponent } from './dib-controls.component';
 
 @NgModule({
   imports: [
@@ -38,19 +20,11 @@ import {
     DropdownMenuModule,
     IconModule,
     NoticeModule,
-    RouterModule
+    RouterModule,
   ],
-  declarations: [
-    DibControlsComponent
-  ],
-  exports: [
-    DibControlsComponent
-  ],
-  providers: [
-    DibService
-  ],
-  entryComponents: [
-    DibEditComponent
-  ]
+  declarations: [DibControlsComponent],
+  exports: [DibControlsComponent],
+  providers: [DibService],
+  entryComponents: [DibEditComponent],
 })
-export class DibControlsModule { }
+export class DibControlsModule {}

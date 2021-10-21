@@ -1,15 +1,8 @@
-import {
-  NgModule
-} from '@angular/core';
-
-import {
-  CommonModule
-} from '@angular/common';
-
-import {
-  ReactiveFormsModule
-} from '@angular/forms';
-
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AssetsModule } from '@app/shared/modules/assets';
+import { UserModule } from '@app/shared/modules/user';
 import {
   ChecklistModule,
   FormFieldModule,
@@ -18,28 +11,14 @@ import {
   ImageUploaderModule,
   NoticeModule,
   PasswordViewerModule,
-  WaitModule
+  WaitModule,
 } from '@giftdibs/ux';
-
-import {
-  AssetsModule
-} from '@app/shared/modules/assets';
-
-import {
-  UserModule
-} from '@app/shared/modules/user';
-
-import {
-  IconModule
-} from '@giftdibs/ux';
-
-import {
-  FacebookModule
-} from './facebook';
+import { IconModule } from '@giftdibs/ux';
 
 import { AccountRoutingModule } from './account-routing.module';
 import { AccountService } from './account.service';
 import { DeleteComponent } from './delete/delete.component';
+import { FacebookModule } from './facebook';
 import { ForgottenComponent } from './forgotten/forgotten.component';
 import { RegisterComponent } from './register/register.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
@@ -62,7 +41,7 @@ import { VerifyAccountComponent } from './verify/verify.component';
     PasswordViewerModule,
     ReactiveFormsModule,
     UserModule,
-    WaitModule
+    WaitModule,
   ],
   declarations: [
     ForgottenComponent,
@@ -70,10 +49,8 @@ import { VerifyAccountComponent } from './verify/verify.component';
     ResetPasswordComponent,
     VerifyAccountComponent,
     SettingsComponent,
-    DeleteComponent
+    DeleteComponent,
   ],
-  providers: [
-    AccountService
-  ]
+  providers: [AccountService],
 })
-export class AccountModule { }
+export class AccountModule {}

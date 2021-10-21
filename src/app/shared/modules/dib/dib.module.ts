@@ -1,21 +1,10 @@
-import {
-  NgModule
-} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import {
-  CommonModule
-} from '@angular/common';
-
-import {
-  DibService
-} from './dib.service';
+import { DibService } from './dib.service';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
-  providers: [
-    DibService
-  ]
+  imports: [CommonModule],
+  providers: [DibService],
 })
-export class DibModule { }
+export class DibModule {}

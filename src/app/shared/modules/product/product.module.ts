@@ -1,21 +1,10 @@
-import {
-  NgModule
-} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import {
-  CommonModule
-} from '@angular/common';
-
-import {
-  ProductService
-} from './product.service';
+import { ProductService } from './product.service';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
-  providers: [
-    ProductService
-  ]
+  imports: [CommonModule],
+  providers: [ProductService],
 })
-export class ProductModule { }
+export class ProductModule {}

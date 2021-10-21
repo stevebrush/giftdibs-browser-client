@@ -2,39 +2,26 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  OnInit
+  OnInit,
 } from '@angular/core';
-
 import {
   FormBuilder,
   FormControl,
   FormGroup,
-  Validators
+  Validators,
 } from '@angular/forms';
+import { AlertService } from '@giftdibs/ux';
+import { ModalInstance } from '@giftdibs/ux';
 
-import {
-  AlertService
-} from '@giftdibs/ux';
+import { WishList, WishListService, WishListType } from '../wish-list';
 
-import {
-  ModalInstance
-} from '@giftdibs/ux';
-
-import {
-  WishList,
-  WishListService,
-  WishListType
-} from '../wish-list';
-
-import {
-  WishListEditContext
-} from './wish-list-edit-context';
+import { WishListEditContext } from './wish-list-edit-context';
 
 @Component({
   selector: 'gd-wish-list-edit',
   templateUrl: './wish-list-edit.component.html',
   styleUrls: ['./wish-list-edit.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WishListEditComponent implements OnInit {
   public wishListForm: FormGroup;
@@ -48,8 +35,8 @@ export class WishListEditComponent implements OnInit {
     private formBuilder: FormBuilder,
     private modal: ModalInstance<any>,
     private context: WishListEditContext,
-    private wishListService: WishListService
-  ) { }
+    private wishListService: WishListService,
+  ) {}
 
   public ngOnInit(): void {
     this.createForm();
@@ -95,17 +82,15 @@ export class WishListEditComponent implements OnInit {
         this.alertService.error(error.message);
         this.errors = error.errors;
         this.enableView();
-      }
+      },
     );
   }
 
   private createForm(): void {
     this.wishListForm = this.formBuilder.group({
-      name: new FormControl(null, [
-        Validators.required
-      ]),
+      name: new FormControl(null, [Validators.required]),
       privacy: new FormControl(null, []),
-      type: new FormControl(WishListType.WishList)
+      type: new FormControl(WishListType.WishList),
     });
   }
 

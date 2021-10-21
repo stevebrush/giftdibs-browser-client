@@ -10,21 +10,12 @@
     "noUnusedLocals": true,
     "noImplicitAny": true,
     "target": "es5",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2017",
-      "dom"
-    ],
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2017", "dom"],
     "baseUrl": "src",
     "paths": {
-      "@app/*": [
-        "app/*"
-      ],
-      "@root/*": [
-        "*"
-      ]
+      "@app/*": ["app/*"],
+      "@root/*": ["*"]
     }
   },
   "angularCompilerOptions": {

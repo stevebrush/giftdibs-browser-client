@@ -1,18 +1,12 @@
 <div class="app-wrapper">
-  <app-navbar>
-  </app-navbar>
+  <app-navbar> </app-navbar>
 
   <main class="app-main">
     <div class="gd-container gd-container-sm">
-      <gd-verify-email-notice
-        [visibleForRoutes]="[
-          '/',
-          '/account/settings'
-        ]">
+      <gd-verify-email-notice [visibleForRoutes]="['/', '/account/settings']">
       </gd-verify-email-notice>
     </div>
 
-    <router-outlet>
-    </router-outlet>
+    <router-outlet> </router-outlet>
   </main>
 </div>

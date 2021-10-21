@@ -1,33 +1,24 @@
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Component
+  Component,
 } from '@angular/core';
-
-import {
-  Router
-} from '@angular/router';
-
 import {
   FormBuilder,
   FormControl,
   FormGroup,
-  Validators
+  Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AlertService } from '@giftdibs/ux';
 
-import {
-  AlertService
-} from '@giftdibs/ux';
-
-import {
-  AccountService
-} from '../account.service';
+import { AccountService } from '../account.service';
 
 @Component({
   selector: 'gd-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterComponent {
   public registerForm: FormGroup;
@@ -39,7 +30,7 @@ export class RegisterComponent {
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
   ) {
     this.createForm();
   }
@@ -63,44 +54,35 @@ export class RegisterComponent {
     this.errors = [];
     this.changeDetector.markForCheck();
 
-    this.accountService.register(this.registerForm.value)
-      .subscribe(
-        (result: any) => {
-          this.router.navigate(['/users', result.data.userId]);
-        },
-        (err: any) => {
-          const error = err.error;
+    this.accountService.register(this.registerForm.value).subscribe(
+      (result: any) => {
+        this.router.navigate(['/users', result.data.userId]);
+      },
+      (err: any) => {
+        const error = err.error;
 
-          // Spam control
-          if (error.code === 108) {
-            this.router.navigate(['/page-not-found']);
-            return;
-          }
-
-          this.alertService.error(error.message);
-          this.errors = error.errors;
-          this.registerForm.enable();
-          this.isLoading = false;
-          this.changeDetector.markForCheck();
+        // Spam control
+        if (error.code === 108) {
+          this.router.navigate(['/page-not-found']);
+          return;
         }
-      );
+
+        this.alertService.error(error.message);
+        this.errors = error.errors;
+        this.registerForm.enable();
+        this.isLoading = false;
+        this.changeDetector.markForCheck();
+      },
+    );
   }
 
   private createForm(): void {
     this.registerForm = this.formBuilder.group({
-      firstName: new FormControl(null, [
-        Validators.required
-      ]),
-      lastName: new FormControl(null, [
-        Validators.required
-      ]),
+      firstName: new FormControl(null, [Validators.required]),
+      lastName: new FormControl(null, [Validators.required]),
       gdNickname: null,
-      emailAddress: new FormControl(null, [
-        Validators.required
-      ]),
-      password: new FormControl(null, [
-        Validators.required
-      ])
+      emailAddress: new FormControl(null, [Validators.required]),
+      password: new FormControl(null, [Validators.required]),
     });
   }
 }

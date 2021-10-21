@@ -1,5 +1,6 @@
 <div class="gd-comment-preview">
-  <gd-comment-edit *ngIf="isEdit else commentPreview"
+  <gd-comment-edit
+    *ngIf="isEdit; else commentPreview"
     [comment]="comment"
     (cancelled)="onCancelled()"
     (saved)="onSaved()"
@@ -20,7 +21,9 @@
       <gd-media-content>
         <gd-media-body>
           <div class="gd-comment-body">
-            <a routerLink="/users/{{ comment.user.id }}">{{ comment.user.firstName }} {{ comment.user.lastName }}</a>
+            <a routerLink="/users/{{ comment.user.id }}"
+              >{{ comment.user.firstName }} {{ comment.user.lastName }}</a
+            >
             {{ comment.body }}
           </div>
           <div class="gd-comment-footer gd-text-small">
@@ -38,7 +41,7 @@
           gdDropdownMenuTrigger
           menuHorizontalAlignment="right"
           [menuItems]="menuItems"
-          (click)="$event.stopPropagation();$event.preventDefault();"
+          (click)="$event.stopPropagation(); $event.preventDefault()"
         >
           <gd-icon icon="ellipsis-v"></gd-icon>
         </button>

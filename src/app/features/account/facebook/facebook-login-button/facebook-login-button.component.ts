@@ -5,32 +5,22 @@ import {
   EventEmitter,
   Input,
   OnDestroy,
-  Output
+  Output,
 } from '@angular/core';
+import { AlertService, WindowRefService } from '@giftdibs/ux';
 
-import {
-  finalize
-} from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 
-import {
-  AlertService,
-  WindowRefService
-} from '@giftdibs/ux';
+import { AccountService } from '../../account.service';
 
-import {
-  AccountService
-} from '../../account.service';
-
-import {
-  FacebookLoginButtonResult
-} from './facebook-login-button-result';
+import { FacebookLoginButtonResult } from './facebook-login-button-result';
 
 // TODO: Convert this into a directive instead.
 @Component({
   selector: 'gd-facebook-login-button',
   templateUrl: './facebook-login-button.component.html',
   styleUrls: ['./facebook-login-button.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FacebookLoginButtonComponent implements OnDestroy {
   @Input()
@@ -51,8 +41,8 @@ export class FacebookLoginButtonComponent implements OnDestroy {
     private accountService: AccountService,
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
-    private windowService: WindowRefService
-  ) { }
+    private windowService: WindowRefService,
+  ) {}
 
   public ngOnDestroy(): void {
     this.success.complete();
@@ -62,7 +52,7 @@ export class FacebookLoginButtonComponent implements OnDestroy {
   public login(): void {
     const FB = (this.windowService.nativeWindow as any).FB;
     const facebookConfig = {
-      scope: 'email'
+      scope: 'email',
     };
 
     this.isLoading = true;
@@ -75,7 +65,7 @@ export class FacebookLoginButtonComponent implements OnDestroy {
         this.changeDetector.detectChanges();
         this.failure.next();
         this.alertService.error(
-          'Please provide the necessary permissions to continue with Facebook.'
+          'Please provide the necessary permissions to continue with Facebook.',
         );
         return;
       }
@@ -89,13 +79,14 @@ export class FacebookLoginButtonComponent implements OnDestroy {
         return;
       }
 
-      this.accountService.loginUsingFacebook(response.authResponse.accessToken)
+      this.accountService
+        .loginUsingFacebook(response.authResponse.accessToken)
         .pipe(
           finalize(() => {
             this.isLoading = false;
             this.disabled = false;
             this.changeDetector.markForCheck();
-          })
+          }),
         )
         .subscribe(
           (data: any) => {
@@ -107,7 +98,7 @@ export class FacebookLoginButtonComponent implements OnDestroy {
             // the failure emitter, so that the consumer can handle
             // the error messaging.
             this.alertService.error(err.error.message);
-          }
+          },
         );
     }, facebookConfig);
   }

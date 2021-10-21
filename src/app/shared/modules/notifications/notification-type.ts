@@ -3,5 +3,5 @@ export enum NotificationType {
   GiftCommentAlso = 'gift_comment_also',
   GiftDelivered = 'gift_delivered',
   GiftReceived = 'gift_received',
-  FriendshipNew = 'friendship_new'
+  FriendshipNew = 'friendship_new',
 }

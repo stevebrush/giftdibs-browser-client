@@ -1,10 +1,5 @@
-import {
-  Gift
-} from '../gift';
+import { Gift } from '../gift';
 
 export class GiftEditContext {
-  constructor(
-    public gift?: Gift,
-    public wishListId?: string
-  ) { }
+  constructor(public gift?: Gift, public wishListId?: string) {}
 }

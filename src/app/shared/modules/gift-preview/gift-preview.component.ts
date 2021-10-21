@@ -4,24 +4,19 @@ import {
   ChangeDetectorRef,
   Component,
   Input,
-  OnInit
+  OnInit,
 } from '@angular/core';
+import { SessionService } from '@giftdibs/session';
 
-import {
-  SessionService
-} from '@giftdibs/session';
+import { Gift, GiftService } from '../gift';
 
-import {
-  Gift,
-  GiftService
-} from '../gift';
 // #endregion
 
 @Component({
   selector: 'gd-gift-preview',
   templateUrl: './gift-preview.component.html',
   styleUrls: ['./gift-preview.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GiftPreviewComponent implements OnInit {
   @Input()
@@ -38,8 +33,8 @@ export class GiftPreviewComponent implements OnInit {
   constructor(
     private changeDetector: ChangeDetectorRef,
     private giftService: GiftService,
-    private sessionService: SessionService
-  ) { }
+    private sessionService: SessionService,
+  ) {}
 
   public ngOnInit(): void {
     this.isSessionUser = this.sessionService.isSessionUser(this.gift.user.id);
@@ -76,8 +71,8 @@ export class GiftPreviewComponent implements OnInit {
         }
       });
 
-      allDibbed = (numDibbed >= gift.quantity);
-      allDelivered = (numDelivered === gift.dibs.length);
+      allDibbed = numDibbed >= gift.quantity;
+      allDelivered = numDelivered === gift.dibs.length;
     }
 
     if (allDelivered) {
@@ -90,10 +85,9 @@ export class GiftPreviewComponent implements OnInit {
   }
 
   private updateGift(): void {
-    this.giftService.getById(this.gift.id)
-      .subscribe((gift: Gift) => {
-        this.gift = gift;
-        this.showRibbon();
-      });
+    this.giftService.getById(this.gift.id).subscribe((gift: Gift) => {
+      this.gift = gift;
+      this.showRibbon();
+    });
   }
 }

@@ -1,9 +1,6 @@
 <gd-wait *ngIf="isLoading"></gd-wait>
 
-<div
-  class="gd-user"
-  [gdHideUntil]="user"
->
+<div class="gd-user" [gdHideUntil]="user">
   <ng-template [ngIf]="user">
     <div class="app-user-header gd-spacing-padding-even-large">
       <div class="gd-container gd-container-sm">
@@ -15,10 +12,7 @@
               </h1>
             </gd-media-header>
             <gd-media-body>
-              <gd-friendships
-                [user]="user"
-              >
-              </gd-friendships>
+              <gd-friendships [user]="user"> </gd-friendships>
             </gd-media-body>
           </gd-media-content>
           <gd-media-thumbnail>
@@ -32,10 +26,7 @@
           </gd-media-thumbnail>
         </gd-media>
         <div class="app-user-header-controls">
-          <gd-follow-button
-            [friendId]="user.id"
-          >
-          </gd-follow-button>
+          <gd-follow-button [friendId]="user.id"> </gd-follow-button>
         </div>
         <div class="app-user-header-tabs gd-button-group gd-button-group-tabs">
           <button
@@ -63,50 +54,41 @@
     </div>
 
     <div class="gd-container">
-      <ng-container *ngTemplateOutlet="wishListsTemplate;context:wishLists">
+      <ng-container *ngTemplateOutlet="wishListsTemplate; context: wishLists">
       </ng-container>
     </div>
   </ng-template>
 </div>
 
 <ng-template let-wishLists="wishLists" #wishListsTemplate>
-  <ng-container *ngIf="!isSessionUser && !isArchivedViewActive && !wishLists.length">
-    <gd-notice>
-      No wish lists found.
-    </gd-notice>
+  <ng-container
+    *ngIf="!isSessionUser && !isArchivedViewActive && !wishLists.length"
+  >
+    <gd-notice> No wish lists found. </gd-notice>
   </ng-container>
 
   <ng-container *ngIf="isArchivedViewActive && !wishLists.length">
-    <gd-notice>
-      No archived wish lists found.
-    </gd-notice>
+    <gd-notice> No archived wish lists found. </gd-notice>
   </ng-container>
 
   <gd-row>
-    <gd-column *ngIf="isSessionUser && !isArchivedViewActive"
+    <gd-column
+      *ngIf="isSessionUser && !isArchivedViewActive"
       [screenXXSmall]="12"
       [screenSmall]="4"
       [screenMedium]="4"
       [screenLarge]="3"
     >
       <div class="app-user-wish-list-create-button">
-        <gd-card
-          (actionClick)="openWishListEditModal()"
-        >
+        <gd-card (actionClick)="openWishListEditModal()">
           <gd-card-thumbnail class="app-user-wish-list-create-button-thumbnail">
-            <gd-thumbnail
-              size="fill"
-              icon="none"
-              iconSize="inherit"
-            >
+            <gd-thumbnail size="fill" icon="none" iconSize="inherit">
               <gd-icon-stack>
                 <gd-icon
                   icon="circle fas fa-stack-2x"
                   iconStyle="secondary"
                 ></gd-icon>
-                <gd-icon
-                  icon="plus fas fa-stack-1x fa-inverse"
-                ></gd-icon>
+                <gd-icon icon="plus fas fa-stack-1x fa-inverse"></gd-icon>
               </gd-icon-stack>
             </gd-thumbnail>
           </gd-card-thumbnail>
@@ -119,7 +101,8 @@
       </div>
     </gd-column>
 
-    <gd-column *ngFor="let wishList of wishLists"
+    <gd-column
+      *ngFor="let wishList of wishLists"
       [screenXXSmall]="12"
       [screenSmall]="4"
       [screenMedium]="4"

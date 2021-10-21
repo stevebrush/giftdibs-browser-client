@@ -1,15 +1,6 @@
-import {
-  NgModule
-} from '@angular/core';
-
-import {
-  RouterModule,
-  Routes
-} from '@angular/router';
-
-import {
-  AuthGuard
-} from '@app/shared/guards';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '@app/shared/guards';
 
 import { DeleteComponent } from './delete/delete.component';
 import { ForgottenComponent } from './forgotten/forgotten.component';
@@ -21,56 +12,51 @@ import { VerifyAccountComponent } from './verify/verify.component';
 const routes: Routes = [
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
+    loadChildren: () =>
+      import('./login/login.module').then((m) => m.LoginModule),
   },
   {
     path: 'forgotten',
-    component: ForgottenComponent
+    component: ForgottenComponent,
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
   },
   {
     path: 'reset-password/:resetPasswordToken',
-    component: ResetPasswordComponent
+    component: ResetPasswordComponent,
   },
   {
     path: 'reset-password',
     component: ResetPasswordComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'verify/:emailAddressVerificationToken',
     component: VerifyAccountComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'verify',
     component: VerifyAccountComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'settings',
     component: SettingsComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'delete',
     component: DeleteComponent,
-    canActivate: [AuthGuard]
-  }
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forChild(routes)
-  ],
-  exports: [
-    RouterModule
-  ],
-  providers: [
-    AuthGuard
-  ]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
+  providers: [AuthGuard],
 })
-export class AccountRoutingModule { }
+export class AccountRoutingModule {}

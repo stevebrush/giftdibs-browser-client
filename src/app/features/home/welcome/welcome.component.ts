@@ -3,19 +3,17 @@ import {
   Component,
   Renderer2,
   OnInit,
-  OnDestroy
+  OnDestroy,
 } from '@angular/core';
 
 @Component({
   selector: 'gd-welcome',
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WelcomeComponent implements OnInit, OnDestroy {
-  constructor(
-    private renderer: Renderer2
-  ) { }
+  constructor(private renderer: Renderer2) {}
 
   public ngOnInit(): void {
     // Custom styles for the welcome page.

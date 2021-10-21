@@ -3,46 +3,25 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  OnInit
+  OnInit,
 } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { SessionService } from '@giftdibs/session';
+import { AlertService } from '@giftdibs/ux';
+import { ModalInstance } from '@giftdibs/ux';
 
-import {
-  FormBuilder,
-  FormGroup
-} from '@angular/forms';
+import { Gift, GiftService } from '../gift';
+import { WishList, WishListService } from '../wish-list';
 
-import {
-  AlertService
-} from '@giftdibs/ux';
+import { GiftMoveContext } from './gift-move-context';
 
-import {
-  ModalInstance
-} from '@giftdibs/ux';
-
-import {
-  SessionService
-} from '@giftdibs/session';
-
-import {
-  WishList,
-  WishListService
-} from '../wish-list';
-
-import {
-  Gift,
-  GiftService
-} from '../gift';
-
-import {
-  GiftMoveContext
-} from './gift-move-context';
 // #endregion
 
 @Component({
   selector: 'gd-gift-edit',
   templateUrl: './gift-move.component.html',
   styleUrls: ['./gift-move.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GiftMoveComponent implements OnInit {
   public errors: any[];
@@ -64,8 +43,8 @@ export class GiftMoveComponent implements OnInit {
     private giftService: GiftService,
     private modal: ModalInstance<any>,
     private sessionService: SessionService,
-    private wishListService: WishListService
-  ) { }
+    private wishListService: WishListService,
+  ) {}
 
   public ngOnInit(): void {
     this.createForm();
@@ -73,10 +52,11 @@ export class GiftMoveComponent implements OnInit {
     this.modalTitle = this.context.title;
 
     this.moveForm.reset({
-      wishListId: this.context.wishListId
+      wishListId: this.context.wishListId,
     });
 
-    this.wishListService.getAllByUserId(this.sessionService.user.id)
+    this.wishListService
+      .getAllByUserId(this.sessionService.user.id)
       .subscribe((wishLists) => {
         this.wishLists = wishLists;
 
@@ -101,17 +81,19 @@ export class GiftMoveComponent implements OnInit {
 
     // Create a new wish list.
     if (this.wishListId === 'new') {
-      this.wishListService.create({
-        name: this.moveForm.get('name').value
-      }).subscribe(
-        (result: any) => {
-          this.moveForm.get('wishListId').setValue(result.data.wishListId);
-          this.moveGiftToWishList();
-        },
-        (err: any) => {
-          this.handleError(err);
-        }
-      );
+      this.wishListService
+        .create({
+          name: this.moveForm.get('name').value,
+        })
+        .subscribe(
+          (result: any) => {
+            this.moveForm.get('wishListId').setValue(result.data.wishListId);
+            this.moveGiftToWishList();
+          },
+          (err: any) => {
+            this.handleError(err);
+          },
+        );
     } else {
       this.moveGiftToWishList();
     }
@@ -124,7 +106,7 @@ export class GiftMoveComponent implements OnInit {
   private createForm(): void {
     this.moveForm = this.formBuilder.group({
       name: undefined,
-      wishListId: undefined
+      wishListId: undefined,
     });
   }
 
@@ -132,30 +114,28 @@ export class GiftMoveComponent implements OnInit {
     // Update existing gift.
     if (this.gift.id) {
       const formData = {
-        wishList: { id: this.wishListId }
+        wishList: { id: this.wishListId },
       };
 
-      this.giftService.update(this.gift.id, formData)
-        .subscribe(
-          (result: any) => {
-            this.modal.close('save', result.data);
-          },
-          (err) => {
-            this.handleError(err);
-          }
-        );
+      this.giftService.update(this.gift.id, formData).subscribe(
+        (result: any) => {
+          this.modal.close('save', result.data);
+        },
+        (err) => {
+          this.handleError(err);
+        },
+      );
 
-    // Create a new gift.
+      // Create a new gift.
     } else {
-      this.giftService.create(this.wishListId, this.gift)
-        .subscribe(
-          (result: any) => {
-            this.modal.close('save', result.data);
-          },
-          (err) => {
-            this.handleError(err);
-          }
-        );
+      this.giftService.create(this.wishListId, this.gift).subscribe(
+        (result: any) => {
+          this.modal.close('save', result.data);
+        },
+        (err) => {
+          this.handleError(err);
+        },
+      );
     }
   }
 

@@ -1,31 +1,17 @@
-import {
-  NgModule
-} from '@angular/core';
-
-import {
-  CommonModule
-} from '@angular/common';
-
-import {
-  RouterModule
-} from '@angular/router';
-
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { GiftPriorityModule } from '@app/shared/modules/gift-priority';
 import {
   CardModule,
   DateTimeModule,
   IconModule,
   MediaModule,
   RibbonModule,
-  ThumbnailModule
+  ThumbnailModule,
 } from '@giftdibs/ux';
 
-import {
-  GiftPriorityModule
-} from '@app/shared/modules/gift-priority';
-
-import {
-  GiftPreviewComponent
-} from './gift-preview.component';
+import { GiftPreviewComponent } from './gift-preview.component';
 
 @NgModule({
   imports: [
@@ -37,13 +23,9 @@ import {
     MediaModule,
     RibbonModule,
     RouterModule,
-    ThumbnailModule
+    ThumbnailModule,
   ],
-  declarations: [
-    GiftPreviewComponent
-  ],
-  exports: [
-    GiftPreviewComponent
-  ]
+  declarations: [GiftPreviewComponent],
+  exports: [GiftPreviewComponent],
 })
-export class GiftPreviewModule { }
+export class GiftPreviewModule {}

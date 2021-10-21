@@ -1,22 +1,29 @@
 <gd-wait *ngIf="isLoading"></gd-wait>
 
-<div class="gd-verify-account gd-container gd-container-sm gd-spacing-padding-even-large" *ngIf="!isLoading">
-  <h1>
-    Email address verification
-  </h1>
+<div
+  class="
+    gd-verify-account gd-container gd-container-sm gd-spacing-padding-even-large
+  "
+  *ngIf="!isLoading"
+>
+  <h1>Email address verification</h1>
 
   <ng-template [ngIf]="hasToken">
     <ng-template [ngIf]="isVerified">
       <gd-notice noticeType="success">
-        Your email address has been successfully verified. (Thanks for doing that!)
+        Your email address has been successfully verified. (Thanks for doing
+        that!)
       </gd-notice>
       <p>
-        <a class="gd-button gd-button-primary" routerLink="/">Return to home page</a>
+        <a class="gd-button gd-button-primary" routerLink="/"
+          >Return to home page</a
+        >
       </p>
     </ng-template>
     <ng-template [ngIf]="!isVerified">
       <gd-notice noticeType="danger">
-        Hm. It appears that the link in your verification email is invalid (or has expired).
+        Hm. It appears that the link in your verification email is invalid (or
+        has expired).
       </gd-notice>
       <ng-container [ngTemplateOutlet]="resendEmail"></ng-container>
     </ng-template>
@@ -28,21 +35,29 @@
         Thank you! Your email address has already been verified.
       </gd-notice>
       <p>
-        <a class="gd-button gd-button-primary" routerLink="/">Return to home page</a>
+        <a class="gd-button gd-button-primary" routerLink="/"
+          >Return to home page</a
+        >
       </p>
     </ng-template>
     <ng-template [ngIf]="!isVerified">
       <gd-notice>
         <p>
-          Account email address: <strong>{{ sessionUser.emailAddress }}</strong>&nbsp;
-          <a routerLink="/account/settings"><gd-icon icon="pencil-alt"></gd-icon> Edit</a>
+          Account email address: <strong>{{ sessionUser.emailAddress }}</strong
+          >&nbsp;
+          <a routerLink="/account/settings"
+            ><gd-icon icon="pencil-alt"></gd-icon> Edit</a
+          >
         </p>
       </gd-notice>
       <p>
-        GiftDibs needs to verify your email address before you can receive notifications about your friends' activity.
+        GiftDibs needs to verify your email address before you can receive
+        notifications about your friends' activity.
       </p>
       <p>
-        You should have received an activation link via email when you registered; however, you can click the button below to resend a new verification link.
+        You should have received an activation link via email when you
+        registered; however, you can click the button below to resend a new
+        verification link.
       </p>
       <ng-container [ngTemplateOutlet]="resendEmail"></ng-container>
     </ng-template>
@@ -58,9 +73,13 @@
     >
       Resend verification email
     </button>
-    <a class="gd-button gd-button-default" routerLink="/">Return to home page</a>
+    <a class="gd-button gd-button-default" routerLink="/"
+      >Return to home page</a
+    >
   </div>
   <p>
-    <a routerLink="/support/feedback">Having trouble verifying your email address?</a>
+    <a routerLink="/support/feedback"
+      >Having trouble verifying your email address?</a
+    >
   </p>
 </ng-template>

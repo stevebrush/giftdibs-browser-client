@@ -1,16 +1,10 @@
-import {
-  NgModule
-} from '@angular/core';
-
-import {
-  CommonModule
-} from '@angular/common';
-
-import {
-  FormsModule,
-  ReactiveFormsModule
-} from '@angular/forms';
-
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AssetsModule } from '@app/shared/modules/assets';
+import { GiftModule } from '@app/shared/modules/gift';
+import { ProductModule } from '@app/shared/modules/product';
+import { UrlScraperModule } from '@app/shared/modules/url-scraper';
 import {
   CharacterCounterModule,
   CheckboxModule,
@@ -20,32 +14,11 @@ import {
   MediaModule,
   ModalModule,
   ThumbnailModule,
-  WaitModule
+  WaitModule,
 } from '@giftdibs/ux';
+import { IconModule } from '@giftdibs/ux';
 
-import {
-  AssetsModule
-} from '@app/shared/modules/assets';
-
-import {
-  GiftModule
-} from '@app/shared/modules/gift';
-
-import {
-  ProductModule
-} from '@app/shared/modules/product';
-
-import {
-  UrlScraperModule
-} from '@app/shared/modules/url-scraper';
-
-import {
-  IconModule
-} from '@giftdibs/ux';
-
-import {
-  GiftEditComponent
-} from './gift-edit.component';
+import { GiftEditComponent } from './gift-edit.component';
 
 @NgModule({
   imports: [
@@ -65,13 +38,9 @@ import {
     ReactiveFormsModule,
     ThumbnailModule,
     UrlScraperModule,
-    WaitModule
+    WaitModule,
   ],
-  declarations: [
-    GiftEditComponent
-  ],
-  entryComponents: [
-    GiftEditComponent
-  ]
+  declarations: [GiftEditComponent],
+  entryComponents: [GiftEditComponent],
 })
-export class GiftEditModule { }
+export class GiftEditModule {}

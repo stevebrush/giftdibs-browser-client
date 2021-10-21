@@ -10,9 +10,7 @@
   <gd-modal-body>
     <div class="app-gift-detail">
       <gd-row>
-        <gd-column
-          [screenSmall]="6"
-        >
+        <gd-column [screenSmall]="6">
           <div class="app-gift-detail-thumbnail">
             <gd-thumbnail
               class="gd-gift-thumbnail"
@@ -21,13 +19,9 @@
             ></gd-thumbnail>
           </div>
         </gd-column>
-        <gd-column
-          [screenSmall]="6"
-        >
+        <gd-column [screenSmall]="6">
           <ng-container *ngIf="isSessionUser">
-            <div *ngIf="!gift.dateReceived"
-              class="gd-button-group"
-            >
+            <div *ngIf="!gift.dateReceived" class="gd-button-group">
               <button
                 class="gd-button gd-button-primary"
                 type="button"
@@ -68,18 +62,15 @@
           </ng-container>
 
           <ng-container *ngIf="!isSessionUser">
-            <gd-dib-controls
-              [gift]="gift"
-              (change)="onDibChange()"
-            >
+            <gd-dib-controls [gift]="gift" (change)="onDibChange()">
             </gd-dib-controls>
           </ng-container>
 
           <div class="app-gift-detail-external-urls">
-            <gd-media-list *ngIf="gift.externalUrls && gift.externalUrls.length">
-              <gd-media *ngFor="let externalUrl of gift.externalUrls"
-                size="sm"
-              >
+            <gd-media-list
+              *ngIf="gift.externalUrls && gift.externalUrls.length"
+            >
+              <gd-media *ngFor="let externalUrl of gift.externalUrls" size="sm">
                 <gd-media-thumbnail>
                   <gd-thumbnail
                     iconSize="2x"
@@ -93,7 +84,8 @@
                     [attr.href]="externalUrl.url"
                     target="_blank"
                     title="Open this URL in a new window"
-                  >{{ getURLName(externalUrl.url) }}</a>&nbsp;
+                    >{{ getURLName(externalUrl.url) }}</a
+                  >&nbsp;
                   <gd-icon icon="external-link-alt"></gd-icon>
                 </gd-media-content>
               </gd-media>
@@ -107,14 +99,15 @@
             </tr>
             <tr>
               <th>Budget</th>
-              <td>${{ gift.budget || '--' }} <span *ngIf="gift.quantity > 1">ea.</span></td>
+              <td>
+                ${{ gift.budget || '--' }}
+                <span *ngIf="gift.quantity > 1">ea.</span>
+              </td>
             </tr>
             <tr>
               <th>Priority</th>
               <td>
-                <gd-gift-priority
-                  [priority]="gift.priority"
-                >
+                <gd-gift-priority [priority]="gift.priority">
                 </gd-gift-priority>
               </td>
             </tr>
@@ -122,13 +115,17 @@
               <th>Quantity</th>
               <td>
                 {{ gift.quantity }}
-                <span *ngIf="quantityRemaining !== undefined">({{ quantityRemaining }} available)</span>
+                <span *ngIf="quantityRemaining !== undefined"
+                  >({{ quantityRemaining }} available)</span
+                >
               </td>
             </tr>
             <tr>
               <th>Wish list</th>
               <td>
-                <a routerLink="/wish-lists/{{ gift.wishList.id }}">{{ gift.wishList.name }}</a>
+                <a routerLink="/wish-lists/{{ gift.wishList.id }}">{{
+                  gift.wishList.name
+                }}</a>
               </td>
             </tr>
           </table>
@@ -136,21 +133,13 @@
           <gd-disclosure>
             <gd-disclosure-heading>
               Comments
-              <ng-template
-                [ngIf]="gift.comments && gift.comments.length"
-              >
+              <ng-template [ngIf]="gift.comments && gift.comments.length">
                 ({{ gift.comments.length }})
               </ng-template>
             </gd-disclosure-heading>
             <gd-disclosure-body>
-              <gd-comment-list
-                [comments]="gift.comments"
-              >
-              </gd-comment-list>
-              <gd-comment-edit
-                [giftId]="gift.id"
-                (saved)="onCommentSaved()"
-              >
+              <gd-comment-list [comments]="gift.comments"> </gd-comment-list>
+              <gd-comment-edit [giftId]="gift.id" (saved)="onCommentSaved()">
               </gd-comment-edit>
             </gd-disclosure-body>
           </gd-disclosure>
@@ -170,10 +159,16 @@
                   </gd-thumbnail>
                 </gd-media-thumbnail>
                 <gd-media-content>
-                  <a [routerLink]="['/users', gift.user.id]">{{ gift.user.firstName }} {{ gift.user.lastName }}</a>
+                  <a [routerLink]="['/users', gift.user.id]"
+                    >{{ gift.user.firstName }} {{ gift.user.lastName }}</a
+                  >
                   added to
-                  <a routerLink="/wish-lists/{{ gift.wishList.id }}">{{ gift.wishList.name }}.</a><br>
-                  <time class="gd-date">{{ gift.dateUpdated | gdFriendlyDate }}</time>
+                  <a routerLink="/wish-lists/{{ gift.wishList.id }}"
+                    >{{ gift.wishList.name }}.</a
+                  ><br />
+                  <time class="gd-date">{{
+                    gift.dateUpdated | gdFriendlyDate
+                  }}</time>
                 </gd-media-content>
               </gd-media>
 
@@ -190,9 +185,13 @@
                   </gd-thumbnail>
                 </gd-media-thumbnail>
                 <gd-media-content>
-                  <a [routerLink]="['/users', gift.user.id]">{{ gift.user.firstName }} {{ gift.user.lastName }}</a>
-                  marked as received.<br>
-                  <time class="gd-date">{{ gift.dateReceived | gdFriendlyDate }}</time>
+                  <a [routerLink]="['/users', gift.user.id]"
+                    >{{ gift.user.firstName }} {{ gift.user.lastName }}</a
+                  >
+                  marked as received.<br />
+                  <time class="gd-date">{{
+                    gift.dateReceived | gdFriendlyDate
+                  }}</time>
                 </gd-media-content>
               </gd-media>
 
@@ -205,25 +204,33 @@
                         shape="circle"
                         size="fill"
                         [imageSource]="dib.user.avatarUrl"
-                        [route]="(dib.isAnonymous) ? null : {
-                          commands: ['/users', dib.user.id]
-                        }"
+                        [route]="
+                          dib.isAnonymous
+                            ? null
+                            : {
+                                commands: ['/users', dib.user.id]
+                              }
+                        "
                       >
                       </gd-thumbnail>
                     </gd-media-thumbnail>
                     <gd-media-content>
-                      <strong *ngIf="dib.isAnonymous else notAnonymous">Anonymous</strong>
+                      <strong *ngIf="dib.isAnonymous; else notAnonymous"
+                        >Anonymous</strong
+                      >
                       <ng-template #notAnonymous>
-                        <a routerLink="/users/{{ dib.user.id }}">{{ dib.user.firstName }} {{ dib.user.lastName }}</a>
+                        <a routerLink="/users/{{ dib.user.id }}"
+                          >{{ dib.user.firstName }} {{ dib.user.lastName }}</a
+                        >
                       </ng-template>
                       <ng-template [ngIf]="dib.dateDelivered">
-                        delivered ({{ dib.quantity }}).<br>
+                        delivered ({{ dib.quantity }}).<br />
                         <time class="gd-date">
                           {{ dib.dateDelivered | gdFriendlyDate }}
                         </time>
                       </ng-template>
                       <ng-template [ngIf]="!dib.dateDelivered">
-                        dibbed ({{ dib.quantity }}).<br>
+                        dibbed ({{ dib.quantity }}).<br />
                         <time class="gd-date">
                           {{ dib.dateUpdated | gdFriendlyDate }}
                         </time>

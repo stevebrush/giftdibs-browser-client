@@ -8,35 +8,21 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { AlertService } from '@giftdibs/ux';
 
-import {
-  FormBuilder,
-  FormGroup
-} from '@angular/forms';
+import { finalize } from 'rxjs/operators';
 
-import {
-  finalize
-} from 'rxjs/operators';
-
-import {
-  AlertService
-} from '@giftdibs/ux';
-
-import {
-  Comment
-} from './comment';
-
-import {
-  CommentService
-} from './comment.service';
+import { Comment } from './comment';
+import { CommentService } from './comment.service';
 
 @Component({
   selector: 'gd-comment-edit',
   templateUrl: './comment-edit.component.html',
   styleUrls: ['./comment-edit.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommentEditComponent implements OnInit, OnDestroy {
   @Input()
@@ -62,8 +48,8 @@ export class CommentEditComponent implements OnInit, OnDestroy {
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
     private commentService: CommentService,
-    private formBuilder: FormBuilder
-  ) { }
+    private formBuilder: FormBuilder,
+  ) {}
 
   public ngOnInit(): void {
     this.createForm();
@@ -104,7 +90,7 @@ export class CommentEditComponent implements OnInit, OnDestroy {
           this.commentForm.reset();
           this.commentForm.enable();
           this.changeDetector.markForCheck();
-        })
+        }),
       )
       .subscribe(
         () => {
@@ -114,7 +100,7 @@ export class CommentEditComponent implements OnInit, OnDestroy {
           const error = err.error;
           this.alertService.error(error.message);
           this.errors = error.errors;
-        }
+        },
       );
   }
 
@@ -125,7 +111,7 @@ export class CommentEditComponent implements OnInit, OnDestroy {
 
   private createForm(): void {
     this.commentForm = this.formBuilder.group({
-      body: undefined
+      body: undefined,
     });
   }
 }

@@ -7,38 +7,34 @@
       }
     }"
   >
-    <gd-ribbon *ngIf="showDibbedRibbon"
+    <gd-ribbon
+      *ngIf="showDibbedRibbon"
       ribbonType="secondary"
       title="This gift has been dibbed."
     >
       <gd-icon icon="check"></gd-icon>
     </gd-ribbon>
 
-    <gd-ribbon *ngIf="showDeliveredRibbon"
+    <gd-ribbon
+      *ngIf="showDeliveredRibbon"
       ribbonType="primary"
       title="This gift has been delivered."
     >
       <gd-icon icon="box"></gd-icon>
     </gd-ribbon>
 
-    <gd-ribbon *ngIf="showReceivedRibbon"
+    <gd-ribbon
+      *ngIf="showReceivedRibbon"
       ribbonType="primary"
       title="This gift has been received."
     >
       <gd-icon icon="box-open"></gd-icon>
     </gd-ribbon>
     <gd-card-thumbnail>
-      <gd-thumbnail
-        size="fill"
-        [imageSource]="gift.imageUrl"
-      >
-      </gd-thumbnail>
+      <gd-thumbnail size="fill" [imageSource]="gift.imageUrl"> </gd-thumbnail>
     </gd-card-thumbnail>
     <gd-card-body>
-      <gd-card-heading
-        [multiline]="false"
-        [attr.title]="gift.name"
-      >
+      <gd-card-heading [attr.title]="gift.name" [multiline]="false">
         {{ gift.name }}
         <ng-container *ngIf="gift.quantity > 1">
           ({{ gift.quantity }})
@@ -50,14 +46,9 @@
       </div>
 
       <div class="app-gift-preview-user">
-        <gd-media
-          size="xs"
-        >
+        <gd-media size="xs">
           <gd-media-content>
-            <gd-gift-priority
-              [priority]="gift.priority"
-            >
-            </gd-gift-priority>
+            <gd-gift-priority [priority]="gift.priority"> </gd-gift-priority>
             <time class="gd-date">
               {{ gift.dateUpdated | gdFriendlyDate }}
             </time>
@@ -69,7 +60,7 @@
               shape="circle"
               [imageSource]="gift.user.avatarUrl"
               [route]="{ commands: ['/users', gift.user.id] }"
-              (click)="$event.stopPropagation();"
+              (click)="$event.stopPropagation()"
             ></gd-thumbnail>
           </gd-media-thumbnail>
         </gd-media>

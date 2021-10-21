@@ -1,8 +1,7 @@
-<div *ngIf="comments && comments.length"
-  class="gd-comment-list"
->
+<div *ngIf="comments && comments.length" class="gd-comment-list">
   <gd-media-list>
-    <gd-comment-preview *ngFor="let comment of comments; let i = index;"
+    <gd-comment-preview
+      *ngFor="let comment of comments; let i = index"
       [comment]="comment"
       (deleted)="onDeleted(i)"
     >

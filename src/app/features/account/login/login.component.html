@@ -2,13 +2,9 @@
 
 <div class="gd-container gd-container-xxs gd-spacing-padding-even-large">
   <div class="gd-detail-pane">
-    <h1>
-      Log in
-    </h1>
+    <h1>Log in</h1>
 
-    <p>
-      Or <a routerLink="/account/register">create a new account</a>
-    </p>
+    <p>Or <a routerLink="/account/register">create a new account</a></p>
 
     <form
       class="gd-form"
@@ -30,7 +26,8 @@
       <gd-form-field [errors]="errors">
         <gd-password-viewer
           [disabled]="loginForm.disabled"
-          [inputElement]="passwordInput">
+          [inputElement]="passwordInput"
+        >
           <input
             autocorrect="off"
             autocapitalize="none"
@@ -46,7 +43,8 @@
       <button
         class="gd-button gd-button-primary"
         type="submit"
-        [disabled]="loginForm.disabled">
+        [disabled]="loginForm.disabled"
+      >
         Log in
       </button>
     </form>
@@ -66,7 +64,7 @@
     </p>
   </div>
 
-  <p class="gd-text-deemphasized gd-text-small" style="text-align:center;">
+  <p class="gd-text-deemphasized gd-text-small" style="text-align: center">
     GiftDibs, LLC &copy; 2018
   </p>
 </div>

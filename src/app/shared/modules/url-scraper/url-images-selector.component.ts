@@ -2,12 +2,9 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  OnInit
+  OnInit,
 } from '@angular/core';
-
-import {
-  ModalInstance
-} from '@giftdibs/ux';
+import { ModalInstance } from '@giftdibs/ux';
 
 import { UrlImagesSelectorContext } from './url-images-selector-context';
 import { UrlScraperResultImage } from './url-scraper-result-image';
@@ -16,7 +13,7 @@ import { UrlScraperResultImage } from './url-scraper-result-image';
   selector: 'gd-url-images-selector',
   templateUrl: './url-images-selector.component.html',
   styleUrls: ['./url-images-selector.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UrlImagesSelectorComponent implements OnInit {
   public images: UrlScraperResultImage[] = [];
@@ -25,8 +22,8 @@ export class UrlImagesSelectorComponent implements OnInit {
   constructor(
     private changeDetector: ChangeDetectorRef,
     private context: UrlImagesSelectorContext,
-    private modal: ModalInstance<any>
-  ) { }
+    private modal: ModalInstance<any>,
+  ) {}
 
   public ngOnInit(): void {
     const product = this.context.product;
@@ -48,7 +45,7 @@ export class UrlImagesSelectorComponent implements OnInit {
     // Load the images
     // Launch a new modal with the image results to let the user select.
     this.modal.close('save', {
-      selectedImage: this.selectedImage
+      selectedImage: this.selectedImage,
     });
   }
 
@@ -58,6 +55,6 @@ export class UrlImagesSelectorComponent implements OnInit {
   }
 
   public isSelectedImage(image: any): boolean {
-    return (image === this.selectedImage);
+    return image === this.selectedImage;
   }
 }

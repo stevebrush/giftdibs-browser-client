@@ -2,45 +2,27 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  OnInit
+  OnInit,
 } from '@angular/core';
-
-import {
-  ActivatedRoute,
-  Router
-} from '@angular/router';
-
 import {
   FormBuilder,
   FormControl,
   FormGroup,
-  Validators
+  Validators,
 } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SessionService } from '@giftdibs/session';
+import { AlertService, ModalService } from '@giftdibs/ux';
 
-import {
-  AlertService, ModalService
-} from '@giftdibs/ux';
+import { AccountService } from '../account.service';
 
-import {
-  SessionService
-} from '@giftdibs/session';
-
-import {
-  AccountService
-} from '../account.service';
-
-import {
-  LoginHelpComponent
-} from './login-help.component';
-
-import {
-  LoginHelpContext
-} from './login-help-context';
+import { LoginHelpContext } from './login-help-context';
+import { LoginHelpComponent } from './login-help.component';
 
 @Component({
   selector: 'gd-login',
   templateUrl: './login.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
@@ -56,14 +38,16 @@ export class LoginComponent implements OnInit {
     private modalService: ModalService,
     private route: ActivatedRoute,
     private router: Router,
-    private sessionService: SessionService
+    private sessionService: SessionService,
   ) {
     this.createForm();
   }
 
   public ngOnInit(): void {
     this.sessionService.clearAll();
-    this.redirectUrl = decodeURIComponent(this.route.snapshot.queryParams['redirectUrl'] || '/');
+    this.redirectUrl = decodeURIComponent(
+      this.route.snapshot.queryParams['redirectUrl'] || '/',
+    );
   }
 
   public submit(): void {
@@ -77,7 +61,8 @@ export class LoginComponent implements OnInit {
     this.changeDetector.markForCheck();
 
     const formData = this.loginForm.value;
-    this.accountService.login(formData.emailAddress, formData.password)
+    this.accountService
+      .login(formData.emailAddress, formData.password)
       .subscribe(
         () => {
           this.redirect();
@@ -94,7 +79,7 @@ export class LoginComponent implements OnInit {
           this.loginForm.enable();
           this.isLoading = false;
           this.changeDetector.markForCheck();
-        }
+        },
       );
   }
 
@@ -110,12 +95,8 @@ export class LoginComponent implements OnInit {
 
   private createForm(): void {
     this.loginForm = this.formBuilder.group({
-      emailAddress: new FormControl(null, [
-        Validators.required
-      ]),
-      password: new FormControl(null, [
-        Validators.required
-      ])
+      emailAddress: new FormControl(null, [Validators.required]),
+      password: new FormControl(null, [Validators.required]),
     });
   }
 
@@ -128,7 +109,7 @@ export class LoginComponent implements OnInit {
       params = urlParts[1].split('&');
     }
 
-    const queryParams: {[_: string]: string} = {};
+    const queryParams: { [_: string]: string } = {};
     if (params && params.length > 0) {
       params.forEach((param) => {
         const paramParts = param.split('=');
@@ -137,18 +118,20 @@ export class LoginComponent implements OnInit {
     }
 
     this.router.navigate(routeParts, {
-      queryParams
+      queryParams,
     });
   }
 
   private openLoginHelpModal(emailAddress: string): void {
     this.modalService.open(LoginHelpComponent, {
-      providers: [{
-        provide: LoginHelpContext,
-        useValue: {
-          emailAddress
-        }
-      }]
+      providers: [
+        {
+          provide: LoginHelpContext,
+          useValue: {
+            emailAddress,
+          },
+        },
+      ],
     });
   }
 }

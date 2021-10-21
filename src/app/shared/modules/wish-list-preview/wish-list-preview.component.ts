@@ -2,18 +2,15 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  OnInit
+  OnInit,
 } from '@angular/core';
-
-import {
-  WishList
-} from '@app/shared/modules/wish-list';
+import { WishList } from '@app/shared/modules/wish-list';
 
 @Component({
   selector: 'gd-wish-list-preview',
   templateUrl: './wish-list-preview.component.html',
   styleUrls: ['./wish-list-preview.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WishListPreviewComponent implements OnInit {
   @Input()

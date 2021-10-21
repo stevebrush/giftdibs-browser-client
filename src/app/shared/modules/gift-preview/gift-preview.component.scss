@@ -4,12 +4,12 @@
   margin-bottom: $gd-spacing;
 
   @media (min-width: $gd-screen-sm-min) {
-    margin-bottom: $gd-spacing * 3;
+    margin-bottom: $gd-spacing * 2;
   }
 
   ::ng-deep {
     .gd-gift-priority {
-      font-size: 14px;
+      font-size: 85%;
     }
 
     .gd-card-wrapper {

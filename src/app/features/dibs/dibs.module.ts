@@ -1,11 +1,8 @@
-import {
-  NgModule
-} from '@angular/core';
-
-import {
-  CommonModule
-} from '@angular/common';
-
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { DibService } from '@app/shared/modules/dib';
+import { DibControlsModule } from '@app/shared/modules/dib-controls';
+import { GiftPreviewModule } from '@app/shared/modules/gift-preview';
 import {
   CardModule,
   GridModule,
@@ -13,28 +10,11 @@ import {
   NoticeModule,
   RepeaterModule,
   ThumbnailModule,
-  WaitModule
+  WaitModule,
 } from '@giftdibs/ux';
 
-import {
-  DibControlsModule
-} from '@app/shared/modules/dib-controls';
-
-import {
-  GiftPreviewModule
-} from '@app/shared/modules/gift-preview';
-
-import {
-  DibService
-} from '@app/shared/modules/dib';
-
-import {
-  DibsComponent
-} from './dibs.component';
-
-import {
-  DibsRoutingModule
-} from './dibs-routing.module';
+import { DibsRoutingModule } from './dibs-routing.module';
+import { DibsComponent } from './dibs.component';
 
 @NgModule({
   imports: [
@@ -48,13 +28,9 @@ import {
     NoticeModule,
     RepeaterModule,
     ThumbnailModule,
-    WaitModule
+    WaitModule,
   ],
-  declarations: [
-    DibsComponent
-  ],
-  providers: [
-    DibService
-  ]
+  declarations: [DibsComponent],
+  providers: [DibService],
 })
-export class DibsModule { }
+export class DibsModule {}

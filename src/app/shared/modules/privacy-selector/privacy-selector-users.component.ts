@@ -2,38 +2,21 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  OnInit
+  OnInit,
 } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ChecklistChoice, ModalInstance } from '@giftdibs/ux';
 
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup
-} from '@angular/forms';
+import { FriendshipService, FriendshipSummary } from '../friendship';
+import { User } from '../user';
 
-import {
-  ChecklistChoice,
-  ModalInstance
-} from '@giftdibs/ux';
-
-import {
-  FriendshipService,
-  FriendshipSummary
-} from '../friendship';
-
-import {
-  User
-} from '../user';
-
-import {
-  PrivacySelectorUsersContext
-} from './privacy-selector-users-context';
+import { PrivacySelectorUsersContext } from './privacy-selector-users-context';
 
 @Component({
   selector: 'gd-privacy-selector-users',
   templateUrl: './privacy-selector-users.component.html',
   styleUrls: ['./privacy-selector-users.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PrivacySelectorUsersComponent implements OnInit {
   public choices: ChecklistChoice[];
@@ -45,20 +28,21 @@ export class PrivacySelectorUsersComponent implements OnInit {
     private context: PrivacySelectorUsersContext,
     private formBuilder: FormBuilder,
     private friendshipService: FriendshipService,
-    private modal: ModalInstance<any>
-  ) { }
+    private modal: ModalInstance<any>,
+  ) {}
 
   public ngOnInit(): void {
     this.createForm();
     this.usersForm.controls.friends.reset(this.context.selected);
 
-    this.friendshipService.getAllByUserId(this.context.user.id)
+    this.friendshipService
+      .getAllByUserId(this.context.user.id)
       .subscribe((friendships: FriendshipSummary) => {
         const friends = friendships.followers.concat(friendships.following);
 
         const unique: User[] = [];
-        friends.forEach(friend => {
-          const found = unique.find(u => u.id === friend.id);
+        friends.forEach((friend) => {
+          const found = unique.find((u) => u.id === friend.id);
           if (!found) {
             unique.push(friend);
           }
@@ -67,7 +51,7 @@ export class PrivacySelectorUsersComponent implements OnInit {
         this.choices = unique.map((friend) => {
           return {
             value: friend.id,
-            label: `${friend.firstName} ${friend.lastName}`
+            label: `${friend.firstName} ${friend.lastName}`,
           };
         });
 
@@ -87,7 +71,7 @@ export class PrivacySelectorUsersComponent implements OnInit {
 
   private createForm(): void {
     this.usersForm = this.formBuilder.group({
-      friends: new FormControl(null, [])
+      friends: new FormControl(null, []),
     });
   }
 }

@@ -1,32 +1,11 @@
-import {
-  NgModule
-} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { GiftModule } from '@app/shared/modules/gift';
+import { GiftPreviewModule } from '@app/shared/modules/gift-preview';
+import { GridModule, NoticeModule, WaitModule } from '@giftdibs/ux';
 
-import {
-  CommonModule
-} from '@angular/common';
-
-import {
-  RouterModule
-} from '@angular/router';
-
-import {
-  GiftModule
-} from '@app/shared/modules/gift';
-
-import {
-  GiftPreviewModule
-} from '@app/shared/modules/gift-preview';
-
-import {
-  GridModule,
-  NoticeModule,
-  WaitModule
-} from '@giftdibs/ux';
-
-import {
-  CommunityComponent
-} from './community.component';
+import { CommunityComponent } from './community.component';
 
 @NgModule({
   imports: [
@@ -36,13 +15,9 @@ import {
     GridModule,
     NoticeModule,
     RouterModule,
-    WaitModule
+    WaitModule,
   ],
-  declarations: [
-    CommunityComponent
-  ],
-  exports: [
-    CommunityComponent
-  ]
+  declarations: [CommunityComponent],
+  exports: [CommunityComponent],
 })
 export class CommunityModule {}

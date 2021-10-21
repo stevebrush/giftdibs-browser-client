@@ -1,17 +1,11 @@
-import {
-  NgModule
-} from '@angular/core';
-
-import {
-  CommonModule
-} from '@angular/common';
-
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import {
   CardModule,
   GridModule,
   ModalModule,
   ThumbnailModule,
-  WaitModule
+  WaitModule,
 } from '@giftdibs/ux';
 
 import { UrlImagesLoaderContext } from './url-images-loader-context';
@@ -20,25 +14,16 @@ import { UrlImagesSelectorContext } from './url-images-selector-context';
 import { UrlImagesSelectorComponent } from './url-images-selector.component';
 
 @NgModule({
-  declarations: [
-    UrlImagesLoaderComponent,
-    UrlImagesSelectorComponent
-  ],
+  declarations: [UrlImagesLoaderComponent, UrlImagesSelectorComponent],
   imports: [
     CardModule,
     CommonModule,
     GridModule,
     ModalModule,
     ThumbnailModule,
-    WaitModule
+    WaitModule,
   ],
-  entryComponents: [
-    UrlImagesLoaderComponent,
-    UrlImagesSelectorComponent
-  ],
-  providers: [
-    UrlImagesLoaderContext,
-    UrlImagesSelectorContext
-  ]
+  entryComponents: [UrlImagesLoaderComponent, UrlImagesSelectorComponent],
+  providers: [UrlImagesLoaderContext, UrlImagesSelectorContext],
 })
 export class UrlScraperModule {}

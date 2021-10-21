@@ -1,21 +1,8 @@
 // #region imports
-import {
-  NgModule
-} from '@angular/core';
-
-import {
-  CommonModule
-} from '@angular/common';
-
-import {
-  FormsModule,
-  ReactiveFormsModule
-} from '@angular/forms';
-
-import {
-  RouterModule
-} from '@angular/router';
-
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import {
   CharacterCounterModule,
   DateTimeModule,
@@ -23,24 +10,14 @@ import {
   FormFieldModule,
   IconModule,
   MediaModule,
-  ThumbnailModule
+  ThumbnailModule,
 } from '@giftdibs/ux';
 
-import {
-  CommentEditComponent
-} from './comment-edit.component';
+import { CommentEditComponent } from './comment-edit.component';
+import { CommentListComponent } from './comment-list.component';
+import { CommentPreviewComponent } from './comment-preview.component';
+import { CommentService } from './comment.service';
 
-import {
-  CommentListComponent
-} from './comment-list.component';
-
-import {
-  CommentPreviewComponent
-} from './comment-preview.component';
-
-import {
-  CommentService
-} from './comment.service';
 // #endregion
 
 @NgModule({
@@ -55,20 +32,18 @@ import {
     MediaModule,
     ReactiveFormsModule,
     RouterModule,
-    ThumbnailModule
+    ThumbnailModule,
   ],
-  providers: [
-    CommentService
-  ],
+  providers: [CommentService],
   declarations: [
     CommentEditComponent,
     CommentListComponent,
-    CommentPreviewComponent
+    CommentPreviewComponent,
   ],
   exports: [
     CommentEditComponent,
     CommentListComponent,
-    CommentPreviewComponent
-  ]
+    CommentPreviewComponent,
+  ],
 })
-export class CommentModule { }
+export class CommentModule {}

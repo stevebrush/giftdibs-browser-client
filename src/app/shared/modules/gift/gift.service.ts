@@ -1,60 +1,40 @@
-import {
-  Injectable
-} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { environment } from '@root/environments/environment';
 
-import {
-  HttpClient
-} from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map, share } from 'rxjs/operators';
 
-import {
-  Observable
-} from 'rxjs';
-
-import {
-  map,
-  share
-} from 'rxjs/operators';
-
-import {
-  environment
-} from '@root/environments/environment';
-
-import {
-  Gift
-} from './gift';
+import { Gift } from './gift';
 
 @Injectable()
 export class GiftService {
   private resourceUrl = environment.apiUrl;
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 
-  public create(
-    wishListId: string,
-    formData: Gift
-  ): Observable<any> {
-    return this.http.post(`${this.resourceUrl}/wish-lists/${wishListId}/gifts`, formData);
+  public create(wishListId: string, formData: Gift): Observable<any> {
+    return this.http.post(
+      `${this.resourceUrl}/wish-lists/${wishListId}/gifts`,
+      formData,
+    );
   }
 
   public getAll(startIndex?: number): Observable<Gift[]> {
-    const paginate = (startIndex) ? `?startIndex=${startIndex}` : '';
-    return this.http.get(`${this.resourceUrl}/gifts${paginate}`)
-      .pipe(
-        map((result: any) => {
-          return result.data.gifts.map((g: Gift) => this.prepare(g));
-        }),
-        share()
-      );
+    const paginate = startIndex ? `?startIndex=${startIndex}` : '';
+    return this.http.get(`${this.resourceUrl}/gifts${paginate}`).pipe(
+      map((result: any) => {
+        return result.data.gifts.map((g: Gift) => this.prepare(g));
+      }),
+      share(),
+    );
   }
 
   public getById(giftId: string): Observable<Gift> {
-    return this.http.get(`${this.resourceUrl}/gifts/${giftId}`)
-      .pipe(
-        map((result: any) => this.prepare(result.data.gift)),
-        share()
-      );
+    return this.http.get(`${this.resourceUrl}/gifts/${giftId}`).pipe(
+      map((result: any) => this.prepare(result.data.gift)),
+      share(),
+    );
   }
 
   public remove(giftId: string): Observable<any> {

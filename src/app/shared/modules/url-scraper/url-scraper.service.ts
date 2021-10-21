@@ -1,22 +1,9 @@
-import {
-  Injectable
-} from '@angular/core';
-
-import {
-  HttpBackend,
-  HttpClient
-} from '@angular/common/http';
-
-import {
-  Observable
-} from 'rxjs';
-
-import {
-  map,
-  share
-} from 'rxjs/operators';
-
+import { HttpBackend, HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { environment } from '@root/environments/environment';
+
+import { Observable } from 'rxjs';
+import { map, share } from 'rxjs/operators';
 
 import { UrlScraperResult } from './url-scraper-result';
 
@@ -25,9 +12,7 @@ export class UrlScraperService {
   private http: HttpClient;
   private resourceUrl = environment.scraperUrl;
 
-  constructor(
-    private httpBackend: HttpBackend
-  ) {
+  constructor(private httpBackend: HttpBackend) {
     // Need to create a new backend to allow this service
     // to ignore the auth interceptor.
     this.http = new HttpClient(this.httpBackend);
@@ -35,10 +20,9 @@ export class UrlScraperService {
 
   public getProduct(url: string): Observable<UrlScraperResult> {
     const encoded = encodeURIComponent(url);
-    return this.http.get(`${this.resourceUrl}/products?url=${encoded}`)
-      .pipe(
-        map((result: any) => result.product),
-        share()
-      );
+    return this.http.get(`${this.resourceUrl}/products?url=${encoded}`).pipe(
+      map((result: any) => result.product),
+      share(),
+    );
   }
 }

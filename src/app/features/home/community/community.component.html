@@ -3,22 +3,19 @@
 <div class="gd-container gd-container-lg gd-spacing-padding-even-large">
   <ng-container *ngIf="!isLoading && !gifts.length">
     <gd-notice>
-      <strong>Your community hasn't created any gifts yet.</strong><br>
+      <strong>Your community hasn't created any gifts yet.</strong><br />
       <a routerLink="/profile">Create gift</a>
     </gd-notice>
   </ng-container>
   <gd-row>
-    <gd-column *ngFor="let gift of gifts"
+    <gd-column
+      *ngFor="let gift of gifts"
       screenXSmall="6"
-        screenSmall="4"
-        screenMedium="3"
-        screenLarge="3"
+      screenSmall="4"
+      screenMedium="3"
+      screenLarge="3"
     >
-      <gd-gift-preview
-        [gift]="gift"
-        [showUserInfo]="true"
-      >
-      </gd-gift-preview>
+      <gd-gift-preview [gift]="gift" [showUserInfo]="true"> </gd-gift-preview>
     </gd-column>
   </gd-row>
 
@@ -32,3 +29,4 @@
       Show more results
     </button>
   </div>
+</div>

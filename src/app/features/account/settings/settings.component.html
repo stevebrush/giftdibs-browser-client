@@ -3,9 +3,7 @@
 <div *ngIf="sessionUser">
   <div class="gd-container gd-container-sm gd-spacing-padding-even-large">
     <div class="gd-detail-pane">
-      <h1>
-        Account settings
-      </h1>
+      <h1>Account settings</h1>
 
       <form
         aria-label="Account settings"
@@ -16,9 +14,7 @@
         novalidate
       >
         <gd-form-field>
-          <label class="gd-control-label">
-            Profile image
-          </label>
+          <label class="gd-control-label"> Profile image </label>
           <gd-image-uploader
             formControlName="avatarUrl"
             [allowUrl]="false"
@@ -30,10 +26,7 @@
         <gd-row>
           <gd-column screenSmall="6">
             <gd-form-field [errors]="errors">
-              <label
-                class="gd-control-label"
-                for="gd-settings-first-name"
-              >
+              <label class="gd-control-label" for="gd-settings-first-name">
                 First name
               </label>
               <input
@@ -47,10 +40,7 @@
           </gd-column>
           <gd-column screenSmall="6">
             <gd-form-field [errors]="errors">
-              <label
-                class="gd-control-label"
-                for="gd-settings-last-name"
-              >
+              <label class="gd-control-label" for="gd-settings-last-name">
                 Last name
               </label>
               <input
@@ -65,10 +55,7 @@
         </gd-row>
 
         <gd-form-field [errors]="errors">
-          <label
-            class="gd-control-label"
-            for="gd-settings-email-address"
-          >
+          <label class="gd-control-label" for="gd-settings-email-address">
             Email
           </label>
           <input
@@ -101,7 +88,8 @@
       </form>
 
       <p>
-        <button *ngIf="sessionUser.facebookId"
+        <button
+          *ngIf="sessionUser.facebookId"
           class="gd-button gd-button-default gd-button-unlink-facebook"
           type="button"
           [disabled]="settingsForm.disabled"
@@ -111,7 +99,8 @@
           Unlink Facebook account
         </button>
 
-        <gd-facebook-login-button *ngIf="!sessionUser.facebookId"
+        <gd-facebook-login-button
+          *ngIf="!sessionUser.facebookId"
           buttonText="Link Facebook account"
           [disabled]="settingsForm.disabled"
           (click)="disableForm()"

@@ -15,24 +15,23 @@
     <ng-container *ngIf="isLoggedIn">
       <!-- DESKTOP SEARCH -->
       <div *ngIf="!isMobile">
-        <gd-search>
-        </gd-search>
+        <gd-search> </gd-search>
       </div>
 
       <!-- MOBILE SEARCH -->
-      <div *ngIf="isMobile"
+      <div
+        *ngIf="isMobile"
         class="app-navbar-search-mobile"
         [ngClass]="{
           'app-navbar-search-visible': showSearch
         }"
       >
-        <gd-search class="app-navbar-mobile-search">
-        </gd-search>
+        <gd-search class="app-navbar-mobile-search"> </gd-search>
         <div class="app-navbar-mobile-search-button">
           <button
             class="gd-button gd-button-default"
             type="button"
-            (click)="showSearch = false;$event.preventDefault();"
+            (click)="showSearch = false; $event.preventDefault()"
           >
             <gd-icon icon="times"></gd-icon>
           </button>
@@ -41,11 +40,8 @@
     </ng-container>
   </div>
 
-  <nav
-    aria-label="User navigation"
-    class="app-navbar-secondary"
-  >
-    <ng-container *ngIf="isLoggedIn else notLoggedInMenu">
+  <nav aria-label="User navigation" class="app-navbar-secondary">
+    <ng-container *ngIf="isLoggedIn; else notLoggedInMenu">
       <!-- DESKTOP USER NAV -->
       <ul *ngIf="!isMobile" class="app-navbar-menu">
         <li>
@@ -61,13 +57,15 @@
           </a>
         </li>
         <li>
-          <gd-notifications>
-          </gd-notifications>
+          <gd-notifications> </gd-notifications>
         </li>
         <li>
           <button
             type="button"
-            class="gd-button gd-button-link gd-text-deemphasized app-navbar-icon-link"
+            class="
+              gd-button gd-button-link gd-text-deemphasized
+              app-navbar-icon-link
+            "
             title="Open user menu"
             gdDropdownMenuTrigger
             menuHorizontalAlignment="right"
@@ -84,12 +82,11 @@
           class="gd-button gd-button-link"
           title="Open search"
           type="button"
-          (click)="showSearch = true;$event.preventDefault();"
+          (click)="showSearch = true; $event.preventDefault()"
         >
           <gd-icon icon="search"></gd-icon>
         </button>
-        <gd-notifications>
-        </gd-notifications>
+        <gd-notifications> </gd-notifications>
         <button
           class="gd-button gd-button-link"
           title="Open user menu"

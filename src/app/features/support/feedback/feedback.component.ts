@@ -1,27 +1,18 @@
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Component
+  Component,
 } from '@angular/core';
-
 import {
   FormBuilder,
   FormControl,
   FormGroup,
-  Validators
+  Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AlertService } from '@giftdibs/ux';
 
-import {
-  Router
-} from '@angular/router';
-
-import {
-  AlertService
-} from '@giftdibs/ux';
-
-import {
-  finalize
-} from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 
 import { FeedbackReason } from './feedback-reason';
 import { FeedbackService } from './feedback.service';
@@ -30,30 +21,30 @@ import { FeedbackService } from './feedback.service';
   selector: 'gd-feedback',
   templateUrl: './feedback.component.html',
   styleUrls: ['./feedback.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FeedbackComponent {
   public feedbackForm: FormGroup;
   public errors: any[] = [];
   public isLoading = false;
 
-  public reasons: {name: string; value: FeedbackReason}[] = [
+  public reasons: { name: string; value: FeedbackReason }[] = [
     {
       name: 'General inquiry',
-      value: FeedbackReason.GeneralInquiry
+      value: FeedbackReason.GeneralInquiry,
     },
     {
       name: 'Problem with my account',
-      value: FeedbackReason.ProblemWithAccount
+      value: FeedbackReason.ProblemWithAccount,
     },
     {
       name: 'Problem with site',
-      value: FeedbackReason.Bug
+      value: FeedbackReason.Bug,
     },
     {
       name: 'Report abuse or spam',
-      value: FeedbackReason.Abuse
-    }
+      value: FeedbackReason.Abuse,
+    },
   ];
 
   constructor(
@@ -61,7 +52,7 @@ export class FeedbackComponent {
     private changeDetector: ChangeDetectorRef,
     private feedbackService: FeedbackService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
   ) {
     this.createForm();
   }
@@ -78,12 +69,13 @@ export class FeedbackComponent {
 
     const formData = this.feedbackForm.value;
 
-    this.feedbackService.create(formData)
+    this.feedbackService
+      .create(formData)
       .pipe(
         finalize(() => {
           this.isLoading = false;
           this.changeDetector.markForCheck();
-        })
+        }),
       )
       .subscribe(
         (result: any) => {
@@ -105,7 +97,7 @@ export class FeedbackComponent {
           this.errors = error.errors;
           this.feedbackForm.enable();
           this.changeDetector.markForCheck();
-        }
+        },
       );
   }
 
@@ -114,9 +106,7 @@ export class FeedbackComponent {
       reason: new FormControl(FeedbackReason.GeneralInquiry),
       referrer: new FormControl(document.referrer),
       gdNickname: null,
-      message: new FormControl(null, [
-        Validators.required
-      ])
+      message: new FormControl(null, [Validators.required]),
     });
   }
 }

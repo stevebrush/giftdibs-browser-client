@@ -1,11 +1,5 @@
-import {
-  NgModule
-} from '@angular/core';
-
-import {
-  RouterModule,
-  Routes
-} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AboutComponent } from './about/about.component';
 import { FaqComponent } from './faq/faq.component';
@@ -20,34 +14,37 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: AboutComponent
+        component: AboutComponent,
       },
       {
         path: 'about',
-        component: AboutComponent
+        component: AboutComponent,
       },
       {
         path: 'faq',
-        component: FaqComponent
+        component: FaqComponent,
       },
       {
         path: 'feedback',
-        loadChildren: () => import('app/features/support/feedback/feedback.module').then(m => m.FeedbackModule)
+        loadChildren: () =>
+          import('app/features/support/feedback/feedback.module').then(
+            (m) => m.FeedbackModule,
+          ),
       },
       {
         path: 'privacy',
-        component: PrivacyComponent
+        component: PrivacyComponent,
       },
       {
         path: 'terms',
-        component: TermsComponent
-      }
-    ]
-  }
+        component: TermsComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class SupportRoutingModule { }
+export class SupportRoutingModule {}

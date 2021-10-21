@@ -1,6 +1,4 @@
-import {
-  Gift
-} from '../gift';
+import { Gift } from '../gift';
 
 export class GiftMoveContext {
   public gift: Gift;

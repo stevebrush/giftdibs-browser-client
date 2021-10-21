@@ -5,61 +5,46 @@ import {
   ElementRef,
   forwardRef,
   OnInit,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
-
-import {
-  ControlValueAccessor,
-  NG_VALUE_ACCESSOR
-} from '@angular/forms';
-
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { SessionService } from '@giftdibs/session';
 import {
   DropdownMenuItem,
   ModalClosedEventArgs,
-  ModalService
+  ModalService,
 } from '@giftdibs/ux';
 
-import {
-  SessionService
-} from '@giftdibs/session';
+import { User } from '../user';
+import { WishListPrivacy } from '../wish-list';
 
-import {
-  User
-} from '../user';
-
-import {
-  WishListPrivacy
-} from '../wish-list';
-
-import {
-  PrivacySelectorUsersContext
-} from './privacy-selector-users-context';
-
-import {
-  PrivacySelectorUsersComponent
-} from './privacy-selector-users.component';
+import { PrivacySelectorUsersContext } from './privacy-selector-users-context';
+import { PrivacySelectorUsersComponent } from './privacy-selector-users.component';
 
 @Component({
   selector: 'gd-privacy-selector',
   templateUrl: './privacy-selector.component.html',
   styleUrls: ['./privacy-selector.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    /* eslint-disable-next-line @angular-eslint/no-forward-ref */
-    useExisting: forwardRef(() => PrivacySelectorComponent),
-    multi: true
-  }]
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      /* eslint-disable-next-line @angular-eslint/no-forward-ref */
+      useExisting: forwardRef(() => PrivacySelectorComponent),
+      multi: true,
+    },
+  ],
 })
-export class PrivacySelectorComponent
-  implements OnInit, ControlValueAccessor {
+export class PrivacySelectorComponent implements OnInit, ControlValueAccessor {
   public disabled = false;
   public menuItems: DropdownMenuItem[];
 
   public get value(): WishListPrivacy {
-    return this._value || {
-      type: 'everyone'
-    };
+    return (
+      this._value || {
+        type: 'everyone',
+      }
+    );
   }
 
   public set value(value: WishListPrivacy) {
@@ -70,8 +55,8 @@ export class PrivacySelectorComponent
 
   public get valueLabel(): string {
     const value = this.value;
-    const found = this.menuItems.find(item => {
-      return (item.data.type === value.type);
+    const found = this.menuItems.find((item) => {
+      return item.data.type === value.type;
     });
     return found.label;
   }
@@ -86,8 +71,8 @@ export class PrivacySelectorComponent
   constructor(
     private changeDetector: ChangeDetectorRef,
     private modalService: ModalService,
-    private sessionService: SessionService
-  ) { }
+    private sessionService: SessionService,
+  ) {}
 
   public ngOnInit(): void {
     this.user = this.sessionService.user;
@@ -98,13 +83,13 @@ export class PrivacySelectorComponent
         icon: 'users',
         action: () => {
           this.value = {
-            type: 'everyone'
+            type: 'everyone',
           };
           this.changeDetector.markForCheck();
         },
         data: {
-          type: 'everyone'
-        }
+          type: 'everyone',
+        },
       },
       {
         label: 'Specific friends...',
@@ -117,18 +102,20 @@ export class PrivacySelectorComponent
           const instance = this.modalService.open(
             PrivacySelectorUsersComponent,
             {
-              providers: [{
-                provide: PrivacySelectorUsersContext,
-                useValue: context
-              }]
-            }
+              providers: [
+                {
+                  provide: PrivacySelectorUsersContext,
+                  useValue: context,
+                },
+              ],
+            },
           );
 
           instance.closed.subscribe((args: ModalClosedEventArgs) => {
             if (args.reason === 'save') {
               this.value = {
                 type: 'custom',
-                allowedUserIds: args.data.value
+                allowedUserIds: args.data.value,
               };
               this.changeDetector.markForCheck();
             }
@@ -137,22 +124,22 @@ export class PrivacySelectorComponent
           });
         },
         data: {
-          type: 'custom'
-        }
+          type: 'custom',
+        },
       },
       {
         label: 'Only you',
         icon: 'eye-slash',
         action: () => {
           this.value = {
-            type: 'me'
+            type: 'me',
           };
           this.changeDetector.markForCheck();
         },
         data: {
-          type: 'me'
-        }
-      }
+          type: 'me',
+        },
+      },
     ];
   }
 

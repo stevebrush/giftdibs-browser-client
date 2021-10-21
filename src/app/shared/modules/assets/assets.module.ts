@@ -1,14 +1,8 @@
-import {
-  NgModule
-} from '@angular/core';
+import { NgModule } from '@angular/core';
 
-import {
-  AssetsService
-} from './assets.service';
+import { AssetsService } from './assets.service';
 
 @NgModule({
-  providers: [
-    AssetsService
-  ]
+  providers: [AssetsService],
 })
 export class AssetsModule {}

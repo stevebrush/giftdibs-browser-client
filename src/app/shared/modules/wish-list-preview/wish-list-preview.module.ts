@@ -1,24 +1,9 @@
-import {
-  NgModule
-} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { CardModule, IconModule, ThumbnailModule } from '@giftdibs/ux';
 
-import {
-  CommonModule
-} from '@angular/common';
-
-import {
-  RouterModule
-} from '@angular/router';
-
-import {
-  CardModule,
-  IconModule,
-  ThumbnailModule
-} from '@giftdibs/ux';
-
-import {
-  WishListPreviewComponent
-} from './wish-list-preview.component';
+import { WishListPreviewComponent } from './wish-list-preview.component';
 
 @NgModule({
   imports: [
@@ -26,13 +11,9 @@ import {
     CommonModule,
     IconModule,
     RouterModule,
-    ThumbnailModule
+    ThumbnailModule,
   ],
-  declarations: [
-    WishListPreviewComponent
-  ],
-  exports: [
-    WishListPreviewComponent
-  ]
+  declarations: [WishListPreviewComponent],
+  exports: [WishListPreviewComponent],
 })
 export class WishListPreviewModule {}

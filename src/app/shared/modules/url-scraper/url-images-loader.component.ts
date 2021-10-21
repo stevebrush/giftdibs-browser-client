@@ -4,33 +4,22 @@ import {
   Component,
   ElementRef,
   OnInit,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
-
-import {
-  AlertService
-} from '@giftdibs/ux';
-
+import { AlertService } from '@giftdibs/ux';
 import {
   ModalClosedEventArgs,
   ModalInstance,
   ModalService,
-  ModalSize
+  ModalSize,
 } from '@giftdibs/ux';
 
-import {
-  Subject
-} from 'rxjs';
-
-import {
-  finalize,
-  takeUntil
-} from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { finalize, takeUntil } from 'rxjs/operators';
 
 import { UrlImagesLoaderContext } from './url-images-loader-context';
 import { UrlImagesSelectorContext } from './url-images-selector-context';
 import { UrlImagesSelectorComponent } from './url-images-selector.component';
-
 import { UrlScraperResult } from './url-scraper-result';
 import { UrlScraperService } from './url-scraper.service';
 
@@ -38,9 +27,7 @@ import { UrlScraperService } from './url-scraper.service';
   selector: 'gd-url-images-loader',
   templateUrl: './url-images-loader.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    UrlScraperService
-  ]
+  providers: [UrlScraperService],
 })
 export class UrlImagesLoaderComponent implements OnInit {
   public disabled = false;
@@ -59,8 +46,8 @@ export class UrlImagesLoaderComponent implements OnInit {
     private modal: ModalInstance<any>,
     private modalService: ModalService,
     private urlScraperService: UrlScraperService,
-    private context: UrlImagesLoaderContext
-  ) { }
+    private context: UrlImagesLoaderContext,
+  ) {}
 
   public ngOnInit(): void {
     if (this.context.allowUrlEdit === false) {
@@ -96,13 +83,14 @@ export class UrlImagesLoaderComponent implements OnInit {
 
     // TODO: Check if url is actually an image and send it to the upload service.
 
-    this.urlScraperService.getProduct(this.url)
+    this.urlScraperService
+      .getProduct(this.url)
       .pipe(
         takeUntil(this.cancelled),
         finalize(() => {
           this.disabled = false;
           this.changeDetector.markForCheck();
-        })
+        }),
       )
       .subscribe(
         (result: UrlScraperResult) => {
@@ -111,7 +99,7 @@ export class UrlImagesLoaderComponent implements OnInit {
             if (result.images.length === 1) {
               this.modal.close('save', {
                 image: result.images[0],
-                result
+                result,
               });
               return;
             }
@@ -121,16 +109,17 @@ export class UrlImagesLoaderComponent implements OnInit {
               this.alertService.info('No images found.');
             } else {
               this.modal.close('save', {
-                result
+                result,
               });
             }
           }
         },
         (err: any) => {
-          const message = err.error.message ||
+          const message =
+            err.error.message ||
             `We couldn't reach that URL. Please try again later.`;
           this.alertService.error(message);
-        }
+        },
       );
   }
 
@@ -139,11 +128,13 @@ export class UrlImagesLoaderComponent implements OnInit {
     context.product = result;
 
     const instance = this.modalService.open(UrlImagesSelectorComponent, {
-      providers: [{
-        provide: UrlImagesSelectorContext,
-        useValue: context
-      }],
-      size: ModalSize.Medium
+      providers: [
+        {
+          provide: UrlImagesSelectorContext,
+          useValue: context,
+        },
+      ],
+      size: ModalSize.Medium,
     });
 
     instance.closed.subscribe((args: ModalClosedEventArgs) => {
@@ -151,7 +142,7 @@ export class UrlImagesLoaderComponent implements OnInit {
       if (args.reason === 'save') {
         this.modal.close('save', {
           image: args.data.selectedImage,
-          result
+          result,
         });
       } else {
         if (!this.allowUrlEdit) {

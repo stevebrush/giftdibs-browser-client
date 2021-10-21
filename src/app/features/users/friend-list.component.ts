@@ -4,46 +4,25 @@ import {
   Component,
   Input,
   OnDestroy,
-  OnInit
+  OnInit,
 } from '@angular/core';
-
-import {
-  ActivatedRoute,
-  Params,
-  Router
-} from '@angular/router';
-
-import {
-  AlertService
-} from '@giftdibs/ux';
-
-import {
-  Subject
-} from 'rxjs';
-
-import {
-  mergeMap,
-  takeUntil
-} from 'rxjs/operators';
-
-import {
-  SessionService
-} from '@giftdibs/session';
-
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import {
   FriendshipService,
-  FriendshipSummary
+  FriendshipSummary,
 } from '@app/shared/modules/friendship';
+import { User, UserService } from '@app/shared/modules/user';
+import { SessionService } from '@giftdibs/session';
+import { AlertService } from '@giftdibs/ux';
 
-import {
-  User, UserService
-} from '@app/shared/modules/user';
+import { Subject } from 'rxjs';
+import { mergeMap, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'gd-friend-list',
   templateUrl: './friend-list.component.html',
   styleUrls: ['./friend-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FriendListComponent implements OnInit, OnDestroy {
   @Input()
@@ -63,8 +42,8 @@ export class FriendListComponent implements OnInit, OnDestroy {
     private friendshipService: FriendshipService,
     private router: Router,
     private sessionService: SessionService,
-    private userService: UserService
-  ) { }
+    private userService: UserService,
+  ) {}
 
   public ngOnInit(): void {
     this.activatedRoute.params
@@ -79,7 +58,7 @@ export class FriendListComponent implements OnInit, OnDestroy {
           this.user = user;
           return this.friendshipService.getAllByUserId(user.id);
         }),
-        takeUntil(this.ngUnsubscribe)
+        takeUntil(this.ngUnsubscribe),
       )
       .subscribe(
         (friendships: FriendshipSummary) => {
@@ -90,7 +69,7 @@ export class FriendListComponent implements OnInit, OnDestroy {
         () => {
           this.alertService.error('Friendships not found.', true);
           this.router.navigate(['/users']);
-        }
+        },
       );
   }
 

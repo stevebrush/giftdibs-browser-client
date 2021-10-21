@@ -1,32 +1,17 @@
-import {
-  Injectable
-} from '@angular/core';
+import { HttpBackend, HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { environment } from '@root/environments/environment';
 
-import {
-  HttpBackend,
-  HttpClient
-} from '@angular/common/http';
+import { Observable } from 'rxjs';
 
-import {
-  Observable
-} from 'rxjs';
-
-import {
-  environment
-} from '@root/environments/environment';
-
-import {
-  Feedback
-} from './feedback';
+import { Feedback } from './feedback';
 
 @Injectable()
 export class FeedbackService {
   private http: HttpClient;
   private resourceUrl = environment.apiUrl + '/feedback';
 
-  constructor(
-    private handler: HttpBackend
-  ) {
+  constructor(private handler: HttpBackend) {
     this.http = new HttpClient(this.handler);
   }
 

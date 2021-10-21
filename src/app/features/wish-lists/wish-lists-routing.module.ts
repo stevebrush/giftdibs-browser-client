@@ -1,11 +1,5 @@
-import {
-  NgModule
-} from '@angular/core';
-
-import {
-  RouterModule,
-  Routes
-} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 import { WishListComponent } from './wish-list.component';
 
@@ -13,12 +7,12 @@ const routes: Routes = [
   {
     path: ':wishListId',
     pathMatch: 'full',
-    component: WishListComponent
-  }
+    component: WishListComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class WishListsRoutingModule { }
+export class WishListsRoutingModule {}

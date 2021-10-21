@@ -1,6 +1,10 @@
 @import '../../../../styles/mixins';
 
-$app-navbar-gradient: linear-gradient(45deg, $gd-color-primary 0%, #742182 100%);
+$app-navbar-gradient: linear-gradient(
+  45deg,
+  $gd-color-primary 0%,
+  #742182 100%
+);
 
 .app-navbar {
   background: $gd-color-secondary;

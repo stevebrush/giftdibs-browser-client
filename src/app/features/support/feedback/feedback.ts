@@ -1,6 +1,4 @@
-import {
-  FeedbackReason
-} from './feedback-reason';
+import { FeedbackReason } from './feedback-reason';
 
 export interface Feedback {
   body?: string;

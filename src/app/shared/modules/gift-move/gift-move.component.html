@@ -15,10 +15,7 @@
       <gd-wait *ngIf="isLoading"></gd-wait>
 
       <gd-form-field [errors]="errors">
-        <label
-          class="gd-control-label"
-          for="gd-gift-move-wish-lists"
-        >
+        <label class="gd-control-label" for="gd-gift-move-wish-lists">
           Select wish list:
         </label>
         <select
@@ -27,14 +24,10 @@
           name="wishListId"
           formControlName="wishListId"
         >
-          <option *ngFor="let wishList of wishLists"
-            [ngValue]="wishList.id"
-          >
+          <option *ngFor="let wishList of wishLists" [ngValue]="wishList.id">
             {{ wishList.name }}
           </option>
-          <option value="new">
-            Create new...
-          </option>
+          <option value="new">Create new...</option>
         </select>
       </gd-form-field>
 
@@ -46,10 +39,9 @@
             formControlName="name"
             placeholder="New wish list name"
             type="text"
-          >
+          />
         </gd-form-field>
       </ng-container>
-
     </form>
   </gd-modal-body>
   <gd-modal-footer>

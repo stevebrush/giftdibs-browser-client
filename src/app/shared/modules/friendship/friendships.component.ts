@@ -5,12 +5,9 @@ import {
   Input,
   OnChanges,
   OnInit,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core';
-
-import {
-  User
-} from '@app/shared/modules/user';
+import { User } from '@app/shared/modules/user';
 
 import { FriendshipSummary } from './friendship-summary';
 import { FriendshipService } from './friendship.service';
@@ -19,7 +16,7 @@ import { FriendshipService } from './friendship.service';
   selector: 'gd-friendships',
   templateUrl: './friendships.component.html',
   styleUrls: ['./friendships.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FriendshipsComponent implements OnInit, OnChanges {
   @Input()
@@ -32,8 +29,8 @@ export class FriendshipsComponent implements OnInit, OnChanges {
 
   constructor(
     private changeDetector: ChangeDetectorRef,
-    private friendshipService: FriendshipService
-  ) { }
+    private friendshipService: FriendshipService,
+  ) {}
 
   public ngOnInit(): void {
     this.assignFriendships();
@@ -50,7 +47,8 @@ export class FriendshipsComponent implements OnInit, OnChanges {
   private assignFriendships(): void {
     this.isLoading = true;
     this.changeDetector.markForCheck();
-    this.friendshipService.getAllByUserId(this.user.id)
+    this.friendshipService
+      .getAllByUserId(this.user.id)
       .subscribe((friendships: FriendshipSummary) => {
         this.friendships = friendships;
         this.followers = friendships.followers;

@@ -1,26 +1,14 @@
-import {
-  NgModule
-} from '@angular/core';
-
-import {
-  CommonModule
-} from '@angular/common';
-
-import {
-  FormsModule,
-  ReactiveFormsModule
-} from '@angular/forms';
-
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   CharacterCounterModule,
   CheckboxModule,
   FormFieldModule,
-  ModalModule
+  ModalModule,
 } from '@giftdibs/ux';
 
-import {
-  DibEditComponent
-} from './dib-edit.component';
+import { DibEditComponent } from './dib-edit.component';
 
 @NgModule({
   imports: [
@@ -30,13 +18,9 @@ import {
     FormFieldModule,
     FormsModule,
     ModalModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  declarations: [
-    DibEditComponent
-  ],
-  exports: [
-    DibEditComponent
-  ]
+  declarations: [DibEditComponent],
+  exports: [DibEditComponent],
 })
-export class DibEditModule { }
+export class DibEditModule {}

@@ -3,61 +3,28 @@ import {
   ChangeDetectorRef,
   Component,
   OnDestroy,
-  OnInit
+  OnInit,
 } from '@angular/core';
-
-import {
-  ActivatedRoute,
-  Params,
-  Router
-} from '@angular/router';
-
-import {
-  AlertService
-} from '@giftdibs/ux';
-
-import {
-  ModalClosedEventArgs,
-  ModalService,
-  ModalSize
-} from '@giftdibs/ux';
-
-import {
-  combineLatest,
-  Subject
-} from 'rxjs';
-
-import {
-  takeUntil
-} from 'rxjs/operators';
-
-import {
-  SessionService
-} from '@giftdibs/session';
-
-import {
-  User,
-  UserService
-} from '@app/shared/modules/user';
-
-import {
-  WishList
-} from '@app/shared/modules/wish-list';
-
-import {
-  WishListService
-} from '@app/shared/modules/wish-list';
-
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { User, UserService } from '@app/shared/modules/user';
+import { WishList } from '@app/shared/modules/wish-list';
+import { WishListService } from '@app/shared/modules/wish-list';
 import {
   WishListEditComponent,
-  WishListEditContext
+  WishListEditContext,
 } from '@app/shared/modules/wish-list-edit';
+import { SessionService } from '@giftdibs/session';
+import { AlertService } from '@giftdibs/ux';
+import { ModalClosedEventArgs, ModalService, ModalSize } from '@giftdibs/ux';
+
+import { combineLatest, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'gd-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserComponent implements OnInit, OnDestroy {
   public isLoading = true;
@@ -81,17 +48,12 @@ export class UserComponent implements OnInit, OnDestroy {
     private router: Router,
     private sessionService: SessionService,
     private userService: UserService,
-    private wishListService: WishListService
-  ) { }
+    private wishListService: WishListService,
+  ) {}
 
   public ngOnInit(): void {
-    combineLatest(
-      this.activatedRoute.params,
-      this.activatedRoute.queryParams
-    )
-      .pipe(
-        takeUntil(this.ngUnsubscribe)
-      )
+    combineLatest(this.activatedRoute.params, this.activatedRoute.queryParams)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((result: Params[]) => {
         const params = result[0];
         const queryParams = result[1];
@@ -103,45 +65,48 @@ export class UserComponent implements OnInit, OnDestroy {
         this.changeDetector.markForCheck();
 
         if (params.userId) {
-          this.userService.getById(params.userId)
-            .pipe(
-              takeUntil(this.ngUnsubscribe)
-            )
-            .subscribe((user) => {
-              this.user = user;
-              this.isSessionUser = this.sessionService.isSessionUser(this.user.id);
-              this.wishListService.getAllByUserId(user.id)
-                .pipe(
-                  takeUntil(this.ngUnsubscribe)
-                )
-                .subscribe((wishLists) => {
-                  this._wishLists = wishLists;
+          this.userService
+            .getById(params.userId)
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe(
+              (user) => {
+                this.user = user;
+                this.isSessionUser = this.sessionService.isSessionUser(
+                  this.user.id,
+                );
+                this.wishListService
+                  .getAllByUserId(user.id)
+                  .pipe(takeUntil(this.ngUnsubscribe))
+                  .subscribe(
+                    (wishLists) => {
+                      this._wishLists = wishLists;
 
-                  // Automatically open the new wish list modal?
-                  if (
-                    this.isSessionUser &&
-                    queryParams.action === 'new_wish_list'
-                  ) {
-                    this.openWishListEditModal();
-                  }
+                      // Automatically open the new wish list modal?
+                      if (
+                        this.isSessionUser &&
+                        queryParams.action === 'new_wish_list'
+                      ) {
+                        this.openWishListEditModal();
+                      }
 
-                  this.isLoading = false;
-                  this.changeDetector.markForCheck();
-                }, () => {
-                  this.isLoading = false;
-                  this.changeDetector.markForCheck();
-                });
-            }, () => {
-              this.alertService.error('User not found.', true);
-              this.router.navigate(['/']);
-            });
+                      this.isLoading = false;
+                      this.changeDetector.markForCheck();
+                    },
+                    () => {
+                      this.isLoading = false;
+                      this.changeDetector.markForCheck();
+                    },
+                  );
+              },
+              () => {
+                this.alertService.error('User not found.', true);
+                this.router.navigate(['/']);
+              },
+            );
         } else {
           // Redirect to session user's profile if invalid route.
-          this.router.navigate([
-            '/users',
-            this.sessionService.user.id
-          ], {
-            queryParamsHandling: 'merge'
+          this.router.navigate(['/users', this.sessionService.user.id], {
+            queryParamsHandling: 'merge',
           });
         }
       });
@@ -158,7 +123,8 @@ export class UserComponent implements OnInit, OnDestroy {
     this.isArchivedViewActive = false;
     this.changeDetector.markForCheck();
 
-    this.wishListService.getAllByUserId(this.user.id)
+    this.wishListService
+      .getAllByUserId(this.user.id)
       .subscribe((wishLists: WishList[]) => {
         this._wishLists = wishLists;
         this.isLoading = false;
@@ -172,7 +138,8 @@ export class UserComponent implements OnInit, OnDestroy {
     this.isArchivedViewActive = true;
     this.changeDetector.markForCheck();
 
-    this.wishListService.getArchivedByUserId(this.user.id)
+    this.wishListService
+      .getArchivedByUserId(this.user.id)
       .subscribe((wishLists: WishList[]) => {
         this._wishLists = wishLists;
         this.isLoading = false;
@@ -184,11 +151,13 @@ export class UserComponent implements OnInit, OnDestroy {
     const context = new WishListEditContext();
 
     const modalInstance = this.modalService.open(WishListEditComponent, {
-      providers: [{
-        provide: WishListEditContext,
-        useValue: context
-      }],
-      size: ModalSize.Small
+      providers: [
+        {
+          provide: WishListEditContext,
+          useValue: context,
+        },
+      ],
+      size: ModalSize.Small,
     });
 
     modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
@@ -202,7 +171,8 @@ export class UserComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.changeDetector.markForCheck();
 
-    this.wishListService.getAllByUserId(this.user.id)
+    this.wishListService
+      .getAllByUserId(this.user.id)
       .subscribe((wishLists: WishList[]) => {
         this._wishLists = wishLists;
         this.isLoading = false;

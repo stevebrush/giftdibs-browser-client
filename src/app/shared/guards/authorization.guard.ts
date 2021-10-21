@@ -1,24 +1,14 @@
-import {
-  Injectable
-} from '@angular/core';
-
+import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
   CanLoad,
   Route,
   Router,
-  RouterStateSnapshot
+  RouterStateSnapshot,
 } from '@angular/router';
-
-import {
-  AlertService,
-  WindowRefService
-} from '@giftdibs/ux';
-
-import {
-  SessionService
-} from '@giftdibs/session';
+import { SessionService } from '@giftdibs/session';
+import { AlertService, WindowRefService } from '@giftdibs/ux';
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanLoad {
@@ -26,12 +16,12 @@ export class AuthGuard implements CanActivate, CanLoad {
     private alertService: AlertService,
     private router: Router,
     private sessionService: SessionService,
-    private windowRef: WindowRefService
-  ) { }
+    private windowRef: WindowRefService,
+  ) {}
 
   public canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
+    state: RouterStateSnapshot,
   ): boolean {
     return this.validateOrRedirect(state.url);
   }
@@ -51,8 +41,8 @@ export class AuthGuard implements CanActivate, CanLoad {
     this.alertService.info('Please log in to view that page.', true);
     this.router.navigate(['/account', 'login'], {
       queryParams: {
-        redirectUrl
-      }
+        redirectUrl,
+      },
     });
 
     return false;

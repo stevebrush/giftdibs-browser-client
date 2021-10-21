@@ -1,29 +1,11 @@
-import {
-  NgModule
-} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormFieldModule, ModalModule, WaitModule } from '@giftdibs/ux';
 
-import {
-  CommonModule
-} from '@angular/common';
+import { WishListModule } from '../wish-list';
 
-import {
-  FormsModule,
-  ReactiveFormsModule
-} from '@angular/forms';
-
-import {
-  FormFieldModule,
-  ModalModule,
-  WaitModule
-} from '@giftdibs/ux';
-
-import {
-  WishListModule
-} from '../wish-list';
-
-import {
-  GiftMoveComponent
-} from './gift-move.component';
+import { GiftMoveComponent } from './gift-move.component';
 
 @NgModule({
   imports: [
@@ -33,13 +15,9 @@ import {
     ModalModule,
     ReactiveFormsModule,
     WaitModule,
-    WishListModule
+    WishListModule,
   ],
-  declarations: [
-    GiftMoveComponent
-  ],
-  entryComponents: [
-    GiftMoveComponent
-  ]
+  declarations: [GiftMoveComponent],
+  entryComponents: [GiftMoveComponent],
 })
-export class GiftMoveModule { }
+export class GiftMoveModule {}

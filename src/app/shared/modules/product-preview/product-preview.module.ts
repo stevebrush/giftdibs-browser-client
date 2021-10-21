@@ -1,21 +1,13 @@
-import {
-  NgModule
-} from '@angular/core';
-
-import {
-  CommonModule
-} from '@angular/common';
-
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import {
   CardModule,
   IconModule,
   ModalModule,
-  ThumbnailModule
+  ThumbnailModule,
 } from '@giftdibs/ux';
 
-import {
-  AssetsModule
-} from '../assets';
+import { AssetsModule } from '../assets';
 
 import { ProductPreviewComponent } from './product-preview.component';
 
@@ -26,13 +18,9 @@ import { ProductPreviewComponent } from './product-preview.component';
     CommonModule,
     IconModule,
     ModalModule,
-    ThumbnailModule
+    ThumbnailModule,
   ],
-  exports: [
-    ProductPreviewComponent
-  ],
-  declarations: [
-    ProductPreviewComponent
-  ]
+  exports: [ProductPreviewComponent],
+  declarations: [ProductPreviewComponent],
 })
-export class ProductPreviewModule { }
+export class ProductPreviewModule {}

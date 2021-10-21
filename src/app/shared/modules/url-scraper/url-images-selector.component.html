@@ -1,11 +1,8 @@
 <gd-modal>
   <gd-modal-header>
-    <gd-modal-heading>
-      Select an image
-    </gd-modal-heading>
+    <gd-modal-heading> Select an image </gd-modal-heading>
   </gd-modal-header>
   <gd-modal-body>
-
     <gd-row>
       <gd-column *ngFor="let image of images" screenSmall="3">
         <gd-card>
@@ -22,13 +19,10 @@
             >
             </gd-thumbnail>
           </gd-card-thumbnail>
-          <gd-card-body>
-            {{ image.width }} x {{ image.height }}
-          </gd-card-body>
+          <gd-card-body> {{ image.width }} x {{ image.height }} </gd-card-body>
         </gd-card>
       </gd-column>
     </gd-row>
-
   </gd-modal-body>
   <gd-modal-footer>
     <div class="gd-button-group">

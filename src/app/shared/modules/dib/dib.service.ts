@@ -1,50 +1,28 @@
-import {
-  Injectable
-} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { environment } from '@root/environments/environment';
 
-import {
-  HttpClient
-} from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map, share } from 'rxjs/operators';
 
-import {
-  environment
-} from '@root/environments/environment';
-
-import {
-  Observable
-} from 'rxjs';
-
-import {
-  map,
-  share
-} from 'rxjs/operators';
-
-import {
-  Dib
-} from './dib';
+import { Dib } from './dib';
 
 @Injectable()
 export class DibService {
   private resourceUrl = environment.apiUrl;
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 
-  public create(
-    giftId: string,
-    formData: Dib
-  ): Observable<any> {
+  public create(giftId: string, formData: Dib): Observable<any> {
     return this.http.post(`${this.resourceUrl}/gifts/${giftId}/dibs`, formData);
   }
 
   public getAllRecipients(isDelivered = false): Observable<any> {
-    const status = (isDelivered) ? '?status=delivered' : '';
-    return this.http.get(`${this.resourceUrl}/dibs/recipients${status}`)
-      .pipe(
-        map((result: any) => result.data),
-        share()
-      );
+    const status = isDelivered ? '?status=delivered' : '';
+    return this.http.get(`${this.resourceUrl}/dibs/recipients${status}`).pipe(
+      map((result: any) => result.data),
+      share(),
+    );
   }
 
   public markAsDelivered(dibId: string): Observable<any> {

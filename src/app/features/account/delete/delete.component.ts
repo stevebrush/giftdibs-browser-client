@@ -1,37 +1,25 @@
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Component
+  Component,
 } from '@angular/core';
-
 import {
   FormBuilder,
   FormControl,
   FormGroup,
-  Validators
+  Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import { SessionService } from '@giftdibs/session';
+import { AlertService } from '@giftdibs/ux';
 
-import {
-  Router
-} from '@angular/router';
-
-import {
-  AlertService
-} from '@giftdibs/ux';
-
-import {
-  SessionService
-} from '@giftdibs/session';
-
-import {
-  AccountService
-} from '../account.service';
+import { AccountService } from '../account.service';
 
 @Component({
   selector: 'gd-delete',
   templateUrl: './delete.component.html',
   styleUrls: ['./delete.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeleteComponent {
   public isLoading = false;
@@ -44,7 +32,7 @@ export class DeleteComponent {
     private changeDetector: ChangeDetectorRef,
     private formBuilder: FormBuilder,
     private router: Router,
-    private sessionService: SessionService
+    private sessionService: SessionService,
   ) {
     this.createForm();
   }
@@ -60,7 +48,8 @@ export class DeleteComponent {
     this.changeDetector.markForCheck();
 
     const formData = this.deleteAccountForm.value;
-    this.accountService.destroyWithPassword(this.sessionService.user.id, formData.password)
+    this.accountService
+      .destroyWithPassword(this.sessionService.user.id, formData.password)
       .subscribe(
         (result: any) => {
           this.sessionService.clearAll();
@@ -73,15 +62,13 @@ export class DeleteComponent {
           this.deleteAccountForm.enable();
           this.isLoading = false;
           this.changeDetector.markForCheck();
-        }
+        },
       );
   }
 
   private createForm(): void {
     this.deleteAccountForm = this.formBuilder.group({
-      password: new FormControl(null, [
-        Validators.required
-      ])
+      password: new FormControl(null, [Validators.required]),
     });
   }
 }

@@ -31,7 +31,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
   public hasToken = false;
   public isLoading = true;
 
-  private ngUnsubscribe = new Subject();
+  private ngUnsubscribe = new Subject<void>();
 
   constructor(
     private accountService: AccountService,

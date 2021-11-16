@@ -33,7 +33,7 @@ export class FriendListComponent implements OnInit, OnDestroy {
   public isSessionUser = false;
   public user: User;
 
-  private ngUnsubscribe = new Subject();
+  private ngUnsubscribe = new Subject<void>();
 
   constructor(
     private activatedRoute: ActivatedRoute,

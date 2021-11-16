@@ -62,7 +62,7 @@ export class GiftDetailComponent implements OnInit, OnDestroy {
     },
   ];
 
-  private ngUnsubscribe = new Subject();
+  private ngUnsubscribe = new Subject<void>();
   private hasBeenModified = false;
 
   constructor(

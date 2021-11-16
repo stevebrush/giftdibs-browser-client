@@ -55,7 +55,7 @@ export class WishListComponent implements OnInit, OnDestroy {
   }
 
   private _sortBy = 'recent';
-  private ngUnsubscribe = new Subject();
+  private ngUnsubscribe = new Subject<void>();
 
   constructor(
     private activatedRoute: ActivatedRoute,

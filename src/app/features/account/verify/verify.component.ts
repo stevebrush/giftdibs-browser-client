@@ -26,7 +26,7 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
   public isVerified = false;
   public sessionUser: SessionUser;
 
-  private ngUnsubscribe = new Subject();
+  private ngUnsubscribe = new Subject<void>();
 
   constructor(
     private accountService: AccountService,

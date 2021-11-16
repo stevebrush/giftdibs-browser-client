@@ -36,7 +36,7 @@ export class UserComponent implements OnInit, OnDestroy {
     return { wishLists: this._wishLists };
   }
 
-  private ngUnsubscribe = new Subject();
+  private ngUnsubscribe = new Subject<void>();
 
   private _wishLists: WishList[];
 

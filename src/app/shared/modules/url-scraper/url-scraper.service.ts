@@ -1,7 +1,7 @@
 import { HttpBackend, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '@root/environments/environment';
 
+import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 import { map, share } from 'rxjs/operators';
 

@@ -61,7 +61,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   public menuItemsMobile: DropdownMenuItem[] = [];
 
-  private ngUnsubscribe = new Subject();
+  private ngUnsubscribe = new Subject<void>();
 
   constructor(
     private changeDetector: ChangeDetectorRef,

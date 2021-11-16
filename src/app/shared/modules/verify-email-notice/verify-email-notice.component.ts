@@ -29,7 +29,7 @@ export class VerifyEmailNoticeComponent implements OnInit, OnDestroy {
   public isLoading = false;
 
   private sessionUser: SessionUser;
-  private ngUnsubscribe = new Subject();
+  private ngUnsubscribe = new Subject<void>();
 
   constructor(
     private accountService: AccountService,

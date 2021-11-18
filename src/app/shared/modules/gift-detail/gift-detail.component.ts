@@ -245,7 +245,7 @@ export class GiftDetailComponent implements OnInit, OnDestroy {
     modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
       if (args.reason === 'save') {
         this.hasBeenModified = true;
-        this.refreshGift();
+        this.modal.close('save');
       }
     });
   }

@@ -8,16 +8,15 @@ import { WishListModule } from '../wish-list';
 import { GiftMoveComponent } from './gift-move.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormFieldModule,
-    FormsModule,
-    ModalModule,
-    ReactiveFormsModule,
-    WaitModule,
-    WishListModule,
-  ],
-  declarations: [GiftMoveComponent],
-  entryComponents: [GiftMoveComponent],
+    imports: [
+        CommonModule,
+        FormFieldModule,
+        FormsModule,
+        ModalModule,
+        ReactiveFormsModule,
+        WaitModule,
+        WishListModule,
+    ],
+    declarations: [GiftMoveComponent]
 })
 export class GiftMoveModule {}

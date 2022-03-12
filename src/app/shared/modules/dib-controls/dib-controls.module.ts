@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { DibService } from '@app/shared/modules/dib';
-import { DibEditComponent, DibEditModule } from '@app/shared/modules/dib-edit';
+import { DibEditModule } from '@app/shared/modules/dib-edit';
 import {
   ConfirmModule,
   DropdownMenuModule,
@@ -25,6 +25,5 @@ import { DibControlsComponent } from './dib-controls.component';
   declarations: [DibControlsComponent],
   exports: [DibControlsComponent],
   providers: [DibService],
-  entryComponents: [DibEditComponent],
 })
 export class DibControlsModule {}

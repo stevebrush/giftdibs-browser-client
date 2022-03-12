@@ -21,26 +21,25 @@ import { IconModule } from '@giftdibs/ux';
 import { GiftEditComponent } from './gift-edit.component';
 
 @NgModule({
-  imports: [
-    AssetsModule,
-    CharacterCounterModule,
-    CheckboxModule,
-    CommonModule,
-    FormFieldModule,
-    FormsModule,
-    ImageUploaderModule,
-    GiftModule,
-    GridModule,
-    IconModule,
-    MediaModule,
-    ModalModule,
-    ProductModule,
-    ReactiveFormsModule,
-    ThumbnailModule,
-    UrlScraperModule,
-    WaitModule,
-  ],
-  declarations: [GiftEditComponent],
-  entryComponents: [GiftEditComponent],
+    imports: [
+        AssetsModule,
+        CharacterCounterModule,
+        CheckboxModule,
+        CommonModule,
+        FormFieldModule,
+        FormsModule,
+        ImageUploaderModule,
+        GiftModule,
+        GridModule,
+        IconModule,
+        MediaModule,
+        ModalModule,
+        ProductModule,
+        ReactiveFormsModule,
+        ThumbnailModule,
+        UrlScraperModule,
+        WaitModule,
+    ],
+    declarations: [GiftEditComponent]
 })
 export class GiftEditModule {}

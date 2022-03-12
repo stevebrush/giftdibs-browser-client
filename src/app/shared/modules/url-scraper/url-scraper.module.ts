@@ -14,16 +14,15 @@ import { UrlImagesSelectorContext } from './url-images-selector-context';
 import { UrlImagesSelectorComponent } from './url-images-selector.component';
 
 @NgModule({
-  declarations: [UrlImagesLoaderComponent, UrlImagesSelectorComponent],
-  imports: [
-    CardModule,
-    CommonModule,
-    GridModule,
-    ModalModule,
-    ThumbnailModule,
-    WaitModule,
-  ],
-  entryComponents: [UrlImagesLoaderComponent, UrlImagesSelectorComponent],
-  providers: [UrlImagesLoaderContext, UrlImagesSelectorContext],
+    declarations: [UrlImagesLoaderComponent, UrlImagesSelectorComponent],
+    imports: [
+        CardModule,
+        CommonModule,
+        GridModule,
+        ModalModule,
+        ThumbnailModule,
+        WaitModule,
+    ],
+    providers: [UrlImagesLoaderContext, UrlImagesSelectorContext]
 })
 export class UrlScraperModule {}

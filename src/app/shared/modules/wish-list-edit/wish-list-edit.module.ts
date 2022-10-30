@@ -14,17 +14,17 @@ import { PrivacySelectorModule } from '../privacy-selector';
 import { WishListEditComponent } from './wish-list-edit.component';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        ConfirmModule,
-        FormFieldModule,
-        FormsModule,
-        ModalModule,
-        NoticeModule,
-        PrivacySelectorModule,
-        ReactiveFormsModule,
-        WaitModule,
-    ],
-    declarations: [WishListEditComponent]
+  imports: [
+    CommonModule,
+    ConfirmModule,
+    FormFieldModule,
+    FormsModule,
+    ModalModule,
+    NoticeModule,
+    PrivacySelectorModule,
+    ReactiveFormsModule,
+    WaitModule,
+  ],
+  declarations: [WishListEditComponent],
 })
 export class WishListEditModule {}

@@ -8,16 +8,16 @@ import { PrivacySelectorUsersComponent } from './privacy-selector-users.componen
 import { PrivacySelectorComponent } from './privacy-selector.component';
 
 @NgModule({
-    imports: [
-        ChecklistModule,
-        CommonModule,
-        DropdownMenuModule,
-        FormsModule,
-        IconModule,
-        ModalModule,
-        ReactiveFormsModule,
-    ],
-    declarations: [PrivacySelectorComponent, PrivacySelectorUsersComponent],
-    exports: [PrivacySelectorComponent]
+  imports: [
+    ChecklistModule,
+    CommonModule,
+    DropdownMenuModule,
+    FormsModule,
+    IconModule,
+    ModalModule,
+    ReactiveFormsModule,
+  ],
+  declarations: [PrivacySelectorComponent, PrivacySelectorUsersComponent],
+  exports: [PrivacySelectorComponent],
 })
 export class PrivacySelectorModule {}

@@ -17,19 +17,19 @@ import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 
 @NgModule({
-    declarations: [LoginComponent, LoginHelpComponent],
-    imports: [
-        CommonModule,
-        FacebookModule,
-        FormFieldModule,
-        FormsModule,
-        LoginRoutingModule,
-        NoticeModule,
-        PasswordViewerModule,
-        ReactiveFormsModule,
-        RouterModule,
-        ModalModule,
-        WaitModule,
-    ]
+  declarations: [LoginComponent, LoginHelpComponent],
+  imports: [
+    CommonModule,
+    FacebookModule,
+    FormFieldModule,
+    FormsModule,
+    LoginRoutingModule,
+    NoticeModule,
+    PasswordViewerModule,
+    ReactiveFormsModule,
+    RouterModule,
+    ModalModule,
+    WaitModule,
+  ],
 })
 export class LoginModule {}

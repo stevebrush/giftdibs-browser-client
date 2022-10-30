@@ -7,7 +7,8 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { User } from '@app/shared/modules/user';
+
+import { User } from 'src/app/shared/modules/user';
 
 import { FriendshipSummary } from './friendship-summary';
 import { FriendshipService } from './friendship.service';

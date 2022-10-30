@@ -1,9 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { GiftEditModule } from '@app/shared/modules/gift-edit';
-import { GiftPreviewModule } from '@app/shared/modules/gift-preview';
-import { WishListModule } from '@app/shared/modules/wish-list';
-import { WishListEditModule } from '@app/shared/modules/wish-list-edit';
 import {
   CardModule,
   ConfirmModule,
@@ -16,6 +12,11 @@ import {
   WaitModule,
 } from '@giftdibs/ux';
 import { IconModule } from '@giftdibs/ux';
+
+import { GiftEditModule } from 'src/app/shared/modules/gift-edit';
+import { GiftPreviewModule } from 'src/app/shared/modules/gift-preview';
+import { WishListModule } from 'src/app/shared/modules/wish-list';
+import { WishListEditModule } from 'src/app/shared/modules/wish-list-edit';
 
 import { WishListComponent } from './wish-list.component';
 import { WishListsRoutingModule } from './wish-lists-routing.module';

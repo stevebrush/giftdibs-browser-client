@@ -1,0 +1,43 @@
+@import '../../styles/mixins';
+
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  position: fixed;
+  width: 100%;
+}
+
+.gd-confirm {
+  background-color: #fff;
+  padding: $gd-spacing-padding-squish;
+  padding-bottom: $gd-spacing;
+  position: relative;
+  box-shadow: $gd-box-shadow-lg;
+  border-radius: $gd-border-radius;
+  max-width: 90%;
+
+  &:focus {
+    outline: none;
+  }
+
+  @media (min-width: $gd-screen-xs-min) {
+    width: 300px;
+  }
+}
+
+.gd-confirm-message {
+  font-weight: $gd-font-weight-bold;
+  margin: 0 0 $gd-spacing;
+}
+
+.gd-confirm-supplemental {
+  margin: 0 0 $gd-spacing;
+  color: $gd-text-color-deemphasized;
+  font-size: $gd-font-size-small;
+}
+
+.gd-confirm-message + .gd-confirm-supplemental {
+  margin-top: -$gd-spacing;
+}

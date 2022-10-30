@@ -1,0 +1,15 @@
+@import '../../styles/mixins';
+
+.gd-badge {
+  display: inline-block;
+  background-color: $gd-color-danger;
+  color: #fff;
+  font-weight: 700;
+  font-size: 70%;
+  padding: 3px 4px;
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+  vertical-align: top;
+  border-radius: 2px;
+}

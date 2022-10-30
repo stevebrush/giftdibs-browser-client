@@ -4,7 +4,8 @@ import {
   Component,
   OnInit,
 } from '@angular/core';
-import { Gift, GiftService } from '@app/shared/modules/gift';
+
+import { Gift, GiftService } from 'src/app/shared/modules/gift';
 
 @Component({
   selector: 'gd-community',

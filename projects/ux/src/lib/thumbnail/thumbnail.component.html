@@ -1,0 +1,54 @@
+<div
+  aria-hidden="true"
+  class="gd-thumbnail"
+  [attr.title]="altText"
+  [ngClass]="classNames"
+>
+  <ng-container *ngIf="!route && !externalLink; else hasHref">
+    <ng-container *ngTemplateOutlet="image"></ng-container>
+  </ng-container>
+  <ng-template #hasHref>
+    <ng-container *ngIf="route; else hasExternalLink">
+      <a
+        class="gd-thumbnail-anchor"
+        tabindex="0"
+        [fragment]="route.extras?.fragment"
+        [queryParams]="route.extras?.queryParams"
+        [queryParamsHandling]="route.extras?.queryParamsHandling"
+        [routerLink]="route.commands"
+        ><ng-container *ngTemplateOutlet="image"></ng-container
+      ></a>
+    </ng-container>
+    <ng-template #hasExternalLink>
+      <a class="gd-thumbnail-anchor" tabindex="0" [attr.href]="externalLink"
+        ><ng-container *ngTemplateOutlet="image"></ng-container
+      ></a>
+    </ng-template>
+  </ng-template>
+</div>
+
+<ng-template #image>
+  <div
+    class="gd-thumbnail-image-container"
+    role="img"
+    [ngStyle]="{
+      'background-image':
+        imageSource && size !== 'static' ? 'url(' + imageSource + ')' : ''
+    }"
+  >
+    <ng-template [ngIf]="!imageSource">
+      <gd-icon
+        [icon]="icon"
+        [iconSize]="iconSize"
+        [iconStyle]="iconStyle"
+      ></gd-icon>
+    </ng-template>
+    <img
+      *ngIf="size === 'static' && imageSource"
+      class="gd-thumbnail-image"
+      [attr.alt]="altText"
+      [attr.src]="imageSource"
+    />
+    <ng-content></ng-content>
+  </div>
+</ng-template>

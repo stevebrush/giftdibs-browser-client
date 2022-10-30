@@ -6,19 +6,19 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { User, UserService } from '@app/shared/modules/user';
-import { WishList } from '@app/shared/modules/wish-list';
-import { WishListService } from '@app/shared/modules/wish-list';
-import {
-  WishListEditComponent,
-  WishListEditContext,
-} from '@app/shared/modules/wish-list-edit';
 import { SessionService } from '@giftdibs/session';
 import { AlertService } from '@giftdibs/ux';
 import { ModalClosedEventArgs, ModalService, ModalSize } from '@giftdibs/ux';
 
 import { combineLatest, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { User, UserService } from 'src/app/shared/modules/user';
+import { WishList } from 'src/app/shared/modules/wish-list';
+import { WishListService } from 'src/app/shared/modules/wish-list';
+import {
+  WishListEditComponent,
+  WishListEditContext,
+} from 'src/app/shared/modules/wish-list-edit';
 
 @Component({
   selector: 'gd-user',

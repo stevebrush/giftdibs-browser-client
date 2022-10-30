@@ -1,0 +1,38 @@
+@import '../../styles/mixins';
+
+.gd-image-uploader {
+  display: flex;
+
+  .gd-image-uploader-controls {
+    .gd-button {
+      margin-bottom: $gd-spacing-sm;
+    }
+  }
+}
+
+.gd-image-uploader-orientation-horizontal {
+  flex-wrap: nowrap;
+  flex-direction: row;
+
+  .gd-image-uploader-thumbnail {
+    margin-right: $gd-spacing;
+    flex: 0 0 40%;
+    @media (min-width: $gd-screen-xs-min) {
+      flex: 0 0 20%;
+    }
+  }
+
+  .gd-image-uploader-controls {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.gd-image-uploader-orientation-vertical {
+  flex-direction: column;
+
+  .gd-image-uploader-thumbnail {
+    margin-bottom: $gd-spacing-md;
+  }
+}

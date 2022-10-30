@@ -1,0 +1,11 @@
+@import '../../styles/mixins';
+
+.gd-card-header {
+  margin-left: -$gd-spacing;
+  margin-right: -$gd-spacing;
+  margin-bottom: -$gd-spacing;
+  margin-top: $gd-spacing-md;
+  background: $gd-color-neutral-faint;
+  padding: $gd-spacing;
+  border-radius: 0 0 $gd-border-radius $gd-border-radius;
+}

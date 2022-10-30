@@ -70,10 +70,10 @@
             <gd-media-list
               *ngIf="gift.externalUrls && gift.externalUrls.length"
             >
-              <gd-media *ngFor="let externalUrl of gift.externalUrls" size="sm">
+              <gd-media *ngFor="let externalUrl of gift.externalUrls" size="xs">
                 <gd-media-thumbnail>
                   <gd-thumbnail
-                    iconSize="2x"
+                    iconSize="1x"
                     size="fill"
                     [externalLink]="externalUrl.url"
                     [imageSource]="gift.imageUrl"

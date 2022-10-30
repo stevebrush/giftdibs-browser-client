@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { CommunityModule } from '@app/features/home/community';
-import { WelcomeModule } from '@app/features/home/welcome';
+
+import { CommunityModule } from 'src/app/features/home/community';
+import { WelcomeModule } from 'src/app/features/home/welcome';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';

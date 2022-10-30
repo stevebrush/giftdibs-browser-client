@@ -1,0 +1,9 @@
+@import '../../styles/mixins';
+
+:host {
+  flex: 0 0 auto;
+}
+
+.gd-repeater-controls {
+  padding-left: $gd-spacing;
+}

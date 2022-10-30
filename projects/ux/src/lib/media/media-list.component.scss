@@ -1,0 +1,10 @@
+@import '../../styles/mixins';
+
+.gd-media-list {
+  ::ng-deep {
+    gd-media {
+      display: block;
+      margin: $gd-spacing 0;
+    }
+  }
+}

@@ -4,9 +4,9 @@ import {
   Component,
   OnInit,
 } from '@angular/core';
-import { DibService } from '@app/shared/modules/dib';
 
 import { finalize } from 'rxjs/operators';
+import { DibService } from 'src/app/shared/modules/dib';
 
 @Component({
   selector: 'gd-dibs',

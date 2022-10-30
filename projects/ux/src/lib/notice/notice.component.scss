@@ -1,0 +1,63 @@
+@import '../../styles/variables';
+
+.gd-notice {
+  margin: $gd-spacing 0;
+  border-radius: $gd-border-radius;
+  display: flex;
+  background-color: #fff;
+  overflow: hidden;
+  border: 1px solid;
+
+  ::ng-deep {
+    p {
+      margin: $gd-spacing-sm 0;
+    }
+  }
+}
+
+.gd-notice-heading {
+  font-weight: bold;
+  font-family: $gd-font-family-serif;
+  font-size: 1.1em;
+}
+
+.gd-notice-indicator {
+  padding: $gd-spacing-padding-squish;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: 1.4em;
+}
+
+.gd-notice-content {
+  flex: 1 1 auto;
+  padding: $gd-spacing;
+}
+
+.gd-notice-info {
+  border-color: $gd-color-info;
+  .gd-notice-indicator {
+    background-color: $gd-color-info;
+  }
+}
+
+.gd-notice-danger {
+  border-color: $gd-color-danger;
+  .gd-notice-indicator {
+    background-color: $gd-color-danger;
+  }
+}
+
+.gd-notice-warning {
+  border-color: $gd-color-warning;
+  .gd-notice-indicator {
+    background-color: $gd-color-warning;
+  }
+}
+
+.gd-notice-success {
+  border-color: $gd-color-success;
+  .gd-notice-indicator {
+    background-color: $gd-color-success;
+  }
+}

@@ -1,11 +1,4 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { AssetsService } from '@app/shared/modules/assets';
-import { Gift } from '@app/shared/modules/gift';
-import {
-  GiftMoveComponent,
-  GiftMoveContext,
-} from '@app/shared/modules/gift-move';
-import { Product } from '@app/shared/modules/product';
 import {
   AlertService,
   dataUrlToFile,
@@ -15,6 +8,14 @@ import {
   ModalSize,
   toDataUrl,
 } from '@giftdibs/ux';
+
+import { AssetsService } from 'src/app/shared/modules/assets';
+import { Gift } from 'src/app/shared/modules/gift';
+import {
+  GiftMoveComponent,
+  GiftMoveContext,
+} from 'src/app/shared/modules/gift-move';
+import { Product } from 'src/app/shared/modules/product';
 
 @Component({
   selector: 'app-product-preview',

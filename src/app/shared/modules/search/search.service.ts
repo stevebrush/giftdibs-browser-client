@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '@app/shared/modules/user';
 
-import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 import { map, share } from 'rxjs/operators';
+import { User } from 'src/app/shared/modules/user';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class SearchService {

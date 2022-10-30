@@ -1,0 +1,25 @@
+@import './variables';
+@import 'public-mixins';
+
+@mixin gd_form_control() {
+  // See: https://stackoverflow.com/questions/23211656/remove-ios-input-shadow
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  font-size: $gd-font-size-default;
+  font-family: inherit;
+  line-height: $gd-line-height;
+  border: 1px solid transparent;
+  border-radius: $gd-border-radius-sm;
+  vertical-align: baseline;
+  font-weight: $gd-font-weight-normal;
+  padding: $gd-spacing-padding-squish-compact;
+  color: $gd-text-color-dark;
+  margin: 0;
+}
+
+@mixin gd_disabled() {
+  opacity: 0.65;
+  cursor: default;
+}

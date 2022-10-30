@@ -1,0 +1,64 @@
+@import '../../styles/variables';
+
+.gd-alert-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.gd-alert {
+  max-width: 330px;
+  position: fixed;
+  bottom: $gd-spacing;
+  left: $gd-spacing;
+  display: flex;
+  align-items: center;
+  z-index: $gd-zindex-alert;
+  border-radius: $gd-border-radius;
+  background-color: #fff;
+  box-shadow: $gd-box-shadow-lg;
+}
+
+.gd-alert-indicator {
+  padding: $gd-spacing-padding-squish;
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  color: #fff;
+  border-radius: $gd-border-radius 0 0 $gd-border-radius;
+}
+
+.gd-alert-message {
+  flex: 1 1 auto;
+  padding: $gd-spacing-padding-squish;
+}
+
+.gd-alert-controls {
+  padding: $gd-spacing-sm;
+  align-self: flex-start;
+}
+
+.gd-alert-button {
+  color: $gd-text-color-default;
+  background-color: transparent;
+}
+
+.gd-alert-info {
+  .gd-alert-indicator {
+    background-color: $gd-color-info;
+  }
+}
+
+.gd-alert-danger {
+  .gd-alert-indicator {
+    background-color: $gd-color-danger;
+  }
+}
+
+.gd-alert-success {
+  .gd-alert-indicator {
+    background-color: $gd-color-success;
+  }
+}

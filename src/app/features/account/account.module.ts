@@ -1,8 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AssetsModule } from '@app/shared/modules/assets';
-import { UserModule } from '@app/shared/modules/user';
 import {
   ChecklistModule,
   FormFieldModule,
@@ -14,6 +12,9 @@ import {
   WaitModule,
 } from '@giftdibs/ux';
 import { IconModule } from '@giftdibs/ux';
+
+import { AssetsModule } from 'src/app/shared/modules/assets';
+import { UserModule } from 'src/app/shared/modules/user';
 
 import { AccountRoutingModule } from './account-routing.module';
 import { AccountService } from './account.service';

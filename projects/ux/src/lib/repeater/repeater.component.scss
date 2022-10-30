@@ -1,0 +1,16 @@
+@import '../../styles/mixins';
+
+.gd-repeater {
+  margin-top: $gd-spacing;
+  margin-bottom: $gd-spacing;
+
+  ::ng-deep {
+    gd-repeater-item:first-child {
+      .gd-repeater-item {
+        border-top: 0;
+        padding-top: 0;
+        margin-top: 0;
+      }
+    }
+  }
+}

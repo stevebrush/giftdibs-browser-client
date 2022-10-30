@@ -1,8 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { DibService } from '@app/shared/modules/dib';
-import { DibControlsModule } from '@app/shared/modules/dib-controls';
-import { GiftPreviewModule } from '@app/shared/modules/gift-preview';
 import {
   CardModule,
   GridModule,
@@ -12,6 +9,10 @@ import {
   ThumbnailModule,
   WaitModule,
 } from '@giftdibs/ux';
+
+import { DibService } from 'src/app/shared/modules/dib';
+import { DibControlsModule } from 'src/app/shared/modules/dib-controls';
+import { GiftPreviewModule } from 'src/app/shared/modules/gift-preview';
 
 import { DibsRoutingModule } from './dibs-routing.module';
 import { DibsComponent } from './dibs.component';

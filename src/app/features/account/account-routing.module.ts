@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from '@app/shared/guards';
+
+import { AuthGuard } from 'src/app/shared/guards';
 
 import { DeleteComponent } from './delete/delete.component';
 import { ForgottenComponent } from './forgotten/forgotten.component';

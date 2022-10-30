@@ -1,0 +1,32 @@
+<div
+  *ngIf="alert"
+  role="alert"
+  class="gd-alert"
+  [ngClass]="'gd-alert-' + alert.type"
+  [attr.aria-live]="ariaLive"
+  [@gdAnimationEmerge]="animationState"
+  (@gdAnimationEmerge.done)="onAnimationDone($event)"
+>
+  <div class="gd-alert-indicator">
+    <gd-icon *ngIf="alert.type === 'success'" icon="check"></gd-icon>
+    <gd-icon *ngIf="alert.type === 'info'" icon="question-circle"></gd-icon>
+    <gd-icon
+      *ngIf="alert.type === 'danger'"
+      icon="exclamation-triangle"
+    ></gd-icon>
+  </div>
+  <div class="gd-alert-message">
+    {{ alert.text }}
+  </div>
+  <div class="gd-alert-controls">
+    <button
+      type="button"
+      class="gd-button gd-alert-button"
+      title="Close alert"
+      aria-hidden="true"
+      (click)="close()"
+    >
+      <gd-icon icon="times"></gd-icon>
+    </button>
+  </div>
+</div>

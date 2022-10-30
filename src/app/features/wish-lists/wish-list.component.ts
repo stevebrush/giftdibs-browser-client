@@ -6,16 +6,6 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Gift } from '@app/shared/modules/gift';
-import {
-  GiftEditComponent,
-  GiftEditContext,
-} from '@app/shared/modules/gift-edit';
-import { WishList, WishListService } from '@app/shared/modules/wish-list';
-import {
-  WishListEditComponent,
-  WishListEditContext,
-} from '@app/shared/modules/wish-list-edit';
 import { SessionService } from '@giftdibs/session';
 import {
   AlertService,
@@ -29,6 +19,16 @@ import {
 
 import { Subject } from 'rxjs';
 import { mergeMap, takeUntil } from 'rxjs/operators';
+import { Gift } from 'src/app/shared/modules/gift';
+import {
+  GiftEditComponent,
+  GiftEditContext,
+} from 'src/app/shared/modules/gift-edit';
+import { WishList, WishListService } from 'src/app/shared/modules/wish-list';
+import {
+  WishListEditComponent,
+  WishListEditContext,
+} from 'src/app/shared/modules/wish-list-edit';
 
 @Component({
   selector: 'gd-wish-list',

@@ -1,0 +1,50 @@
+@import '../../styles/mixins';
+
+.gd-ribbon {
+  color: #fff;
+  transform: rotate(-45deg);
+  position: absolute;
+  z-index: 1;
+  top: -10px;
+  left: -39px;
+  width: 119px;
+  height: 60px;
+  text-align: center;
+  font-weight: $gd-font-weight-bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gd-ribbon-content {
+  transform: rotate(45deg);
+  padding-top: 6px;
+  padding-left: 6px;
+}
+
+.gd-ribbon-primary {
+  background: $gd-color-primary;
+  background: linear-gradient(
+    45deg,
+    $gd-color-primary 0%,
+    $gd-color-secondary 100%
+  );
+}
+
+.gd-ribbon-secondary {
+  background: $gd-color-secondary;
+  background: linear-gradient(
+    45deg,
+    $gd-color-danger 0%,
+    $gd-color-secondary 100%
+  );
+}
+
+.gd-ribbon-success {
+  background-color: $gd-color-info;
+  background: linear-gradient(45deg, $gd-color-info 0%, $gd-color-success 100%);
+}
+
+.gd-ribbon-danger {
+  background-color: $gd-color-danger;
+}

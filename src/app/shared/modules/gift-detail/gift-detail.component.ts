@@ -6,15 +6,6 @@ import {
   OnInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { Gift, GiftService } from '@app/shared/modules/gift';
-import {
-  GiftEditComponent,
-  GiftEditContext,
-} from '@app/shared/modules/gift-edit';
-import {
-  GiftMoveComponent,
-  GiftMoveContext,
-} from '@app/shared/modules/gift-move';
 import { SessionService } from '@giftdibs/session';
 import {
   AlertService,
@@ -29,6 +20,15 @@ import {
 
 import { Subject } from 'rxjs';
 import { finalize, takeUntil } from 'rxjs/operators';
+import { Gift, GiftService } from 'src/app/shared/modules/gift';
+import {
+  GiftEditComponent,
+  GiftEditContext,
+} from 'src/app/shared/modules/gift-edit';
+import {
+  GiftMoveComponent,
+  GiftMoveContext,
+} from 'src/app/shared/modules/gift-move';
 
 import { GiftDetailContext } from './gift-detail-context';
 

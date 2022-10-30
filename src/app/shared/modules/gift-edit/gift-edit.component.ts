@@ -40,27 +40,27 @@ import {
 
 import {
   AssetsService
-} from '@app/shared/modules/assets';
+} from 'src/app/shared/modules/assets';
 
 import {
   Gift,
   GiftService
-} from '@app/shared/modules/gift';
+} from 'src/app/shared/modules/gift';
 
 import {
   GiftExternalUrl
-} from '@app/shared/modules/gift/gift-external-url';
+} from 'src/app/shared/modules/gift/gift-external-url';
 
 import {
   ProductService
-} from '@app/shared/modules/product';
+} from 'src/app/shared/modules/product';
 
 import {
   UrlImagesLoaderComponent,
   UrlImagesLoaderContext,
   UrlScraperResult,
   UrlScraperService
-} from '@app/shared/modules/url-scraper';
+} from 'src/app/shared/modules/url-scraper';
 
 import {
   GiftEditContext

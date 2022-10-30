@@ -1,0 +1,38 @@
+@import 'variables';
+
+.gd-container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0 $gd-spacing;
+}
+
+.gd-container-lg {
+  @media (min-width: $gd-screen-xs-min) {
+    max-width: $gd-screen-lg-min;
+  }
+}
+
+.gd-container-md {
+  @media (min-width: $gd-screen-xs-min) {
+    max-width: $gd-screen-md-min;
+  }
+}
+
+.gd-container-sm {
+  @media (min-width: $gd-screen-xs-min) {
+    max-width: $gd-screen-sm-min;
+  }
+}
+
+.gd-container-xs {
+  @media (min-width: $gd-screen-xs-min) {
+    max-width: $gd-screen-xs-max;
+  }
+}
+
+.gd-container-xxs {
+  @media (min-width: $gd-screen-xs-min) {
+    max-width: $gd-screen-xxs-max;
+  }
+}

@@ -4,12 +4,12 @@ import {
   Component,
   OnInit,
 } from '@angular/core';
-import { DibService } from '@app/shared/modules/dib';
-import { GiftService } from '@app/shared/modules/gift';
 import { AlertService, PopoverMessage, PopoverMessageType } from '@giftdibs/ux';
 
 import { Subject } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { DibService } from 'src/app/shared/modules/dib';
+import { GiftService } from 'src/app/shared/modules/gift';
 
 import { Notification } from './notification';
 import { NotificationService } from './notification.service';

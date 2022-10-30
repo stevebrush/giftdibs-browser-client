@@ -1,0 +1,7 @@
+@import '../../styles/mixins';
+
+.gd-date-picker {
+  select {
+    margin-right: $gd-spacing-sm;
+  }
+}

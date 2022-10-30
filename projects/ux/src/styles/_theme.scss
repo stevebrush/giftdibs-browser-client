@@ -1,0 +1,159 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  // Used for rem calculations:
+  font-size: $gd-font-size-default;
+}
+
+body {
+  font-size: $gd-font-size-default;
+  font-family: $gd-font-family;
+  color: $gd-text-color-default;
+  line-height: $gd-line-height;
+  font-weight: $gd-font-weight-normal;
+  background-color: $gd-color-neutral-faint;
+}
+
+a {
+  color: $gd-text-color-default;
+  font-weight: $gd-font-weight-bold;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus {
+    @include gd_focus_indicator();
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $gd-font-family-serif;
+  line-height: $gd-line-height-reduced;
+  margin-bottom: $gd-spacing;
+  font-weight: $gd-font-weight-normal;
+  word-break: break-word;
+}
+
+h1 {
+  font-size: $gd-font-size-xl;
+  margin-bottom: $gd-spacing * 2;
+}
+
+h2 {
+  font-size: $gd-font-size-large;
+}
+
+p {
+  margin: $gd-spacing 0;
+}
+
+strong {
+  font-weight: $gd-font-weight-bold;
+}
+
+.gd-date {
+  color: $gd-color-neutral-light;
+  font-size: 11px;
+  letter-spacing: 0.2px;
+  text-transform: lowercase;
+}
+
+.gd-screen-reader-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  -webkit-clip-path: inset(50%);
+  clip-path: inset(50%);
+  border: 0;
+}
+
+.gd-subheading {
+  border-bottom: 1px solid $gd-color-neutral-faint;
+  padding-bottom: $gd-spacing;
+  margin-top: $gd-spacing * 2;
+}
+
+.gd-text-deemphasized {
+  color: $gd-text-color-deemphasized;
+
+  a {
+    color: $gd-text-color-deemphasized;
+  }
+}
+
+.gd-text-price {
+}
+
+.gd-text-strikethrough {
+  text-decoration: line-through;
+}
+
+.gd-text-small {
+  font-size: $gd-font-size-small;
+}
+
+.gd-rounded-corners {
+  border-radius: $gd-border-radius !important;
+}
+
+.gd-rounded-corners-subtle {
+  border-radius: $gd-border-radius-sm !important;
+}
+
+.gd-rounded-corners-circle {
+  border-radius: 50% !important;
+}
+
+.gd-spacing-padding-even-large {
+  padding: $gd-spacing-padding-even;
+
+  @media (min-width: $gd-screen-sm-min) {
+    padding: $gd-spacing-padding-even-large;
+  }
+}
+
+.gd-spacing-padding-squish {
+  padding: $gd-spacing-padding-squish;
+}
+
+.gd-spacing-padding-squish-large {
+  padding: $gd-spacing-padding-squish-large;
+}
+
+.gd-spacing-padding-squish-compact {
+  padding: $gd-spacing-padding-squish-compact;
+}
+
+.gd-unordered-list {
+  margin: $gd-spacing 0;
+  padding-left: $gd-spacing;
+  list-style: disc;
+  list-style-position: outside;
+}
+
+.gd-ordered-list {
+  margin: $gd-spacing 0;
+  padding-left: $gd-spacing;
+  list-style: decimal;
+  list-style-position: outside;
+}
+
+.gd-text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  white-space: nowrap;
+}

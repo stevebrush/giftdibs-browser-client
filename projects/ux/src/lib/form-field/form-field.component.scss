@@ -1,0 +1,31 @@
+@import '../../styles/mixins';
+
+.gd-form-field {
+  margin-bottom: $gd-spacing;
+
+  ::ng-deep {
+    .gd-form-field {
+      margin-top: $gd-spacing-xs;
+    }
+
+    .gd-control-label {
+      display: block;
+    }
+  }
+}
+
+.gd-form-field-has-error {
+  color: $gd-color-danger;
+
+  ::ng-deep {
+    .gd-form-control {
+      background-color: $gd-background-color-danger;
+      border-color: $gd-border-color-danger;
+    }
+  }
+}
+
+.gd-form-field-subscript {
+  font-size: $gd-font-size-small;
+  margin-top: $gd-spacing-xs;
+}

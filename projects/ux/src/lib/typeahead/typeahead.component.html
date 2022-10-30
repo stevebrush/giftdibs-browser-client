@@ -1,0 +1,39 @@
+<div class="gd-typeahead">
+  <ng-container *ngIf="!searchOnKeyUp; else input">
+    <div class="gd-input-group-inline">
+      <ng-container *ngTemplateOutlet="input"></ng-container>
+      <button
+        class="gd-button gd-button-default"
+        type="button"
+        [disabled]="disabled"
+        (click)="onButtonClick($event)"
+      >
+        <ng-container *ngIf="!isLoading; else loadingIcon">
+          <gd-icon
+            *ngIf="searchButtonIcon"
+            iconSize="1x"
+            [icon]="searchButtonIcon"
+          >
+          </gd-icon>
+          {{ searchButtonText }}
+        </ng-container>
+        <ng-template #loadingIcon>
+          <gd-icon iconSize="1x" icon="spinner" [enableSpin]="true"> </gd-icon>
+        </ng-template>
+      </button>
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #input>
+  <input
+    autocomplete="off"
+    class="gd-form-control"
+    type="text"
+    [attr.aria-describedby]="ariaDescribedBy"
+    [attr.placeholder]="placeholder"
+    (focus)="searchInput.select()"
+    (keyup.enter)="onInputEnterKeyUp($event)"
+    #searchInput
+  />
+</ng-template>

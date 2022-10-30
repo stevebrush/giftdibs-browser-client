@@ -12,10 +12,11 @@
     "target": "es5",
     "typeRoots": ["node_modules/@types"],
     "lib": ["es2017", "dom"],
-    "baseUrl": "src",
+    "baseUrl": ".",
+    "rootDir": ".",
     "paths": {
-      "@app/*": ["app/*"],
-      "@root/*": ["*"]
+      "@giftdibs/ux": ["projects/ux/src/public-api.ts"],
+      "@giftdibs/session": ["projects/session/src/public-api.ts"]
     }
   },
   "angularCompilerOptions": {

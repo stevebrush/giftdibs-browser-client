@@ -4,7 +4,8 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { WishList } from '@app/shared/modules/wish-list';
+
+import { WishList } from 'src/app/shared/modules/wish-list';
 
 @Component({
   selector: 'gd-wish-list-preview',

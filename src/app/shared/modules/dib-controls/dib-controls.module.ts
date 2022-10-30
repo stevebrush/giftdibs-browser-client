@@ -1,14 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { DibService } from '@app/shared/modules/dib';
-import { DibEditModule } from '@app/shared/modules/dib-edit';
 import {
   ConfirmModule,
   DropdownMenuModule,
   IconModule,
   NoticeModule,
 } from '@giftdibs/ux';
+
+import { DibService } from 'src/app/shared/modules/dib';
+import { DibEditModule } from 'src/app/shared/modules/dib-edit';
 
 import { DibControlsComponent } from './dib-controls.component';
 

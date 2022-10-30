@@ -10,14 +10,14 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { AssetsService } from '@app/shared/modules/assets';
-import { NotificationType } from '@app/shared/modules/notifications';
-import { User } from '@app/shared/modules/user';
-import { UserService } from '@app/shared/modules/user';
 import { SessionService, SessionUser } from '@giftdibs/session';
 import { AlertService, ChecklistChoice } from '@giftdibs/ux';
 
 import { finalize } from 'rxjs/operators';
+import { AssetsService } from 'src/app/shared/modules/assets';
+import { NotificationType } from 'src/app/shared/modules/notifications';
+import { User } from 'src/app/shared/modules/user';
+import { UserService } from 'src/app/shared/modules/user';
 
 @Component({
   selector: 'gd-settings',

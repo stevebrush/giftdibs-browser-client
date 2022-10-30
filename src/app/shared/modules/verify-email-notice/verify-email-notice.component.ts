@@ -7,12 +7,12 @@ import {
   OnInit,
 } from '@angular/core';
 import { NavigationStart, Router, RouterEvent } from '@angular/router';
-import { AccountService } from '@app/features/account/account.service';
 import { SessionService, SessionUser } from '@giftdibs/session';
 import { AlertService } from '@giftdibs/ux';
 
 import { combineLatest, Subject } from 'rxjs';
 import { filter, finalize, takeUntil } from 'rxjs/operators';
+import { AccountService } from 'src/app/features/account/account.service';
 
 @Component({
   selector: 'gd-verify-email-notice',

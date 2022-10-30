@@ -1,0 +1,17 @@
+@use 'sass:math';
+@import '../../styles/mixins';
+
+.gd-row {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-left: math.div($gd-spacing, 2) * -1;
+  margin-right: math.div($gd-spacing, 2) * -1;
+  flex-direction: row;
+
+  &.gd-row-reverse {
+    @media (min-width: $gd-screen-xs-min) {
+      flex-direction: row-reverse;
+    }
+  }
+}

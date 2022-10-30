@@ -1,0 +1,122 @@
+// SCREEN
+$gd-screen-xxs-min: 0 !default;
+$gd-screen-xs-min: 500px !default;
+$gd-screen-sm-min: 768px !default;
+$gd-screen-md-min: 992px !default;
+$gd-screen-lg-min: 1200px !default;
+
+$gd-screen-xxs-max: $gd-screen-xs-min - 1 !default;
+$gd-screen-xs-max: $gd-screen-sm-min - 1 !default;
+$gd-screen-sm-max: $gd-screen-md-min - 1 !default;
+$gd-screen-md-max: $gd-screen-lg-min - 1 !default;
+
+// TEXT
+$gd-font-family: system-ui !default;
+$gd-font-family-serif: system-ui !default;
+$gd-font-weight-light: 100 !default;
+$gd-font-weight-normal: 400 !default;
+$gd-font-weight-bold: 700 !default;
+$gd-font-weight-black: 900 !default;
+$gd-line-height: 1.5 !default;
+$gd-line-height-reduced: 1.2 !default;
+
+// COLORS
+
+@function border_color($color) {
+  @return darken($color, 10%);
+}
+
+@function text_color($color) {
+  @return saturate(darken($color, 15%), 20%);
+}
+
+// PRIMARY
+$gd-color-primary: darkslateblue !default;
+$gd-background-color-primary: desaturate(
+  lighten($gd-color-primary, 45%),
+  15%
+) !default;
+$gd-border-color-primary: border_color($gd-color-primary) !default;
+$gd-text-color-primary: text_color($gd-color-primary) !default;
+
+// SECONDARY
+$gd-color-secondary: darkmagenta !default;
+$gd-background-color-secondary: desaturate(
+  lighten($gd-color-secondary, 45%),
+  15%
+) !default;
+$gd-border-color-secondary: border_color($gd-color-secondary) !default;
+$gd-text-color-secondary: text_color($gd-color-secondary) !default;
+
+// INFO
+$gd-color-info: #272a45 !default;
+$gd-background-color-info: desaturate(
+  lighten($gd-color-info, 45%),
+  25%
+) !default;
+$gd-border-color-info: border_color($gd-color-info) !default;
+$gd-text-color-info: text_color($gd-color-info) !default;
+
+// SUCCESS
+$gd-color-success: forestgreen !default;
+$gd-background-color-success: desaturate(
+  lighten($gd-color-success, 55%),
+  65%
+) !default;
+$gd-border-color-success: border_color($gd-color-success) !default;
+$gd-text-color-success: text_color($gd-color-success) !default;
+
+// WARNING
+$gd-color-warning: #a9139d !default;
+$gd-background-color-warning: desaturate(
+  lighten($gd-color-warning, 55%),
+  45%
+) !default;
+$gd-border-color-warning: border_color($gd-color-warning) !default;
+$gd-text-color-warning: text_color($gd-color-warning) !default;
+
+// DANGER
+$gd-color-danger: rgb(186, 63, 86) !default;
+$gd-background-color-danger: desaturate(
+  lighten($gd-color-danger, 55%),
+  55%
+) !default;
+$gd-border-color-danger: $gd-color-danger !default;
+$gd-text-color-danger: $gd-color-danger !default;
+
+// NEUTRAL
+$gd-color-neutral: #7f7f7f !default;
+$gd-color-neutral-light: lighten($gd-color-neutral, 15%) !default;
+$gd-color-neutral-lighter: lighten($gd-color-neutral, 30%) !default;
+$gd-color-neutral-lightest: lighten($gd-color-neutral, 40%) !default;
+$gd-color-neutral-faint: #f5f4f1 !default;
+$gd-color-neutral-dark: darken($gd-color-neutral, 20%) !default;
+$gd-color-neutral-darker: darken($gd-color-neutral, 30%) !default;
+$gd-color-neutral-darkest: #000 !default;
+
+$gd-border-color-neutral: darken($gd-color-neutral, 5%) !default;
+$gd-border-color-neutral-light: darken($gd-color-neutral-light, 5%) !default;
+$gd-border-color-neutral-lighter: darken(
+  $gd-color-neutral-lighter,
+  5%
+) !default;
+$gd-border-color-neutral-lightest: darken(
+  $gd-color-neutral-lightest,
+  5%
+) !default;
+
+// TEXT COLOR
+$gd-text-color-default: #121620 !default;
+$gd-text-color-deemphasized: #888 !default;
+$gd-text-color-dark: $gd-color-neutral-darkest !default;
+
+// BRANDS
+$gd-color-brand-facebook: #3b5998 !default;
+
+// SPACING
+$gd-spacing: 14px !default;
+$gd-spacing-xl: $gd-spacing * 2 !default;
+$gd-spacing-lg: 12px !default;
+$gd-spacing-md: 10px !default;
+$gd-spacing-sm: 6px !default;
+$gd-spacing-xs: 4px !default;

@@ -1,10 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import {
-  GiftDetailComponent,
-  GiftDetailContext,
-} from '@app/shared/modules/gift-detail';
-import {
   ModalClosedEventArgs,
   ModalService,
   WindowRefService,
@@ -12,6 +8,10 @@ import {
 
 import { Subject } from 'rxjs';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import {
+  GiftDetailComponent,
+  GiftDetailContext,
+} from 'src/app/shared/modules/gift-detail';
 
 @Component({
   selector: 'app-root',

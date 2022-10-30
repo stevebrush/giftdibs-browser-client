@@ -1,0 +1,30 @@
+@import '../../styles/mixins';
+
+.gd-card-wrapper {
+  padding: $gd-spacing;
+  border-radius: $gd-border-radius;
+  background-color: #fff;
+  box-shadow: $gd-box-shadow;
+  overflow: hidden;
+}
+
+.gd-card-anchor {
+  display: block;
+  color: $gd-text-color-default;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.gd-card-anchor,
+.gd-card-button {
+  border-radius: $gd-border-radius;
+  cursor: pointer;
+
+  &:hover {
+    .gd-card-wrapper {
+      box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.06), 0 1px 1px rgba(0, 0, 0, 0.25);
+    }
+  }
+}

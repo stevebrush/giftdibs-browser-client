@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '@app/shared/modules/user';
 import {
   TypeaheadSearchFunction,
   TypeaheadSearchResultAction,
 } from '@giftdibs/ux';
+
+import { User } from 'src/app/shared/modules/user';
 
 import { SearchService } from './search.service';
 

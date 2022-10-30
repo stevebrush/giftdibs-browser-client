@@ -7,16 +7,16 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import {
-  FriendshipService,
-  FriendshipSummary,
-} from '@app/shared/modules/friendship';
-import { User, UserService } from '@app/shared/modules/user';
 import { SessionService } from '@giftdibs/session';
 import { AlertService } from '@giftdibs/ux';
 
 import { Subject } from 'rxjs';
 import { mergeMap, takeUntil } from 'rxjs/operators';
+import {
+  FriendshipService,
+  FriendshipSummary,
+} from 'src/app/shared/modules/friendship';
+import { User, UserService } from 'src/app/shared/modules/user';
 
 @Component({
   selector: 'gd-friend-list',

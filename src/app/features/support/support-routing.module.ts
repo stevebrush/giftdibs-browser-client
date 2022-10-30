@@ -27,7 +27,7 @@ const routes: Routes = [
       {
         path: 'feedback',
         loadChildren: () =>
-          import('app/features/support/feedback/feedback.module').then(
+          import('src/app/features/support/feedback/feedback.module').then(
             (m) => m.FeedbackModule,
           ),
       },

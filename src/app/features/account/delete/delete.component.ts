@@ -4,9 +4,9 @@ import {
   Component,
 } from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -23,14 +23,14 @@ import { AccountService } from '../account.service';
 })
 export class DeleteComponent {
   public isLoading = false;
-  public deleteAccountForm: FormGroup;
+  public deleteAccountForm: UntypedFormGroup;
   public errors: any[] = [];
 
   constructor(
     private accountService: AccountService,
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private router: Router,
     private sessionService: SessionService,
   ) {
@@ -68,7 +68,7 @@ export class DeleteComponent {
 
   private createForm(): void {
     this.deleteAccountForm = this.formBuilder.group({
-      password: new FormControl(null, [Validators.required]),
+      password: new UntypedFormControl(null, [Validators.required]),
     });
   }
 }

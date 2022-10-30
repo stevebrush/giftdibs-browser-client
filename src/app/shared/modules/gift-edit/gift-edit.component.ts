@@ -8,10 +8,10 @@ import {
 
 import {
   AbstractControl,
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormArray,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators
 } from '@angular/forms';
 
@@ -77,8 +77,8 @@ import {
   ]
 })
 export class GiftEditComponent implements OnInit {
-  public get externalUrls(): FormArray {
-    return <FormArray>this.giftForm.get('externalUrls');
+  public get externalUrls(): UntypedFormArray {
+    return <UntypedFormArray>this.giftForm.get('externalUrls');
   }
 
   public get urlPickerProductUrl(): AbstractControl {
@@ -91,8 +91,8 @@ export class GiftEditComponent implements OnInit {
 
   public errors: any[];
   public gift: Gift;
-  public giftForm: FormGroup;
-  public urlPickerForm: FormGroup;
+  public giftForm: UntypedFormGroup;
+  public urlPickerForm: UntypedFormGroup;
   public isLoading = false;
 
   private newImageFile: any;
@@ -102,7 +102,7 @@ export class GiftEditComponent implements OnInit {
     private alertService: AlertService,
     private assetsService: AssetsService,
     private changeDetector: ChangeDetectorRef,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private context: GiftEditContext,
     private giftService: GiftService,
     private modal: ModalInstance<any>,
@@ -326,8 +326,8 @@ export class GiftEditComponent implements OnInit {
     this.giftForm = this.formBuilder.group({
       budget: undefined,
       externalUrls: this.formBuilder.array([]) as any,
-      imageUrl: new FormControl(),
-      name: new FormControl(null, [
+      imageUrl: new UntypedFormControl(),
+      name: new UntypedFormControl(null, [
         Validators.required
       ]),
       notes: undefined,
@@ -348,7 +348,7 @@ export class GiftEditComponent implements OnInit {
 
   private createUrlPickerForm(): void {
     this.urlPickerForm = this.formBuilder.group({
-      productUrl: new FormControl()
+      productUrl: new UntypedFormControl()
     });
   }
 

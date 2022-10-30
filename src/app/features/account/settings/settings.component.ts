@@ -5,9 +5,9 @@ import {
   OnInit,
 } from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { SessionService, SessionUser } from '@giftdibs/session';
@@ -31,14 +31,14 @@ export class SettingsComponent implements OnInit {
   public isReady = false;
   public isLoading = true;
   public sessionUser: SessionUser;
-  public settingsForm: FormGroup;
+  public settingsForm: UntypedFormGroup;
   public errors: any[] = [];
 
   constructor(
     private alertService: AlertService,
     private assetsService: AssetsService,
     private changeDetector: ChangeDetectorRef,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private sessionService: SessionService,
     private userService: UserService,
   ) {}
@@ -169,11 +169,11 @@ export class SettingsComponent implements OnInit {
 
   private createForm(): void {
     this.settingsForm = this.formBuilder.group({
-      avatarUrl: new FormControl(),
-      firstName: new FormControl(null, [Validators.required]),
-      lastName: new FormControl(null, [Validators.required]),
-      emailAddress: new FormControl(null, [Validators.required]),
-      emailSettings: new FormControl([]),
+      avatarUrl: new UntypedFormControl(),
+      firstName: new UntypedFormControl(null, [Validators.required]),
+      lastName: new UntypedFormControl(null, [Validators.required]),
+      emailAddress: new UntypedFormControl(null, [Validators.required]),
+      emailSettings: new UntypedFormControl([]),
     });
 
     this.disableForm();

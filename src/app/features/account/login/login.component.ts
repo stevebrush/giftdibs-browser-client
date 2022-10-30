@@ -5,9 +5,9 @@ import {
   OnInit,
 } from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -25,7 +25,7 @@ import { LoginHelpComponent } from './login-help.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent implements OnInit {
-  public loginForm: FormGroup;
+  public loginForm: UntypedFormGroup;
   public errors: any[] = [];
   public redirectUrl: string;
   public isLoading = false;
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
     private accountService: AccountService,
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private modalService: ModalService,
     private route: ActivatedRoute,
     private router: Router,
@@ -95,8 +95,8 @@ export class LoginComponent implements OnInit {
 
   private createForm(): void {
     this.loginForm = this.formBuilder.group({
-      emailAddress: new FormControl(null, [Validators.required]),
-      password: new FormControl(null, [Validators.required]),
+      emailAddress: new UntypedFormControl(null, [Validators.required]),
+      password: new UntypedFormControl(null, [Validators.required]),
     });
   }
 

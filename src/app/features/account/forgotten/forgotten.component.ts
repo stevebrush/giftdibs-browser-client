@@ -4,9 +4,9 @@ import {
   Component,
 } from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { AlertService } from '@giftdibs/ux';
@@ -22,14 +22,14 @@ import { AccountService } from '../account.service';
 })
 export class ForgottenComponent {
   public isLoading = false;
-  public forgottenForm: FormGroup;
+  public forgottenForm: UntypedFormGroup;
   public errors: any[] = [];
 
   constructor(
     private accountService: AccountService,
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
   ) {
     this.createForm();
   }
@@ -68,7 +68,7 @@ export class ForgottenComponent {
 
   private createForm(): void {
     this.forgottenForm = this.formBuilder.group({
-      emailAddress: new FormControl(null, [Validators.required]),
+      emailAddress: new UntypedFormControl(null, [Validators.required]),
     });
   }
 }

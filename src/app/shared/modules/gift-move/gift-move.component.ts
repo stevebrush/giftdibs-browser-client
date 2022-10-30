@@ -5,7 +5,7 @@ import {
   Component,
   OnInit,
 } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { SessionService } from '@giftdibs/session';
 import { AlertService } from '@giftdibs/ux';
 import { ModalInstance } from '@giftdibs/ux';
@@ -26,7 +26,7 @@ import { GiftMoveContext } from './gift-move-context';
 export class GiftMoveComponent implements OnInit {
   public errors: any[];
   public gift: Gift;
-  public moveForm: FormGroup;
+  public moveForm: UntypedFormGroup;
   public isLoading = true;
   public modalTitle: string;
   public wishLists: WishList[];
@@ -38,7 +38,7 @@ export class GiftMoveComponent implements OnInit {
   constructor(
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private context: GiftMoveContext,
     private giftService: GiftService,
     private modal: ModalInstance<any>,

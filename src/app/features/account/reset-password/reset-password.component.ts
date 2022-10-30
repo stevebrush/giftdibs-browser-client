@@ -6,9 +6,9 @@ import {
   OnInit,
 } from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -26,7 +26,7 @@ import { AccountService } from '../account.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResetPasswordComponent implements OnInit, OnDestroy {
-  public resetPasswordForm: FormGroup;
+  public resetPasswordForm: UntypedFormGroup;
   public errors: any[] = [];
   public hasToken = false;
   public isLoading = true;
@@ -37,7 +37,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     private accountService: AccountService,
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private sessionService: SessionService,
@@ -119,10 +119,10 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
 
   private createForm(): void {
     this.resetPasswordForm = this.formBuilder.group({
-      currentPassword: new FormControl(undefined, [Validators.required]),
-      password: new FormControl(undefined, [Validators.required]),
-      passwordAgain: new FormControl(undefined, [Validators.required]),
-      resetPasswordToken: new FormControl(undefined, []),
+      currentPassword: new UntypedFormControl(undefined, [Validators.required]),
+      password: new UntypedFormControl(undefined, [Validators.required]),
+      passwordAgain: new UntypedFormControl(undefined, [Validators.required]),
+      resetPasswordToken: new UntypedFormControl(undefined, []),
     });
   }
 }

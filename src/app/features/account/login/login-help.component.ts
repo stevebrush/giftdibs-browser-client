@@ -4,9 +4,9 @@ import {
   Component,
 } from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -25,7 +25,7 @@ import { LoginHelpContext } from './login-help-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginHelpComponent {
-  public forgottenForm: FormGroup;
+  public forgottenForm: UntypedFormGroup;
   public errors: any[] = [];
 
   constructor(
@@ -33,7 +33,7 @@ export class LoginHelpComponent {
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
     private context: LoginHelpContext,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private modal: ModalInstance<any>,
     private router: Router,
   ) {
@@ -80,7 +80,7 @@ export class LoginHelpComponent {
 
   private createForm(): void {
     this.forgottenForm = this.formBuilder.group({
-      emailAddress: new FormControl(this.context.emailAddress, [
+      emailAddress: new UntypedFormControl(this.context.emailAddress, [
         Validators.required,
       ]),
     });

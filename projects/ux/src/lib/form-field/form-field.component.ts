@@ -7,7 +7,7 @@ import {
   Input,
   OnChanges,
 } from '@angular/core';
-import { FormArray, FormControlName } from '@angular/forms';
+import { UntypedFormArray, FormControlName } from '@angular/forms';
 
 @Component({
   selector: 'gd-form-field',
@@ -93,7 +93,7 @@ export class FormFieldComponent implements AfterContentInit, OnChanges {
         // This form control is part of a form array.
         // Check to make sure the error from the server
         // matches the index of the form array.
-        if (formArray instanceof FormArray) {
+        if (formArray instanceof UntypedFormArray) {
           const index = parseInt(fragments[fragments.length - 2], 10);
           if (formArray.controls[index] !== formGroup) {
             return;

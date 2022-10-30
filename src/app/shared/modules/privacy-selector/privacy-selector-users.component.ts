@@ -4,7 +4,11 @@ import {
   Component,
   OnInit,
 } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
+} from '@angular/forms';
 import { ChecklistChoice, ModalInstance } from '@giftdibs/ux';
 
 import { FriendshipService, FriendshipSummary } from '../friendship';
@@ -21,12 +25,12 @@ import { PrivacySelectorUsersContext } from './privacy-selector-users-context';
 export class PrivacySelectorUsersComponent implements OnInit {
   public choices: ChecklistChoice[];
   public isReady = false;
-  public usersForm: FormGroup;
+  public usersForm: UntypedFormGroup;
 
   constructor(
     private changeDetector: ChangeDetectorRef,
     private context: PrivacySelectorUsersContext,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private friendshipService: FriendshipService,
     private modal: ModalInstance<any>,
   ) {}
@@ -71,7 +75,7 @@ export class PrivacySelectorUsersComponent implements OnInit {
 
   private createForm(): void {
     this.usersForm = this.formBuilder.group({
-      friends: new FormControl(null, []),
+      friends: new UntypedFormControl(null, []),
     });
   }
 }

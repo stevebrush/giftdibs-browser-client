@@ -168,7 +168,6 @@
       }
     }
   },
-  "defaultProject": "giftdibs",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "gd",
@@ -179,6 +178,6 @@
     }
   },
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": ["@angular-eslint/schematics"]
   }
 }

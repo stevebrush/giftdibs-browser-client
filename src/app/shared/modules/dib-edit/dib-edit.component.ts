@@ -4,7 +4,11 @@ import {
   Component,
   OnInit,
 } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
+} from '@angular/forms';
 import { AlertService } from '@giftdibs/ux';
 import { ModalInstance } from '@giftdibs/ux';
 
@@ -23,7 +27,7 @@ export class DibEditComponent implements OnInit {
   public dib: Dib;
   public errors: any[];
   public gift: Gift;
-  public dibForm: FormGroup;
+  public dibForm: UntypedFormGroup;
   public isLoading = false;
 
   constructor(
@@ -31,7 +35,7 @@ export class DibEditComponent implements OnInit {
     private changeDetector: ChangeDetectorRef,
     private context: DibEditContext,
     private dibService: DibService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private modal: ModalInstance<any>,
   ) {}
 
@@ -87,7 +91,7 @@ export class DibEditComponent implements OnInit {
 
   private createForm(): void {
     this.dibForm = this.formBuilder.group({
-      giftId: new FormControl(this.gift.id),
+      giftId: new UntypedFormControl(this.gift.id),
       isAnonymous: false,
       notes: undefined,
       pricePaid: undefined,

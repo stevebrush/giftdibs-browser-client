@@ -4,9 +4,9 @@ import {
   Component,
 } from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -24,7 +24,7 @@ import { FeedbackService } from './feedback.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FeedbackComponent {
-  public feedbackForm: FormGroup;
+  public feedbackForm: UntypedFormGroup;
   public errors: any[] = [];
   public isLoading = false;
 
@@ -51,7 +51,7 @@ export class FeedbackComponent {
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
     private feedbackService: FeedbackService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private router: Router,
   ) {
     this.createForm();
@@ -103,10 +103,10 @@ export class FeedbackComponent {
 
   private createForm(): void {
     this.feedbackForm = this.formBuilder.group({
-      reason: new FormControl(FeedbackReason.GeneralInquiry),
-      referrer: new FormControl(document.referrer),
+      reason: new UntypedFormControl(FeedbackReason.GeneralInquiry),
+      referrer: new UntypedFormControl(document.referrer),
       gdNickname: null,
-      message: new FormControl(null, [Validators.required]),
+      message: new UntypedFormControl(null, [Validators.required]),
     });
   }
 }

@@ -4,9 +4,9 @@ import {
   Component,
 } from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -21,7 +21,7 @@ import { AccountService } from '../account.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterComponent {
-  public registerForm: FormGroup;
+  public registerForm: UntypedFormGroup;
   public errors: any[] = [];
   public isLoading = false;
 
@@ -29,7 +29,7 @@ export class RegisterComponent {
     private accountService: AccountService,
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private router: Router,
   ) {
     this.createForm();
@@ -78,11 +78,11 @@ export class RegisterComponent {
 
   private createForm(): void {
     this.registerForm = this.formBuilder.group({
-      firstName: new FormControl(null, [Validators.required]),
-      lastName: new FormControl(null, [Validators.required]),
+      firstName: new UntypedFormControl(null, [Validators.required]),
+      lastName: new UntypedFormControl(null, [Validators.required]),
       gdNickname: null,
-      emailAddress: new FormControl(null, [Validators.required]),
-      password: new FormControl(null, [Validators.required]),
+      emailAddress: new UntypedFormControl(null, [Validators.required]),
+      password: new UntypedFormControl(null, [Validators.required]),
     });
   }
 }

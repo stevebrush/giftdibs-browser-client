@@ -5,9 +5,9 @@ import {
   OnInit,
 } from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { AlertService } from '@giftdibs/ux';
@@ -24,7 +24,7 @@ import { WishListEditContext } from './wish-list-edit-context';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WishListEditComponent implements OnInit {
-  public wishListForm: FormGroup;
+  public wishListForm: UntypedFormGroup;
   public errors: any[];
   public isLoading = false;
   public wishList: WishList;
@@ -32,7 +32,7 @@ export class WishListEditComponent implements OnInit {
   constructor(
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private modal: ModalInstance<any>,
     private context: WishListEditContext,
     private wishListService: WishListService,
@@ -88,9 +88,9 @@ export class WishListEditComponent implements OnInit {
 
   private createForm(): void {
     this.wishListForm = this.formBuilder.group({
-      name: new FormControl(null, [Validators.required]),
-      privacy: new FormControl(null, []),
-      type: new FormControl(WishListType.WishList),
+      name: new UntypedFormControl(null, [Validators.required]),
+      privacy: new UntypedFormControl(null, []),
+      type: new UntypedFormControl(WishListType.WishList),
     });
   }
 

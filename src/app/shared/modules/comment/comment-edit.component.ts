@@ -10,7 +10,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { AlertService } from '@giftdibs/ux';
 
 import { finalize } from 'rxjs/operators';
@@ -38,7 +38,7 @@ export class CommentEditComponent implements OnInit, OnDestroy {
   public saved = new EventEmitter<void>();
 
   public errors: any[];
-  public commentForm: FormGroup;
+  public commentForm: UntypedFormGroup;
   public isLoading = false;
 
   @ViewChild('commentInput', { static: true })
@@ -48,7 +48,7 @@ export class CommentEditComponent implements OnInit, OnDestroy {
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
     private commentService: CommentService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
   ) {}
 
   public ngOnInit(): void {

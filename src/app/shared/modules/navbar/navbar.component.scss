@@ -107,6 +107,7 @@ $app-navbar-gradient: linear-gradient(
     > a,
     ::ng-deep .gd-button-link {
       color: #fff;
+      text-decoration: none;
 
       &:focus,
       &:hover {

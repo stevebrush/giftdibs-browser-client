@@ -18,8 +18,6 @@ body {
 
 a {
   color: $gd-text-color-default;
-  font-weight: $gd-font-weight-bold;
-  text-decoration: none;
 
   &:hover {
     text-decoration: underline;

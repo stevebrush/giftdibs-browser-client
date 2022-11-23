@@ -62,10 +62,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    HomeModule,
-    RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' }),
-  ],
+  imports: [HomeModule, RouterModule.forRoot(appRoutes, {})],
   exports: [RouterModule],
   providers: [AuthGuard],
 })

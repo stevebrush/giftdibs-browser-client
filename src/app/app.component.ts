@@ -1,10 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import {
-  ModalClosedEventArgs,
-  ModalService,
-  WindowRefService,
-} from '@giftdibs/ux';
+import { ModalClosedEventArgs, ModalService } from '@giftdibs/ux';
 
 import { Subject } from 'rxjs';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
@@ -26,17 +22,16 @@ export class AppComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private modalService: ModalService,
     private router: Router,
-    private windowService: WindowRefService,
   ) {}
 
   public ngOnInit(): void {
-    const FB = (this.windowService.nativeWindow as any).FB;
+    // const FB = (this.windowService.nativeWindow as any).FB;
 
-    FB.init({
-      appId: '529193240473948',
-      xfbml: false,
-      version: 'v2.10',
-    });
+    // FB.init({
+    //   appId: '529193240473948',
+    //   xfbml: false,
+    //   version: 'v2.10',
+    // });
 
     this.activatedRoute.queryParams
       .pipe(distinctUntilChanged(), takeUntil(this.ngUnsubscribe))

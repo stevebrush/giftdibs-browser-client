@@ -59,6 +59,7 @@
 @mixin gd-button-variant($bg-color, $text-color) {
   background-color: $bg-color;
   color: $text-color;
+  text-decoration: none;
 
   &:not(.gd-button-disabled):not(:disabled):hover {
     background-color: lighten($bg-color, 2%);
@@ -86,6 +87,7 @@
 .gd-button-link {
   background-color: transparent;
   box-shadow: none;
+  text-decoration: underline;
 
   &:not(.gd-button-disabled):not(:disabled):hover {
     text-decoration: underline;

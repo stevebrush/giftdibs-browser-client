@@ -35,7 +35,7 @@ export class WishListEditComponent implements OnInit {
     private formBuilder: UntypedFormBuilder,
     private modal: ModalInstance<any>,
     private context: WishListEditContext,
-    private wishListService: WishListService,
+    private wishListService: WishListService
   ) {}
 
   public ngOnInit(): void {
@@ -82,7 +82,7 @@ export class WishListEditComponent implements OnInit {
         this.alertService.error(error.message);
         this.errors = error.errors;
         this.enableView();
-      },
+      }
     );
   }
 

@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 
 import { Notification } from './notification';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class NotificationService {
   private resourceUrl = environment.apiUrl;
 
@@ -16,13 +16,13 @@ export class NotificationService {
   public getAll(): Observable<Notification[]> {
     return this.http.get(`${this.resourceUrl}/notifications`).pipe(
       map((result: any) => result.data.notifications),
-      share(),
+      share()
     );
   }
 
   public remove(notificationId: string): Observable<any> {
     return this.http.delete(
-      `${this.resourceUrl}/notifications/${notificationId}`,
+      `${this.resourceUrl}/notifications/${notificationId}`
     );
   }
 }

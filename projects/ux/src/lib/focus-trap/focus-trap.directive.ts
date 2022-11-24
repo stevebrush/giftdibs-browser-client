@@ -42,7 +42,7 @@ export class FocusTrapDirective implements AfterContentInit, OnDestroy {
 
   constructor(
     private elementRef: ElementRef,
-    private windowRef: WindowRefService,
+    private windowRef: WindowRefService
   ) {}
 
   public ngAfterContentInit(): void {
@@ -99,7 +99,7 @@ export class FocusTrapDirective implements AfterContentInit, OnDestroy {
 
   private assignFocusableElements(): void {
     const elements: HTMLElement[] = [].slice.call(
-      this.elementRef.nativeElement.querySelectorAll(GD_FOCUSABLE_SELECTORS),
+      this.elementRef.nativeElement.querySelectorAll(GD_FOCUSABLE_SELECTORS)
     );
 
     const focusableElements = elements

@@ -42,7 +42,7 @@ export class DropdownMenuTriggerDirective {
 
   constructor(
     private dropdownMenuService: DropdownMenuService,
-    private elementRef: ElementRef,
+    private elementRef: ElementRef
   ) {}
 
   @HostListener('click', ['$event'])

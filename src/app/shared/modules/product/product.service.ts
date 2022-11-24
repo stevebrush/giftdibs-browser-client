@@ -16,7 +16,7 @@ export class ProductService {
   public findSimilarByAsin(asin: string): Observable<Product[]> {
     return this.http.get(`${this.resourceUrl}/similar?asin=${asin}`).pipe(
       map((result: any) => result.data.results),
-      share(),
+      share()
     );
   }
 
@@ -24,7 +24,7 @@ export class ProductService {
     const encoded = encodeURIComponent(searchText);
     return this.http.get(`${this.resourceUrl}/search?query=${encoded}`).pipe(
       map((result: any) => result.data.results),
-      share(),
+      share()
     );
   }
 }

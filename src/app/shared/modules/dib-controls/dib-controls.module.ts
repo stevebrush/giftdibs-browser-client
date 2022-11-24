@@ -8,7 +8,6 @@ import {
   NoticeModule,
 } from '@giftdibs/ux';
 
-import { DibService } from 'src/app/shared/modules/dib';
 import { DibEditModule } from 'src/app/shared/modules/dib-edit';
 
 import { DibControlsComponent } from './dib-controls.component';
@@ -25,6 +24,5 @@ import { DibControlsComponent } from './dib-controls.component';
   ],
   declarations: [DibControlsComponent],
   exports: [DibControlsComponent],
-  providers: [DibService],
 })
 export class DibControlsModule {}

@@ -19,14 +19,14 @@ export class UserService {
   public getAll(): Observable<User[]> {
     return this.http.get(this.resourceUrl).pipe(
       map((result: any) => result.data.users),
-      share(),
+      share()
     );
   }
 
   public getById(id: string): Observable<User> {
     return this.http.get(`${this.resourceUrl}/${id}`).pipe(
       map((result: any) => result.data.user),
-      share(),
+      share()
     );
   }
 

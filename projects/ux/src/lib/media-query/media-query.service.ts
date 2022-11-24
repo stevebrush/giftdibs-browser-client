@@ -50,7 +50,7 @@ export class MediaQueryService implements OnDestroy {
   ];
 
   private _breakpointChange = new BehaviorSubject<MediaQueryBreakpoint>(
-    MediaQueryBreakpoint.Medium,
+    MediaQueryBreakpoint.Medium
   );
 
   constructor(private windowRef: WindowRefService, private zone: NgZone) {}
@@ -63,7 +63,7 @@ export class MediaQueryService implements OnDestroy {
   private addListeners(): void {
     this.mediaQueries = this.breakpoints.map((breakpoint: any) => {
       const mq = this.windowRef.nativeWindow.matchMedia(
-        breakpoint.mediaQueryString,
+        breakpoint.mediaQueryString
       );
 
       const listener = (event: MediaQueryListEvent) => {

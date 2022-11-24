@@ -24,14 +24,14 @@ export class WishListService {
       .get(`${this.resourceUrl}/wish-lists/${wishListId}?sortBy=${sortBy}`)
       .pipe(
         map((result: any) => result.data.wishList),
-        share(),
+        share()
       );
   }
 
   public getAllByUserId(userId: string): Observable<WishList[]> {
     return this.http.get(`${this.resourceUrl}/users/${userId}/wish-lists`).pipe(
       map((result: any) => result.data.wishLists),
-      share(),
+      share()
     );
   }
 
@@ -40,7 +40,7 @@ export class WishListService {
       .get(`${this.resourceUrl}/users/${userId}/wish-lists/archived`)
       .pipe(
         map((result: any) => result.data.wishLists),
-        share(),
+        share()
       );
   }
 
@@ -51,7 +51,7 @@ export class WishListService {
   public update(wishListId: string, formData: WishList): Observable<any> {
     return this.http.patch(
       `${this.resourceUrl}/wish-lists/${wishListId}`,
-      formData,
+      formData
     );
   }
 }

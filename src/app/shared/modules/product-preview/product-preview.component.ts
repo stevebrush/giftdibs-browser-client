@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import {
   AlertService,
-  dataUrlToFile,
   ModalClosedEventArgs,
   ModalInstance,
   ModalService,
   ModalSize,
+  dataUrlToFile,
   toDataUrl,
 } from '@giftdibs/ux';
 
@@ -30,7 +30,7 @@ export class ProductPreviewComponent {
   constructor(
     private alertService: AlertService,
     private assetService: AssetsService,
-    private modalService: ModalService,
+    private modalService: ModalService
   ) {}
 
   public addProductToWishList(): void {
@@ -63,7 +63,7 @@ export class ProductPreviewComponent {
                 },
                 (err: any) => {
                   newGiftSuccess();
-                },
+                }
               );
           })
           .catch(() => {

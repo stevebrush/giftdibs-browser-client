@@ -61,7 +61,7 @@ export class DibsSummaryComponent implements OnInit, OnDestroy {
     private changeDetector: ChangeDetectorRef,
     private dibService: DibService,
     private modalService: ModalService,
-    private sessionService: SessionService,
+    private sessionService: SessionService
   ) {}
 
   public ngOnInit(): void {
@@ -82,7 +82,7 @@ export class DibsSummaryComponent implements OnInit, OnDestroy {
         finalize(() => {
           this.isLoading = false;
           this.changeDetector.markForCheck();
-        }),
+        })
       )
       .subscribe(
         (data: any) => {
@@ -91,7 +91,7 @@ export class DibsSummaryComponent implements OnInit, OnDestroy {
         },
         (err: any) => {
           this.alertService.error(err.error.message);
-        },
+        }
       );
   }
 

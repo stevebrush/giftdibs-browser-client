@@ -1,9 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Renderer2,
-  OnInit,
   OnDestroy,
+  OnInit,
+  Renderer2,
 } from '@angular/core';
 
 @Component({

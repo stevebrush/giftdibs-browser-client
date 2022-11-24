@@ -67,7 +67,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private changeDetector: ChangeDetectorRef,
     private mediaQueryService: MediaQueryService,
     private router: Router,
-    private sessionService: SessionService,
+    private sessionService: SessionService
   ) {}
 
   public ngOnInit(): void {

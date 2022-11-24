@@ -21,7 +21,7 @@ export class DibsComponent implements OnInit {
 
   constructor(
     private changeDetector: ChangeDetectorRef,
-    private dibService: DibService,
+    private dibService: DibService
   ) {}
 
   public ngOnInit(): void {
@@ -51,7 +51,7 @@ export class DibsComponent implements OnInit {
         finalize(() => {
           this.isLoading = false;
           this.changeDetector.markForCheck();
-        }),
+        })
       )
       .subscribe((data: any) => {
         this.recipients = data.recipients;

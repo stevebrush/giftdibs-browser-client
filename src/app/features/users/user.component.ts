@@ -10,7 +10,7 @@ import { SessionService } from '@giftdibs/session';
 import { AlertService } from '@giftdibs/ux';
 import { ModalClosedEventArgs, ModalService, ModalSize } from '@giftdibs/ux';
 
-import { combineLatest, Subject } from 'rxjs';
+import { Subject, combineLatest } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { User, UserService } from 'src/app/shared/modules/user';
 import { WishList } from 'src/app/shared/modules/wish-list';
@@ -48,7 +48,7 @@ export class UserComponent implements OnInit, OnDestroy {
     private router: Router,
     private sessionService: SessionService,
     private userService: UserService,
-    private wishListService: WishListService,
+    private wishListService: WishListService
   ) {}
 
   public ngOnInit(): void {
@@ -72,7 +72,7 @@ export class UserComponent implements OnInit, OnDestroy {
               (user) => {
                 this.user = user;
                 this.isSessionUser = this.sessionService.isSessionUser(
-                  this.user.id,
+                  this.user.id
                 );
                 this.wishListService
                   .getAllByUserId(user.id)
@@ -95,13 +95,13 @@ export class UserComponent implements OnInit, OnDestroy {
                     () => {
                       this.isLoading = false;
                       this.changeDetector.markForCheck();
-                    },
+                    }
                   );
               },
               () => {
                 this.alertService.error('User not found.', true);
                 this.router.navigate(['/']);
-              },
+              }
             );
         } else {
           // Redirect to session user's profile if invalid route.

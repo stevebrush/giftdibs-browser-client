@@ -13,12 +13,8 @@ import {
 } from '@giftdibs/ux';
 import { IconModule } from '@giftdibs/ux';
 
-import { AssetsModule } from 'src/app/shared/modules/assets';
-
 import { AccountRoutingModule } from './account-routing.module';
-import { AccountService } from './account.service';
 import { DeleteComponent } from './delete/delete.component';
-import { FacebookModule } from './facebook';
 import { ForgottenComponent } from './forgotten/forgotten.component';
 import { RegisterComponent } from './register/register.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
@@ -28,10 +24,8 @@ import { VerifyAccountComponent } from './verify/verify.component';
 @NgModule({
   imports: [
     AccountRoutingModule,
-    AssetsModule,
     ChecklistModule,
     CommonModule,
-    FacebookModule,
     FormFieldModule,
     ImageUploaderModule,
     GridModule,
@@ -50,6 +44,5 @@ import { VerifyAccountComponent } from './verify/verify.component';
     SettingsComponent,
     DeleteComponent,
   ],
-  providers: [AccountService],
 })
 export class AccountModule {}

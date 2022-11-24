@@ -52,7 +52,7 @@ export class FeedbackComponent {
     private changeDetector: ChangeDetectorRef,
     private feedbackService: FeedbackService,
     private formBuilder: UntypedFormBuilder,
-    private router: Router,
+    private router: Router
   ) {
     this.createForm();
   }
@@ -75,7 +75,7 @@ export class FeedbackComponent {
         finalize(() => {
           this.isLoading = false;
           this.changeDetector.markForCheck();
-        }),
+        })
       )
       .subscribe(
         (result: any) => {
@@ -97,7 +97,7 @@ export class FeedbackComponent {
           this.errors = error.errors;
           this.feedbackForm.enable();
           this.changeDetector.markForCheck();
-        },
+        }
       );
   }
 

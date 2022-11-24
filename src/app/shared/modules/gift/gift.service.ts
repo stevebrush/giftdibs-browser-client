@@ -18,7 +18,7 @@ export class GiftService {
   public create(wishListId: string, formData: Gift): Observable<any> {
     return this.http.post(
       `${this.resourceUrl}/wish-lists/${wishListId}/gifts`,
-      formData,
+      formData
     );
   }
 
@@ -28,14 +28,14 @@ export class GiftService {
       map((result: any) => {
         return result.data.gifts.map((g: Gift) => this.prepare(g));
       }),
-      share(),
+      share()
     );
   }
 
   public getById(giftId: string): Observable<Gift> {
     return this.http.get(`${this.resourceUrl}/gifts/${giftId}`).pipe(
       map((result: any) => this.prepare(result.data.gift)),
-      share(),
+      share()
     );
   }
 

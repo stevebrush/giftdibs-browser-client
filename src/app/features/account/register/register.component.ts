@@ -30,18 +30,9 @@ export class RegisterComponent {
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
     private formBuilder: UntypedFormBuilder,
-    private router: Router,
+    private router: Router
   ) {
     this.createForm();
-  }
-
-  public onFacebookLoginSuccess(): void {
-    // TODO: Redirect to profile instead?
-    this.router.navigate(['/']);
-  }
-
-  public onFacebookLoginFailure(): void {
-    this.registerForm.enable();
   }
 
   public submit(): void {
@@ -72,7 +63,7 @@ export class RegisterComponent {
         this.registerForm.enable();
         this.isLoading = false;
         this.changeDetector.markForCheck();
-      },
+      }
     );
   }
 

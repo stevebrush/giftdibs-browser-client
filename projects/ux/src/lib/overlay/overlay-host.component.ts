@@ -29,12 +29,12 @@ export class OverlayHostComponent implements OnDestroy {
 
   constructor(
     private injector: Injector,
-    private resolver: ComponentFactoryResolver,
+    private resolver: ComponentFactoryResolver
   ) {}
 
   public attach<T>(
     component: Type<T>,
-    config: OverlayConfig,
+    config: OverlayConfig
   ): OverlayInstance<T> {
     const injector = Injector.create({
       providers: [],
@@ -45,7 +45,7 @@ export class OverlayHostComponent implements OnDestroy {
     const componentRef = this.targetRef!.createComponent(
       factory,
       undefined,
-      injector,
+      injector
     );
     const instance = componentRef.instance.attach(component, config);
 

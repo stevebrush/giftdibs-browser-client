@@ -44,7 +44,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
 
   constructor(
     private elementRef: ElementRef,
-    private overlayService: OverlayService,
+    private overlayService: OverlayService
   ) {}
 
   public ngOnInit(): void {

@@ -32,7 +32,7 @@ export class DeleteComponent {
     private changeDetector: ChangeDetectorRef,
     private formBuilder: UntypedFormBuilder,
     private router: Router,
-    private sessionService: SessionService,
+    private sessionService: SessionService
   ) {
     this.createForm();
   }
@@ -62,7 +62,7 @@ export class DeleteComponent {
           this.deleteAccountForm.enable();
           this.isLoading = false;
           this.changeDetector.markForCheck();
-        },
+        }
       );
   }
 

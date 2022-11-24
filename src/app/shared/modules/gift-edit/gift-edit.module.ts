@@ -14,7 +14,6 @@ import {
 } from '@giftdibs/ux';
 import { IconModule } from '@giftdibs/ux';
 
-import { AssetsModule } from 'src/app/shared/modules/assets';
 import { ProductModule } from 'src/app/shared/modules/product';
 import { UrlScraperModule } from 'src/app/shared/modules/url-scraper';
 
@@ -22,7 +21,6 @@ import { GiftEditComponent } from './gift-edit.component';
 
 @NgModule({
   imports: [
-    AssetsModule,
     CharacterCounterModule,
     CheckboxModule,
     CommonModule,

@@ -10,8 +10,6 @@ import {
   WaitModule,
 } from '@giftdibs/ux';
 
-import { FacebookModule } from '../facebook';
-
 import { LoginHelpComponent } from './login-help.component';
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
@@ -20,7 +18,6 @@ import { LoginComponent } from './login.component';
   declarations: [LoginComponent, LoginHelpComponent],
   imports: [
     CommonModule,
-    FacebookModule,
     FormFieldModule,
     FormsModule,
     LoginRoutingModule,

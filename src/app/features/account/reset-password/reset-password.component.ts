@@ -40,7 +40,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     private formBuilder: UntypedFormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private sessionService: SessionService,
+    private sessionService: SessionService
   ) {
     this.createForm();
   }
@@ -63,14 +63,14 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
 
           this.alertService.error(
             'A reset password token was not provided.',
-            true,
+            true
           );
           this.router.navigate(['/account/forgotten']);
           return;
         }
 
         this.resetPasswordForm.controls.resetPasswordToken.setValue(
-          params.resetPasswordToken,
+          params.resetPasswordToken
         );
         this.resetPasswordForm.enable();
         this.hasToken = true;
@@ -113,7 +113,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
         this.resetPasswordForm.enable();
         this.isLoading = false;
         this.changeDetector.markForCheck();
-      },
+      }
     );
   }
 

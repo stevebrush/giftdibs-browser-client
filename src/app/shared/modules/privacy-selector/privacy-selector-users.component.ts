@@ -32,7 +32,7 @@ export class PrivacySelectorUsersComponent implements OnInit {
     private context: PrivacySelectorUsersContext,
     private formBuilder: UntypedFormBuilder,
     private friendshipService: FriendshipService,
-    private modal: ModalInstance<any>,
+    private modal: ModalInstance<any>
   ) {}
 
   public ngOnInit(): void {

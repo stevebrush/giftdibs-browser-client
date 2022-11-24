@@ -4,7 +4,7 @@ import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { SessionStartupService } from './session-startup.service';
 
 export function startupServiceFactory(
-  startupService: SessionStartupService,
+  startupService: SessionStartupService
 ): Function {
   // See: https://github.com/angular/angular/issues/14485
   const cb = function () {

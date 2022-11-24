@@ -10,7 +10,7 @@ import { NavigationStart, Router, RouterEvent } from '@angular/router';
 import { SessionService, SessionUser } from '@giftdibs/session';
 import { AlertService } from '@giftdibs/ux';
 
-import { combineLatest, Subject } from 'rxjs';
+import { Subject, combineLatest } from 'rxjs';
 import { filter, finalize, takeUntil } from 'rxjs/operators';
 import { AccountService } from 'src/app/features/account/account.service';
 
@@ -19,7 +19,6 @@ import { AccountService } from 'src/app/features/account/account.service';
   templateUrl: './verify-email-notice.component.html',
   styleUrls: ['./verify-email-notice.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [AccountService],
 })
 export class VerifyEmailNoticeComponent implements OnInit, OnDestroy {
   @Input()
@@ -36,15 +35,15 @@ export class VerifyEmailNoticeComponent implements OnInit, OnDestroy {
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
     private router: Router,
-    private sessionService: SessionService,
+    private sessionService: SessionService
   ) {}
 
   public ngOnInit(): void {
     combineLatest(
       this.sessionService.userStream,
       this.router.events.pipe(
-        filter((event) => event instanceof NavigationStart),
-      ),
+        filter((event) => event instanceof NavigationStart)
+      )
     )
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((value: [SessionUser, RouterEvent]) => {
@@ -79,7 +78,7 @@ export class VerifyEmailNoticeComponent implements OnInit, OnDestroy {
         finalize(() => {
           this.isLoading = false;
           this.changeDetector.markForCheck();
-        }),
+        })
       )
       .subscribe(
         (data: any) => {
@@ -87,7 +86,7 @@ export class VerifyEmailNoticeComponent implements OnInit, OnDestroy {
         },
         (err: any) => {
           this.alertService.error(err.error.message);
-        },
+        }
       );
   }
 }

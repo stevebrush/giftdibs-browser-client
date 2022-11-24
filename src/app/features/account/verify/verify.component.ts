@@ -33,7 +33,7 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
     private route: ActivatedRoute,
-    private sessionService: SessionService,
+    private sessionService: SessionService
   ) {}
 
   public ngOnInit(): void {
@@ -65,7 +65,7 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
               this.isLoading = false;
               this.isVerified = false;
               this.changeDetector.markForCheck();
-            },
+            }
           );
       });
   }
@@ -85,7 +85,7 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
         finalize(() => {
           this.isLoading = false;
           this.changeDetector.markForCheck();
-        }),
+        })
       )
       .subscribe(
         (data: any) => {
@@ -93,7 +93,7 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
         },
         (err: any) => {
           this.alertService.error(err.error.message);
-        },
+        }
       );
   }
 }

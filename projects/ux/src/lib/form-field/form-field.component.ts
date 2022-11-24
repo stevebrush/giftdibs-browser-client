@@ -7,7 +7,7 @@ import {
   Input,
   OnChanges,
 } from '@angular/core';
-import { UntypedFormArray, FormControlName } from '@angular/forms';
+import { FormControlName, UntypedFormArray } from '@angular/forms';
 
 @Component({
   selector: 'gd-form-field',

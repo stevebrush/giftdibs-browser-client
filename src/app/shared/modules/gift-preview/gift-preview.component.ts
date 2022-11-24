@@ -33,7 +33,7 @@ export class GiftPreviewComponent implements OnInit {
   constructor(
     private changeDetector: ChangeDetectorRef,
     private giftService: GiftService,
-    private sessionService: SessionService,
+    private sessionService: SessionService
   ) {}
 
   public ngOnInit(): void {

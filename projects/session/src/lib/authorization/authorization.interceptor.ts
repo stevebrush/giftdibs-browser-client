@@ -20,7 +20,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   public intercept(
     req: HttpRequest<any>,
-    next: HttpHandler,
+    next: HttpHandler
   ): Observable<HttpEvent<any>> {
     const token = this.sessionService.token;
 
@@ -59,8 +59,8 @@ export class AuthInterceptor implements HttpInterceptor {
               this.router.navigate(['/account', 'login'], routerOptions);
             }
           }
-        },
-      ),
+        }
+      )
     );
   }
 }

@@ -10,7 +10,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 
-import { fromEvent, Observable, Subject } from 'rxjs';
+import { Observable, Subject, fromEvent } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { AffixService } from '../affix/affix.service';
@@ -49,7 +49,7 @@ export class PopoverComponent implements OnDestroy {
   constructor(
     private affixService: AffixService,
     private changeDetector: ChangeDetectorRef,
-    private windowRef: WindowRefService,
+    private windowRef: WindowRefService
   ) {}
 
   public ngOnDestroy(): void {
@@ -81,7 +81,7 @@ export class PopoverComponent implements OnDestroy {
       this.affixService.affixTo(
         this.popoverRef!,
         this.config!.trigger,
-        this.config!.affix,
+        this.config!.affix
       );
 
       this.isVisible = true;
@@ -91,7 +91,7 @@ export class PopoverComponent implements OnDestroy {
 
   private assignFocusableElements(): void {
     const elements: HTMLElement[] = [].slice.call(
-      this.popoverRef!.nativeElement.querySelectorAll(GD_FOCUSABLE_SELECTORS),
+      this.popoverRef!.nativeElement.querySelectorAll(GD_FOCUSABLE_SELECTORS)
     );
 
     const focusableElements = elements

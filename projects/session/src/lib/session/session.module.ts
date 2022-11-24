@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import { GD_AUTHORIZATION_PROVIDERS } from '../authorization/authorization-providers';
 

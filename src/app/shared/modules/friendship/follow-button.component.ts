@@ -33,7 +33,7 @@ export class FollowButtonComponent implements OnInit {
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
     private friendshipService: FriendshipService,
-    private sessionService: SessionService,
+    private sessionService: SessionService
   ) {}
 
   public ngOnInit(): void {
@@ -71,7 +71,7 @@ export class FollowButtonComponent implements OnInit {
         finalize(() => {
           this.isLoading = false;
           this.changeDetector.markForCheck();
-        }),
+        })
       )
       .subscribe(
         (result: any) => {
@@ -80,7 +80,7 @@ export class FollowButtonComponent implements OnInit {
         },
         (err: any) => {
           this.alertService.error(err.error.message);
-        },
+        }
       );
   }
 
@@ -94,7 +94,7 @@ export class FollowButtonComponent implements OnInit {
         finalize(() => {
           this.isLoading = false;
           this.changeDetector.markForCheck();
-        }),
+        })
       )
       .subscribe(
         () => {
@@ -102,7 +102,7 @@ export class FollowButtonComponent implements OnInit {
         },
         (err: any) => {
           this.alertService.error(err.error.message);
-        },
+        }
       );
   }
 }

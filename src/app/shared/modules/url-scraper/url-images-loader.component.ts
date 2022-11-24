@@ -46,7 +46,7 @@ export class UrlImagesLoaderComponent implements OnInit {
     private modal: ModalInstance<any>,
     private modalService: ModalService,
     private urlScraperService: UrlScraperService,
-    private context: UrlImagesLoaderContext,
+    private context: UrlImagesLoaderContext
   ) {}
 
   public ngOnInit(): void {
@@ -90,7 +90,7 @@ export class UrlImagesLoaderComponent implements OnInit {
         finalize(() => {
           this.disabled = false;
           this.changeDetector.markForCheck();
-        }),
+        })
       )
       .subscribe(
         (result: UrlScraperResult) => {
@@ -119,7 +119,7 @@ export class UrlImagesLoaderComponent implements OnInit {
             err.error.message ||
             `We couldn't reach that URL. Please try again later.`;
           this.alertService.error(message);
-        },
+        }
       );
   }
 

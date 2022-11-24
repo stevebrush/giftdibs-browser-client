@@ -6,7 +6,7 @@ import { map, share } from 'rxjs/operators';
 import { User } from 'src/app/shared/modules/user';
 import { environment } from 'src/environments/environment';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class SearchService {
   private resourceUrl = environment.apiUrl;
 
@@ -16,7 +16,7 @@ export class SearchService {
     const encoded = encodeURIComponent(searchText);
     return this.http.get(`${this.resourceUrl}/users?search=${encoded}`).pipe(
       map((result: any) => result.data.results),
-      share(),
+      share()
     );
   }
 }

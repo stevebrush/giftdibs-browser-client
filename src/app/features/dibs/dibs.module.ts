@@ -10,7 +10,6 @@ import {
   WaitModule,
 } from '@giftdibs/ux';
 
-import { DibService } from 'src/app/shared/modules/dib';
 import { DibControlsModule } from 'src/app/shared/modules/dib-controls';
 import { GiftPreviewModule } from 'src/app/shared/modules/gift-preview';
 
@@ -32,6 +31,5 @@ import { DibsComponent } from './dibs.component';
     WaitModule,
   ],
   declarations: [DibsComponent],
-  providers: [DibService],
 })
 export class DibsModule {}

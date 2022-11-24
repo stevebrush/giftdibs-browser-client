@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AssetsService {
   private resourceUrl = environment.apiUrl;
 
@@ -21,7 +21,7 @@ export class AssetsService {
   public uploadGiftThumbnail(file: any, giftId: string): Observable<any> {
     return this.uploadFile(
       file,
-      `${this.resourceUrl}/gifts/${giftId}/thumbnails`,
+      `${this.resourceUrl}/gifts/${giftId}/thumbnails`
     );
   }
 
@@ -42,7 +42,7 @@ export class AssetsService {
         (err: any) => {
           observer.error(err);
           observer.complete();
-        },
+        }
       );
     });
   }

@@ -15,7 +15,7 @@ export class ConfirmService {
 
   public confirm(
     config: ConfirmConfig,
-    callback: (answer: ConfirmAnswer) => void,
+    callback: (answer: ConfirmAnswer) => void
   ): void {
     const context = new ConfirmContext(config);
 

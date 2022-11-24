@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 
 import { Dib } from './dib';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class DibService {
   private resourceUrl = environment.apiUrl;
 
@@ -21,7 +21,7 @@ export class DibService {
     const status = isDelivered ? '?status=delivered' : '';
     return this.http.get(`${this.resourceUrl}/dibs/recipients${status}`).pipe(
       map((result: any) => result.data),
-      share(),
+      share()
     );
   }
 

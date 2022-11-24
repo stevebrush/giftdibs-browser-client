@@ -65,7 +65,7 @@ export class WishListComponent implements OnInit, OnDestroy {
     private modalService: ModalService,
     private router: Router,
     private sessionService: SessionService,
-    private wishListService: WishListService,
+    private wishListService: WishListService
   ) {}
 
   public ngOnInit(): void {
@@ -79,14 +79,14 @@ export class WishListComponent implements OnInit, OnDestroy {
 
           return this.wishListService.getById(params.wishListId, this.sortBy);
         }),
-        takeUntil(this.ngUnsubscribe),
+        takeUntil(this.ngUnsubscribe)
       )
       .subscribe(
         (wishList: WishList) => {
           this.setupWishList(wishList);
 
           this.isSessionUser = this.sessionService.isSessionUser(
-            this.wishList.user.id,
+            this.wishList.user.id
           );
 
           this.menuItems = [
@@ -132,7 +132,7 @@ export class WishListComponent implements OnInit, OnDestroy {
         () => {
           this.alertService.error('Wish list not found.', true);
           this.router.navigate(['/']);
-        },
+        }
       );
   }
 
@@ -197,16 +197,16 @@ export class WishListComponent implements OnInit, OnDestroy {
             () => {
               this.alertService.success(
                 `${this.wishListType} successfully deleted.`,
-                true,
+                true
               );
               this.router.navigate(['/', 'users', this.wishList.user.id]);
             },
             (err: any) => {
               this.alertService.error(err.error.message);
-            },
+            }
           );
         }
-      },
+      }
     );
   }
 
@@ -219,13 +219,13 @@ export class WishListComponent implements OnInit, OnDestroy {
       () => {
         this.alertService.success(
           `${this.wishListType} successfully archived.`,
-          true,
+          true
         );
         this.router.navigate(['/', 'users', this.wishList.user.id]);
       },
       (err: any) => {
         this.alertService.error(err.error.message);
-      },
+      }
     );
   }
 
@@ -238,13 +238,13 @@ export class WishListComponent implements OnInit, OnDestroy {
       () => {
         this.alertService.success(
           `${this.wishListType} successfully unarchived.`,
-          true,
+          true
         );
         this.refreshWishList();
       },
       (err: any) => {
         this.alertService.error(err.error.message);
-      },
+      }
     );
   }
 

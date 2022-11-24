@@ -16,7 +16,6 @@ import {
 import { CommentEditComponent } from './comment-edit.component';
 import { CommentListComponent } from './comment-list.component';
 import { CommentPreviewComponent } from './comment-preview.component';
-import { CommentService } from './comment.service';
 
 // #endregion
 
@@ -34,7 +33,6 @@ import { CommentService } from './comment.service';
     RouterModule,
     ThumbnailModule,
   ],
-  providers: [CommentService],
   declarations: [
     CommentEditComponent,
     CommentListComponent,

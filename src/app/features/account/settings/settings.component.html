@@ -87,28 +87,6 @@
         </button>
       </form>
 
-      <!-- <p>
-        <button
-          *ngIf="sessionUser.facebookId"
-          class="gd-button gd-button-default gd-button-unlink-facebook"
-          type="button"
-          [disabled]="settingsForm.disabled"
-          (click)="unlinkFacebookAccount()"
-        >
-          <gd-icon icon="facebook-square fab"></gd-icon>
-          Unlink Facebook account
-        </button>
-
-        <gd-facebook-login-button
-          *ngIf="!sessionUser.facebookId"
-          buttonText="Link Facebook account"
-          [disabled]="settingsForm.disabled"
-          (click)="disableForm()"
-          (success)="onFacebookLoginSuccess($event)"
-        >
-        </gd-facebook-login-button>
-      </p> -->
-
       <p><a routerLink="/account/reset-password">Change password...</a></p>
       <p><a routerLink="/account/delete">Delete account...</a></p>
     </div>

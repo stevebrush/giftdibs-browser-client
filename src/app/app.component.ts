@@ -21,18 +21,10 @@ export class AppComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private modalService: ModalService,
-    private router: Router,
+    private router: Router
   ) {}
 
   public ngOnInit(): void {
-    // const FB = (this.windowService.nativeWindow as any).FB;
-
-    // FB.init({
-    //   appId: '529193240473948',
-    //   xfbml: false,
-    //   version: 'v2.10',
-    // });
-
     this.activatedRoute.queryParams
       .pipe(distinctUntilChanged(), takeUntil(this.ngUnsubscribe))
       .subscribe((params) => {

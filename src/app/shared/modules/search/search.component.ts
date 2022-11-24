@@ -15,7 +15,6 @@ let autoIncrementedId = 0;
   selector: 'gd-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
-  providers: [SearchService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchComponent {
@@ -27,13 +26,13 @@ export class SearchComponent {
   }
 
   public searchFunction: TypeaheadSearchFunction<User> = (
-    searchText: string,
+    searchText: string
   ) => {
     return this.searchService.searchUsers(searchText);
   };
 
   public searchResultAction: TypeaheadSearchResultAction = (
-    searchResult: any,
+    searchResult: any
   ) => {
     // Let the user name be returned to the typeahead input before navigating.
     setTimeout(() => {

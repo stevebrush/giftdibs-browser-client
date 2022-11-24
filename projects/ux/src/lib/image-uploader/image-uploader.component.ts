@@ -4,11 +4,11 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  forwardRef,
   Input,
   OnDestroy,
   Output,
   ViewChild,
+  forwardRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 

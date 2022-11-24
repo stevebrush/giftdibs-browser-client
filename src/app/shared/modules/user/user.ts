@@ -1,6 +1,5 @@
 export interface User {
   avatarUrl?: string;
-  facebookId?: string;
   id?: string;
   emailAddress?: string;
   emailAddressVerified?: boolean;

@@ -40,7 +40,7 @@ export class SettingsComponent implements OnInit {
     private changeDetector: ChangeDetectorRef,
     private formBuilder: UntypedFormBuilder,
     private sessionService: SessionService,
-    private userService: UserService,
+    private userService: UserService
   ) {}
 
   public ngOnInit(): void {
@@ -55,7 +55,7 @@ export class SettingsComponent implements OnInit {
       },
       (err: any) => {
         this.alertService.error(err.error.message);
-      },
+      }
     );
   }
 
@@ -66,7 +66,7 @@ export class SettingsComponent implements OnInit {
       },
       (err: any) => {
         this.alertService.error(err.error.message);
-      },
+      }
     );
   }
 
@@ -96,7 +96,7 @@ export class SettingsComponent implements OnInit {
       .pipe(
         finalize(() => {
           this.enableForm();
-        }),
+        })
       )
       .subscribe(
         (result: any) => {
@@ -108,50 +108,8 @@ export class SettingsComponent implements OnInit {
           const error = err.error;
           this.errors = error.errors;
           this.alertService.error(error.message);
-        },
+        }
       );
-  }
-
-  public unlinkFacebookAccount(): void {
-    if (this.settingsForm.disabled) {
-      return;
-    }
-
-    this.disableForm();
-
-    // Remove facebook id from user
-    // Logout out of facebook?
-    this.userService
-      .update(this.sessionService.user.id, {
-        facebookId: null,
-      })
-      .pipe(
-        finalize(() => {
-          this.enableForm();
-        }),
-      )
-      .subscribe(
-        () => {
-          this.sessionService.patchUser({
-            facebookId: null,
-          });
-          this.alertService.success(
-            'You have successfully unlinked your Facebook account.',
-          );
-        },
-        (err: any) => {
-          const error = err.error;
-          this.errors = error.errors;
-          this.alertService.error(error.message);
-        },
-      );
-  }
-
-  public onFacebookLoginSuccess(result: any): void {
-    this.sessionService.patchUser({
-      facebookId: result.data.authResponse.user.facebookId,
-    });
-    this.enableForm();
   }
 
   public disableForm(): void {
@@ -186,7 +144,7 @@ export class SettingsComponent implements OnInit {
         finalize(() => {
           this.isReady = true;
           this.enableForm();
-        }),
+        })
       )
       .subscribe(
         (user: User) => {
@@ -208,7 +166,6 @@ export class SettingsComponent implements OnInit {
 
           const formData: any = {
             avatarUrl: user.avatarUrl,
-            facebookId: user.facebookId,
             firstName: user.firstName,
             lastName: user.lastName,
             emailAddress: user.emailAddress,
@@ -217,14 +174,14 @@ export class SettingsComponent implements OnInit {
           formData.emailSettings = Object.keys(notificationSettings).filter(
             (key) => {
               return notificationSettings[key].allowEmail === true;
-            },
+            }
           );
 
           this.settingsForm.reset(formData);
         },
         (err: any) => {
           this.alertService.error(err.error.message);
-        },
+        }
       );
   }
 

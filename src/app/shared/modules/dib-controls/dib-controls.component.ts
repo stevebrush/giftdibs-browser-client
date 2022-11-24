@@ -66,7 +66,7 @@ export class DibControlsComponent implements OnInit, OnChanges, OnDestroy {
     private confirmService: ConfirmService,
     private dibService: DibService,
     private modalService: ModalService,
-    private sessionService: SessionService,
+    private sessionService: SessionService
   ) {}
 
   public ngOnInit(): void {
@@ -100,7 +100,7 @@ export class DibControlsComponent implements OnInit, OnChanges, OnDestroy {
               finalize(() => {
                 this.isLoading = false;
                 this.changeDetector.detectChanges();
-              }),
+              })
             )
             .subscribe(
               () => {
@@ -109,13 +109,13 @@ export class DibControlsComponent implements OnInit, OnChanges, OnDestroy {
               },
               (err: any) => {
                 this.alertService.error(err.error.message);
-              },
+              }
             );
         } else {
           this.isLoading = false;
           this.changeDetector.detectChanges();
         }
-      },
+      }
     );
   }
 
@@ -182,7 +182,7 @@ export class DibControlsComponent implements OnInit, OnChanges, OnDestroy {
               finalize(() => {
                 this.isLoading = false;
                 this.changeDetector.markForCheck();
-              }),
+              })
             )
             .subscribe(
               () => {
@@ -191,13 +191,13 @@ export class DibControlsComponent implements OnInit, OnChanges, OnDestroy {
               },
               (err: any) => {
                 this.alertService.error(err.error.message);
-              },
+              }
             );
         } else {
           this.isLoading = false;
           this.changeDetector.detectChanges();
         }
-      },
+      }
     );
   }
 }

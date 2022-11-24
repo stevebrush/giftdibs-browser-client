@@ -48,7 +48,7 @@ export class CommentEditComponent implements OnInit, OnDestroy {
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
     private commentService: CommentService,
-    private formBuilder: UntypedFormBuilder,
+    private formBuilder: UntypedFormBuilder
   ) {}
 
   public ngOnInit(): void {
@@ -90,7 +90,7 @@ export class CommentEditComponent implements OnInit, OnDestroy {
           this.commentForm.reset();
           this.commentForm.enable();
           this.changeDetector.markForCheck();
-        }),
+        })
       )
       .subscribe(
         () => {
@@ -100,7 +100,7 @@ export class CommentEditComponent implements OnInit, OnDestroy {
           const error = err.error;
           this.alertService.error(error.message);
           this.errors = error.errors;
-        },
+        }
       );
   }
 

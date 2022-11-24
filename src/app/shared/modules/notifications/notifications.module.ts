@@ -6,7 +6,6 @@ import { BadgeModule, PopoverModule, RepeaterModule } from '@giftdibs/ux';
 
 import { FriendshipModule } from 'src/app/shared/modules/friendship';
 
-import { NotificationService } from './notification.service';
 import { NotificationsComponent } from './notifications.component';
 
 @NgModule({
@@ -21,6 +20,5 @@ import { NotificationsComponent } from './notifications.component';
   ],
   exports: [NotificationsComponent],
   declarations: [NotificationsComponent],
-  providers: [NotificationService],
 })
 export class NotificationsModule {}

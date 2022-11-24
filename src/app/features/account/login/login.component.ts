@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     private modalService: ModalService,
     private route: ActivatedRoute,
     private router: Router,
-    private sessionService: SessionService,
+    private sessionService: SessionService
   ) {
     this.createForm();
   }
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
   public ngOnInit(): void {
     this.sessionService.clearAll();
     this.redirectUrl = decodeURIComponent(
-      this.route.snapshot.queryParams['redirectUrl'] || '/',
+      this.route.snapshot.queryParams['redirectUrl'] || '/'
     );
   }
 
@@ -79,18 +79,8 @@ export class LoginComponent implements OnInit {
           this.loginForm.enable();
           this.isLoading = false;
           this.changeDetector.markForCheck();
-        },
+        }
       );
-  }
-
-  public onFacebookLoginSuccess(): void {
-    this.redirect();
-  }
-
-  public onFacebookLoginFailure(): void {
-    this.loginForm.enable();
-    this.isLoading = false;
-    this.changeDetector.detectChanges();
   }
 
   private createForm(): void {

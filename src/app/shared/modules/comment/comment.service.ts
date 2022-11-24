@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 
 import { Comment } from './comment';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class CommentService {
   private resourceUrl = `${environment.apiUrl}/gifts`;
 
@@ -28,7 +28,7 @@ export class CommentService {
   public getById(commentId: string): Observable<Comment> {
     return this.http.get(`${this.resourceUrl}/comments/${commentId}`).pipe(
       map((result: any) => result.data.comment),
-      share(),
+      share()
     );
   }
 
@@ -39,7 +39,7 @@ export class CommentService {
   public update(commentId: string, formData: Comment): Observable<any> {
     return this.http.patch(
       `${this.resourceUrl}/comments/${commentId}`,
-      formData,
+      formData
     );
   }
 }

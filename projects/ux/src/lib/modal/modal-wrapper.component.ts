@@ -45,7 +45,7 @@ export class ModalWrapperComponent implements OnDestroy {
   constructor(
     private changeDetector: ChangeDetectorRef,
     private resolver: ComponentFactoryResolver,
-    private injector: Injector,
+    private injector: Injector
   ) {}
 
   public ngOnDestroy(): void {
@@ -62,7 +62,7 @@ export class ModalWrapperComponent implements OnDestroy {
     const componentRef = this.targetRef!.createComponent(
       factory,
       undefined,
-      injector,
+      injector
     );
 
     this.size = config.size || ModalSize.Medium;

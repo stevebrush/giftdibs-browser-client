@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AccountService {
   private resourceUrl = environment.apiUrl + '/auth';
 
@@ -14,12 +14,6 @@ export class AccountService {
     return this.http.post(`${this.resourceUrl}/login`, {
       emailAddress,
       password,
-    });
-  }
-
-  public loginUsingFacebook(facebookUserAccessToken: string): Observable<any> {
-    return this.http.post(`${this.resourceUrl}/login-facebook`, {
-      facebookUserAccessToken,
     });
   }
 
@@ -42,7 +36,7 @@ export class AccountService {
   }
 
   public verifyEmailAddress(
-    emailAddressVerificationToken: string,
+    emailAddressVerificationToken: string
   ): Observable<any> {
     return this.http.post(`${this.resourceUrl}/verify-email`, {
       emailAddressVerificationToken,
@@ -51,7 +45,7 @@ export class AccountService {
 
   public destroyWithPassword(
     userId: string,
-    password: string,
+    password: string
   ): Observable<any> {
     return this.http.post(`${this.resourceUrl}/delete-account`, {
       password,

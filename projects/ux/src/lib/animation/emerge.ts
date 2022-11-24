@@ -17,14 +17,14 @@ export const gdAnimationEmerge = trigger('gdAnimationEmerge', [
     style({
       opacity: 1,
       transform: 'initial',
-    }),
+    })
   ),
   state(
     'closed',
     style({
       opacity: 0,
       transform: 'scale(0.0)',
-    }),
+    })
   ),
   transition('void => *', [
     style({

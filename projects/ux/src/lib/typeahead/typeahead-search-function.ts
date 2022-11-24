@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
 
 export type TypeaheadSearchFunction<T> = (
-  searchText: string,
+  searchText: string
 ) => Observable<T[]>;

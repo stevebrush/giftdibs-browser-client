@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 
-import { fromEvent, Observable, Subject } from 'rxjs';
+import { Observable, Subject, fromEvent } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { OverlayConfig } from './overlay-config';
@@ -49,7 +49,7 @@ export class OverlayComponent implements OnInit, OnDestroy {
     private elementRef: ElementRef,
     private injector: Injector,
     private resolver: ComponentFactoryResolver,
-    private router: Router,
+    private router: Router
   ) {}
 
   public ngOnInit(): void {
@@ -70,13 +70,13 @@ export class OverlayComponent implements OnInit, OnDestroy {
 
   public attach<T>(
     component: Type<T>,
-    config: OverlayConfig,
+    config: OverlayConfig
   ): OverlayInstance<T> {
     const overlayInstance = new OverlayInstance<T>();
 
     const defaultProviders: any[] = [];
     config.providers = defaultProviders.concat(
-      (config && config.providers) || [],
+      (config && config.providers) || []
     );
 
     const injector = Injector.create({
@@ -88,7 +88,7 @@ export class OverlayComponent implements OnInit, OnDestroy {
     const componentRef = this.targetRef!.createComponent(
       factory,
       undefined,
-      injector,
+      injector
     );
 
     this.router.events

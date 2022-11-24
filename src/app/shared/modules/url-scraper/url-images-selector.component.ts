@@ -22,7 +22,7 @@ export class UrlImagesSelectorComponent implements OnInit {
   constructor(
     private changeDetector: ChangeDetectorRef,
     private context: UrlImagesSelectorContext,
-    private modal: ModalInstance<any>,
+    private modal: ModalInstance<any>
   ) {}
 
   public ngOnInit(): void {

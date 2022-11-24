@@ -3,9 +3,9 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  forwardRef,
   OnInit,
   ViewChild,
+  forwardRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SessionService } from '@giftdibs/session';
@@ -71,7 +71,7 @@ export class PrivacySelectorComponent implements OnInit, ControlValueAccessor {
   constructor(
     private changeDetector: ChangeDetectorRef,
     private modalService: ModalService,
-    private sessionService: SessionService,
+    private sessionService: SessionService
   ) {}
 
   public ngOnInit(): void {
@@ -108,7 +108,7 @@ export class PrivacySelectorComponent implements OnInit, ControlValueAccessor {
                   useValue: context,
                 },
               ],
-            },
+            }
           );
 
           instance.closed.subscribe((args: ModalClosedEventArgs) => {

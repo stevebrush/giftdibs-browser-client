@@ -29,7 +29,7 @@ export class ForgottenComponent {
     private accountService: AccountService,
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
-    private formBuilder: UntypedFormBuilder,
+    private formBuilder: UntypedFormBuilder
   ) {
     this.createForm();
   }
@@ -52,7 +52,7 @@ export class ForgottenComponent {
           this.forgottenForm.enable();
           this.isLoading = false;
           this.changeDetector.markForCheck();
-        }),
+        })
       )
       .subscribe(
         (result: any) => {
@@ -62,7 +62,7 @@ export class ForgottenComponent {
         (err: any) => {
           this.errors = err.error.errors;
           this.alertService.error(err.error.message);
-        },
+        }
       );
   }
 

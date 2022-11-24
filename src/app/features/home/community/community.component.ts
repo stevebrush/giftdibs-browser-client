@@ -20,7 +20,7 @@ export class CommunityComponent implements OnInit {
 
   constructor(
     private changeDetector: ChangeDetectorRef,
-    private giftService: GiftService,
+    private giftService: GiftService
   ) {}
 
   public ngOnInit(): void {

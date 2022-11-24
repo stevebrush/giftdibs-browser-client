@@ -19,7 +19,6 @@ import { NotificationService } from './notification.service';
   templateUrl: './notifications.component.html',
   styleUrls: ['./notifications.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DibService, GiftService],
 })
 export class NotificationsComponent implements OnInit {
   public isLoading = true;
@@ -31,7 +30,7 @@ export class NotificationsComponent implements OnInit {
     private changeDetector: ChangeDetectorRef,
     private dibService: DibService,
     private giftService: GiftService,
-    private notificationService: NotificationService,
+    private notificationService: NotificationService
   ) {}
 
   public ngOnInit(): void {
@@ -62,7 +61,7 @@ export class NotificationsComponent implements OnInit {
         finalize(() => {
           this.isLoading = false;
           this.changeDetector.markForCheck();
-        }),
+        })
       )
       .subscribe(() => {
         this.notifications.splice(this.notifications.indexOf(notification), 1);
@@ -84,7 +83,7 @@ export class NotificationsComponent implements OnInit {
         finalize(() => {
           this.isLoading = false;
           this.changeDetector.markForCheck();
-        }),
+        })
       )
       .subscribe((notifications: Notification[]) => {
         this.notifications = notifications;

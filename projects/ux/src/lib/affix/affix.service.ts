@@ -20,7 +20,7 @@ export class AffixService {
   public affixTo(
     subject: ElementRef,
     target: ElementRef,
-    config?: AffixConfig,
+    config?: AffixConfig
   ): void {
     const defaults: AffixConfig = {
       horizontalAlignment: 'left',
@@ -75,14 +75,14 @@ export class AffixService {
     // See: https://stackoverflow.com/a/8876069/6178885
     const viewportHeight = Math.max(
       document.documentElement.clientHeight,
-      window.innerHeight || 0,
+      window.innerHeight || 0
     );
 
     if (subjectRect.height + top >= viewportHeight) {
       this.renderer.setStyle(
         subject.nativeElement,
         'height',
-        `${subjectRect.height}px`,
+        `${subjectRect.height}px`
       );
     }
 
@@ -94,7 +94,7 @@ export class AffixService {
       this.renderer.setStyle(
         subject.nativeElement,
         'width',
-        `${viewportWidth - left}px`,
+        `${viewportWidth - left}px`
       );
     }
   }

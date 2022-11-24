@@ -3,14 +3,14 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  forwardRef,
   Input,
   OnDestroy,
   OnInit,
+  forwardRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { fromEvent, Subject } from 'rxjs';
+import { Subject, fromEvent } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 let nextUniqueId = 0;
@@ -62,7 +62,7 @@ export class CheckboxComponent
 
   constructor(
     private changeDetector: ChangeDetectorRef,
-    private elementRef: ElementRef,
+    private elementRef: ElementRef
   ) {}
 
   public ngOnInit(): void {

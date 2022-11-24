@@ -26,7 +26,7 @@ export class OverlayService implements OnDestroy {
     private adapter: OverlayDomAdapterService,
     private appRef: ApplicationRef,
     private injector: Injector,
-    private resolver: ComponentFactoryResolver,
+    private resolver: ComponentFactoryResolver
   ) {}
 
   public ngOnDestroy(): void {
@@ -35,7 +35,7 @@ export class OverlayService implements OnDestroy {
 
   public attach<T>(
     component: Type<T>,
-    config?: OverlayConfig,
+    config?: OverlayConfig
   ): OverlayInstance<T> {
     const defaults: OverlayConfig = {
       destroyOnOverlayClick: true,

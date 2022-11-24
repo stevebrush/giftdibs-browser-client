@@ -43,7 +43,7 @@ export class GiftMoveComponent implements OnInit {
     private giftService: GiftService,
     private modal: ModalInstance<any>,
     private sessionService: SessionService,
-    private wishListService: WishListService,
+    private wishListService: WishListService
   ) {}
 
   public ngOnInit(): void {
@@ -92,7 +92,7 @@ export class GiftMoveComponent implements OnInit {
           },
           (err: any) => {
             this.handleError(err);
-          },
+          }
         );
     } else {
       this.moveGiftToWishList();
@@ -123,7 +123,7 @@ export class GiftMoveComponent implements OnInit {
         },
         (err) => {
           this.handleError(err);
-        },
+        }
       );
 
       // Create a new gift.
@@ -134,7 +134,7 @@ export class GiftMoveComponent implements OnInit {
         },
         (err) => {
           this.handleError(err);
-        },
+        }
       );
     }
   }

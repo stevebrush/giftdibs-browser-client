@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 import { Friendship } from './friendship';
 import { FriendshipSummary } from './friendship-summary';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class FriendshipService {
   private resourceUrl = environment.apiUrl;
 
@@ -23,7 +23,7 @@ export class FriendshipService {
       .get(`${this.resourceUrl}/users/${userId}/friendships/summary`)
       .pipe(
         map((result: any) => result.data.friendships),
-        share(),
+        share()
       );
   }
 
@@ -32,7 +32,7 @@ export class FriendshipService {
       .get(`${this.resourceUrl}/users/${userId}/friendships`)
       .pipe(
         map((result: any) => result.data.friendships),
-        share(),
+        share()
       );
   }
 
@@ -41,7 +41,7 @@ export class FriendshipService {
       .get(`${this.resourceUrl}/users/${userId}/friendships/following`)
       .pipe(
         map((result: any) => result.data.friendships),
-        share(),
+        share()
       );
   }
 

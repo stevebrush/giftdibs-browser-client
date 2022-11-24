@@ -4,15 +4,15 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  forwardRef,
   Input,
   OnDestroy,
   TemplateRef,
   ViewChild,
+  forwardRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { fromEvent, merge, Subject } from 'rxjs';
+import { Subject, fromEvent, merge } from 'rxjs';
 import {
   debounceTime,
   distinctUntilChanged,
@@ -112,7 +112,7 @@ export class TypeaheadComponent
     private changeDetector: ChangeDetectorRef,
     private elementRef: ElementRef,
     private domAdapter: TypeaheadDomAdapterService,
-    private overlayService: OverlayService,
+    private overlayService: OverlayService
   ) {}
 
   public ngAfterViewInit(): void {
@@ -122,7 +122,7 @@ export class TypeaheadComponent
       .pipe(
         takeUntil(this.ngUnsubscribe),
         debounceTime(KEYUP_DEBOUNCE_TIME),
-        distinctUntilChanged(),
+        distinctUntilChanged()
       )
       .subscribe((event: any) => {
         if (this.searchOnKeyUp) {
@@ -213,7 +213,7 @@ export class TypeaheadComponent
           this.disabled = false;
           this.changeDetector.markForCheck();
         }),
-        takeUntil(this.ngUnsubscribe),
+        takeUntil(this.ngUnsubscribe)
       )
       .subscribe(
         (results: any[]) => {
@@ -239,7 +239,7 @@ export class TypeaheadComponent
         },
         () => {
           // Swallow error for now.
-        },
+        }
       );
   }
 
@@ -263,7 +263,7 @@ export class TypeaheadComponent
 
     this.overlayInstance = this.overlayService.attach(
       TypeaheadResultsComponent,
-      overlayConfig,
+      overlayConfig
     );
 
     // Set the input value to what is selected in the dropdown.
@@ -276,7 +276,7 @@ export class TypeaheadComponent
         if (this.overlayInstance) {
           this.overlayInstance.destroy();
         }
-      },
+      }
     );
 
     this.hasResults = true;
@@ -322,7 +322,7 @@ export class TypeaheadComponent
 
     merge(
       fromEvent(window, 'scroll').pipe(takeWhile(() => this.hasResults)),
-      fromEvent(window, 'resize').pipe(takeWhile(() => this.hasResults)),
+      fromEvent(window, 'resize').pipe(takeWhile(() => this.hasResults))
     ).subscribe(() => {
       this.positionResults();
     });

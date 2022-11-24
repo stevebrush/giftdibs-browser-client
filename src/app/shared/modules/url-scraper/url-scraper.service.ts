@@ -22,7 +22,7 @@ export class UrlScraperService {
     const encoded = encodeURIComponent(url);
     return this.http.get(`${this.resourceUrl}/products?url=${encoded}`).pipe(
       map((result: any) => result.product),
-      share(),
+      share()
     );
   }
 }

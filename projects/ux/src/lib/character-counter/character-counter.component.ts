@@ -7,7 +7,7 @@ import {
   OnInit,
 } from '@angular/core';
 
-import { fromEvent, Subject } from 'rxjs';
+import { Subject, fromEvent } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({

@@ -11,7 +11,7 @@ export class OverlayDomAdapterService {
 
   constructor(
     private rendererFactory: RendererFactory2,
-    private windowRef: WindowRefService,
+    private windowRef: WindowRefService
   ) {
     this.renderer = this.rendererFactory.createRenderer(undefined, null);
   }
@@ -31,14 +31,14 @@ export class OverlayDomAdapterService {
     this.renderer.setStyle(
       this.windowRef.nativeWindow.document.body,
       'overflow',
-      'hidden',
+      'hidden'
     );
   }
 
   public releaseBodyScroll(): void {
     this.renderer.removeStyle(
       this.windowRef.nativeWindow.document.body,
-      'overflow',
+      'overflow'
     );
   }
 }

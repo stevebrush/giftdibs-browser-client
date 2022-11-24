@@ -10,7 +10,7 @@ import {
   ViewChild,
 } from '@angular/core';
 
-import { fromEvent, Observable, Subject } from 'rxjs';
+import { Observable, Subject, fromEvent } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { AffixConfig } from '../affix/affix-config';
@@ -74,7 +74,7 @@ export class DropdownMenuComponent
     private changeDetector: ChangeDetectorRef,
     private context: DropdownMenuContext,
     private elementRef: ElementRef,
-    private windowRef: WindowRefService,
+    private windowRef: WindowRefService
   ) {}
 
   public ngOnInit(): void {
@@ -91,7 +91,7 @@ export class DropdownMenuComponent
     this.positionMenu();
     this.windowRef.nativeWindow.setTimeout(() => {
       this.buttons = [].slice.call(
-        this.elementRef.nativeElement.querySelectorAll('.gd-button'),
+        this.elementRef.nativeElement.querySelectorAll('.gd-button')
       );
       this.menuElementRef!.nativeElement.focus();
     });
@@ -132,7 +132,7 @@ export class DropdownMenuComponent
     this.affixService.affixTo(
       this.menuElementRef!,
       this.context.config.caller,
-      Object.assign({}, defaultAffixConfig, this.context.config.affix),
+      Object.assign({}, defaultAffixConfig, this.context.config.affix)
     );
 
     this.isVisible = true;

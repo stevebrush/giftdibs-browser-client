@@ -68,7 +68,7 @@ export class TypeaheadResultsComponent implements OnInit, OnDestroy {
 
   constructor(
     private changeDetector: ChangeDetectorRef,
-    private context: TypeaheadResultsContext,
+    private context: TypeaheadResultsContext
   ) {
     this.templateRef = this.context.templateRef;
   }

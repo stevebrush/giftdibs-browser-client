@@ -20,14 +20,14 @@ export class HideUntilDirective implements OnInit, OnChanges {
   constructor(
     private elementRef: ElementRef,
     private renderer: Renderer2,
-    private windowRef: WindowRefService,
+    private windowRef: WindowRefService
   ) {}
 
   public ngOnInit(): void {
     this.renderer.setStyle(
       this.elementRef.nativeElement,
       'transition',
-      'opacity 200ms',
+      'opacity 200ms'
     );
     // this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'block');
     this.setOpacity(false);

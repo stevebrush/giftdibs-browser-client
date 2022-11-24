@@ -107,10 +107,6 @@
   cursor: default;
 }
 
-.gd-button-facebook {
-  @include gd-button-variant($gd-color-brand-facebook, #fff);
-}
-
 .gd-button-tab {
   background-color: transparent;
   color: $gd-text-color-deemphasized;

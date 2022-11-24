@@ -5,12 +5,12 @@ import { Pipe, PipeTransform } from '@angular/core';
   pure: true,
 })
 export class FriendlyDatePipe implements PipeTransform {
-  public transform(value: string|Date): string {
-    const date = (typeof value === 'string') ? new Date(value) : value;
+  public transform(value: string | Date): string {
+    const date = typeof value === 'string' ? new Date(value) : value;
     const now = new Date();
 
     const seconds = Math.round(
-      Math.abs((now.getTime() - date.getTime()) / 1000),
+      Math.abs((now.getTime() - date.getTime()) / 1000)
     );
 
     if (Number.isNaN(seconds)) {

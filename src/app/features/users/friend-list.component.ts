@@ -42,7 +42,7 @@ export class FriendListComponent implements OnInit, OnDestroy {
     private friendshipService: FriendshipService,
     private router: Router,
     private sessionService: SessionService,
-    private userService: UserService,
+    private userService: UserService
   ) {}
 
   public ngOnInit(): void {
@@ -58,7 +58,7 @@ export class FriendListComponent implements OnInit, OnDestroy {
           this.user = user;
           return this.friendshipService.getAllByUserId(user.id);
         }),
-        takeUntil(this.ngUnsubscribe),
+        takeUntil(this.ngUnsubscribe)
       )
       .subscribe(
         (friendships: FriendshipSummary) => {
@@ -69,7 +69,7 @@ export class FriendListComponent implements OnInit, OnDestroy {
         () => {
           this.alertService.error('Friendships not found.', true);
           this.router.navigate(['/users']);
-        },
+        }
       );
   }
 

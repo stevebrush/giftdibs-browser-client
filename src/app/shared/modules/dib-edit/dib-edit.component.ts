@@ -36,7 +36,7 @@ export class DibEditComponent implements OnInit {
     private context: DibEditContext,
     private dibService: DibService,
     private formBuilder: UntypedFormBuilder,
-    private modal: ModalInstance<any>,
+    private modal: ModalInstance<any>
   ) {}
 
   public ngOnInit(): void {
@@ -85,7 +85,7 @@ export class DibEditComponent implements OnInit {
         this.dibForm.enable();
         this.isLoading = false;
         this.changeDetector.markForCheck();
-      },
+      }
     );
   }
 

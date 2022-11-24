@@ -9,7 +9,6 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AlertService, ModalInstance } from '@giftdibs/ux';
 
 import { finalize } from 'rxjs/operators';
@@ -34,14 +33,9 @@ export class LoginHelpComponent {
     private changeDetector: ChangeDetectorRef,
     private context: LoginHelpContext,
     private formBuilder: UntypedFormBuilder,
-    private modal: ModalInstance<any>,
-    private router: Router,
+    private modal: ModalInstance<any>
   ) {
     this.createForm();
-  }
-
-  public onFacebookLoginSuccess(): void {
-    this.router.navigate(['/']);
   }
 
   public onCancelClicked(): void {
@@ -64,7 +58,7 @@ export class LoginHelpComponent {
         finalize(() => {
           this.forgottenForm.enable();
           this.changeDetector.markForCheck();
-        }),
+        })
       )
       .subscribe(
         (result: any) => {
@@ -74,7 +68,7 @@ export class LoginHelpComponent {
         (err: any) => {
           this.errors = err.error.errors;
           this.alertService.error(err.error.message);
-        },
+        }
       );
   }
 

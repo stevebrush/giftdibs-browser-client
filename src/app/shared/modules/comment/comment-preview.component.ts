@@ -49,7 +49,7 @@ export class CommentPreviewComponent implements OnInit, OnDestroy {
           },
           (err: any) => {
             this.alertService.error(err.error.message);
-          },
+          }
         );
       },
     },
@@ -59,7 +59,7 @@ export class CommentPreviewComponent implements OnInit, OnDestroy {
     private alertService: AlertService,
     private changeDetector: ChangeDetectorRef,
     private commentService: CommentService,
-    private sessionService: SessionService,
+    private sessionService: SessionService
   ) {}
 
   public ngOnInit(): void {
@@ -84,7 +84,7 @@ export class CommentPreviewComponent implements OnInit, OnDestroy {
       },
       (err: any) => {
         this.alertService.error(err.errors.message);
-      },
+      }
     );
   }
 }

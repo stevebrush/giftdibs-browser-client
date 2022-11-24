@@ -33,7 +33,7 @@ export class ConfirmComponent implements OnInit {
 
   constructor(
     private changeDetector: ChangeDetectorRef,
-    private context: ConfirmContext,
+    private context: ConfirmContext
   ) {}
 
   public ngOnInit(): void {

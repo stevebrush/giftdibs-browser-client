@@ -18,7 +18,7 @@ export class ModalService {
       {
         providers: [],
       },
-      config,
+      config
     );
 
     const overlayInstance = this.overlayService.attach(ModalWrapperComponent, {

@@ -30,7 +30,7 @@ export class FriendshipsComponent implements OnInit, OnChanges {
 
   constructor(
     private changeDetector: ChangeDetectorRef,
-    private friendshipService: FriendshipService,
+    private friendshipService: FriendshipService
   ) {}
 
   public ngOnInit(): void {

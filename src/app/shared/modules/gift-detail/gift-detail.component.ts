@@ -74,7 +74,7 @@ export class GiftDetailComponent implements OnInit, OnDestroy {
     private modalService: ModalService,
     private router: Router,
     private sessionService: SessionService,
-    private context: GiftDetailContext,
+    private context: GiftDetailContext
   ) {}
 
   public ngOnInit(): void {
@@ -90,7 +90,7 @@ export class GiftDetailComponent implements OnInit, OnDestroy {
         (gift: Gift) => {
           this.gift = gift;
           this.isSessionUser = this.sessionService.isSessionUser(
-            this.gift.user.id,
+            this.gift.user.id
           );
           this.checkQuantity();
           this.isLoading = false;
@@ -99,7 +99,7 @@ export class GiftDetailComponent implements OnInit, OnDestroy {
         () => {
           this.alertService.error('Gift not found.', true);
           this.router.navigate(['/']);
-        },
+        }
       );
   }
 
@@ -124,7 +124,7 @@ export class GiftDetailComponent implements OnInit, OnDestroy {
               finalize(() => {
                 this.isLoading = false;
                 this.changeDetector.markForCheck();
-              }),
+              })
             )
             .subscribe(
               (result: any) => {
@@ -133,13 +133,13 @@ export class GiftDetailComponent implements OnInit, OnDestroy {
               },
               (err: any) => {
                 this.alertService.error(err.error.message);
-              },
+              }
             );
         } else {
           this.isLoading = false;
           this.changeDetector.detectChanges();
         }
-      },
+      }
     );
   }
 
@@ -200,10 +200,10 @@ export class GiftDetailComponent implements OnInit, OnDestroy {
               const error = err.error;
               this.alertService.error(error.message);
               this.changeDetector.markForCheck();
-            },
+            }
           );
         }
-      },
+      }
     );
   }
 

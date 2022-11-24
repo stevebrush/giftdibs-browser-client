@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable, Inject } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 
 import { GD_API_URL } from './api-url-token';
 import { SessionService } from './session.service';
@@ -11,7 +11,7 @@ export class SessionStartupService {
   constructor(
     private http: HttpClient,
     private sessionService: SessionService,
-    @Inject(GD_API_URL) apiUrl: string,
+    @Inject(GD_API_URL) apiUrl: string
   ) {
     this.resourceUrl = apiUrl + '/auth';
   }

@@ -16,14 +16,14 @@ const appRoutes: Routes = [
     path: 'account',
     loadChildren: () =>
       import('src/app/features/account/account.module').then(
-        (m) => m.AccountModule,
+        (m) => m.AccountModule
       ),
   },
   {
     path: 'support',
     loadChildren: () =>
       import('src/app/features/support/support.module').then(
-        (m) => m.SupportModule,
+        (m) => m.SupportModule
       ),
   },
   {
@@ -42,7 +42,7 @@ const appRoutes: Routes = [
     path: 'wish-lists',
     loadChildren: () =>
       import('src/app/features/wish-lists/wish-lists.module').then(
-        (m) => m.WishListsModule,
+        (m) => m.WishListsModule
       ),
     canLoad: [AuthGuard],
   },
@@ -56,7 +56,7 @@ const appRoutes: Routes = [
     path: '**',
     loadChildren: () =>
       import('src/app/features/page-not-found/page-not-found.module').then(
-        (m) => m.PageNotFoundModule,
+        (m) => m.PageNotFoundModule
       ),
   },
 ];

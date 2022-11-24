@@ -62,20 +62,16 @@
           </gd-media>
         </div>
         <div
-          class="
-            gd-dibs-recipient-gift-body
-            gd-rounded-corners-subtle
-            gd-spacing-padding-squish
-          "
+          class="gd-dibs-recipient-gift-body gd-rounded-corners-subtle gd-spacing-padding-squish"
         >
           <gd-repeater>
             <ng-container *ngFor="let wishList of recipient.wishLists">
               <gd-repeater-item *ngFor="let gift of wishList.gifts">
                 <gd-row>
                   <gd-column
-                    screenXXSmall="12"
-                    screenXSmall="3"
-                    screenSmall="2"
+                    [screenXXSmall]="12"
+                    [screenXSmall]="3"
+                    [screenSmall]="2"
                   >
                     <div class="app-dibs-recipient-gift-thumbnail">
                       <gd-thumbnail
@@ -92,9 +88,9 @@
                     </div>
                   </gd-column>
                   <gd-column
-                    screenXXSmall="12"
-                    screenXSmall="9"
-                    screenSmall="10"
+                    [screenXXSmall]="12"
+                    [screenXSmall]="9"
+                    [screenSmall]="10"
                   >
                     <a
                       role="heading"

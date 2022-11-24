@@ -167,6 +167,10 @@ export class UserComponent implements OnInit, OnDestroy {
     });
   }
 
+  public onWishListRemoved(): void {
+    this.refreshWishLists();
+  }
+
   private refreshWishLists(): void {
     this.isLoading = true;
     this.changeDetector.markForCheck();

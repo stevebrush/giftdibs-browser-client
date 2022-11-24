@@ -8,7 +8,9 @@ import { environment } from 'src/environments/environment';
 
 import { User } from './user';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class UserService {
   private resourceUrl = environment.apiUrl + '/users';
 

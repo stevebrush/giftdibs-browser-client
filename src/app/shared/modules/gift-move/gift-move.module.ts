@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormFieldModule, ModalModule, WaitModule } from '@giftdibs/ux';
 
-import { WishListModule } from '../wish-list';
-
 import { GiftMoveComponent } from './gift-move.component';
 
 @NgModule({
@@ -15,7 +13,6 @@ import { GiftMoveComponent } from './gift-move.component';
     ModalModule,
     ReactiveFormsModule,
     WaitModule,
-    WishListModule,
   ],
   declarations: [GiftMoveComponent],
 })

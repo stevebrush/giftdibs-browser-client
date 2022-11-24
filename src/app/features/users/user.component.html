@@ -1,6 +1,6 @@
 <gd-wait *ngIf="isLoading"></gd-wait>
 
-<div class="gd-user" [gdHideUntil]="user">
+<div class="gd-user" [gdHideUntil]="!!user">
   <ng-template [ngIf]="user">
     <div class="app-user-header gd-spacing-padding-even-large">
       <div class="gd-container gd-container-sm">
@@ -82,7 +82,7 @@
       <div class="app-user-wish-list-create-button">
         <gd-card (actionClick)="openWishListEditModal()">
           <gd-card-thumbnail class="app-user-wish-list-create-button-thumbnail">
-            <gd-thumbnail size="fill" icon="none" iconSize="inherit">
+            <gd-thumbnail size="fill" icon="none">
               <gd-icon-stack>
                 <gd-icon
                   icon="circle fas fa-stack-2x"
@@ -110,7 +110,7 @@
     >
       <gd-wish-list-preview
         [wishList]="wishList"
-        (removed)="onWishListRemoved(wishList.id)"
+        (removed)="onWishListRemoved()"
       >
       </gd-wish-list-preview>
     </gd-column>

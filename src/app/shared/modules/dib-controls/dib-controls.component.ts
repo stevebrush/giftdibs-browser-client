@@ -119,7 +119,7 @@ export class DibControlsComponent implements OnInit, OnChanges, OnDestroy {
     );
   }
 
-  private openDibModal(): void {
+  protected openDibModal(): void {
     this.isLoading = true;
     this.changeDetector.markForCheck();
 

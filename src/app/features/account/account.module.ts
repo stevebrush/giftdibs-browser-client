@@ -14,7 +14,6 @@ import {
 import { IconModule } from '@giftdibs/ux';
 
 import { AssetsModule } from 'src/app/shared/modules/assets';
-import { UserModule } from 'src/app/shared/modules/user';
 
 import { AccountRoutingModule } from './account-routing.module';
 import { AccountService } from './account.service';
@@ -41,7 +40,6 @@ import { VerifyAccountComponent } from './verify/verify.component';
     NoticeModule,
     PasswordViewerModule,
     ReactiveFormsModule,
-    UserModule,
     WaitModule,
   ],
   declarations: [

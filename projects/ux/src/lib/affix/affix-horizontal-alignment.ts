@@ -1,5 +1,1 @@
-export enum AffixHorizontalAlignment {
-  Left = 'left',
-  Right = 'right',
-  Center = 'center',
-}
+export type AffixHorizontalAlignment = 'left' | 'right' | 'center';

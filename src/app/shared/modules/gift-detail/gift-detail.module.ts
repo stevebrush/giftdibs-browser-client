@@ -17,7 +17,6 @@ import {
 
 import { CommentModule } from 'src/app/shared/modules/comment';
 import { DibControlsModule } from 'src/app/shared/modules/dib-controls';
-import { GiftModule } from 'src/app/shared/modules/gift';
 import { GiftEditModule } from 'src/app/shared/modules/gift-edit';
 import { GiftMoveModule } from 'src/app/shared/modules/gift-move';
 import { GiftPriorityModule } from 'src/app/shared/modules/gift-priority';
@@ -30,7 +29,6 @@ import { GiftDetailComponent } from './gift-detail.component';
     CommonModule,
     DateTimeModule,
     DisclosureModule,
-    GiftModule,
     GiftMoveModule,
     CommentModule,
     ConfirmModule,

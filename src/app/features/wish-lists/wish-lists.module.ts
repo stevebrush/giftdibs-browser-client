@@ -15,7 +15,6 @@ import { IconModule } from '@giftdibs/ux';
 
 import { GiftEditModule } from 'src/app/shared/modules/gift-edit';
 import { GiftPreviewModule } from 'src/app/shared/modules/gift-preview';
-import { WishListModule } from 'src/app/shared/modules/wish-list';
 import { WishListEditModule } from 'src/app/shared/modules/wish-list-edit';
 
 import { WishListComponent } from './wish-list.component';
@@ -37,7 +36,6 @@ import { WishListsRoutingModule } from './wish-lists-routing.module';
     ThumbnailModule,
     WaitModule,
     WishListEditModule,
-    WishListModule,
     WishListsRoutingModule,
   ],
   declarations: [WishListComponent],

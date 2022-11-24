@@ -7,7 +7,9 @@ import { environment } from 'src/environments/environment';
 
 import { WishList } from './wish-list';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class WishListService {
   private resourceUrl = environment.apiUrl;
 

@@ -1,4 +1,5 @@
 export interface SessionUser {
+  avatarUrl?: string;
   emailAddress?: string;
   emailAddressVerified?: boolean;
   facebookId?: string | undefined | null;

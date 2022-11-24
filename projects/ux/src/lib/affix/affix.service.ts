@@ -6,8 +6,6 @@ import {
 } from '@angular/core';
 
 import { AffixConfig } from './affix-config';
-import { AffixHorizontalAlignment } from './affix-horizontal-alignment';
-import { AffixVerticalAlignment } from './affix-vertical-alignment';
 
 @Injectable({
   providedIn: 'root',
@@ -25,8 +23,8 @@ export class AffixService {
     config?: AffixConfig,
   ): void {
     const defaults: AffixConfig = {
-      horizontalAlignment: AffixHorizontalAlignment.Left,
-      verticalAlignment: AffixVerticalAlignment.Top,
+      horizontalAlignment: 'left',
+      verticalAlignment: 'top',
     };
 
     // Reset the height.

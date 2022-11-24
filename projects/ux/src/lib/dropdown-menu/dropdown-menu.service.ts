@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 
-import { AffixHorizontalAlignment } from '../affix/affix-horizontal-alignment';
-import { AffixVerticalAlignment } from '../affix/affix-vertical-alignment';
 import { OverlayService } from '../overlay/overlay.service';
 
 import { DropdownMenuConfig } from './dropdown-menu-config';
@@ -17,8 +15,8 @@ export class DropdownMenuService {
 
   public open(config: DropdownMenuConfig): DropdownMenuInstance {
     const defaults = {
-      horizontalAlignment: AffixHorizontalAlignment.Right,
-      verticalAlignment: AffixVerticalAlignment.Bottom,
+      horizontalAlignment: 'right',
+      verticalAlignment: 'bottom',
     };
 
     const settings = Object.assign({}, defaults, config);

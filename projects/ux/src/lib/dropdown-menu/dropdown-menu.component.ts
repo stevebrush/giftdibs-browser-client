@@ -14,8 +14,6 @@ import { fromEvent, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { AffixConfig } from '../affix/affix-config';
-import { AffixHorizontalAlignment } from '../affix/affix-horizontal-alignment';
-import { AffixVerticalAlignment } from '../affix/affix-vertical-alignment';
 import { AffixService } from '../affix/affix.service';
 import { WindowRefService } from '../window/window-ref.service';
 
@@ -125,8 +123,8 @@ export class DropdownMenuComponent
 
   private positionMenu(): void {
     const defaultAffixConfig: AffixConfig = {
-      horizontalAlignment: AffixHorizontalAlignment.Left,
-      verticalAlignment: AffixVerticalAlignment.Bottom,
+      horizontalAlignment: 'left',
+      verticalAlignment: 'bottom',
     };
 
     this.changeDetector.detectChanges();

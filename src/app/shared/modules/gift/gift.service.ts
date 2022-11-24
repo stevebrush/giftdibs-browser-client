@@ -7,7 +7,9 @@ import { environment } from 'src/environments/environment';
 
 import { Gift } from './gift';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class GiftService {
   private resourceUrl = environment.apiUrl;
 

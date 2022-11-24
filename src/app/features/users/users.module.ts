@@ -13,8 +13,6 @@ import {
 } from '@giftdibs/ux';
 
 import { FriendshipModule } from 'src/app/shared/modules/friendship';
-import { UserModule } from 'src/app/shared/modules/user';
-import { WishListModule } from 'src/app/shared/modules/wish-list';
 import { WishListEditModule } from 'src/app/shared/modules/wish-list-edit';
 import { WishListPreviewModule } from 'src/app/shared/modules/wish-list-preview';
 
@@ -37,10 +35,8 @@ import { UsersRoutingModule } from './users-routing.module';
     UsersRoutingModule,
     RepeaterModule,
     ThumbnailModule,
-    UserModule,
     WaitModule,
     WishListEditModule,
-    WishListModule,
     WishListPreviewModule,
   ],
   declarations: [

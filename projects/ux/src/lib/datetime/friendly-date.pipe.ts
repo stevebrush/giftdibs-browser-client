@@ -5,8 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
   pure: true,
 })
 export class FriendlyDatePipe implements PipeTransform {
-  public transform(value: string): string {
-    const date = new Date(value);
+  public transform(value: string|Date): string {
+    const date = (typeof value === 'string') ? new Date(value) : value;
     const now = new Date();
 
     const seconds = Math.round(

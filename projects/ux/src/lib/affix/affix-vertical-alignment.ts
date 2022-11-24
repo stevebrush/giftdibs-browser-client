@@ -1,5 +1,1 @@
-export enum AffixVerticalAlignment {
-  Top = 'top',
-  Bottom = 'bottom',
-  Middle = 'middle',
-}
+export type AffixVerticalAlignment = 'top' | 'bottom' | 'middle';

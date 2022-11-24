@@ -21,7 +21,6 @@ import {
   takeWhile,
 } from 'rxjs/operators';
 
-import { AffixVerticalAlignment } from '../affix/affix-vertical-alignment';
 import { AffixService } from '../affix/affix.service';
 import { OverlayConfig } from '../overlay/overlay-config';
 import { OverlayInstance } from '../overlay/overlay-instance';
@@ -309,7 +308,7 @@ export class TypeaheadComponent
 
     setTimeout(() => {
       this.affixService.affixTo(resultsRef!, this.searchInput!, {
-        verticalAlignment: AffixVerticalAlignment.Bottom,
+        verticalAlignment: 'bottom',
       });
 
       this.domAdapter.matchWidth(resultsRef!, this.elementRef);

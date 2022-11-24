@@ -15,7 +15,6 @@ import {
 import { IconModule } from '@giftdibs/ux';
 
 import { AssetsModule } from 'src/app/shared/modules/assets';
-import { GiftModule } from 'src/app/shared/modules/gift';
 import { ProductModule } from 'src/app/shared/modules/product';
 import { UrlScraperModule } from 'src/app/shared/modules/url-scraper';
 
@@ -30,7 +29,6 @@ import { GiftEditComponent } from './gift-edit.component';
     FormFieldModule,
     FormsModule,
     ImageUploaderModule,
-    GiftModule,
     GridModule,
     IconModule,
     MediaModule,

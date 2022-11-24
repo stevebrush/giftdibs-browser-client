@@ -2,12 +2,7 @@
 
 <div *ngIf="!isLoading && wishList" class="gd-wish-list">
   <div
-    class="
-      gd-wish-list-banner
-      gd-container
-      gd-container-sm
-      gd-spacing-padding-even-large
-    "
+    class="gd-wish-list-banner gd-container gd-container-sm gd-spacing-padding-even-large"
   >
     <gd-media size="md">
       <gd-media-content>
@@ -16,10 +11,7 @@
         </h1>
 
         <p
-          class="
-            app-wish-list-banner-details
-            gd-text-small gd-text-deemphasized
-          "
+          class="app-wish-list-banner-details gd-text-small gd-text-deemphasized"
         >
           Privacy:&nbsp;{{ privacyType }}&nbsp;&bull; Type:&nbsp;{{
             wishListType
@@ -85,20 +77,15 @@
   </div>
 
   <div
-    class="
-      gd-wish-list-body
-      gd-container
-      gd-container-lg
-      gd-spacing-padding-even-large
-    "
+    class="gd-wish-list-body gd-container gd-container-lg gd-spacing-padding-even-large"
   >
     <gd-row>
       <gd-column
         *ngFor="let gift of wishList.gifts"
-        screenXSmall="6"
-        screenSmall="4"
-        screenMedium="3"
-        screenLarge="3"
+        [screenXSmall]="6"
+        [screenSmall]="4"
+        [screenMedium]="3"
+        [screenLarge]="3"
       >
         <gd-gift-preview [gift]="gift"> </gd-gift-preview>
       </gd-column>

@@ -37,7 +37,7 @@
       (ngSubmit)="submit()"
     >
       <gd-row [reverseColumnOrder]="true">
-        <gd-column screenXSmall="9" screenSmall="8">
+        <gd-column [screenXSmall]="9" [screenSmall]="8">
           <gd-form-field [errors]="errors">
             <label class="gd-control-label" for="gd-gift-edit-name">
               Item name
@@ -56,7 +56,7 @@
             <div formArrayName="externalUrls">
               <div
                 *ngFor="let externalUrl of externalUrls.controls; let i = index"
-                [formGroup]="externalUrl"
+                [formGroupName]="i"
               >
                 <gd-form-field [errors]="errors">
                   <div class="gd-input-group-inline">
@@ -114,13 +114,13 @@
             </textarea>
             <gd-character-counter
               [inputReference]="giftNotes"
-              maxCharacters="2000"
+              [maxCharacters]="2000"
             >
             </gd-character-counter>
           </gd-form-field>
 
           <gd-row>
-            <gd-column screenXXSmall="12" screenXSmall="6">
+            <gd-column [screenXXSmall]="12" [screenXSmall]="6">
               <gd-form-field [errors]="errors">
                 <label class="gd-control-label" for="gd-gift-edit-priority">
                   Priority
@@ -138,7 +138,7 @@
                 </select>
               </gd-form-field>
             </gd-column>
-            <gd-column screenXXSmall="6" screenXSmall="4">
+            <gd-column [screenXXSmall]="6" [screenXSmall]="4">
               <gd-form-field [errors]="errors">
                 <label
                   class="gd-control-label"
@@ -157,7 +157,7 @@
                 />
               </gd-form-field>
             </gd-column>
-            <gd-column screenXXSmall="6" screenXSmall="2">
+            <gd-column [screenXXSmall]="6" [screenXSmall]="2">
               <gd-form-field [errors]="errors">
                 <label class="gd-control-label" for="gd-gift-edit-quantity">
                   Quantity
@@ -173,7 +173,7 @@
             </gd-column>
           </gd-row>
         </gd-column>
-        <gd-column screenXSmall="3" screenSmall="4">
+        <gd-column [screenXSmall]="3" [screenSmall]="4">
           <gd-form-field [errors]="errors">
             <label class="gd-control-label"> Thumbnail </label>
             <gd-image-uploader

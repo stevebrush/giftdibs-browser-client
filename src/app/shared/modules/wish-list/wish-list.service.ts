@@ -28,6 +28,14 @@ export class WishListService {
       );
   }
 
+  public getAll(startIndex?: number): Observable<WishList[]> {
+    const paginate = startIndex ? `?startIndex=${startIndex}` : '';
+    return this.http.get(`${this.resourceUrl}/wish-lists${paginate}`).pipe(
+      map((result: any) => result.data.wishLists),
+      share()
+    );
+  }
+
   public getAllByUserId(userId: string): Observable<WishList[]> {
     return this.http.get(`${this.resourceUrl}/users/${userId}/wish-lists`).pipe(
       map((result: any) => result.data.wishLists),

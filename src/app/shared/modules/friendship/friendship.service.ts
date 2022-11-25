@@ -18,15 +18,6 @@ export class FriendshipService {
     return this.http.post(`${this.resourceUrl}/friendships`, { friendId });
   }
 
-  public getSummaryByUserId(userId: string): Observable<FriendshipSummary> {
-    return this.http
-      .get(`${this.resourceUrl}/users/${userId}/friendships/summary`)
-      .pipe(
-        map((result: any) => result.data.friendships),
-        share()
-      );
-  }
-
   public getAllByUserId(userId: string): Observable<FriendshipSummary> {
     return this.http
       .get(`${this.resourceUrl}/users/${userId}/friendships`)

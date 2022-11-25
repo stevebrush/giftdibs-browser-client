@@ -5,7 +5,10 @@ import { Pipe, PipeTransform } from '@angular/core';
   pure: true,
 })
 export class FriendlyDatePipe implements PipeTransform {
-  public transform(value: string | Date): string {
+  public transform(
+    value: string | Date,
+    format: 'short' | 'long' = 'long'
+  ): string {
     const date = typeof value === 'string' ? new Date(value) : value;
     const now = new Date();
 
@@ -17,56 +20,48 @@ export class FriendlyDatePipe implements PipeTransform {
       return '';
     }
 
-    if (seconds <= 45) {
-      return 'a few seconds ago';
-    }
-
-    if (seconds <= 90) {
-      return 'a minute ago';
+    if (seconds < 60) {
+      return `${seconds}${
+        format === 'long'
+          ? seconds === 1
+            ? ' second ago'
+            : ' seconds ago'
+          : 's'
+      }`;
     }
 
     const minutes = Math.round(Math.abs(seconds / 60));
 
-    if (minutes <= 45) {
-      return minutes + ' minutes ago';
-    }
-
-    if (minutes <= 90) {
-      return 'an hour ago';
+    if (minutes < 60) {
+      return `${minutes}${
+        format === 'long'
+          ? minutes === 1
+            ? ' minute ago'
+            : ' minutes ago'
+          : 'm'
+      }`;
     }
 
     const hours = Math.round(Math.abs(minutes / 60));
 
-    if (hours <= 22) {
-      return hours + ' hours ago';
-    }
-
-    if (hours <= 36) {
-      return 'a day ago';
+    if (hours < 24) {
+      return `${hours}${
+        format === 'long' ? (hours === 1 ? ' hour ago' : ' hours ago') : 'h'
+      }`;
     }
 
     const days = Math.round(Math.abs(hours / 24));
 
-    if (days <= 25) {
-      return days + ' days ago';
-    }
-
-    if (days <= 45) {
-      return 'a month ago';
-    }
-
-    const months = Math.round(Math.abs(days / 30.416));
-
-    if (days <= 345) {
-      return months + ' months ago';
-    }
-
-    if (days <= 545) {
-      return 'a year ago';
+    if (days < 365) {
+      return `${days}${
+        format === 'long' ? (days === 1 ? ' day ago' : ' days ago') : 'd'
+      }`;
     }
 
     const years = Math.round(Math.abs(days / 365));
 
-    return years + ' years ago';
+    return `${years}${
+      format === 'long' ? (years === 1 ? ' year ago' : ' years ago') : 'y'
+    }`;
   }
 }

@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 
+import { lastValueFrom } from 'rxjs';
+
 import { GD_API_URL } from './api-url-token';
 import { SessionService } from './session.service';
 
@@ -22,9 +24,9 @@ export class SessionStartupService {
       Authorization: `JWT ${token}`,
     });
 
-    return this.http
-      .post(`${this.resourceUrl}/refresh-token`, {}, { headers })
-      .toPromise()
+    return lastValueFrom(
+      this.http.post(`${this.resourceUrl}/refresh-token`, {}, { headers })
+    )
       .then((data: any) => {
         this.sessionService.user = data.authResponse.user;
         this.sessionService.token = data.authResponse.token;

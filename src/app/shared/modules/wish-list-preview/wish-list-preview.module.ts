@@ -1,7 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { CardModule, IconModule, ThumbnailModule } from '@giftdibs/ux';
+import {
+  CardModule,
+  DateTimeModule,
+  IconModule,
+  MediaModule,
+  ThumbnailModule,
+} from '@giftdibs/ux';
 
 import { WishListPreviewComponent } from './wish-list-preview.component';
 
@@ -9,7 +15,9 @@ import { WishListPreviewComponent } from './wish-list-preview.component';
   imports: [
     CardModule,
     CommonModule,
+    DateTimeModule,
     IconModule,
+    MediaModule,
     RouterModule,
     ThumbnailModule,
   ],

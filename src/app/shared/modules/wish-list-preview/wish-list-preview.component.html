@@ -29,14 +29,39 @@
       </div>
     </gd-card-thumbnail>
     <gd-card-body>
-      <gd-card-heading>
-        <gd-icon
-          *ngIf="wishList.privacy.type === 'me'"
-          icon="eye-slash"
-          title="This wish list is private"
-        ></gd-icon>
-        {{ wishList.name }}
-      </gd-card-heading>
+      <gd-media size="xs">
+        <gd-media-content>
+          <gd-media-header>
+            <gd-media-heading>
+              <gd-icon
+                *ngIf="wishList.privacy.type === 'me'"
+                icon="eye-slash"
+                title="This wish list is private"
+              ></gd-icon>
+              {{ wishList.name }}
+            </gd-media-heading>
+          </gd-media-header>
+          <gd-media-body>
+            <span class="gd-text-deemphasized gd-text-small"
+              >{{
+                wishList.type === 'registry' ? 'Registry' : 'Wish list'
+              }}&nbsp;&middot;&nbsp;<time>{{
+                wishList.dateUpdated | gdFriendlyDate
+              }}</time>
+            </span>
+          </gd-media-body>
+        </gd-media-content>
+        <gd-media-thumbnail>
+          <gd-thumbnail
+            iconSize="2x"
+            size="fill"
+            shape="circle"
+            [imageSource]="wishList.user.avatarUrl"
+            [route]="{ commands: ['/users', wishList.user.id] }"
+            (click)="$event.stopPropagation()"
+          ></gd-thumbnail>
+        </gd-media-thumbnail>
+      </gd-media>
     </gd-card-body>
   </gd-card>
 </div>

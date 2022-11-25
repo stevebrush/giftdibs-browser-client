@@ -18,6 +18,8 @@ body {
 
 a {
   color: $gd-text-color-default;
+  font-weight: $gd-font-weight-bold;
+  text-decoration: none;
 
   &:hover {
     text-decoration: underline;
@@ -42,8 +44,8 @@ h6 {
 }
 
 h1 {
-  font-size: $gd-font-size-xl;
-  margin-bottom: $gd-spacing * 2;
+  font-size: $gd-font-size-larger;
+  margin-bottom: $gd-spacing;
 }
 
 h2 {

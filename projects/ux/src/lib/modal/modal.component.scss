@@ -6,7 +6,7 @@
   box-shadow: $gd-box-shadow-lg;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: auto;
   max-height: 90vh;
 
   &:focus {

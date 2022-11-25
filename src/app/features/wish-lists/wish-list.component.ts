@@ -91,10 +91,6 @@ export class WishListComponent implements OnInit, OnDestroy {
 
           this.menuItems = [
             {
-              label: `Edit ${this.wishListType.toLowerCase()}`,
-              action: () => this.openWishListEditModal(),
-            },
-            {
               label: this.wishList.isArchived ? 'Unarchive' : 'Archive',
               action: () => {
                 if (this.wishList.isArchived) {
@@ -110,6 +106,13 @@ export class WishListComponent implements OnInit, OnDestroy {
               action: () => this.confirmDelete(),
             },
           ];
+
+          if (!wishList.isArchived) {
+            this.menuItems.unshift({
+              label: `Edit ${this.wishListType.toLowerCase()}`,
+              action: () => this.openWishListEditModal(),
+            });
+          }
 
           this.sortMenuItems = [
             {

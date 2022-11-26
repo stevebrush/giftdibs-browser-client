@@ -6,27 +6,6 @@
   >
     <gd-card-body>
       <gd-media size="xs">
-        <gd-media-content>
-          <gd-media-header>
-            <gd-media-heading [multiline]="false">
-              <gd-icon
-                *ngIf="wishList.privacy.type === 'me'"
-                icon="eye-slash"
-                title="This wish list is private"
-              ></gd-icon>
-              {{ wishList.name }}
-            </gd-media-heading>
-          </gd-media-header>
-          <gd-media-body>
-            <span class="gd-text-deemphasized gd-text-small"
-              >{{
-                wishList.type === 'registry' ? 'Registry' : 'Wish list'
-              }}&nbsp;&middot;&nbsp;<time>{{
-                wishList.dateUpdated | gdFriendlyDate
-              }}</time>
-            </span>
-          </gd-media-body>
-        </gd-media-content>
         <gd-media-thumbnail>
           <gd-thumbnail
             iconSize="2x"
@@ -37,6 +16,30 @@
             (click)="$event.stopPropagation()"
           ></gd-thumbnail>
         </gd-media-thumbnail>
+        <gd-media-content>
+          <gd-media-header>
+            <gd-media-heading [multiline]="false">
+              {{ wishList.name }}
+            </gd-media-heading>
+          </gd-media-header>
+          <gd-media-body>
+            <span class="gd-text-deemphasized gd-text-small gd-text-overflow"
+              ><a [routerLink]="['/users', wishList.user.id]"
+                >{{ wishList.user.firstName }} {{ wishList.user.lastName }}</a
+              >&nbsp;&middot;&nbsp;<span *ngIf="wishList.privacy.type === 'me'"
+                ><gd-icon
+                  icon="eye-slash"
+                  title="This wish list is private"
+                ></gd-icon
+                >&nbsp;&middot;&nbsp;</span
+              >{{
+                wishList.type === 'registry' ? 'Registry' : 'Wish list'
+              }}&nbsp;&middot;&nbsp;<time>{{
+                wishList.dateUpdated | gdFriendlyDate : 'short'
+              }}</time>
+            </span>
+          </gd-media-body>
+        </gd-media-content>
       </gd-media>
     </gd-card-body>
     <gd-card-thumbnail>

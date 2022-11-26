@@ -2,6 +2,10 @@
 
 .gd-wish-list-preview {
   margin-bottom: $gd-spacing * 2;
+
+  ::ng-deep .gd-card-body a {
+    font-weight: normal;
+  }
 }
 
 .gd-wish-list-preview-thumbnail-group {

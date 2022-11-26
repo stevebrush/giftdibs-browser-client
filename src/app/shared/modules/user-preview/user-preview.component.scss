@@ -1,0 +1,9 @@
+@use 'projects/ux/src/styles/variables' as *;
+
+.gd-user-preview {
+  display: block;
+  margin-bottom: $gd-spacing-sm;
+  background-color: #fff;
+  box-shadow: $gd-box-shadow;
+  border-radius: $gd-border-radius;
+}

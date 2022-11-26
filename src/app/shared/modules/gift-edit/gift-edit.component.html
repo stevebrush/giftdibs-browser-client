@@ -179,7 +179,7 @@
             <gd-image-uploader
               formControlName="imageUrl"
               orientation="vertical"
-              [allowUrl]="false"
+              [allowUrl]="true"
               (selectFile)="onSelectFile($event)"
               (removeFile)="onRemoveFile()"
             >
@@ -209,7 +209,11 @@
           >
             I don't have a link
           </button>
-          <button class="gd-button" type="button" (click)="onCancelClicked()">
+          <button
+            class="gd-button gd-button-danger"
+            type="button"
+            (click)="onCancelClicked()"
+          >
             Cancel
           </button>
         </div>
@@ -224,7 +228,11 @@
         >
           Save
         </button>
-        <button class="gd-button" type="button" (click)="onCancelClicked()">
+        <button
+          class="gd-button gd-button-default"
+          type="button"
+          (click)="onCancelClicked()"
+        >
           Cancel
         </button>
       </ng-container>

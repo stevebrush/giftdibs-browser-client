@@ -1,7 +1,7 @@
 <div class="gd-friend-list" [gdHideUntil]="!isLoading">
   <ng-template [ngIf]="user">
     <div class="gd-container gd-container-sm gd-spacing-padding-even-large">
-      <gd-media size="md">
+      <gd-media size="sm">
         <gd-media-content>
           <gd-media-header>
             <h1>{{ friends.length }} {{ type }}</h1>
@@ -19,32 +19,13 @@
       </gd-media>
     </div>
 
-    <div class="gd-container gd-container-md gd-spacing-padding-even-large">
-      <gd-repeater>
-        <gd-repeater-item *ngFor="let friend of friends">
-          <gd-media size="sm">
-            <gd-media-thumbnail>
-              <gd-thumbnail
-                iconSize="1x"
-                size="fill"
-                shape="circle"
-                [imageSource]="friend.avatarUrl"
-                [route]="{ commands: ['/users', friend.id] }"
-              >
-              </gd-thumbnail>
-            </gd-media-thumbnail>
-            <gd-media-content>
-              <gd-media-header>
-                <gd-media-heading>
-                  <a routerLink="/users/{{ friend.id }}">
-                    {{ friend.firstName }} {{ friend.lastName }}
-                  </a>
-                </gd-media-heading>
-              </gd-media-header>
-            </gd-media-content>
-          </gd-media>
-        </gd-repeater-item>
-      </gd-repeater>
+    <div class="gd-container gd-container-sm gd-spacing-padding-even-large">
+      <gd-user-preview
+        *ngFor="let friend of friends"
+        [showFollowButton]="true"
+        [user]="friend"
+      >
+      </gd-user-preview>
     </div>
   </ng-template>
 </div>

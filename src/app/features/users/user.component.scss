@@ -7,7 +7,6 @@
 .app-user-wish-list-create-button-thumbnail {
   height: 140px;
   display: block;
-  margin-bottom: $gd-spacing;
 }
 
 .app-user-header-heading {
@@ -21,4 +20,5 @@
 
 .app-user-header-tabs {
   margin-top: $gd-spacing;
+  margin-bottom: 0;
 }

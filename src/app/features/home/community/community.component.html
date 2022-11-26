@@ -1,21 +1,25 @@
 <gd-wait *ngIf="isLoading"></gd-wait>
 
 <div class="gd-container gd-container-lg gd-spacing-padding-even-large">
-  <ng-container *ngIf="!isLoading && !gifts.length">
+  <h1>Community</h1>
+
+  <ng-container *ngIf="!isLoading && !wishLists.length">
     <gd-notice>
       <strong>Your community hasn't created any gifts yet.</strong><br />
       <a routerLink="/profile">Create gift</a>
     </gd-notice>
   </ng-container>
+
   <gd-row>
     <gd-column
-      *ngFor="let gift of gifts"
+      *ngFor="let wishList of wishLists"
+      [screenXXSmall]="12"
       [screenXSmall]="6"
       [screenSmall]="4"
       [screenMedium]="3"
       [screenLarge]="3"
     >
-      <gd-gift-preview [gift]="gift" [showUserInfo]="true"> </gd-gift-preview>
+      <gd-wish-list-preview [wishList]="wishList"> </gd-wish-list-preview>
     </gd-column>
   </gd-row>
 

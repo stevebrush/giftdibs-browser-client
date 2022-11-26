@@ -7,15 +7,15 @@
     <gd-media size="md">
       <gd-media-content>
         <h1 class="app-wish-list-banner-heading">
-          {{ wishList.name }}
+          {{ wishList.name }}{{ wishList.isArchived ? ' (archived)' : '' }}
         </h1>
 
         <p
           class="app-wish-list-banner-details gd-text-small gd-text-deemphasized"
         >
-          Privacy:&nbsp;{{ privacyType }}&nbsp;&bull; Type:&nbsp;{{
+          Privacy:&nbsp;{{ privacyType }}&nbsp;&middot;&nbsp;{{
             wishListType
-          }}&nbsp;&bull;
+          }}&nbsp;&middot;
           <time>{{ wishList.dateUpdated | gdFriendlyDate }}</time>
         </p>
 
@@ -30,7 +30,7 @@
         <div class="gd-button-group">
           <ng-container *ngIf="isSessionUser; else visitorButtons">
             <button
-              *ngIf="isSessionUser"
+              *ngIf="!wishList.isArchived"
               class="gd-button gd-button-primary"
               type="button"
               (click)="openGiftCreateModal()"
@@ -65,6 +65,7 @@
       </gd-media-content>
       <gd-media-thumbnail>
         <gd-thumbnail
+          iconSize="2x"
           shape="circle"
           size="fill"
           title="{{ wishList.user.firstName }} {{ wishList.user.lastName }}"
@@ -82,8 +83,9 @@
     <gd-row>
       <gd-column
         *ngFor="let gift of wishList.gifts"
-        [screenXSmall]="6"
-        [screenSmall]="4"
+        [screenXXSmall]="6"
+        [screenXSmall]="4"
+        [screenSmall]="3"
         [screenMedium]="3"
         [screenLarge]="3"
       >

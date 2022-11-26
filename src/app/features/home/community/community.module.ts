@@ -3,18 +3,18 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { GridModule, NoticeModule, WaitModule } from '@giftdibs/ux';
 
-import { GiftPreviewModule } from 'src/app/shared/modules/gift-preview';
+import { WishListPreviewModule } from 'src/app/shared/modules/wish-list-preview';
 
 import { CommunityComponent } from './community.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    GiftPreviewModule,
     GridModule,
     NoticeModule,
     RouterModule,
     WaitModule,
+    WishListPreviewModule,
   ],
   declarations: [CommunityComponent],
   exports: [CommunityComponent],

@@ -1,5 +1,6 @@
 export interface User {
   avatarUrl?: string;
+  dateLastLoggedIn?: Date;
   id?: string;
   emailAddress?: string;
   emailAddressVerified?: boolean;

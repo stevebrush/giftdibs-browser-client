@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 
-import { Gift, GiftService } from 'src/app/shared/modules/gift';
+import { WishList, WishListService } from 'src/app/shared/modules/wish-list';
 
 @Component({
   selector: 'gd-community',
@@ -14,21 +14,25 @@ import { Gift, GiftService } from 'src/app/shared/modules/gift';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommunityComponent implements OnInit {
-  public gifts: Gift[];
+  public wishLists: WishList[];
   public isLoading = true;
   public hasMore = false;
 
+  #wishListSvc: WishListService;
+
   constructor(
     private changeDetector: ChangeDetectorRef,
-    private giftService: GiftService
-  ) {}
+    wishlistSvc: WishListService
+  ) {
+    this.#wishListSvc = wishlistSvc;
+  }
 
   public ngOnInit(): void {
-    this.giftService.getAll().subscribe((gifts: Gift[]) => {
-      this.gifts = gifts;
+    this.#wishListSvc.getAll().subscribe((wishLists) => {
+      this.wishLists = wishLists;
       this.isLoading = false;
 
-      if (gifts && gifts.length && gifts.length > 23) {
+      if (wishLists?.length > 11) {
         this.hasMore = true;
       }
 
@@ -37,7 +41,7 @@ export class CommunityComponent implements OnInit {
   }
 
   public loadMoreResults(): void {
-    const startIndex = this.gifts.length;
+    const startIndex = this.wishLists.length;
 
     if (startIndex <= 0) {
       this.hasMore = false;
@@ -46,9 +50,9 @@ export class CommunityComponent implements OnInit {
 
     this.isLoading = true;
 
-    this.giftService.getAll(startIndex).subscribe((gifts: Gift[]) => {
-      if (gifts && gifts.length) {
-        this.gifts = this.gifts.concat(gifts);
+    this.#wishListSvc.getAll(startIndex).subscribe((wishLists) => {
+      if (wishLists?.length) {
+        this.wishLists = this.wishLists.concat(wishLists);
         this.hasMore = true;
       } else {
         this.hasMore = false;

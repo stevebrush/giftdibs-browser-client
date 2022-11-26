@@ -3,7 +3,8 @@
   [ngClass]="'gd-image-uploader-orientation-' + orientation"
 >
   <div class="gd-image-uploader-thumbnail">
-    <gd-thumbnail size="static" [imageSource]="imageSource"> </gd-thumbnail>
+    <gd-thumbnail iconSize="2x" size="static" [imageSource]="imageSource">
+    </gd-thumbnail>
   </div>
   <div class="gd-image-uploader-controls">
     <div class="gd-button-group">
@@ -13,14 +14,6 @@
         (click)="triggerFileSelect()"
       >
         Select image...
-      </button>
-      <button
-        *ngIf="allowUrl"
-        class="gd-button gd-button-default"
-        type="button"
-        (click)="triggerUrlSelect()"
-      >
-        From external link...
       </button>
       <button
         *ngIf="imageSource"
@@ -39,6 +32,26 @@
         (change)="onFileSelected($event)"
         #fileInput
       />
+      <button
+        *ngIf="allowUrl && !showUrlField"
+        class="gd-button gd-button-link"
+        type="button"
+        (click)="triggerUrlSelect()"
+      >
+        Upload image from URL...
+      </button>
+      <div *ngIf="showUrlField" class="gd-form-group">
+        <label class="gd-control-label" [attr.for]="fileUrlId">
+          Image URL
+        </label>
+        <input
+          class="gd-form-control"
+          type="text"
+          [attr.id]="fileUrlId"
+          (blur)="onFileUrlChange($event)"
+          #fileUrlInput
+        />
+      </div>
     </div>
   </div>
 </div>

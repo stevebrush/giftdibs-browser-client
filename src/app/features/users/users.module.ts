@@ -7,12 +7,12 @@ import {
   IconModule,
   MediaModule,
   NoticeModule,
-  RepeaterModule,
   ThumbnailModule,
   WaitModule,
 } from '@giftdibs/ux';
 
 import { FriendshipModule } from 'src/app/shared/modules/friendship';
+import { UserPreviewModule } from 'src/app/shared/modules/user-preview/user-preview.module';
 import { WishListEditModule } from 'src/app/shared/modules/wish-list-edit';
 import { WishListPreviewModule } from 'src/app/shared/modules/wish-list-preview';
 
@@ -21,6 +21,7 @@ import { FollowingComponent } from './following.component';
 import { FriendListComponent } from './friend-list.component';
 import { UserComponent } from './user.component';
 import { UsersRoutingModule } from './users-routing.module';
+import { UsersComponent } from './users.component';
 
 @NgModule({
   imports: [
@@ -32,15 +33,16 @@ import { UsersRoutingModule } from './users-routing.module';
     IconModule,
     MediaModule,
     NoticeModule,
-    UsersRoutingModule,
-    RepeaterModule,
     ThumbnailModule,
+    UserPreviewModule,
+    UsersRoutingModule,
     WaitModule,
     WishListEditModule,
     WishListPreviewModule,
   ],
   declarations: [
     UserComponent,
+    UsersComponent,
     FollowersComponent,
     FollowingComponent,
     FriendListComponent,

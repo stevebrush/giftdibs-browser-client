@@ -31,7 +31,8 @@
       <gd-icon icon="box-open"></gd-icon>
     </gd-ribbon>
     <gd-card-thumbnail>
-      <gd-thumbnail size="fill" [imageSource]="gift.imageUrl"> </gd-thumbnail>
+      <gd-thumbnail iconSize="2x" size="fill" [imageSource]="gift.imageUrl">
+      </gd-thumbnail>
     </gd-card-thumbnail>
     <gd-card-body>
       <gd-card-heading [attr.title]="gift.name" [multiline]="false">
@@ -55,7 +56,7 @@
           </gd-media-content>
           <gd-media-thumbnail>
             <gd-thumbnail
-              iconSize="1x"
+              iconSize="2x"
               size="fill"
               shape="circle"
               [imageSource]="gift.user.avatarUrl"

@@ -1,47 +1,16 @@
 @import '../../../../styles/mixins';
 
 .gd-wish-list-preview {
-  margin-bottom: $gd-spacing;
+  margin-bottom: $gd-spacing * 2;
 }
 
 .gd-wish-list-preview-thumbnail-group {
-  display: flex;
-  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 3px;
   width: 100%;
-  height: 140px;
 }
 
 .gd-wish-list-preview-thumbnail {
-  width: 20%;
-  height: 100%;
-  padding-right: 1px;
-
-  // &:nth-of-type(1) {
-  //   margin-right: 1%;
-  // }
-
-  // &:nth-of-type(3) {
-  //   margin-right: 1%;
-  //   align-self: flex-end;
-  //   height: 49%;
-  // }
-
-  // &:nth-of-type(4) {
-  //   align-self: flex-end;
-  //   height: 49%;
-  // }
-
-  ::ng-deep {
-    .gd-thumbnail-image-container {
-      background-size: cover;
-    }
-
-    .gd-thumbnail {
-      border-radius: 0;
-    }
-  }
-
-  // ::ng-deep .gd-thumbnail-image-container {
-  //   box-shadow: inset -1px -1px 0px 0px #fff;
-  // }
+  aspect-ratio: 1;
 }

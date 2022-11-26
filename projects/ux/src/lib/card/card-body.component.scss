@@ -2,6 +2,8 @@
 
 .gd-card-body {
   font-weight: $gd-font-weight-normal;
+  padding: $gd-spacing-padding-squish;
+  border-bottom: 1px solid $gd-color-neutral-lightest;
 }
 
 ::ng-deep .gd-text-price {

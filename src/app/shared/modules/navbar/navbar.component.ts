@@ -80,11 +80,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
           this.menuItemsMobile = [
             {
-              label: 'My wish lists',
+              label: 'Wish lists',
               route: `/users/${sessionUser.id}`,
             },
             {
-              label: 'My dibs',
+              label: 'Dibs',
               route: '/dibs',
               addSeparatorAfter: true,
             },

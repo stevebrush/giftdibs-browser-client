@@ -4,35 +4,11 @@
       commands: ['/wish-lists', wishList.id]
     }"
   >
-    <gd-card-thumbnail>
-      <div
-        class="gd-wish-list-preview-thumbnail-group gd-rounded-corners-subtle"
-      >
-        <ng-container *ngFor="let i of [0, 1, 2, 3, 4]">
-          <gd-thumbnail
-            *ngIf="wishList.gifts[i]; else blankThumbnail"
-            class="gd-wish-list-preview-thumbnail"
-            iconSize="2x"
-            size="fill"
-            [imageSource]="wishList.gifts[i].imageUrl"
-          >
-          </gd-thumbnail>
-          <ng-template #blankThumbnail>
-            <gd-thumbnail
-              iconSize="2x"
-              class="gd-wish-list-preview-thumbnail"
-              size="fill"
-            >
-            </gd-thumbnail>
-          </ng-template>
-        </ng-container>
-      </div>
-    </gd-card-thumbnail>
     <gd-card-body>
       <gd-media size="xs">
         <gd-media-content>
           <gd-media-header>
-            <gd-media-heading>
+            <gd-media-heading [multiline]="false">
               <gd-icon
                 *ngIf="wishList.privacy.type === 'me'"
                 icon="eye-slash"
@@ -63,5 +39,29 @@
         </gd-media-thumbnail>
       </gd-media>
     </gd-card-body>
+    <gd-card-thumbnail>
+      <div
+        class="gd-wish-list-preview-thumbnail-group gd-rounded-corners-subtle"
+      >
+        <ng-container *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 7]">
+          <gd-thumbnail
+            *ngIf="wishList.gifts[i]; else blankThumbnail"
+            class="gd-wish-list-preview-thumbnail"
+            iconSize="2x"
+            size="fill"
+            [imageSource]="wishList.gifts[i].imageUrl"
+          >
+          </gd-thumbnail>
+          <ng-template #blankThumbnail>
+            <gd-thumbnail
+              iconSize="2x"
+              class="gd-wish-list-preview-thumbnail"
+              size="fill"
+            >
+            </gd-thumbnail>
+          </ng-template>
+        </ng-container>
+      </div>
+    </gd-card-thumbnail>
   </gd-card>
 </div>

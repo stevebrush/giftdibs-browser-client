@@ -53,7 +53,7 @@
       </div>
     </div>
 
-    <div class="gd-container">
+    <div class="gd-container gd-container-lg">
       <ng-container *ngTemplateOutlet="wishListsTemplate; context: wishLists">
       </ng-container>
     </div>
@@ -77,12 +77,16 @@
     <gd-column
       *ngIf="isSessionUser && !isArchivedViewActive"
       [screenXXSmall]="12"
+      [screenXSmall]="6"
       [screenSmall]="4"
-      [screenMedium]="4"
+      [screenMedium]="3"
       [screenLarge]="3"
     >
       <div class="app-user-wish-list-create-button">
         <gd-card (actionClick)="openWishListEditModal()">
+          <gd-card-body>
+            <gd-card-heading>Create a wish list </gd-card-heading>
+          </gd-card-body>
           <gd-card-thumbnail class="app-user-wish-list-create-button-thumbnail">
             <gd-thumbnail size="fill" icon="none">
               <gd-icon-stack>
@@ -94,11 +98,6 @@
               </gd-icon-stack>
             </gd-thumbnail>
           </gd-card-thumbnail>
-          <gd-card-body>
-            <gd-card-heading>
-              <span class="gd-text-deemphasized">New wish list</span>
-            </gd-card-heading>
-          </gd-card-body>
         </gd-card>
       </div>
     </gd-column>
@@ -106,8 +105,9 @@
     <gd-column
       *ngFor="let wishList of wishLists"
       [screenXXSmall]="12"
+      [screenXSmall]="6"
       [screenSmall]="4"
-      [screenMedium]="4"
+      [screenMedium]="3"
       [screenLarge]="3"
     >
       <gd-wish-list-preview

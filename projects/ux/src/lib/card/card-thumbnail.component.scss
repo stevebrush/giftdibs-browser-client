@@ -1,9 +1,9 @@
 @import '../../styles/mixins';
 
 .gd-card-thumbnail {
-  margin-bottom: $gd-spacing-lg;
   display: flex;
   height: 100%;
+  padding: $gd-spacing-padding-even;
 
   ::ng-deep {
     .gd-thumbnail {

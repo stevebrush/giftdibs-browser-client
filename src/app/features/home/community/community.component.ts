@@ -32,7 +32,7 @@ export class CommunityComponent implements OnInit {
       this.wishLists = wishLists;
       this.isLoading = false;
 
-      if (wishLists?.length > 23) {
+      if (wishLists?.length > 11) {
         this.hasMore = true;
       }
 

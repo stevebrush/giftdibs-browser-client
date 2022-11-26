@@ -7,7 +7,7 @@
 .gd-control-label {
   display: inline-block;
   margin-bottom: $gd-spacing-xs;
-  font-weight: $gd-font-weight-normal;
+  font-weight: $gd-font-weight-bold;
 }
 
 .gd-form-control {
@@ -31,7 +31,7 @@ textarea.gd-form-control {
 }
 
 select.gd-form-control {
-  height: 38px;
+  height: 32px;
 }
 
 .gd-input-group {

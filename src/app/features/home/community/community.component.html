@@ -1,7 +1,7 @@
 <gd-wait *ngIf="isLoading"></gd-wait>
 
-<div class="gd-container gd-container-md gd-spacing-padding-even-large">
-  <h1>Community</h1>
+<div class="gd-container gd-container-lg gd-spacing-padding-even-large">
+  <h1>Community wish lists</h1>
 
   <ng-container *ngIf="!isLoading && !wishLists.length">
     <gd-notice>
@@ -17,7 +17,7 @@
       [screenXSmall]="6"
       [screenSmall]="4"
       [screenMedium]="3"
-      [screenLarge]="2"
+      [screenLarge]="3"
     >
       <gd-wish-list-preview [wishList]="wishList"> </gd-wish-list-preview>
     </gd-column>

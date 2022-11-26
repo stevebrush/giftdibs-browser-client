@@ -1,0 +1,31 @@
+<gd-media class="gd-user-preview gd-spacing-padding-squish" size="xs">
+  <gd-media-thumbnail
+    ><gd-thumbnail
+      iconSize="2x"
+      shape="circle"
+      size="fill"
+      [imageSource]="user.avatarUrl"
+      [route]="{
+        commands: ['/users', user.id]
+      }"
+    ></gd-thumbnail
+  ></gd-media-thumbnail>
+  <gd-media-content>
+    <gd-media-header>
+      <gd-media-heading
+        ><a [routerLink]="['/users', user.id]"
+          >{{ user.firstName }} {{ user.lastName }}</a
+        ></gd-media-heading
+      >
+
+      <gd-media-controls *ngIf="showFollowButton"
+        ><gd-follow-button [friendId]="user.id"> </gd-follow-button
+      ></gd-media-controls>
+    </gd-media-header>
+    <gd-media-body
+      ><span class="gd-text-deemphasized gd-text-small">
+        Last login on {{ user.dateLastLoggedIn | date }}</span
+      ></gd-media-body
+    >
+  </gd-media-content>
+</gd-media>

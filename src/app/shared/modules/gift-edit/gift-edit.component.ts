@@ -344,6 +344,10 @@ export class GiftEditComponent implements OnInit {
         url: ''
       });
     }
+
+    this.giftForm.get('imageUrl').valueChanges.subscribe(value => {
+      this.newImageFile = value? dataUrlToFile(value) : '';
+    });
   }
 
   private createUrlPickerForm(): void {

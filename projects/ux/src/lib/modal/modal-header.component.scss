@@ -6,12 +6,14 @@
 }
 
 .gd-modal-header-body {
-  padding: 16px 40px 16px 14px;
+  padding: $gd-spacing-padding-even-large;
+  padding-right: 50px;
+  padding-bottom: 20px;
 }
 
 .gd-modal-header-button-close {
   position: absolute;
-  right: $gd-spacing-lg;
-  top: $gd-spacing-lg;
+  right: 15px;
+  top: 18px;
   background: transparent;
 }

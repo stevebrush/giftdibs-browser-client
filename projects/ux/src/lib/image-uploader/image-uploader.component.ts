@@ -12,7 +12,12 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { AlertService } from '../alert/alert.service';
+import { toDataUrl } from '../utils/to-data-url';
+
 import { ImageUploaderOrientation } from './image-uploader-orientation';
+
+let uniqueId = 0;
 
 @Component({
   selector: 'gd-image-uploader',
@@ -54,20 +59,48 @@ export class ImageUploaderComponent implements OnDestroy, ControlValueAccessor {
   @Output()
   public removeFile = new EventEmitter<void>();
 
-  @Output()
-  public urlButtonClick = new EventEmitter<void>();
-
   @ViewChild('fileInput')
   public fileInput: ElementRef | undefined;
 
+  @ViewChild('fileUrlInput')
+  public fileUrlInput: ElementRef | undefined;
+
+  protected showUrlField = false;
+  protected fileUrlId = `file-url-input-${++uniqueId}-${Date.now()}`;
+
   private _value: string = '';
 
-  constructor(private changeDetector: ChangeDetectorRef) {}
+  constructor(
+    private changeDetector: ChangeDetectorRef,
+    private alertSvc: AlertService
+  ) {}
 
   public ngOnDestroy(): void {
     this.selectFile.complete();
     this.removeFile.complete();
-    this.urlButtonClick.complete();
+  }
+
+  public async onFileUrlChange(evt: any): Promise<void> {
+    if (evt.target.value) {
+      try {
+        const imageDataUrl = await toDataUrl(evt.target.value);
+        this.value = imageDataUrl.toString();
+        this.imageSource = this.value;
+      } catch (err) {
+        this.value = '';
+        this.imageSource = '';
+        this.alertSvc.error(
+          'The URL provided is not a valid image resource.',
+          false
+        );
+      }
+    } else if (!this.imageSource) {
+      this.value = '';
+      this.imageSource = '';
+    }
+
+    this.onChange(this.value);
+    this.changeDetector.markForCheck();
   }
 
   public triggerFileSelect(): void {
@@ -79,7 +112,7 @@ export class ImageUploaderComponent implements OnDestroy, ControlValueAccessor {
   }
 
   public triggerUrlSelect(): void {
-    this.urlButtonClick.next();
+    this.showUrlField = true;
   }
 
   public onFileSelected(event: any): void {
@@ -112,5 +145,10 @@ export class ImageUploaderComponent implements OnDestroy, ControlValueAccessor {
 
   public clearSelection(): void {
     this.removeFile.next();
+
+    if (this.fileUrlInput) {
+      this.showUrlField = false;
+      this.fileUrlInput.nativeElement.value = '';
+    }
   }
 }

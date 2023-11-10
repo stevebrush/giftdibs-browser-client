@@ -39,14 +39,14 @@ export class VerifyEmailNoticeComponent implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
-    combineLatest(
+    combineLatest([
       this.sessionService.userStream,
       this.router.events.pipe(
-        filter((event) => event instanceof NavigationStart)
-      )
-    )
+        filter((e): e is NavigationStart => e instanceof NavigationStart)
+      ),
+    ])
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((value: [SessionUser, RouterEvent]) => {
+      .subscribe((value) => {
         this.sessionUser = value[0];
         const event: RouterEvent = value[1];
 

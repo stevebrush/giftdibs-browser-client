@@ -1,9 +1,16 @@
 {
-  "extends": ["plugin:@angular-eslint/recommended", "prettier"],
-  "ignorePatterns": ["!**/*"],
+  "extends": [
+    "plugin:@angular-eslint/recommended",
+    "prettier"
+  ],
+  "ignorePatterns": [
+    "!**/*"
+  ],
   "overrides": [
     {
-      "files": ["*.ts"],
+      "files": [
+        "*.ts"
+      ],
       "parserOptions": {
         "project": [
           "projects/session/tsconfig.lib.json",
@@ -31,7 +38,9 @@
       }
     },
     {
-      "files": ["*.html"],
+      "files": [
+        "*.html"
+      ],
       "rules": {}
     }
   ]

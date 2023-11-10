@@ -54,20 +54,20 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "giftdibs:build",
             "ssl": true,
-            "open": true
+            "open": true,
+            "buildTarget": "giftdibs:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "giftdibs:build:production"
+              "buildTarget": "giftdibs:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "giftdibs:build"
+            "buildTarget": "giftdibs:build"
           }
         },
         "test": {

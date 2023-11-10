@@ -1,18 +1,11 @@
 {
   "root": true,
-  "ignorePatterns": [
-    "projects/**/*"
-  ],
+  "ignorePatterns": ["projects/**/*"],
   "overrides": [
     {
-      "files": [
-        "*.ts"
-      ],
+      "files": ["*.ts"],
       "parserOptions": {
-        "project": [
-          "tsconfig.json",
-          "e2e/tsconfig.json"
-        ],
+        "project": ["tsconfig.json", "e2e/tsconfig.json"],
         "createDefaultProgram": true
       },
       "extends": [
@@ -24,10 +17,7 @@
         "@angular-eslint/component-selector": [
           "error",
           {
-            "prefix": [
-              "app",
-              "gd"
-            ],
+            "prefix": ["app", "gd"],
             "style": "kebab-case",
             "type": "element"
           }
@@ -35,26 +25,17 @@
         "@angular-eslint/directive-selector": [
           "error",
           {
-            "prefix": [
-              "app",
-              "gd"
-            ],
+            "prefix": ["app", "gd"],
             "style": "camelCase",
             "type": "attribute"
           }
         ],
-        "@angular-eslint/no-output-native": [
-          "warn"
-        ]
+        "@angular-eslint/no-output-native": ["warn"]
       }
     },
     {
-      "files": [
-        "*.html"
-      ],
-      "extends": [
-        "plugin:@angular-eslint/template/recommended"
-      ],
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
       "rules": {}
     }
   ]

@@ -9,27 +9,6 @@
   </gd-modal-header>
   <gd-modal-body>
     <form
-      *ngIf="showUrlPicker"
-      class="gd-form"
-      novalidate
-      [formGroup]="urlPickerForm"
-    >
-      <gd-form-field [errors]="errors">
-        <label class="gd-control-label" for="gd-gift-edit-url">
-          Paste a link from anywhere on the web
-        </label>
-        <input
-          class="gd-form-control"
-          formControlName="productUrl"
-          id="gd-gift-edit-url"
-          type="text"
-          autocomplete="off"
-        />
-      </gd-form-field>
-    </form>
-
-    <form
-      *ngIf="!showUrlPicker"
       class="gd-form"
       novalidate
       [attr.aria-label]="gift ? 'Edit item' : 'New item'"
@@ -191,51 +170,21 @@
   </gd-modal-body>
   <gd-modal-footer>
     <div class="gd-button-group">
-      <ng-container *ngIf="showUrlPicker">
-        <button
-          class="gd-button gd-button-primary"
-          type="button"
-          [disabled]="urlPickerForm.disabled"
-          (click)="findProductInfoFromUrl(urlPickerProductUrl.value)"
-        >
-          Submit
-        </button>
-        <div class="gd-gift-edit-url-picker-buttons-secondary">
-          <button
-            class="gd-button gd-button-default"
-            type="button"
-            [disabled]="urlPickerForm.disabled"
-            (click)="skipUrlPicker()"
-          >
-            I don't have a link
-          </button>
-          <button
-            class="gd-button gd-button-danger"
-            type="button"
-            (click)="onCancelClicked()"
-          >
-            Cancel
-          </button>
-        </div>
-      </ng-container>
-
-      <ng-container *ngIf="!showUrlPicker">
-        <button
-          class="gd-button gd-button-primary"
-          type="button"
-          [disabled]="giftForm.disabled"
-          (click)="submit()"
-        >
-          Save
-        </button>
-        <button
-          class="gd-button gd-button-default"
-          type="button"
-          (click)="onCancelClicked()"
-        >
-          Cancel
-        </button>
-      </ng-container>
+      <button
+        class="gd-button gd-button-primary"
+        type="button"
+        [disabled]="giftForm.disabled"
+        (click)="submit()"
+      >
+        Save
+      </button>
+      <button
+        class="gd-button gd-button-default"
+        type="button"
+        (click)="onCancelClicked()"
+      >
+        Cancel
+      </button>
     </div>
   </gd-modal-footer>
 </gd-modal>

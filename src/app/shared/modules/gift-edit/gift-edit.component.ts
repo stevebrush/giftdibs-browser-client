@@ -3,68 +3,42 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  OnInit
+  OnInit,
 } from '@angular/core';
-
 import {
-  AbstractControl,
   FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
-  Validators
+  Validators,
 } from '@angular/forms';
-
+import { AlertService } from '@giftdibs/ux';
 import {
-  AlertService
-} from '@giftdibs/ux';
-
-import {
-  dataUrlToFile,
   ModalClosedEventArgs,
   ModalInstance,
   ModalService,
   ModalSize,
-  toDataUrl,
   TypeaheadSearchFunction,
-  TypeaheadSearchResultAction
+  TypeaheadSearchResultAction,
+  dataUrlToFile,
+  toDataUrl,
 } from '@giftdibs/ux';
 
-import {
-  Observable
-} from 'rxjs';
-
-import {
-  finalize
-} from 'rxjs/operators';
-
-import {
-  AssetsService
-} from 'src/app/shared/modules/assets';
-
-import {
-  Gift,
-  GiftService
-} from 'src/app/shared/modules/gift';
-
-import {
-  GiftExternalUrl
-} from 'src/app/shared/modules/gift/gift-external-url';
-
-import {
-  ProductService
-} from 'src/app/shared/modules/product';
-
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+import { AssetsService } from 'src/app/shared/modules/assets';
+import { Gift, GiftService } from 'src/app/shared/modules/gift';
+import { GiftExternalUrl } from 'src/app/shared/modules/gift/gift-external-url';
+import { ProductService } from 'src/app/shared/modules/product';
 import {
   UrlImagesLoaderComponent,
   UrlImagesLoaderContext,
   UrlScraperResult,
-  UrlScraperService
+  UrlScraperService,
 } from 'src/app/shared/modules/url-scraper';
 
-import {
-  GiftEditContext
-} from './gift-edit-context';
+import { GiftEditContext } from './gift-edit-context';
+
 // #endregion
 
 @Component({
@@ -72,30 +46,19 @@ import {
   templateUrl: './gift-edit.component.html',
   styleUrls: ['./gift-edit.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    UrlScraperService
-  ]
+  providers: [UrlScraperService],
 })
 export class GiftEditComponent implements OnInit {
   public get externalUrls(): FormArray {
-    return <FormArray>this.giftForm.get('externalUrls');
-  }
-
-  public get urlPickerProductUrl(): AbstractControl {
-    return this.urlPickerForm.get('productUrl');
-  }
-
-  public get showUrlPicker(): boolean {
-    return (this.gift === undefined && this.urlPickerForm !== undefined);
+    return this.giftForm.get('externalUrls') as FormArray;
   }
 
   public errors: any[];
   public gift: Gift;
   public giftForm: FormGroup;
-  public urlPickerForm: FormGroup;
   public isLoading = false;
 
-  private newImageFile: any;
+  private newImageFile: undefined | any;
   private wishListId: string;
 
   constructor(
@@ -108,17 +71,13 @@ export class GiftEditComponent implements OnInit {
     private modal: ModalInstance<any>,
     private modalService: ModalService,
     private productService: ProductService
-  ) { }
+  ) {}
 
   public ngOnInit(): void {
     this.gift = this.context.gift;
     this.wishListId = this.context.wishListId;
 
-    if (this.gift) {
-      this.createForm();
-    } else {
-      this.createUrlPickerForm();
-    }
+    this.createForm();
   }
 
   public onSelectFile(args: any): void {
@@ -140,7 +99,8 @@ export class GiftEditComponent implements OnInit {
 
     this.disableForm();
 
-    this.assetsService.removeGiftThumbnail(this.gift.id)
+    this.assetsService
+      .removeGiftThumbnail(this.gift.id)
       .pipe(
         finalize(() => {
           this.enableForm();
@@ -164,7 +124,7 @@ export class GiftEditComponent implements OnInit {
     this.disableForm();
     this.removeEmptyExternalUrls();
 
-    const formData: Gift = this.giftForm.value;
+    const formData = structuredClone(this.giftForm.value);
     const priority = formData.priority + '';
 
     formData.priority = parseInt(priority, 10);
@@ -182,7 +142,7 @@ export class GiftEditComponent implements OnInit {
 
     obs.subscribe(
       (result: any) => {
-        const giftId = (this.gift) ? this.gift.id : result.data.giftId;
+        const giftId = this.gift ? this.gift.id : result.data.giftId;
 
         if (this.newImageFile) {
           this.uploadImage(this.newImageFile, giftId).subscribe(
@@ -221,10 +181,13 @@ export class GiftEditComponent implements OnInit {
   public addExternalUrlField(values?: GiftExternalUrl): void {
     this.externalUrls.push(
       this.formBuilder.group(
-        Object.assign({
-          price: undefined,
-          url: undefined
-        }, values)
+        Object.assign(
+          {
+            price: undefined,
+            url: undefined,
+          },
+          values
+        )
       )
     );
   }
@@ -235,7 +198,7 @@ export class GiftEditComponent implements OnInit {
     // Always make sure there's at least one blank external URL.
     if (!this.externalUrls.length) {
       this.addExternalUrlField({
-        url: ''
+        url: '',
       });
     }
   }
@@ -243,11 +206,6 @@ export class GiftEditComponent implements OnInit {
   public findImageFromUrl(index: number): void {
     const url = this.externalUrls.at(index).value.url;
     this.openUrlImagesLoaderModal(url);
-  }
-
-  public skipUrlPicker(): void {
-    delete this.urlPickerForm;
-    this.createForm();
   }
 
   public findProductInfoFromUrl(url: string): void {
@@ -263,23 +221,24 @@ export class GiftEditComponent implements OnInit {
     context.allowUrlEdit = false;
 
     const modalInstance = this.modalService.open(UrlImagesLoaderComponent, {
-      providers: [{
-        provide: UrlImagesLoaderContext,
-        useValue: context
-      }],
-      size: ModalSize.Small
+      providers: [
+        {
+          provide: UrlImagesLoaderContext,
+          useValue: context,
+        },
+      ],
+      size: ModalSize.Small,
     });
 
     modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
       if (args.reason === 'save') {
-        this.urlPickerForm = undefined;
         this.gift = undefined;
 
         this.createForm();
 
         const productDetails: UrlScraperResult = args.data.result;
-
         const imageDataUrl = args.data.image?.dataUrl;
+
         if (imageDataUrl) {
           this.giftForm.get('imageUrl').setValue(imageDataUrl);
           this.newImageFile = dataUrlToFile(imageDataUrl);
@@ -288,7 +247,7 @@ export class GiftEditComponent implements OnInit {
         this.updateIfEmpty('name', productDetails.name);
         this.updateIfEmpty('budget', productDetails.price);
         this.addExternalUrlIfNew({
-          url: productDetails.url
+          url: productDetails.url,
         });
       }
 
@@ -297,42 +256,41 @@ export class GiftEditComponent implements OnInit {
     });
   }
 
-  public findProductFunction: TypeaheadSearchFunction<any> = (searchText: string) => {
+  public findProductFunction: TypeaheadSearchFunction<any> = (
+    searchText: string
+  ) => {
     return this.productService.searchByKeyword(searchText);
-  }
+  };
 
   public searchResultAction: TypeaheadSearchResultAction = (result: any) => {
     if (!this.giftForm.get('imageUrl').value) {
-      toDataUrl(result.imageUrl)
-        .then((imageDataUrl: any) => {
-          this.giftForm.get('imageUrl').setValue(imageDataUrl);
-          this.newImageFile = dataUrlToFile(imageDataUrl);
-        });
+      toDataUrl(result.imageUrl).then((imageDataUrl: any) => {
+        this.giftForm.get('imageUrl').setValue(imageDataUrl);
+        this.newImageFile = dataUrlToFile(imageDataUrl);
+      });
     }
 
     this.removeEmptyExternalUrls();
 
     this.addExternalUrlIfNew({
-      url: result.url
+      url: result.url,
     });
 
     this.giftForm.get('name').setValue(result.name);
     this.updateIfEmpty('budget', result.price);
 
     return result.name;
-  }
+  };
 
   private createForm(): void {
     this.giftForm = this.formBuilder.group({
       budget: undefined,
       externalUrls: this.formBuilder.array([]) as any,
       imageUrl: new FormControl(),
-      name: new FormControl(null, [
-        Validators.required
-      ]),
+      name: new FormControl(null, [Validators.required]),
       notes: undefined,
       priority: 3,
-      quantity: 1
+      quantity: 1,
     });
 
     if (this.gift) {
@@ -341,18 +299,12 @@ export class GiftEditComponent implements OnInit {
 
     if (!this.externalUrls.length) {
       this.addExternalUrlField({
-        url: ''
+        url: '',
       });
     }
 
-    this.giftForm.get('imageUrl').valueChanges.subscribe(value => {
-      this.newImageFile = value? dataUrlToFile(value) : '';
-    });
-  }
-
-  private createUrlPickerForm(): void {
-    this.urlPickerForm = this.formBuilder.group({
-      productUrl: new FormControl()
+    this.giftForm.get('imageUrl').valueChanges.subscribe((value) => {
+      this.newImageFile = value ? dataUrlToFile(value) : '';
     });
   }
 
@@ -363,19 +315,19 @@ export class GiftEditComponent implements OnInit {
   private resetForm(gift: Gift): void {
     this.giftForm.reset(gift);
 
-    this.giftForm.setControl(
-      'externalUrls',
-      this.formBuilder.array([])
-    );
+    this.giftForm.setControl('externalUrls', this.formBuilder.array([]));
 
     const control = this.externalUrls;
     gift.externalUrls.forEach((externalUrl: any) => {
       control.push(
         this.formBuilder.group(
-          Object.assign({
-            url: undefined,
-            price: undefined
-          }, externalUrl)
+          Object.assign(
+            {
+              url: undefined,
+              price: undefined,
+            },
+            externalUrl
+          )
         )
       );
     });
@@ -388,11 +340,13 @@ export class GiftEditComponent implements OnInit {
     this.giftForm.disable();
 
     const modalInstance = this.modalService.open(UrlImagesLoaderComponent, {
-      providers: [{
-        provide: UrlImagesLoaderContext,
-        useValue: context
-      }],
-      size: ModalSize.Small
+      providers: [
+        {
+          provide: UrlImagesLoaderContext,
+          useValue: context,
+        },
+      ],
+      size: ModalSize.Small,
     });
 
     modalInstance.closed.subscribe((args: ModalClosedEventArgs) => {
@@ -418,7 +372,7 @@ export class GiftEditComponent implements OnInit {
   }
 
   private disableForm(): void {
-    this.giftForm.disable();
+    this.giftForm.disable({ emitEvent: false });
     this.errors = [];
     this.isLoading = true;
     this.changeDetector.markForCheck();
@@ -433,12 +387,12 @@ export class GiftEditComponent implements OnInit {
 
   private addExternalUrlIfNew(externalUrl: GiftExternalUrl): void {
     const found = this.externalUrls.controls.find((control) => {
-      return (control.get('url').value === externalUrl.url);
+      return control.get('url').value === externalUrl.url;
     });
 
     if (!found) {
       this.addExternalUrlField({
-        url: externalUrl.url
+        url: externalUrl.url,
       });
 
       this.removeEmptyExternalUrls();
